@@ -3,7 +3,8 @@
   "version": "2.0.0",
   "description": "Explore community-curated spreadsheets",
   "main": "index.js",
-  "repository": "https://bntzio@bitbucket.org/spreadshare/spreadshare.git",
+  "repository": "https://bitbucket.org/spreadshare/spreadshare.git",
+  "private": true,
   "author": "Benjamin, Dennis, Enrique & Rohan",
   "license": "UNLICENSED",
   "scripts": {
