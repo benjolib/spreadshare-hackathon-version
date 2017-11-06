@@ -1,0 +1,12 @@
+[database]
+adapter = Mysql
+host = "localhost"
+username = "root"
+password = ""
+dbname = "spreadshare"
+
+[application]
+controllersDir = "app/controllers/"
+modelsDir = "app/models/Abstracts/"
+viewsDir = "app/views/"
+baseUri = "/"
