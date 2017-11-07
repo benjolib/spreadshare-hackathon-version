@@ -8,39 +8,42 @@
  * @package   DS\Config
  */
 return [
-    'domain' => 'spreadshare.app',
+    'domain' => 'spreadshare.docker',
     'elasticsearch' => [
         'host' => 'localhost',
         'port' => '9200',
     ],
     'read-database' => [
         'adapter' => 'Mysql',
-        'host' => 'localhost',
+        'host' => 'spreadshare.docker',
+        'port' => '3307',
         'username' => 'root',
-        'password' => '',
+        'password' => 'spreadshare',
         'dbname' => 'spreadshare',
         'charset' => 'utf8',
         'profile' => false,
     ],
     'write-database' => [
         'adapter' => 'Mysql',
-        'host' => 'localhost',
+        'host' => 'spreadshare.docker',
+        'port' => '3307',
         'username' => 'root',
-        'password' => '',
+        'password' => 'spreadshare',
         'dbname' => 'spreadshare',
         'charset' => 'utf8',
+        'profile' => false,
     ],
     'memcache' => [
         [
             'lifetime' => 3600 * 48,
-            'host' => 'localhost',
+            'host' => 'memcached',
             'port' => 11211,
             'persistent' => true,
             'weight' => 1,
         ],
     ],
     'redis' => [
-        'host' => 'localhost',
+        'host' => 'redis',
         'port' => 6379,
     ],
     'crypt' => [
