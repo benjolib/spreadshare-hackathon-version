@@ -264,6 +264,7 @@ DROP TABLE IF EXISTS `tableStats`;
 
 CREATE TABLE `tableStats` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `tableId` int(11) unsigned NOT NULL,
   `votesCount` int(11) unsigned DEFAULT NULL,
   `viewsCount` int(11) unsigned DEFAULT NULL,
   `commentsCount` int(11) unsigned DEFAULT NULL,
