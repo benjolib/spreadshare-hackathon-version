@@ -10,12 +10,12 @@
 return [
     'domain' => 'spreadshare.docker',
     'elasticsearch' => [
-        'host' => 'localhost',
+        'host' => 'elasticsearch',
         'port' => '9200',
     ],
     'read-database' => [
         'adapter' => 'Mysql',
-        'host' => 'mysql',
+        'host' => 'mysql1',
         'port' => '3306',
         'username' => 'root',
         'password' => 'spreadshare',
@@ -25,7 +25,7 @@ return [
     ],
     'write-database' => [
         'adapter' => 'Mysql',
-        'host' => 'mysql',
+        'host' => 'mysql1',
         'port' => '3306',
         'username' => 'root',
         'password' => 'spreadshare',
