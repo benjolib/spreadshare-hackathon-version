@@ -1,4 +1,46 @@
--- Create syntax for TABLE 'rows'
+# ************************************************************
+# Sequel Pro SQL dump
+# Version 4541
+#
+# http://www.sequelpro.com/
+# https://github.com/sequelpro/sequelpro
+#
+# Host: localhost (MySQL 5.5.5-10.1.19-MariaDB)
+# Datenbank: spreadshare
+# Erstellt am: 2017-11-07 00:29:21 +0000
+# ************************************************************
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+
+# Export von Tabelle locations
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `locations`;
+
+CREATE TABLE `locations` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `lat` int(11) unsigned NOT NULL COMMENT 'latitude',
+  `lng` int(11) unsigned NOT NULL COMMENT 'longitude',
+  `locationName` varchar(200) DEFAULT NULL,
+  `createdAt` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# Export von Tabelle rows
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `rows`;
+
 CREATE TABLE `rows` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `userId` int(11) unsigned NOT NULL COMMENT 'author (user id)',
@@ -16,7 +58,13 @@ CREATE TABLE `rows` (
   CONSTRAINT `rowsUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Create syntax for TABLE 'rowVotes'
+
+
+# Export von Tabelle rowVotes
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `rowVotes`;
+
 CREATE TABLE `rowVotes` (
   `rowId` int(11) unsigned NOT NULL,
   `userId` int(11) unsigned NOT NULL,
@@ -26,7 +74,13 @@ CREATE TABLE `rowVotes` (
   CONSTRAINT `rowVotesUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Create syntax for TABLE 'tableComments'
+
+
+# Export von Tabelle tableComments
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `tableComments`;
+
 CREATE TABLE `tableComments` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `parentId` int(11) unsigned DEFAULT NULL COMMENT 'parent tabelComment.id',
@@ -43,7 +97,13 @@ CREATE TABLE `tableComments` (
   CONSTRAINT `tableCommentsUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Create syntax for TABLE 'tables'
+
+
+# Export von Tabelle tables
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `tables`;
+
 CREATE TABLE `tables` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `userId` int(11) unsigned NOT NULL COMMENT 'author',
@@ -63,7 +123,13 @@ CREATE TABLE `tables` (
   CONSTRAINT `decksUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Create syntax for TABLE 'tableTags'
+
+
+# Export von Tabelle tableTags
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `tableTags`;
+
 CREATE TABLE `tableTags` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `userId` int(11) unsigned NOT NULL COMMENT 'user.id',
@@ -74,7 +140,13 @@ CREATE TABLE `tableTags` (
   CONSTRAINT `tableTagsUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Create syntax for TABLE 'tableVotes'
+
+
+# Export von Tabelle tableVotes
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `tableVotes`;
+
 CREATE TABLE `tableVotes` (
   `tableId` int(11) unsigned NOT NULL,
   `userId` int(11) unsigned NOT NULL,
@@ -84,7 +156,13 @@ CREATE TABLE `tableVotes` (
   CONSTRAINT `tableVotesUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Create syntax for TABLE 'types'
+
+
+# Export von Tabelle types
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `types`;
+
 CREATE TABLE `types` (
   `id` tinyint(1) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(200) DEFAULT NULL,
@@ -92,6 +170,13 @@ CREATE TABLE `types` (
   `color` varchar(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# Export von Tabelle user
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `user`;
 
 CREATE TABLE `user` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -119,7 +204,50 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Create syntax for TABLE 'wallet'
+
+
+# Export von Tabelle userResetPassword
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `userResetPassword`;
+
+CREATE TABLE `userResetPassword` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `userId` int(11) unsigned DEFAULT NULL,
+  `code` varchar(48) DEFAULT NULL,
+  `createdAt` int(11) unsigned DEFAULT NULL,
+  `updatedAt` int(11) DEFAULT NULL,
+  `status` int(1) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `userId` (`userId`),
+  KEY `code` (`code`),
+  CONSTRAINT `userResetPasswordUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# Export von Tabelle userSettings
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `userSettings`;
+
+CREATE TABLE `userSettings` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `userId` int(11) unsigned DEFAULT NULL,
+  `key` varchar(100) DEFAULT NULL,
+  `value` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `userSettingsUserId` (`userId`),
+  CONSTRAINT `userSettingsUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# Export von Tabelle wallet
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `wallet`;
+
 CREATE TABLE `wallet` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `userId` int(11) unsigned DEFAULT NULL,
@@ -132,37 +260,12 @@ CREATE TABLE `wallet` (
   CONSTRAINT `walletUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `locations` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `lat` int(11) unsigned NOT NULL COMMENT 'latitude',
-  `lng` int(11) unsigned NOT NULL COMMENT 'longitude',
-  `locationName` varchar(200) DEFAULT NULL,
-  `createdAt` int(10) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
--- Create syntax for TABLE 'userResetPassword'
-CREATE TABLE `userResetPassword` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `userId` int(11) unsigned DEFAULT NULL,
-  `code` varchar(48) DEFAULT NULL,
-  `createdAt` int(11) unsigned DEFAULT NULL,
-  `updatedAt` int(11) DEFAULT NULL,
-  `status` int(1) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `userId` (`userId`),
-  KEY `code` (`code`),
-  CONSTRAINT `userResetPasswordUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
--- Create syntax for TABLE 'userSettings'
-CREATE TABLE `userSettings` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `userId` int(11) unsigned DEFAULT NULL,
-  `key` varchar(100) DEFAULT NULL,
-  `value` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `userSettingsUserId` (`userId`),
-  CONSTRAINT `userSettingsUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
