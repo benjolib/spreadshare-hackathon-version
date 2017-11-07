@@ -15,7 +15,7 @@ gulp.task('server', function() {
 
 // scss to css
 gulp.task('styles', function() {
-  gulp.src('./src/styles/main.scss')
+  gulp.src('./public/sass/main.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(minifyCSS())
     .pipe(gulp.dest('./dist/css'))
@@ -23,12 +23,12 @@ gulp.task('styles', function() {
 
 // watch for changes
 gulp.task('watch', function() {
-  gulp.watch('./src/**/*.scss', ['styles'])
-  gulp.watch('./*.html', ['dist'])
+  gulp.watch('./public/**/*.scss', ['styles'])
+  gulp.watch('./*.html', ['public'])
 })
 
-// dist build
-gulp.task('dist', ['styles'])
+// public build
+gulp.task('public', ['styles'])
 
 // default
-gulp.task('default', ['server', 'watch', 'dist'])
+gulp.task('default', ['server', 'watch', 'public'])
