@@ -1,0 +1,9 @@
+#!/bin/bash
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+if [ "$1" = "" ]; then
+  echo "Please provide a valid table name."
+  exit 0
+fi
+
+$DIR/phalcon model --abstract --get-set --doc --trace --force --namespace=DS\\Model\\Abstracts --extends=\\DS\\Model\\Base --camelize --annotate --name=$1

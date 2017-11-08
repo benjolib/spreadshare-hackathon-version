@@ -1,0 +1,19 @@
+#!/bin/bash
+DIR="$( cd "$( dirname "$( dirname "${BASH_SOURCE[0]}" )")" && pwd )"
+cd $DIR
+
+if [ -z system/cache ]; then
+  if [ -f .gitmodules ]; then
+    git submodules update
+  else
+    echo "Cache directories not existing. Creating.."
+
+    mkdir system/cache
+    mkdir system/cache/locationiq system/cache/application system/cache/github-api
+
+    chown -R 755 system/
+    chmod g+w -R system/
+  fi
+else
+  echo "Already initialized."
+fi

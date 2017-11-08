@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<phpunit bootstrap="app/tests/bootstrap.php"
+         colors="true"
+         backupGlobals="false"
+         backupStaticAttributes="false"
+         verbose="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnFailure="false"
+         syntaxCheck="true"
+>
+
+    <testsuites>
+        <testsuite name="Test suite">
+            <directory>./app/tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <php>
+        <var name="GITHUB_AUTHTOKEN" value="e045230b87e3832d42c2e064ba52648c88e40743"/>
+        <var name="GITHUB_USERNAME" value="dstuecken"/>
+    </php>
+</phpunit>

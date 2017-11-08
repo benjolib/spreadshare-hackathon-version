@@ -15,10 +15,10 @@ gulp.task('server', function() {
 
 // scss to css
 gulp.task('styles', function() {
-  gulp.src('./public/sass/styles.scss')
+  gulp.src('./sass/styles.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(minifyCSS())
-    .pipe(gulp.dest('./dist/css'))
+    .pipe(gulp.dest('./public/css'))
 })
 
 // watch for changes
