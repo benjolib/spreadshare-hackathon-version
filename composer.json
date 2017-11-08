@@ -12,7 +12,7 @@
   "homepage": "https://www.spreadshare.co",
   "require": {
     "php": ">=7.0",
-    "ext-phalcon": ">=3.0.0",
+    "ext-phalcon": ">=3.1.0",
     "ext-json": "*",
     "ext-pdo": "*",
     "phalcon/incubator": "^3.2",
