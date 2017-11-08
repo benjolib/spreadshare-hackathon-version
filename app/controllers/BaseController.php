@@ -17,7 +17,7 @@ use Phalcon\Mvc\Controller as PhalconMvcController;
  * @version   $Version$
  * @package   DS\Controller
  */
-class BaseController
+abstract class BaseController
     extends PhalconMvcController
 {
     /**
