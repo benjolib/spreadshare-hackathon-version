@@ -1,6 +1,7 @@
 [database]
 adapter = Mysql
-host = "mysql-1"
+host = "localhost"
+port = 3307
 username = "root"
 password = "spreadshare"
 dbname = "spreadshare"
@@ -10,3 +11,6 @@ controllersDir = "app/controllers/"
 modelsDir = "app/models/Abstracts/"
 viewsDir = "app/views/"
 baseUri = "/"
+
+[migration]
+migrations = "app/migrations"
