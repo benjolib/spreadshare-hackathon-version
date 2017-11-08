@@ -15,7 +15,7 @@ gulp.task('server', function() {
 
 // scss to css
 gulp.task('styles', function() {
-  gulp.src('./public/sass/main.scss')
+  gulp.src('./public/sass/styles.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(minifyCSS())
     .pipe(gulp.dest('./dist/css'))

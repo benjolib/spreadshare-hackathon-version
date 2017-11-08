@@ -1,0 +1,35 @@
+.main {
+  font-family: 'Montserrat', sans-serif;
+  background: $background-color;
+  display: flex;
+  flex-direction: column;
+
+  &__hero {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    background: url('/public/images/background.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 8px;
+    @include rem(height, 336);
+    @include rem(margin, 28);
+
+
+    p {
+      margin: 0;
+      font-weight: 800;
+      @include rem(font-size, 40);
+      @include rem(padding-bottom, 32);
+
+    }
+    h2 {
+      margin: 0;
+      @include rem(font-size, 18);
+      font-weight: 300;
+    }
+  }
+}
