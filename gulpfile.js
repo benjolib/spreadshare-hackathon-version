@@ -3,16 +3,6 @@ var webserver = require('gulp-webserver')
 var sass = require('gulp-sass')
 var minifyCSS = require('gulp-minify-css')
 
-// webserver
-gulp.task('server', function() {
-  gulp.src('./')
-    .pipe(webserver({
-      host: '0.0.0.0',
-      port: 3000,
-      livereload: true
-    }))
-})
-
 // scss to css
 gulp.task('styles', function() {
   gulp.src('./sass/styles.scss')
@@ -23,12 +13,12 @@ gulp.task('styles', function() {
 
 // watch for changes
 gulp.task('watch', function() {
-  gulp.watch('./public/**/*.scss', ['styles'])
-  gulp.watch('./*.html', ['public'])
+  gulp.watch('./sass/**/*.scss', ['styles'])
+  gulp.watch('./app/views/**/*.volt', ['public'])
 })
 
 // public build
 gulp.task('public', ['styles'])
 
 // default
-gulp.task('default', ['server', 'watch', 'public'])
+gulp.task('default', ['watch', 'public'])
