@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ddc35de5e838167b0afceee0a26208c8",
-    "content-hash": "478c3e175f847493db9fea3188c9ef17",
+    "hash": "fb5507998cb654880f8267bcda43bc14",
+    "content-hash": "db27fae41bd443534d719ef4eb52b555",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.36.37",
+            "version": "3.37.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "a6d7fd9f32c63d018a6603a36174b4cb971fccd9"
+                "reference": "f3166fbdf14cea6898729dd945eaabdd211abe8f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/a6d7fd9f32c63d018a6603a36174b4cb971fccd9",
-                "reference": "a6d7fd9f32c63d018a6603a36174b4cb971fccd9",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/f3166fbdf14cea6898729dd945eaabdd211abe8f",
+                "reference": "f3166fbdf14cea6898729dd945eaabdd211abe8f",
                 "shasum": ""
             },
             "require": {
@@ -85,7 +85,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2017-11-03 16:39:35"
+            "time": "2017-11-07 20:32:15"
         },
         {
             "name": "clue/stream-filter",
@@ -2249,12 +2249,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ruflin/Elastica.git",
-                "reference": "6ca31124a7753edbe3cec0f7a0cb723829da57c5"
+                "reference": "3849b83cc1a511066dbc7339e7c52f0ab03c0762"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ruflin/Elastica/zipball/6ca31124a7753edbe3cec0f7a0cb723829da57c5",
-                "reference": "6ca31124a7753edbe3cec0f7a0cb723829da57c5",
+                "url": "https://api.github.com/repos/ruflin/Elastica/zipball/3849b83cc1a511066dbc7339e7c52f0ab03c0762",
+                "reference": "3849b83cc1a511066dbc7339e7c52f0ab03c0762",
                 "shasum": ""
             },
             "require": {
@@ -2299,7 +2299,7 @@
                 "client",
                 "search"
             ],
-            "time": "2017-07-26 12:21:58"
+            "time": "2017-11-08 09:14:07"
         },
         {
             "name": "sentry/sentry",
@@ -2760,37 +2760,40 @@
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.x-dev",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "8e6e04167378abf1ddb4d3522d8755c5fd90d102"
+                "reference": "3b8a3a99ba1f6a3952ac2747d989303cbd6b7a3e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/8e6e04167378abf1ddb4d3522d8755c5fd90d102",
-                "reference": "8e6e04167378abf1ddb4d3522d8755c5fd90d102",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/3b8a3a99ba1f6a3952ac2747d989303cbd6b7a3e",
+                "reference": "3b8a3a99ba1f6a3952ac2747d989303cbd6b7a3e",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.4.0"
+                "php": "^5.6 || ^7.0"
             },
             "require-dev": {
-                "doctrine/collections": "1.*",
-                "phpunit/phpunit": "~4.1"
+                "doctrine/collections": "^1.0",
+                "doctrine/common": "^2.6",
+                "phpunit/phpunit": "^4.1"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
                     "DeepCopy\\": "src/DeepCopy/"
-                }
+                },
+                "files": [
+                    "src/DeepCopy/deep_copy.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "description": "Create deep copies (clones) of your objects",
-            "homepage": "https://github.com/myclabs/DeepCopy",
             "keywords": [
                 "clone",
                 "copy",
@@ -2798,7 +2801,7 @@
                 "object",
                 "object graph"
             ],
-            "time": "2017-04-12 18:52:22"
+            "time": "2017-10-19 19:58:43"
         },
         {
             "name": "nikic/php-parser",
@@ -2853,17 +2856,11 @@
         },
         {
             "name": "phalcon/devtools",
-            "version": "3.2.x-dev",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/phalcon/phalcon-devtools.git",
-                "reference": "12833b9809656ac2617abacb85671f5d853b9f80"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phalcon/phalcon-devtools/zipball/12833b9809656ac2617abacb85671f5d853b9f80",
-                "reference": "12833b9809656ac2617abacb85671f5d853b9f80",
-                "shasum": ""
+                "url": "https://github.com/dstuecken/phalcon-devtools.git",
+                "reference": "9abace49664835c9b919a544d02f378c98d67bf6"
             },
             "require": {
                 "ext-phalcon": "~3.1",
@@ -2887,7 +2884,16 @@
                     "Phalcon\\": "scripts/Phalcon/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Phalcon\\Test\\": "tests/unit",
+                    "Phalcon\\Test\\Models\\": "tests/_data/models",
+                    "Phalcon\\Test\\Module\\": "tests/_support/Module"
+                },
+                "files": [
+                    "tests/_support/helpers.php"
+                ]
+            },
             "license": [
                 "BSD-3-Clause"
             ],
@@ -2905,13 +2911,18 @@
             "description": "This tools provide you useful scripts to generate code helping to develop faster and easy applications that use with Phalcon framework.",
             "homepage": "https://phalconphp.com",
             "keywords": [
-                "Devtools",
+                "devtools",
                 "framework",
                 "phalcon",
                 "phar",
                 "webtools"
             ],
-            "time": "2017-11-06 15:22:43"
+            "support": {
+                "issues": "https://github.com/phalcon/phalcon-devtools/issues",
+                "source": "https://github.com/phalcon/phalcon-devtools",
+                "forum": "https://forum.phalconphp.com/"
+            },
+            "time": "2017-11-08 15:59:34"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -3065,12 +3076,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "c9b8c6088acd19d769d4cc0ffa60a9fe34344bd6"
+                "reference": "ddd9d7ffff1d7c3acd1a79a8e21d5ee5ea7beace"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/c9b8c6088acd19d769d4cc0ffa60a9fe34344bd6",
-                "reference": "c9b8c6088acd19d769d4cc0ffa60a9fe34344bd6",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/ddd9d7ffff1d7c3acd1a79a8e21d5ee5ea7beace",
+                "reference": "ddd9d7ffff1d7c3acd1a79a8e21d5ee5ea7beace",
                 "shasum": ""
             },
             "require": {
@@ -3082,7 +3093,7 @@
             },
             "require-dev": {
                 "phpspec/phpspec": "^2.5|^3.2",
-                "phpunit/phpunit": "^4.8 || ^5.6.5"
+                "phpunit/phpunit": "^4.8.35 || ^5.7"
             },
             "type": "library",
             "extra": {
@@ -3120,7 +3131,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2017-09-04 11:05:03"
+            "time": "2017-11-07 12:00:44"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -4104,12 +4115,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "379744aa3f7ccc56d0b767d0a27edc44b3bef8d9"
+                "reference": "a2e7a0bb621a55647877608ae202175086444595"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/379744aa3f7ccc56d0b767d0a27edc44b3bef8d9",
-                "reference": "379744aa3f7ccc56d0b767d0a27edc44b3bef8d9",
+                "url": "https://api.github.com/repos/symfony/console/zipball/a2e7a0bb621a55647877608ae202175086444595",
+                "reference": "a2e7a0bb621a55647877608ae202175086444595",
                 "shasum": ""
             },
             "require": {
@@ -4165,7 +4176,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2017-11-05 16:10:10"
+            "time": "2017-11-07 14:20:24"
         },
         {
             "name": "symfony/debug",
@@ -4173,12 +4184,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-                "reference": "a5bb97fb9fbd0e2a5e44feb8b32bb541f8b5b7b7"
+                "reference": "d61d1eb839d4f741745f32af6b7d0608fd53c25a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/a5bb97fb9fbd0e2a5e44feb8b32bb541f8b5b7b7",
-                "reference": "a5bb97fb9fbd0e2a5e44feb8b32bb541f8b5b7b7",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/d61d1eb839d4f741745f32af6b7d0608fd53c25a",
+                "reference": "d61d1eb839d4f741745f32af6b7d0608fd53c25a",
                 "shasum": ""
             },
             "require": {
@@ -4221,7 +4232,7 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2017-10-24 14:16:56"
+            "time": "2017-11-07 14:45:01"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -4288,12 +4299,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "11310e8e67a2af653bc9ae2b7d7b1b25c91cd569"
+                "reference": "1a4f435b9b9347f8dcf2692f756620dd20d9c1b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/11310e8e67a2af653bc9ae2b7d7b1b25c91cd569",
-                "reference": "11310e8e67a2af653bc9ae2b7d7b1b25c91cd569",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/1a4f435b9b9347f8dcf2692f756620dd20d9c1b4",
+                "reference": "1a4f435b9b9347f8dcf2692f756620dd20d9c1b4",
                 "shasum": ""
             },
             "require": {
@@ -4349,7 +4360,7 @@
                 "debug",
                 "dump"
             ],
-            "time": "2017-11-05 16:59:57"
+            "time": "2017-11-07 14:28:09"
         },
         {
             "name": "symfony/yaml",
@@ -4357,12 +4368,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "f63664afe959bb1289147112342506a8e215e271"
+                "reference": "bb53b8735e4d8566d84f9e796322b3698399ee01"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/f63664afe959bb1289147112342506a8e215e271",
-                "reference": "f63664afe959bb1289147112342506a8e215e271",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/bb53b8735e4d8566d84f9e796322b3698399ee01",
+                "reference": "bb53b8735e4d8566d84f9e796322b3698399ee01",
                 "shasum": ""
             },
             "require": {
@@ -4407,7 +4418,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2017-10-24 14:36:35"
+            "time": "2017-11-07 14:45:01"
         },
         {
             "name": "whoops/phalcon",
@@ -4448,7 +4459,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "phalcon/devtools": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

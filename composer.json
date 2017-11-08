@@ -34,8 +34,14 @@
     "mailgun/mailgun-php": "^2.3"
   },
   "require-dev": {
-    "phalcon/devtools": "^3.2",
+    "phalcon/devtools": "dev-master",
     "whoops/phalcon": "^2.0",
     "phpunit/phpunit": "^5.0"
-  }
+  },
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/dstuecken/phalcon-devtools.git"
+    }
+  ]
 }
