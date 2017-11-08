@@ -26,7 +26,7 @@
         <img class="navbar__search__filter__icon" src="/public/icons/filter.svg" />
       </div>
     </div>
-    <div class="navbar__login">Log in <span>or</span> Sign up</div>
+    <a href="/login" class="navbar__login">Log in <span>or</span> Sign up</a>
   </nav>
   <!-- Main Section -->
   <section class="main">
