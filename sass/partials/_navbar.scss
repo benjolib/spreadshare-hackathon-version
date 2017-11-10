@@ -24,6 +24,21 @@
       margin-bottom: 0;
     }
 
+    a {
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: none;
+        color: $logo-color;
+      }
+      &:visited {
+        color: $logo-color;
+      }
+      &:focus {
+        color: $logo-color;
+      }
+    }
+
     h1 {
       margin: 0;
       font-weight: 800;

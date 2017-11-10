@@ -13,7 +13,7 @@
 <body>
   <nav class="navbar">
     <div class="navbar__logo">
-      <h1>SpreadShare</h1>
+      <a href="/"><h1>SpreadShare</h1></a>
       <h2>Community Curated Tables</h2>
     </div>
     <div class="navbar__search">
