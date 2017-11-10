@@ -65,6 +65,7 @@ CREATE TABLE `locations` (
   `createdAt` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `cityId` (`cityId`),
+  KEY `locationName` (`locationName`),
   CONSTRAINT `locationsCityId` FOREIGN KEY (`cityId`) REFERENCES `cities` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
