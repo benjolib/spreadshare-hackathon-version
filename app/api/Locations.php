@@ -30,10 +30,31 @@ class Locations
      */
     public static function getAll(): array
     {
-        self::generateLocationsFromCities();
         $locations = new LocationsModel;
         
         return $locations->find()->toArray();
+    }
+    
+    /**
+     * Searches a location by name. Wildcard is added at the end of $name.
+     *
+     * @param     $name
+     * @param int $limit
+     *
+     * @return \DS\Model\Abstracts\AbstractLocations|\DS\Model\Abstracts\AbstractLocations[]|\Phalcon\Mvc\Model\ResultSetInterface
+     */
+    public static function searchLocationByName($name, $limit = 100)
+    {
+        $locations = new LocationsModel;
+        
+        return $locations->find(
+            [
+                "conditions" => "locationName LIKE ?0",
+                "order" => "locationName ASC",
+                "limit" => $limit,
+                "bind" => [$name . '%'],
+            ]
+        );
     }
     
     /**
