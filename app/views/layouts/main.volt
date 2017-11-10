@@ -19,11 +19,11 @@
     </div>
     <div class="navbar__search">
       <div class="navbar__search__icon">
-        <img src="/public/icons/search.svg" />
+        <img src="/assets/icons/search.svg" />
       </div>
       <input type="text" class="navbar__search__field" placeholder="Find anything" />
       <div class="navbar__search__filter">
-        <img class="navbar__search__filter__icon" src="/public/icons/filter.svg" />
+        <img class="navbar__search__filter__icon" src="/assets/icons/filter.svg" />
       </div>
     </div>
     <a href="/login" class="navbar__login">Log in <span>or</span> Sign up</a>
