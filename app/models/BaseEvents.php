@@ -28,12 +28,12 @@ abstract class BaseEvents
     public function beforeCreate()
     {
         $time = time();
-        if (isset($this->lastUpdateAt))
+        if (property_exists($this, 'lastUpdateAt'))
         {
             $this->lastUpdateAt = $time;
         }
         
-        if (isset($this->createdAt))
+        if (property_exists($this, 'createdAt'))
         {
             $this->createdAt = $time;
         }
@@ -46,7 +46,7 @@ abstract class BaseEvents
      */
     public function beforeSave()
     {
-        if (isset($this->lastUpdateAt))
+        if (property_exists($this, 'lastUpdateAt'))
         {
             $this->lastUpdateAt = time();
         }
