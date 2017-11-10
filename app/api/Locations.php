@@ -24,6 +24,13 @@ class Locations
     extends BaseApi
 {
     /**
+     * Default columns to use for response
+     *
+     * @var string
+     */
+    private static $defaultColumns = 'id, locationName';
+    
+    /**
      * Return all locations
      *
      * @return array
@@ -32,7 +39,11 @@ class Locations
     {
         $locations = new LocationsModel;
         
-        return $locations->find()->toArray();
+        return $locations->find(
+            [
+                'columns' => self::$defaultColumns,
+            ]
+        )->toArray();
     }
     
     /**
@@ -41,7 +52,7 @@ class Locations
      * @param     $name
      * @param int $limit
      *
-     * @return \DS\Model\Abstracts\AbstractLocations|\DS\Model\Abstracts\AbstractLocations[]|\Phalcon\Mvc\Model\ResultSetInterface
+     * @return array
      */
     public static function searchLocationByName($name, $limit = 100)
     {
@@ -50,11 +61,12 @@ class Locations
         return $locations->find(
             [
                 "conditions" => "locationName LIKE ?0",
+                'columns' => self::$defaultColumns,
                 "order" => "locationName ASC",
                 "limit" => $limit,
                 "bind" => [$name . '%'],
             ]
-        );
+        )->toArray(['id', 'locationName']);
     }
     
     /**

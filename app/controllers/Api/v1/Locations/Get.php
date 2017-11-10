@@ -40,30 +40,28 @@ class Get extends ActionHandler implements MethodInterface
      *
      * @apiSuccess {Object} _meta Meta object with properties total and success
      * @apiSuccess {Object[]} data Array of locations
+     * @apiSuccess {string} data.id Id of location
+     * @apiSuccess {string} data.locationName Name of location
      *
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK
      *     {
      *      "_meta": {
-     *              "total":7274,
+     *              "total":3,
      *              "success":true
      *          },
      *      "data": [
      *          {
      *              "id":"1",
-     *              "cityId":"1",
-     *              "lat":"34.983",
-     *              "lng":"34.983",
-     *              "locationName":"Qal eh-ye",
-     *              "createdAt":1510317573
+     *              "locationName":"Berlin",
      *          },
      *          {
      *              "id":"2",
-     *              "cityId":NULL,
-     *              "lat":"34.983",
-     *              "lng":"34.983",
-     *              "locationName":"Afghanistan",
-     *              "createdAt":1510317573
+     *              "locationName":"Germany",
+     *          },
+     *          {
+     *              "id":"3",
+     *              "locationName":"Cologne",
      *          }
      *       ]
      *      }
