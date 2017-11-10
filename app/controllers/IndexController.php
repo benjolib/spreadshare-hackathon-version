@@ -27,12 +27,12 @@ class IndexController
     {
         try
         {
-            $this->view->setMainView('frontpage');
+            $this->view->setMainView('partials/index');
         }
         catch (Exception $e)
         {
             Application::instance()->log($e->getMessage(), Logger::CRITICAL);
         }
     }
-    
+
 }
