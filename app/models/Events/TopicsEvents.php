@@ -1,6 +1,6 @@
 <?php
 
-namespace DS\Model\Abstracts\Events;
+namespace DS\Model\Events;
 
 use DS\Model\Abstracts\AbstractTopics;
 
@@ -17,7 +17,7 @@ use DS\Model\Abstracts\AbstractTopics;
  * @version   $Version$
  * @package   DS\Model
  */
-class TopicsEvents
+abstract class TopicsEvents
     extends AbstractTopics
 {
     

@@ -1,6 +1,6 @@
 <?php
 
-namespace DS\Model\Abstracts\Events;
+namespace DS\Model\Events;
 
 use DS\Model\Abstracts\AbstractUserConnections;
 
@@ -17,7 +17,7 @@ use DS\Model\Abstracts\AbstractUserConnections;
  * @version   $Version$
  * @package   DS\Model
  */
-class UserConnectionsEvents
+abstract class UserConnectionsEvents
     extends AbstractUserConnections
 {
     

@@ -1,6 +1,6 @@
 <?php
 
-namespace DS\Model\Abstracts\Events;
+namespace DS\Model\Events;
 
 use DS\Model\Abstracts\AbstractChangeRequests;
 
@@ -17,7 +17,7 @@ use DS\Model\Abstracts\AbstractChangeRequests;
  * @version   $Version$
  * @package   DS\Model
  */
-class ChangeRequestsEvents
+abstract class ChangeRequestsEvents
     extends AbstractChangeRequests
 {
     

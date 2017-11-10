@@ -2,7 +2,7 @@
 
 namespace DS\Model;
 
-use DS\Model\Abstracts\Events\TableCommentVotesEvents;
+use DS\Model\Events\TableCommentVotesEvents;
 
 /**
  * TableCommentVotes

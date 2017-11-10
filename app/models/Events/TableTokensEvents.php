@@ -1,6 +1,6 @@
 <?php
 
-namespace DS\Model\Abstracts\Events;
+namespace DS\Model\Events;
 
 use DS\Model\Abstracts\AbstractTableTokens;
 
@@ -17,7 +17,7 @@ use DS\Model\Abstracts\AbstractTableTokens;
  * @version   $Version$
  * @package   DS\Model
  */
-class TableTokensEvents
+abstract class TableTokensEvents
     extends AbstractTableTokens
 {
     

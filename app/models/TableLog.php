@@ -2,7 +2,7 @@
 
 namespace DS\Model;
 
-use DS\Model\Abstracts\Events\TableLogEvents;
+use DS\Model\Events\TableLogEvents;
 
 /**
  * TableLog

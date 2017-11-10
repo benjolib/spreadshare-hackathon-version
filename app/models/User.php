@@ -2,7 +2,7 @@
 
 namespace DS\Model;
 
-use DS\Model\Abstracts\Events\UserEvents;
+use DS\Model\Events\UserEvents;
 
 /**
  * User

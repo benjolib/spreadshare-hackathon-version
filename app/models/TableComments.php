@@ -2,7 +2,7 @@
 
 namespace DS\Model;
 
-use DS\Model\Abstracts\Events\TableCommentsEvents;
+use DS\Model\Events\TableCommentsEvents;
 
 /**
  * TableComments

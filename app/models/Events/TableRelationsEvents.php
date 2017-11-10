@@ -1,6 +1,6 @@
 <?php
 
-namespace DS\Model\Abstracts\Events;
+namespace DS\Model\Events;
 
 use DS\Model\Abstracts\AbstractTableRelations;
 
@@ -17,7 +17,7 @@ use DS\Model\Abstracts\AbstractTableRelations;
  * @version   $Version$
  * @package   DS\Model
  */
-class TableRelationsEvents
+abstract class TableRelationsEvents
     extends AbstractTableRelations
 {
     

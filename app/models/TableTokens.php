@@ -2,7 +2,7 @@
 
 namespace DS\Model;
 
-use DS\Model\Abstracts\Events\TableTokensEvents;
+use DS\Model\Events\TableTokensEvents;
 
 /**
  * TableTokens

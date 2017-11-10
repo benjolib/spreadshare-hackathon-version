@@ -2,7 +2,7 @@
 
 namespace DS\Model;
 
-use DS\Model\Abstracts\Events\TableCellsEvents;
+use DS\Model\Events\TableCellsEvents;
 
 /**
  * TableCells

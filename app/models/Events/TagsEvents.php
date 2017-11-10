@@ -1,6 +1,6 @@
 <?php
 
-namespace DS\Model\Abstracts\Events;
+namespace DS\Model\Events;
 
 use DS\Model\Abstracts\AbstractTags;
 
@@ -17,7 +17,7 @@ use DS\Model\Abstracts\AbstractTags;
  * @version   $Version$
  * @package   DS\Model
  */
-class TagsEvents
+abstract class TagsEvents
     extends AbstractTags
 {
     

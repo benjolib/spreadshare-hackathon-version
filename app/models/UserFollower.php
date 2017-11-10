@@ -2,7 +2,7 @@
 
 namespace DS\Model;
 
-use DS\Model\Abstracts\Events\UserFollowerEvents;
+use DS\Model\Events\UserFollowerEvents;
 
 /**
  * UserFollower

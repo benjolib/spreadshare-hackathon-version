@@ -1,6 +1,6 @@
 <?php
 
-namespace DS\Model\Abstracts\Events;
+namespace DS\Model\Events;
 
 use DS\Model\Abstracts\AbstractTableColumns;
 
@@ -17,7 +17,7 @@ use DS\Model\Abstracts\AbstractTableColumns;
  * @version   $Version$
  * @package   DS\Model
  */
-class TableColumnsEvents
+abstract class TableColumnsEvents
     extends AbstractTableColumns
 {
     

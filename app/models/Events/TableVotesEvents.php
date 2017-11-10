@@ -1,6 +1,6 @@
 <?php
 
-namespace DS\Model\Abstracts\Events;
+namespace DS\Model\Events;
 
 use DS\Model\Abstracts\AbstractTableVotes;
 
@@ -17,7 +17,7 @@ use DS\Model\Abstracts\AbstractTableVotes;
  * @version   $Version$
  * @package   DS\Model
  */
-class TableVotesEvents
+abstract class TableVotesEvents
     extends AbstractTableVotes
 {
     

@@ -1,6 +1,6 @@
 <?php
 
-namespace DS\Model\Abstracts\Events;
+namespace DS\Model\Events;
 
 use DS\Model\Abstracts\AbstractTableComments;
 
@@ -17,7 +17,7 @@ use DS\Model\Abstracts\AbstractTableComments;
  * @version   $Version$
  * @package   DS\Model
  */
-class TableCommentsEvents
+abstract class TableCommentsEvents
     extends AbstractTableComments
 {
     

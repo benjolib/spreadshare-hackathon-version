@@ -1,6 +1,6 @@
 <?php
 
-namespace DS\Model\Abstracts\Events;
+namespace DS\Model\Events;
 
 use DS\Model\Abstracts\AbstractUserNotifications;
 
@@ -17,7 +17,7 @@ use DS\Model\Abstracts\AbstractUserNotifications;
  * @version   $Version$
  * @package   DS\Model
  */
-class UserNotificationsEvents
+abstract class UserNotificationsEvents
     extends AbstractUserNotifications
 {
     

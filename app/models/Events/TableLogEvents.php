@@ -1,6 +1,6 @@
 <?php
 
-namespace DS\Model\Abstracts\Events;
+namespace DS\Model\Events;
 
 use DS\Model\Abstracts\AbstractTableLog;
 
@@ -17,7 +17,7 @@ use DS\Model\Abstracts\AbstractTableLog;
  * @version   $Version$
  * @package   DS\Model
  */
-class TableLogEvents
+abstract class TableLogEvents
     extends AbstractTableLog
 {
     

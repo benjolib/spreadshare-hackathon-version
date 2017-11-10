@@ -2,7 +2,7 @@
 
 namespace DS\Model;
 
-use DS\Model\Abstracts\Events\TableRelationsEvents;
+use DS\Model\Events\TableRelationsEvents;
 
 /**
  * TableRelations

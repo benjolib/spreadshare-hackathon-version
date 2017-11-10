@@ -2,7 +2,7 @@
 
 namespace DS\Model;
 
-use DS\Model\Abstracts\Events\ModelTemplateEvents;
+use DS\Model\Events\ModelTemplateEvents;
 
 /**
  * ModelTemplate

@@ -1,6 +1,6 @@
 <?php
 
-namespace DS\Model\Abstracts\Events;
+namespace DS\Model\Events;
 
 use DS\Model\Abstracts\AbstractTables;
 
@@ -17,7 +17,7 @@ use DS\Model\Abstracts\AbstractTables;
  * @version   $Version$
  * @package   DS\Model
  */
-class TablesEvents
+abstract class TablesEvents
     extends AbstractTables
 {
     

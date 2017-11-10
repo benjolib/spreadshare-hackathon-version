@@ -1,6 +1,6 @@
 <?php
 
-namespace DS\Model\Abstracts\Events;
+namespace DS\Model\Events;
 
 use DS\Model\Abstracts\AbstractTypes;
 
@@ -17,7 +17,7 @@ use DS\Model\Abstracts\AbstractTypes;
  * @version   $Version$
  * @package   DS\Model
  */
-class TypesEvents
+abstract class TypesEvents
     extends AbstractTypes
 {
     

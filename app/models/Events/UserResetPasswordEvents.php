@@ -1,6 +1,6 @@
 <?php
 
-namespace DS\Model\Abstracts\Events;
+namespace DS\Model\Events;
 
 use DS\Model\Abstracts\AbstractUserResetPassword;
 
@@ -17,7 +17,7 @@ use DS\Model\Abstracts\AbstractUserResetPassword;
  * @version   $Version$
  * @package   DS\Model
  */
-class UserResetPasswordEvents
+abstract class UserResetPasswordEvents
     extends AbstractUserResetPassword
 {
     

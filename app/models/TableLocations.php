@@ -2,7 +2,7 @@
 
 namespace DS\Model;
 
-use DS\Model\Abstracts\Events\TableLocationsEvents;
+use DS\Model\Events\TableLocationsEvents;
 
 /**
  * TableLocations

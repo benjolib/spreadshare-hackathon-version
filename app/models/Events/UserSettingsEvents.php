@@ -1,6 +1,6 @@
 <?php
 
-namespace DS\Model\Abstracts\Events;
+namespace DS\Model\Events;
 
 use DS\Model\Abstracts\AbstractUserSettings;
 
@@ -17,7 +17,7 @@ use DS\Model\Abstracts\AbstractUserSettings;
  * @version   $Version$
  * @package   DS\Model
  */
-class UserSettingsEvents
+abstract class UserSettingsEvents
     extends AbstractUserSettings
 {
     

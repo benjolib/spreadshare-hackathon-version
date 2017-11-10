@@ -2,7 +2,7 @@
 
 namespace DS\Model;
 
-use DS\Model\Abstracts\Events\TagsEvents;
+use DS\Model\Events\TagsEvents;
 
 /**
  * Tags

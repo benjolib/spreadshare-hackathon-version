@@ -2,7 +2,7 @@
 
 namespace DS\Model;
 
-use DS\Model\Abstracts\Events\CitiesEvents;
+use DS\Model\Events\CitiesEvents;
 
 /**
  * Cities

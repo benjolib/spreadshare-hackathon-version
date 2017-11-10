@@ -2,7 +2,7 @@
 
 namespace DS\Model;
 
-use DS\Model\Abstracts\Events\UserNotificationsEvents;
+use DS\Model\Events\UserNotificationsEvents;
 
 /**
  * UserNotifications

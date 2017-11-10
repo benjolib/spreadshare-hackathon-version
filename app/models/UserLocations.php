@@ -2,7 +2,7 @@
 
 namespace DS\Model;
 
-use DS\Model\Abstracts\Events\UserLocationsEvents;
+use DS\Model\Events\UserLocationsEvents;
 
 /**
  * UserLocations

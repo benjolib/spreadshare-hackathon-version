@@ -1,6 +1,6 @@
 <?php
 
-namespace DS\Model\Abstracts\Events;
+namespace DS\Model\Events;
 
 use DS\Model\Abstracts\AbstractWallet;
 
@@ -17,7 +17,7 @@ use DS\Model\Abstracts\AbstractWallet;
  * @version   $Version$
  * @package   DS\Model
  */
-class WalletEvents
+abstract class WalletEvents
     extends AbstractWallet
 {
     

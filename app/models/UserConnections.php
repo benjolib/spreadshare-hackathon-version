@@ -2,7 +2,7 @@
 
 namespace DS\Model;
 
-use DS\Model\Abstracts\Events\UserConnectionsEvents;
+use DS\Model\Events\UserConnectionsEvents;
 
 /**
  * UserConnections

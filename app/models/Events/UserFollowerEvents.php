@@ -1,6 +1,6 @@
 <?php
 
-namespace DS\Model\Abstracts\Events;
+namespace DS\Model\Events;
 
 use DS\Model\Abstracts\AbstractUserFollower;
 
@@ -17,7 +17,7 @@ use DS\Model\Abstracts\AbstractUserFollower;
  * @version   $Version$
  * @package   DS\Model
  */
-class UserFollowerEvents
+abstract class UserFollowerEvents
     extends AbstractUserFollower
 {
     

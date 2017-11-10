@@ -2,7 +2,7 @@
 
 namespace DS\Model;
 
-use DS\Model\Abstracts\Events\ChangeRequestsEvents;
+use DS\Model\Events\ChangeRequestsEvents;
 
 /**
  * ChangeRequests

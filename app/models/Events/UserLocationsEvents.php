@@ -1,6 +1,6 @@
 <?php
 
-namespace DS\Model\Abstracts\Events;
+namespace DS\Model\Events;
 
 use DS\Model\Abstracts\AbstractUserLocations;
 
@@ -17,7 +17,7 @@ use DS\Model\Abstracts\AbstractUserLocations;
  * @version   $Version$
  * @package   DS\Model
  */
-class UserLocationsEvents
+abstract class UserLocationsEvents
     extends AbstractUserLocations
 {
     
