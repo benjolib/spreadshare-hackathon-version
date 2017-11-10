@@ -5,7 +5,9 @@ namespace DS\Model\Abstracts\Events;
 use DS\Model\Abstracts\AbstractUserStats;
 
 /**
- * UserStats
+ * Events for model UserStats
+ *
+ * @see https://docs.phalconphp.com/ar/3.2/db-models-events
  *
  * @author    Dennis Stücken
  * @license   proprietary
@@ -14,8 +16,6 @@ use DS\Model\Abstracts\AbstractUserStats;
  *
  * @version   $Version$
  * @package   DS\Model
- *
- * @method static findFirstById(int $id)
  */
 class UserStatsEvents
     extends AbstractUserStats
