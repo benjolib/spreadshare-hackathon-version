@@ -17,19 +17,32 @@
     border-radius: 8px;
     @include rem(height, 336);
     @include rem(margin, 28);
-
+    @include rem2(padding, 0, 40);
 
     p {
       margin: 0;
       font-weight: 800;
-      @include rem(font-size, 40);
+      @include rem(font-size, 26);
       @include rem(padding-bottom, 32);
 
+      @include tablet {
+        @include rem(font-size, 32);
+      }
+      @include desktop {
+        @include rem(font-size, 36);
+      }
     }
     h2 {
       margin: 0;
-      @include rem(font-size, 18);
       font-weight: 300;
+      @include rem(font-size, 16);
+
+      @include tablet {
+        @include rem(font-size, 17);
+      }
+      @include desktop {
+        @include rem(font-size, 18);
+      }
     }
   }
 }
