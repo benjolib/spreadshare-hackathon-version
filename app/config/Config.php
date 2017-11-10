@@ -89,8 +89,9 @@ return [
         'DS\Cli' => ROOT_PATH . '/app/cli/',
         'DS\Constants' => ROOT_PATH . '/app/constants/',
         'DS\Tests' => ROOT_PATH . '/app/tests/',
+        'DS\Api' => ROOT_PATH . '/app/api/',
     ],
-    'mode' => 'development',
+    'mode' => 'production',
     
     'hybridauth' => [
         "debug_mode" => true,
