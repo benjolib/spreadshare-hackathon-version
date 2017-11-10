@@ -2,16 +2,15 @@
 
 namespace DS\Model;
 
-use DS\Model\Abstracts\AbstractTableComments;
+use DS\Model\Abstracts\Events\TableCommentsEvents;
 
 /**
- * Comments
+ * TableComments
  *
- * @author Dennis Stücken
- * @license proprietary
-
+ * @author    Dennis Stücken
+ * @license   proprietary
  * @copyright Spreadshare
- * @link https://www.spreadshare.co
+ * @link      https://www.spreadshare.co
  *
  * @version   $Version$
  * @package   DS\Model
@@ -19,21 +18,35 @@ use DS\Model\Abstracts\AbstractTableComments;
  * @method static findFirstById(int $id)
  */
 class TableComments
-    extends AbstractTableComments
+    extends TableCommentsEvents
 {
     /**
-     * @param $tableId
+     * @param array $param
+     * @param int   $page
+     * @param int   $limit
      *
-     * @return AbstractTableComments|AbstractTableComments[]|\Phalcon\Mvc\Model\ResultSetInterface
+     * @return array
      */
-    public static function getCommentsByTable($tableId)
+    /*
+    public function findCustom($param = [], $page = 0, $limit = Paging::endlessScrollPortions)
     {
-        return self::find(
-            [
-                "conditions" => 'tableId = ?0 and isnull(commentId)',
-                "bind" => [$tableId],
-                'order' => 'createdAt DESC',
-            ]
-        );
+        if (count($param))
+        {
+            return self::query()
+                       ->columns(
+                           [
+                               TableComments::class . ".id",
+                           ]
+                       )
+                //->leftJoin(TableComments::class, TableComments::class . '.profileId = ' . Profile::class . '.id')
+                //->inWhere(Profile::class . '.id', $param)
+                       ->limit((int) $limit, (int) Paging::endlessScrollPortions * $page)
+                //->orderBy(sprintf('FIELD (id,%s)', implode(',', $param)))
+                       ->execute()
+                       ->toArray() ?: [];
+        }
+        
+        return [];
     }
+    */
 }

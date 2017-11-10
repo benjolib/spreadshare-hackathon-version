@@ -2,10 +2,10 @@
 
 namespace DS\Model;
 
-use DS\Model\Abstracts\Events\UserEvents;
+use DS\Model\Abstracts\Events\TableRelationsEvents;
 
 /**
- * User
+ * TableRelations
  *
  * @author    Dennis Stücken
  * @license   proprietary
@@ -17,8 +17,8 @@ use DS\Model\Abstracts\Events\UserEvents;
  *
  * @method static findFirstById(int $id)
  */
-class User
-    extends UserEvents
+class TableRelations
+    extends TableRelationsEvents
 {
     /**
      * @param array $param
@@ -35,10 +35,10 @@ class User
             return self::query()
                        ->columns(
                            [
-                               User::class . ".id",
+                               TableRelations::class . ".id",
                            ]
                        )
-                //->leftJoin(User::class, User::class . '.profileId = ' . Profile::class . '.id')
+                //->leftJoin(TableRelations::class, TableRelations::class . '.profileId = ' . Profile::class . '.id')
                 //->inWhere(Profile::class . '.id', $param)
                        ->limit((int) $limit, (int) Paging::endlessScrollPortions * $page)
                 //->orderBy(sprintf('FIELD (id,%s)', implode(',', $param)))
