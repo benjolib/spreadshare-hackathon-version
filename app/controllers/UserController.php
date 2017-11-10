@@ -41,10 +41,12 @@ class UserController
         {
             $user = User::findByFieldValue('handle', $handle);
             
+            /*
             if (!$user)
             {
                 $this->response->redirect('/');
             }
+            */
             
             $this->view->setVar('profile', $user);
             $this->view->setMainView('user/profile');
