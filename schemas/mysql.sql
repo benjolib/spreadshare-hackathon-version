@@ -44,8 +44,8 @@ CREATE TABLE `cities` (
   `region` varchar(200) DEFAULT NULL,
   `country` varchar(200) DEFAULT NULL,
   `continent` varchar(200) DEFAULT NULL,
-  `lat` float DEFAULT NULL,
-  `lng` float DEFAULT NULL,
+  `lat` float unsigned DEFAULT NULL,
+  `lng` float unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -59,8 +59,8 @@ DROP TABLE IF EXISTS `locations`;
 CREATE TABLE `locations` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `cityId` int(11) unsigned DEFAULT NULL,
-  `lat` int(11) unsigned NOT NULL COMMENT 'latitude',
-  `lng` int(11) unsigned NOT NULL COMMENT 'longitude',
+  `lat` float unsigned NOT NULL COMMENT 'latitude',
+  `lng` float unsigned NOT NULL COMMENT 'longitude',
   `locationName` varchar(200) DEFAULT NULL,
   `createdAt` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`),
