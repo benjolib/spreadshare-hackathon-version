@@ -31,5 +31,8 @@ abstract class BaseController
     public function initialize()
     {
         $this->serviceManager = ServiceManager::instance($this->di);
+        
+        // Providing the auth instance to our view
+        $this->view->setVar('auth', $this->serviceManager->getAuth());
     }
 }

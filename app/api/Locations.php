@@ -8,7 +8,7 @@ use DS\Model\Locations as LocationsModel;
 /**
  * Spreadshare
  *
- * Some default events
+ * General Locations Api
  *
  * @author    Dennis Stücken
  * @license   proprietary

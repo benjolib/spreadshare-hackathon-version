@@ -8,7 +8,7 @@
  * @package   DS\Config
  */
 return [
-    'domain' => 'spreadshare.docker',
+    'domain' => 'spreadshare.docker:81',
     'elasticsearch' => [
         'host' => 'elasticsearch',
         'port' => '9200',
@@ -52,7 +52,7 @@ return [
     'mail' => [
         'driver' => 'mailgun',
         'from' => [
-            'email' => 'no-reply@spreadshare.co',
+            'email' => 'hi@spreadshare.co',
             'name' => 'Spreadshare',
         ],
         'mailgun' => [

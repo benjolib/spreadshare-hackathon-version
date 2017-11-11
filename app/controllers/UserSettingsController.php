@@ -80,6 +80,9 @@ class UserSettingsController
                 case "wallet":
                     $this->walletAction();
                     break;
+                case "donations":
+                    $this->donationsAction();
+                    break;
                 default:
                 case "personal":
                     $this->personalAction();
@@ -136,11 +139,19 @@ class UserSettingsController
     }
     
     /**
-     * Notifications
+     * Account
      */
     public function accountAction()
     {
         $this->view->setMainView('user/settings/account');
+    }
+    
+    /**
+     * Donations
+     */
+    public function donationsAction()
+    {
+        $this->view->setMainView('user/settings/donations');
     }
     
 }

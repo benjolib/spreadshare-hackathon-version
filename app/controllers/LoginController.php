@@ -2,9 +2,11 @@
 
 namespace DS\Controller;
 
+use DS\Api\Login;
 use DS\Application;
 use DS\Component\Auth;
 use DS\Component\ServiceManager;
+use DS\Model\DataSource\UserStatus;
 use DS\Model\User;
 use Hybridauth\Adapter\AdapterInterface;
 use Hybridauth\Exception\AuthorizationDeniedException;
@@ -15,11 +17,10 @@ use Phalcon\Logger;
 /**
  * Spreadshare
  *
- * @author Dennis Stücken
- * @license proprietary
-
+ * @author    Dennis Stücken
+ * @license   proprietary
  * @copyright Spreadshare
- * @link https://www.spreadshare.co
+ * @link      https://www.spreadshare.co
  *
  * @version   $Version$
  * @package   DS\Controller
@@ -34,6 +35,26 @@ class LoginController
     {
         try
         {
+            if ($this->request->isPost())
+            {
+                // Login...
+                $login = new Login();
+                if ($login->login($this->request->getPost('username'), $this->request->getPost('password')))
+                {
+                    header('Location: /');
+                }
+            }
+            
+            if ($this->request->get('token'))
+            {
+                $user = (new User())->findByFieldValue('emailConfirmationToken', $this->request->get('token'));
+                
+                if ($user)
+                {
+                    $user->setStatus(UserStatus::Confirmed)->setConfirmed(1)->save();
+                }
+            }
+            
             if ($this->request->get('oauth_token'))
             {
                 return $this->loginWithTwitterAction();
@@ -42,34 +63,40 @@ class LoginController
             {
                 return $this->loginWithFacebookAction();
             }
-
+            
             /**
              * @var $auth Auth
              */
             $auth = ServiceManager::instance($this->di)->getAuth();
-
+            
             // Relocate to feed view if user is logged in
             if ($auth->loggedIn())
             {
                 // Calling redirect only sets the 302 response status.
                 $this->response->redirect('/', true, 301);
-
+                
                 // Better disable the view to prevent the unnecessary rendering as well.
                 $this->view->disable();
-            }
-            else
-            {
-                $this->view->setMainView('auth/login');
             }
         }
         catch (Exception $e)
         {
-            Application::instance()->log($e->getMessage(), Logger::CRITICAL);
+            $this->view->setVar('errorMessage', $e->getMessage());
         }
-
+        
+        $this->view->setMainView('auth/login');
+        
         return null;
     }
-
+    
+    /**
+     * Forgot password
+     */
+    public function forgotAction()
+    {
+        $this->view->setMainView('auth/forgot');
+    }
+    
     /**
      * Login with Twitter account
      */
@@ -77,7 +104,7 @@ class LoginController
     {
         return $this->loginWith('Twitter');
     }
-
+    
     /**
      * Login with Facebook account
      */
@@ -85,7 +112,7 @@ class LoginController
     {
         return $this->loginWith('Facebook');
     }
-
+    
     /**
      * @param $provider
      *
@@ -96,21 +123,21 @@ class LoginController
         try
         {
             $this->view->disable();
-
+            
             //Feed configuration array to Hybridauth
             $hybridauth = new Hybridauth($this->di->get('config')->get('hybridauth')->toArray());
-
+            
             //Attempt to authenticate users with a provider by name
             $adapter = $hybridauth->authenticate($provider);
-
+            
             //Returns a boolean of whether the user is connected with Facebook
             $isConnected = $adapter->isConnected();
-
+            
             if ($isConnected)
             {
                 $this->loginSucceeded($adapter, $provider);
             }
-
+            
             //Disconnect the adapter
             $adapter->disconnect();
         }
@@ -124,10 +151,10 @@ class LoginController
             //var_dump($e);
             //die;
         }
-
+        
         return null;
     }
-
+    
     /**
      * @param AdapterInterface $adapter
      * @param                  $provider
@@ -136,26 +163,26 @@ class LoginController
     {
         //Retrieve the user's profile
         $userProfile = $adapter->getUserProfile();
-
+        
         $user = User::addUserFromAuthService(
             trim($userProfile->firstName . ' ' . $userProfile->lastName),
             $this->cleanString(strtolower($userProfile->displayName), '-'),
             $userProfile->emailVerified,
+            '',
             $userProfile->description,
             $userProfile->identifier,
             $userProfile->photoURL,
             $userProfile->city ? $userProfile->city : $userProfile->region,
-            $userProfile->profileURL,
             $provider
         );
-
+        
         $this->serviceManager->getAuth()->storeSession($user);
-
+        
         header('Location: /');
         $this->response->redirect('/', false);
         $this->view->disable();
     }
-
+    
     /**
      * @param $string
      * @param $delimiter
@@ -166,15 +193,15 @@ class LoginController
     {
         // replace non letter or non digits by -
         $string = preg_replace('#[^\pL\d]+#u', '-', $string);
-
+        
         // Trim trailing -
         $string = trim($string, '-');
-
+        
         $clean = preg_replace('~[^-\w]+~', '', $string);
         $clean = strtolower($clean);
         $clean = preg_replace('#[\/_|+ -]+#', $delimiter, $clean);
         $clean = trim($clean, $delimiter);
-
+        
         return $clean;
     }
 }

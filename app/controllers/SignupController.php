@@ -3,6 +3,7 @@
 namespace DS\Controller;
 
 use DS\Application;
+use DS\Model\User;
 use Phalcon\Exception;
 use Phalcon\Logger;
 
@@ -27,12 +28,36 @@ class SignupController
     {
         try
         {
-            $this->view->setMainView('auth/signup');
+            if ($this->request->isPost())
+            {
+                // Create new user
+                $userModel = (new User())
+                    ->addUserFromSignup(
+                        $this->request->getPost('name'),
+                        $this->request->getPost('handle'),
+                        $this->request->getPost('email'),
+                        $this->request->getPost('password')
+                    );
+                
+                // User is now directly logged in:
+                $this->serviceManager->getAuth()->storeSession($userModel);
+                
+                // Redirect to topics page
+                header('Location: /signup/topics');
+                //$this->response->redirect('/signup/topics', false);
+                
+                // Disable further rendering
+                $this->view->disable();
+            }
         }
         catch (Exception $e)
         {
-            Application::instance()->log($e->getMessage(), Logger::CRITICAL);
+            $this->view->setVar('signupSuccessfull', false);
+            $this->view->setVar('errorMessage', $e->getMessage());
+            $this->view->setVar('post', $this->request->getPost());
         }
+        
+        $this->view->setMainView('auth/signup');
     }
     
     /**
@@ -42,6 +67,8 @@ class SignupController
     {
         try
         {
+            var_dump($this->serviceManager->getAuth()->getUserId());
+            die;
             $this->view->setMainView('auth/onboarding/topics');
         }
         catch (Exception $e)

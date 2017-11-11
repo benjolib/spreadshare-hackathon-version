@@ -16,7 +16,7 @@ use Phalcon\Mvc\Controller;
  * @package   DS\Controller
  */
 abstract class IndexLoader
-    extends Controller
+    extends BaseController
 {
     /**
      * Initialize controller and define index view

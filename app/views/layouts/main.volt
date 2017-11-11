@@ -11,85 +11,96 @@
   <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-  {# navbar #}
-  <nav class="navbar">
-    <div class="navbar__logo">
-      <a href="/"><h1>SpreadShare</h1></a>
-      <h2>Community curated Tables</h2>
+{# navbar #}
+<nav class="navbar">
+  <div class="navbar__logo">
+    <a href="/"><h1>SpreadShare</h1></a>
+    <h2>Community curated Tables</h2>
+  </div>
+  <div class="navbar__search">
+    <div class="navbar__search__icon">
+      <img src="/assets/icons/search.svg" />
     </div>
-    <div class="navbar__search">
-      <div class="navbar__search__icon">
-        <img src="/assets/icons/search.svg" />
-      </div>
-      <input type="text" class="navbar__search__field" placeholder="Find anything" />
-      <div class="navbar__search__filter">
-        <img class="navbar__search__filter__icon" src="/assets/icons/filter.svg" />
-      </div>
+    <input type="text" class="navbar__search__field" placeholder="Find anything" />
+    <div class="navbar__search__filter">
+      <img class="navbar__search__filter__icon" src="/assets/icons/filter.svg" />
     </div>
-    <a href="/signup" class="navbar__login">Log in <span>or</span> Sign up</a>
-  </nav>
-  {# main section #}
-  <section class="main">
-    {% block content %}{% endblock %}
-    {# footer #}
-    <footer class="footer">
-      <div class="footer__top">
-        <div class="footer__top__left">
-          <h2>SpreadShare</h2>
-          <h3>Community curated Tables</h3>
-          <p>Explore community-curated tables for startups and professionals</p>
-        </div>
-        <div class="footer__top__right">
-          <div class="footer__top__right__column footer__top__right__column--first">
-            <p>About</p>
-            <ul>
-              <li>Vision</li>
-              <li>Team</li>
-              <li>Press</li>
-              <li>Invest</li>
-              <li>Donate</li>
-              <li>Jobs</li>
-            </ul>
-          </div>
-          <div class="footer__top__right__column footer__top__right__column--second">
-            <p>Useful links</p>
-            <ul>
-              <li>Feature Voting</li>
-              <li>Table Guideline</li>
-              <li>Frequently Asked</li>
-              <li>Privacy Policy</li>
-              <li>Request Table</li>
-            </ul>
-          </div>
-          <div class="footer__top__right__column footer__top__right__column--third">
-            <p>Navigate</p>
-            <ul>
-              <li>Feed</li>
-              <li>Ranking</li>
-              <li>Sign In & Up</li>
-              <li>Create Table</li>
-              <li>Topics</li>
-            </ul>
-          </div>
-        </div>
+  </div>
+  {% if auth.loggedIn() %}
+  Logged in as {{ auth.getUser().getName() }}
+  <a href="/logout" class="navbar__login">Logout</a>
+  {% else %}
+  <span class="navbar__login">
+      <a href="/login" class="navbar__login">Log in</a>
+      <span>or</span>
+      <a href="/signup" class="navbar__login">Sign up</a>
+    </span>
+
+
+  {% endif %}
+</nav>
+{# main section #}
+<section class="main">
+  {% block content %}{% endblock %}
+  {# footer #}
+  <footer class="footer">
+    <div class="footer__top">
+      <div class="footer__top__left">
+        <h2>SpreadShare</h2>
+        <h3>Community curated Tables</h3>
+        <p>Explore community-curated tables for startups and professionals</p>
       </div>
-      <div class="footer__bottom">
-        <div class="footer__bottom__rights">
-          <p>All Rights Reserved @ spreadshare.co</p>
-        </div>
-        <div class="footer__bottom__social">
+      <div class="footer__top__right">
+        <div class="footer__top__right__column footer__top__right__column--first">
+          <p>About</p>
           <ul>
-            <li>Facebook</li>
-            <li>Twitter</li>
-            <li>Medium</li>
-            <li>GitHub</li>
-            <li>Patreon</li>
-            <li>Dribbble</li>
-            <li>Product Hunt</li>
+            <li>Vision</li>
+            <li>Team</li>
+            <li>Press</li>
+            <li>Invest</li>
+            <li>Donate</li>
+            <li>Jobs</li>
+          </ul>
+        </div>
+        <div class="footer__top__right__column footer__top__right__column--second">
+          <p>Useful links</p>
+          <ul>
+            <li>Feature Voting</li>
+            <li>Table Guideline</li>
+            <li>Frequently Asked</li>
+            <li>Privacy Policy</li>
+            <li>Request Table</li>
+          </ul>
+        </div>
+        <div class="footer__top__right__column footer__top__right__column--third">
+          <p>Navigate</p>
+          <ul>
+            <li>Feed</li>
+            <li>Ranking</li>
+            <li>Sign In & Up</li>
+            <li>Create Table</li>
+            <li>Topics</li>
           </ul>
         </div>
       </div>
-    </footer>
-  </section>
+    </div>
+    <div class="footer__bottom">
+      <div class="footer__bottom__rights">
+        <p>All Rights Reserved @ spreadshare.co</p>
+      </div>
+      <div class="footer__bottom__social">
+        <ul>
+          <li>Facebook</li>
+          <li>Twitter</li>
+          <li>Medium</li>
+          <li>GitHub</li>
+          <li>Patreon</li>
+          <li>Dribbble</li>
+          <li>Product Hunt</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</section>
 </body>
 </html>

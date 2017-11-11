@@ -96,6 +96,8 @@ namespace Phalcon\Mvc {
 
 		/**
 		 * Returns the dependency injection container
+         *
+         * @return \Phalcon\DiInterface
 		 */
 		public function getDI(){ }
 

@@ -34,6 +34,18 @@ if (!function_exists('auth'))
     }
 }
 
+
+if (!function_exists('request'))
+{
+    /**
+     * @return \Phalcon\Http\Request
+     */
+    function request()
+    {
+        return di()->get('request');
+    }
+}
+
 if (!function_exists('serviceManager'))
 {
     /**

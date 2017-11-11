@@ -19,5 +19,16 @@ namespace DS\Api;
  */
 abstract class BaseApi
 {
-
+    /**
+     * @var \DS\Component\ServiceManager
+     */
+    protected $serviceManager;
+    
+    /**
+     * BaseApi constructor.
+     */
+    public function __construct()
+    {
+        $this->serviceManager = serviceManager();
+    }
 }
