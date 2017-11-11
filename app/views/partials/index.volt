@@ -11,13 +11,17 @@
 {# main section #}
 {% block main %}
   <section class="main">
+    {# hero #}
     <div class="main__hero">
       <p>Collaborate with and get rewarded by the community</p>
       <h2>A marketplace for community-curated tables in the blockchain</h2>
     </div>
+    {# content #}
     <div class="main__content">
       {{ flash.output() }}
+      {# tables content #}
       <div class="main__content__tables">
+        {# filters #}
         <div class="main__content__tables__filters">
           <div class="main__content__tables__filters__left">
             <li>Today</li><img src="/assets/icons/chevron-down.svg" />
@@ -29,6 +33,7 @@
             <img src="/assets/icons/comment.svg" /><li>Most Contributed</li>
           </div>
         </div>
+        {# cards #}
         <div class="main__content__tables__cards">
           {# card 1 #}
           <div class="main__content__tables__cards__item">
@@ -124,6 +129,7 @@
           </div>
         </div>
       </div>
+      {# sidebar #}
       <div class="main__content__sidebar">
         <div class="main__content__sidebar__option">
           <a>Categories</a><img src="/assets/icons/chevron-down.svg" />
