@@ -15,7 +15,7 @@
   <nav class="navbar">
     <div class="navbar__logo">
       <a href="/"><h1>SpreadShare</h1></a>
-      <h2>Community Curated Tables</h2>
+      <h2>Community curated Tables</h2>
     </div>
     <div class="navbar__search">
       <div class="navbar__search__icon">

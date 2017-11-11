@@ -1,9 +1,7 @@
 {% extends 'layouts/main.volt' %}
 
 {# page title #}
-{% block title %}
-  <title>SpreadShare</title>
-{% endblock %}
+{% block title %}SpreadShare - Community curated Tables{% endblock %}
 
 {# page header #}
 {% block header %}{% endblock %}
