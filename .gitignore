@@ -5,6 +5,7 @@
 ### JS
 node_modules/
 dist/
+apidoc/apidoc-template/
 ### Composer
 /vendor/
 ### Sass
