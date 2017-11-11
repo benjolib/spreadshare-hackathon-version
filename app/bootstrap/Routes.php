@@ -28,6 +28,22 @@ return [
         'methods' => ['GET'],
     ],
     [
+        'url' => '/user/{user:[a-zA-Z0-9\-]+}/settings',
+        'paths' => [
+            'controller' => 'UserSettings',
+            'action' => 'settings',
+        ],
+        'methods' => ['GET'],
+    ],
+    [
+        'url' => '/user/{user:[a-zA-Z0-9\-]+}/settings/{page:[a-zA-Z0-9\-]+}',
+        'paths' => [
+            'controller' => 'UserSettings',
+            'action' => 'settings',
+        ],
+        'methods' => ['GET'],
+    ],
+    [
         'url' => '/upvote/{id:[a-zA-Z0-9\-]+}',
         'paths' => [
             'controller' => 'Upvote',
