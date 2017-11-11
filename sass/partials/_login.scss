@@ -68,6 +68,20 @@
         text-transform: uppercase;
         @include rem(font-size, 14);
         @include rem(margin-top, 32);
+
+        span {
+          text-transform: lowercase;
+        }
+
+        a {
+          text-transform: none;
+          text-decoration: underline;
+
+          &:hover {
+            cursor: pointer;
+            text-decoration: underline;
+          }
+        }
       }
 
       span {
@@ -95,40 +109,39 @@
       &__buttons {
         display: flex;
         justify-content: flex-end;
+        align-items: center;
         background: #F8F8FB;
         @include rem2(margin, 0, -35);
         @include rem(margin-top, 32 * 2);
         @include rem(margin-bottom, -25);
         @include rem(padding, 16);
 
+        a {
+          text-decoration: none;
+          font-weight: 300;
+          text-transform: uppercase;
+          color: #B1BBC7;
+          background: transparent;
+          @include rem(margin-right, 24);
+
+          &:hover {
+            text-decoration: none;
+            color: $text-link-color-hover;
+          }
+        }
+
         button {
           font-weight: 300;
           text-transform: uppercase;
+          color: white;
+          background: $logo-color;
+          border: none;
+          border-radius: 4px;
           @include rem(font-size, 15);
           @include rem2(padding, 8, 16);
 
           &:hover {
             cursor: pointer;
-          }
-        }
-
-        button:first-child {
-          color: #B1BBC7;
-          background: transparent;
-          border: none;
-          @include rem(margin-right, 10);
-
-          &:hover {
-            color: $text-link-color-hover;
-          }
-        }
-        button:last-child {
-          color: white;
-          background: $logo-color;
-          border: none;
-          border-radius: 4px;
-
-          &:hover {
             background: lighten($logo-color, 4%);
           }
         }

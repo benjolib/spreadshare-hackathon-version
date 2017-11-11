@@ -20,7 +20,7 @@
             <img src="/assets/icons/eye.svg" /><span>Show Password</span>
           </div>
           <div class="signup__content__form__buttons">
-            <button>Login</button>
+            <a href="/login">Login</a>
             <button type="submit">Sign up</button>
           </div>
         </form>

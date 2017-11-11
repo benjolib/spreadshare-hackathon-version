@@ -9,19 +9,14 @@
         <p class="login__content__title">Join now</p>
         <p class="login__content__subtitle">Discover and contribute to the community of data lovers.</p>
         <form class="login__content__form">
-          <p>Your name</p>
+          <p>Username <span>or</span> Email</p>
           <input type="text" autofocus />
           <span>We’re big on real names around here, so people know who’s who</span>
-          <p>Email</p>
-          <input type="email" />
-          <p>Password</p>
+          <p>Password ● <a>Forgot?</a></p>
           <input type="password" />
-          <div id="showPassword">
-            <img src="/assets/icons/eye.svg" /><span>Show Password</span>
-          </div>
           <div class="login__content__form__buttons">
-            <button>Login</button>
-            <button type="submit">Sign up</button>
+            <a href="/signup">Sign up</a>
+            <button type="submit">Login</button>
           </div>
         </form>
       </div>
