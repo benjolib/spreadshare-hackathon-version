@@ -1,5 +1,5 @@
 {% extends 'layouts/main.volt' %}
 
-{% block main %}
+{% block content %}
   <h1>Login 🔑</h1>
 {% endblock %}
