@@ -18,14 +18,33 @@
     <div class="main__content">
       {{ flash.output() }}
       <div class="main__content__tables">
-        <div class="main__content__tables__filters"></div>
-        <div class="main__content__tables__cards"></div>
+        <div class="main__content__tables__filters">
+          <div class="main__content__tables__filters__left">
+            <li>Today</li><img src="/assets/icons/chevron-down.svg" />
+          </div>
+          <div class="main__content__tables__filters__right">
+            <img src="/assets/icons/clock.svg" /><li>Newly Added</li>
+            <img src="/assets/icons/upvote.svg" /><li>Most Upvoted</li>
+            <img src="/assets/icons/eye.svg" /><li>Most Viewed</li>
+            <img src="/assets/icons/comment.svg" /><li>Most Contributed</li>
+          </div>
+        </div>
+        <div class="main__content__tables__cards">
+        </div>
       </div>
-      <div class="main__content_sidebar">
-        <div class="main_content__sidebar__categories"></div>
-        <div class="main_content__sidebar__types"></div>
-        <div class="main_content__sidebar__tags"></div>
-        <div class="main_content__sidebar__location"></div>
+      <div class="main__content__sidebar">
+        <div class="main__content__sidebar__option">
+          <a>Categories</a><img src="/assets/icons/chevron-down.svg" />
+        </div>
+        <div class="main__content__sidebar__option">
+          <a>Table Type</a><img src="/assets/icons/chevron-down.svg" />
+        </div>
+        <div class="main__content__sidebar__option">
+          <a>Tags</a><img src="/assets/icons/chevron-down.svg" />
+        </div>
+        <div class="main__content__sidebar__option">
+          <a>Geography</a><img src="/assets/icons/chevron-down.svg" />
+        </div>
       </div>
     </div>
   </section>
