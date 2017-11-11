@@ -29,17 +29,6 @@ abstract class UserEvents
     private $emailMinimumLength = 5;
     
     /**
-     * Send an email after creating a new user; Add user to team.
-     */
-    public function afterCreate()
-    {
-        // Send mail
-        SignupMail::factory($this->getDI())
-                  ->prepare($this)
-                  ->send();
-    }
-    
-    /**
      * @return bool
      */
     public function beforeCreate()

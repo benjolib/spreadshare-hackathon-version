@@ -2,6 +2,7 @@
 
 namespace DS\Model;
 
+use DS\Component\Mail\Events\SignupMail;
 use DS\Model\Events\UserEvents;
 
 /**
@@ -84,7 +85,7 @@ class User
      *
      * @return User
      */
-    public static function addUserFromSignup($name, $handle, $email, $unhashedPassword)
+    public function addUserFromSignup($name, $handle, $email, $unhashedPassword)
     {
         $user = new User();
         $user->setName($name)
@@ -92,6 +93,11 @@ class User
              ->setEmail($email)
              ->setSecuritySalt(serviceManager()->getSecurity()->hash($unhashedPassword))
              ->create();
+        
+        // Send mail
+        SignupMail::factory($this->getDI())
+                  ->prepare($user)
+                  ->send();
         
         return $user;
     }

@@ -35,7 +35,8 @@ class LoginController
     {
         try
         {
-            if ($this->request->isPost())
+            // Login request with username and password
+            if ($this->request->isPost() && $this->request->getPost('username') && $this->request->getPost('password'))
             {
                 // Login...
                 $login = new Login();
@@ -45,6 +46,7 @@ class LoginController
                 }
             }
             
+            // Email confirmation request
             if ($this->request->get('token'))
             {
                 $user = (new User())->findByFieldValue('emailConfirmationToken', $this->request->get('token'));
@@ -55,10 +57,13 @@ class LoginController
                 }
             }
             
+            // Login request from Twitter
             if ($this->request->get('oauth_token'))
             {
                 return $this->loginWithTwitterAction();
             }
+            
+            // Login request from Facebook
             if ($this->request->get('code'))
             {
                 return $this->loginWithFacebookAction();

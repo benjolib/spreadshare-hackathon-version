@@ -98,7 +98,7 @@ return [
         "debug_file" => ROOT_PATH . "/system/log/hybridauth",
         
         //Location where to redirect users once they authenticate with a provider
-        'callback' => 'http://spreadshare.app/login',
+        'callback' => 'http://spreadshare.docker:81/login',
         
         //Providers specifics
         'providers' => [
@@ -120,8 +120,8 @@ return [
             'Facebook' => [
                 'enabled' => true,
                 'keys' => [
-                    'id' => '',
-                    'secret' => '',
+                    'id' => '153117502101937',
+                    'secret' => 'f1c03b95bfc5c671085147b31b0474ef',
                 ],
                 "scope" => "email",
             ],

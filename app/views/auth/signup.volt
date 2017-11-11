@@ -42,11 +42,11 @@
       <div class="signup__content__aside__social">
         <div class="signup__content__aside__social__facebook">
           <img src="/assets/icons/facebook.svg" />
-          <span>Use Facebook</span>
+          <a href="/login/facebook">Use Facebook</a>
         </div>
         <div class="signup__content__aside__social__twitter">
           <img src="/assets/icons/twitter.svg" />
-          <span>Use Twitter</span>
+          <a href="/login/twitter">Use Twitter</a>
         </div>
       </div>
     </aside>
