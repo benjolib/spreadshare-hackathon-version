@@ -79,6 +79,7 @@
         list-style-type: none;
         text-transform: uppercase;
         @include rem(font-size, 12);
+        @include rem(margin-bottom, 25);
 
         @include desktop {
           flex-direction: row;
@@ -156,6 +157,130 @@
             }
             @include desktop {
               display: block;
+            }
+          }
+        }
+      }
+
+      &__cards {
+        display: flex;
+        flex-direction: column;
+
+        &__item {
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          background: white;
+          color: $text-color;
+          border-radius: 6px;
+          @include rem2(padding, 25, 35);
+
+          &__info {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+
+            &__title {
+              display: flex;
+              flex-direction: column;
+
+              h3 {
+                align-self: flex-start;
+                margin: 0;
+                color: black;
+                font-weight: 600;
+                @include rem(font-size, 20);
+
+                &:hover {
+                  cursor: pointer;
+                  color: $logo-color;
+                }
+              }
+              p {
+                @include rem(font-size, 16);
+              }
+            }
+
+            &__upvote {
+              position: absolute;
+              top: 20px;
+              right: 20px;
+
+              @include desktop {
+                display: flex;
+                align-self: flex-start;
+                background: $upvote-background-color;
+                color: $upvote-text-color;
+                font-weight: 300;
+                border-radius: 3px;
+                @include rem2(padding, 10, 20);
+
+                &:hover {
+                  cursor: pointer;
+                  background: darken($upvote-background-color, 4%);
+                }
+
+                img {
+                  @include rem(margin-right, 12);
+                }
+              }
+            }
+          }
+
+          &__stats {
+            display: none;
+
+            @include tablet {
+              display: flex;
+              border-top: 2px solid #F7F7FB;
+              @include rem(font-size, 12);
+            }
+            @include desktop {
+              display: flex;
+              border-top: 2px solid #F7F7FB;
+              @include rem(font-size, 14);
+            }
+
+            div {
+              @include rem(margin-top, 14);
+              @include rem(margin-right, 16);
+
+              &:hover {
+                cursor: pointer;
+              }
+
+              &:first-child {
+                background: $logo-color;
+                border-radius: 3px;
+                @include rem2(padding, 2, 4);
+                color: white;
+              }
+              &:nth-child(2) {
+                background: $card-tokens-background-color;
+                border-radius: 3px;
+                color: white;
+                @include rem2(padding, 2, 4);
+              }
+              &:nth-child(3), &:last-child {
+                display: flex;
+                align-items: center;
+                img {
+                  align-self: center;
+                  @include rem(width, 14);
+                  @include rem(margin-right, 5);
+                }
+                span {
+                  color: $text-color;
+
+                  i {
+                    font-style: normal;
+                    color: $text-link-color;
+                  }
+                }
+              }
+              &:last-child {
+                margin-right: 0;
+              }
             }
           }
         }

@@ -30,6 +30,28 @@
           </div>
         </div>
         <div class="main__content__tables__cards">
+          <div class="main__content__tables__cards__item">
+            <div class="main__content__tables__cards__item__info">
+              <div class="main__content__tables__cards__item__info__title">
+                <h3>Tech Journalist Database</h3>
+                <p>A list of over 300 Tech Journalists from all top publications</p>
+              </div>
+              <div class="main__content__tables__cards__item__info__upvote">
+                <img src="/assets/icons/upvote.svg" />
+                <div>2.300</div>
+              </div>
+            </div>
+            <div class="main__content__tables__cards__item__stats">
+              <div>Growth</div>
+              <div>2,345 Tokens</div>
+              <div>
+                <img src="/assets/icons/eye.svg" /><span><i>2.300</i> Views</span>
+              </div>
+              <div>
+                <img src="/assets/icons/comment.svg" /><span><i>23</i> Contributions</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="main__content__sidebar">
