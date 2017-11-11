@@ -7,8 +7,8 @@
   <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600,800" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
   <link rel="stylesheet" href="/css/styles.css">
-  {% block title %}{% endblock %}
   {% block header %}{% endblock %}
+  <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
   {# navbar #}
@@ -26,7 +26,7 @@
         <img class="navbar__search__filter__icon" src="/assets/icons/filter.svg" />
       </div>
     </div>
-    <a href="/login" class="navbar__login">Log in <span>or</span> Sign up</a>
+    <a href="/signup" class="navbar__login">Log in <span>or</span> Sign up</a>
   </nav>
   {# main section #}
   <section class="main">

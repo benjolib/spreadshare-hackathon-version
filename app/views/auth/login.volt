@@ -1,5 +1,7 @@
 {% extends 'layouts/main.volt' %}
 
+{% block title %}SpreadShare - Sign In{% endblock %}
+
 {% block content %}
   <div class="login">
     <div class="login__content">
