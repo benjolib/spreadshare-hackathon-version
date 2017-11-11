@@ -92,6 +92,7 @@
           align-items: center;
           order: 2;
           width: 100%;
+          color: $text-link-color-active-alternative;
           @include rem(margin-top, 25);
 
           @include desktop {
@@ -174,6 +175,7 @@
           color: $text-color;
           border-radius: 6px;
           @include rem2(padding, 25, 35);
+          @include rem(margin-bottom, 20);
 
           &__info {
             width: 100%;
