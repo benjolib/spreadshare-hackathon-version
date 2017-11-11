@@ -60,7 +60,7 @@ return [
         'methods' => ['GET'],
     ],
     [
-        'url' => '/user/{user:[a-zA-Z0-9\-]+}/settings',
+        'url' => '/settings',
         'paths' => [
             'controller' => 'UserSettings',
             'action' => 'settings',
@@ -68,7 +68,7 @@ return [
         'methods' => ['GET'],
     ],
     [
-        'url' => '/user/{user:[a-zA-Z0-9\-]+}/settings/{page:[a-zA-Z0-9\-]+}',
+        'url' => '/settings/{page:[a-zA-Z0-9\-]+}',
         'paths' => [
             'controller' => 'UserSettings',
             'action' => 'settings',

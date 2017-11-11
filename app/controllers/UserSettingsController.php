@@ -32,13 +32,13 @@ class UserSettingsController
     }
     
     /**
-     * @param string $handle
+     * @param int $id
      *
      * @return User
      */
-    private function getUser($handle)
+    private function getUser($id)
     {
-        $user = User::findByFieldValue('handle', $handle);
+        $user = User::findByFieldValue('id', $id);
         
         /*
         if (!$user)
@@ -53,16 +53,15 @@ class UserSettingsController
     /**
      * Settings actions
      *
-     * @param $handle
      * @param $page
      *
      * @return null|void
      */
-    public function settingsAction($handle, $page)
+    public function settingsAction($page)
     {
         try
         {
-            $this->view->setVar('profile', $this->getUser($handle));
+            $this->view->setVar('profile', $this->getUser($this->serviceManager->getAuth()->getUserId()));
             
             switch ($page)
             {
