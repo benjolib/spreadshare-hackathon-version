@@ -105,9 +105,9 @@ return [
             'Twitter' => [
                 'enabled' => true,     //Optional: indicates whether to enable or disable Twitter adapter. Defaults to false
                 'keys' => [
-                    'id' => '14298964',
-                    'key' => '', //Required: your Twitter consumer key
-                    'secret' => ''  //Required: your Twitter consumer secret
+                    'id' => '764738293347024896',
+                    'key' => 'G6PfK0VGgF1GFYROic4hSAcAr',
+                    'secret' => 'imPH3BmKlk3XWzKY2DrcAXbll329NNwASRxgLK1Fw52pns2oGP',
                 ],
             ],
             'Google' => [

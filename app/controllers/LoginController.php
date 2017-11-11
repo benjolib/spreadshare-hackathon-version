@@ -153,8 +153,6 @@ class LoginController
         catch (\Exception $e)
         {
             $this->response->redirect('/');
-            //var_dump($e);
-            //die;
         }
         
         return null;
