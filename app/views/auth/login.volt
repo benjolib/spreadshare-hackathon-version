@@ -27,8 +27,8 @@
       </div>
       <aside class="login__content__aside">
         <div class="login__content__aside__box">
-          <div>Sign up</div>
-          <div>Sign in</div>
+          <a href="/signup"><div>Sign up</div></a>
+          <a href="/login"><div class="sign-box-selected">Sign in</div></a>
         </div>
         <p>OR</P>
         <div class="login__content__aside__social">
