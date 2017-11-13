@@ -106,7 +106,7 @@
           </div>
         </div>
         <div class="layout__content__main__buttons">
-          <a href="/signup">Cancel</a>
+          <a href="/">Cancel</a>
           <button type="submit">Save Changes</button>
         </div>
       </div>
@@ -119,7 +119,6 @@
         <a href="/settings/connected"><div>Connect Accounts</div></a>
         <a href="/settings/wallet"><div>Wallet</div></a>
         <a href="/settings/invite"><div>Invite</div></a>
-        </a>
       </div>
     </aside>
   </div>
