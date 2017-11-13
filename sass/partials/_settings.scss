@@ -485,7 +485,160 @@
   }
   // settings/wallet
   &__wallet {
+    display: flex;
+    flex-direction: column;
 
+    &__column {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+    &__row {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    &__stats {
+      &__text {
+        p {
+          margin: 0;
+          color: $text-color-alternate;
+          @include rem(margin-bottom, 30);
+        }
+      }
+      &__data {
+        p:first-child {
+          margin: 0;
+          color: $text-color;
+          @include rem(font-size, 40);
+        }
+        p:last-child {
+          margin: 0;
+          @include rem(margin-top, 6);
+
+          i {
+            font-style: normal;
+            color: $logo-color;
+          }
+          span {
+            text-transform: uppercase;
+            color: #9CAAC0;
+          }
+        }
+      }
+    }
+
+    &__tables {
+      display: flex;
+
+      &__text {
+        @include rem(margin-bottom, 16);
+
+        p {
+          color: #B1BBC7;
+          font-weight: 300;
+        }
+      }
+
+      &__titles {
+        display: flex;
+        justify-content: space-between;
+        background: inherit;
+        font-weight: 400;
+
+        div {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          @include rem(margin-bottom, 10);
+
+          &:hover {
+            cursor: pointer;
+          }
+
+          &:first-child {
+            justify-content: flex-start;
+            &:hover {
+              cursor: unset;
+            }
+            p {
+              text-align: left;
+            }
+          }
+          &:last-child {
+            justify-content: flex-end;
+            p {
+              text-align: right;
+            }
+          }
+          &:nth-child(2) {
+            @include rem(margin-left, 44);
+          }
+          &:nth-child(3) {
+            @include rem(margin-left, 44);
+          }
+
+          p {
+            margin: 0;
+            text-align: center;
+            text-transform: none;
+            font-weight: 400;
+            @include rem(font-size, 10);
+
+            @include tablet {
+              @include rem(font-size, 12);
+            }
+            @include desktop {
+              @include rem(font-size, 14);
+            }
+          }
+          img {
+            align-self: center;
+            @include rem(margin-left, 8);
+            @include rem(width, 6);
+
+            @include tablet {
+              @include rem(width, 7);
+            }
+            @include desktop {
+              @include rem(width, 8);
+            }
+          }
+        }
+      }
+
+      &__cells {
+        background: white;
+
+        &__item {
+          display: flex;
+          justify-content: space-between;
+          background: #F2F2F8;
+          border-radius: 3px;
+          font-weight: 300;
+          color: $card-tokens-background-color;
+          @include rem(font-size, 12);
+          @include rem(margin-bottom, 10);
+          @include rem2(padding, 16, 0);
+
+          @include tablet {
+            @include rem(font-size, 14);
+          }
+          @include desktop {
+            @include rem(font-size, 16);
+          }
+
+          div:first-child {
+            @include rem(padding-left, 8);
+          }
+          div:last-child {
+            @include rem(padding-right, 8);
+          }
+        }
+      }
+    }
   }
   // settings/invite
   &__invite {
