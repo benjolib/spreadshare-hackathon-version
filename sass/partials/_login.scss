@@ -207,6 +207,22 @@
         @include rem(font-size, 14);
         @include rem2(padding, 15, 20);
 
+        a {
+          text-decoration: none;
+          color: white;
+
+          &:hover {
+            text-decoration: none;
+            color: white;
+          }
+          &:visited {
+            color: white;
+          }
+          &:focus {
+            color: white;
+          }
+        }
+
         &__facebook {
           display: inline-flex;
           align-items: center;

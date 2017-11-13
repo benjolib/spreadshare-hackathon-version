@@ -31,12 +31,12 @@
         </a>
       </div>
       <p>OR</P>
-      <div class="signup__content__aside__social">
-        <div class="signup__content__aside__social__facebook">
+      <div class="login__content__aside__social">
+        <div class="login__content__aside__social__facebook">
           <img src="/assets/icons/facebook.svg" />
           <a href="/login/facebook">Use Facebook</a>
         </div>
-        <div class="signup__content__aside__social__twitter">
+        <div class="login__content__aside__social__twitter">
           <img src="/assets/icons/twitter.svg" />
           <a href="/login/twitter">Use Twitter</a>
         </div>
