@@ -44,8 +44,6 @@ class MailManager extends Manager
     /**
      * Override Transport with Mailgun Transport
      *
-     * @return null
-     *
      * @see MailgunTransport
      */
     protected function registerSwiftTransport()

@@ -46,6 +46,8 @@ namespace Phalcon\Http\Response {
 		/**
 		 * Sets a cookie to be sent at the end of the request
 		 * This method overrides any cookie set before with the same name
+         *
+         * @return self
 		 */
 		public function set($name, $value=null, $expire=null, $path=null, $secure=null, $domain=null, $httpOnly=null){ }
 

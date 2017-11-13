@@ -5,6 +5,8 @@ namespace DS\Component;
 use DS\Component\Elasticsearch\ElasticaClient;
 use DS\Interfaces\GeneralApplication;
 use Phalcon\Di;
+use Phalcon\Http\Response\Cookies;
+use Phalcon\Security;
 
 /**
  * Spreadshare
@@ -46,6 +48,8 @@ use Phalcon\Di;
  * @method \Raven_Client getRavenClient();
  * @method Notify getNotify();
  * @method \League\Flysystem\Filesystem getFiles();
+ * @method Security getSecurity();
+ * @method Cookies getCookies();
  */
 class ServiceManager
 {

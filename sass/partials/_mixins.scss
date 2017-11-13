@@ -1,0 +1,29 @@
+// rem mixins w/fallback
+@mixin rem($property, $value) {
+  #{$property}: #{$value}px;
+  #{$property}: #{$value * 0.0625}rem;
+}
+@mixin rem2($property, $value1, $value2) {
+  #{$property}: #{$value1}px #{$value2}px;
+  #{$property}: #{$value1 * 0.0625}rem #{$value2 * 0.0625}rem;
+}
+@mixin rem3($property, $value1, $value2, $value3) {
+  #{$property}: #{$value1}px #{$value2}px;
+  #{$property}: #{$value1 * 0.0625}rem #{$value2 * 0.0625}rem;
+}
+@mixin rem4($property, $value1, $value2, $value3, $value4) {
+  #{$property}: #{$value1}px #{$value2}px #{$value3}px #{$value4}px;
+  #{$property}: #{$value1 * 0.0625}rem #{$value2 * 0.0625}rem #{$value3 * 0.0625}rem #{$value4 * 0.0625}rem;
+}
+
+// media query mixins
+@mixin tablet {
+  @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+    @content;
+  }
+}
+@mixin desktop {
+  @media (min-width: #{$desktop-width}) {
+    @content;
+  }
+}

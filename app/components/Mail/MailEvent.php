@@ -5,7 +5,7 @@ namespace DS\Component\Mail;
 use DS\Component\Mail\ViewParams\DefaultParams;
 use DS\Component\Queue\QueueInterface;
 use DS\Constants\Services;
-use DS\Model\User;
+use DS\Model\Abstracts\AbstractUser;
 use DS\Traits\DiInjection;
 use Phalcon\DiInterface;
 use Phalcon\Mailer\Manager;
@@ -16,11 +16,10 @@ use Phalcon\Mailer\Message;
  *
  * Mailing
  *
- * @author Dennis Stücken
- * @license proprietary
-
+ * @author    Dennis Stücken
+ * @license   proprietary
  * @copyright Spreadshare
- * @link https://www.spreadshare.co
+ * @link      https://www.spreadshare.co
  *
  * @version   $Version$
  * @package   DS\Component\Mail
@@ -47,7 +46,7 @@ class MailEvent
     /**
      * @var string
      */
-    protected $viewPath = 'mails/default/default.phtml';
+    protected $viewPath = 'mails/default/layout.volt';
     
     /**
      * @var string
@@ -111,14 +110,29 @@ class MailEvent
      * Prepare a message that is going to be send to a user
      *
      * @param DefaultParams $viewParams
-     * @param User          $userModel
+     * @param AbstractUser  $userModel
      */
-    protected function prepareUserMessage(DefaultParams $viewParams, User $userModel)
+    protected function prepareUserMessage(DefaultParams $viewParams, AbstractUser $userModel)
     {
+        /**
+         * Creating a new Volt view instance here since using
+         * $this->mailmanager->createMessageFromView did not work!
+         *
+         * Original code was: $this->message =
+         * $this->mailManager->createMessageFromView($this->viewPath, $viewParams->toArray())
+         * ->to($userModel->getEmail(), $userModel->getName())
+         * ->subject($this->subject);
+         */
+        $message = $this->mailManager->createMessage();
+        
+        $view = new \Phalcon\Mvc\View();
+        $view->setViewsDir(ROOT_PATH . '/app/views/');
+        $volt = new \Phalcon\Mvc\View\Engine\Volt($view);
+        
         $this->message =
-            $this->mailManager->createMessageFromView($this->viewPath, $viewParams->toArray())
-                              ->to($userModel->getUsername(), $userModel->getGivenName())
-                              ->subject($this->subject);
+            $message->content($volt->render(ROOT_PATH . '/app/views/' . $this->viewPath, $viewParams->toArray()), $message::CONTENT_TYPE_HTML)
+                    ->to($userModel->getEmail(), $userModel->getName())
+                    ->subject($this->subject);
     }
     
     /**

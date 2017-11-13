@@ -4,6 +4,7 @@ namespace DS\Component;
 
 use DS\Application;
 use DS\Component\Session\Adapter\RedisAdapter;
+use DS\Model\Abstracts\AbstractUser;
 use DS\Model\User;
 use Phalcon\DI\InjectionAwareInterface;
 use Phalcon\DiInterface;
@@ -135,11 +136,11 @@ class Auth
     /**
      * Login
      *
-     * @param User $user
+     * @param AbstractUser $user
      *
      * @return $this
      */
-    public function storeSession(User $user)
+    public function storeSession(AbstractUser $user)
     {
         try
         {

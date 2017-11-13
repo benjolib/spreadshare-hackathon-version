@@ -2,16 +2,16 @@
 
 namespace DS\Model;
 
-use DS\Model\Abstracts\AbstractUser;
+use DS\Component\Mail\Events\SignupMail;
+use DS\Model\Events\UserEvents;
 
 /**
- * Users
+ * User
  *
- * @author Dennis Stücken
- * @license proprietary
-
+ * @author    Dennis Stücken
+ * @license   proprietary
  * @copyright Spreadshare
- * @link https://www.spreadshare.co
+ * @link      https://www.spreadshare.co
  *
  * @version   $Version$
  * @package   DS\Model
@@ -19,8 +19,38 @@ use DS\Model\Abstracts\AbstractUser;
  * @method static findFirstById(int $id)
  */
 class User
-    extends AbstractUser
+    extends UserEvents
 {
+    /**
+     * @param array $param
+     * @param int   $page
+     * @param int   $limit
+     *
+     * @return array
+     */
+    /*
+    public function findCustom($param = [], $page = 0, $limit = Paging::endlessScrollPortions)
+    {
+        if (count($param))
+        {
+            return self::query()
+                       ->columns(
+                           [
+                               User::class . ".id",
+                           ]
+                       )
+                //->leftJoin(User::class, User::class . '.profileId = ' . Profile::class . '.id')
+                //->inWhere(Profile::class . '.id', $param)
+                       ->limit((int) $limit, (int) Paging::endlessScrollPortions * $page)
+                //->orderBy(sprintf('FIELD (id,%s)', implode(',', $param)))
+                       ->execute()
+                       ->toArray() ?: [];
+        }
+        
+        return [];
+    }
+    */
+    
     /**
      * @return string
      */
@@ -30,18 +60,62 @@ class User
     }
     
     /**
+     * Get username by email address or username
+     *
+     * @param $usernameOrEmail
+     *
+     * @return Abstracts\AbstractUser|\Phalcon\Mvc\Model\ResultInterface
+     */
+    public static function findFirstByUsernameOrEmail($usernameOrEmail)
+    {
+        return parent::findFirst(
+            [
+                "conditions" => "handle = ?0 OR email = ?1",
+                "limit" => 1,
+                "bind" => [$usernameOrEmail, $usernameOrEmail],
+            ]
+        );
+    }
+    
+    /**
+     * @param string $name
+     * @param string $email
+     * @param string $handle
+     * @param string $unhashedPassword
+     *
+     * @return User
+     */
+    public function addUserFromSignup($name, $handle, $email, $unhashedPassword)
+    {
+        $user = new User();
+        $user->setName($name)
+             ->setHandle($handle)
+             ->setEmail($email)
+             ->setSecuritySalt(serviceManager()->getSecurity()->hash($unhashedPassword))
+             ->create();
+        
+        // Send mail
+        SignupMail::factory($this->getDI())
+                  ->prepare($user)
+                  ->send();
+        
+        return $user;
+    }
+    
+    /**
      * @param        $name
      * @param        $handle
      * @param        $email
      * @param        $description
+     * @param        $tagline
      * @param        $authUid
      * @param        $profileImage
      * @param        $city
      * @param string $provider
      *
-     * @return AbstractUser|User|\Phalcon\Mvc\Model\ResultInterface
+     * @return User|\Phalcon\Mvc\Model\ResultInterface
      */
-    public static function addUserFromAuthService($name, $handle, $email, $description, $authUid, $profileImage, $city, $profileUrl, $provider = 'Facebook')
+    public static function addUserFromAuthService($name, $handle, $email, $description, $tagline, $authUid, $profileImage, $city, $provider = 'Facebook')
     {
         $email = $email ? $email : "{$authUid}@" . strtolower($provider) . ".com";
         $user  = User::findFirst(" email='$email' OR authUid='" . $authUid . "' ");
@@ -50,37 +124,31 @@ class User
         {
             $user = new self();
             
-            call_user_func([$user, 'set' . $provider . 'Url'], $profileUrl);
-            
             $user->setEmail($email)
                  ->setName($name)
                  ->setImage($profileImage)
                  ->setAuthProvider($provider)
                  ->setAuthUid($authUid)
                  ->setHandle($handle)
-                 ->setCity($city)
+                 ->setLocation($city)
                  ->setDescription($description)
-                 ->setCreationDate(time())
-                 ->setActive(1)
+                 ->setTagline($tagline)
                  ->setLastLogin(time())
                  ->create();
         }
         else
         {
-            call_user_func([$user, 'set' . $provider . 'Url'], $profileUrl);
-            
             $user->setEmail($email)
                  ->setName($name)
                  ->setHandle($handle)
                  ->setImage($profileImage)
                  ->setLastLogin(time())
-                 ->setActive(1)
+                 ->setTagline($tagline)
                  ->setDescription($description)
-                 ->setCity($city)
+                 ->setLocation($city)
                  ->save();
         }
         
         return $user;
     }
-    
 }

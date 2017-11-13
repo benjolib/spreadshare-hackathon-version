@@ -1,0 +1,193 @@
+.footer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  color: $text-color;
+  box-sizing: border-box;
+
+  @include tablet {
+    @include rem2(padding, 0, 36);
+  }
+
+  @include desktop {
+    padding: 0;
+  }
+
+  &__top {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    @include rem(margin-bottom, 50);
+    @include rem2(padding, 0, 50);
+
+    @include tablet {
+      flex-direction: row;
+      padding: 0;
+    }
+    @include desktop {
+      flex-direction: row;
+      padding: 0;
+    }
+
+    &__left {
+      display: flex;
+      flex-direction: column;
+      @include rem(margin-top, 50);
+
+      h2 {
+        margin: 0;
+        color: $logo-color;
+        @include rem(font-size, 28);
+      }
+      h3 {
+        margin: 0;
+        line-height: 2rem;
+        color: $text-color-alternate;
+        font-weight: 600;
+        @include rem(font-size, 14);
+      }
+      p {
+        @include rem(font-size, 14);
+      }
+    }
+
+    &__right {
+      display: flex;
+      justify-content: center;
+      @include rem(font-size, 14);
+
+      @include tablet {
+        @include rem(margin-top, 50);
+      }
+      @include desktop {
+        @include rem(margin-top, 50);
+        justify-content: flex-start;
+      }
+
+      &__column {
+        @include rem(margin-top, 50);
+
+        @include tablet {
+          margin-top: 0;
+        }
+        @include desktop {
+          margin-top: 0;
+        }
+
+        &--first {
+          @include rem(margin-right, 32);
+        }
+        &--second {
+          @include rem(margin-right, 32);
+        }
+
+        p {
+          color: $text-color-alternate;
+          text-transform: uppercase;
+          text-align: center;
+          @include rem(font-size, 12);
+
+          @include tablet {
+            @include rem(font-size, 14);
+          }
+          @include desktop {
+            @include rem(font-size, 16);
+          }
+        }
+
+        ul {
+          padding-left: 0;
+          text-align: right;
+          @include rem(font-size, 12);
+
+          @include tablet {
+            @include rem(font-size, 14);
+          }
+          @include desktop {
+            @include rem(font-size, 16);
+          }
+
+          li {
+            list-style-type: none;
+            @include rem(margin-bottom, 12);
+
+            &:hover {
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &__bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    color: $text-color-alternate;
+    border-top: 2px solid #F7F7FB;
+
+    @include tablet {
+      flex-direction: row;
+      @include rem2(margin, 0, 50);
+    }
+    @include desktop {
+      flex-direction: row;
+      @include rem2(margin, 0, 100);
+    }
+
+    &__rights {
+      order: 2;
+      text-align: center;
+
+      @include tablet {
+        order: 1;
+      }
+      @include desktop {
+        order: 1;
+      }
+
+      p {
+        text-transform: uppercase;
+        @include rem(font-size, 10);
+
+        @include desktop {
+          @include rem(font-size, 12);
+        }
+      }
+    }
+
+    &__social {
+      order: 1;
+      text-align: center;
+      @include rem(margin-bottom, 20);
+
+      @include tablet {
+        order: 2;
+        margin-bottom: 0;
+      }
+      @include desktop {
+        order: 2;
+        margin-bottom: 0;
+      }
+
+      ul {
+        padding-left: 0;
+        margin: 0;
+
+        li {
+          display: inline-flex;
+          list-style-type: none;
+          @include rem(font-size, 12);
+          @include rem(margin-right, 8);
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}

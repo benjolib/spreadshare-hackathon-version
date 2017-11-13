@@ -8,7 +8,7 @@
  * @package   DS\Config
  */
 return [
-    'domain' => 'spreadshare.docker',
+    'domain' => 'spreadshare.docker:81',
     'elasticsearch' => [
         'host' => 'elasticsearch',
         'port' => '9200',
@@ -52,7 +52,7 @@ return [
     'mail' => [
         'driver' => 'mailgun',
         'from' => [
-            'email' => 'no-reply@spreadshare.co',
+            'email' => 'hi@spreadshare.co',
             'name' => 'Spreadshare',
         ],
         'mailgun' => [
@@ -89,24 +89,25 @@ return [
         'DS\Cli' => ROOT_PATH . '/app/cli/',
         'DS\Constants' => ROOT_PATH . '/app/constants/',
         'DS\Tests' => ROOT_PATH . '/app/tests/',
+        'DS\Api' => ROOT_PATH . '/app/api/',
     ],
-    'mode' => 'development',
+    'mode' => 'production',
     
     'hybridauth' => [
         "debug_mode" => true,
         "debug_file" => ROOT_PATH . "/system/log/hybridauth",
         
         //Location where to redirect users once they authenticate with a provider
-        'callback' => 'http://spreadshare.app/login',
+        'callback' => 'http://spreadshare.docker:81/login',
         
         //Providers specifics
         'providers' => [
             'Twitter' => [
                 'enabled' => true,     //Optional: indicates whether to enable or disable Twitter adapter. Defaults to false
                 'keys' => [
-                    'id' => '14298964',
-                    'key' => '', //Required: your Twitter consumer key
-                    'secret' => ''  //Required: your Twitter consumer secret
+                    'id' => '764738293347024896',
+                    'key' => 'G6PfK0VGgF1GFYROic4hSAcAr',
+                    'secret' => 'imPH3BmKlk3XWzKY2DrcAXbll329NNwASRxgLK1Fw52pns2oGP',
                 ],
             ],
             'Google' => [
@@ -119,8 +120,8 @@ return [
             'Facebook' => [
                 'enabled' => true,
                 'keys' => [
-                    'id' => '',
-                    'secret' => '',
+                    'id' => '153117502101937',
+                    'secret' => 'f1c03b95bfc5c671085147b31b0474ef',
                 ],
                 "scope" => "email",
             ],

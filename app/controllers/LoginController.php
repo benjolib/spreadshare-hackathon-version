@@ -2,9 +2,11 @@
 
 namespace DS\Controller;
 
+use DS\Api\Login;
 use DS\Application;
 use DS\Component\Auth;
 use DS\Component\ServiceManager;
+use DS\Model\DataSource\UserStatus;
 use DS\Model\User;
 use Hybridauth\Adapter\AdapterInterface;
 use Hybridauth\Exception\AuthorizationDeniedException;
@@ -15,11 +17,10 @@ use Phalcon\Logger;
 /**
  * Spreadshare
  *
- * @author Dennis Stücken
- * @license proprietary
-
+ * @author    Dennis Stücken
+ * @license   proprietary
  * @copyright Spreadshare
- * @link https://www.spreadshare.co
+ * @link      https://www.spreadshare.co
  *
  * @version   $Version$
  * @package   DS\Controller
@@ -34,10 +35,35 @@ class LoginController
     {
         try
         {
+            // Login request with username and password
+            if ($this->request->isPost() && $this->request->getPost('username') && $this->request->getPost('password'))
+            {
+                // Login...
+                $login = new Login();
+                if ($login->login($this->request->getPost('username'), $this->request->getPost('password')))
+                {
+                    header('Location: /');
+                }
+            }
+            
+            // Email confirmation request
+            if ($this->request->get('token'))
+            {
+                $user = (new User())->findByFieldValue('emailConfirmationToken', $this->request->get('token'));
+                
+                if ($user)
+                {
+                    $user->setStatus(UserStatus::Confirmed)->setConfirmed(1)->save();
+                }
+            }
+            
+            // Login request from Twitter
             if ($this->request->get('oauth_token'))
             {
                 return $this->loginWithTwitterAction();
             }
+            
+            // Login request from Facebook
             if ($this->request->get('code'))
             {
                 return $this->loginWithFacebookAction();
@@ -57,17 +83,23 @@ class LoginController
                 // Better disable the view to prevent the unnecessary rendering as well.
                 $this->view->disable();
             }
-            else
-            {
-                $this->view->setMainView('auth/loginForm');
-            }
         }
         catch (Exception $e)
         {
-            Application::instance()->log($e->getMessage(), Logger::CRITICAL);
+            $this->view->setVar('errorMessage', $e->getMessage());
         }
         
+        $this->view->setMainView('auth/login');
+        
         return null;
+    }
+    
+    /**
+     * Forgot password
+     */
+    public function forgotAction()
+    {
+        $this->view->setMainView('auth/forgot');
     }
     
     /**
@@ -121,8 +153,6 @@ class LoginController
         catch (\Exception $e)
         {
             $this->response->redirect('/');
-            //var_dump($e);
-            //die;
         }
         
         return null;
@@ -141,11 +171,11 @@ class LoginController
             trim($userProfile->firstName . ' ' . $userProfile->lastName),
             $this->cleanString(strtolower($userProfile->displayName), '-'),
             $userProfile->emailVerified,
+            '',
             $userProfile->description,
             $userProfile->identifier,
             $userProfile->photoURL,
             $userProfile->city ? $userProfile->city : $userProfile->region,
-            $userProfile->profileURL,
             $provider
         );
         

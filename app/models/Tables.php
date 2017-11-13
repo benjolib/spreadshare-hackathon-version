@@ -2,16 +2,15 @@
 
 namespace DS\Model;
 
-use DS\Model\Abstracts\AbstractTables;
+use DS\Model\Events\TablesEvents;
 
 /**
- * Comments
+ * Tables
  *
- * @author Dennis Stücken
- * @license proprietary
-
+ * @author    Dennis Stücken
+ * @license   proprietary
  * @copyright Spreadshare
- * @link https://www.spreadshare.co
+ * @link      https://www.spreadshare.co
  *
  * @version   $Version$
  * @package   DS\Model
@@ -19,20 +18,35 @@ use DS\Model\Abstracts\AbstractTables;
  * @method static findFirstById(int $id)
  */
 class Tables
-    extends AbstractTables
+    extends TablesEvents
 {
     /**
-     * @param $tableId
+     * @param array $param
+     * @param int   $page
+     * @param int   $limit
      *
-     * @return AbstractTables|AbstractTables[]|\Phalcon\Mvc\Model\ResultSetInterface
+     * @return array
      */
-    public static function getTable($tableId)
+    /*
+    public function findCustom($param = [], $page = 0, $limit = Paging::endlessScrollPortions)
     {
-        return self::find(
-            [
-                "conditions" => 'tableId = ?0',
-                "bind" => [$tableId],
-            ]
-        );
+        if (count($param))
+        {
+            return self::query()
+                       ->columns(
+                           [
+                               Tables::class . ".id",
+                           ]
+                       )
+                //->leftJoin(Tables::class, Tables::class . '.profileId = ' . Profile::class . '.id')
+                //->inWhere(Profile::class . '.id', $param)
+                       ->limit((int) $limit, (int) Paging::endlessScrollPortions * $page)
+                //->orderBy(sprintf('FIELD (id,%s)', implode(',', $param)))
+                       ->execute()
+                       ->toArray() ?: [];
+        }
+        
+        return [];
     }
+    */
 }

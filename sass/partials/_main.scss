@@ -1,0 +1,326 @@
+.main {
+  font-family: 'Montserrat', sans-serif;
+  background: $background-color;
+  display: flex;
+  flex-direction: column;
+
+  &__hero {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    background: url('/assets/images/background.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 8px;
+    @include rem(height, 336);
+    @include rem(margin, 28);
+    @include rem2(padding, 0, 40);
+
+    p {
+      margin: 0;
+      font-weight: 800;
+      @include rem(font-size, 26);
+      @include rem(padding-bottom, 32);
+
+      @include tablet {
+        @include rem(font-size, 32);
+      }
+      @include desktop {
+        @include rem(font-size, 36);
+      }
+    }
+    h2 {
+      margin: 0;
+      font-weight: 300;
+      @include rem(font-size, 16);
+
+      @include tablet {
+        @include rem(font-size, 17);
+      }
+      @include desktop {
+        @include rem(font-size, 18);
+      }
+    }
+  }
+
+  &__content {
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 100%;
+    @include rem2(padding, 15, 40);
+
+    @include tablet {
+      @include rem2(padding, 15, 80);
+    }
+    @include desktop {
+      justify-content: space-between;
+      @include rem2(padding, 15, 110);
+    }
+
+    &__tables {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+
+      @include desktop {
+        width: 80%;
+      }
+
+      &__filters {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: $text-link-color;
+        list-style-type: none;
+        text-transform: uppercase;
+        @include rem(font-size, 12);
+        @include rem(margin-bottom, 25);
+
+        @include desktop {
+          flex-direction: row;
+          justify-content: space-between;
+          @include rem(font-size, 14);
+        }
+
+        &__left {
+          display: flex;
+          align-items: center;
+          order: 2;
+          width: 100%;
+          color: $text-link-color-active-alternative;
+          @include rem(margin-top, 25);
+
+          @include desktop {
+            order: 1;
+            width: auto;
+            margin-top: 0;
+          }
+
+          li {
+            display: inline-flex;
+
+            &:hover {
+              cursor: pointer;
+              color: $text-link-color-hover;
+            }
+          }
+
+          img {
+            align-self: flex-start;
+            @include rem(width, 16);
+            @include rem(margin-left, 2);
+          }
+        }
+        &__right {
+          display: flex;
+          order: 1;
+
+          @include desktop {
+            order: 2;
+          }
+
+          li {
+            display: inline-flex;
+            @include rem(margin-right, 16);
+            @include rem(margin-bottom, 16);
+
+            @include desktop {
+              margin-bottom: 0;
+              @include rem(margin-right, 32);
+            }
+
+            &:hover {
+              cursor: pointer;
+              color: $text-link-color-hover;
+            }
+
+            &:last-child {
+              margin-right: 0;
+            }
+            &:nth-child(2) {
+              color: $text-link-color-active;
+            }
+          }
+
+          img {
+            display: none;
+            align-self: flex-start;
+            @include rem(width, 14);
+            @include rem(margin-right, 5);
+
+            @include tablet {
+              display: block;
+            }
+            @include desktop {
+              display: block;
+            }
+          }
+        }
+      }
+
+      &__cards {
+        display: flex;
+        flex-direction: column;
+
+        &__item {
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          background: white;
+          color: $text-color;
+          border-radius: 6px;
+          @include rem2(padding, 25, 35);
+          @include rem(margin-bottom, 20);
+
+          &__info {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+
+            &__title {
+              display: flex;
+              flex-direction: column;
+
+              h3 {
+                align-self: flex-start;
+                margin: 0;
+                color: black;
+                font-weight: 600;
+                @include rem(font-size, 20);
+
+                &:hover {
+                  cursor: pointer;
+                  color: $logo-color;
+                }
+              }
+              p {
+                @include rem(font-size, 16);
+              }
+            }
+
+            &__upvote {
+              position: absolute;
+              top: 20px;
+              right: 20px;
+
+              @include desktop {
+                display: flex;
+                align-self: flex-start;
+                background: $upvote-background-color;
+                color: $upvote-text-color;
+                font-weight: 300;
+                border-radius: 3px;
+                @include rem2(padding, 10, 20);
+
+                &:hover {
+                  cursor: pointer;
+                  background: darken($upvote-background-color, 4%);
+                }
+
+                img {
+                  @include rem(margin-right, 12);
+                }
+              }
+            }
+          }
+
+          &__stats {
+            display: none;
+
+            @include tablet {
+              display: flex;
+              border-top: 2px solid #F7F7FB;
+              @include rem(font-size, 12);
+            }
+            @include desktop {
+              display: flex;
+              border-top: 2px solid #F7F7FB;
+              @include rem(font-size, 14);
+            }
+
+            div {
+              @include rem(margin-top, 14);
+              @include rem(margin-right, 16);
+
+              &:hover {
+                cursor: pointer;
+              }
+
+              &:first-child {
+                background: $logo-color;
+                border-radius: 3px;
+                @include rem2(padding, 2, 4);
+                color: white;
+              }
+              &:nth-child(2) {
+                background: $card-tokens-background-color;
+                border-radius: 3px;
+                color: white;
+                @include rem2(padding, 2, 4);
+              }
+              &:nth-child(3), &:last-child {
+                display: flex;
+                align-items: center;
+                img {
+                  align-self: center;
+                  @include rem(width, 14);
+                  @include rem(margin-right, 5);
+                }
+                span {
+                  color: $text-color;
+
+                  i {
+                    font-style: normal;
+                    color: $text-link-color;
+                  }
+                }
+              }
+              &:last-child {
+                margin-right: 0;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &__sidebar {
+      display: none;
+
+      @include desktop {
+        width: 20%;
+        display: flex;
+        flex-direction: column;
+        color: $text-link-color;
+        font-weight: 300;
+        @include rem(margin-left, 66);
+      }
+
+      &__option {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        @include rem(margin-bottom, 36);
+
+        a {
+          color: $text-link-color;
+          text-decoration: none;
+
+          &:hover {
+            cursor: pointer;
+            color: $text-link-color-hover;
+          }
+        }
+
+        img {
+          @include rem(width, 20);
+        }
+      }
+    }
+  }
+}

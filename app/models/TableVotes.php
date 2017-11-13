@@ -2,17 +2,15 @@
 
 namespace DS\Model;
 
-use DS\Component\ServiceManager;
-use DS\Model\Abstracts\AbstractTableVotes;
+use DS\Model\Events\TableVotesEvents;
 
 /**
- * Votes
+ * TableVotes
  *
- * @author Dennis Stücken
- * @license proprietary
-
+ * @author    Dennis Stücken
+ * @license   proprietary
  * @copyright Spreadshare
- * @link https://www.spreadshare.co
+ * @link      https://www.spreadshare.co
  *
  * @version   $Version$
  * @package   DS\Model
@@ -20,61 +18,35 @@ use DS\Model\Abstracts\AbstractTableVotes;
  * @method static findFirstById(int $id)
  */
 class TableVotes
-    extends AbstractTableVotes
+    extends TableVotesEvents
 {
     /**
-     * @param int $userId
-     * @param int $tableId
+     * @param array $param
+     * @param int   $page
+     * @param int   $limit
      *
-     * @return AbstractTableVotes|\Phalcon\Mvc\Model\ResultInterface
+     * @return array
      */
-    public static function findVote(int $userId, int $tableId)
+    /*
+    public function findCustom($param = [], $page = 0, $limit = Paging::endlessScrollPortions)
     {
-        return self::findFirst(
-            [
-                "conditions" => 'userId = ?0 AND tableId = ?1',
-                "bind" => [$userId, $tableId],
-                "limit" => 1,
-            ]
-        );
-    }
-    
-    /**
-     * @param int $userId
-     * @param int $limit
-     *
-     * @return AbstractTableVotes|AbstractTableVotes[]|\Phalcon\Mvc\Model\ResultSetInterface
-     */
-    public static function getUpvotedTableByUser(int $userId, $limit = 50)
-    {
-        return self::find(
-            [
-                "conditions" => 'userId = ?0',
-                "bind" => [$userId],
-                "limit" => $limit,
-            ]
-        );
-    }
-    
-    /**
-     * @param int $tableId
-     * @param int $userId
-     *
-     * @return bool
-     */
-    public function votedForTable(int $tableId, int $userId = null)
-    {
-        if ($userId === null)
+        if (count($param))
         {
-            $userId = ServiceManager::instance($this->getDI())->getAuth()->getUserId();
+            return self::query()
+                       ->columns(
+                           [
+                               TableVotes::class . ".id",
+                           ]
+                       )
+                //->leftJoin(TableVotes::class, TableVotes::class . '.profileId = ' . Profile::class . '.id')
+                //->inWhere(Profile::class . '.id', $param)
+                       ->limit((int) $limit, (int) Paging::endlessScrollPortions * $page)
+                //->orderBy(sprintf('FIELD (id,%s)', implode(',', $param)))
+                       ->execute()
+                       ->toArray() ?: [];
         }
         
-        return self::findFirst(
-            [
-                "conditions" => 'userId = ?0 AND tableId = ?1',
-                "bind" => [$userId, $tableId],
-                "limit" => 1,
-            ]
-        ) ? true : false;
+        return [];
     }
+    */
 }

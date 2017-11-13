@@ -26,7 +26,7 @@ use Phalcon\Mvc\Model;
  * @method static findFirstById(int $id)
  */
 abstract class Base
-    extends Model
+    extends BaseEvents
 {
     /**
      * The default user id to look for. Usually the current user that is logged in.

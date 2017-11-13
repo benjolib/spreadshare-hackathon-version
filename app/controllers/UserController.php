@@ -3,20 +3,17 @@
 namespace DS\Controller;
 
 use DS\Application;
-use DS\Model\Decks;
 use DS\Model\User;
-use DS\Model\Votes;
 use Phalcon\Exception;
 use Phalcon\Logger;
 
 /**
  * Spreadshare
  *
- * @author Dennis Stücken
- * @license proprietary
-
+ * @author    Dennis Stücken
+ * @license   proprietary
  * @copyright Spreadshare
- * @link https://www.spreadshare.co
+ * @link      https://www.spreadshare.co
  *
  * @version   $Version$
  * @package   DS\Controller

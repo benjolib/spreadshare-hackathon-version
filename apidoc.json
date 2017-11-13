@@ -1,0 +1,13 @@
+{
+  "name": "Spreadshare",
+  "version": "1.0",
+  "description": "Backend Api Documentation",
+  "sampleUrl": "https://api.spreadshare.co",
+  "apidoc": {
+    "title": "Spreadshare Api Docs",
+    "url": "https://apidocs.spreadshare.co"
+  },
+  "header": {
+    "title": "Spreadshare Api Docs"
+  }
+}

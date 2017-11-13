@@ -68,6 +68,8 @@ namespace Phalcon\Http {
 		 * // Returns value from $_REQUEST["user_email"] with sanitizing
 		 * $userEmail = $request->get("user_email", "email");
 		 *</code>
+         *
+         * @return string
 		 */
 		public function get($name=null, $filters=null, $defaultValue=null, $notAllowEmpty=null, $noRecursive=null){ }
 
@@ -83,6 +85,8 @@ namespace Phalcon\Http {
 		 * // Returns value from $_POST["user_email"] with sanitizing
 		 * $userEmail = $request->getPost("user_email", "email");
 		 *</code>
+         *
+         * @return string
 		 */
 		public function getPost($name=null, $filters=null, $defaultValue=null, $notAllowEmpty=null, $noRecursive=null){ }
 
