@@ -74,12 +74,21 @@
         }
 
         a {
+          color: $text-color;
           text-transform: none;
           text-decoration: underline;
 
           &:hover {
             cursor: pointer;
             text-decoration: underline;
+          }
+          &:visited {
+            text-decoration: underline;
+            color: $text-color;
+          }
+          &:focus {
+            text-decoration: underline;
+            color: $text-color;
           }
         }
       }
