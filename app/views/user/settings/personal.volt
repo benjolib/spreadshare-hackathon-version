@@ -113,12 +113,12 @@
     </div>
     <aside class="layout__content__aside">
       <div class="layout__content__aside__box">
-        <a href="#"><div class="sign-box-selected">Personal</div></a>
-        <a href="#"><div>Account</div></a>
-        <a href="#"><div>Notifications</div></a>
-        <a href="#"><div>Connect Accounts</div></a>
-        <a href="#"><div>Wallet</div></a>
-        <a href="#"><div>Invite</div></a>
+        <a href="/settings/personal"><div class="settings-box-selected">Personal</div></a>
+        <a href="/settings/account"><div>Account</div></a>
+        <a href="/settings/notifications"><div>Notifications</div></a>
+        <a href="/settings/connected"><div>Connect Accounts</div></a>
+        <a href="/settings/wallet"><div>Wallet</div></a>
+        <a href="/settings/invite"><div>Invite</div></a>
         </a>
       </div>
     </aside>
