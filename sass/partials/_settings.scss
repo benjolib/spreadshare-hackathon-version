@@ -538,6 +538,8 @@
 // aside menu
 .layout__content__aside {
   &__box {
+  @include rem(font-size, 14);
+
     a {
       color: $card-tokens-background-color;
     }
