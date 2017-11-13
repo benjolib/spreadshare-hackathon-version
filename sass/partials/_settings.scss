@@ -1,0 +1,280 @@
+.layout__content__main {
+  // settings/personal
+  &__personal {
+    display: flex;
+    flex-direction: column;
+
+    &__column {
+      display: flex;
+      flex-direction: column;
+    }
+    &__row {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    &__profile {
+      &__text {
+        p {
+          margin: 0;
+          color: $text-color-alternate;
+          @include rem(margin-bottom, 16);
+        }
+      }
+      &__photo {
+        img {
+          display: block;
+          border-radius: 6px;
+          @include rem(width, 60);
+          @include rem(margin-right, 16);
+        }
+      }
+      &__add {
+        button {
+          border: none;
+          border-radius: 3px;
+          background: $text-color;
+          color: white;
+          text-transform: uppercase;
+          @include rem2(padding, 10, 12);
+          @include rem(margin-right, 16);
+          @include rem(font-size, 14);
+
+          &:hover {
+            background: darken($text-color, 8%);
+            cursor: pointer;
+          }
+        }
+      }
+      &__remove {
+        a {
+          text-decoration: none;
+          color: $text-link-color;
+          font-weight: 300;
+          text-transform: uppercase;
+          @include rem(font-size, 14);
+
+          &:hover {
+            color: $text-link-color-hover;
+          }
+        }
+      }
+    }
+    &__name {
+      &__text {
+        p {
+          margin: 0;
+          color: $text-color-alternate;
+          @include rem(margin-top, 16 * 3);
+          @include rem(margin-bottom, 8);
+        }
+      }
+    }
+    &__username {
+      &__text {
+        p {
+          margin: 0;
+          color: $text-color-alternate;
+          @include rem(margin-top, 16 * 3);
+          @include rem(margin-bottom, 8);
+        }
+      }
+    }
+    &__tagline {
+      &__text {
+        p {
+          margin: 0;
+          color: $text-color-alternate;
+          @include rem(margin-top, 16 * 3);
+          @include rem(margin-bottom, 8);
+        }
+      }
+      span {
+        color: #DEE0E7;
+        @include rem(font-size, 12);
+
+        i {
+          font-style: normal;
+          color: #9CAAC0;
+        }
+      }
+    }
+    &__locations {
+      &__text {
+        p {
+          margin: 0;
+          color: $text-color-alternate;
+          @include rem(margin-top, 16 * 3);
+          @include rem(margin-bottom, 8);
+        }
+      }
+      &__tags {
+        display: flex;
+        background: $background-color;
+        border-radius: 3px;
+        @include rem2(padding, 8, 12);
+
+        &__item {
+          display: flex;
+          background: inherit;
+          @include rem(margin-right, 12);
+
+          &__text {
+            margin: 0;
+            background: $card-tokens-background-color;
+            color: white;
+            font-weight: 300;
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+            @include rem(font-size, 14);
+            @include rem2(padding, 8, 12);
+          }
+
+          &__close {
+            display: flex;
+            justify-content: center;
+            color: $card-tokens-background-color;
+            background: white;
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+            text-align: center;
+            height: 100%;
+            @include rem(width, 33);
+
+            &:hover {
+              cursor: pointer;
+            }
+
+            img {
+              @include rem(width, 9);
+            }
+          }
+        }
+      }
+    }
+    &__website {
+      &__text {
+        p {
+          margin: 0;
+          color: $text-color-alternate;
+          @include rem(margin-top, 16 * 3);
+          @include rem(margin-bottom, 8);
+        }
+      }
+    }
+    &__switch {
+      &__text {
+        p {
+          margin: 0;
+          color: $text-color-alternate;
+          @include rem(margin-top, 16 * 3);
+          @include rem(margin-bottom, 8);
+        }
+      }
+
+      &__buttons {
+        display: flex;
+        color: white;
+        background: $background-color;
+        font-weight: 300;
+
+        &--left {
+          border-top-left-radius: 3px;
+          border-bottom-left-radius: 3px;
+          @include rem2(padding, 10, 12);
+
+          &:hover {
+            cursor: pointer;
+            background: darken($background-color, 8%);
+          }
+        }
+        &--right {
+          border-top-right-radius: 3px;
+          border-bottom-right-radius: 3px;
+          @include rem2(padding, 10, 12);
+
+          &:hover {
+            cursor: pointer;
+            background: darken($background-color, 8%);
+          }
+        }
+
+        .active {
+          background: $logo-color;
+        }
+      }
+    }
+  }
+  // settings/account
+  &__account {
+
+  }
+  // settings/notifications
+  &__notifications {
+
+  }
+  // settings/connected
+  &__connected {
+
+  }
+  // settings/wallet
+  &__wallet {
+
+  }
+  // settings/invite
+  &__invite {
+
+  }
+
+  // main buttons
+  &__buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background: #F8F8FB;
+    @include rem2(margin, 0, -35);
+    @include rem(margin-top, 32 * 2);
+    @include rem(margin-bottom, -25);
+    @include rem(padding, 16);
+
+    a {
+      text-decoration: none;
+      font-weight: 300;
+      text-transform: uppercase;
+      color: #B1BBC7;
+      background: transparent;
+      @include rem(margin-right, 24);
+
+      &:hover {
+        text-decoration: none;
+        color: $text-link-color-hover;
+      }
+    }
+
+    button {
+      font-weight: 300;
+      text-transform: uppercase;
+      color: white;
+      background: $logo-color;
+      border: none;
+      border-radius: 4px;
+      @include rem(font-size, 15);
+      @include rem2(padding, 8, 16);
+
+      &:hover {
+        cursor: pointer;
+        background: lighten($logo-color, 4%);
+      }
+    }
+  }
+}
+
+// aside menu
+.layout__content__aside {
+  &__box {
+    a {
+      color: $card-tokens-background-color;
+    }
+  }
+}

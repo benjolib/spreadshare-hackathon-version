@@ -4,7 +4,6 @@
 {% endblock %}
 
 {% block content %}
-
 <div class="layout">
   <div class="layout__content">
     <div class="layout__content__wrapper">
@@ -19,5 +18,4 @@
     </aside>
   </div>
 </div>
-
 {% endblock %}
