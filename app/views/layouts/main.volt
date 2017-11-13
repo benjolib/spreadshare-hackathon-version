@@ -27,20 +27,19 @@
     </div>
   </div>
   {% if auth.loggedIn() %}
-  Logged in as {{ auth.getUser().getName() }}
-  <a href="/logout" class="navbar__login">Logout</a>
+    <span>Logged in as {{ auth.getUser().getName() }}</span>
+    <a href="/logout" class="navbar__login">Logout</a>
   {% else %}
-  <span class="navbar__login">
-      <a href="/login" class="navbar__login">Log in</a>
+    <span class="navbar__login">
+      <a href="/login" class="navbar__login__login">Log in</a>
       <span>or</span>
-      <a href="/signup" class="navbar__login">Sign up</a>
+      <a href="/signup" class="navbar__login__signup">Sign up</a>
     </span>
-
-
   {% endif %}
 </nav>
 {# main section #}
 <section class="main">
+  {# content #}
   {% block content %}{% endblock %}
   {# footer #}
   <footer class="footer">

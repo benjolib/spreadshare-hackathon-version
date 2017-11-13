@@ -137,16 +137,41 @@
       @include rem(font-size, 14);
       @include rem2(padding, 8, 16);
 
-      &:hover {
-        cursor: pointer;
-        background: lighten($logo-color, 3%);
-      }
-
       span {
         text-transform: lowercase;
         color: white;
         opacity: 0.4;
         @include rem2(margin, 0, 6);
+      }
+    }
+
+    &__login {
+      color: white;
+      text-decoration: none;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    &__signup {
+      color: white;
+      text-decoration: none;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    a {
+      &:hover {
+        text-decoration: none;
+        color: white;
+      }
+      &:visited {
+        color: white;
+      }
+      &:focus {
+        color: white;
       }
     }
   }
