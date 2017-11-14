@@ -88,7 +88,7 @@ class Auth
      */
     public function setUserId($userId)
     {
-        $this->userId = $userId;
+        $this->userId = (int) $userId;
         
         return $this;
     }
@@ -108,7 +108,7 @@ class Auth
      */
     public function setUser(User $user)
     {
-        $this->userId = $user->getId();
+        $this->userId = (int) $user->getId();
         $this->user   = $user;
         
         return $this;
@@ -159,7 +159,7 @@ class Auth
             // $this->removeSession();
             
             // Set user for internal usage
-            $this->userId = $user->getId();
+            $this->userId = (int) $user->getId();
             
             // Store current user id in session
             $this->session->set('uid', $this->userId);
@@ -272,7 +272,7 @@ class Auth
         }
         
         // This is responsible for checking if a user is logged in or not
-        $this->userId = $this->session->get('uid');
+        $this->userId = (int) $this->session->get('uid');
         $this->loadUser();
     }
 }
