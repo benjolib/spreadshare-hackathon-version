@@ -69,7 +69,7 @@ class UserSettingsController
                     $this->notificationsAction();
                     break;
                 case "connected":
-                    $this->notificationsAction();
+                    $this->connectedAction();
                     break;
                 case "invite":
                     $this->inviteAction();
