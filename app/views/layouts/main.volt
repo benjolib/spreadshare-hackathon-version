@@ -28,6 +28,7 @@
   </div>
   {% if auth.loggedIn() %}
     <span>Logged in as {{ auth.getUser().getName() }}</span>
+    <img class="profileImage" id="profileImage" src="{{ auth.getUser().getImage() }}" />
     <a href="/logout" class="navbar__login">Logout</a>
   {% else %}
     <span class="navbar__login">
