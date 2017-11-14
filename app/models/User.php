@@ -16,7 +16,7 @@ use DS\Model\Events\UserEvents;
  * @version   $Version$
  * @package   DS\Model
  *
- * @method static findFirstById(int $id)
+ * @method static User findFirstById(int $id)
  */
 class User
     extends UserEvents

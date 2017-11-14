@@ -2,6 +2,7 @@
 
 namespace DS\Controller;
 
+use DS\Api\UserSettings;
 use DS\Application;
 use DS\Model\Decks;
 use DS\Model\User;
@@ -103,6 +104,41 @@ class UserSettingsController
      */
     public function personalAction()
     {
+        if ($this->request->isPost())
+        {
+            $userId = $this->serviceManager->getAuth()->getUserId();
+            if ($userId > 0)
+            {
+                // Prepare image
+                $imagePath = '';
+                if ($this->request->hasFiles() == true)
+                {
+                    foreach ($this->request->getUploadedFiles() as $file)
+                    {
+                        $imageName = md5($userId) . '.' . $file->getExtension();
+                        $file->moveTo(ROOT_PATH . 'system/uploads/userimages/' . $imageName);
+                        $imagePath = '/user-images/' . $imageName;
+                    }
+                }
+                
+                // Save user settings
+                $userSettings = new UserSettings();
+                $user = $userSettings->savePersonalSettings(
+                    $userId,
+                    $imagePath,
+                    $this->request->getPost('name'),
+                    $this->request->getPost('handle'),
+                    $this->request->getPost('tagline'),
+                    [],
+                    $this->request->getPost('website'),
+                    true
+                );
+                
+                // Send new user model to view
+                $this->view->setVar('profile', $user);
+            }
+        }
+        
         $this->view->setMainView('user/settings/personal');
     }
     
