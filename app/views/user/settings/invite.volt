@@ -38,6 +38,7 @@
             </div>
           </div>
         </div>
+        <!--
         <div class="layout__content__main__invite__contacts">
           <div class="layout__content__main__invite__column">
             <div class="layout__content__main__invite__contacts__text">
@@ -116,25 +117,38 @@
                       <img src="/assets/icons/cancel.svg" />
                     </div>
                   </div>
-                </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
         <div class="layout__content__main__buttons">
           <a href="/">Cancel</a>
           <button type="submit">Save Changes</button>
         </div>
+        -->
       </div>
     </div>
     <aside class="layout__content__aside">
       <div class="layout__content__aside__box">
-        <a href="/settings/personal"><div>Personal</div></a>
-        <a href="/settings/account"><div>Account</div></a>
-        <a href="/settings/notifications"><div>Notifications</div></a>
-        <a href="/settings/connected"><div>Connect Accounts</div></a>
-        <a href="/settings/wallet"><div>Wallet</div></a>
-        <a href="/settings/invite"><div class="settings-box-selected">Invite</div></a>
+        <a href="/settings/personal">
+          <div>Personal</div>
+        </a>
+        <a href="/settings/account">
+          <div>Account</div>
+        </a>
+        <a href="/settings/notifications">
+          <div>Notifications</div>
+        </a>
+        <a href="/settings/connected">
+          <div>Connect Accounts</div>
+        </a>
+        <a href="/settings/wallet">
+          <div>Wallet</div>
+        </a>
+        <a href="/settings/invite">
+          <div class="settings-box-selected">Invite</div>
+        </a>
       </div>
     </aside>
   </div>

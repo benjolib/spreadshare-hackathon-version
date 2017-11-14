@@ -78,6 +78,27 @@ class User
     }
     
     /**
+     * Save user credentials. Leave password blank to not update.
+     *
+     * @param string $email
+     * @param string $unhashedPassword
+     *
+     * @return $this
+     */
+    public function saveCredentials(string $email, string $unhashedPassword)
+    {
+        if ($unhashedPassword)
+        {
+            $this->setSecuritySalt(serviceManager()->getSecurity()->hash($unhashedPassword));
+        }
+        
+        $this->setEmail($email)
+             ->save();
+        
+        return $this;
+    }
+    
+    /**
      * @param string $name
      * @param string $email
      * @param string $handle

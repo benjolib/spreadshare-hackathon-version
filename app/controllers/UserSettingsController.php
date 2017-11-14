@@ -123,7 +123,7 @@ class UserSettingsController
                 
                 // Save user settings
                 $userSettings = new UserSettings();
-                $user = $userSettings->savePersonalSettings(
+                $user         = $userSettings->savePersonalSettings(
                     $userId,
                     $imagePath,
                     $this->request->getPost('name'),
@@ -140,6 +140,28 @@ class UserSettingsController
         }
         
         $this->view->setMainView('user/settings/personal');
+    }
+    
+    /**
+     * Account
+     */
+    public function accountAction()
+    {
+        if ($this->request->isPost())
+        {
+            $userId = $this->serviceManager->getAuth()->getUserId();
+            if ($userId > 0)
+            {
+                $user = (new UserSettings())->saveAccountSettings(
+                    $userId,
+                    $this->request->getPost('email'),
+                    $this->request->getPost('password')
+                );
+                $this->view->setVar('profile', $user);
+            }
+        }
+        
+        $this->view->setMainView('user/settings/account');
     }
     
     /**
@@ -172,14 +194,6 @@ class UserSettingsController
     public function walletAction()
     {
         $this->view->setMainView('user/settings/wallet');
-    }
-    
-    /**
-     * Account
-     */
-    public function accountAction()
-    {
-        $this->view->setMainView('user/settings/account');
     }
     
     /**

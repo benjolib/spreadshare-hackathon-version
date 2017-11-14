@@ -56,4 +56,16 @@ class UserSettings
         
         return $user;
     }
+    
+    /**
+     * @param int    $userId
+     * @param string $email
+     * @param string $password
+     *
+     * @return User
+     */
+    public function saveAccountSettings(int $userId, string $email, string $password)
+    {
+        return User::findFirstById($userId)->saveCredentials($email, $password);
+    }
 }
