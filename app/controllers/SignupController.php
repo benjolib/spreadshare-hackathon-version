@@ -67,8 +67,6 @@ class SignupController
     {
         try
         {
-            var_dump($this->serviceManager->getAuth()->getUserId());
-            die;
             $this->view->setMainView('auth/onboarding/topics');
         }
         catch (Exception $e)
