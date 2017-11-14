@@ -30,7 +30,7 @@ class UserController
     }
     
     /**
-     * Hunt
+     * User
      */
     public function profileAction($handle)
     {
