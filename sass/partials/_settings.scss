@@ -480,9 +480,7 @@
     }
   }
   // settings/connected
-  &__connected {
-
-  }
+  &__connected {}
   // settings/wallet
   &__wallet {
     display: flex;
@@ -642,7 +640,281 @@
   }
   // settings/invite
   &__invite {
+    display: flex;
+    flex-direction: column;
 
+    &__column {
+      display: flex;
+      flex-direction: column;
+    }
+    &__row {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    &__email {
+      &__text {
+        p {
+          margin: 0;
+          color: $text-color-alternate;
+          @include rem(margin-bottom, 8);
+        }
+      }
+      &__field {
+        position: relative;
+        align-self: flex-start;
+        width: 100%;
+
+        @include desktop {
+          width: 50%;
+        }
+
+        input {
+          width: 94%;
+
+          @include tablet {
+            width: 97%;
+          }
+          @include desktop {
+            width: 100%;
+          }
+
+          &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+            color: #B1BBC7;
+          }
+          &::-moz-placeholder { /* Firefox 19+ */
+            color: #B1BBC7;
+          }
+          &:-ms-input-placeholder { /* IE 10+ */
+            color: #B1BBC7;
+          }
+          &:-moz-placeholder { /* Firefox 18- */
+            color: #B1BBC7;
+          }
+        }
+        div {
+          position: absolute;
+          top: 8%;
+          right: 1%;
+          height: 84%;
+          background: $logo-color;
+          border-radius: 4px;
+          padding: 0 12px;
+          @include rem2(padding, 0, 12);
+
+          &:hover {
+            cursor: pointer;
+            background: lighten($logo-color, 4%);
+          }
+
+          @include tablet {
+            right: 2%;
+          }
+          @include desktop {
+            right: -4%;
+          }
+
+          span {
+            display: inline-flex;
+            color: white;
+            text-transform: uppercase;
+            margin-top: 15%;
+          }
+        }
+      }
+    }
+
+    &__share {
+      &__text {
+        p {
+          margin: 0;
+          color: $text-color-alternate;
+          @include rem(margin-top, 16 * 3);
+          @include rem(margin-bottom, 8);
+        }
+      }
+      input {
+        color: #6A7C94;
+      }
+      &__field {
+        position: relative;
+        align-self: flex-start;
+        width: 100%;
+
+        @include desktop {
+          width: 50%;
+        }
+
+        input {
+          width: 94%;
+
+          @include tablet {
+            width: 97%;
+          }
+          @include desktop {
+            width: 100%;
+          }
+
+          &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+            color: #B1BBC7;
+          }
+          &::-moz-placeholder { /* Firefox 19+ */
+            color: #B1BBC7;
+          }
+          &:-ms-input-placeholder { /* IE 10+ */
+            color: #B1BBC7;
+          }
+          &:-moz-placeholder { /* Firefox 18- */
+            color: #B1BBC7;
+          }
+        }
+        div {
+          position: absolute;
+          top: 8%;
+          right: 1%;
+          height: 84%;
+          background: $logo-color;
+          border-radius: 4px;
+          padding: 0 12px;
+          @include rem2(padding, 0, 12);
+
+          &:hover {
+            cursor: pointer;
+            background: lighten($logo-color, 4%);
+          }
+
+          @include tablet {
+            right: 2%;
+          }
+          @include desktop {
+            right: -4%;
+          }
+
+          span {
+            display: inline-flex;
+            color: white;
+            text-transform: uppercase;
+            margin-top: 15%;
+          }
+        }
+      }
+    }
+
+    &__contacts {
+      &__text {
+        p {
+          margin: 0;
+          color: $text-color-alternate;
+          @include rem(margin-top, 16 * 3);
+          @include rem(margin-bottom, 8);
+        }
+      }
+      &__social {
+        border-radius: 4px;
+        @include rem(margin-top, 8);
+        @include rem(margin-right, 20);
+
+        img {
+          display: flex;
+          @include rem(width, 20);
+          @include rem2(padding, 8, 12);
+        }
+
+        &--twitter {
+          background: $twitter-color;
+
+          &:hover {
+            cursor: pointer;
+            background: lighten($twitter-color, 4%);
+          }
+        }
+        &--facebook {
+          background: $facebook-color;
+
+          &:hover {
+            cursor: pointer;
+            background: lighten($facebook-color, 4%);
+          }
+        }
+        &--gmail {
+          background: #EBF7F9;
+
+          &:hover {
+            cursor: pointer;
+            background: darken(#EBF7F9, 2%);
+          }
+        }
+      }
+    }
+
+    &__friends {
+      div.layout__content__main__invite__column {
+        div.layout__content__main__invite__row {
+          justify-content: space-around;
+          flex-direction: column;
+          @include rem(margin-bottom, 22);
+
+          @include tablet {
+            flex-direction: row;
+            margin-bottom: 0;
+          }
+          @include desktop {
+            flex-direction: row;
+            margin-bottom: 0;
+          }
+        }
+      }
+      &__text {
+        p {
+          margin: 0;
+          color: $text-color-alternate;
+          @include rem(margin-top, 16 * 3);
+          @include rem(margin-bottom, 22);
+        }
+      }
+      &__invitation {
+        div.layout__content__main__invite__column {
+          align-items: center;
+
+          div.layout__content__main__invite__row {
+            @include rem(margin-top, 10);
+            flex-direction: row;
+          }
+        }
+        img {
+          border-radius: 6px;
+          @include rem(width, 54);
+          @include rem(height, 54);
+        }
+        span {
+          font-weight: 400;
+          color: $text-color;
+          @include rem(font-size, 14);
+        }
+
+        &__accept {
+          @include rem(margin-right, 8);
+
+          img {
+            @include rem(width, 30);
+
+            &:hover {
+              cursor: pointer;
+            }
+          }
+        }
+        &__reject {
+          img {
+            @include rem(width, 30);
+
+            &:hover {
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
   }
 
   // main buttons
