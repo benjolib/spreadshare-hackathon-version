@@ -20,33 +20,27 @@ use DS\Model\Events\UserLocationsEvents;
 class UserLocations
     extends UserLocationsEvents
 {
+    
     /**
-     * @param array $param
-     * @param int   $page
-     * @param int   $limit
+     * Reassign all location ids
      *
-     * @return array
+     * @param int   $userId
+     * @param array $locationIds
+     *
+     * @return $this
      */
-    /*
-    public function findCustom($param = [], $page = 0, $limit = Paging::endlessScrollPortions)
+    public function setUserLocationsByUserId(int $userId, array $locationIds): UserLocations
     {
-        if (count($param))
+        // Remove all locations
+        $this->getWriteConnection()
+             ->delete($this->getSource(), 'userId = ?0', [$userId]);
+        
+        // .. and recrete them:
+        foreach ($locationIds as $id)
         {
-            return self::query()
-                       ->columns(
-                           [
-                               UserLocations::class . ".id",
-                           ]
-                       )
-                //->leftJoin(UserLocations::class, UserLocations::class . '.profileId = ' . Profile::class . '.id')
-                //->inWhere(Profile::class . '.id', $param)
-                       ->limit((int) $limit, (int) Paging::endlessScrollPortions * $page)
-                //->orderBy(sprintf('FIELD (id,%s)', implode(',', $param)))
-                       ->execute()
-                       ->toArray() ?: [];
+            (new self())->setUserId($userId)->setLocationId($id)->create();
         }
         
-        return [];
+        return $this;
     }
-    */
 }
