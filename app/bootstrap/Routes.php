@@ -33,7 +33,7 @@ return [
             'controller' => 'Signup',
             'action' => 'topics',
         ],
-        'methods' => ['GET'],
+        'methods' => ['GET', 'POST'],
     ],
     [
         'url' => '/signup/follow',
@@ -41,7 +41,7 @@ return [
             'controller' => 'Signup',
             'action' => 'follow',
         ],
-        'methods' => ['GET'],
+        'methods' => ['GET', 'POST'],
     ],
     [
         'url' => '/signup/location',
@@ -49,7 +49,7 @@ return [
             'controller' => 'Signup',
             'action' => 'location',
         ],
-        'methods' => ['GET'],
+        'methods' => ['GET', 'POST'],
     ],
     [
         'url' => '/user/{user:[a-zA-Z0-9\-]+}',
@@ -65,7 +65,7 @@ return [
             'controller' => 'UserSettings',
             'action' => 'settings',
         ],
-        'methods' => ['GET'],
+        'methods' => ['GET', 'POST'],
     ],
     [
         'url' => '/settings/{page:[a-zA-Z0-9\-]+}',
@@ -73,29 +73,13 @@ return [
             'controller' => 'UserSettings',
             'action' => 'settings',
         ],
-        'methods' => ['GET'],
+        'methods' => ['GET', 'POST'],
     ],
     [
         'url' => '/upvote/{id:[a-zA-Z0-9\-]+}',
         'paths' => [
             'controller' => 'Upvote',
             'action' => 'ajax',
-        ],
-        'methods' => ['GET'],
-    ],
-    [
-        'url' => '/post/{id:[a-zA-Z0-9\-]+}',
-        'paths' => [
-            'controller' => 'Post',
-            'action' => 'index',
-        ],
-        'methods' => ['GET'],
-    ],
-    [
-        'url' => '/hunt/post',
-        'paths' => [
-            'controller' => 'Hunt',
-            'action' => 'post',
         ],
         'methods' => ['POST'],
     ],
