@@ -1,95 +1,128 @@
-<?php 
+<?php
 
-namespace Phalcon\Events {
+namespace Phalcon\Events;
 
-	/**
-	 * Phalcon\Events\Event
-	 *
-	 * This class offers contextual information of a fired event in the EventsManager
-	 */
-	
-	class Event implements \Phalcon\Events\EventInterface {
+/**
+ * Phalcon\Events\Event
+ *
+ * This class offers contextual information of a fired event in the EventsManager
+ */
+class Event implements \Phalcon\Events\EventInterface
+{
+    /**
+     * Event type
+     *
+     * @var string
+     */
+    protected $_type;
 
-		protected $_type;
+    /**
+     * Event source
+     *
+     * @var object
+     */
+    protected $_source;
 
-		protected $_source;
+    /**
+     * Event data
+     *
+     * @var mixed
+     */
+    protected $_data;
 
-		protected $_data;
+    /**
+     * Is event propagation stopped?
+     *
+     * @var boolean
+     */
+    protected $_stopped = false;
 
-		protected $_stopped;
-
-		protected $_cancelable;
-
-		/**
-		 * Event type
-		 */
-		public function getType(){ }
-
-
-		/**
-		 * Event source
-		 */
-		public function getSource(){ }
-
-
-		/**
-		 * Event data
-		 */
-		public function getData(){ }
-
-
-		/**
-		 * \Phalcon\Events\Event constructor
-		 *
-		 * @param string type
-		 * @param object source
-		 * @param mixed data
-		 * @param boolean cancelable
-		 */
-		public function __construct($type, $source, $data=null, $cancelable=null){ }
+    /**
+     * Is event cancelable?
+     *
+     * @var boolean
+     */
+    protected $_cancelable = true;
 
 
-		/**
-		 * Sets event data.
-		 * @param mixed data
-		 */
-		public function setData($data=null){ }
+    /**
+     * Event type
+     *
+     * @return string
+     */
+    public function getType() {}
 
+    /**
+     * Event source
+     *
+     * @return object
+     */
+    public function getSource() {}
 
-		/**
-		 * Sets event type.
-		 */
-		public function setType($type){ }
+    /**
+     * Event data
+     *
+     * @return mixed
+     */
+    public function getData() {}
 
+    /**
+     * Phalcon\Events\Event constructor
+     *
+     * @param string $type
+     * @param object $source
+     * @param mixed $data
+     * @param boolean $cancelable
+     */
+    public function __construct($type, $source, $data = null, $cancelable = true) {}
 
-		/**
-		 * Stops the event preventing propagation.
-		 *
-		 * <code>
-		 * if ($event->isCancelable()) {
-		 *     $event->stop();
-		 * }
-		 * </code>
-		 */
-		public function stop(){ }
+    /**
+     * Sets event data.
+     *
+     * @param mixed $data
+     * @return EventInterface
+     */
+    public function setData($data = null) {}
 
+    /**
+     * Sets event type.
+     *
+     * @param string $type
+     * @return EventInterface
+     */
+    public function setType($type) {}
 
-		/**
-		 * Check whether the event is currently stopped.
-		 */
-		public function isStopped(){ }
+    /**
+     * Stops the event preventing propagation.
+     *
+     * <code>
+     * if ($event->isCancelable()) {
+     *     $event->stop();
+     * }
+     * </code>
+     *
+     * @return EventInterface
+     */
+    public function stop() {}
 
+    /**
+     * Check whether the event is currently stopped.
+     *
+     * @return bool
+     */
+    public function isStopped() {}
 
-		/**
-		 * Check whether the event is cancelable.
-		 *
-		 * <code>
-		 * if ($event->isCancelable()) {
-		 *     $event->stop();
-		 * }
-		 * </code>
-		 */
-		public function isCancelable(){ }
+    /**
+     * Check whether the event is cancelable.
+     *
+     * <code>
+     * if ($event->isCancelable()) {
+     *     $event->stop();
+     * }
+     * </code>
+     *
+     * @return bool
+     */
+    public function isCancelable() {}
 
-	}
 }

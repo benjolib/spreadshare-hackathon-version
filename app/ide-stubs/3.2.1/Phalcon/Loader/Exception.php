@@ -1,7 +1,13 @@
-<?php 
+<?php
 
-namespace Phalcon\Loader {
+namespace Phalcon\Loader;
 
-	class Exception extends \Phalcon\Exception implements \Throwable {
-	}
+/**
+ * Phalcon\Loader\Exception
+ *
+ * Exceptions thrown in Phalcon\Loader will use this class
+ */
+class Exception extends \Phalcon\Exception
+{
+
 }

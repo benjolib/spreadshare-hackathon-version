@@ -1,10 +1,20 @@
-<?php 
+<?php
 
-namespace Phalcon\Mvc\Model\Binder {
+namespace Phalcon\Mvc\Model\Binder;
 
-	interface BindableInterface {
+/**
+ * Phalcon\Mvc\Model\Binder\BindableInterface
+ *
+ * Interface for bindable classes
+ */
+interface BindableInterface
+{
 
-		public function getModelName();
+    /**
+     * Return the model name or models names and parameters keys associated with this class
+     *
+     * @return string|array
+     */
+    public function getModelName();
 
-	}
 }

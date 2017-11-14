@@ -1,7 +1,13 @@
-<?php 
+<?php
 
-namespace Phalcon\Mvc {
+namespace Phalcon\Mvc;
 
-	interface ControllerInterface {
-	}
+/**
+ * Phalcon\Mvc\ControllerInterface
+ *
+ * Interface for controller handlers
+ */
+interface ControllerInterface
+{
+
 }

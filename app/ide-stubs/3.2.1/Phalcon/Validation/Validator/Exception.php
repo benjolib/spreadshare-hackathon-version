@@ -1,7 +1,13 @@
-<?php 
+<?php
 
-namespace Phalcon\Validation\Validator {
+namespace Phalcon\Validation\Validator;
 
-	class Exception extends \Phalcon\Exception implements \Throwable {
-	}
+/**
+ * Phalcon\Validation\Exception
+ *
+ * Exceptions thrown in Phalcon\Validation\Validator\ classes will use this class
+ */
+class Exception extends \Phalcon\Exception
+{
+
 }

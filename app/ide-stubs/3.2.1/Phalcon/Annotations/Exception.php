@@ -1,7 +1,13 @@
-<?php 
+<?php
 
-namespace Phalcon\Annotations {
+namespace Phalcon\Annotations;
 
-	class Exception extends \Exception implements \Throwable {
-	}
+/**
+ * Phalcon\Annotations\Exception
+ *
+ * Class for exceptions thrown by Phalcon\Annotations
+ */
+class Exception extends \Exception
+{
+
 }

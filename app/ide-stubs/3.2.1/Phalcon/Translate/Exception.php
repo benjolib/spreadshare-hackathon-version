@@ -1,7 +1,13 @@
-<?php 
+<?php
 
-namespace Phalcon\Translate {
+namespace Phalcon\Translate;
 
-	class Exception extends \Phalcon\Exception implements \Throwable {
-	}
+/**
+ * Phalcon\Translate\Exception
+ *
+ * Class for exceptions thrown by Phalcon\Translate
+ */
+class Exception extends \Phalcon\Exception
+{
+
 }

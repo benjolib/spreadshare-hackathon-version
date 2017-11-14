@@ -1,46 +1,55 @@
-<?php 
+<?php
 
-namespace Phalcon\Cli {
+namespace Phalcon\Cli;
 
-	/**
-	 * Phalcon\Cli\Console
-	 *
-	 * This component allows to create CLI applications using Phalcon
-	 */
-	
-	class Console extends \Phalcon\Application implements \Phalcon\Di\InjectionAwareInterface, \Phalcon\Events\EventsAwareInterface {
+/**
+ * Phalcon\Cli\Console
+ *
+ * This component allows to create CLI applications using Phalcon
+ */
+class Console extends \Phalcon\Application
+{
 
-		protected $_arguments;
-
-		protected $_options;
-
-		/**
-		 * Merge modules with the existing ones
-		 *
-		 *<code>
-		 * $application->addModules(
-		 *     [
-		 *         "admin" => [
-		 *             "className" => "Multiple\\Admin\\Module",
-		 *             "path"      => "../apps/admin/Module.php",
-		 *         ],
-		 *     ]
-		 * );
-		 *</code>
-		 */
-		public function addModules($modules){ }
+    protected $_arguments = array();
 
 
-		/**
-		 * Handle the whole command-line tasks
-		 */
-		public function handle($arguments=null){ }
+    protected $_options = array();
 
 
-		/**
-		 * Set an specific argument
-		 */
-		public function setArgument($arguments=null, $str=null, $shift=null){ }
+    /**
+     * Merge modules with the existing ones
+     *
+     * <code>
+     * $application->addModules(
+     *     [
+     *         "admin" => [
+     *             "className" => "Multiple\\Admin\\Module",
+     *             "path"      => "../apps/admin/Module.php",
+     *         ],
+     *     ]
+     * );
+     * </code>
+     *
+     * @param array $modules
+     * @deprecated
+     */
+    public function addModules(array $modules) {}
 
-	}
+    /**
+     * Handle the whole command-line tasks
+     *
+     * @param array $arguments
+     */
+    public function handle(array $arguments = null) {}
+
+    /**
+     * Set an specific argument
+     *
+     * @param array $arguments
+     * @param bool $str
+     * @param bool $shift
+     * @return Console
+     */
+    public function setArgument(array $arguments = null, $str = true, $shift = true) {}
+
 }
