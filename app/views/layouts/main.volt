@@ -7,6 +7,7 @@
   <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600,800" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
   <link rel="stylesheet" href="/css/styles.css">
+  <link href="/css/main.508c7389.css" rel="stylesheet">
   {% block header %}{% endblock %}
   <title>{% block title %}{% endblock %}</title>
 </head>
@@ -104,8 +105,7 @@
     </div>
   </footer>
 </section>
-<script type="text/javascript" src="/js/react/main.f8c5d60c.js"></script>
+<script type="text/javascript" src="/js/react/main.db350b35.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.slim.min.js"></script>
-<link href="/css/main.508c7389.css" rel="stylesheet">
 </body>
 </html>
