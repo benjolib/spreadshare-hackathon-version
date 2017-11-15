@@ -8,7 +8,7 @@
   <div class="follow__content">
     <div class="follow__content__wrapper">
       <p class="follow__content__title">Awesome <span>people</span> you should follow</p>
-      <p class="follow__content__subtitle">We’ll add tables created or collaborated on by people you follow. Pick at least 3</p>
+      <p class="follow__content__subtitle">We’ll add tables created or collaborated on by people you follow. <span>Pick at least 3</span></p>
       <div class="follow__content__main">
         <div class="follow__content__main__cards">
           <div class="follow__content__main__cards__item">
@@ -109,10 +109,10 @@
         <a href="/signup/topics">
           <div>Topics</div>
         </a>
-        <a href="/signup/people">
+        <a href="/signup/follow">
           <div class="sign-box-selected">People</div>
         </a>
-        <a href="/signup/regions">
+        <a href="/signup/location">
           <div>Regions</div>
         </a>
         <a href="/signup/tables">
