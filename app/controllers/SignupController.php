@@ -3,6 +3,7 @@
 namespace DS\Controller;
 
 use DS\Application;
+use DS\Model\Tables;
 use DS\Model\Topics;
 use DS\Model\User;
 use DS\Model\UserFollower;
@@ -188,11 +189,36 @@ class SignupController
                 }
             }
             
+            $this->view->setVar('tables', (new Tables())->findTables($this->serviceManager->getAuth()->getUserId(), [], 0, 'RAND()'));
+            
             $this->view->setMainView('auth/onboarding/tables');
         }
         catch (Exception $e)
         {
             Application::instance()->log($e->getMessage(), Logger::CRITICAL);
         }
+    }
+    
+    /**
+     * Onboarding Finished
+     */
+    public function finishedAction()
+    {
+        $this->redirectIfNotLoggedIn();
+        
+        if ($this->request->isPost())
+        {
+            $locations = $this->request->getPost('locations');
+            if (is_array($locations) && count($locations))
+            {
+                // Set selected locations
+                (new UserLocations())->setUserLocationsByUserId(
+                    $this->serviceManager->getAuth()->getUserId(),
+                    $locations
+                );
+            }
+        }
+        
+        $this->response->redirect('/');
     }
 }

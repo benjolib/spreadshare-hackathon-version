@@ -59,8 +59,8 @@ To make sure we have your correct email address, please confirm it by clicking t
         /**
          * @todo Remove the next line once emails are working....
          */
-        echo $this->message->getContent();
-        die;
+        //echo $this->message->getContent();
+        //die;
         
         return $this;
     }

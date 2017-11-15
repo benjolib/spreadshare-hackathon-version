@@ -4,6 +4,7 @@ namespace DS\Model;
 
 use DS\Component\Mail\Events\SignupMail;
 use DS\Model\Events\UserEvents;
+use DS\Model\Helper\RandomUserImage;
 
 /**
  * User
@@ -21,36 +22,6 @@ use DS\Model\Events\UserEvents;
 class User
     extends UserEvents
 {
-    /**
-     * @param array $param
-     * @param int   $page
-     * @param int   $limit
-     *
-     * @return array
-     */
-    /*
-    public function findCustom($param = [], $page = 0, $limit = Paging::endlessScrollPortions)
-    {
-        if (count($param))
-        {
-            return self::query()
-                       ->columns(
-                           [
-                               User::class . ".id",
-                           ]
-                       )
-                //->leftJoin(User::class, User::class . '.profileId = ' . Profile::class . '.id')
-                //->inWhere(Profile::class . '.id', $param)
-                       ->limit((int) $limit, (int) Paging::endlessScrollPortions * $page)
-                //->orderBy(sprintf('FIELD (id,%s)', implode(',', $param)))
-                       ->execute()
-                       ->toArray() ?: [];
-        }
-        
-        return [];
-    }
-    */
-    
     /**
      * @return string
      */
@@ -112,6 +83,7 @@ class User
         $user->setName($name)
              ->setHandle($handle)
              ->setEmail($email)
+             ->setImage(RandomUserImage::get())
              ->setSecuritySalt(serviceManager()->getSecurity()->hash($unhashedPassword))
              ->create();
         

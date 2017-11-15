@@ -28,11 +28,11 @@
     </div>
   </div>
   {% if auth.loggedIn() %}
-    <div class="navbar__controls">
-      <a href="#"><img src="/assets/icons/add.svg" class="navbar__controls__add" /></a>
-      <a href="#"><img src="/assets/icons/bell.svg" class="navbar__controls__notification" /></a>
-      <a href="/settings/personal"><img src="{{ auth.getUser().getImage() }}" class="navbar__controls__profile" id="profileImage" /></a>
-    </div>
+  <div class="navbar__controls">
+    <a href="/table/add"><img src="/assets/icons/add.svg" class="navbar__controls__add" /></a>
+    <a href="#"><img src="/assets/icons/bell.svg" class="navbar__controls__notification" /></a>
+    <a href="/settings/personal"><img src="{{ auth.getUser().getImage() }}" class="navbar__controls__profile" id="profileImage" /></a>
+  </div>
   {% else %}
     <span class="navbar__login">
       <a href="/login" class="navbar__login__login">Log in</a>
@@ -105,6 +105,34 @@
     </div>
   </footer>
 </section>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="/js/react/main.f8c5d60c.js" defer></script>
+
+<script type="text/javascript" src="/js/api.js"></script>
+<script type="text/javascript">
+  $(document).ready(function () {
+    /* Define API endpoints once and globally */
+    $.fn.api.settings.api = {
+      'upvote': '/api/v1/vote/{id}',
+    };
+
+    $('div.upvote').api({
+      method: 'POST',
+      onSuccess: function (response, button) {
+        console.log(response);
+        var span = button.find('span');
+        if (response.data.voted) {
+          button.addClass('selected');
+          span.text(parseInt(parseInt(span.text()) + 1));
+        } else {
+          button.removeClass('selected');
+          span.text(parseInt(parseInt(span.text()) - 1));
+        }
+      },
+    });
+  });
+</script>
+{% block scripts %}{% endblock %}
 <script type="text/javascript" src="/js/react/main.db350b35.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.slim.min.js"></script>
 </body>

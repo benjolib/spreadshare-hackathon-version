@@ -292,17 +292,16 @@ DROP TABLE IF EXISTS `tableStats`;
 CREATE TABLE `tableStats` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `tableId` int(11) unsigned NOT NULL COMMENT 'tables.id',
-  `votesCount` int(11) unsigned DEFAULT NULL COMMENT 'upvotes',
-  `viewsCount` int(11) unsigned DEFAULT NULL COMMENT 'views',
-  `commentsCount` int(11) unsigned DEFAULT NULL COMMENT 'comments',
-  `collaboratorCount` int(11) unsigned DEFAULT NULL COMMENT 'collaborators',
-  `contributionCount` int(11) unsigned DEFAULT NULL COMMENT 'contributions',
-  `tokensCount` int(11) DEFAULT NULL COMMENT 'all distributed tokens',
+  `votesCount` int(11) unsigned DEFAULT '0' COMMENT 'upvotes',
+  `viewsCount` int(11) unsigned DEFAULT '0' COMMENT 'views',
+  `commentsCount` int(11) unsigned DEFAULT '0' COMMENT 'comments',
+  `collaboratorCount` int(11) unsigned DEFAULT '0' COMMENT 'collaborators',
+  `contributionCount` int(11) unsigned DEFAULT '0' COMMENT 'contributions',
+  `tokensCount` int(11) DEFAULT '0' COMMENT 'all distributed tokens',
   PRIMARY KEY (`id`),
   KEY `tableId` (`tableId`),
   CONSTRAINT `tableStatsTableId` FOREIGN KEY (`tableId`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 
 # Export von Tabelle tableSubscription

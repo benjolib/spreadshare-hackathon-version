@@ -45,8 +45,12 @@ class UserSettings
             throw new \InvalidArgumentException('User id does not exist!');
         }
         
-        $user->setImage($imagePath)
-             ->setName($name)
+        if ($imagePath)
+        {
+            $user->setImage($imagePath);
+        }
+        
+        $user->setName($name)
              ->setHandle($handle)
              ->setTagline($tagline)
              ->setWebsite($website)

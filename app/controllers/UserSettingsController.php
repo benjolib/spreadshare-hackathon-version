@@ -115,9 +115,12 @@ class UserSettingsController
                 {
                     foreach ($this->request->getUploadedFiles() as $file)
                     {
-                        $imageName = md5($userId) . '.' . $file->getExtension();
-                        $file->moveTo(ROOT_PATH . 'system/uploads/userimages/' . $imageName);
-                        $imagePath = '/user-images/' . $imageName;
+                        if ($file->getTempName() && $file->getName() && $file->getSize())
+                        {
+                            $imageName = md5($userId) . '.' . $file->getExtension();
+                            $file->moveTo(ROOT_PATH . 'system/uploads/userimages/' . $imageName);
+                            $imagePath = '/user-images/' . $imageName;
+                        }
                     }
                 }
                 

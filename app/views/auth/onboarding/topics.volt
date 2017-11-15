@@ -45,10 +45,12 @@
     </aside>
   </div>
 </div>
+{% endblock %}
 
+{% block scripts %}
 <script type="text/javascript">
-  window.onload = function () {
-    $('.topics__content__main').on('click', '.topics__content__main__cards__item', function (ev) {
+  $(document).ready(function () {
+    $('.topics__content__main__cards__item').on('click', function (ev) {
       ev.stopPropagation();
       var target = $(ev.currentTarget);
       var input = target.find('input')[0];
@@ -60,6 +62,6 @@
         target.addClass('selected');
       }
     });
-  };
+  });
 </script>
 {% endblock %}

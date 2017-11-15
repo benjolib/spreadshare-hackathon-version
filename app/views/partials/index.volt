@@ -15,7 +15,6 @@
   </div>
   {# content #}
   <div class="main__content">
-    {{ flash.output() }}
     {# tables content #}
     <div class="main__content__tables">
       {# filters #}

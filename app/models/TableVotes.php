@@ -2,6 +2,7 @@
 
 namespace DS\Model;
 
+use DS\Component\ServiceManager;
 use DS\Model\Events\TableVotesEvents;
 
 /**
@@ -21,32 +22,58 @@ class TableVotes
     extends TableVotesEvents
 {
     /**
-     * @param array $param
-     * @param int   $page
-     * @param int   $limit
+     * Check if a user voted for a specific table
      *
-     * @return array
+     * @param int $userId
+     * @param int $tableId
+     *
+     * @return TableVotes|\Phalcon\Mvc\Model\ResultInterface
      */
-    /*
-    public function findCustom($param = [], $page = 0, $limit = Paging::endlessScrollPortions)
+    public static function findVote(int $userId, int $tableId)
     {
-        if (count($param))
+        return TableVotes::findFirst(
+            [
+                "conditions" => 'userId = ?0 AND tableId = ?1',
+                "bind" => [$userId, $tableId],
+                "limit" => 1,
+            ]
+        );
+    }
+    
+    /**
+     * Get tables that are upvoted by userId
+     *
+     * @param int $userId
+     * @param int $limit
+     *
+     * @return TableVotes|TableVotes[]|\Phalcon\Mvc\Model\ResultSetInterface
+     */
+    public static function getUpvotedTablesByUser(int $userId, $limit = 50)
+    {
+        return TableVotes::find(
+            [
+                "conditions" => 'userId = ?0',
+                "bind" => [$userId],
+                "limit" => $limit,
+            ]
+        );
+    }
+    
+    /**
+     * Check wheather a user has already voted for a table
+     *
+     * @param int $tableId
+     * @param int $userId
+     *
+     * @return bool
+     */
+    public function votedForTable(int $tableId, int $userId = null)
+    {
+        if ($userId === null)
         {
-            return self::query()
-                       ->columns(
-                           [
-                               TableVotes::class . ".id",
-                           ]
-                       )
-                //->leftJoin(TableVotes::class, TableVotes::class . '.profileId = ' . Profile::class . '.id')
-                //->inWhere(Profile::class . '.id', $param)
-                       ->limit((int) $limit, (int) Paging::endlessScrollPortions * $page)
-                //->orderBy(sprintf('FIELD (id,%s)', implode(',', $param)))
-                       ->execute()
-                       ->toArray() ?: [];
+            $userId = ServiceManager::instance($this->getDI())->getAuth()->getUserId();
         }
         
-        return [];
+        return self::findVote($userId, $tableId) ? true : false;
     }
-    */
 }

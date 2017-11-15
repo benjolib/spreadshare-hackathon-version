@@ -3,7 +3,6 @@
 namespace DS\Controller;
 
 use DS\Api\Login;
-use DS\Application;
 use DS\Component\Auth;
 use DS\Component\ServiceManager;
 use DS\Model\DataSource\UserStatus;
@@ -12,7 +11,6 @@ use Hybridauth\Adapter\AdapterInterface;
 use Hybridauth\Exception\AuthorizationDeniedException;
 use Hybridauth\Hybridauth;
 use Phalcon\Exception;
-use Phalcon\Logger;
 
 /**
  * Spreadshare
@@ -53,6 +51,7 @@ class LoginController
                 
                 if ($user)
                 {
+                    $this->flash->success("Your account has been successfully confirmed!");
                     $user->setStatus(UserStatus::Confirmed)->setConfirmed(1)->save();
                 }
             }
@@ -86,7 +85,7 @@ class LoginController
         }
         catch (Exception $e)
         {
-            $this->view->setVar('errorMessage', $e->getMessage());
+            $this->flash->error($e->getMessage());
         }
         
         $this->view->setMainView('auth/login');

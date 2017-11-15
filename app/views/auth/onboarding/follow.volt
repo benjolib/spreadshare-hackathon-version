@@ -52,8 +52,11 @@
     </div>
   </div>
 </form>
+{% endblock %}
+
+{% block scripts %}
 <script type="text/javascript">
-  window.onload = function () {
+  $(document).ready(function () {
     $('.follow__content__main__cards').on('click', '.follow__content__main__cards__item__button', function (ev) {
       ev.stopPropagation();
       var target = $(ev.currentTarget);
@@ -66,6 +69,6 @@
         target.addClass('selected');
       }
     });
-  };
+  });
 </script>
 {% endblock %}

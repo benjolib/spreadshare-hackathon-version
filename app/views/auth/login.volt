@@ -14,7 +14,8 @@
         <span>We’re big on real names around here, so people know who’s who</span>
         <p>Password ● <a href="/login/forgot">Forgot?</a></p>
         <input type="password" name="password" tabindex="2" />
-        <p style="color:darkred;">{{ errorMessage }}</p>
+        {{ flash.output() }}
+
         <div class="login__content__form__buttons">
           <a href="/signup">Sign up</a>
           <button type="submit">Login</button>
