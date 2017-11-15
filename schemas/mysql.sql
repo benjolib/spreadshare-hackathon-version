@@ -504,6 +504,17 @@ CREATE TABLE `userConnections` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
+DROP TABLE IF EXISTS `userTopics`;
+
+CREATE TABLE `userTopics` (
+  `userId` int(11) unsigned NOT NULL,
+  `topicId` tinyint(1) unsigned NOT NULL,
+  PRIMARY KEY (`userId`,`topicId`),
+  KEY `userTopicsTopicId` (`topicId`),
+  CONSTRAINT `userTopicsTopicId` FOREIGN KEY (`topicId`) REFERENCES `topics` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `userTopicsUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 # Export von Tabelle userFollower
 # ------------------------------------------------------------
