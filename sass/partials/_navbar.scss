@@ -197,6 +197,7 @@
     display: none;
 
     @include desktop {
+      order: 3;
       display: flex;
       background: $logo-color;
       color: white;
