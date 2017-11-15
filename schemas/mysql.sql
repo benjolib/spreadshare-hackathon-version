@@ -19683,3 +19683,8 @@ VALUES
 	(16928, NULL, 'Zula', 1510751626),
 	(16929, NULL, 'Zurcoin', 1510751626),
 	(16930, NULL, 'Zynga', 1510751626);
+
+
+INSERT INTO `user` (`id`, `handle`, `name`, `email`, `securitySalt`, `authUid`, `authProvider`, `location`, `description`, `website`, `tagline`, `image`, `emailConfirmationToken`, `passwordResetToken`, `passwordResetSentAt`, `lastSessionId`, `lastLogin`, `confirmed`, `status`, `createdAt`)
+VALUES
+	(1, 'dstuecken', 'Dennis Stücken', '764738293347024896@twitter.com', NULL, '764738293347024896', 'Twitter', 'Düsseldorf, Deutschland', '', NULL, 'ReactJS and PHP hacker, MySQL query optimizer, dj and techno musician.', 'http://pbs.twimg.com/profile_images/764740281744887808/O3sxhSFO.jpg', '9XrsdCPrANWbSOAmRKMUkevxzGoRPZK4', NULL, NULL, '3m334faenii258d50ejvmjcf67', 1510441306, 0, 0, 1510441306);
