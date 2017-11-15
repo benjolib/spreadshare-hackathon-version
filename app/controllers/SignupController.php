@@ -6,6 +6,7 @@ use DS\Application;
 use DS\Model\Topics;
 use DS\Model\User;
 use DS\Model\UserFollower;
+use DS\Model\UserLocations;
 use DS\Model\UserTopics;
 use Phalcon\Exception;
 use Phalcon\Logger;
@@ -142,6 +143,8 @@ class SignupController
     {
         try
         {
+            $this->redirectIfNotLoggedIn();
+            
             if ($this->request->isPost())
             {
                 $users = $this->request->getPost('user');
@@ -154,7 +157,6 @@ class SignupController
                     );
                 }
             }
-            $this->redirectIfNotLoggedIn();
             
             $this->view->setMainView('auth/onboarding/location');
         }
@@ -172,6 +174,19 @@ class SignupController
         try
         {
             $this->redirectIfNotLoggedIn();
+            
+            if ($this->request->isPost())
+            {
+                $locations = $this->request->getPost('locations');
+                if (is_array($locations) && count($locations))
+                {
+                    // Set selected locations
+                    (new UserLocations())->setUserLocationsByUserId(
+                        $this->serviceManager->getAuth()->getUserId(),
+                        $locations
+                    );
+                }
+            }
             
             $this->view->setMainView('auth/onboarding/tables');
         }

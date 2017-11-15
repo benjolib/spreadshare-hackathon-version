@@ -511,7 +511,7 @@
         @include rem2(padding, 25, 30);
 
         @include desktop {
-          width: 30%;
+          //width: 30%;
           box-sizing: content-box;
         }
 
