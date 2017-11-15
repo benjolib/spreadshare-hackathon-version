@@ -83,4 +83,12 @@ return [
         ],
         'methods' => ['POST'],
     ],
+    [
+        'url' => '/tables/{order:[a-zA-Z0-9\-]+}',
+        'paths' => [
+            'controller' => 'Index',
+            'action' => 'index',
+        ],
+        'methods' => ['GET'],
+    ],
 ];
