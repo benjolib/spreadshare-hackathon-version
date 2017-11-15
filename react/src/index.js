@@ -14,6 +14,7 @@ if (process.env.NODE_ENV === 'production') {
   const componentRegister = {
     Table,
     LocationSelect,
+    TopicsSelect,
   };
 
   function renderAppInDom(el) {
