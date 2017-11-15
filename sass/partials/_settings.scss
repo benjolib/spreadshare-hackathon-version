@@ -373,27 +373,34 @@
         }
       }
 
-      &__button {
-        border-radius: 4px;
-        background: #DEE0E7;
-        display: flex;
-        align-items: center;
-        @include rem2(padding, 8, 16);
+      &__link {
+        text-decoration: none;
 
-        &:hover {
-          cursor: pointer;
-          background: darken(#DEE0E7, 8%);
-        }
+        &__button {
+          border-radius: 4px;
+          background: #DEE0E7;
+          display: flex;
+          align-items: center;
+          @include rem2(padding, 8, 16);
 
-        img {
-          @include rem(width, 20);
-          @include rem(margin-right, 10);
-        }
-        span {
-          margin: 0;
-          text-transform: uppercase;
-          align-self: center;
-          color: white;
+          &:hover {
+            cursor: pointer;
+            background: darken(#DEE0E7, 8%);
+          }
+
+          img {
+            @include rem(width, 20);
+            @include rem(margin-right, 10);
+          }
+
+          span {
+            margin: 0;
+            font-weight: 300;
+            text-transform: uppercase;
+            color: white;
+            align-self: center;
+            @include rem(font-size, 16);
+          }
         }
       }
     }

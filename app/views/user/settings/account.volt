@@ -67,10 +67,12 @@
               <div class="layout__content__main__account__logout__text">
                 <p>Log out of your account</p>
               </div>
-              <div class="layout__content__main__account__logout__button">
-                <img src="/assets/icons/log-out.svg" />
-                <a href="/logout">Logout</a>
-              </div>
+              <a href="/logout" class="layout__content__main__account__logout__link">
+                <div class="layout__content__main__account__logout__link__button">
+                  <img src="/assets/icons/log-out.svg" />
+                  <span>Logout</span>
+                </div>
+              </a>
             </div>
           </div>
           <div class="layout__content__main__buttons">
