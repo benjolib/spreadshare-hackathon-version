@@ -5,6 +5,6 @@
 
 {% block content %}
 
-Content in here
+Tables
 
 {% endblock %}
