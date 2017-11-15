@@ -17,11 +17,19 @@ class TableController
     extends BaseController
 {
     /**
-     * Home
+     * Table
      */
     public function indexAction($params = [])
     {
         $this->view->setMainView('table/table');
+    }
+    
+    /**
+     * Add table
+     */
+    public function addAction($params = [])
+    {
+        $this->view->setMainView('table/add');
     }
     
 }
