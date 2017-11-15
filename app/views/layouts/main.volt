@@ -27,11 +27,13 @@
     </div>
   </div>
   {% if auth.loggedIn() %}
-  <span>Logged in as {{ auth.getUser().getName() }}</span>
-  <img class="profileImage" id="profileImage" src="{{ auth.getUser().getImage() }}" />
-  <a href="/logout" class="navbar__login">Logout</a>
+    <div class="navbar__controls">
+      <a href="#"><img src="/assets/icons/add.svg" class="navbar__controls__add" /></a>
+      <a href="#"><img src="/assets/icons/bell.svg" class="navbar__controls__notification" /></a>
+      <a href="/settings/personal"><img src="{{ auth.getUser().getImage() }}" class="navbar__controls__profile" id="profileImage" /></a>
+    </div>
   {% else %}
-  <span class="navbar__login">
+    <span class="navbar__login">
       <a href="/login" class="navbar__login__login">Log in</a>
       <span>or</span>
       <a href="/signup" class="navbar__login__signup">Sign up</a>
