@@ -1,8 +1,8 @@
 <?php
 
-namespace DS\Controller\Api\v1\Locations;
+namespace DS\Controller\Api\v1\Topics;
 
-use DS\Api\Locations;
+use DS\Api\Topics;
 use DS\Controller\Api\ActionHandler;
 use DS\Controller\Api\Meta\Records;
 use DS\Controller\Api\MethodInterface;
@@ -22,8 +22,6 @@ use DS\Controller\Api\MethodInterface;
  */
 class Get extends ActionHandler implements MethodInterface
 {
-    private $searchMinimum = 2;
-    
     /**
      * @return bool
      */
@@ -35,17 +33,17 @@ class Get extends ActionHandler implements MethodInterface
     /**
      * Process Get Method
      *
-     * @api               {get} /api/v1/locations Request all locations
+     * @api               {get} /api/v1/topics Request all topics
      * @apiVersion        1.0.0
-     * @apiName           Locations
+     * @apiName           Topics
      * @apiGroup          Public
      *
      * @apiSuccess {Object} _meta Meta object
      * @apiSuccess {int} _meta.total total number of items included in this response
      * @apiSuccess {bool} _meta.success Defines whether the request had any errors
-     * @apiSuccess {Object[]} data Array of locations
-     * @apiSuccess {string} data.id Id of location
-     * @apiSuccess {string} data.locationName Name of location
+     * @apiSuccess {Object[]} data Array of topics
+     * @apiSuccess {string} data.id Id of topic
+     * @apiSuccess {string} data.title Title of topic
      *
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK
@@ -57,15 +55,15 @@ class Get extends ActionHandler implements MethodInterface
      *          "data": [
      *              {
      *                  "id": "1",
-     *                  "locationName": "Berlin",
+     *                  "title": "Engineering & Tech",
      *              },
      *              {
      *                  "id": "2",
-     *                  "locationName": "Germany",
+     *                  "title": "Design & Product",
      *              },
      *              {
      *                  "id": "3",
-     *                  "locationName": "Cologne",
+     *                  "title": "Growth & Marketing",
      *              }
      *          ]
      *      }
@@ -74,14 +72,7 @@ class Get extends ActionHandler implements MethodInterface
      */
     public function process()
     {
-        $query = $this->request->get('q', null, null);
-        
-        if ($query === null || strlen($query) < $this->searchMinimum)
-        {
-            throw new \InvalidArgumentException(sprintf('Give at least %d characters.', $this->searchMinimum));
-        }
-        
-        return new Records(Locations::searchLocationByName($query));
+        return new Records(Topics::getAll());
     }
     
 }
