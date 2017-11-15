@@ -52,7 +52,10 @@ class UserSettings
              ->setWebsite($website)
              ->save();
         
-        (new UserLocations())->setUserLocationsByUserId($userId, $locationIds);
+        if (count($locationIds))
+        {
+            (new UserLocations())->setUserLocationsByUserId($userId, $locationIds);
+        }
         
         return $user;
     }

@@ -2,7 +2,7 @@
 
 namespace DS\Model;
 
-use DS\Model\Events\UserTopicsEvent;
+use DS\Model\Events\UserTopicsEvents;
 
 /**
  * UserSettings
@@ -18,6 +18,29 @@ use DS\Model\Events\UserTopicsEvent;
  * @method static findFirstById(int $id)
  */
 class UserTopics
-    extends UserTopicsEvent
+    extends UserTopicsEvents
 {
+    
+    /**
+     * Reassign all topic ids
+     *
+     * @param int   $userId
+     * @param array $topicIds
+     *
+     * @return $this
+     */
+    public function setTopicsByUserId(int $userId, array $topicIds): UserTopics
+    {
+        // Remove all topics for user
+        $this->getWriteConnection()
+             ->delete($this->getSource(), 'userId = ?', [$userId]);
+        
+        // .. and recrete them:
+        foreach ($topicIds as $id)
+        {
+            (new self())->setUserId($userId)->setTopicId($id)->create();
+        }
+        
+        return $this;
+    }
 }
