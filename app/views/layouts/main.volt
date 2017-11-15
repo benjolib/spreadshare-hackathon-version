@@ -27,11 +27,11 @@
     </div>
   </div>
   {% if auth.loggedIn() %}
-    <span>Logged in as {{ auth.getUser().getName() }}</span>
-    <img class="profileImage" id="profileImage" src="{{ auth.getUser().getImage() }}" />
-    <a href="/logout" class="navbar__login">Logout</a>
+  <span>Logged in as {{ auth.getUser().getName() }}</span>
+  <img class="profileImage" id="profileImage" src="{{ auth.getUser().getImage() }}" />
+  <a href="/logout" class="navbar__login">Logout</a>
   {% else %}
-    <span class="navbar__login">
+  <span class="navbar__login">
       <a href="/login" class="navbar__login__login">Log in</a>
       <span>or</span>
       <a href="/signup" class="navbar__login__signup">Sign up</a>
@@ -102,6 +102,7 @@
     </div>
   </footer>
 </section>
-<script type="text/javascript" src="/js/react/main.c97ff7b8.js"></script>
+<script type="text/javascript" src="/js/react/main.d1c7c06e.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.slim.min.js"></script>
 </body>
 </html>

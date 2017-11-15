@@ -21,32 +21,25 @@ class UserFollower
     extends UserFollowerEvents
 {
     /**
-     * @param array $param
-     * @param int   $page
-     * @param int   $limit
+     * (re-)Set all users followers
      *
-     * @return array
+     * @param int   $userId
+     * @param array $followerUserIds
+     *
+     * @return $this
      */
-    /*
-    public function findCustom($param = [], $page = 0, $limit = Paging::endlessScrollPortions)
+    public function overrideFollowerByUserId(int $userId, array $followerUserIds): UserFollower
     {
-        if (count($param))
+        // Remove all followers
+        $this->getWriteConnection()
+             ->delete($this->getSource(), "userId = '{$userId}'");
+        
+        // .. and recrete them:
+        foreach ($followerUserIds as $id)
         {
-            return self::query()
-                       ->columns(
-                           [
-                               UserFollower::class . ".id",
-                           ]
-                       )
-                //->leftJoin(UserFollower::class, UserFollower::class . '.profileId = ' . Profile::class . '.id')
-                //->inWhere(Profile::class . '.id', $param)
-                       ->limit((int) $limit, (int) Paging::endlessScrollPortions * $page)
-                //->orderBy(sprintf('FIELD (id,%s)', implode(',', $param)))
-                       ->execute()
-                       ->toArray() ?: [];
+            (new self())->setUserId($userId)->setFollowedByUserId($id)->create();
         }
         
-        return [];
+        return $this;
     }
-    */
 }

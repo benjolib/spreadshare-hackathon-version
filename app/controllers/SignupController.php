@@ -3,7 +3,10 @@
 namespace DS\Controller;
 
 use DS\Application;
+use DS\Model\Topics;
 use DS\Model\User;
+use DS\Model\UserFollower;
+use DS\Model\UserTopics;
 use Phalcon\Exception;
 use Phalcon\Logger;
 
@@ -21,6 +24,18 @@ use Phalcon\Logger;
 class SignupController
     extends BaseController
 {
+    
+    /**
+     * Redirect user to Homepage if he/she is not logged in
+     */
+    public function redirectIfNotLoggedIn()
+    {
+        if (!$this->serviceManager->getAuth()->getUserId())
+        {
+            $this->response->redirect('/');
+        }
+    }
+    
     /**
      * Signup form
      */
@@ -67,7 +82,77 @@ class SignupController
     {
         try
         {
+            $this->redirectIfNotLoggedIn();
+            
+            $topics = (new Topics())->find();
+            
+            $this->view->setVar('topics', $topics);
             $this->view->setMainView('auth/onboarding/topics');
+        }
+        catch (Exception $e)
+        {
+            Application::instance()->log($e->getMessage(), Logger::CRITICAL);
+        }
+    }
+    
+    /**
+     * Follow
+     */
+    public function followAction($params = [])
+    {
+        try
+        {
+            $this->redirectIfNotLoggedIn();
+            
+            if ($this->request->isPost())
+            {
+                $topics = $this->request->getPost('topic');
+                if (is_array($topics) && count($topics))
+                {
+                    // Handle Topics
+                    (new UserTopics())->setTopicsByUserId(
+                        $this->serviceManager->getAuth()->getUserId(),
+                        $topics
+                    );
+                }
+            }
+            
+            $users = (new User())->find([
+               'order' => 'RAND()',
+               'limit' => 20,
+            ]);
+            $this->view->setVar('users', $users);
+            
+            $this->view->setMainView('auth/onboarding/follow');
+        }
+        catch (Exception $e)
+        {
+            Application::instance()->log($e->getMessage(), Logger::CRITICAL);
+        }
+    }
+    
+    /**
+     * Location
+     */
+    public function locationAction($params = [])
+    {
+        try
+        {
+            if ($this->request->isPost())
+            {
+                $users = $this->request->getPost('user');
+                if (is_array($users) && count($users))
+                {
+                    // Handle Topics
+                    (new UserFollower())->overrideFollowerByUserId(
+                        $this->serviceManager->getAuth()->getUserId(),
+                        $users
+                    );
+                }
+            }
+            $this->redirectIfNotLoggedIn();
+            
+            $this->view->setMainView('auth/onboarding/location');
         }
         catch (Exception $e)
         {
@@ -82,37 +167,9 @@ class SignupController
     {
         try
         {
+            $this->redirectIfNotLoggedIn();
+            
             $this->view->setMainView('auth/onboarding/tables');
-        }
-        catch (Exception $e)
-        {
-            Application::instance()->log($e->getMessage(), Logger::CRITICAL);
-        }
-    }
-    
-    /**
-     * Tables
-     */
-    public function followAction($params = [])
-    {
-        try
-        {
-            $this->view->setMainView('auth/onboarding/follow');
-        }
-        catch (Exception $e)
-        {
-            Application::instance()->log($e->getMessage(), Logger::CRITICAL);
-        }
-    }
-    
-    /**
-     * Tables
-     */
-    public function locationAction($params = [])
-    {
-        try
-        {
-            $this->view->setMainView('auth/onboarding/location');
         }
         catch (Exception $e)
         {

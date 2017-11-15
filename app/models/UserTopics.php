@@ -33,7 +33,7 @@ class UserTopics
     {
         // Remove all topics for user
         $this->getWriteConnection()
-             ->delete($this->getSource(), 'userId = ?', [$userId]);
+             ->delete($this->getSource(), "userId = '{$userId}'");
         
         // .. and recrete them:
         foreach ($topicIds as $id)

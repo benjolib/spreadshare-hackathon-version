@@ -419,6 +419,10 @@
 .selected {
   background: #2ead6b !important;
 }
+.selected span,
+.selected p {
+  color: white;
+}
 
 // signup/locations
 .locations {

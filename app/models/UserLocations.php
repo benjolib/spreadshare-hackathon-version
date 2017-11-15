@@ -33,7 +33,7 @@ class UserLocations
     {
         // Remove all locations
         $this->getWriteConnection()
-             ->delete($this->getSource(), 'userId = ?', [$userId]);
+             ->delete($this->getSource(), "userId = '{$userId}'");
         
         // .. and recrete them:
         foreach ($locationIds as $id)
