@@ -186,6 +186,7 @@ DROP TABLE IF EXISTS `tableLog`;
 CREATE TABLE `tableLog` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `tableId` int(11) unsigned DEFAULT NULL COMMENT 'tables.id',
+  `userId` int(11) unsigned DEFAULT NULL,
   `logType` tinyint(1) unsigned DEFAULT NULL COMMENT 'log type',
   `text` mediumtext COMMENT 'log text',
   `placeholders` text COMMENT 'json placeholders',
@@ -194,7 +195,9 @@ CREATE TABLE `tableLog` (
   KEY `tableId` (`tableId`),
   KEY `logType` (`logType`),
   KEY `createdAt` (`createdAt`),
-  CONSTRAINT `tableLogTableId` FOREIGN KEY (`tableId`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `userId` (`userId`),
+  CONSTRAINT `tableLogTableId` FOREIGN KEY (`tableId`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `tableLogUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
