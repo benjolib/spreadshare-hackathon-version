@@ -34,7 +34,7 @@ class LocationSelect extends React.Component {
 
     // Initial state
     this.state = {
-      value: props.value ? JSON.parse(props.value) : [],
+      value: typeof props.value === 'string' ? JSON.parse(props.value) : [],
     };
   }
 
