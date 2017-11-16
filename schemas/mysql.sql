@@ -227,7 +227,7 @@ CREATE TABLE `tableRows` (
   `content` longtext COMMENT 'cached json content for row',
   `votesCount` int(11) DEFAULT NULL COMMENT 'total votes cache',
   `commentsCount` int(11) DEFAULT NULL COMMENT 'total comments cache',
-  `lastEdited` int(10) unsigned DEFAULT NULL COMMENT 'timestamp',
+  `updatedAt` int(10) unsigned DEFAULT NULL COMMENT 'timestamp',
   `createdAt` int(10) unsigned DEFAULT NULL COMMENT 'timestamp',
   PRIMARY KEY (`id`),
   KEY `userId` (`userId`),
