@@ -43,4 +43,25 @@ class UserLocations
         
         return $this;
     }
+    
+    /**
+     * @param int $userId
+     *
+     * @return array
+     */
+    public static function getUserLocations(int $userId): array
+    {
+        $query = self::query()
+                     ->columns(
+                         [
+                             Locations::class . ".id",
+                             Locations::class . ".locationName",
+                         ]
+                     )
+                     ->leftJoin(Locations::class, self::class . '.locationId = ' . Locations::class . '.id')
+                     ->where(UserLocations::class . '.userId = ?0', [$userId])
+                     ->orderBy(Locations::class . ".locationName ASC");
+        
+        return $query->execute()->toArray() ?: [];
+    }
 }

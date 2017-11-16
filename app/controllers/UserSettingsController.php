@@ -6,6 +6,7 @@ use DS\Api\UserSettings;
 use DS\Application;
 use DS\Model\Decks;
 use DS\Model\User;
+use DS\Model\UserLocations;
 use DS\Model\Votes;
 use Phalcon\Exception;
 use Phalcon\Logger;
@@ -104,9 +105,10 @@ class UserSettingsController
      */
     public function personalAction()
     {
+        $userId = $this->serviceManager->getAuth()->getUserId();
+        
         if ($this->request->isPost())
         {
-            $userId = $this->serviceManager->getAuth()->getUserId();
             if ($userId > 0)
             {
                 // Prepare image
@@ -132,7 +134,7 @@ class UserSettingsController
                     $this->request->getPost('name'),
                     $this->request->getPost('handle'),
                     $this->request->getPost('tagline'),
-                    [],
+                    $this->request->getPost('locations', null, []),
                     $this->request->getPost('website'),
                     true
                 );
@@ -141,6 +143,9 @@ class UserSettingsController
                 $this->view->setVar('profile', $user);
             }
         }
+        
+        $locations = UserLocations::getUserLocations($userId);
+        $this->view->setVar('locations', htmlentities(json_encode($locations)));
         
         $this->view->setMainView('user/settings/personal');
     }

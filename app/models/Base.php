@@ -101,6 +101,30 @@ abstract class Base
     }
     
     /**
+     * Allows to query this model by the given sql field name and it's value
+     *
+     * @param string $field
+     * @param string $value
+     *
+     * @return static[]
+     */
+    public static function findAllByFieldValue($field, $value)
+    {
+        if (property_exists(static::class, $field))
+        {
+            return parent::find(
+                [
+                    "conditions" => sprintf("%s = ?0", $field),
+                    "limit" => 1,
+                    "bind" => [$value],
+                ]
+            );
+        }
+        
+        throw new \InvalidArgumentException('Invalid field name provided. This field is not available in this model.');
+    }
+    
+    /**
      * @param int    $limit
      * @param string $order
      *

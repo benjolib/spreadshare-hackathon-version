@@ -63,24 +63,8 @@
               <div class="layout__content__main__personal__locations__text">
                 <p>Locations</p>
               </div>
-              <div class="layout__content__main__personal__locations__tags">
-                <div class="layout__content__main__personal__locations__tags__item">
-                  <div class="layout__content__main__personal__locations__tags__item__text">
-                    Indiana
-                  </div>
-                  <div class="layout__content__main__personal__locations__tags__item__close">
-                    <img src="/assets/icons/close.svg" />
-                  </div>
-                </div>
-                <div class="layout__content__main__personal__locations__tags__item">
-                  <div class="layout__content__main__personal__locations__tags__item__text">
-                    United States
-                  </div>
-                  <div class="layout__content__main__personal__locations__tags__item__close">
-                    <img src="/assets/icons/close.svg" />
-                  </div>
-                </div>
-              </div>
+
+              <div id="LocationSelect" data-name="locations[]" data-value="{{ locations }}" data-placeholder="Add a location" class="react-component"></div>
             </div>
           </div>
           <div class="layout__content__main__personal__website">

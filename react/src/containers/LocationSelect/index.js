@@ -34,7 +34,7 @@ class LocationSelect extends React.Component {
 
     // Initial state
     this.state = {
-      value: props.value,
+      value: props.value ? JSON.parse(props.value) : [],
     };
   }
 
@@ -43,8 +43,7 @@ class LocationSelect extends React.Component {
   }
 
   onChange = (value) => {
-    console.log('Selected: ', value);
-
+    // console.log('Selected: ', value);
     this.setState({
       value,
     });
@@ -70,12 +69,12 @@ class LocationSelect extends React.Component {
     };
 
     // Add options for preselection
-    if (this.props.value) {
-      if (options.options.length === 0 && this.props.value.forEach) {
-        this.props.value.forEach((item) => {
+    if (this.state.value) {
+      if (options.options.length === 0 && this.state.value.forEach) {
+        this.state.value.forEach((item) => {
           options.options.push({
-            name: item.name,
-            id: item.name,
+            locationName: item.locationName,
+            id: item.id,
           });
         });
       }
