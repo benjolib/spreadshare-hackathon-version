@@ -106,8 +106,6 @@
   </footer>
 </section>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript" src="/js/react/main.f8c5d60c.js" defer></script>
-
 <script type="text/javascript" src="/js/api.js"></script>
 <script type="text/javascript">
   $(document).ready(function () {
@@ -132,8 +130,7 @@
     });
   });
 </script>
-{% block scripts %}{% endblock %}
 <script type="text/javascript" src="/js/react/main.db350b35.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.slim.min.js"></script>
+{% block scripts %}{% endblock %}
 </body>
 </html>
