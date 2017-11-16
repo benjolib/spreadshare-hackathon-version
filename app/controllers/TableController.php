@@ -59,6 +59,12 @@ class TableController
                 
                 $this->view->setMainView('table/add/empty');
                 break;
+            case 'csv-import':
+                $this->view->setMainView('table/add/csv-import');
+                break;
+            case 'copy-paste':
+                $this->view->setMainView('table/add/copy-paste');
+                break;
             default:
                 $this->view->setMainView('table/add');
                 break;
