@@ -25,14 +25,30 @@ class Table
     extends BaseApi
 {
     
-    public static function createTable(
+    /**
+     * Creates a new table.
+     *
+     * @param int    $ownerUserId
+     * @param string $title
+     * @param string $tagline
+     * @param string $image
+     * @param int    $typeId
+     * @param int    $topic1Id
+     * @param int    $topic2Id
+     * @param array  $tags
+     * @param int    $flags
+     *
+     * @return Tables|static
+     * @throws Exception
+     */
+    public function createTable(
         int $ownerUserId,
         string $title,
         string $tagline,
         string $image,
-        int $typeId = 1,
-        int $topic1Id = 1,
-        int $topic2Id = 2,
+        int $typeId = null,
+        int $topic1Id = null,
+        int $topic2Id = null,
         array $tags = [],
         int $flags = TableFlags::Normal
     ) {
@@ -48,6 +64,7 @@ class Table
               ->setTitle($title)
               ->setTagline($tagline)
               ->setTypeId($typeId)
+              ->setImage($image)
               ->setTopic1Id($topic1Id)
               ->setTopic2Id($topic2Id)
               ->setFlags($flags)
@@ -57,10 +74,7 @@ class Table
         {
             throw new Exception('There was an error creating the table. Please try again later or contact our support.');
         }
-        else {
         
-        
-        
-        }
+        return $table;
     }
 }

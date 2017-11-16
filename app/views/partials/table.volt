@@ -10,6 +10,7 @@
     </div>
   </div>
   <div class="tables__content__main__cards__item__stats">
+    <div>{{ table['typeTitle'] }}</div>
     <div>{{ table['tags'] }}</div>
     <div>{{ table['tokensCount'] +0 }} Tokens</div>
     <div>

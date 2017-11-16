@@ -91,4 +91,12 @@ return [
         ],
         'methods' => ['GET'],
     ],
+    [
+        'url' => '/table/{id:[0-9]+}',
+        'paths' => [
+            'controller' => 'TableDetail',
+            'action' => 'index',
+        ],
+        'methods' => ['GET'],
+    ],
 ];

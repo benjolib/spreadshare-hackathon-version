@@ -2,6 +2,8 @@
 
 namespace DS\Controller;
 
+use DS\Api\Table;
+
 /**
  * Spreadshare
  *
@@ -27,9 +29,40 @@ class TableController
     /**
      * Add table
      */
-    public function addAction($params = [])
+    public function addAction($action = '')
     {
-        $this->view->setMainView('table/add');
+        $userId = $this->serviceManager->getAuth()->getUserId();
+        switch ($action)
+        {
+            case 'empty':
+                if ($this->request->isPost())
+                {
+                    $tableApi          = new Table();
+                    $createdTableModel = $tableApi->createTable(
+                        $userId,
+                        $this->request->getPost('title'),
+                        $this->request->getPost('tagline'),
+                        $this->request->getPost('image', '', '/assets/images/dustin.jpg'),
+                        1,
+                        1,
+                        2,
+                        []
+                    );
+                    
+                    if ($createdTableModel->getId())
+                    {
+                        // Table successfully created
+                        // $this->response->redirect(sprintf('/table/%d', $createdTableModel->getId()));
+                        $this->response->redirect('');
+                    }
+                }
+                
+                $this->view->setMainView('table/add/empty');
+                break;
+            default:
+                $this->view->setMainView('table/add');
+                break;
+        }
     }
     
 }

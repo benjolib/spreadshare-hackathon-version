@@ -43,11 +43,13 @@ class Tables
                              TableStats::class . ".collaboratorCount",
                              TableStats::class . ".contributionCount",
                              TableStats::class . ".tokensCount",
+                             Types::class . ".title as typeTitle",
                              "(SELECT " . TableVotes::class . ".createdAt FROM " . TableVotes::class . " WHERE " . TableVotes::class . ".tableId = " . Tables::class . ".id AND " . TableVotes::class . ".userId = " . $userId . ") as userHasVoted",
-                             "(SELECT CUSTOM_GROUP_CONCAT(" . Tags::class . ".title, " . Tags::class . ".title, 'DESC', '</div><div>') FROM " . TableTags::class . " INNER JOIN " . Tags::class . " ON " . Tags::class . ".id = " . TableTags::class . ".tagId WHERE " . TableTags::class . ".tableId = " . Tables::class . ".id) as tags",
+                             "(SELECT CUSTOM_GROUP_CONCAT(" . Tags::class . ".title, " . Tags::class . ".title, 'DESC', ', ') FROM " . TableTags::class . " INNER JOIN " . Tags::class . " ON " . Tags::class . ".id = " . TableTags::class . ".tagId WHERE " . TableTags::class . ".tableId = " . Tables::class . ".id) as tags",
                          ]
                      )
                      ->leftJoin(TableStats::class, TableStats::class . '.tableId = ' . Tables::class . '.id')
+                     ->leftJoin(Types::class, Tables::class . '.typeId = ' . Types::class . '.id')
                      ->limit((int) $limit, (int) Paging::endlessScrollPortions * $page);
         
         if ($orderBy)

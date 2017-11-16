@@ -1,5 +1,10 @@
 {% extends 'layouts/main.volt' %}
 
 {% block content %}
-<div id="Table" class="react-component">Table</div>
+<h1>{{ table['title'] }}</h1>
+<h3>{{ table['tagline'] }}</h3>
+
+<div>
+  <div id="Table" class="react-component">Table</div>
+</div>
 {% endblock %}
