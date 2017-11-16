@@ -554,25 +554,25 @@
 
               &::-webkit-input-placeholder {
                 text-transform: uppercase;
-                color: #B1BBC7;
+                color: #dddde3;
                 font-weight: lighter;
                 @include rem(font-size, 14);
               }
               &::-moz-placeholder {
                 text-transform: uppercase;
-                color: #B1BBC7;
+                color: #dddde3;
                 font-weight: lighter;
                 @include rem(font-size, 14);
               }
               &:-ms-input-placeholder {
                 text-transform: uppercase;
-                color: #B1BBC7;
+                color: #dddde3;
                 font-weight: lighter;
                 @include rem(font-size, 14);
               }
               &:-moz-placeholder {
                 text-transform: uppercase;
-                color: #B1BBC7;
+                color: #dddde3;
                 font-weight: lighter;
                 @include rem(font-size, 14);
               }

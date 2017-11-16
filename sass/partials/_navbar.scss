@@ -92,19 +92,19 @@
       @include rem(height, 40);
 
       &::-webkit-input-placeholder {
-        color: #B1BBC7;
+        color: #dddde3;
         font-weight: lighter;
       }
       &::-moz-placeholder {
-        color: #B1BBC7;
+        color: #dddde3;
         font-weight: lighter;
       }
       &:-ms-input-placeholder {
-        color: #B1BBC7;
+        color: #dddde3;
         font-weight: lighter;
       }
       &:-moz-placeholder {
-        color: #B1BBC7;
+        color: #dddde3;
         font-weight: lighter;
       }
     }

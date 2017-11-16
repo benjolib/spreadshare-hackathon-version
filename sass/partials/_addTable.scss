@@ -99,9 +99,10 @@
             }
           }
 
-          button {
+          a.button {
             background: $logo-color;
             color: white;
+            text-decoration: none;
             text-transform: uppercase;
             align-self: center;
             border: none;
