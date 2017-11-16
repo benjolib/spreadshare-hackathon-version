@@ -1,7 +1,7 @@
 <div class="tables__content__main__cards__item">
   <div class="tables__content__main__cards__item__info">
     <div class="tables__content__main__cards__item__info__title">
-      <h3><a href="/table/{{ table['id'] }}" target="_new" }>{{ table['title'] }}</a></h3>
+      <h3><a href="/table/{{ table['id'] }}" }>{{ table['title'] }}</a></h3>
       <p>{{ table['tagline'] }}</p>
     </div>
     <div class="tables__content__main__cards__item__info__upvote upvote {% if table['userHasVoted'] %}selected{% endif %}" data-action="upvote" data-id="{{ table['id'] }}" onclick="var event = arguments[0] || window.event; event.stopPropagation();">
@@ -11,7 +11,7 @@
   </div>
   <div class="tables__content__main__cards__item__stats">
     <div>{{ table['typeTitle'] }}</div>
-    <div>{{ table['tags'] }}</div>
+    {# {% if table['tags'] %}<span>{{ table['tags'] }}</span>{% endif %} #}
     <div>{{ table['tokensCount'] +0 }} Tokens</div>
     <div>
       <img src="/assets/icons/eye.svg" /><span><i>{{ table['viewsCount'] +0 }}</i> Views</span>

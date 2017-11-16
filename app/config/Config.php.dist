@@ -90,6 +90,7 @@ return [
         'DS\Constants' => ROOT_PATH . '/app/constants/',
         'DS\Tests' => ROOT_PATH . '/app/tests/',
         'DS\Api' => ROOT_PATH . '/app/api/',
+        'DS\Events' => ROOT_PATH . '/app/events/',
     ],
     'mode' => 'development',
     

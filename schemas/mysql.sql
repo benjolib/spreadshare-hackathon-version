@@ -364,15 +364,15 @@ CREATE TABLE `tableTokens` (
 DROP TABLE IF EXISTS `tableViews`;
 
 CREATE TABLE `tableViews` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `tableId` int(11) unsigned NOT NULL COMMENT 'tables.id',
   `userId` int(11) unsigned NOT NULL COMMENT 'user.id',
   `createdAt` int(10) unsigned DEFAULT NULL COMMENT 'timestamp',
-  PRIMARY KEY (`tableId`,`userId`),
+  PRIMARY KEY (`id`),
   KEY `createdAt` (`createdAt`),
   KEY `tableViewsUserId` (`userId`),
-  CONSTRAINT `tableViewsTableId` FOREIGN KEY (`tableId`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tableViewsUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 
 

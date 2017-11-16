@@ -2,6 +2,7 @@
 
 namespace DS\Controller;
 
+use DS\Events\Table\TableViewed;
 use DS\Model\Tables;
 
 /**
@@ -27,7 +28,7 @@ class TableDetailController
         {
             // Assign table data to UI
             $tableModel = new Tables();
-            $tables      = $tableModel->findTables(
+            $tables     = $tableModel->findTables(
                 $this->serviceManager->getAuth()->getUserId(),
                 [
                     $tableId,
@@ -36,6 +37,8 @@ class TableDetailController
             
             if (isset($tables[0]))
             {
+                TableViewed::after($this->serviceManager->getAuth()->getUserId(), (int) $tables[0]['id']);
+                
                 $this->view->setVar('table', $tables[0]);
                 $this->view->setMainView('table/table');
                 
