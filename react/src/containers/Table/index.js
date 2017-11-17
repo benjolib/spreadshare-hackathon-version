@@ -5,7 +5,7 @@ import HotTable from 'react-handsontable';
 
 class Table extends React.Component {
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     // TODO: split into some child components
     return (
       <div className="Table">

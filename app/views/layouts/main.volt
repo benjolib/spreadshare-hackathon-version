@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600,800" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,800" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
   <link rel="stylesheet" href="/css/styles.css">
   <link href="/css/main.508c7389.css" rel="stylesheet">
@@ -130,7 +130,7 @@
     });
   });
 </script>
-<script type="text/javascript" src="/js/react/main.e17aa435.js"></script>
+<script type="text/javascript" src="/js/react/main.4fe1a9e8.js"></script>
 {% block scripts %}{% endblock %}
 </body>
 </html>

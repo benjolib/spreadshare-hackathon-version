@@ -6,6 +6,8 @@ import store, { history } from './store';
 import Table from './containers/Table';
 import LocationSelect from './containers/LocationSelect';
 import TopicsSelect from './containers/TopicsSelect';
+import ContentTypeSelect from './containers/ContentTypeSelect';
+import TagsSelect from './containers/TagsSelect';
 
 import 'sanitize.css/sanitize.css';
 import './index.css';
@@ -15,6 +17,8 @@ if (process.env.NODE_ENV === 'production') {
     Table,
     LocationSelect,
     TopicsSelect,
+    ContentTypeSelect,
+    TagsSelect
   };
 
   function renderAppInDom(el) {
@@ -40,8 +44,7 @@ if (process.env.NODE_ENV === 'production') {
     .forEach(renderAppInDom);
 }
 else {
-
-  render(
+  render (
     <Provider store={store}>
       <ConnectedRouter history={history}>
         <div>
@@ -52,6 +55,14 @@ else {
           <div>
             <h1>TopicsSelect</h1>
             <TopicsSelect />
+          </div>
+          <div>
+            <h1>ContentTypeSelect</h1>
+            <ContentTypeSelect />
+          </div>
+          <div>
+            <h1>TagsSelect</h1>
+            <TagsSelect />
           </div>
           <div>
             <h1>Table</h1>

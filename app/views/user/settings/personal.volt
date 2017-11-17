@@ -63,7 +63,6 @@
               <div class="layout__content__main__personal__locations__text">
                 <p>Locations</p>
               </div>
-
               <div id="LocationSelect" data-name="locations[]" data-value="{{ locations }}" data-placeholder="Add a location" class="react-component"></div>
             </div>
           </div>

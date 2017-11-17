@@ -1,0 +1,234 @@
+.addTableEmpty {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  color: $text-color;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    @include rem2(margin, 50, 0);
+    @include rem(margin-bottom, 100);
+
+    @include tablet {
+      @include rem(margin-bottom, 200);
+    }
+
+    @include desktop {
+      flex-direction: row;
+      @include rem(margin-bottom, 300);
+    }
+
+    &__wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+
+      @include desktop {
+        width: 80%;
+      }
+    }
+
+    &__title {
+      width: 100%;
+      text-align: center;
+      align-self: center;
+      margin: 0;
+      font-weight: 600;
+      @include rem(font-size, 30);
+
+      @include tablet {
+        @include rem(font-size, 35);
+      }
+
+      @include desktop {
+        width: 80%;
+        text-align: left;
+        @include rem(font-size, 40);
+      }
+    }
+    &__subtitle {
+      width: 80%;
+      margin: 0;
+      font-weight: 300;
+      @include rem(margin-top, 16);
+      @include rem(margin-bottom, 16 * 2);
+      @include rem(font-size, 16);
+    }
+
+    &__main {
+      display: flex;
+      background: white;
+      border-radius: 8px;
+      width: 80%;
+      flex-direction: column;
+
+      &__options {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        @include rem2(padding, 25, 30);
+
+        &__item {
+          display: flex;
+          width: 100%;
+          justify-content: space-between;
+          @include rem(margin-bottom, 35);
+
+          &__column {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+
+            p {
+              color: $text-color-alternate;
+              font-weight: 300;
+              text-transform: uppercase;
+              margin: 0;
+              @include rem(font-size, 14);
+              @include rem(margin-bottom, 5);
+            }
+
+            input {
+              font-family: $primary-font;
+              font-weight: 400;
+              color: #6A7C94;
+              background: #F8F8FB;
+              border: none;
+              outline: none;
+              border-radius: 3px;
+              width: 100%;
+              @include rem(padding-left, 10);
+              @include rem(height, 40);
+
+              @include desktop {
+                width: 90%;
+              }
+
+              &::-webkit-input-placeholder {
+                color: #dddde3;
+                font-weight: lighter;
+              }
+              &::-moz-placeholder {
+                color: #dddde3;
+                font-weight: lighter;
+              }
+              &:-ms-input-placeholder {
+                color: #dddde3;
+                font-weight: lighter;
+              }
+              &:-moz-placeholder {
+                color: #dddde3;
+                font-weight: lighter;
+              }
+            }
+
+            span {
+              color: #DEE0E7;
+              font-weight: 300;
+              @include rem(margin-top, 5);
+              @include rem(font-size, 14);
+
+              i {
+                font-style: normal;
+                color: #9CAAC0;
+              }
+            }
+          }
+        }
+      }
+
+      &__buttons {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        background: #F8F8FB;
+        border-bottom-left-radius: 6px;
+        border-bottom-right-radius: 6px;
+        @include rem(margin-top, 5);
+        @include rem(margin-bottom, -25);
+        @include rem(padding, 16);
+
+        a {
+          font-weight: 500;
+          text-decoration: none;
+          color: #B1BBC7;
+          background: transparent;
+          @include rem(margin-right, 24);
+
+          &:hover {
+            text-decoration: none;
+            color: $text-link-color-hover;
+          }
+        }
+
+        button {
+          color: white;
+          font-weight: 600;
+          background: $logo-color;
+          border: none;
+          border-radius: 4px;
+          @include rem2(padding, 8, 16);
+
+          &:hover {
+            cursor: pointer;
+            background: lighten($logo-color, 4%);
+          }
+        }
+      }
+    }
+
+    &__aside {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      @include rem(margin-top, 110 / 2);
+      @include rem(margin-right, 50);
+
+      @include desktop {
+        width: 20%;
+        @include rem(margin-top, 110);
+      }
+
+      &__box {
+        display: flex;
+        flex-direction: column;
+        background: white;
+        border-radius: 8px;
+        @include rem2(padding, 15, 20);
+
+        a {
+          text-decoration: none;
+          color: $text-color;
+
+          &:hover {
+            color: $text-color;
+            text-decoration: none;
+          }
+
+          div {
+            text-transform: uppercase;
+            font-weight: 300;
+            border-radius: 4px;
+            @include rem2(padding, 10, 15);
+
+            &:hover {
+              cursor: pointer;
+            }
+
+            &:first-child {
+              @include rem(margin-bottom, 26);
+            }
+          }
+        }
+      }
+
+      p {
+        text-align: center;
+        @include rem2(margin, 20, 0);
+      }
+    }
+  }
+}

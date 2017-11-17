@@ -2,52 +2,75 @@
 
 {% block content %}
 <form id="addEmptyTableForm" method="post">
-  <div class="layout">
-    <div class="layout__content">
-      <div class="layout__content__wrapper">
-        <p class="layout__content__title">Add a table</p>
-        <p class="layout__content__subtitle">
-          As a table owner you receive 2,5% of all tokens a table generates.
-        </p>
-        <div class="layout__content__main layout__content__main__account">
-          <div class="layout__content__main__account__email">
-            <div class="layout__content__main__account__column">
-              <div class="layout__content__main__account__email__text">
+  <div class="addTableEmpty">
+    <div class="addTableEmpty__content">
+      <div class="addTableEmpty__content__wrapper">
+        <p class="addTableEmpty__content__title">Add a Table</p>
+        <p class="addTableEmpty__content__subtitle">As an table owner you receive 2,5% of all tokens a table generates</p>
+        <div class="addTableEmpty__content__main">
+          <div class="addTableEmpty__content__main__options">
+            {# title #}
+            <div class="addTableEmpty__content__main__options__item">
+              <div class="addTableEmpty__content__main__options__item__column">
                 <p>Title</p>
+                <input type="text" placeholder="Bay Area Seed-stage Business Angels " autofocus />
+                <span>Max <i>100</i> characters</span>
               </div>
-              <input type="text" placeholder="Bay Area Seed-stage Business Angels" name="title" value="" maxlength="100" />
-              Max 100 characters
             </div>
-          </div>
-        </div>
-        <div class="layout__content__main layout__content__main__account">
-          <div class="layout__content__main__account__email">
-            <div class="layout__content__main__account__column">
-              <div class="layout__content__main__account__email__text">
+            {# tagline #}
+            <div class="addTableEmpty__content__main__options__item">
+              <div class="addTableEmpty__content__main__options__item__column">
                 <p>Tagline</p>
+                <input type="text" placeholder="Business Angels from SV who invest in tech startups valuated below 5MN" />
+                <span>Max <i>140</i> characters</span>
               </div>
-              <input type="text" placeholder="Business Angels from SV who invest in tech startups valuated below 5M" name="tagline" value="" maxlength="140" />
-              Max 140 characters
+            </div>
+            {# topics #}
+            <div class="addTableEmpty__content__main__options__item">
+              <div class="addTableEmpty__content__main__options__item__column">
+                <p>Topics</p>
+                <div id="TopicsSelect" data-name="topics[]" data-value="{{ topics }}" data-placeholder="Add topics" class="react-component"></div>
+                <span>Max <i>2</i> topics</span>
+              </div>
+            </div>
+            {# content type #}
+            <div class="addTableEmpty__content__main__options__item">
+              <div class="addTableEmpty__content__main__options__item__column">
+                <p>Content type</p>
+                <div id="ContentTypeSelect" class="react-component"></div>
+              </div>
+            </div>
+            {# tags #}
+            <div class="addTableEmpty__content__main__options__item">
+              <div class="addTableEmpty__content__main__options__item__column">
+                <p>Tags</p>
+                <div id="TagsSelect" class="react-component"></div>
+              </div>
+            </div>
+            {# locations #}
+            <div class="addTableEmpty__content__main__options__item">
+              <div class="addTableEmpty__content__main__options__item__column">
+                <p>Locations</p>
+                <div id="LocationSelect" class="react-component"></div>
+              </div>
             </div>
           </div>
-          <div class="layout__content__main__buttons">
-            <a href="/">Cancel</a>
-            <button type="submit">Create Table</button>
+          {# buttons #}
+          <div class="addTableEmpty__content__main__buttons">
+            <a href="/login">Cancel</a>
+            <button type="submit">Save Changes</button>
           </div>
         </div>
       </div>
-      <aside class="layout__content__aside">
-        <div class="layout__content__aside__box">
-          <a href="javascript;">
-            <div>Choose Table</div>
+      <aside class="addTableEmpty__content__aside">
+        <div class="addTableEmpty__content__aside__box">
+          <a href="/table/add">
+            <div>Choose table</div>
           </a>
-          <a href="javascript;">
-            <div class="settings-box-selected">
-              Description
-            </div>
+          <a href="#">
+            <div class="sign-box-selected">Description</div>
           </a>
-          </a>
-          <a href="/settings/notifications">
+          <a href="#">
             <div>Confirm</div>
           </a>
         </div>

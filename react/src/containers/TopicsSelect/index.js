@@ -7,7 +7,6 @@ import 'react-select/dist/react-select.css';
 import { fetchTopics } from './actions';
 
 class TopicsSelect extends React.Component {
-
   constructor(props) {
     super(props);
 
@@ -20,19 +19,21 @@ class TopicsSelect extends React.Component {
     this.props.fetchTopics();
   }
 
-  selectChanged = (val) => {
+  selectChanged = (value) => {
+    // console.log('Selected: ', value);
     this.setState({
-      value: val.value,
+      value
     });
   };
 
   render() {
     return <div>
       <Select
-        name="location"
+        name="topic"
+        multi={true}
         options={this.props.topics}
         value={this.state.value}
-        placeholder={this.props.loading ? 'Loading..' : 'Select Location'}
+        placeholder={this.props.loading ? 'Loading..' : 'Choose topics'}
         onChange={this.selectChanged}
       />
     </div>;
