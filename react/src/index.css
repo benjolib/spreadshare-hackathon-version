@@ -8,8 +8,76 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 1rem;
   line-height: 1.5;
+  background: #f2f2f8;
 }
 
 button:disabled {
   opacity: 0.5;
 }
+
+.Table {
+}
+
+.Table__header {
+  display: flex;
+  background: #FFFFFF;
+  padding: 20px 16px;
+}
+
+.Table__header__button {
+  border: 0;
+  padding: 0;
+  border-radius: 3px;
+  width: 40px;
+  height: 40px;
+  background: #f2f2f8;
+  margin: 0 4px;
+}
+
+.Table__header__search {
+  margin: 0 4px;
+  margin-left: auto;
+  height: 40px;
+  background: #f2f2f8;
+  width: 225px;
+  display: flex;
+  border-radius: 3px;
+}
+
+.Table__header__search > button {
+  border: 0;
+  padding: 0;
+  border-radius: 3px;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  background: #f2f2f8;
+}
+
+.Table__header__search > input {
+  border: 0;
+  padding: 0;
+  padding-top: 4px;
+  flex-grow: 1;
+  border-radius: 3px;
+  height: 40px;
+  font-size: 16px;
+  width: 100%;
+}
+
+.Table__main {
+  display: inline-block;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+}
+
+.Table__main__votes {
+
+}
+
+.Table__main__HotTable {
+
+}
+
+/* TODO: Transfer this stuff into sass or load index.css on production */
