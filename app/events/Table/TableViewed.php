@@ -2,6 +2,7 @@
 
 namespace DS\Events\Table;
 
+use DS\Events\AbstractEvent;
 use DS\Model\TableStats;
 use DS\Model\TableViews;
 
@@ -19,7 +20,7 @@ use DS\Model\TableViews;
  * @version   $Version$
  * @package   DS\Events\Table
  */
-class TableViewed
+class TableViewed extends AbstractEvent
 {
     
     /**

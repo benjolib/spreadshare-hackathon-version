@@ -16,7 +16,7 @@ use DS\Model\Events\TablesEvents;
  * @version   $Version$
  * @package   DS\Model
  *
- * @method static findFirstById(int $id)
+ * @method static self findFirstById(int $id)
  */
 class Tables
     extends TablesEvents

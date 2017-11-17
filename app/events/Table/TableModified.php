@@ -2,6 +2,7 @@
 
 namespace DS\Events\Table;
 
+use DS\Events\AbstractEvent;
 use DS\Model\Tables;
 
 /**
@@ -18,7 +19,7 @@ use DS\Model\Tables;
  * @version   $Version$
  * @package   DS\Events\Table
  */
-class TableModified
+class TableModified extends AbstractEvent
 {
     
     /**

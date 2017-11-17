@@ -2,6 +2,7 @@
 
 namespace DS\Events\Table;
 
+use DS\Events\AbstractEvent;
 use DS\Model\Tables;
 
 /**
@@ -20,7 +21,7 @@ use DS\Model\Tables;
  *
  * @todo Use Phalcons event engine
  */
-class TableCreated
+class TableCreated extends AbstractEvent
 {
     
     /**

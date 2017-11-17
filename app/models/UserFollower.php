@@ -2,6 +2,7 @@
 
 namespace DS\Model;
 
+use DS\Events\Table\UserFollowed;
 use DS\Model\Events\UserFollowerEvents;
 
 /**
@@ -38,6 +39,9 @@ class UserFollower
         foreach ($followerUserIds as $id)
         {
             (new self())->setUserId($userId)->setFollowedByUserId($id)->create();
+            
+            // trigger UserFollowed event
+            UserFollowed::after($userId, $id);
         }
         
         return $this;

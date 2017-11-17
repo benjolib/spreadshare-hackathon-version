@@ -151,7 +151,7 @@ class SignupController
                 $users = $this->request->getPost('user');
                 if (is_array($users) && count($users))
                 {
-                    // Handle Topics
+                    // Handle Followers
                     (new UserFollower())->overrideFollowerByUserId(
                         $this->serviceManager->getAuth()->getUserId(),
                         $users
