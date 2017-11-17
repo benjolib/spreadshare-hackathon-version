@@ -2,12 +2,13 @@
 
 namespace DS\Model\Events;
 
+use DS\Events\User\UserTableSubscribed;
 use DS\Model\Abstracts\AbstractTableVotes;
 
 /**
  * Events for model TableVotes
  *
- * @see https://docs.phalconphp.com/ar/3.2/db-models-events
+ * @see       https://docs.phalconphp.com/ar/3.2/db-models-events
  *
  * @author    Dennis Stücken
  * @license   proprietary
@@ -39,5 +40,14 @@ abstract class TableVotesEvents
         parent::beforeSave();
         
         return true;
+    }
+    
+    /**
+     * After table vote created
+     */
+    public function afterCreate()
+    {
+        // trigger Table subscription event
+        UserTableSubscribed::after($this->getUserId(), $this->getTableId());
     }
 }

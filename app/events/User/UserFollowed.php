@@ -1,6 +1,6 @@
 <?php
 
-namespace DS\Events\Table;
+namespace DS\Events\User;
 
 use DS\Events\AbstractEvent;
 use DS\Model\DataSource\UserNotificationType;

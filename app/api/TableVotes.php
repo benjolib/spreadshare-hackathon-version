@@ -2,7 +2,6 @@
 
 namespace DS\Api;
 
-use DS\Events\Table\UserTableSubscribed;
 use DS\Model\TableStats;
 use DS\Model\TableVotes as TableVotesModel;
 
@@ -57,9 +56,6 @@ class TableVotes
                    ->create();
         
         $tableStats->setVotesCount($tableStats->getVotesCount() + 1)->save();
-        
-        // trigger Table subscription event
-        UserTableSubscribed::after($userId, $tableId);
         
         return true;
     }
