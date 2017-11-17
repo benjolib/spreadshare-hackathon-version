@@ -5,6 +5,6 @@
 <h3>{{ table['tagline'] }}</h3>
 
 <div>
-  <div id="Table" class="react-component">Table</div>
+  <div id="Table" data-tableId="{{ table['id'] }}" class="react-component">Table</div>
 </div>
 {% endblock %}
