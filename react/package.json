@@ -3,6 +3,7 @@
   "version": "2.0.0",
   "private": true,
   "devDependencies": {
+    "expect": "^21.2.1",
     "react-scripts": "^1.0.17",
     "recursive-copy": "^2.0.7"
   },
