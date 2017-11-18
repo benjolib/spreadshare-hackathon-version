@@ -1,45 +1,62 @@
-import React from 'react'
-import Select from 'react-select'
+import React from 'react';
+import Select from 'react-select';
 import { connect } from 'react-redux';
 import { selectTag } from './actions';
-import 'react-select/dist/react-select.css'
+import 'react-select/dist/react-select.css';
 
 class TagsSelect extends React.Component {
+  static defaultProps = {
+    values: [],
+    name: 'tags[]',
+    placeholder: <span>Select tags</span>,
+  };
+
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
-      values: null,
+      values: typeof props.values === 'string' ? JSON.parse(props.values) : [],
       tags: [
-        { value: 3, label: 'Fundraising' },
-        { value: 7, label: 'Funding' },
-        { value: 14, label: 'VC' }
-      ]
-    }
+        {
+          value: 3,
+          label: 'Fundraising',
+        },
+        {
+          value: 7,
+          label: 'Funding',
+        },
+        {
+          value: 14,
+          label: 'VC',
+        },
+      ],
+    };
   }
 
   onChange = value => {
-    const { dispatch } = this.props
+    const { dispatch } = this.props;
 
     this.setState({
-      values: value
-    })
+      values: value,
+    });
 
-    dispatch(selectTag(value))
-  }
+    dispatch(selectTag(value));
+  };
 
   render() {
+    const options = {
+      name: this.props.name,
+      placeholder: this.props.placeholder,
+      clearable: true,
+      multi: true,
+      options: this.state.tags,
+      value: this.state.values,
+      onChange: this.onChange,
+    };
+
     return (
-      <Select
-        name="tags"
-        clearable={true}
-        multi={true}
-        options={this.state.tags}
-        value={this.state.values}
-        placeholder="Add tags"
-        onChange={this.onChange}
-      />
-    )
+      <Select {...options} />
+    );
   }
 }
 

@@ -89,5 +89,12 @@ class VoltAdapter extends Volt
                 return "\\DS\\Component\\View\\Functions\\UserToProfileUrl::parse({$key})";
             }
         );
+        
+        $compiler->addFunction(
+            'reactArray',
+            function ($key) {
+                return "htmlentities(json_encode({$key}))";
+            }
+        );
     }
 }

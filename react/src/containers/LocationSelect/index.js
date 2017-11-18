@@ -25,7 +25,7 @@ class LocationSelect extends React.Component {
 
   static defaultProps = {
     value: [],
-    name: 'location',
+    name: 'location[]',
     placeholder: <span>Select locations</span>,
   };
 

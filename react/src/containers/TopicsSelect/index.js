@@ -7,11 +7,18 @@ import 'react-select/dist/react-select.css';
 import { fetchTopics } from './actions';
 
 class TopicsSelect extends React.Component {
+
+  static defaultProps = {
+    values: [],
+    name: 'topics[]',
+    placeholder: <span>Select topics</span>,
+  };
+
   constructor(props) {
     super(props);
 
     this.state = {
-      value: props.topics || null,
+      values: typeof props.values === 'string' ? JSON.parse(props.values) : [],
     };
   }
 
@@ -19,10 +26,10 @@ class TopicsSelect extends React.Component {
     this.props.fetchTopics();
   }
 
-  selectChanged = (value) => {
-    if (value.length <= 2) {
+  selectChanged = (values) => {
+    if (values.length <= 2) {
       this.setState({
-        value
+        values,
       });
     }
   };
@@ -30,11 +37,11 @@ class TopicsSelect extends React.Component {
   render() {
     return <div>
       <Select
-        name="topic"
+        name={this.props.name}
         multi={true}
         options={this.props.topics}
-        value={this.state.value}
-        placeholder={this.props.loading ? 'Loading..' : 'Choose topics'}
+        value={this.state.values}
+        placeholder={this.props.loading ? 'Loading..' : this.props.placeholder}
         onChange={this.selectChanged}
       />
     </div>;

@@ -3,7 +3,10 @@
 namespace DS\Api;
 
 use DS\Model\DataSource\TableFlags;
+use DS\Model\TableLocations;
 use DS\Model\Tables;
+use DS\Model\TableTags;
+use DS\Model\Types;
 use Phalcon\Exception;
 
 /**
@@ -50,6 +53,7 @@ class Table
         int $topic1Id = null,
         int $topic2Id = null,
         array $tags = [],
+        array $locations = [],
         int $flags = TableFlags::Normal
     ) {
         $table = Tables::findByFieldValue('title', $title);
@@ -57,6 +61,24 @@ class Table
         if ($table)
         {
             throw new \InvalidArgumentException('A table with the exact same title already exists. Please choose another title');
+        }
+        
+        if ($typeId === 0)
+        {
+            $typeId = null;
+        }
+        if ($topic1Id === 0)
+        {
+            $topic1Id = null;
+        }
+        if ($topic2Id === 0)
+        {
+            $topic2Id = null;
+        }
+        
+        if ($typeId && Types::findFirstById($typeId) === false)
+        {
+            throw new \InvalidArgumentException("Your selected type is invalid. Please select another one.");
         }
         
         $table = new Tables();
@@ -73,6 +95,38 @@ class Table
         if (!$table->getId())
         {
             throw new Exception('There was an error creating the table. Please try again later or contact our support.');
+        }
+        
+        // Add tags to table
+        $tagsModel = new TableTags();
+        foreach ($tags as $tag)
+        {
+            try
+            {
+                $tagsModel->setTableId($table->getId())
+                          ->setTagId($tag)
+                          ->create();
+            }
+            catch (Exception $e)
+            {
+                // Tag id may not existing..?
+            }
+        }
+        
+        // Add locations to table
+        $locationModel = new TableLocations();
+        foreach ($locations as $location)
+        {
+            try
+            {
+                $locationModel->setTableId($table->getId())
+                              ->setLocationId($location)
+                              ->create();
+            }
+            catch (Exception $e)
+            {
+                // Location id may not existing..?
+            }
         }
         
         return $table;

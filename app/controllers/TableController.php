@@ -31,43 +31,68 @@ class TableController
      */
     public function addAction($action = '')
     {
-        $userId = $this->serviceManager->getAuth()->getUserId();
-        switch ($action)
+        try
         {
-            case 'empty':
-                if ($this->request->isPost())
-                {
-                    $tableApi          = new Table();
-                    $createdTableModel = $tableApi->createTable(
-                        $userId,
-                        $this->request->getPost('title'),
-                        $this->request->getPost('tagline'),
-                        $this->request->getPost('image', '', '/assets/images/dustin.jpg'),
-                        1,
-                        1,
-                        2,
-                        []
-                    );
+            $userId = $this->serviceManager->getAuth()->getUserId();
+            switch ($action)
+            {
+                case 'empty':
+                    $this->view->setMainView('table/add/empty');
                     
-                    if ($createdTableModel->getId())
+                    if ($this->request->isPost())
                     {
-                        // Table successfully created
-                        // $this->response->redirect(sprintf('/table/%d', $createdTableModel->getId()));
-                        $this->response->redirect('');
+                        $topic2Id = $topic1Id = null;
+                        
+                        $topics = $this->request->getPost('topics', null, '');
+                        if (isset($topics[0]))
+                        {
+                            $topic1Id = $topics[0];
+                        }
+                        if (isset($topics[1]))
+                        {
+                            $topic2Id = $topics[1];
+                        }
+
+                        $tableApi          = new Table();
+                        $createdTableModel = $tableApi->createTable(
+                            $userId,
+                            (string) $this->request->getPost('title', null, ''),
+                            (string) $this->request->getPost('tagline', null, ''),
+                            (string) $this->request->getPost('image', '', '/assets/images/dustin.jpg'),
+                            (int) $this->request->getPost('type'),
+                            (int) $topic1Id,
+                            (int) $topic2Id,
+                            $this->request->getPost('tags', null, []),
+                            $this->request->getPost('location', null, [])
+                        );
+                        
+                        if ($createdTableModel->getId())
+                        {
+                            // Table successfully created
+                            // $this->response->redirect(sprintf('/table/%d', $createdTableModel->getId()));
+                            $this->response->redirect('');
+                        }
                     }
-                }
-                
-                $this->view->setMainView('table/add/empty');
-                break;
-            case 'csv-import':
-                $this->view->setMainView('table/add/csv-import');
-                break;
-            case 'copy-paste':
-                $this->view->setMainView('table/add/copy-paste');
-                break;
-            default:
-                $this->view->setMainView('table/add');
-                break;
+                    break;
+                case 'csv-import':
+                    $this->view->setMainView('table/add/csv-import');
+                    break;
+                case 'copy-paste':
+                    $this->view->setMainView('table/add/copy-paste');
+                    break;
+                default:
+                    $this->view->setMainView('table/add');
+                    break;
+            }
+        }
+        catch (\Exception $e)
+        {
+            if ($this->request->isPost())
+            {
+                $this->view->setVar('post', $this->request->getPost());
+            }
+            
+            $this->flash->error($e->getMessage());
         }
     }
     
