@@ -20,10 +20,11 @@ class TopicsSelect extends React.Component {
   }
 
   selectChanged = (value) => {
-    // console.log('Selected: ', value);
-    this.setState({
-      value
-    });
+    if (value.length <= 2) {
+      this.setState({
+        value
+      });
+    }
   };
 
   render() {
