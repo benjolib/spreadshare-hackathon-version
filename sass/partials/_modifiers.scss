@@ -1,9 +1,20 @@
-// active classes
+/* active classes */
 .sign-box-selected {
   background: #F2F2F8;
 }
-
 .settings-box-selected {
   background: #F2F2F8;
   color: #6A7C94;
+}
+.table-card-upvoted {
+  color: $logo-color;
+
+  @include desktop {
+    background: $logo-color;
+    color: white;
+  }
+
+  &:hover {
+    background: darken($logo-color, 8%);
+  }
 }

@@ -1,0 +1,512 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+
+  &__column {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__row {
+    display: flex;
+    flex-direction: column;
+
+    @include desktop {
+      flex-direction: row;
+    }
+
+    &--unchanged {
+      flex-direction: row;
+    }
+
+    &--pushToBottom {
+      margin-top: 0;
+
+      @include desktop {
+        @include rem(margin-top, 24);
+      }
+    }
+  }
+
+  &__hero {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    background: url('/assets/images/profile_background.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 8px;
+    @include rem(height, 336);
+    @include rem(margin, 28);
+    @include rem2(padding, 0, 20);
+
+    @include desktop {
+      position: unset;
+    }
+
+    &__avatar {
+      align-self: center;
+
+      @include desktop {
+        @include rem(margin-left, 70);
+      }
+
+      img {
+        border-radius: 6px;
+        @include rem(width, 100);
+        @include rem(height, 100);
+        @include rem(margin-top, 24);
+        -webkit-box-shadow: 2px 4px 35px 1px rgba(0,0,0,0.75);
+        -moz-box-shadow: 2px 4px 35px 1px rgba(0,0,0,0.75);
+        box-shadow: 2px 5px 35px 1px rgba(0,0,0,0.75);
+
+        @include desktop {
+          margin-top: 0;
+          @include rem(width, 200);
+          @include rem(height, 200);
+        }
+      }
+    }
+
+    &__info {
+      color: white;
+      text-align: center;
+      font-weight: 300;
+      display: flex;
+      flex-direction: column;
+      @include rem(font-size, 16);
+      @include rem(margin-top, 18);
+
+      @include desktop {
+        margin-top: 0;
+        text-align: left;
+        @include rem(margin-left, 50);
+      }
+
+      &__mobile {
+        display: flex;
+        align-self: center;
+
+        @include desktop {
+          display: none;
+        }
+
+        &__website {
+          align-self: center;
+          @include rem(margin-top, 5);
+          @include rem(margin-bottom, 5);
+
+          span {
+            display: inline-flex;
+            @include rem2(margin, 0, 6);
+          }
+
+          a {
+            color: white;
+            font-weight: 400;
+            text-decoration: none;
+            border-bottom: 2px solid white;
+            @include rem(font-size, 14);
+
+            @include desktop {
+              font-weight: 300;
+              @include rem(font-size, 16);
+            }
+
+            &:hover {
+              color: white;
+              text-decoration: none;
+            }
+            &:visited {
+              color: white;
+            }
+            &:focus {
+              color: white;
+            }
+          }
+        }
+
+        &__social {
+          ul {
+            display: inline-flex;
+            margin: 0;
+            list-style-type: none;
+            padding-left: 0;
+            @include rem(margin-top, 5);
+
+            li {
+              @include rem(margin-right, 5);
+
+              &:first-child {
+                @include rem(margin-left, 5);
+              }
+
+              &:last-child {
+                margin-right: 0;
+              }
+
+              img {
+                @include rem(width, 16);
+                @include rem(height, 16);
+              }
+            }
+          }
+        }
+      }
+
+      &__name {
+        @include rem(margin-bottom, 14);
+
+        h3 {
+          margin: 0;
+          font-weight: 800;
+          @include rem(font-size, 24);
+
+          @include desktop {
+            @include rem(font-size, 40);
+          }
+        }
+      }
+      &__tagline {
+        @include rem(margin-bottom, 10);
+
+        p {
+          margin: 0;
+          @include rem(font-size, 14);
+
+          @include desktop {
+            @include rem(font-size, 16);
+          }
+        }
+      }
+      &__location {
+        p {
+          margin: 0;
+          font-weight: 400;
+          @include rem(font-size, 14);
+
+          @include desktop {
+            font-weight: 300;
+            @include rem(font-size, 16);
+          }
+        }
+      }
+      &__website {
+        display: none;
+        align-self: center;
+
+        @include desktop {
+          display: block;
+        }
+
+        span {
+          display: inline-flex;
+          @include rem2(margin, 0, 6);
+        }
+
+        a {
+          color: white;
+          font-weight: 400;
+          text-decoration: none;
+          border-bottom: 2px solid white;
+          @include rem(font-size, 14);
+
+          @include desktop {
+            font-weight: 300;
+            @include rem(font-size, 16);
+          }
+
+          &:hover {
+            color: white;
+            text-decoration: none;
+          }
+          &:visited {
+            color: white;
+          }
+          &:focus {
+            color: white;
+          }
+        }
+      }
+      &__edit {
+        position: absolute;
+        top: 0;
+        right: 0;
+        align-self: center;
+        @include rem(margin-top, 16);
+        @include rem(margin-right, 16);
+
+        @include desktop {
+          position: unset;
+          margin-top: 0;
+          @include rem(margin-right, 24);
+        }
+
+        button {
+          color: #B4BDC8;
+          background: white;
+          outline: none;
+          border: none;
+          border-radius: 3px;
+          @include rem(font-size, 14);
+          @include rem2(padding, 5, 5 * 3);
+
+          @include desktop {
+            @include rem(font-size, 16);
+            @include rem2(padding, 6, 6 * 3);
+          }
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+      &__social {
+        display: none;
+        align-self: center;
+
+        @include desktop {
+          display: block;
+        }
+
+        ul {
+          display: inline-flex;
+          margin: 0;
+          list-style-type: none;
+          padding-left: 0;
+
+          li {
+            @include rem(margin-right, 5);
+
+            &:last-child {
+              margin-right: 0;
+            }
+
+            img {
+              @include rem(width, 24);
+              @include rem(height, 24);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &__content {
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 100%;
+    @include rem2(padding, 15, 40);
+
+    @include tablet {
+      @include rem2(padding, 15, 80);
+    }
+    @include desktop {
+      justify-content: space-between;
+      @include rem2(padding, 15, 110);
+    }
+
+    &__wrapper {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      justify-content: space-between;
+
+      @include desktop {
+        flex-direction: row;
+      }
+    }
+
+    &__tables {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+
+      @include desktop {
+        width: 70%;
+      }
+
+      &__cards {
+        display: flex;
+        flex-direction: column;
+
+        &__item {
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          background: white;
+          color: $text-color;
+          border-radius: 6px;
+          @include rem2(padding, 25, 35);
+          @include rem(margin-bottom, 20);
+
+          &__info {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+
+            &__title {
+              display: flex;
+              flex-direction: column;
+
+              h3 {
+                align-self: flex-start;
+                margin: 0;
+                color: black;
+                font-weight: 600;
+                @include rem(font-size, 20);
+
+                &:hover {
+                  cursor: pointer;
+                  color: $logo-color;
+                }
+              }
+              p {
+                @include rem(font-size, 16);
+              }
+            }
+
+            &__upvote {
+              position: absolute;
+              top: 20px;
+              right: 20px;
+
+              @include desktop {
+                display: flex;
+                align-self: flex-start;
+                background: $upvote-background-color;
+                color: $upvote-text-color;
+                font-weight: 300;
+                border-radius: 3px;
+                @include rem2(padding, 10, 20);
+
+                &:hover {
+                  cursor: pointer;
+                  background: darken($upvote-background-color, 4%);
+                }
+
+                img {
+                  @include rem(margin-right, 12);
+                }
+              }
+            }
+          }
+
+          &__stats {
+            display: none;
+
+            @include tablet {
+              display: flex;
+              border-top: 2px solid #F7F7FB;
+              @include rem(font-size, 12);
+            }
+            @include desktop {
+              display: flex;
+              border-top: 2px solid #F7F7FB;
+              @include rem(font-size, 14);
+            }
+
+            div {
+              @include rem(margin-top, 14);
+              @include rem(margin-right, 16);
+
+              &:hover {
+                cursor: pointer;
+              }
+
+              &:first-child {
+                background: $logo-color;
+                border-radius: 3px;
+                @include rem2(padding, 2, 4);
+                color: white;
+              }
+              &:nth-child(2) {
+                background: $card-tokens-background-color;
+                border-radius: 3px;
+                color: white;
+                @include rem2(padding, 2, 4);
+              }
+              &:nth-child(3), &:last-child {
+                display: flex;
+                align-items: center;
+                img {
+                  align-self: center;
+                  @include rem(width, 14);
+                  @include rem(margin-right, 5);
+                }
+                span {
+                  color: $text-color;
+
+                  i {
+                    font-style: normal;
+                    color: $text-link-color;
+                  }
+                }
+              }
+              &:last-child {
+                margin-right: 0;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &__aside {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+
+      @include desktop {
+        width: 25%;
+      }
+
+      &__box {
+        display: flex;
+        flex-direction: column;
+        background: white;
+        border-radius: 8px;
+        @include rem2(padding, 15, 20);
+
+        &:last-child {
+          @include rem(margin-top, 50);
+        }
+
+        a {
+          text-decoration: none;
+          color: $text-color;
+
+          &:hover {
+            color: $text-color;
+            text-decoration: none;
+          }
+
+          div {
+            text-transform: uppercase;
+            font-weight: 300;
+            border-radius: 4px;
+            @include rem2(padding, 10, 15);
+
+            &:hover {
+              cursor: pointer;
+            }
+
+            &:first-child {
+              @include rem(margin-bottom, 26);
+            }
+          }
+        }
+      }
+
+      p {
+        text-align: center;
+        @include rem2(margin, 20, 0);
+      }
+    }
+  }
+}
