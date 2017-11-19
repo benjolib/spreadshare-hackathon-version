@@ -9,25 +9,31 @@
   <div class="profile__hero">
     <div class="profile__row">
       <div class="profile__hero__avatar">
-        <img src="/assets/images/eleven.png" />
+        <img src="{{ profile.image }}" />
       </div>
       <div class="profile__hero__info">
-        <div class="profile__hero__info__name"><h3>Jane Ives (Eleven)</h3></div>
+        <div class="profile__hero__info__name"><h3>{{ profile.name }}</h3></div>
         <div class="profile__hero__info__tagline">
-          <p>I got superpowers, do not mess with me. Waffle lover.</p>
+          <p>{{ profile.tagline }}</p>
         </div>
         <div class="profile__row profile__row">
           <div class="profile__hero__info__location">
-            <p>Hawkins, Indiana</p>
+            {% if profile.location %}
+              <p>{{profile.location}}</p>
+            {% endif %}
           </div>
           <div class="profile__hero__info__website">
-            <span>●</span>
-            <a href="https://netflix.com/" target="_blank">netflix.com</a>
+            {% if profile.website %}
+              <span>●</span>
+              <a href="https://netflix.com/" target="_blank">{{profile.website}}</a>
+            {% endif %}
           </div>
           <div class="profile__hero__info__mobile">
             <div class="profile__hero__info__mobile__website">
-              <a href="https://netflix.com/" target="_blank">netflix.com</a>
-              <span>●</span>
+              {% if profile.website %}
+                <a href="https://netflix.com/" target="_blank">{{profile.website}}</a>
+                <span>●</span>
+              {% endif %}
             </div>
             <div class="profile__hero__info__mobile__social">
               <ul>
@@ -38,9 +44,11 @@
           </div>
         </div>
         <div class="profile__row profile__row--pushToBottom">
-          <div class="profile__hero__info__edit">
-            <button>Edit</button>
-          </div>
+          {% if auth.loggedIn() and auth.getUserId() == profile.id %}
+            <div class="profile__hero__info__edit">
+              <button onclick="window.location.href='/settings/personal'">Edit</button>
+            </div>
+          {% endif %}
           <div class="profile__hero__info__social">
             <ul>
             <li><a href="#"><img src="/assets/icons/twitter.svg" /></a></li>
@@ -206,12 +214,14 @@
           <a href="#">
             <div>Owned</div>
           </a>
-          <a href="#">
-            <div>Contributed</div>
-          </a>
-          <a href="#">
-            <div>History</div>
-          </a>
+          {% if auth.loggedIn() and auth.getUserId() == profile.id %}
+            <a href="#">
+              <div>Contributed</div>
+            </a>
+            <a href="#">
+              <div>History</div>
+            </a>
+          {% endif %}
         </div>
         <div class="profile__content__aside__box">
           <a href="#">
