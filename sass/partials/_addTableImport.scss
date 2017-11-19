@@ -1,4 +1,4 @@
-.addTableEmpty {
+.addTableImport {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -81,59 +81,99 @@
             display: flex;
             flex-direction: column;
             width: 100%;
+          }
 
-            p {
-              color: $text-color-alternate;
-              font-weight: 300;
-              text-transform: uppercase;
-              margin: 0;
-              @include rem(font-size, 14);
-              @include rem(margin-bottom, 5);
+          &__row {
+            display: flex;
+            width: 100%;
+          }
+
+          p {
+            color: $text-color-alternate;
+            font-weight: 300;
+            text-transform: uppercase;
+            margin: 0;
+            @include rem(font-size, 14);
+            @include rem(margin-bottom, 12);
+          }
+
+          input {
+            background: white;
+            border: 2px solid #DEE0E7;
+            border-right-color: white;
+            outline: none;
+            border-top-left-radius: 3px;
+            border-bottom-left-radius: 3px;
+            width: 100%;
+            @include rem(padding-left, 10);
+            @include rem(height, 40);
+
+            @include desktop {
+              width: 90%;
             }
 
-            input {
-              font-weight: 400;
-              color: #6A7C94;
-              background: #F8F8FB;
-              border: none;
-              outline: none;
-              border-radius: 3px;
-              width: 100%;
-              @include rem(padding-left, 10);
-              @include rem(height, 40);
-
-              @include desktop {
-                width: 90%;
-              }
-
-              &::-webkit-input-placeholder {
-                color: #dddde3;
-                font-weight: lighter;
-              }
-              &::-moz-placeholder {
-                color: #dddde3;
-                font-weight: lighter;
-              }
-              &:-ms-input-placeholder {
-                color: #dddde3;
-                font-weight: lighter;
-              }
-              &:-moz-placeholder {
-                color: #dddde3;
-                font-weight: lighter;
-              }
+            &::-webkit-input-placeholder {
+              color: #dddde3;
+              font-weight: lighter;
             }
+            &::-moz-placeholder {
+              color: #dddde3;
+              font-weight: lighter;
+            }
+            &:-ms-input-placeholder {
+              color: #dddde3;
+              font-weight: lighter;
+            }
+            &:-moz-placeholder {
+              color: #dddde3;
+              font-weight: lighter;
+            }
+          }
 
-            span {
-              color: #DEE0E7;
-              font-weight: 300;
-              @include rem(margin-top, 5);
-              @include rem(font-size, 14);
+          span#importCSVText {
+            position: absolute;
+            align-self: center;
+            font-weight: 400;
+            color: #6A7C94;
+            @include rem(margin-top, 0);
+            @include rem(margin-left, 16);
+          }
 
-              i {
-                font-style: normal;
-                color: #9CAAC0;
-              }
+          input[type="file"] {
+            width: 0.1px;
+            height: 0.1px;
+            opacity: 0;
+            overflow: hidden;
+            position: absolute;
+            z-index: -1;
+          }
+
+          &__browse {
+            color: white;
+            background: #DEE0E7;
+            outline: none;
+            border: 2px solid #DEE0E7;
+            font-weight: 500;
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+            @include rem2(padding, 5, 20);
+
+            &:hover {
+              cursor: pointer;
+              border-color: darken(#DEE0E7, 8%);
+              background: darken(#DEE0E7, 8%);
+            }
+          }
+
+          span {
+            color: #DEE0E7;
+            font-weight: 300;
+            @include rem(margin-top, 5);
+            @include rem(font-size, 14);
+
+            i {
+              font-style: normal;
+              color: #9CAAC0;
             }
           }
         }

@@ -30,5 +30,8 @@ body {
     font-weight: lighter;
     opacity: .8;
   }
-}
 
+  button, input {
+    font-family: $primary-font;
+  }
+}
