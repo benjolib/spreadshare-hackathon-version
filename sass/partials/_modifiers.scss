@@ -12,9 +12,9 @@
   @include desktop {
     background: $logo-color;
     color: white;
-  }
 
-  &:hover {
-    background: darken($logo-color, 8%);
+    &:hover {
+      background: darken($logo-color, 8%);
+    }
   }
 }
