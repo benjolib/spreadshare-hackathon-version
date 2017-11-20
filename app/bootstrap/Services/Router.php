@@ -132,7 +132,7 @@ return function (\DS\Interfaces\GeneralApplication $application, Phalcon\Di\Fact
                             // .. and if so, redirect to the login page
                             $dispatcher->forward(
                                 [
-                                    'controller' => 'index',
+                                    'controller' => 'Login',
                                     'action' => 'index',
                                 ]
                             );
@@ -158,7 +158,7 @@ return function (\DS\Interfaces\GeneralApplication $application, Phalcon\Di\Fact
                         case PhDispatcher::EXCEPTION_ACTION_NOT_FOUND:
                             $dispatcher->forward(
                                 [
-                                    'controller' => 'error',
+                                    'controller' => 'Error',
                                     'action' => 'show',
                                 ]
                             );
