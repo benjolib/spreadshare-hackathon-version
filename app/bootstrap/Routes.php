@@ -84,7 +84,7 @@ return [
         'methods' => ['POST'],
     ],
     [
-        'url' => '/tables/{order:[a-zA-Z0-9\-]+}',
+        'url' => '/tables/{order:[a-z0-9\-]+}',
         'paths' => [
             'controller' => 'Index',
             'action' => 'index',
@@ -98,5 +98,13 @@ return [
             'action' => 'index',
         ],
         'methods' => ['GET'],
+    ],
+    [
+        'url' => '/table/add/{action:[a-z\-]+}/:step}',
+        'paths' => [
+            'controller' => 'Table',
+            'action' => 'add',
+        ],
+        'methods' => ['POST'],
     ],
 ];
