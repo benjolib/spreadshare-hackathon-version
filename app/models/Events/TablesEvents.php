@@ -5,7 +5,6 @@ namespace DS\Model\Events;
 use DS\Model\Abstracts\AbstractTables;
 use DS\Model\DataSource\TableLogType;
 use DS\Model\TableLog;
-use DS\Model\TableRows;
 use DS\Model\TableStats;
 use DS\Model\TableTokens;
 
@@ -44,14 +43,6 @@ abstract class TablesEvents
         // Initialize table stats
         $tableStats = new TableStats();
         $tableStats->setTableId($this->getId())->create();
-        
-        // Initialize table rows
-        $tableRows = new TableRows();
-        $tableRows->setUserId($this->getOwnerUserId())
-                  ->setContent('[]')
-                  ->setVotesCount(0)
-                  ->setCommentsCount(0)
-                  ->create();
         
         // Initialize table log with a table created entry
         $tableLog = new TableLog();
