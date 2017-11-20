@@ -1,3 +1,4 @@
+// @flow
 import { fetchDataApi } from '../../api';
 
 export const TOPICS_GET = 'topics/GET';

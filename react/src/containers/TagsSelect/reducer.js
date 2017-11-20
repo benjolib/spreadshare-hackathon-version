@@ -1,3 +1,4 @@
+// @flow
 export default (state = [], action) => {
   switch (action.type) {
     case 'SELECT_TAG':

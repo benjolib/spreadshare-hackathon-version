@@ -1,3 +1,4 @@
+// @flow
 import { TABLE_RECEIVED } from './actions';
 
 // TODO: flow typing

@@ -1,3 +1,4 @@
+// @flow
 import React from 'react'
 import expect from 'expect'
 import ContentTypeSelect from '../../containers/ContentTypeSelect'

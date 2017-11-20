@@ -1,3 +1,4 @@
+// @flow
 import fetch from './utils/fetch';
 
 const API_URL = 'http://spreadshare.docker:81';

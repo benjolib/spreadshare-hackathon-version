@@ -1,3 +1,4 @@
+// @flow
 import { LOCATIONS_GET, LOCATIONS_GET_FAILED, LOCATIONS_GET_RECEIVED } from './actions';
 
 const initialState = {
