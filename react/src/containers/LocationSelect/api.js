@@ -2,11 +2,10 @@
 /**
  * Language api
  */
-import fetchDataApi from '../../api';
+import { fetchDataApi } from "../../api";
 
 /**
  * Retrieve languages
  */
-export const getLocations = (searchTerm) => {
-  return fetchDataApi(`locations?q=${encodeURIComponent(searchTerm)}`);
-};
+export const getLocations = searchTerm =>
+  fetchDataApi(`locations?q=${encodeURIComponent(searchTerm)}`);

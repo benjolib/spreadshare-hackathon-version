@@ -1,10 +1,8 @@
 // @flow
-import React from 'react'
-import expect from 'expect'
-import TopicsSelect from '../../containers/TopicsSelect'
+import TopicsSelect from "../../containers/TopicsSelect";
 
-describe('TopicsSelect', () => {
-  it('should exist', () => {
-    expect(TopicsSelect).toBeDefined()
-  })
-})
+describe("TopicsSelect", () => {
+  it("should exist", () => {
+    expect(TopicsSelect).toBeDefined();
+  });
+});

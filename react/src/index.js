@@ -1,19 +1,18 @@
 // @flow
-import React from 'react';
-import { render } from 'react-dom';
-import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'react-router-redux';
-import store, { history } from './store';
-import Table from './containers/Table';
-import LocationSelect from './containers/LocationSelect';
-import TopicsSelect from './containers/TopicsSelect';
-import ContentTypeSelect from './containers/ContentTypeSelect';
-import TagsSelect from './containers/TagsSelect';
+import React from "react";
+import { render } from "react-dom";
+import { Provider } from "react-redux";
+import { ConnectedRouter } from "react-router-redux";
+import "sanitize.css/sanitize.css";
+import store, { history } from "./store";
+import Table from "./containers/Table";
+import LocationSelect from "./containers/LocationSelect";
+import TopicsSelect from "./containers/TopicsSelect";
+import ContentTypeSelect from "./containers/ContentTypeSelect";
+import TagsSelect from "./containers/TagsSelect";
+import "./index.css";
 
-import 'sanitize.css/sanitize.css';
-import './index.css';
-
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === "production") {
   const componentRegister = {
     Table,
     LocationSelect,
@@ -22,7 +21,7 @@ if (process.env.NODE_ENV === 'production') {
     TagsSelect
   };
 
-  function renderAppInDom(el) {
+  const renderAppInDom = el => {
     const App = componentRegister[el.id];
     if (!App) {
       return;
@@ -37,15 +36,14 @@ if (process.env.NODE_ENV === 'production') {
             <App {...props} />
           </div>
         </ConnectedRouter>
-      </Provider>, el);
-  }
+      </Provider>,
+      el
+    );
+  };
 
-  document
-    .querySelectorAll('.react-component')
-    .forEach(renderAppInDom);
-}
-else {
-  render (
+  document.querySelectorAll(".react-component").forEach(renderAppInDom);
+} else {
+  render(
     <Provider store={store}>
       <ConnectedRouter history={history}>
         <div>
@@ -71,5 +69,7 @@ else {
           </div>
         </div>
       </ConnectedRouter>
-    </Provider>, document.getElementById('root'));
+    </Provider>,
+    document.getElementById("root")
+  );
 }

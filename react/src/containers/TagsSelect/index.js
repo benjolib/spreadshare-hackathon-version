@@ -1,36 +1,36 @@
 // @flow
-import React from 'react';
-import Select from 'react-select';
-import { connect } from 'react-redux';
-import { selectTag } from './actions';
-import 'react-select/dist/react-select.css';
+import React, { Component } from "react";
+import Select from "react-select";
+import { connect } from "react-redux";
+import "react-select/dist/react-select.css";
+import { selectTag } from "./actions";
 
-class TagsSelect extends React.Component {
+class TagsSelect extends Component {
   static defaultProps = {
     values: [],
-    name: 'tags[]',
-    placeholder: <span>Select tags</span>,
+    name: "tags[]",
+    placeholder: <span>Select tags</span>
   };
 
   constructor(props) {
     super(props);
 
     this.state = {
-      values: typeof props.values === 'string' ? JSON.parse(props.values) : [],
+      values: typeof props.values === "string" ? JSON.parse(props.values) : [],
       tags: [
         {
           value: 3,
-          label: 'Fundraising',
+          label: "Fundraising"
         },
         {
           value: 7,
-          label: 'Funding',
+          label: "Funding"
         },
         {
           value: 14,
-          label: 'VC',
-        },
-      ],
+          label: "VC"
+        }
+      ]
     };
   }
 
@@ -38,7 +38,7 @@ class TagsSelect extends React.Component {
     const { dispatch } = this.props;
 
     this.setState({
-      values: value,
+      values: value
     });
 
     dispatch(selectTag(value));
@@ -52,12 +52,10 @@ class TagsSelect extends React.Component {
       multi: true,
       options: this.state.tags,
       value: this.state.values,
-      onChange: this.onChange,
+      onChange: this.onChange
     };
 
-    return (
-      <Select {...options} />
-    );
+    return <Select {...options} />;
   }
 }
 

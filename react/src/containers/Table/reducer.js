@@ -1,9 +1,7 @@
 // @flow
-import { TABLE_RECEIVED } from './actions';
+import { TABLE_RECEIVED } from "./actions";
 
-// TODO: flow typing
-// TODO: tests
-
+// prettier-ignore
 const initialState = {
   data: [
     [2000, 'Talkus', 'Centralize all your customer feedback (livechat, email, sms, twitter, facebook) in one place, Slack', 'http://talkus.io', '$48/mo unlimited agents'],
@@ -31,9 +29,9 @@ export default (state = initialState, action) => {
     case TABLE_RECEIVED:
       return {
         ...state,
-        table: action.payload.data,
+        table: action.payload.data
       };
     default:
       return state;
   }
-}
+};

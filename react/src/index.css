@@ -5,7 +5,8 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
+    sans-serif;
   font-size: 1rem;
   line-height: 1.5;
   background: #f2f2f8;
@@ -15,12 +16,12 @@ body {
 .htContextMenu table.htCore {
   font-family: 'Montserrat', sans-serif;
   border: none;
-  color: #B1BBC7;
+  color: #b1bbc7;
   font-weight: 400;
   font-size: 14px;
-  -webkit-box-shadow: 3px 4px 10px 0px rgba(0,0,0,0.45);
-  -moz-box-shadow: 3px 4px 10px 0px rgba(0,0,0,0.45);
-  box-shadow: 3px 4px 10px 0px rgba(0,0,0,0.45);
+  -webkit-box-shadow: 3px 4px 10px 0px rgba(0, 0, 0, 0.45);
+  -moz-box-shadow: 3px 4px 10px 0px rgba(0, 0, 0, 0.45);
+  box-shadow: 3px 4px 10px 0px rgba(0, 0, 0, 0.45);
 }
 .htContextMenu table.htCore tr td {
   height: 26px !important;
@@ -41,19 +42,19 @@ body {
   border: none;
 }
 .table__main table.htCore thead tr th div {
-  background-color: #F2F2F8;
+  background-color: #f2f2f8;
 }
 .handsontable thead th .relative {
   padding-top: 14px;
   padding-bottom: 14px;
-  color: #6A7C94;
+  color: #6a7c94;
   font-weight: 500;
 }
 .handsontable tr:first-child td {
   border-top: none;
 }
 .handsontable tr:first-child td.current.highlight {
-  border-top: 2px solid #24AE69;
+  border-top: 2px solid #24ae69;
 }
 /* handsontable styles end */
 
@@ -61,11 +62,12 @@ button:disabled {
   opacity: 0.5;
 }
 
-.table {}
+.table {
+}
 
 .table__header {
   display: flex;
-  background: #FFFFFF;
+  background: #ffffff;
   padding: 20px 16px;
 }
 
@@ -117,8 +119,10 @@ button:disabled {
   overflow: hidden;
 }
 
-.table__main__votes {}
+.table__main__votes {
+}
 
-.table__main__hotTable {}
+.table__main__hotTable {
+}
 
 /* TODO: Transfer this stuff into sass or load index.css on production */

@@ -1,9 +1,13 @@
 // @flow
-import { LOCATIONS_GET, LOCATIONS_GET_FAILED, LOCATIONS_GET_RECEIVED } from './actions';
+import {
+  LOCATIONS_GET,
+  LOCATIONS_GET_FAILED,
+  LOCATIONS_GET_RECEIVED
+} from "./actions";
 
 const initialState = {
   all: [],
-  isFetching: false,
+  isFetching: false
 };
 
 export default (state = initialState, action) => {
@@ -12,24 +16,25 @@ export default (state = initialState, action) => {
     case LOCATIONS_GET_FAILED:
       return {
         ...state,
-        isFetching: true,
+        isFetching: true
       };
-    case LOCATIONS_GET_RECEIVED:
-
+    case LOCATIONS_GET_RECEIVED: {
       const all = [];
-      action.payload.locations.forEach((location) => {
+      action.payload.locations.forEach(location => {
         all.push({
           label: location.locationName,
-          value: location.id,
+          value: location.id
         });
       });
 
       return {
         ...state,
         isFetching: false,
-        all,
+        all
       };
-    default:
+    }
+    default: {
       return state;
+    }
   }
-}
+};

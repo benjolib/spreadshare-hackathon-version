@@ -1,7 +1,7 @@
 // @flow
 export default (state = [], action) => {
   switch (action.type) {
-    case 'SELECT_TYPE':
+    case "SELECT_TYPE":
       return {
         ...state,
         type: action.contentType
@@ -9,4 +9,4 @@ export default (state = [], action) => {
     default:
       return state;
   }
-}
+};

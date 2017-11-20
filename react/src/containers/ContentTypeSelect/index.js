@@ -1,15 +1,15 @@
 // @flow
-import React from 'react';
-import Select from 'react-select';
-import { connect } from 'react-redux';
-import { selectType } from './actions';
-import 'react-select/dist/react-select.css';
+import React from "react";
+import Select from "react-select";
+import { connect } from "react-redux";
+import "react-select/dist/react-select.css";
+import { selectType } from "./actions";
 
 class ContentTypeSelect extends React.Component {
   static defaultProps = {
     value: [],
-    name: 'contentType',
-    placeholder: <span>Select tags</span>,
+    name: "contentType",
+    placeholder: <span>Select tags</span>
   };
 
   constructor(props) {
@@ -19,14 +19,14 @@ class ContentTypeSelect extends React.Component {
       value: props.value,
       types: [
         {
-          value: 'contacts',
-          label: 'Contacts',
+          value: "contacts",
+          label: "Contacts"
         },
         {
-          value: 'resources',
-          label: 'Resources',
-        },
-      ],
+          value: "resources",
+          label: "Resources"
+        }
+      ]
     };
   }
 
@@ -34,14 +34,13 @@ class ContentTypeSelect extends React.Component {
     const { dispatch } = this.props;
 
     this.setState({
-      value,
+      value
     });
 
     dispatch(selectType(value));
   };
 
   render() {
-
     const options = {
       name: this.props.name,
       placeholder: this.props.placeholder,
@@ -49,12 +48,10 @@ class ContentTypeSelect extends React.Component {
       simpleValue: true,
       options: this.state.types,
       value: this.state.value,
-      onChange: this.onChange,
+      onChange: this.onChange
     };
 
-    return (
-      <Select {...options} />
-    );
+    return <Select {...options} />;
   }
 }
 

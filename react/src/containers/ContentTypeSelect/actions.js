@@ -1,7 +1,5 @@
 // @flow
-export const selectType = contentType => {
-  return {
-    type: 'SELECT_TYPE',
-    contentType
-  }
-}
+export const selectType = contentType => ({
+  type: "SELECT_TYPE",
+  contentType
+});

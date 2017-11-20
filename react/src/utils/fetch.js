@@ -6,19 +6,19 @@
  * @package React/Utils
  * @version 1.0
  */
-import parentFetch from 'isomorphic-fetch';
+import parentFetch from "isomorphic-fetch";
 
 // @see https://github.com/matthew-andrews/isomorphic-fetch
-require('es6-promise').polyfill();
+require("es6-promise").polyfill();
 
-export default function fetch(url, options = { method: 'GET' }) {
-  options.cache = options.cache || 'default';
-  options.credentials = 'include';
+export default function fetch(url, options = { method: "GET" }) {
+  options.cache = options.cache || "default";
+  options.credentials = "include";
 
   // No-cors produces an "unexpected end of input" in json requests
   // Currently don't have a clue why :)
   // But cors is working fine..
-  options.mode = 'cors';
+  options.mode = "cors";
 
   try {
     return parentFetch(url, options);

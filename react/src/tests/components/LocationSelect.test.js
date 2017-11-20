@@ -1,10 +1,8 @@
 // @flow
-import React from 'react'
-import expect from 'expect'
-import LocationSelect from '../../containers/LocationSelect'
+import LocationSelect from "../../containers/LocationSelect";
 
-describe('LocationSelect', () => {
-  it('should exist', () => {
-    expect(LocationSelect).toBeDefined()
-  })
-})
+describe("LocationSelect", () => {
+  it("should exist", () => {
+    expect(LocationSelect).toBeDefined();
+  });
+});

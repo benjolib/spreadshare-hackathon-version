@@ -1,25 +1,24 @@
 // @flow
-import React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import Select from 'react-select';
-import 'react-select/dist/react-select.css';
+import React, { Component } from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import Select from "react-select";
+import "react-select/dist/react-select.css";
 
-import { fetchTopics } from './actions';
+import { fetchTopics } from "./actions";
 
-class TopicsSelect extends React.Component {
-
+class TopicsSelect extends Component {
   static defaultProps = {
     values: [],
-    name: 'topics[]',
-    placeholder: <span>Select topics</span>,
+    name: "topics[]",
+    placeholder: <span>Select topics</span>
   };
 
   constructor(props) {
     super(props);
 
     this.state = {
-      values: typeof props.values === 'string' ? JSON.parse(props.values) : [],
+      values: typeof props.values === "string" ? JSON.parse(props.values) : []
     };
   }
 
@@ -27,38 +26,43 @@ class TopicsSelect extends React.Component {
     this.props.fetchTopics();
   }
 
-  selectChanged = (values) => {
+  selectChanged = values => {
     if (values.length <= 2) {
       this.setState({
-        values,
+        values
       });
     }
   };
 
   render() {
-    return <div>
-      <Select
-        name={this.props.name}
-        multi={true}
-        options={this.props.topics}
-        value={this.state.values}
-        placeholder={this.props.loading ? 'Loading..' : this.props.placeholder}
-        onChange={this.selectChanged}
-      />
-    </div>;
+    return (
+      <div>
+        <Select
+          name={this.props.name}
+          multi
+          options={this.props.topics}
+          value={this.state.values}
+          placeholder={
+            this.props.loading ? "Loading.." : this.props.placeholder
+          }
+          onChange={this.selectChanged}
+        />
+      </div>
+    );
   }
 }
 
 const mapStateToProps = state => ({
   topics: state.topics.all,
-  loading: state.topics.isFetching,
+  loading: state.topics.isFetching
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-  fetchTopics,
-}, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      fetchTopics
+    },
+    dispatch
+  );
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(TopicsSelect);
+export default connect(mapStateToProps, mapDispatchToProps)(TopicsSelect);

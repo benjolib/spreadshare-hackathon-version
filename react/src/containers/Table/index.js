@@ -1,10 +1,10 @@
 // @flow
-import React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import TableComponent from '../../components/TableComponent';
+import React, { Component } from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import TableComponent from "../../components/TableComponent";
 
-class Table extends React.Component {
+class Table extends Component {
   render() {
     // console.log(this.props);
     return <TableComponent data={this.props.data} />;
@@ -12,12 +12,9 @@ class Table extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  data: state.table.data,
+  data: state.table.data
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({}, dispatch);
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Table);
+export default connect(mapStateToProps, mapDispatchToProps)(Table);
