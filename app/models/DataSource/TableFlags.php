@@ -15,10 +15,8 @@ namespace DS\Model\DataSource;
  */
 class TableFlags
 {
-    /**
-     * If dataset was deleted
-     */
-    const Deleted = 0;
+ 
+    const All = 0;
     
     /**
      * Normal state for a dataset
@@ -26,7 +24,17 @@ class TableFlags
     const Normal = 1;
     
     /**
+     * Normal state for a dataset
+     */
+    const Published = 2;
+    
+    /**
      * Inactive / hidden dataset
      */
-    const Archived = 2;
+    const Archived = 3;
+    
+    /**
+     * If dataset was deleted
+     */
+    const Deleted = 4;
 }
