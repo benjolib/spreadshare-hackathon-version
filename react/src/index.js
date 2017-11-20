@@ -1,16 +1,19 @@
 // @flow
+import "babel-polyfill";
+import "whatwg-fetch";
 import React from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
-import { ConnectedRouter } from "react-router-redux";
 import "sanitize.css/sanitize.css";
-import store, { history } from "./store";
+import configureStore from "./store";
 import Table from "./containers/Table";
 import LocationSelect from "./containers/LocationSelect";
 import TopicsSelect from "./containers/TopicsSelect";
 import ContentTypeSelect from "./containers/ContentTypeSelect";
 import TagsSelect from "./containers/TagsSelect";
 import "./index.css";
+
+const store = configureStore();
 
 if (process.env.NODE_ENV === "production") {
   const componentRegister = {
@@ -31,11 +34,9 @@ if (process.env.NODE_ENV === "production") {
 
     render(
       <Provider store={store}>
-        <ConnectedRouter history={history}>
-          <div>
-            <App {...props} />
-          </div>
-        </ConnectedRouter>
+        <div>
+          <App {...props} />
+        </div>
       </Provider>,
       el
     );
@@ -45,31 +46,31 @@ if (process.env.NODE_ENV === "production") {
 } else {
   render(
     <Provider store={store}>
-      <ConnectedRouter history={history}>
+      <div>
         <div>
-          <div>
-            <h1>LocationSelect</h1>
-            <LocationSelect />
-          </div>
-          <div>
-            <h1>TopicsSelect</h1>
-            <TopicsSelect />
-          </div>
-          <div>
-            <h1>ContentTypeSelect</h1>
-            <ContentTypeSelect />
-          </div>
-          <div>
-            <h1>TagsSelect</h1>
-            <TagsSelect />
-          </div>
-          <div>
-            <h1>Table</h1>
-            <Table />
-          </div>
+          <h1>LocationSelect</h1>
+          <LocationSelect />
         </div>
-      </ConnectedRouter>
+        <div>
+          <h1>TopicsSelect</h1>
+          <TopicsSelect />
+        </div>
+        <div>
+          <h1>ContentTypeSelect</h1>
+          <ContentTypeSelect />
+        </div>
+        <div>
+          <h1>TagsSelect</h1>
+          <TagsSelect />
+        </div>
+        <div>
+          <h1>Table</h1>
+          <Table tableId="exampleTableId123" />
+        </div>
+      </div>
     </Provider>,
     document.getElementById("root")
   );
 }
+
+export { store };

@@ -3,16 +3,24 @@ import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import TableComponent from "../../components/TableComponent";
+import type { TableWrapper } from "./types";
 
-class Table extends Component {
+type Props = {
+  tableId: string, // from server markup
+  data: TableWrapper
+};
+
+type State = {};
+
+class Table extends Component<Props, State> {
   render() {
-    // console.log(this.props);
-    return <TableComponent data={this.props.data} />;
+    console.log(this.props);
+    return <TableComponent data={this.props.data.table.rows} />;
   }
 }
 
-const mapStateToProps = state => ({
-  data: state.table.data
+const mapStateToProps = (state, ownProps) => ({
+  data: state.tables[ownProps.tableId]
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({}, dispatch);

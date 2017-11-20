@@ -1,4 +1,5 @@
 // @flow
+/* eslint-disable no-console */
 const copy = require("recursive-copy");
 
 const fs = require("fs");
@@ -12,13 +13,13 @@ const directory = "../public/js/react";
 fs.readdir(directory, (err, files) => {
   if (err) throw err;
 
-  for (const file of files) {
+  files.forEach(file => {
     if (file !== ".gitkeep") {
-      fs.unlink(path.join(directory, file), err => {
-        if (err) throw err;
+      fs.unlink(path.join(directory, file), err2 => {
+        if (err2) throw err2;
       });
     }
-  }
+  });
 });
 
 // Copying build into public js directory
@@ -42,10 +43,10 @@ copy("./build/static/js", "../public/js/react", options)
           if (err) {
             return console.log(err);
           }
-          const result = data.replace(/main\..*?\.js/g, buildFile);
+          const resultAfter = data.replace(/main\..*?\.js/g, buildFile);
 
-          fs.writeFile(mainLayoutFile, result, "utf8", err => {
-            if (err) return console.log(err);
+          fs.writeFile(mainLayoutFile, resultAfter, "utf8", err2 => {
+            if (err2) return console.log(err2);
           });
         });
       }
