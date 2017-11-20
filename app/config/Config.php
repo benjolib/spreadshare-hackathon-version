@@ -91,6 +91,7 @@ return [
         'DS\Tests' => ROOT_PATH . '/app/tests/',
         'DS\Api' => ROOT_PATH . '/app/api/',
         'DS\Events' => ROOT_PATH . '/app/events/',
+        'DS\Exceptions' => ROOT_PATH . '/app/exceptions/',
     ],
     'mode' => 'production',
     
