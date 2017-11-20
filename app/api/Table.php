@@ -29,6 +29,19 @@ class Table
 {
     
     /**
+     * @param int $tableId
+     *
+     * @return Tables
+     */
+    public function publish(int $tableId)
+    {
+        $tableModel = Tables::get($tableId);
+        $tableModel->setFlags(TableFlags::Published)->save();
+        
+        return $tableModel;
+    }
+    
+    /**
      * Creates a new table.
      *
      * @param int    $ownerUserId
