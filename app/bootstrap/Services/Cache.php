@@ -78,7 +78,7 @@ return function (\DS\Interfaces\GeneralApplication $application, Phalcon\Di\Fact
                 
                 if ($config['redis'])
                 {
-                    return new \Phalcon\Mvc\Model\MetaData\Redis(
+                    $cache = new \Phalcon\Mvc\Model\MetaData\Redis(
                         [
                             "lifetime" => 86400 * 30,
                             "prefix" => "metadata.",
@@ -89,7 +89,7 @@ return function (\DS\Interfaces\GeneralApplication $application, Phalcon\Di\Fact
                 }
                 else
                 {
-                    return new \Phalcon\Mvc\Model\MetaData\Memcache(
+                    $cache = new \Phalcon\Mvc\Model\MetaData\Memcache(
                         [
                             "lifetime" => 86400 * 30,
                             "prefix" => "metadata.",
@@ -98,6 +98,11 @@ return function (\DS\Interfaces\GeneralApplication $application, Phalcon\Di\Fact
                         ]
                     );
                 }
+                
+                // After model change do a reset once:
+                //$cache->reset();
+                
+                return $cache;
             }
         );
     }
