@@ -3,6 +3,7 @@
 namespace DS\Controller;
 
 use DS\Application;
+use DS\Model\DataSource\TableFlags;
 use DS\Model\Tables;
 use DS\Model\Topics;
 use DS\Model\User;
@@ -189,7 +190,7 @@ class SignupController
                 }
             }
             
-            $this->view->setVar('tables', (new Tables())->findTables($this->serviceManager->getAuth()->getUserId(), [], 0, 'RAND()'));
+            $this->view->setVar('tables', (new Tables())->findTables($this->serviceManager->getAuth()->getUserId(), [], TableFlags::Published, 0, 'RAND()'));
             
             $this->view->setMainView('auth/onboarding/tables');
         }

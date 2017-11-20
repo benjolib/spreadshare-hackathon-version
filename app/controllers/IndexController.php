@@ -3,6 +3,7 @@
 namespace DS\Controller;
 
 use DS\Application;
+use DS\Model\DataSource\TableFlags;
 use DS\Model\Tables;
 use DS\Model\TableStats;
 use Phalcon\Exception;
@@ -47,7 +48,7 @@ class IndexController
             }
             
             $this->view->setVar('order', $order);
-            $this->view->setVar('tables', (new Tables())->findTables($this->serviceManager->getAuth()->getUserId(), [], 0, $orderBy));
+            $this->view->setVar('tables', (new Tables())->findTables($this->serviceManager->getAuth()->getUserId(), [], TableFlags::Published, 0, $orderBy));
             
             $this->view->setMainView('homepage/index');
         }

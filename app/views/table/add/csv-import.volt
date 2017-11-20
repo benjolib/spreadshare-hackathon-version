@@ -3,7 +3,7 @@
 {% block header %}{% endblock %}
 
 {% block content %}
-<form id="addTableImportForm" method="post">
+<form id="addTableImportForm" method="post" enctype="multipart/form-data" action="/table/add/csv-import/{{ nextstep }}">
   <div class="addTableImport">
     <div class="addTableImport__content">
       <div class="addTableImport__content__wrapper">
@@ -19,7 +19,7 @@
                 <p>Upload file</p>
                 <div class="addTableImport__content__main__options__item__row">
                   <input type="text" disabled />
-                  <input id="importCSVInput" type="file" accept=".csv" />
+                  <input id="importCSVInput" name="file-upload" type="file" accept=".csv" />
                   <span id="importCSVText"></span>
                   <button id="importCSVButton" class="addTableImport__content__main__options__item__browse">Browse</button>
                 </div>

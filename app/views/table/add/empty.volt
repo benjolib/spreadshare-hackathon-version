@@ -1,7 +1,7 @@
 {% extends 'layouts/main.volt' %}
 
 {% block content %}
-<form id="addEmptyTableForm" method="post">
+<form id="addEmptyTableForm" method="post" action="{{ action }}">
   <div class="addTableEmpty">
     <div class="addTableEmpty__content">
       <div class="addTableEmpty__content__wrapper">
@@ -9,6 +9,8 @@
         <p class="addTableEmpty__content__subtitle">As an table owner you receive 2,5% of all tokens a table generates</p>
         <div class="addTableEmpty__content__main">
           {{ flash.output() }}
+
+          <input type="hidden" name="tableId" value="{{ tableId }}" />
 
           <div class="addTableEmpty__content__main__options">
             {# title #}

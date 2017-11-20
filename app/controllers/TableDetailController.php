@@ -3,6 +3,7 @@
 namespace DS\Controller;
 
 use DS\Events\Table\TableViewed;
+use DS\Model\DataSource\TableFlags;
 use DS\Model\Tables;
 
 /**
@@ -32,7 +33,8 @@ class TableDetailController
                 $this->serviceManager->getAuth()->getUserId(),
                 [
                     $tableId,
-                ]
+                ],
+                TableFlags::All
             );
             
             if (isset($tables[0]))
