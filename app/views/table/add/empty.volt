@@ -59,7 +59,7 @@
           </div>
           {# buttons #}
           <div class="addTableEmpty__content__main__buttons">
-            <a href="/login">Cancel</a>
+            <a href="/table/add">Cancel</a>
             <button type="submit">Save Changes</button>
           </div>
         </div>

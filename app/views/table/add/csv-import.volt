@@ -29,7 +29,7 @@
           </div>
           {# buttons #}
           <div class="addTableImport__content__main__buttons">
-            <a href="/login">Cancel</a>
+            <a href="/table/add">Cancel</a>
             <button type="submit">Use this File</button>
           </div>
         </div>

@@ -24,7 +24,7 @@
           </div>
           {# buttons #}
           <div class="addTableCopyPaste__content__main__buttons">
-            <a href="/login">Cancel</a>
+            <a href="/table/add">Cancel</a>
             <button type="submit">Import pasted Data</button>
           </div>
         </div>
