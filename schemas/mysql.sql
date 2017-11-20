@@ -115,7 +115,7 @@ CREATE TABLE `tableColumns` (
   PRIMARY KEY (`id`),
   KEY `tableId` (`tableId`),
   KEY `userId` (`userId`),
-  CONSTRAINT `tableColumnsTableid` FOREIGN KEY (`tableId`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `tableColumnsTableId` FOREIGN KEY (`tableId`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tableColumnsUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -227,15 +227,19 @@ DROP TABLE IF EXISTS `tableRows`;
 CREATE TABLE `tableRows` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `userId` int(11) unsigned DEFAULT NULL COMMENT 'user that created the row',
+  `tableId` int(11) unsigned DEFAULT NULL,
   `content` longtext COMMENT 'cached json content for row',
+  `lineNumber` int(11) DEFAULT NULL,
   `votesCount` int(11) DEFAULT NULL COMMENT 'total votes cache',
   `commentsCount` int(11) DEFAULT NULL COMMENT 'total comments cache',
   `updatedAt` int(10) unsigned DEFAULT NULL COMMENT 'timestamp',
   `createdAt` int(10) unsigned DEFAULT NULL COMMENT 'timestamp',
   PRIMARY KEY (`id`),
   KEY `userId` (`userId`),
+  KEY `tableId` (`tableId`),
+  CONSTRAINT `tableRowsTableId` FOREIGN KEY (`tableId`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tableRowsUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8;
 
 
 
@@ -270,7 +274,7 @@ CREATE TABLE `tables` (
   `title` varchar(100) NOT NULL DEFAULT '' COMMENT 'table name',
   `tagline` varchar(140) DEFAULT '' COMMENT 'description',
   `image` varchar(255) DEFAULT NULL COMMENT 'image url',
-  `flags` tinytext,
+  `flags` tinyint,
   `updatedAt` int(10) unsigned DEFAULT NULL COMMENT 'timestamp',
   `createdAt` int(10) unsigned DEFAULT NULL COMMENT 'timestamp',
   PRIMARY KEY (`id`),
