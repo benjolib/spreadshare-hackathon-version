@@ -3,6 +3,7 @@
 namespace DS\Model;
 
 use DS\Constants\Paging;
+use DS\Model\DataSource\TableFlags;
 use DS\Model\Events\TablesEvents;
 
 /**
@@ -29,7 +30,7 @@ class Tables
      *
      * @return array
      */
-    public function findTables(int $userId, array $tableIds = [], int $page = 0, $orderBy = null, $limit = Paging::endlessScrollPortions): array
+    public function findTables(int $userId, array $tableIds = [], int $flags = TableFlags::Published, int $page = 0, $orderBy = null, $limit = Paging::endlessScrollPortions): array
     {
         $query = self::query()
                      ->columns(
@@ -51,6 +52,11 @@ class Tables
                      ->leftJoin(TableStats::class, TableStats::class . '.tableId = ' . Tables::class . '.id')
                      ->leftJoin(Types::class, Tables::class . '.typeId = ' . Types::class . '.id')
                      ->limit((int) $limit, (int) Paging::endlessScrollPortions * $page);
+        
+        if ($flags)
+        {
+            $query->where('flags = ?0', [$flags]);
+        }
         
         if ($orderBy)
         {

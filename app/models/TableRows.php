@@ -3,6 +3,7 @@
 namespace DS\Model;
 
 use DS\Model\Events\TableRowsEvents;
+use Phalcon\Mvc\Model\Resultset\Simple;
 
 /**
  * TableRows
@@ -21,32 +22,24 @@ class TableRows
     extends TableRowsEvents
 {
     /**
-     * @param array $param
-     * @param int   $page
-     * @param int   $limit
+     * @param int $tableId
      *
-     * @return array
+     * @return Simple
      */
-    /*
-    public function findCustom($param = [], $page = 0, $limit = Paging::endlessScrollPortions)
+    public function getRowsForTable(int $tableId)
     {
-        if (count($param))
-        {
-            return self::query()
-                       ->columns(
-                           [
-                               TableRows::class . ".id",
-                           ]
-                       )
-                //->leftJoin(TableRows::class, TableRows::class . '.profileId = ' . Profile::class . '.id')
-                //->inWhere(Profile::class . '.id', $param)
-                       ->limit((int) $limit, (int) Paging::endlessScrollPortions * $page)
-                //->orderBy(sprintf('FIELD (id,%s)', implode(',', $param)))
-                       ->execute()
-                       ->toArray() ?: [];
-        }
+        $query = self::query()
+                     ->columns(
+                         [
+                             TableRows::class . ".id",
+                             TableRows::class . ".content",
+                             TableRows::class . ".votesCount",
+                             TableRows::class . ".lineNumber",
+                         ]
+                     )
+                     ->orderBy(TableRows::class . ".id ASC")
+                     ->where(TableRows::class . ".tableId = ?0", [$tableId]);
         
-        return [];
+        return $query->execute();
     }
-    */
 }
