@@ -62,7 +62,7 @@ return [
     [
         'url' => '/settings',
         'paths' => [
-            'controller' => 'UserSettings',
+            'controller' => 'User_Settings',
             'action' => 'settings',
         ],
         'methods' => ['GET', 'POST'],
@@ -70,7 +70,7 @@ return [
     [
         'url' => '/settings/{page:[a-zA-Z0-9\-]+}',
         'paths' => [
-            'controller' => 'UserSettings',
+            'controller' => 'User_Settings', // @see https://docs.phalconphp.com/en/latest/routing -> camelized
             'action' => 'settings',
         ],
         'methods' => ['GET', 'POST'],
@@ -94,7 +94,7 @@ return [
     [
         'url' => '/table/{id:[0-9]+}',
         'paths' => [
-            'controller' => 'TableDetail',
+            'controller' => 'Table_Detail',
             'action' => 'index',
         ],
         'methods' => ['GET'],
