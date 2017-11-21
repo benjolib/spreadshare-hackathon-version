@@ -2,7 +2,7 @@
 
 namespace DS\Interfaces;
 
-use DS\Model\User;
+use DS\Model\Tables;
 
 /**
  * Spreadshare
@@ -15,17 +15,17 @@ use DS\Model\User;
  * @version   $Version$
  * @package   DS\Interfaces
  */
-interface UserSubcontrollerInterface
+interface TableSubcontrollerInterface
 {
     
     /**
      * Handle Subcontroller
      *
-     * @param User $user
+     * @param Tables $table
      *
      * @return $this
      */
-    public function handle(User $user);
+    public function handle(Tables $table);
     
     /**
      * Initialize controller

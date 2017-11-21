@@ -108,6 +108,14 @@ return [
         'methods' => ['GET'],
     ],
     [
+        'url' => '/table/{id:[0-9]+}/{tab:[a-z]+}',
+        'paths' => [
+            'controller' => 'Table_Detail',
+            'action' => 'index',
+        ],
+        'methods' => ['GET', 'POST'],
+    ],
+    [
         'url' => '/table/add/{action:[a-z\-]+}/:step}',
         'paths' => [
             'controller' => 'Table',
