@@ -60,6 +60,14 @@ return [
         'methods' => ['GET'],
     ],
     [
+        'url' => '/user/{user:[a-zA-Z0-9\-]+}/{page:[a-z]+}',
+        'paths' => [
+            'controller' => 'User',
+            'action' => 'profile',
+        ],
+        'methods' => ['GET'],
+    ],
+    [
         'url' => '/settings',
         'paths' => [
             'controller' => 'User_Settings',

@@ -29,7 +29,7 @@ class TableDetailController
         {
             // Assign table data to UI
             $tableModel = new Tables();
-            $tables     = $tableModel->findTables(
+            $tables     = $tableModel->findTablesAsArray(
                 $this->serviceManager->getAuth()->getUserId(),
                 [
                     $tableId,

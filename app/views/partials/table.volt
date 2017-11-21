@@ -10,7 +10,9 @@
     </div>
   </div>
   <div class="tables__content__main__cards__item__stats">
+    {% if table['typeTitle'] %}
     <div>{{ table['typeTitle'] }}</div>
+    {% endif %}
     {# {% if table['tags'] %}<span>{{ table['tags'] }}</span>{% endif %} #}
     <div>{{ table['tokensCount'] +0 }} Tokens</div>
     <div>

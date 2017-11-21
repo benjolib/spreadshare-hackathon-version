@@ -2,10 +2,7 @@
 
 namespace DS\Controller;
 
-use DS\Application;
 use DS\Model\User;
-use Phalcon\Exception;
-use Phalcon\Logger;
 
 /**
  * Spreadshare
@@ -32,7 +29,7 @@ class UserController
     /**
      * User
      */
-    public function profileAction($handle)
+    public function profileAction($handle = '', $page = 'upvoted')
     {
         try
         {
@@ -43,13 +40,27 @@ class UserController
                 $this->response->redirect('/');
             }
             
+            $this->view->setVar('currentPage', $page);
             $this->view->setVar('profile', $user);
             $this->view->setMainView('user/profile');
+            
+            $subClass = "DS\\Controller\\User\\" . ucfirst($page);
+            if (class_exists($subClass))
+            {
+                /**
+                 * @var \DS\Interfaces\UserSubcontrollerInterface $subController
+                 */
+                $subController = new $subClass();
+                if (is_a($subController, 'DS\Interfaces\UserSubcontrollerInterface'))
+                {
+                    $subController->initialize();
+                    $subController->handle($user);
+                }
+            }
         }
-        catch (Exception $e)
+        catch (\Exception $e)
         {
-            Application::instance()->log($e->getMessage(), Logger::CRITICAL);
+            $this->serviceManager->getLogger()->error($e->getMessage());
         }
     }
-    
 }

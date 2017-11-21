@@ -36,6 +36,11 @@ abstract class Base
     private $defaultUserId;
     
     /**
+     * @var ServiceManager
+     */
+    protected $serviceManager;
+    
+    /**
      * Get the user id that is checked for every user-related database entries.
      *
      * @return int
@@ -300,6 +305,8 @@ abstract class Base
         $this->setReadConnectionService('read-database');
         $this->setWriteConnectionService('write-database');
         
-        $this->defaultUserId = ServiceManager::instance($this->getDI())->getAuth()->getUserId();
+        $this->serviceManager = ServiceManager::instance($this->getDI());
+        $this->defaultUserId = $this->serviceManager->getAuth()->getUserId();
+        
     }
 }

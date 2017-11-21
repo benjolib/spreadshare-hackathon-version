@@ -190,7 +190,7 @@ class SignupController
                 }
             }
             
-            $this->view->setVar('tables', (new Tables())->findTables($this->serviceManager->getAuth()->getUserId(), [], TableFlags::Published, 0, 'RAND()'));
+            $this->view->setVar('tables', (new Tables())->findTablesAsArray($this->serviceManager->getAuth()->getUserId(), [], TableFlags::Published, 0, 'RAND()'));
             
             $this->view->setMainView('auth/onboarding/tables');
         }

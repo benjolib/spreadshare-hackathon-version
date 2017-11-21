@@ -53,14 +53,6 @@ abstract class TablesEvents
                  ->setText('Table created.')
                  ->create();
         
-        // Initialize table tokens with an amout of zero tokens
-        $tableTokens = new TableTokens();
-        $tableTokens->setTableId($this->getId())
-                    ->setTokensEarned(0)
-                    ->setOwnership(0)
-                    ->setUserId($this->getOwnerUserId())
-                    ->create();
-        
         return true;
     }
     

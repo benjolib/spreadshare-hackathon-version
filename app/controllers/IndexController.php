@@ -48,7 +48,7 @@ class IndexController
             }
             
             $this->view->setVar('order', $order);
-            $this->view->setVar('tables', (new Tables())->findTables($this->serviceManager->getAuth()->getUserId(), [], TableFlags::Published, 0, $orderBy));
+            $this->view->setVar('tables', (new Tables())->findTablesAsArray($this->serviceManager->getAuth()->getUserId(), [], TableFlags::Published, 0, $orderBy));
             
             $this->view->setMainView('homepage/index');
         }
