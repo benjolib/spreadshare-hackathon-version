@@ -18,7 +18,7 @@ use Phalcon\Logger;
  * @version   $Version$
  * @package   DS\Controller
  */
-class PrivacyController
+class TopicsController
     extends BaseController
 {
     /**
@@ -28,7 +28,7 @@ class PrivacyController
     {
         try
         {
-            $this->view->setMainView('pages/privacy');
+            $this->view->setMainView('pages/topics');
         }
         catch (Exception $e)
         {

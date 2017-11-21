@@ -57,32 +57,32 @@
         <div class="footer__top__right__column footer__top__right__column--first">
           <p>About</p>
           <ul>
-            <li>Vision</li>
-            <li>Team</li>
-            <li>Press</li>
-            <li>Invest</li>
-            <li>Donate</li>
-            <li>Jobs</li>
+            <li><a href="/vision">Vision</a></li>
+            <li><a href="/team">Team</a></li>
+            <li><a href="/press">Press</a></li>
+            <li><a href="/invest">Invest</a></li>
+            <li><a href="/donate">Donate</a></li>
+            <li><a href="/jobs">Jobs</a></li>
           </ul>
         </div>
         <div class="footer__top__right__column footer__top__right__column--second">
           <p>Useful links</p>
           <ul>
-            <li>Feature Voting</li>
-            <li>Table Guideline</li>
-            <li>Frequently Asked</li>
-            <li>Privacy Policy</li>
-            <li>Request Table</li>
+            <li><a href="/feature-voting">Feature Voting</a></li>
+            <li><a href="/table-guideline">Table Guideline</a></li>
+            <li><a href="/faq">Frequently Asked</a></li>
+            <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="/request-table">Request Table</a></li>
           </ul>
         </div>
         <div class="footer__top__right__column footer__top__right__column--third">
           <p>Navigate</p>
           <ul>
-            <li>Feed</li>
-            <li>Ranking</li>
-            <li>Sign In & Up</li>
-            <li>Create Table</li>
-            <li>Topics</li>
+            <li><a href="/">Feed</a></li>
+            <li><a href="/ranking">Ranking</a></li>
+            <li><a href="/login">Sign In & Up</a></li>
+            <li><a href="/table/add">Create Table</a></li>
+            <li><a href="/topics">Topics</a></li>
           </ul>
         </div>
       </div>
@@ -93,13 +93,10 @@
       </div>
       <div class="footer__bottom__social">
         <ul>
-          <li>Facebook</li>
-          <li>Twitter</li>
-          <li>Medium</li>
-          <li>GitHub</li>
-          <li>Patreon</li>
-          <li>Dribbble</li>
-          <li>Product Hunt</li>
+          <li><a href="https://www.facebook.com/groups/403500643362775">Facebook</a></li>
+          <li><a href="https://twitter.com/SpreadShareCo">Twitter</a></li>
+          <li><a href="https://medium.com/spreadshare">Medium</a></li>
+          <li><a href="https://www.producthunt.com/posts/spreadshare">Product Hunt</a></li>
         </ul>
       </div>
     </div>

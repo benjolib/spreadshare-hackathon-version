@@ -22,7 +22,7 @@ class TermsController
     extends BaseController
 {
     /**
-     * Hunt
+     * Spreadshare
      */
     public function indexAction($params = [])
     {
