@@ -23,7 +23,7 @@ class TableUpvoted extends AbstractEvent
 {
     
     /**
-     * Issued after a table has been modified
+     * Issued after a table has been upvoted
      *
      * @param int    $userId
      * @param Tables $table
