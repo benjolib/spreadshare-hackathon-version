@@ -391,6 +391,7 @@ CREATE TABLE `tableVotes` (
   `createdAt` int(10) unsigned DEFAULT NULL COMMENT 'timestamp',
   PRIMARY KEY (`tableId`,`userId`),
   KEY `tableVotesUserId` (`userId`),
+  KEY `createdAt` (`createdAt`),
   CONSTRAINT `tableVotesTableId` FOREIGN KEY (`tableId`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tableVotesUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
