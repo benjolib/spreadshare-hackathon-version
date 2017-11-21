@@ -34,4 +34,17 @@ body {
   button, input {
     font-family: $primary-font;
   }
+
+  a,
+  a:active,
+  a:visited {
+    color: #3baf71;
+    text-decoration: none;
+  }
+  a:hover {
+    color: #3b9c5e;
+  }
+  .bold {
+    font-weight: bold;
+  }
 }
