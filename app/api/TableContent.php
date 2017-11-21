@@ -28,27 +28,34 @@ class TableContent
     extends BaseApi
 {
     /**
-     * Get table rows and votes
+     * Get table rows, columns, metadata and votes
      *
      * @param int $tableId
      *
      * @return array
      */
-    public function getTableRows(int $tableId)
+    public function getTableData(int $tableId)
     {
         $tableRows = new TableRows();
         $rows      = $tableRows->getRowsForTable($tableId);
         
-        $votesData = $rowData = [];
+        $columnData = $votesData = $rowData = [];
         foreach ($rows as $row)
         {
             $votesData[] = $row->votesCount;
             $rowData[]   = $row->content;
         }
         
+        $tableColumns = TableColumns::findAllByFieldValue('tableId', $tableId);
+        foreach ($tableColumns as $col)
+        {
+            $columnData[] = $col->getTitle();
+        }
+        
         return [
             'data' => Tables::get($tableId)->toArray(['title']),
             'votes' => $votesData,
+            'columns' => $columnData,
             'rows' => $rowData,
         ];
     }
@@ -57,6 +64,10 @@ class TableContent
      * @param int    $tableId
      * @param string $csvData
      * @param string $separator
+     * @param bool   $hasHeaders
+     *
+     * @return $this|TableContent
+     * @throws Exception
      */
     public function addfromCsvText(int $tableId, string $csvData = '', $separator = ',', $hasHeaders = false)
     {
@@ -140,5 +151,7 @@ class TableContent
             $db->rollback();
             throw $e;
         }
+        
+        return $this;
     }
 }

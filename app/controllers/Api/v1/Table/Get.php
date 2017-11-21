@@ -43,6 +43,7 @@ class Get extends ActionHandler implements MethodInterface
      * @apiSuccess {bool} _meta.success Defines whether the request had any errors
      * @apiSuccess {Object[]} data Array of locations
      * @apiSuccess {string} data.data Meta Information for table
+     * @apiSuccess {string} data.columns Array of columns
      * @apiSuccess {string} data.rows Array of rows
      * @apiSuccess {string} data.votes Array of votes
      *
@@ -50,7 +51,7 @@ class Get extends ActionHandler implements MethodInterface
      *     HTTP/1.1 200 OK
      *     {
      *          "_meta": {
-     *              "total": 1,
+     *              "total": 4,
      *              "success": true
      *          },
      *          "data": [
@@ -58,6 +59,7 @@ class Get extends ActionHandler implements MethodInterface
      *                  "data": {
      *                    "title": "Table Title",
      *                  },
+     *                  "columns": ["Column 1","Column 2","Column 3"],
      *                  "rows": [["Cell 1", "Cell 2", "Cell 3"], ["Cell 1", "Cell 2", "Cell 3"]],
      *                  "votes": [[1, 0, 3], [0, 2, 6]],
      *              },
@@ -77,7 +79,7 @@ class Get extends ActionHandler implements MethodInterface
         
         $tableContent = new TableContent();
         
-        return new Records($tableContent->getTableRows($tableId));
+        return new Records($tableContent->getTableData($tableId));
     }
     
 }

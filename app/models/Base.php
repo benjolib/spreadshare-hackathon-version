@@ -120,7 +120,6 @@ abstract class Base
             return parent::find(
                 [
                     "conditions" => sprintf("%s = ?0", $field),
-                    "limit" => 1,
                     "bind" => [$value],
                 ]
             );
