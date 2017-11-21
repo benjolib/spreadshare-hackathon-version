@@ -9,9 +9,6 @@ use DS\Model\TableViews;
 /**
  * Spreadshare
  *
- * Table events like views or contributions
- * Used to distribute all actions that are associated with a table
- *
  * @author    Dennis Stücken
  * @license   proprietary
  * @copyright Spreadshare

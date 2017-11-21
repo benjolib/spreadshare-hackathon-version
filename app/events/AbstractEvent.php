@@ -5,7 +5,8 @@ namespace DS\Events;
 /**
  * Spreadshare
  *
- * Events
+ * Events like views, changes or contributions
+ * Used to distribute and canalize all actions that are associated with a table
  *
  * @author    Dennis Stücken
  * @license   proprietary
