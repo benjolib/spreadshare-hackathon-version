@@ -21,6 +21,7 @@
     @include rem2(padding, 25, 50);
   }
 
+
   &__logo {
     order: 2;
     @include rem(margin-bottom, 15);
@@ -146,6 +147,51 @@
       justify-content: flex-start;
     }
 
+    &__dropdown {
+      visibility: hidden;
+      margin-top: 20px;
+      float: left;
+      background: #FFFFFF;
+      box-shadow: 0 2px 4px 0 rgba(0,0,0,0.26);
+      border-radius: 6px;
+      ul {
+         list-style-type: none;
+         width: 224px;
+         padding-left: 10px;
+
+       li {
+           /* width: 6em; */
+           margin: 11px 0px 0px 15px;
+
+           a {
+             font-size: 16px;
+             color: #6A7C94;
+             letter-spacing: -0.43px;
+             line-height: 32px;
+           }
+         }
+
+       li:first-child{
+          margin-top: 14px;
+          a {
+            color: #24AE69;
+            letter-spacing: -0.43px;
+          }
+       }
+
+       li:last-child{
+          margin-top: 14px;
+          a {
+            color: #B1BBC7;
+            letter-spacing: -0.43px;
+          }
+        }
+      }
+
+    }
+
+
+
     &__add {
       @include rem(width, 15);
       @include rem(height, 15);
@@ -175,6 +221,8 @@
         @include rem(width, 40);
         @include rem(height, 40);
       }
+
+
     }
 
     a {

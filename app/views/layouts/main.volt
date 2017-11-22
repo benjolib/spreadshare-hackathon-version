@@ -31,8 +31,25 @@
   <div class="navbar__controls">
     <a href="/table/add"><img src="/assets/icons/add.svg" class="navbar__controls__add" /></a>
     <a href="#"><img src="/assets/icons/bell.svg" class="navbar__controls__notification" /></a>
+    <!--
     <a href="/settings/personal"><img src="{{ auth.getUser().getImage() }}" class="navbar__controls__profile" id="profileImage" /></a>
+    !-->
+    <a href="#" onclick="return false;"><img src="{{ auth.getUser().getImage() }}" class="navbar__controls__profile" id="profileImage" /></a>
+
+    <div class="navbar__controls__dropdown">
+      <ul>
+       <li><a href="/table/add">Create a Table</a></li>
+       <li><a href="http://behance.net/patrickserrano">Feed</a></li>
+       <li><a href="/user/{{ auth.getUser().handle }}">Profile</a></li>
+       <li><a href="/settings/wallet">Wallet</a></li>
+       <li><a href="/settings/invite">Get Token</a></li>
+       <li><a href="/settings/account">Settings</a></li>
+       <li><a href="/logout">Sign out</a></li>
+      </ul>
+    </div>
+
   </div>
+
   {% else %}
     <span class="navbar__login">
       <a href="/login" class="navbar__login__login">Log in</a>
@@ -103,9 +120,23 @@
   </footer>
 </section>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
 <script type="text/javascript" src="/js/api.js"></script>
 <script type="text/javascript">
   $(document).ready(function () {
+    /* Popper */
+    var referenceElement = $('.navbar__controls__notification');
+    var onPopper = $('.navbar__controls__dropdown');
+    var popper = new Popper(referenceElement,onPopper,
+      {
+        placement: 'bottom'
+      }
+    );
+    //toggle menu
+    $('#profileImage').click(function() {
+      $(onPopper).toggleClass("show");
+    });
+
     /* Define API endpoints once and globally */
     $.fn.api.settings.api = {
       'upvote': '/api/v1/vote/{id}',
