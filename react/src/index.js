@@ -5,13 +5,13 @@ import React from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
 import "sanitize.css/sanitize.css";
+import "./globalStyles";
 import configureStore from "./store";
 import Table from "./containers/Table";
 import LocationSelect from "./containers/LocationSelect";
 import TopicsSelect from "./containers/TopicsSelect";
 import ContentTypeSelect from "./containers/ContentTypeSelect";
 import TagsSelect from "./containers/TagsSelect";
-import "./index.css";
 
 const store = configureStore();
 

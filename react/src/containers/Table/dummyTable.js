@@ -1,7 +1,8 @@
 // @flow
 // prettier-ignore
 const dummyTable = {
-  votes: [2000, 1998, 1990, 1988, 1802, 1791, 1700, 1697, 1696, 1690, 1450, 1349, 1298, 1100, 1000, 996, 878],
+  votes: ['2000', '1998', '1990', '1988', '1802', '1791', '1700', '1697', '1696', '1690', '1450', '1349', '1298', '1100', '1000', '996', '878'],
+  columns: ["Votes", "Name", "Functionality", "URL", "Price"],
   rows: [
     ['Talkus', 'Centralize all your customer feedback (livechat, email, sms, twitter, facebook) in one place, Slack', 'http://talkus.io', '$48/mo unlimited agents'],
     ['UserTest.io', 'Video feedback of your users voicing their thoughts and opions as they complete tasks.', 'https://usertest.io', '$10 per Your Own Tester, $23 per Qualified Website Tester'],

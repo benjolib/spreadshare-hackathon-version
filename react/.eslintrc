@@ -18,7 +18,11 @@
     "react/require-default-props": "off",
     "linebreak-style": "off",
     "import/prefer-default-export": "off",
-    "consistent-return": "off"
+    "consistent-return": "off",
+    // https://github.com/yannickcr/eslint-plugin-react/issues/1187
+    "react/jsx-indent-props": "off",
+    / https://github.com/yannickcr/eslint-plugin-react/issues/1187
+    "react/jsx-closing-bracket-location": "off"
   },
   "env": {
     "browser": true,
