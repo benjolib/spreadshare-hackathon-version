@@ -29,11 +29,14 @@ class TableViewed extends AbstractEvent
     public static function after(int $userId, int $tableId)
     {
         $tableStats = TableStats::findByFieldValue('tableId', $tableId);
-        $tableStats->setViewsCount($tableStats->getViewsCount() + 1)->save();
-        
-        if ($userId > 0)
+        if ($tableStats)
         {
-            (new TableViews())->setUserId($userId)->setTableId($tableId)->create();
+            $tableStats->setViewsCount($tableStats->getViewsCount() + 1)->save();
+            
+            if ($userId > 0)
+            {
+                (new TableViews())->setUserId($userId)->setTableId($tableId)->create();
+            }
         }
     }
     
