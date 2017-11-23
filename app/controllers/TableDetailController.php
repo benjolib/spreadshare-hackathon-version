@@ -57,7 +57,7 @@ class TableDetailController
             if (is_a($subController, 'DS\Interfaces\TableSubcontrollerInterface'))
             {
                 $subController->initialize();
-                $subController->handle($tableModel);
+                $subController->handle($tableModel, $this->serviceManager->getAuth()->getUserId());
             }
         }
     }

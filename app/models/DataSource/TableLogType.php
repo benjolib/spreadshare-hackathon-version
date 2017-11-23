@@ -26,4 +26,6 @@ class TableLogType
     const Deleted = 5;
     
     const OwnerChagned = 5;
+    
+    const DataImported = 6;
 }

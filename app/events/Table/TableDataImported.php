@@ -17,10 +17,8 @@ use DS\Model\Tables;
  *
  * @version   $Version$
  * @package   DS\Events\Table
- *
- * @todo      Use Phalcons event engine
  */
-class TableCreated extends AbstractEvent
+class TableDataImported extends AbstractEvent
 {
     
     /**
@@ -31,14 +29,16 @@ class TableCreated extends AbstractEvent
      */
     public static function after(int $userId, Tables $table)
     {
+        
         // Initialize table log with a table created entry
         $tableLog = new TableLog();
         $tableLog->setTableId($table->getId())
-                 ->setLogType(TableLogType::Created)
+                 ->setLogType(TableLogType::DataImported)
                  ->setUserId($userId)
                  ->setPlaceholders('')
-                 ->setText('Table created.')
+                 ->setText('Table data imported.')
                  ->create();
+        
     }
     
 }

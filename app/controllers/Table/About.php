@@ -29,7 +29,7 @@ class About
      *
      * @return $this
      */
-    public function handle(Tables $table)
+    public function handle(Tables $table, int $userId)
     {
         try
         {

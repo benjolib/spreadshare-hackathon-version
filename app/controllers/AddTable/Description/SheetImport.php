@@ -1,6 +1,6 @@
 <?php
 
-namespace DS\Controller\Table;
+namespace DS\Controller\AddTable\Description;
 
 use DS\Controller\BaseController;
 use DS\Interfaces\TableSubcontrollerInterface;
@@ -17,7 +17,7 @@ use DS\Model\Tables;
  * @version   $Version$
  * @package   DS\Controller\User
  */
-class Feed
+class SheetImport
     extends BaseController
     implements TableSubcontrollerInterface
 {
@@ -33,7 +33,8 @@ class Feed
     {
         try
         {
-            $this->view->setMainView('table/detail/feed');
+            $this->view->setVar('content', 'table/add/sheet-import');
+            $this->view->setVar('action', '/table/add/description/sheet-import');
         }
         catch (\Exception $e)
         {

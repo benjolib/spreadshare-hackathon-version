@@ -25,7 +25,7 @@ interface TableSubcontrollerInterface
      *
      * @return $this
      */
-    public function handle(Tables $table);
+    public function handle(Tables $table, int $userId);
     
     /**
      * Initialize controller

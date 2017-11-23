@@ -2,6 +2,7 @@
 
 namespace DS\Model\Events;
 
+use DS\Events\Table\TableCreated;
 use DS\Model\Abstracts\AbstractTables;
 use DS\Model\DataSource\TableLogType;
 use DS\Model\TableLog;
@@ -44,14 +45,7 @@ abstract class TablesEvents
         $tableStats = new TableStats();
         $tableStats->setTableId($this->getId())->create();
         
-        // Initialize table log with a table created entry
-        $tableLog = new TableLog();
-        $tableLog->setTableId($this->getId())
-                 ->setLogType(TableLogType::Created)
-                 ->setUserId($this->getOwnerUserId())
-                 ->setPlaceholders('')
-                 ->setText('Table created.')
-                 ->create();
+        TableCreated::after($this->getOwnerUserId(), $this);
         
         return true;
     }

@@ -116,11 +116,35 @@ return [
         'methods' => ['GET', 'POST'],
     ],
     [
-        'url' => '/table/add/{action:[a-z\-]+}/:step}',
+        'url' => '/table/add',
         'paths' => [
-            'controller' => 'Table',
+            'controller' => 'Add_Table',
             'action' => 'add',
         ],
-        'methods' => ['POST'],
+        'methods' => ['GET'],
+    ],
+    [
+        'url' => '/table/add/description/{selection:[a-z\-]+}',
+        'paths' => [
+            'controller' => 'Add_Table',
+            'action' => 'index',
+        ],
+        'methods' => ['GET', 'POST'],
+    ],
+    [
+        'url' => '/table/add/choose/{selection:[a-z\-]+}',
+        'paths' => [
+            'controller' => 'Add_Table',
+            'action' => 'choose',
+        ],
+        'methods' => ['GET', 'POST'],
+    ],
+    [
+        'url' => '/table/add/confirm',
+        'paths' => [
+            'controller' => 'Add_Table',
+            'action' => 'confirm',
+        ],
+        'methods' => ['GET', 'POST'],
     ],
 ];

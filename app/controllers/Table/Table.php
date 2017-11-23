@@ -27,14 +27,15 @@ class Table
      * Handle Subcontroller
      *
      * @param Tables $table
+     * @param int $userId
      *
      * @return $this
      */
-    public function handle(Tables $table)
+    public function handle(Tables $table, int $userId)
     {
         try
         {
-            TableViewed::after($this->serviceManager->getAuth()->getUserId(), (int) $tables[0]['id']);
+            TableViewed::after($this->serviceManager->getAuth()->getUserId(), (int) $table->getId());
             $this->view->setMainView('table/detail/table');
         }
         catch (\Exception $e)
