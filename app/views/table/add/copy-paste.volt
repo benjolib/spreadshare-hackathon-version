@@ -1,7 +1,7 @@
 {% extends 'layouts/main.volt' %}
 
 {% block content %}
-<form id="addTableCopyPasteForm" method="post">
+<form id="addTableCopyPasteForm" method="post" action="/table/add/copy-paste/{{ nextstep }}">
   <div class="addTableCopyPaste">
     <div class="addTableCopyPaste__content">
       <div class="addTableCopyPaste__content__wrapper">
@@ -16,9 +16,13 @@
               <div class="addTableCopyPaste__content__main__options__item__column">
                 <div class="addTableCopyPaste__content__main__options__item__row addTableCopyPaste__content__main__options__item__row--divided">
                   <p>Paste table content here</p>
-                  <p>Separate by <span>comma</span><i></i></p>
+                  <p>Separate by <select name="separator">
+                    <option value="tab">tab</option>
+                    <option value="comma">comma</option>
+                    <option value="semicolon">semicolon</option>
+                  </select><i></i></p>
                 </div>
-                <textarea rows="20" autofocus></textarea>
+                <textarea rows="20" name="data" autofocus></textarea>
               </div>
             </div>
           </div>
@@ -31,11 +35,11 @@
       </div>
       <aside class="addTableCopyPaste__content__aside">
         <div class="addTableCopyPaste__content__aside__box">
-          <a href="/table/add">
-            <div class="sign-box-selected">Choose table</div>
-          </a>
           <a href="#">
             <div>Description</div>
+          </a>
+          <a href="/table/add">
+            <div class="sign-box-selected">Choose table</div>
           </a>
           <a href="#">
             <div>Confirm</div>
