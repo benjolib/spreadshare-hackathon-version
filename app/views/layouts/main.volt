@@ -120,11 +120,32 @@
 <script type="text/javascript">
   $(document).ready(function () {
     /* Popper */
-    var referenceElement = $('.navbar__controls__notification');
+    var referenceElement;
     var onPopper = $('.navbar__controls__dropdown');
-    new Popper(referenceElement,onPopper, {
-        placement: 'bottom'
+
+    // initial state
+    if (window.innerWidth < 1024) {
+      referenceElement = $('.navbar__controls__add');
+    } else {
+      referenceElement = $('.navbar__controls__notification');
+    }
+    new Popper(referenceElement, onPopper, {
+      placement: 'bottom'
     });
+
+    // event listener
+    $(window).resize(function() {
+      if (window.innerWidth < 1024) {
+        referenceElement = $('.navbar__controls__add');
+      } else {
+        referenceElement = $('.navbar__controls__notification');
+      }
+      new Popper(referenceElement, onPopper, {
+        placement: 'bottom'
+      });
+    })
+
+
 
     //toggle menu
     $('#profileImage').click(function() {
