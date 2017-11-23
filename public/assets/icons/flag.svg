@@ -1,0 +1,30 @@
+<svg width="12" height="16" viewBox="0 0 12 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>Group</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(-4780 -24670)">
+<g id="Group">
+<g id="Rectangle 11">
+<use xlink:href="#path0_fill" transform="translate(4780 24670)" fill="#6A7C94"/>
+</g>
+<g id="Rectangle 11">
+<use xlink:href="#path1_fill" transform="translate(4783 24671)" fill="#6A7C94"/>
+</g>
+<g id="Rectangle 11">
+<use xlink:href="#path2_fill" transform="translate(4787 24672)" fill="#6A7C94"/>
+</g>
+<g id="Triangle 2">
+<use xlink:href="#path3_fill" transform="translate(4785.75 24675)" fill="#6A7C94"/>
+</g>
+<g id="Triangle 2">
+<use xlink:href="#path4_fill" transform="matrix(-1 1.22465e-16 -1.22465e-16 -1 4793.25 24676)" fill="#6A7C94"/>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_fill" fill-rule="evenodd" d="M 0 0.5C 0 0.223858 0.223858 0 0.5 0L 1.9567 0C 2.23284 0 2.4567 0.223858 2.4567 0.5L 2.4567 15.2931C 2.4567 15.5692 2.23284 15.7931 1.9567 15.7931L 0.5 15.7931C 0.223857 15.7931 0 15.5692 0 15.2931L 0 0.5Z"/>
+<path id="path1_fill" fill-rule="evenodd" d="M 0 0.5C 0 0.223858 0.223858 0 0.5 0L 4 0C 4.55228 0 5 0.447715 5 1L 5 7L 0.5 7C 0.223858 7 0 6.77614 0 6.5L 0 0.5Z"/>
+<path id="path2_fill" fill-rule="evenodd" d="M 0 0L 3 0L 3 7L 1 7C 0.447715 7 0 6.55228 0 6L 0 0Z"/>
+<path id="path3_fill" fill-rule="evenodd" d="M 3.75327 0L 5.92617 2.31574C 6.52534 2.9543 6.07258 4 5.19693 4L 2.30961 4C 1.43396 4 0.981201 2.9543 1.58037 2.31574L 3.75327 0Z"/>
+<path id="path4_fill" fill-rule="evenodd" d="M 3.62745 0L 7.25489 4L 2.25682 4C 1.38926 4 0.933262 2.97089 1.51606 2.32823L 3.62745 0Z"/>
+</defs>
+</svg>

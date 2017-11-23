@@ -1,0 +1,21 @@
+.upvote-icon {
+  background: url('/assets/icons/chevron-up.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 16px;
+  height: 16px;
+
+  &.small {
+    width: 12px;
+    height: 12px;
+  }
+}
+.flag-icon {
+  background: url('/assets/icons/flag.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 16px;
+  height: 16px;
+}

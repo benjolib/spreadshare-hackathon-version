@@ -1,0 +1,132 @@
+.table {
+  display: flex;
+  flex-direction: column;
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-between;
+    @include rem(padding, 50);
+
+    @include desktop {
+      flex-direction: row;
+      @include rem2(padding, 50, 125);
+    }
+
+    &__details {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+
+      span {
+        background: $text-color;
+        display: inline-flex;
+        align-self: center;
+        border-radius: 6px;
+        font-weight: 600;
+        @include rem2(padding, 2, 8);
+        @include rem(margin-bottom, 14);
+        @include rem(font-size, 14);
+
+        @include desktop {
+          align-self: flex-start;
+          margin-bottom: 0;
+        }
+      }
+
+      h1 {
+        color: $text-color;
+        @include rem(font-size, 42);
+        @include rem(margin-bottom, 14);
+
+        @include desktop {
+          text-align: left;
+          margin-bottom: 0;
+        }
+      }
+      h3 {
+        color: $text-color;
+        font-weight: 400;
+        @include rem(font-size, 16);
+        @include rem(margin-bottom, 14 * 2);
+
+        @include desktop {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    &__buttons {
+      display: flex;
+
+      button {
+        background: white;
+        font-weight: 500;
+        border: none;
+        color: $text-color;
+        align-self: center;
+        cursor: pointer;
+        @include rem(font-size, 16);
+        @include rem2(padding, 6, 14);
+
+        &:nth-child(even) {
+          @include rem2(margin, 0, 10);
+        }
+
+        &.subscribe {
+          color: white;
+          background: $logo-color;
+
+          &:hover {
+            background: lighten($logo-color, 4%);
+          }
+
+          &:after {
+            content: 'Subscribe';
+          }
+        }
+        &.subscribed {
+          color: white;
+          background: $upvote-text-color;
+
+          &:hover {
+            background: darken($upvote-text-color, 8%);
+          }
+
+          &:after {
+            content: 'Unsubscribe';
+          }
+        }
+
+        &.upvote {
+          display: flex;
+          align-items: center;
+
+          div:first-child {
+            margin-right: 12px;
+          }
+
+          &:hover {
+            color: white;
+            background: $text-link-color-hover;
+          }
+        }
+        &.upvoted {
+          color: white;
+          background: $logo-color;
+
+          &:hover {
+            background: darken($logo-color, 8%);
+          }
+        }
+        &.flag {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 36px;
+        }
+      }
+    }
+  }
+}
