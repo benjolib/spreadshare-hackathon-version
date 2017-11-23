@@ -31,11 +31,7 @@
   <div class="navbar__controls">
     <a href="/table/add"><img src="/assets/icons/add.svg" class="navbar__controls__add" /></a>
     <a href="#"><img src="/assets/icons/bell.svg" class="navbar__controls__notification" /></a>
-    <!--
-    <a href="/settings/personal"><img src="{{ auth.getUser().getImage() }}" class="navbar__controls__profile" id="profileImage" /></a>
-    !-->
     <a href="#" onclick="return false;"><img src="{{ auth.getUser().getImage() }}" class="navbar__controls__profile" id="profileImage" /></a>
-
     <div class="navbar__controls__dropdown">
       <ul>
        <li><a href="/table/add">Create a Table</a></li>
@@ -47,7 +43,6 @@
        <li><a href="/logout">Sign out</a></li>
       </ul>
     </div>
-
   </div>
 
   {% else %}
@@ -127,11 +122,10 @@
     /* Popper */
     var referenceElement = $('.navbar__controls__notification');
     var onPopper = $('.navbar__controls__dropdown');
-    var popper = new Popper(referenceElement,onPopper,
-      {
+    new Popper(referenceElement,onPopper, {
         placement: 'bottom'
-      }
-    );
+    });
+
     //toggle menu
     $('#profileImage').click(function() {
       $(onPopper).toggleClass("show");
