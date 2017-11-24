@@ -65,7 +65,7 @@ if (process.env.NODE_ENV === "production") {
         </div>
         <div>
           <h1>Table</h1>
-          <Table tableId="exampleTableId123" />
+          <Table id="exampleTableId123" />
         </div>
       </div>
     </Provider>,
