@@ -57,7 +57,6 @@ class Table extends Component<Props, State> {
     if (key === "edit") {
       setTimeout(() => {
         // timeout is used to make sure the menu collapsed before prompt is shown
-        console.log(options);
         if (!_.isEqual(options.start, options.end)) {
           // TODO: either disable edit when more than one cell selected or use better alert
           alert("Select only one cell for edit");
@@ -70,6 +69,26 @@ class Table extends Component<Props, State> {
         const newValue = prompt("Please type the new value for the cell");
 
         this.props.editCell(this.props.tableId, cell.row, cell.col, newValue);
+      }, 100);
+    } else if (key === "delete") {
+      setTimeout(() => {
+        // timeout is used to make sure the menu collapsed before prompt is shown
+        if (!_.isEqual(options.start, options.end)) {
+          // TODO: either disable edit when more than one cell selected or use better alert
+          alert("Select only one cell for delete");
+          return;
+        }
+
+        const cell = options.start;
+
+        // TODO: confirm is temporary until i make proper dropdown
+        const confirmed = window.confirm("Are you sure?");
+
+        if (!confirmed) {
+          return;
+        }
+
+        this.props.editCell(this.props.tableId, cell.row, cell.col, "");
       }, 100);
     }
   };
@@ -112,9 +131,10 @@ class Table extends Component<Props, State> {
                 delete: {
                   name: "Delete"
                 },
-                addUrl: {
-                  name: "Add URL"
-                },
+                // TODO: I think cell needs to be an object for this to work
+                // addUrl: {
+                //   name: "Add URL"
+                // },
                 copy: {
                   name: "Copy"
                 }
