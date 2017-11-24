@@ -68,7 +68,9 @@ class Table extends Component<Props, State> {
         // TODO: prompt is temporary until i make proper dropdown
         const newValue = prompt("Please type the new value for the cell");
 
-        if (newValue !== "string") {
+        console.log(newValue);
+
+        if (typeof newValue !== "string") {
           return;
         }
 
