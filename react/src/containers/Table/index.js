@@ -12,9 +12,10 @@ import TableError from "../../components/TableError";
 import { editCell, fetchTable } from "./actions";
 import type { ReduxState } from "../../types";
 import type { TableDataWrapper, Rows } from "./types";
+import reactRenderer from "../../lib/reactRenderer";
 
 type Props = {
-  tableId: string, // from server markup
+  id: string, // from server markup
   data: TableDataWrapper,
   fetchTable: typeof fetchTable,
   editCell: typeof editCell
@@ -32,8 +33,9 @@ class Table extends Component<Props, State> {
   state: State;
 
   componentDidMount() {
-    this.props.fetchTable(this.props.tableId);
+    this.props.fetchTable(this.props.id);
   }
+  rowIndexMap = {};
 
   props: Props;
 
@@ -46,12 +48,21 @@ class Table extends Component<Props, State> {
   };
 
   searchRows = (rows: Rows) =>
-    rows.filter(
-      row =>
-        row.filter(field =>
-          field.toLowerCase().includes(this.state.searchValue.toLowerCase())
-        ).length
-    );
+    rows
+      .map((row, rowIndex) => ({
+        rowIndex,
+        row
+      }))
+      .filter(
+        row =>
+          row.row.filter(field =>
+            field.toLowerCase().includes(this.state.searchValue.toLowerCase())
+          ).length
+      )
+      .map((row, rowIndex) => {
+        this.rowIndexMap[rowIndex] = row.rowIndex;
+        return row.row;
+      });
 
   contextMenuCallback = (key, options) => {
     if (key === "edit") {
@@ -73,8 +84,13 @@ class Table extends Component<Props, State> {
         if (typeof newValue !== "string") {
           return;
         }
-
-        this.props.editCell(this.props.tableId, cell.row, cell.col, newValue);
+        console.log(this.rowIndexMap);
+        this.props.editCell(
+          this.props.id,
+          this.rowIndexMap[cell.row],
+          cell.col,
+          newValue
+        );
       }, 100);
     } else if (key === "delete") {
       setTimeout(() => {
@@ -94,7 +110,12 @@ class Table extends Component<Props, State> {
           return;
         }
 
-        this.props.editCell(this.props.tableId, cell.row, cell.col, "");
+        this.props.editCell(
+          this.props.id,
+          this.rowIndexMap[cell.row],
+          cell.col,
+          ""
+        );
       }, 100);
     }
   };
@@ -121,11 +142,21 @@ class Table extends Component<Props, State> {
         </TableHeader>
         <TableMain>
           <HandsOnTable
+            ref={ref => (this.hot = ref)}
             colHeaders={this.props.data.table.columns}
             data={this.searchRows(this.props.data.table.rows)}
-            columns={this.props.data.table.columns.map(() => ({
-              readOnly: true
-            }))}
+            columns={this.props.data.table.columns.map(
+              (item, i) =>
+                i === 0
+                  ? {
+                      readOnly: true,
+                      data: "jsx",
+                      renderer: reactRenderer
+                    }
+                  : {
+                      readOnly: true
+                    }
+            )}
             stretchH="all"
             contextMenuCopyPaste
             contextMenu={{
@@ -154,7 +185,7 @@ class Table extends Component<Props, State> {
 }
 
 const mapStateToProps = (state: ReduxState, ownProps: Props) => ({
-  data: state.tables[ownProps.tableId]
+  data: state.tables[ownProps.id]
 });
 
 const mapDispatchToProps = {
