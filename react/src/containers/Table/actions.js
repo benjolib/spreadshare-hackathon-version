@@ -106,7 +106,7 @@ export const editRow = (
     saveDataApi(`table/${tableId}/edit-row`, {
       tableId,
       rowIndex,
-      rowData
+      lineNumber: rowData // to be consistent with db naming
     }).then(({ error }: { error: Error }) => {
       if (error) {
         dispatch(editRowError(tableId, rowIndex, rowData, new Error(error)));
