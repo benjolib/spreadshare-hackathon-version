@@ -1,6 +1,6 @@
 // @flow
-import * as React from 'react';
-import styled from 'styled-components';
+import * as React from "react";
+import styled from "styled-components";
 
 const StyledDiv = styled.div`
   display: flex;
@@ -9,7 +9,7 @@ const StyledDiv = styled.div`
 `;
 
 type Props = {
-  children?: React.Node,
+  children?: React.Node
 };
 
 const TableHeader = (props: Props) =>

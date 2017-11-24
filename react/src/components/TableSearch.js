@@ -1,6 +1,6 @@
 // @flow
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const StyledDiv = styled.div`
   margin: 0 4px;
@@ -33,7 +33,7 @@ const StyledDiv = styled.div`
 `;
 
 type Props = {
-  onChange: (e: SyntheticInputEvent) => void,
+  onChange: (e: SyntheticInputEvent) => void
 };
 
 const TableSearch = (props: Props) =>

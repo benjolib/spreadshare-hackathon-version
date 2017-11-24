@@ -1,6 +1,6 @@
 // @flow
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const StyledButton = styled.button`
   border: 0;
@@ -13,7 +13,7 @@ const StyledButton = styled.button`
 `;
 
 type Props = {
-  icon: string,
+  icon: string
 };
 
 const TableButton = (props: Props) =>
