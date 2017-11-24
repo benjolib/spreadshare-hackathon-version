@@ -9,7 +9,7 @@ import TableButton from "../../components/TableButton";
 import TableSearch from "../../components/TableSearch";
 import TableLoading from "../../components/TableLoading";
 import TableError from "../../components/TableError";
-import { editCell, fetchTable } from "./actions";
+import { editRow, fetchTable } from "./actions";
 import type { ReduxState } from "../../types";
 import type { TableDataWrapper, Rows } from "./types";
 import reactRenderer from "../../lib/reactRenderer";
@@ -18,7 +18,7 @@ type Props = {
   id: string, // from server markup
   data: TableDataWrapper,
   fetchTable: typeof fetchTable,
-  editCell: typeof editCell
+  editRow: typeof editRow
 };
 
 type State = {
@@ -84,13 +84,19 @@ class Table extends Component<Props, State> {
         if (typeof newValue !== "string") {
           return;
         }
-        console.log(this.rowIndexMap);
-        this.props.editCell(
-          this.props.id,
-          this.rowIndexMap[cell.row],
-          cell.col,
-          newValue
-        );
+
+        const rowData = [
+          ...this.props.data.table.rows[this.rowIndexMap[cell.row]].slice(
+            0,
+            cell.col
+          ),
+          newValue,
+          ...this.props.data.table.rows[this.rowIndexMap[cell.row]].slice(
+            cell.col + 1
+          )
+        ];
+
+        this.props.editRow(this.props.id, this.rowIndexMap[cell.row], rowData);
       }, 100);
     } else if (key === "delete") {
       setTimeout(() => {
@@ -110,12 +116,17 @@ class Table extends Component<Props, State> {
           return;
         }
 
-        this.props.editCell(
-          this.props.id,
-          this.rowIndexMap[cell.row],
-          cell.col,
-          ""
-        );
+        const rowData = [
+          ...this.props.data[this.props.id].table.rows[
+            this.rowIndexMap[cell.row]
+          ].slice(0, cell.col),
+          "",
+          ...this.props.data[this.props.id].table.rows[
+            this.rowIndexMap[cell.row]
+          ].slice(cell.col + 1)
+        ];
+
+        this.props.editRow(this.props.id, this.rowIndexMap[cell.row], rowData);
       }, 100);
     }
   };
@@ -190,7 +201,7 @@ const mapStateToProps = (state: ReduxState, ownProps: Props) => ({
 
 const mapDispatchToProps = {
   fetchTable,
-  editCell
+  editRow
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Table);

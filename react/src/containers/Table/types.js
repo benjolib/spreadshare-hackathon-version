@@ -4,7 +4,9 @@
 
 type Field = string;
 
-export type Rows = Array<Array<Field>>;
+export type Row = Array<Field>;
+
+export type Rows = Array<Row>;
 
 export type Table = {
   votes: Array<string>,
@@ -31,20 +33,19 @@ export type TablesAction =
   | { type: "FETCH_TABLE_SUCCESS", payload: { tableId: string, table: Table } }
   | { type: "FETCH_TABLE_ERROR", payload: { tableId: string, error: Error } }
   | {
-      type: "EDIT_CELL_REQUEST",
-      payload: { tableId: string, row: number, col: number, value: string }
+      type: "EDIT_ROW_REQUEST",
+      payload: { tableId: string, rowIndex: number, rowData: Row }
     }
   | {
-      type: "EDIT_CELL_SUCCESS",
-      payload: { tableId: string, row: number, col: number, value: string }
+      type: "EDIT_ROW_SUCCESS",
+      payload: { tableId: string, rowIndex: number, rowData: Row }
     }
   | {
-      type: "EDIT_CELL_ERROR",
+      type: "EDIT_ROW_ERROR",
       payload: {
         tableId: string,
-        row: number,
-        col: number,
-        value: string,
+        rowIndex: number,
+        rowData: Row,
         error: Error
       }
     };

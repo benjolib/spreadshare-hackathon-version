@@ -1,6 +1,6 @@
 // @flow
 import type { Dispatch, Action, ThunkAction } from "../../types";
-import type { Table } from "./types";
+import type { Table, Row } from "./types";
 import { fetchDataApi, saveDataApi } from "../../api";
 import dummyTable from "./dummyTable";
 
@@ -55,77 +55,69 @@ export const fetchTable = (tableId: string): ThunkAction => (
 
 // EDIT CELL ACTIONS
 
-export const editCellRequest = (
+export const editRowRequest = (
   tableId: string,
-  row: number,
-  col: number,
-  value: string
+  rowIndex: number,
+  rowData: Row
 ): Action => ({
-  type: "EDIT_CELL_REQUEST",
+  type: "EDIT_ROW_REQUEST",
   payload: {
     tableId,
-    row,
-    col,
-    value
+    rowIndex,
+    rowData
   }
 });
 
-export const editCellSuccess = (
+export const editRowSuccess = (
   tableId: string,
-  row: number,
-  col: number,
-  value: string
+  rowIndex: number,
+  rowData: Row
 ): Action => ({
-  type: "EDIT_CELL_SUCCESS",
+  type: "EDIT_ROW_SUCCESS",
   payload: {
     tableId,
-    row,
-    col,
-    value
+    rowIndex,
+    rowData
   }
 });
 
-export const editCellError = (
+export const editRowError = (
   tableId: string,
-  row: number,
-  col: number,
-  value: string,
+  rowIndex: number,
+  rowData: Row,
   error: Error
 ): Action => ({
-  type: "EDIT_CELL_ERROR",
+  type: "EDIT_ROW_ERROR",
   payload: {
     tableId,
-    row,
-    col,
-    value,
+    rowIndex,
+    rowData,
     error
   }
 });
 
-export const editCell = (
+export const editRow = (
   tableId: string,
-  row: number,
-  col: number,
-  value: string
+  rowIndex: number,
+  rowData: Row
 ): ThunkAction => (dispatch: Dispatch) => {
-  dispatch(editCellRequest(tableId, row, col, value));
+  dispatch(editRowRequest(tableId, rowIndex, rowData));
   if (process.env.NODE_ENV === "production") {
-    saveDataApi(`table/${tableId}/edit-cell`, {
+    saveDataApi(`table/${tableId}/edit-row`, {
       tableId,
-      row,
-      col,
-      value
+      rowIndex,
+      rowData
     }).then(({ error }: { error: Error }) => {
       if (error) {
-        dispatch(editCellError(tableId, row, col, value, new Error(error)));
+        dispatch(editRowError(tableId, rowIndex, rowData, new Error(error)));
         return;
       }
 
-      dispatch(editCellSuccess(tableId, row, col, value));
+      dispatch(editRowSuccess(tableId, rowIndex, rowData));
     });
   } else {
     setTimeout(() => {
-      dispatch(editCellSuccess(tableId, row, col, value));
+      dispatch(editRowSuccess(tableId, rowIndex, rowData));
     }, 500);
   }
 };

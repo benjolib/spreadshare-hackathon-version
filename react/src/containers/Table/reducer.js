@@ -42,12 +42,12 @@ export const tablesReducer = (
       };
     }
 
-    case "EDIT_CELL_REQUEST": {
+    case "EDIT_ROW_REQUEST": {
       // TODO: maybe some sort of optimistic update or loader here
       return state;
     }
 
-    case "EDIT_CELL_SUCCESS": {
+    case "EDIT_ROW_SUCCESS": {
       console.log(action.payload);
 
       if (!state[action.payload.tableId].table) {
@@ -64,19 +64,11 @@ export const tablesReducer = (
             rows: [
               ...state[action.payload.tableId].table.rows.slice(
                 0,
-                action.payload.row
+                action.payload.rowIndex
               ),
-              [
-                ...state[action.payload.tableId].table.rows[
-                  action.payload.row
-                ].slice(0, action.payload.col),
-                action.payload.value,
-                ...state[action.payload.tableId].table.rows[
-                  action.payload.row
-                ].slice(action.payload.col + 1)
-              ],
+              action.payload.rowData,
               ...state[action.payload.tableId].table.rows.slice(
-                action.payload.row + 1
+                action.payload.rowIndex + 1
               )
             ]
           }
@@ -84,7 +76,7 @@ export const tablesReducer = (
       };
     }
 
-    case "EDIT_CELL_ERROR": {
+    case "EDIT_ROW_ERROR": {
       // TODO: maybe show error toast message or something
       return state;
     }
