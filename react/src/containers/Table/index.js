@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import HandsOnTable from "react-handsontable";
+import _ from "lodash";
 import TableHeader from "../../components/TableHeader";
 import TableMain from "../../components/TableMain";
 import TableButton from "../../components/TableButton";
@@ -11,7 +12,6 @@ import TableError from "../../components/TableError";
 import { editCell, fetchTable } from "./actions";
 import type { ReduxState } from "../../types";
 import type { TableDataWrapper, Rows } from "./types";
-import _ from "lodash";
 
 type Props = {
   tableId: string, // from server markup
@@ -101,7 +101,6 @@ class Table extends Component<Props, State> {
             columns={this.props.data.table.columns.map(() => ({
               readOnly: true
             }))}
-            // contextMenu
             stretchH="all"
             contextMenuCopyPaste
             contextMenu={{
