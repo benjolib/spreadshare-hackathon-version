@@ -33,7 +33,7 @@ const StyledDiv = styled.div`
 `;
 
 type Props = {
-  onChange: (e: SyntheticInputEvent) => void
+  onChange: (e: Event) => void
 };
 
 const TableSearch = (props: Props) =>

@@ -1,15 +1,8 @@
 // @flow
 import type { Action } from "../../types";
 import type { TablesState } from "./types";
-import dummyTable from "./dummyTable";
 
-const initialState = {
-  exampleTableId123: {
-    loading: false,
-    error: false,
-    table: dummyTable
-  }
-};
+const initialState = {};
 
 export const tablesReducer = (
   state: TablesState = initialState,
@@ -47,6 +40,53 @@ export const tablesReducer = (
           table: false
         }
       };
+    }
+
+    case "EDIT_CELL_REQUEST": {
+      // TODO: maybe some sort of optimistic update or loader here
+      return state;
+    }
+
+    case "EDIT_CELL_SUCCESS": {
+      console.log(action.payload);
+
+      if (!state[action.payload.tableId].table) {
+        return state;
+      }
+
+      // TODO: find a better way to do this (which still doesn't mutate), probably a util function
+      return {
+        ...state,
+        [action.payload.tableId]: {
+          ...state[action.payload.tableId],
+          table: {
+            ...state[action.payload.tableId].table,
+            rows: [
+              ...state[action.payload.tableId].table.rows.slice(
+                0,
+                action.payload.row
+              ),
+              [
+                ...state[action.payload.tableId].table.rows[
+                  action.payload.row
+                ].slice(0, action.payload.col),
+                action.payload.value,
+                ...state[action.payload.tableId].table.rows[
+                  action.payload.row
+                ].slice(action.payload.col + 1)
+              ],
+              ...state[action.payload.tableId].table.rows.slice(
+                action.payload.row + 1
+              )
+            ]
+          }
+        }
+      };
+    }
+
+    case "EDIT_CELL_ERROR": {
+      // TODO: maybe show error toast message or something
+      return state;
     }
 
     default: {
