@@ -78,7 +78,7 @@
           <ul>
             <li><a href="/jobs">Tasks & Jobs</a></li>
             <li><a href="/feature-voting">Feature Voting</a></li>
-            <li><a href="/earntoken">Token</a></li>
+            <li><a href="/token">Token</a></li>
             <li><a href="/donate">Contribute</a></li>
           </ul>
         </div>
