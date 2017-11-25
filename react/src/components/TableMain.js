@@ -3,11 +3,7 @@ import * as React from "react";
 import styled from "styled-components";
 
 const StyledDiv = styled.div`
-  ${"" /* font-family: 'Montserrat', sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  color: #6a7c94; */} font-family: 'Montserrat',
-    sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 400;
   font-size: 14px;
   overflow: hidden;
