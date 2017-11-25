@@ -2,6 +2,7 @@
 
 namespace DS\Api;
 
+use DS\Model\Tags as TagsModel;
 use DS\Traits\Api\GetAllTrait;
 
 /**
@@ -25,7 +26,33 @@ class Tags
     use GetAllTrait;
     
     /**
+     * Modelclass is used in GetAllTrait
+     *
      * @var string
      */
     private static $modelClass = 'Tags';
+    
+    /**
+     * Searches a location by name. Wildcard is added at the end of $name.
+     *
+     * @param     $name
+     * @param int $limit
+     *
+     * @return array
+     */
+    public static function searchByName($name, $limit = 100)
+    {
+        $locations = new TagsModel;
+        
+        return $locations->find(
+            [
+                "conditions" => "title LIKE ?0",
+                'columns' => self::$defaultColumns,
+                "order" => "title ASC",
+                "limit" => $limit,
+                "bind" => [$name . '%'],
+            ]
+        )->toArray(['id', 'locationName']);
+    }
+    
 }

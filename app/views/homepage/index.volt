@@ -51,14 +51,14 @@
       </div>
       <ul class="filter">
         <li>
-          <label {% if filter['topic'] == "" %}class="selected"{% endif %}>
-          <input type="radio" name="topic" checked="checked" value="" /> All
+          <label {% if sidebarFilter.topic == "" %}class="selected"{% endif %}>
+          <input type="radio" name="topic" {% if sidebarFilter.topic == "" %}checked="checked"{% endif %} value="" /> All
           </label>
         </li>
         {% for topic in topics %}
         <li>
-          <label {% if filter['topic'] == topic.id %}class="selected"{% endif %} title="{{ topic.title|e }}">
-          <input type="radio" name="topic" checked="checked" value="{{ topic.id }}" /> {{ topic.title|e }}
+          <label {% if sidebarFilter.topic == topic.id %}class="selected"{% endif %} title="{{ topic.title|e }}">
+          <input type="radio" name="topic" {% if sidebarFilter.topic == topic.id %}checked="checked"{% endif %} value="{{ topic.id }}" /> {{ topic.title|e }}
           </label>
         </li>
         {% endfor %}
@@ -69,26 +69,28 @@
       </div>
       <ul class="filter">
         <li>
-          <label {% if filter['type'] == "" %}class="selected"{% endif %}>
-          <input type="radio" name="type" checked="checked" value="" /> All
+          <label {% if sidebarFilter.type == "" %}class="selected"{% endif %}>
+          <input type="radio" name="type" {% if sidebarFilter.type == "" %}checked="checked"{% endif %} value="" /> All
           </label>
         </li>
         {% for type in types %}
         <li>
-          <label {% if filter['type'] == type.id %}class="selected"{% endif %} title="{{ type.title|e }}">
-          <input type="radio" name="type" checked="checked" value="{{ type.id }}" /> {{ type.title|e }}
+          <label {% if sidebarFilter.type == type.id %}class="selected"{% endif %} title="{{ type.title|e }}">
+          <input type="radio" name="type" {% if sidebarFilter.type == type.id %}checked="checked"{% endif %} value="{{ type.id }}" /> {{ type.title|e }}
           </label>
         </li>
         {% endfor %}
       </ul>
-    </div>
-    <div class="main__content__sidebar__option">
-      <span>Filter by Tags</span><img src="/assets/icons/chevron-down.svg" />
-    </div>
-    <div class="main__content__sidebar__option">
-      <span>Filter by location</span><img src="/assets/icons/chevron-down.svg" />
 
-      <div id="LocationSelect" data-name="locations[]" data-value="{{ filter.locations }}" data-placeholder="" class="react-component"></div>
+      <div class="main__content__sidebar__option">
+        <span>Filter by Tags</span><img src="/assets/icons/chevron-down.svg" />
+      </div>
+      <div id="TagsSelect" data-name="tags[]" data-value="{{ reactArray(filteredTags) }}" data-submit-form-on-change="sidebarForm" data-placeholder="" class="react-component"></div>
+
+      <div class="main__content__sidebar__option">
+        <span>Filter by location</span><img src="/assets/icons/chevron-down.svg" />
+      </div>
+      <div id="LocationSelect" data-name="locations[]" data-value="{{ reactArray(filteredLocations) }}" data-submit-form-on-change="sidebarForm" data-placeholder="" class="react-component"></div>
     </div>
   </form>
 </div>

@@ -1,17 +1,17 @@
 // @flow
-import React, { Component } from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import Select from "react-select";
-import "react-select/dist/react-select.css";
-import { getLocations } from "./api";
+import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
+import { getLocations } from './api';
 
 export const loadLocations = searchTerm => {
   searchTerm = searchTerm.trim();
   if (searchTerm && searchTerm.length >= 2) {
     return getLocations(searchTerm).then(json => ({
       options: json.data,
-      complete: true
+      complete: true,
     }));
   }
 
@@ -22,8 +22,8 @@ export const loadLocations = searchTerm => {
 class LocationSelect extends Component {
   static defaultProps = {
     value: [],
-    name: "location[]",
-    placeholder: <span>Select locations</span>
+    name: 'location[]',
+    placeholder: <span>Select locations</span>,
   };
 
   constructor(props) {
@@ -31,16 +31,24 @@ class LocationSelect extends Component {
 
     // Initial state
     this.state = {
-      value: typeof props.value === "string" ? JSON.parse(props.value) : []
+      value: typeof props.value === 'string' ? JSON.parse(props.value) : [],
     };
   }
 
-  componentWillMount() {}
+  componentDidUpdate = (prevProps, prevState) => {
+    if (this.state.value.length !== prevState.value.length) {
+      if (this.props.submitFormOnChange) {
+        const form = document.getElementById(this.props.submitFormOnChange);
+        if (form) {
+          form.submit();
+        }
+      }
+    }
+  };
 
   onChange = value => {
-    // console.log('Selected: ', value);
     this.setState({
-      value
+      value,
     });
   };
 
@@ -48,8 +56,8 @@ class LocationSelect extends Component {
     const options = {
       name: this.props.name,
       options: [],
-      valueKey: "id",
-      labelKey: "locationName",
+      valueKey: 'id',
+      labelKey: 'locationName',
       autofocus: false,
       autoload: false,
       backspaceRemoves: false,
@@ -60,7 +68,7 @@ class LocationSelect extends Component {
       onChange: this.onChange,
       value: this.state.value,
       loadOptions: loadLocations,
-      matchPos: "start"
+      matchPos: 'start',
     };
 
     // Add options for preselection
@@ -69,7 +77,7 @@ class LocationSelect extends Component {
         this.state.value.forEach(item => {
           options.options.push({
             locationName: item.locationName,
-            id: item.id
+            id: item.id,
           });
         });
       }

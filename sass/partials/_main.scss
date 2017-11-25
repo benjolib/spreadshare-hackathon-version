@@ -4,7 +4,6 @@
   display: flex;
   flex-direction: column;
 
-
   &__hero {
     display: flex;
     flex-direction: column;
@@ -291,6 +290,7 @@
     }
 
     &__sidebar {
+      padding-bottom: 20px;
 
       @include desktop {
         width: 20%;
@@ -329,6 +329,11 @@
         img {
           @include rem(width, 20);
         }
+      }
+
+      .react-component {
+        width: 270px;
+        margin-top: 20px;
       }
     }
 

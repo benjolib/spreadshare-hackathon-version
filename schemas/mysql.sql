@@ -410,6 +410,7 @@ CREATE TABLE `tags` (
   `createdAt` int(10) DEFAULT NULL COMMENT 'timestamp',
   PRIMARY KEY (`id`),
   KEY `userId` (`userId`),
+  KEY `title` (`title`),
   CONSTRAINT `tableTagsUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

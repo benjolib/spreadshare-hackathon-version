@@ -214,6 +214,22 @@ class Tables
             $this->query->andWhere(Tables::class . '.typeId = :type:', ['type' => $tableFilter->getType()]);
         }
         
+        if ($tableFilter->getLocations() && count($tableFilter->getLocations()))
+        {
+            $this->query->innerJoin(TableLocations::class, TableLocations::class . '.tableId = ' . Tables::class . '.id')
+                        ->inWhere(TableLocations::class . '.locationId', $tableFilter->getLocations())
+                        ->groupBy(Tables::class . '.id');
+            
+        }
+        
+        if ($tableFilter->getTags() && count($tableFilter->getTags()))
+        {
+            $this->query->innerJoin(TableTags::class, TableTags::class . '.tableId = ' . Tables::class . '.id')
+                        ->inWhere(TableTags::class . '.tagId', $tableFilter->getTags())
+                        ->groupBy(Tables::class . '.id');
+            
+        }
+        
         return $this;
     }
 }

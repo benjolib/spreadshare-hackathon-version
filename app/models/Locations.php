@@ -2,6 +2,7 @@
 
 namespace DS\Model;
 
+use DS\Constants\Paging;
 use DS\Model\Events\LocationsEvents;
 
 /**
@@ -21,32 +22,28 @@ class Locations
     extends LocationsEvents
 {
     /**
-     * @param array $param
-     * @param int   $page
+     * @param array $ids
      * @param int   $limit
      *
      * @return array
      */
-    /*
-    public function findCustom($param = [], $page = 0, $limit = Paging::endlessScrollPortions)
+    public function getByIds(array $ids = [], $limit = Paging::endlessScrollPortions)
     {
-        if (count($param))
+        if (count($ids))
         {
             return self::query()
                        ->columns(
                            [
-                               Locations::class . ".id",
+                               self::class . ".id",
+                               self::class . ".locationName",
                            ]
                        )
-                //->leftJoin(Locations::class, Locations::class . '.profileId = ' . Profile::class . '.id')
-                //->inWhere(Profile::class . '.id', $param)
-                       ->limit((int) $limit, (int) Paging::endlessScrollPortions * $page)
-                //->orderBy(sprintf('FIELD (id,%s)', implode(',', $param)))
+                       ->inWhere(self::class . '.id', $ids)
+                       ->limit((int) $limit)
                        ->execute()
                        ->toArray() ?: [];
         }
         
         return [];
     }
-    */
 }

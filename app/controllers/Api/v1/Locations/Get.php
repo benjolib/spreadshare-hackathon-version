@@ -36,6 +36,7 @@ class Get extends ActionHandler implements MethodInterface
      * Process Get Method
      *
      * @api               {get} /api/v1/locations Request all locations
+     * @apiParam          {String} q Search term
      * @apiVersion        1.0.0
      * @apiName           Locations
      * @apiGroup          Public

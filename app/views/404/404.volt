@@ -11,7 +11,7 @@
     </div>
     <h1 style="margin: 20px 0 5px 0;">Page not found</h1>
     <p>The link you clicked may be broken or the page may have been removed.</p>
-    <p style="font-weight:500;">Visit the <a href="{{ site.baseurl }}/">Home</a> page or <a href="mailto:hi@spreadshare.co">Contact us</a> about the problem.</p>
+    <p style="font-weight:500;">Visit the <a href="/">Home</a> page or <a href="mailto:hi@spreadshare.co">Contact us</a> about the problem.</p>
   </div>
 </div>
 

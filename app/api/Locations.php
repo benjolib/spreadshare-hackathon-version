@@ -37,9 +37,9 @@ class Locations
      */
     public static function getAll(): array
     {
-        $locations = new LocationsModel;
+        $model = new \DS\Model\Locations();
         
-        return $locations->find(
+        return $model->find(
             [
                 'columns' => self::$defaultColumns,
             ]
