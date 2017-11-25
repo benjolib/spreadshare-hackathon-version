@@ -3,6 +3,7 @@
 namespace DS\Controller;
 
 use DS\Model\DataSource\TableFlags;
+use DS\Model\Helper\TableFilter;
 use DS\Model\Tables;
 
 /**
@@ -39,9 +40,7 @@ class TableDetailController
         {
             $tables = $tableModel->findTablesAsArray(
                 $this->serviceManager->getAuth()->getUserId(),
-                [
-                    $tableId,
-                ],
+                (new TableFilter)->addTableId($tableId),
                 TableFlags::All
             );
             

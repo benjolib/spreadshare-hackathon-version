@@ -44,19 +44,62 @@
 
   </div>
   {# sidebar #}
-  <div class="main__content__sidebar">
-    <div class="main__content__sidebar__option">
-      <a>Categories</a><img src="/assets/icons/chevron-down.svg" />
+  <form method="GET" id="sidebarForm">
+    <div class="main__content__sidebar">
+      <div class="main__content__sidebar__option">
+        <span>Filter by topic</span><img src="/assets/icons/chevron-down.svg" />
+      </div>
+      <ul class="filter">
+        <li>
+          <label {% if filter['topic'] == "" %}class="selected"{% endif %}>
+          <input type="radio" name="topic" checked="checked" value="" /> All
+          </label>
+        </li>
+        {% for topic in topics %}
+        <li>
+          <label {% if filter['topic'] == topic.id %}class="selected"{% endif %} title="{{ topic.title|e }}">
+          <input type="radio" name="topic" checked="checked" value="{{ topic.id }}" /> {{ topic.title|e }}
+          </label>
+        </li>
+        {% endfor %}
+      </ul>
+
+      <div class="main__content__sidebar__option">
+        <span>Filter by Table Type</span><img src="/assets/icons/chevron-down.svg" />
+      </div>
+      <ul class="filter">
+        <li>
+          <label {% if filter['type'] == "" %}class="selected"{% endif %}>
+          <input type="radio" name="type" checked="checked" value="" /> All
+          </label>
+        </li>
+        {% for type in types %}
+        <li>
+          <label {% if filter['type'] == type.id %}class="selected"{% endif %} title="{{ type.title|e }}">
+          <input type="radio" name="type" checked="checked" value="{{ type.id }}" /> {{ type.title|e }}
+          </label>
+        </li>
+        {% endfor %}
+      </ul>
     </div>
     <div class="main__content__sidebar__option">
-      <a>Table Type</a><img src="/assets/icons/chevron-down.svg" />
+      <span>Filter by Tags</span><img src="/assets/icons/chevron-down.svg" />
     </div>
     <div class="main__content__sidebar__option">
-      <a>Tags</a><img src="/assets/icons/chevron-down.svg" />
+      <span>Filter by location</span><img src="/assets/icons/chevron-down.svg" />
+
+      <div id="LocationSelect" data-name="locations[]" data-value="{{ filter.locations }}" data-placeholder="" class="react-component"></div>
     </div>
-    <div class="main__content__sidebar__option">
-      <a>Geography</a><img src="/assets/icons/chevron-down.svg" />
-    </div>
-  </div>
+  </form>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('#sidebarForm > div > ul > li > label').on('change', function (ev) {
+      document.getElementById('sidebarForm').submit();
+    });
+  });
+</script>
 {% endblock %}

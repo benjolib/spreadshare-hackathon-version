@@ -4,8 +4,11 @@ namespace DS\Controller;
 
 use DS\Application;
 use DS\Model\DataSource\TableFlags;
+use DS\Model\Helper\TableFilter;
 use DS\Model\Tables;
 use DS\Model\TableStats;
+use DS\Model\Topics;
+use DS\Model\Types;
 use Phalcon\Exception;
 use Phalcon\Logger;
 
@@ -47,8 +50,28 @@ class IndexController
                     break;
             }
             
+            $this->view->setVar('topics', Topics::find());
+            $this->view->setVar('types', Types::find());
+            $this->view->setVar('filter', $this->request->get());
+            
+            $tableFilter            = new TableFilter();
+            $tableFilter->topic     = $this->request->get('topic', null, '');
+            $tableFilter->locations = $this->request->get('locations', null, []);
+            $tableFilter->tags      = $this->request->get('tags', null, []);
+            $tableFilter->type      = $this->request->get('type', null, '');
+            
             $this->view->setVar('order', $order);
-            $this->view->setVar('tables', (new Tables())->findTablesAsArray($this->serviceManager->getAuth()->getUserId(), [], TableFlags::Published, 0, $orderBy));
+            $this->view->setVar(
+                'tables',
+                (new Tables())
+                    ->findTablesAsArray(
+                        $this->serviceManager->getAuth()->getUserId(),
+                        $tableFilter,
+                        TableFlags::Published,
+                        0,
+                        $orderBy
+                    )
+            );
             
             $this->view->setMainView('homepage/index');
         }

@@ -146,7 +146,7 @@
             position: absolute;
             top: 7px;
             right: 10px;
-            background: #EBEBF4;
+            background: #ebebf4;
             border-radius: 4px;
             @include rem2(padding, 4, 8);
 
@@ -163,7 +163,7 @@
 
             &:hover {
               cursor: pointer;
-              background: darken(#EBEBF4, 8%);
+              background: darken(#ebebf4, 8%);
             }
 
             span {
@@ -236,6 +236,16 @@
       }
     }
   }
+}
+
+// selected topic
+.selected {
+  background: #2ead6b !important;
+}
+
+.selected span,
+.selected p {
+  color: white;
 }
 
 // signup/topics
@@ -414,14 +424,6 @@
     }
   }
 }
-// selected topic
-.selected {
-  background: #2ead6b !important;
-}
-.selected span,
-.selected p {
-  color: white;
-}
 
 // signup/locations
 .locations {
@@ -530,7 +532,7 @@
             &__icon {
               display: flex;
               justify-content: center;
-              background: #F8F8FB;
+              background: #f8f8fb;
               border-top-left-radius: 3px;
               border-bottom-left-radius: 3px;
               @include rem(width, 38);
@@ -543,8 +545,8 @@
             &__field {
               font-family: $primary-font;
               font-weight: 400;
-              color: #6A7C94;
-              background: #F8F8FB;
+              color: #6a7c94;
+              background: #f8f8fb;
               border: none;
               outline: none;
               border-radius: 3px;
@@ -808,7 +810,6 @@
           border-radius: 6px;
           @include rem2(padding, 25, 35);
           @include rem(margin-bottom, 20);
-
           &__info {
             width: 100%;
             display: flex;
@@ -866,12 +867,12 @@
 
             @include tablet {
               display: flex;
-              border-top: 2px solid #F7F7FB;
+              border-top: 2px solid #f7f7fb;
               @include rem(font-size, 12);
             }
             @include desktop {
               display: flex;
-              border-top: 2px solid #F7F7FB;
+              border-top: 2px solid #f7f7fb;
               @include rem(font-size, 14);
             }
 

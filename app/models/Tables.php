@@ -5,6 +5,7 @@ namespace DS\Model;
 use DS\Constants\Paging;
 use DS\Model\DataSource\TableFlags;
 use DS\Model\Events\TablesEvents;
+use DS\Model\Helper\TableFilter;
 use Phalcon\Mvc\Model\Criteria;
 
 /**
@@ -140,18 +141,18 @@ class Tables
     }
     
     /**
-     * @param int   $userId
-     * @param array $tableIds
-     * @param int   $flags
-     * @param int   $page
-     * @param null  $orderBy
-     * @param int   $limit
+     * @param int         $userId
+     * @param TableFilter $tableFilter
+     * @param int         $flags
+     * @param int         $page
+     * @param null        $orderBy
+     * @param int         $limit
      *
      * @return array
      */
-    public function findTablesAsArray(int $userId, array $tableIds = [], int $flags = TableFlags::Published, int $page = 0, $orderBy = null, $limit = Paging::endlessScrollPortions): array
+    public function findTablesAsArray(int $userId, TableFilter $tableFilter, int $flags = TableFlags::Published, int $page = 0, $orderBy = null, $limit = Paging::endlessScrollPortions): array
     {
-        $this->selectTables($userId, $tableIds, $flags, $page, $orderBy, $limit);
+        $this->selectTables($userId, $tableFilter, $flags, $page, $orderBy, $limit);
         
         return $this->query->execute()->toArray() ?: [];
     }
@@ -164,7 +165,7 @@ class Tables
      *
      * @return self
      */
-    public function selectTables(int $userId, array $tableIds = [], int $flags = TableFlags::Published, int $page = 0, $orderBy = null, $limit = Paging::endlessScrollPortions): Tables
+    public function selectTables(int $userId, TableFilter $tableFilter, int $flags = TableFlags::Published, int $page = 0, $orderBy = null, $limit = Paging::endlessScrollPortions): Tables
     {
         $this->query = self::query()
                            ->columns(
@@ -188,19 +189,29 @@ class Tables
                            ->leftJoin(Types::class, Tables::class . '.typeId = ' . Types::class . '.id')
                            ->limit((int) $limit, (int) Paging::endlessScrollPortions * $page);
         
-        if ($flags)
-        {
-            $this->query->where('flags = :flags:', ['flags' => $flags]);
-        }
-        
         if ($orderBy)
         {
             $this->query->orderBy($orderBy);
         }
         
-        if (count($tableIds))
+        if (count($tableFilter->getTableIds()))
         {
-            $this->query->inWhere(Tables::class . '.id', $tableIds);
+            $this->query->inWhere(Tables::class . '.id', $tableFilter->getTableIds());
+        }
+        
+        if ($flags)
+        {
+            $this->query->andWhere('flags = :flags:', ['flags' => $flags]);
+        }
+        
+        if ($tableFilter->getTopic())
+        {
+            $this->query->andWhere(Tables::class . '.topic1Id = :topic: OR ' . Tables::class . '.topic2Id = :topic:', ['topic' => $tableFilter->getTopic()]);
+        }
+        
+        if ($tableFilter->getType())
+        {
+            $this->query->andWhere(Tables::class . '.typeId = :type:', ['type' => $tableFilter->getType()]);
         }
         
         return $this;
