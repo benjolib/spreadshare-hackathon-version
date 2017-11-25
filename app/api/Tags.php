@@ -7,7 +7,7 @@ use DS\Traits\Api\GetAllTrait;
 /**
  * Spreadshare
  *
- * General Topics Api
+ * General Tags Api
  *
  * @author    Dennis Stücken
  * @license   proprietary
@@ -19,7 +19,7 @@ use DS\Traits\Api\GetAllTrait;
  *
  * @method static findFirstById(int $id)
  */
-class Topics
+class Tags
     extends BaseApi
 {
     use GetAllTrait;
@@ -27,5 +27,5 @@ class Topics
     /**
      * @var string
      */
-    private static $modelClass = 'Topics';
+    private static $modelClass = 'Tags';
 }
