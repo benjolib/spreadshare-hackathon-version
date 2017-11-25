@@ -31,7 +31,27 @@ class Post extends ActionHandler implements MethodInterface
     }
     
     /**
-     * Process Get Method
+     * Process Post Method
+     *
+     * @api               {post} /api/v1/comment/:id Post and edited row
+     * @apiVersion        1.0.0
+     * @apiName           Table
+     * @apiGroup          Public
+     *
+     * @apiSuccess {Object} _meta Meta object
+     * @apiSuccess {int} _meta.total total number of items included in this response
+     * @apiSuccess {bool} _meta.success Defines whether the request had any errors
+     * @apiSuccess {bool} result
+     *
+     * @apiSuccessExample Success-Response:
+     *     HTTP/1.1 200 OK
+     *     {
+     *          "_meta": {
+     *              "total": 1,
+     *              "success": true
+     *          },
+     *          "data": true
+     *      }
      *
      * @return mixed
      */

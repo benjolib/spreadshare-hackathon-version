@@ -32,7 +32,9 @@ class Post extends ActionHandler implements MethodInterface
     /**
      * Process Post Method
      *
-     * @api               {get} /api/v1/table/:id Post and edited row
+     * @api               {post} /api/v1/table/:tableId Post an edited row (:tableId is the id of the table)
+     * @apiParam {String} [rowData]  The row as a json string
+     * @apiParam {String} [lineNumber]  Row Index / Line Number
      * @apiVersion        1.0.0
      * @apiName           Table
      * @apiGroup          Public
@@ -58,7 +60,7 @@ class Post extends ActionHandler implements MethodInterface
     {
         if ($this->request->isAjax())
         {
-            $tableId    = $this->request->getPost('rowData');
+            $tableId    = $this->action;
             $lineNumber = $this->request->getPost('lineNumber');
             $rowData    = $this->request->getPost('rowData');
             

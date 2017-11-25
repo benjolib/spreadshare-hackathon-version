@@ -30,7 +30,33 @@ class Post extends ActionHandler implements MethodInterface
     }
     
     /**
-     * Process Get Method
+     * Process Post Method
+     *
+     * @api               {post} /api/v1/vote/:tableId Request all content types  (:tableId is the id of the table)
+     * @apiParam          {string} lineNumber Row Index / Line Number
+     * @apiVersion        1.0.0
+     * @apiName           Topics
+     * @apiGroup          Public
+     *
+     * @apiSuccess {Object} _meta Meta object
+     * @apiSuccess {int} _meta.total total number of items included in this response
+     * @apiSuccess {bool} _meta.success Defines whether the request had any errors
+     * @apiSuccess {Object[]} data Array of content types
+     * @apiSuccess {string} data.voted bool true if upvoted, false if downvoted
+     *
+     * @apiSuccessExample Success-Response:
+     *     HTTP/1.1 200 OK
+     *     {
+     *          "_meta": {
+     *              "total": 1,
+     *              "success": true
+     *          },
+     *          "data": [
+     *              {
+     *                  "voted": true,
+     *              }
+     *          ]
+     *      }
      *
      * @return mixed
      */
