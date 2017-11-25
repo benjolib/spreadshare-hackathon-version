@@ -23,6 +23,23 @@ class TableRows
 {
     /**
      * @param int $tableId
+     * @param int $lineNumber
+     *
+     * @return Abstracts\AbstractTableRows|\Phalcon\Mvc\Model\ResultInterface
+     */
+    public static function findByTableIdAndLineNumber(int $tableId, int $lineNumber)
+    {
+        return parent::findFirst(
+            [
+                "conditions" => "tableId = ?0 AND lineNumber = ?1",
+                "limit" => 1,
+                "bind" => [$tableId, $lineNumber],
+            ]
+        );
+    }
+    
+    /**
+     * @param int $tableId
      *
      * @return Simple
      */

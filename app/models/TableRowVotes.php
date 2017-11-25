@@ -2,6 +2,7 @@
 
 namespace DS\Model;
 
+use DS\Component\ServiceManager;
 use DS\Model\Events\TableRowVotesEvents;
 
 /**
@@ -21,32 +22,59 @@ class TableRowVotes
     extends TableRowVotesEvents
 {
     /**
-     * @param array $param
-     * @param int   $page
-     * @param int   $limit
+     * @param int $userId
+     * @param int $rowId
      *
-     * @return array
+     * @return self
      */
-    /*
-    public function findCustom($param = [], $page = 0, $limit = Paging::endlessScrollPortions)
+    public static function findVote(int $userId, int $rowId)
     {
-        if (count($param))
+        return self::findFirst(
+            [
+                "conditions" => 'userId = ?0 AND rowId = ?1',
+                "bind" => [$userId, $rowId],
+                "limit" => 1,
+            ]
+        );
+    }
+    
+    /**
+     * @param int $userId
+     * @param int $limit
+     *
+     * @return self
+     */
+    public static function getUpvotedRowsByUser(int $userId, $limit = 50)
+    {
+        return self::find(
+            [
+                "conditions" => 'userId = ?0',
+                "bind" => [$userId],
+                "limit" => $limit,
+                "order" => 'createdAt DESC',
+            ]
+        );
+    }
+    
+    /**
+     * @param int $rowId
+     * @param int $userId
+     *
+     * @return bool
+     */
+    public function votedForRow(int $rowId, int $userId = null)
+    {
+        if ($userId === null)
         {
-            return self::query()
-                       ->columns(
-                           [
-                               TableRowVotes::class . ".id",
-                           ]
-                       )
-                //->leftJoin(TableRowVotes::class, TableRowVotes::class . '.profileId = ' . Profile::class . '.id')
-                //->inWhere(Profile::class . '.id', $param)
-                       ->limit((int) $limit, (int) Paging::endlessScrollPortions * $page)
-                //->orderBy(sprintf('FIELD (id,%s)', implode(',', $param)))
-                       ->execute()
-                       ->toArray() ?: [];
+            $userId = ServiceManager::instance($this->getDI())->getAuth()->getUserId();
         }
         
-        return [];
+        return self::findFirst(
+            [
+                "conditions" => 'userId = ?0 AND rowId = ?1',
+                "bind" => [$userId, $rowId],
+                "limit" => 1,
+            ]
+        ) ? true : false;
     }
-    */
 }
