@@ -21,32 +21,53 @@ class TableSubscription
     extends TableSubscriptionEvents
 {
     /**
-     * @param array $param
-     * @param int   $page
-     * @param int   $limit
+     * @param int $userId
+     * @param int $tableId
      *
-     * @return array
+     * @return $this
      */
-    /*
-    public function findCustom($param = [], $page = 0, $limit = Paging::endlessScrollPortions)
+    public function subscribe(int $userId, int $tableId)
     {
-        if (count($param))
+        $this->setUserId($userId)
+             ->setTableId($tableId)
+             ->create();
+        
+        return $this;
+    }
+    
+    /**
+     * @param int $userId
+     * @param int $tableId
+     *
+     * @return $this
+     */
+    public function unsubscribe(int $userId, int $tableId)
+    {
+        $model = static::findSubscription($userId, $tableId);
+        if ($model)
         {
-            return self::query()
-                       ->columns(
-                           [
-                               TableSubscription::class . ".id",
-                           ]
-                       )
-                //->leftJoin(TableSubscription::class, TableSubscription::class . '.profileId = ' . Profile::class . '.id')
-                //->inWhere(Profile::class . '.id', $param)
-                       ->limit((int) $limit, (int) Paging::endlessScrollPortions * $page)
-                //->orderBy(sprintf('FIELD (id,%s)', implode(',', $param)))
-                       ->execute()
-                       ->toArray() ?: [];
+            $model->delete();
         }
         
-        return [];
+        return $this;
     }
-    */
+    
+    /**
+     * Allows to query this model by the given sql field name and it's value
+     *
+     * @param string $field
+     * @param string $value
+     *
+     * @return static
+     */
+    public static function findSubscription(int $userId, int $tableId)
+    {
+        return self::findFirst(
+            [
+                "conditions" => 'tableId = ?0 AND userId = ?1',
+                "limit" => 1,
+                "bind" => [$tableId, $userId],
+            ]
+        );
+    }
 }

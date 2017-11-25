@@ -155,9 +155,23 @@
     /* Define API endpoints once and globally */
     $.fn.api.settings.api = {
       'upvote': '/api/v1/vote/{id}',
+      'subscribe': '/api/v1/subscribe/{id}',
     };
 
-    $('div.upvote').api({
+    $('div.upvote, button.upvote').api({
+      method: 'POST',
+      onSuccess: function (response, button) {
+        var span = button.find('span');
+        if (response.data.voted) {
+          button.addClass('selected');
+          span.text(parseInt(parseInt(span.text()) + 1));
+        } else {
+          button.removeClass('selected');
+          span.text(parseInt(parseInt(span.text()) - 1));
+        }
+      },
+    });
+     $('button.subscribe').api({
       method: 'POST',
       onSuccess: function (response, button) {
         console.log(response);
