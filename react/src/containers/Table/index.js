@@ -9,7 +9,7 @@ import TableButton from "../../components/TableButton";
 import TableSearch from "../../components/TableSearch";
 import TableLoading from "../../components/TableLoading";
 import TableError from "../../components/TableError";
-import { editRow, fetchTable } from "./actions";
+import { voteRow, editRow, fetchTable } from "./actions";
 import type { ReduxState } from "../../types";
 import type { TableDataWrapper, Rows } from "./types";
 import reactRenderer from "../../lib/reactRenderer";
@@ -18,7 +18,8 @@ type Props = {
   id: string, // from server markup
   data: TableDataWrapper,
   fetchTable: typeof fetchTable,
-  editRow: typeof editRow
+  editRow: typeof editRow,
+  voteRow: typeof voteRow
 };
 
 type State = {
@@ -46,6 +47,9 @@ class Table extends Component<Props, State> {
       });
     }
   };
+
+  addVotesColumn = (rows: Rows, votes: Array<string>) =>
+    rows.map((row, rowIndex) => [votes[rowIndex], ...row]);
 
   searchRows = (rows: Rows) =>
     rows
@@ -131,6 +135,10 @@ class Table extends Component<Props, State> {
     }
   };
 
+  vote = row => {
+    this.props.voteRow(this.props.id, this.rowIndexMap[row]);
+  };
+
   render() {
     if (!this.props.data || this.props.data.loading) {
       return <TableLoading />;
@@ -141,6 +149,13 @@ class Table extends Component<Props, State> {
     }
 
     console.log(this.props.data);
+
+    const rowsWithVotes = this.addVotesColumn(
+      this.props.data.table.rows,
+      this.props.data.table.votes
+    );
+
+    const searchedRows = this.searchRows(rowsWithVotes); // with side effect
 
     return (
       <div>
@@ -155,14 +170,17 @@ class Table extends Component<Props, State> {
           <HandsOnTable
             ref={ref => (this.hot = ref)}
             colHeaders={this.props.data.table.columns}
-            data={this.searchRows(this.props.data.table.rows)}
+            data={searchedRows}
             columns={this.props.data.table.columns.map(
               (item, i) =>
                 i === 0
                   ? {
                       readOnly: true,
                       data: "jsx",
-                      renderer: reactRenderer,
+                      renderer: reactRenderer({
+                        searchedRows,
+                        vote: this.vote
+                      }),
                       width: 80
                     }
                   : {
@@ -170,7 +188,6 @@ class Table extends Component<Props, State> {
                     }
             )}
             modifyColWidth={width => {
-              console.log(width);
               if (width > 400) {
                 return 400;
               }
@@ -187,10 +204,6 @@ class Table extends Component<Props, State> {
                 delete: {
                   name: "Delete"
                 },
-                // TODO: I think cell needs to be an object for this to work
-                // addUrl: {
-                //   name: "Add URL"
-                // },
                 copy: {
                   name: "Copy"
                 }
@@ -209,7 +222,8 @@ const mapStateToProps = (state: ReduxState, ownProps: Props) => ({
 
 const mapDispatchToProps = {
   fetchTable,
-  editRow
+  editRow,
+  voteRow
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Table);

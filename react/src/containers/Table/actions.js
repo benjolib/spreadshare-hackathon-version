@@ -53,7 +53,7 @@ export const fetchTable = (tableId: string): ThunkAction => (
   }
 };
 
-// EDIT CELL ACTIONS
+// EDIT ROW ACTIONS
 
 export const editRowRequest = (
   tableId: string,
@@ -96,6 +96,8 @@ export const editRowError = (
   }
 });
 
+// thunk
+
 export const editRow = (
   tableId: string,
   rowIndex: number,
@@ -103,10 +105,10 @@ export const editRow = (
 ): ThunkAction => (dispatch: Dispatch) => {
   dispatch(editRowRequest(tableId, rowIndex, rowData));
   if (process.env.NODE_ENV === "production") {
-    saveDataApi(`table/${tableId}/edit-row`, {
+    saveDataApi(`edit-row/${tableId}`, {
       tableId,
-      rowIndex,
-      lineNumber: rowData // to be consistent with db naming
+      lineNumber: rowIndex, // to be consistent with db naming
+      rowData
     }).then(({ error }: { error: Error }) => {
       if (error) {
         dispatch(editRowError(tableId, rowIndex, rowData, new Error(error)));
@@ -122,4 +124,58 @@ export const editRow = (
   }
 };
 
+// VOTE ROW ACTIONS
+
+export const voteRowRequest = (tableId: string, rowIndex: number): Action => ({
+  type: "VOTE_ROW_REQUEST",
+  payload: {
+    tableId,
+    rowIndex
+  }
+});
+
+export const voteRowSuccess = (tableId: string, rowIndex: number): Action => ({
+  type: "VOTE_ROW_SUCCESS",
+  payload: {
+    tableId,
+    rowIndex
+  }
+});
+
+export const voteRowError = (
+  tableId: string,
+  rowIndex: number,
+  error: Error
+): Action => ({
+  type: "VOTE_ROW_ERROR",
+  payload: {
+    tableId,
+    rowIndex,
+    error
+  }
+});
+
 // thunk
+
+export const voteRow = (tableId: string, rowIndex: number): ThunkAction => (
+  dispatch: Dispatch
+) => {
+  dispatch(voteRowRequest(tableId, rowIndex));
+  if (process.env.NODE_ENV === "production") {
+    saveDataApi(`vote-row/${tableId}`, {
+      tableId,
+      lineNumber: rowIndex // to be consistent with db naming
+    }).then(({ error }: { error: Error }) => {
+      if (error) {
+        dispatch(voteRowError(tableId, rowIndex, new Error(error)));
+        return;
+      }
+
+      dispatch(voteRowSuccess(tableId, rowIndex));
+    });
+  } else {
+    setTimeout(() => {
+      dispatch(voteRowSuccess(tableId, rowIndex));
+    }, 500);
+  }
+};

@@ -81,6 +81,49 @@ export const tablesReducer = (
       return state;
     }
 
+    case "VOTE_ROW_REQUEST": {
+      // TODO: maybe some sort of optimistic update or loader here
+      return state;
+    }
+
+    case "VOTE_ROW_SUCCESS": {
+      console.log(action.payload);
+
+      if (!state[action.payload.tableId].table) {
+        return state;
+      }
+
+      // TODO: find a better way to do this (which still doesn't mutate), probably a util function
+      return {
+        ...state,
+        [action.payload.tableId]: {
+          ...state[action.payload.tableId],
+          table: {
+            ...state[action.payload.tableId].table,
+            votes: [
+              ...state[action.payload.tableId].table.votes.slice(
+                0,
+                action.payload.rowIndex
+              ),
+              (Number(
+                state[action.payload.tableId].table.votes[
+                  action.payload.rowIndex
+                ]
+              ) + 1).toString(),
+              ...state[action.payload.tableId].table.votes.slice(
+                action.payload.rowIndex + 1
+              )
+            ]
+          }
+        }
+      };
+    }
+
+    case "VOTE_ROW_ERROR": {
+      // TODO: maybe show error toast message or something
+      return state;
+    }
+
     default: {
       return state;
     }

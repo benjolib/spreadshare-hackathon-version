@@ -48,4 +48,20 @@ export type TablesAction =
         rowData: Row,
         error: Error
       }
+    }
+  | {
+      type: "VOTE_ROW_REQUEST",
+      payload: { tableId: string, rowIndex: number }
+    }
+  | {
+      type: "VOTE_ROW_SUCCESS",
+      payload: { tableId: string, rowIndex: number }
+    }
+  | {
+      type: "VOTE_ROW_ERROR",
+      payload: {
+        tableId: string,
+        rowIndex: number,
+        error: Error
+      }
     };

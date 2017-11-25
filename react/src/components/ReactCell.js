@@ -1,3 +1,4 @@
+// @flow
 import React from "react";
 import styled from "styled-components";
 
@@ -6,17 +7,21 @@ const StyledDiv = styled.div`
   height: 100%;
 `;
 
-class ReactCell extends React.Component {
-  state = {
-    counter: 0
-  };
+type Props = {
+  row: number,
+  col: number,
+  data: {
+    vote: (row: number) => void,
+    searchedRows: Array<Array<string>>
+  }
+};
 
+class ReactCell extends React.Component<Props> {
+  props: Props;
   render() {
     return (
-      <StyledDiv
-        onClick={() => this.setState({ counter: this.state.counter + 1 })}
-      >
-        {this.state.counter}
+      <StyledDiv onClick={() => this.props.data.vote(this.props.row)}>
+        {this.props.data.searchedRows[this.props.row][this.props.col]}
       </StyledDiv>
     );
   }

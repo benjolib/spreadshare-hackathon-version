@@ -5,16 +5,16 @@ import ReactCell from "../components/ReactCell";
 
 const memoizedContainers = new MemoizedReactDomContainers(20);
 
-function reactRenderer(instance, td, row, col, prop, value) {
+const reactRenderer = data => (instance, td, row, col, prop, value) => {
   renderReactCell({
     memoizedContainers,
     td,
     row,
     col,
-    jsx: <ReactCell row={row} />
+    jsx: <ReactCell row={row} col={col} data={data} />
   });
 
   return td;
-}
+};
 
 export default reactRenderer;
