@@ -2,6 +2,7 @@
 
 namespace DS\Model;
 
+use DS\Constants\Paging;
 use DS\Model\Events\TableCommentsEvents;
 
 /**
@@ -21,32 +22,30 @@ class TableComments
     extends TableCommentsEvents
 {
     /**
-     * @param array $param
-     * @param int   $page
-     * @param int   $limit
+     * @param int $tableId
+     * @param int $page
+     * @param int $limit
      *
      * @return array
      */
-    /*
-    public function findCustom($param = [], $page = 0, $limit = Paging::endlessScrollPortions)
+    public function getComents(int $tableId, $page = 0, $limit = Paging::endlessScrollPortions)
     {
-        if (count($param))
-        {
-            return self::query()
-                       ->columns(
-                           [
-                               TableComments::class . ".id",
-                           ]
-                       )
-                //->leftJoin(TableComments::class, TableComments::class . '.profileId = ' . Profile::class . '.id')
-                //->inWhere(Profile::class . '.id', $param)
-                       ->limit((int) $limit, (int) Paging::endlessScrollPortions * $page)
-                //->orderBy(sprintf('FIELD (id,%s)', implode(',', $param)))
-                       ->execute()
-                       ->toArray() ?: [];
-        }
-        
-        return [];
+        return self::query()
+                   ->columns(
+                       [
+                           self::class . ".id",
+                           self::class . ".comment",
+                           self::class . ".votesCount",
+                           self::class . ".createdAt",
+                           User::class . ".name AS creator",
+                           User::class . ".image AS creatorImage",
+                       ]
+                   )
+                   ->innerJoin(User::class, self::class . '.userId = ' . User::class . '.id')
+                   ->where(self::class . '.tableId = :tableId:', ['tableId' => $tableId])
+                   ->limit((int) $limit, (int) Paging::endlessScrollPortions * $page)
+                   ->orderBy(self::class . '.id DESC')
+                   ->execute()
+                   ->toArray() ?: [];
     }
-    */
 }

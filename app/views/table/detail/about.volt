@@ -9,46 +9,46 @@
     <div class="tableAbout__info__content tableAbout__info__content--left">
       <div class="tableAbout__info__content__item tableAbout__info__content__item--topic">
         <div>Topic</div>
-        <span>Growth</span>
-        <span>Design</span>
+        <span>{{ table['topic1'] }}</span>
+        <span>{{ table['topic2'] }}</span>
       </div>
       <div class="tableAbout__info__content__item--created">
         <div>Created</div>
-        <span>20 Jul 2017</span>
+        <span>{{ formatTimestamp(table['createdAt']) }}</span>
       </div>
       <div class="tableAbout__info__content__item--type">
         <div>Type</div>
-        <span>People & Contacts</span>
+        <span>{{ table['typeTitle'] }}</span>
       </div>
       <div class="tableAbout__info__content__item--locations">
         <div>Locations</div>
-        <span>Europe</span>
+        <span>{{ implode('</span><span>', explode(', ', table['locations'])) }}</span>
       </div>
       <div class="tableAbout__info__content__item--creator">
         <div>Creator</div>
-        <span>Benjamin Libor</span>
+        <span><img src="{{ table['creatorImage'] }}" height="20" /> {{ table['creator'] }}</span>
       </div>
     </div>
     <div class="tableAbout__info__content tableAbout__info__content--right">
       <div class="tableAbout__info__content__item tableAbout__info__content__item--views">
         <div>Views</div>
-        <span>10,200</span>
+        <span>{{ table['viewsCount'] }}</span>
       </div>
-      <div class="tableAbout__info__content__item tableAbout__info__content__item--subscribers">
+      <!--<div class="tableAbout__info__content__item tableAbout__info__content__item--subscribers">
         <div>Subscribers</div>
-        <span>58</span>
-      </div>
+        <span></span>
+      </div>-->
       <div class="tableAbout__info__content__item tableAbout__info__content__item--contributions">
         <div>Contributions</div>
-        <span>435</span>
+        <span>{{ table['contributionCount'] }}</span>
       </div>
       <div class="tableAbout__info__content__item tableAbout__info__content__item--contributors">
         <div>Contributors</div>
-        <span>33</span>
+        <span>{{ table['collaboratorCount'] }}</span>
       </div>
       <div class="tableAbout__info__content__item tableAbout__info__content__item--token">
         <div>Token</div>
-        <span>324</span>
+        <span>{{ table['tokensCount'] }}</span>
       </div>
     </div>
     <aside class="tableAbout__sidebar">

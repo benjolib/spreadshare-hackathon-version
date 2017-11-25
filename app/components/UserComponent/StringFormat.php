@@ -1,17 +1,17 @@
 <?php
+
 namespace DS\Component\UserComponent;
 
-use Phalcon\Mvc\User\Component;
 use DS\Component\PrettyDateTime;
+use Phalcon\Mvc\User\Component;
 
 /**
  * Spreadshare
  *
- * @author Dennis Stücken
- * @license proprietary
-
+ * @author    Dennis Stücken
+ * @license   proprietary
  * @copyright Spreadshare
- * @link https://www.spreadshare.co
+ * @link      https://www.spreadshare.co
  *
  * @version   $Version$
  * @package   DS\Component
@@ -23,7 +23,7 @@ class StringFormat
      * @var PrettyDateTime
      */
     private $date = null;
-
+    
     /**
      * @return $this
      */
@@ -33,10 +33,10 @@ class StringFormat
         {
             $this->date = new PrettyDateTime();
         }
-
+        
         return $this;
     }
-
+    
     /**
      * @return StringFormat
      */
@@ -44,27 +44,38 @@ class StringFormat
     {
         return (new self())->init();
     }
-
+    
     /**
      * @param $date
      *
      * @return string
      * @throws \Exception
      */
-    public function prettyDay($date)
+    public function prettyDay(string $date)
     {
         return $this->date->day(new \DateTime($date));
     }
-
+    
     /**
      * @param string $date
      *
      * @return string
      * @throws \Exception
      */
-    public function prettyDate($date)
+    public function prettyDate(string $date)
     {
         return $this->date->parse(new \DateTime($date));
     }
-
+    
+    /**
+     * @param int $timestamp
+     *
+     * @return string
+     * @throws \Exception
+     */
+    public function prettyDateTimestamp(int $timestamp)
+    {
+        return $this->date->parse(new \DateTime(date('Y-m-d H:i:s', $timestamp)));
+    }
+    
 }

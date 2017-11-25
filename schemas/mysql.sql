@@ -304,7 +304,8 @@ CREATE TABLE `tableStats` (
   `commentsCount` int(11) unsigned DEFAULT '0' COMMENT 'comments',
   `collaboratorCount` int(11) unsigned DEFAULT '0' COMMENT 'collaborators',
   `contributionCount` int(11) unsigned DEFAULT '0' COMMENT 'contributions',
-  `tokensCount` int(11) DEFAULT '0' COMMENT 'all distributed tokens',
+  `tokensCount` int(11) unsigned DEFAULT '0' COMMENT 'all distributed tokens',
+  `subscriberCount` int(11) unsigned DEFAULT '0' COMMENT 'subscribers',
   PRIMARY KEY (`id`),
   KEY `tableId` (`tableId`),
   CONSTRAINT `tableStatsTableId` FOREIGN KEY (`tableId`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE

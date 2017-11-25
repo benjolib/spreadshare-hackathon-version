@@ -1,18 +1,15 @@
 <?php
 
-namespace DS\Events\User;
+namespace DS\Events\Table;
 
 use DS\Events\AbstractEvent;
 use DS\Model\DataSource\UserNotificationType;
 use DS\Model\Tables;
-use DS\Model\TableStats;
 use DS\Model\User;
 use DS\Model\UserNotifications;
 
 /**
  * Spreadshare
- *
- * Table events like views or contributions
  *
  * @author    Dennis Stücken
  * @license   proprietary
@@ -22,25 +19,25 @@ use DS\Model\UserNotifications;
  * @version   $Version$
  * @package   DS\Events\Table
  */
-class UserTableSubscribed extends AbstractEvent
+class TableDownvoted extends AbstractEvent
 {
     
     /**
-     * Issued after a has been followed by another user
+     * Issued after a table has been upvoted
      *
      * @param int $userId
-     * @param int $followedByUserId
+     * @param int $tableId
      */
     public static function after(int $userId, int $tableId)
     {
         $user  = User::findFirstById($userId);
         $table = Tables::findFirstById($tableId);
         
-        $userNotification = new UserNotifications;
+        $userNotification = new UserNotifications();
         $userNotification
             ->setUserId($table->getOwnerUserId())
-            ->setNotificationType(UserNotificationType::Follow)
-            ->setText(sprintf('%s started to subscribe your table %s', $user->getName(), $table->getTitle()))
+            ->setNotificationType(UserNotificationType::TableUpvoted)
+            ->setText(sprintf('%s revoked his vote for your table %s', $user->getName(), $table->getTitle()))
             ->setPlaceholders(
                 json_encode(
                     [
@@ -52,9 +49,6 @@ class UserTableSubscribed extends AbstractEvent
                 )
             )
             ->create();
-        
-        $tableStats = TableStats::findByFieldValue('tableId', $tableId);
-        $tableStats->setSubscriberCount($tableStats->getSubscriberCount() + 1);
     }
     
 }

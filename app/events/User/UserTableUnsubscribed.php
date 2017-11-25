@@ -4,12 +4,15 @@ namespace DS\Events\User;
 
 use DS\Events\AbstractEvent;
 use DS\Model\DataSource\UserNotificationType;
+use DS\Model\Tables;
+use DS\Model\TableStats;
 use DS\Model\User;
 use DS\Model\UserNotifications;
 
 /**
  * Spreadshare
  *
+ * Table events like views or contributions
  *
  * @author    Dennis Stücken
  * @license   proprietary
@@ -19,7 +22,7 @@ use DS\Model\UserNotifications;
  * @version   $Version$
  * @package   DS\Events\Table
  */
-class UserFollowed extends AbstractEvent
+class UserTableUnsubscribed extends AbstractEvent
 {
     
     /**
@@ -28,24 +31,30 @@ class UserFollowed extends AbstractEvent
      * @param int $userId
      * @param int $followedByUserId
      */
-    public static function after(int $userId, int $followedByUserId)
+    public static function after(int $userId, int $tableId)
     {
-        $user = User::findFirstById($followedByUserId);
+        $user  = User::findFirstById($userId);
+        $table = Tables::findFirstById($tableId);
         
         $userNotification = new UserNotifications;
         $userNotification
-            ->setUserId($userId)
+            ->setUserId($table->getOwnerUserId())
             ->setNotificationType(UserNotificationType::Follow)
-            ->setText(sprintf('%s started following you', $user->getName()))
+            ->setText(sprintf('%s unsubscribed your table %s', $user->getName(), $table->getTitle()))
             ->setPlaceholders(
                 json_encode(
                     [
-                        $user->getName(),
                         $user->getId(),
+                        $user->getName(),
+                        $table->getId(),
+                        $table->getTitle(),
                     ]
                 )
             )
             ->create();
+        
+        $tableStats = TableStats::findByFieldValue('tableId', $tableId);
+        $tableStats->setSubscriberCount($tableStats->getSubscriberCount() - 1);
     }
     
 }

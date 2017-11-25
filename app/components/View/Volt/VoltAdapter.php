@@ -48,6 +48,8 @@ class VoltAdapter extends Volt
         */
         # php
         'strtotime',
+        'explode',
+        'implode',
     ];
     
     /**
@@ -82,6 +84,13 @@ class VoltAdapter extends Volt
         {
             $compiler->addFunction($func, $func);
         }
+        
+        $compiler->addFunction(
+            'formatTimestamp',
+            function ($key) {
+                return "\\DS\\Component\\UserComponent\\StringFormat::factory()->prettyDateTimestamp({$key})";
+            }
+        );
         
         $compiler->addFunction(
             'parseUser',

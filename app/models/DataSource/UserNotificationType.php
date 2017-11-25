@@ -25,4 +25,14 @@ class UserNotificationType
      */
     const TableSubscribed = 2;
     
+    /**
+     * A user's table has been upvoted
+     */
+    const TableUpvoted = 3;
+    
+    /**
+     * A user's table has been downvoted
+     */
+    const TableDownvoted = 4;
+    
 }

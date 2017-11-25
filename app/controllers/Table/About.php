@@ -4,6 +4,7 @@ namespace DS\Controller\Table;
 
 use DS\Controller\BaseController;
 use DS\Interfaces\TableSubcontrollerInterface;
+use DS\Model\TableComments;
 use DS\Model\Tables;
 
 /**
@@ -33,6 +34,9 @@ class About
     {
         try
         {
+            $comments = new TableComments();
+            $this->view->setVar('comments', $comments->getComents($table->getId()));
+            
             $this->view->setMainView('table/detail/about');
         }
         catch (\Exception $e)

@@ -23,7 +23,7 @@ use DS\Modules\Bernard;
  */
 class TableCreated extends AbstractEvent
 {
-
+    
     /**
      * Issued after a table has been created
      *
@@ -32,11 +32,14 @@ class TableCreated extends AbstractEvent
      */
     public static function after(int $userId, Tables $table)
     {
-
-      Bernard::produce('newTable',[
-        'userId' => $userId
-      ]);
-
+        
+        Bernard::produce(
+            'newTable',
+            [
+                'userId' => $userId,
+            ]
+        );
+        
         // Initialize table log with a table created entry
         $tableLog = new TableLog();
         $tableLog->setTableId($table->getId())
@@ -46,5 +49,5 @@ class TableCreated extends AbstractEvent
                  ->setText('Table created.')
                  ->create();
     }
-
+    
 }

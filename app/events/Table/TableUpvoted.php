@@ -3,7 +3,10 @@
 namespace DS\Events\Table;
 
 use DS\Events\AbstractEvent;
+use DS\Model\DataSource\UserNotificationType;
 use DS\Model\Tables;
+use DS\Model\User;
+use DS\Model\UserNotifications;
 
 /**
  * Spreadshare
@@ -22,12 +25,31 @@ class TableUpvoted extends AbstractEvent
     /**
      * Issued after a table has been upvoted
      *
-     * @param int    $userId
-     * @param Tables $table
+     * @param int $userId
+     * @param int $tableId
      */
-    public static function after(int $userId, Tables $table)
+    public static function after(int $userId, int $tableId)
     {
-    
+        
+        $user  = User::findFirstById($userId);
+        $table = Tables::findFirstById($tableId);
+        
+        $userNotification = new UserNotifications();
+        $userNotification
+            ->setUserId($table->getOwnerUserId())
+            ->setNotificationType(UserNotificationType::TableUpvoted)
+            ->setText(sprintf('%s upvoted your table %s', $user->getName(), $table->getTitle()))
+            ->setPlaceholders(
+                json_encode(
+                    [
+                        $user->getId(),
+                        $user->getName(),
+                        $table->getId(),
+                        $table->getTitle(),
+                    ]
+                )
+            )
+            ->create();
     }
     
 }

@@ -49,7 +49,7 @@ class IndexController
                     break;
                 default:
                 case 'newly-added':
-                    $orderBy = 'createdAt DESC';
+                    $orderBy = Tables::class . '.createdAt DESC';
                     break;
             }
             

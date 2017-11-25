@@ -2,7 +2,8 @@
 
 namespace DS\Model\Events;
 
-use DS\Events\User\UserTableSubscribed;
+use DS\Events\Table\TableDownvoted;
+use DS\Events\Table\TableUpvoted;
 use DS\Model\Abstracts\AbstractTableVotes;
 
 /**
@@ -47,7 +48,16 @@ abstract class TableVotesEvents
      */
     public function afterCreate()
     {
-        // trigger Table subscription event
-        UserTableSubscribed::after($this->getUserId(), $this->getTableId());
+        // trigger Table upvote event
+        TableUpvoted::after($this->getUserId(), $this->getTableId());
+    }
+    
+    /**
+     * After table vote created
+     */
+    public function afterDelete()
+    {
+        // trigger Table downvote event
+        TableDownvoted::after($this->getUserId(), $this->getTableId());
     }
 }

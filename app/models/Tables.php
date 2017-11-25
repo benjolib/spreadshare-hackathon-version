@@ -174,21 +174,31 @@ class Tables
                                    Tables::class . ".title",
                                    Tables::class . ".tagline",
                                    Tables::class . ".ownerUserId",
+                                   User::class . ".image as creatorImage",
+                                   User::class . ".name as creator",
+                                   Tables::class . ".createdAt",
+                                   Tables::class . ".topic1Id",
+                                   "(SELECT " . Topics::class . ".title FROM " . Topics::class . " WHERE " . Topics::class . ".id = " . Tables::class . ".topic1Id) AS topic1",
+                                   Tables::class . ".topic2Id",
+                                   "(SELECT " . Topics::class . ".title FROM " . Topics::class . " WHERE " . Topics::class . ".id = " . Tables::class . ".topic2Id) AS topic2",
                                    TableStats::class . ".votesCount",
                                    TableStats::class . ".viewsCount",
                                    TableStats::class . ".commentsCount",
                                    TableStats::class . ".collaboratorCount",
                                    TableStats::class . ".contributionCount",
                                    TableStats::class . ".tokensCount",
+                                   TableStats::class . ".subscriberCount",
                                    Types::class . ".title as typeTitle",
                                    "(SELECT " . TableVotes::class . ".createdAt FROM " . TableVotes::class . " WHERE " . TableVotes::class . ".tableId = " . Tables::class . ".id AND " . TableVotes::class . ".userId = " . $userId . ") as userHasVoted",
-                                   "(SELECT CUSTOM_GROUP_CONCAT(" . Tags::class . ".title, " . Tags::class . ".title, 'DESC', ', ') FROM " . TableTags::class . " INNER JOIN " . Tags::class . " ON " . Tags::class . ".id = " . TableTags::class . ".tagId WHERE " . TableTags::class . ".tableId = " . Tables::class . ".id) as tags",
+                                   "(SELECT CUSTOM_GROUP_CONCAT(" . Tags::class . ".title, " . Tags::class . ".title, 'ASC', ', ') FROM " . TableTags::class . " INNER JOIN " . Tags::class . " ON " . Tags::class . ".id = " . TableTags::class . ".tagId WHERE " . TableTags::class . ".tableId = " . Tables::class . ".id) as tags",
+                                   "(SELECT CUSTOM_GROUP_CONCAT(" . Locations::class . ".locationName, " . Locations::class . ".locationName, 'ASC', ', ') FROM " . TableLocations::class . " INNER JOIN " . Locations::class . " ON " . Locations::class . ".id = " . TableLocations::class . ".locationId WHERE " . TableLocations::class . ".tableId = " . Tables::class . ".id) as locations",
                                ]
                            )
                            ->innerJoin(TableStats::class, TableStats::class . '.tableId = ' . Tables::class . '.id')
+                           ->innerJoin(User::class, Tables::class . '.ownerUserId = ' . User::class . '.id')
                            ->leftJoin(Types::class, Tables::class . '.typeId = ' . Types::class . '.id')
                            ->limit((int) $limit, (int) Paging::endlessScrollPortions * $page);
-        
+
         if ($orderBy)
         {
             $this->query->orderBy($orderBy);
