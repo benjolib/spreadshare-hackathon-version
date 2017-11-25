@@ -18,4 +18,61 @@
   background-size: contain;
   width: 16px;
   height: 16px;
+
+  &.small {
+    width: 12px;
+    height: 12px;
+  }
+}
+.table-icon {
+  background: url('/assets/icons/table.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 16px;
+  height: 16px;
+
+  &.small {
+    width: 12px;
+    height: 12px;
+  }
+}
+.info-icon {
+  background: url('/assets/icons/info.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 16px;
+  height: 16px;
+
+  &.small {
+    width: 12px;
+    height: 12px;
+  }
+}
+.feed-icon {
+  background: url('/assets/icons/feed.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 16px;
+  height: 16px;
+
+  &.small {
+    width: 12px;
+    height: 12px;
+  }
+}
+.people-icon {
+  background: url('/assets/icons/people.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 16px;
+  height: 16px;
+
+  &.small {
+    width: 12px;
+    height: 12px;
+  }
 }

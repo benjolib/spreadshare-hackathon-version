@@ -10,121 +10,180 @@
     @include rem(padding, 50);
 
     @include desktop {
-      flex-direction: row;
       @include rem2(padding, 50, 100);
     }
 
-    &__details {
+    &__up {
       display: flex;
+      width: 100%;
       flex-direction: column;
-      justify-content: flex-start;
+      justify-content: space-between;
 
-      span {
-        background: $text-color;
-        display: inline-flex;
-        align-self: center;
-        border-radius: 6px;
-        font-weight: 600;
-        @include rem2(padding, 2, 8);
-        @include rem(margin-bottom, 14);
-        @include rem(font-size, 14);
+      @include desktop {
+        flex-direction: row;
+      }
 
-        @include desktop {
-          align-self: flex-start;
-          margin-bottom: 0;
+      &__details {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+
+        span {
+          background: $text-color;
+          display: inline-flex;
+          align-self: center;
+          border-radius: 6px;
+          font-weight: 600;
+          @include rem2(padding, 2, 8);
+          @include rem(margin-bottom, 14);
+          @include rem(font-size, 14);
+
+          @include desktop {
+            align-self: flex-start;
+            margin-bottom: 0;
+          }
+        }
+
+        h1 {
+          color: $text-color;
+          @include rem(font-size, 42);
+          @include rem(margin-bottom, 14);
+
+          @include desktop {
+            text-align: left;
+            margin-bottom: 0;
+          }
+        }
+        h3 {
+          color: $text-color;
+          font-weight: 400;
+          text-align: center;
+          @include rem(font-size, 16);
+          @include rem(margin-bottom, 14 * 2);
+
+          @include desktop {
+            margin-bottom: 0;
+            text-align: left;
+          }
         }
       }
 
-      h1 {
-        color: $text-color;
-        @include rem(font-size, 42);
-        @include rem(margin-bottom, 14);
+      &__buttons {
+        display: flex;
+        justify-content: center;
 
         @include desktop {
-          text-align: left;
-          margin-bottom: 0;
+          justify-content: flex-start;
         }
-      }
-      h3 {
-        color: $text-color;
-        font-weight: 400;
-        @include rem(font-size, 16);
-        @include rem(margin-bottom, 14 * 2);
 
-        @include desktop {
-          margin-bottom: 0;
+        button {
+          background: white;
+          font-weight: 500;
+          border: none;
+          color: $text-color;
+          align-self: center;
+          cursor: pointer;
+          outline: none;
+          @include rem(font-size, 16);
+          @include rem2(padding, 6, 14);
+
+          &:nth-child(even) {
+            @include rem2(margin, 0, 10);
+          }
+
+          &.subscribe {
+            color: white;
+            background: $logo-color;
+
+            &:hover {
+              background: lighten($logo-color, 4%);
+            }
+
+            &:after {
+              content: 'Subscribe';
+            }
+          }
+          &.subscribed {
+            color: white;
+            background: $upvote-text-color;
+
+            &:hover {
+              background: darken($upvote-text-color, 8%);
+            }
+
+            &:after {
+              content: 'Unsubscribe';
+            }
+          }
+
+          &.upvote {
+            display: flex;
+            align-items: center;
+
+            div:first-child {
+              margin-right: 12px;
+            }
+
+            &:hover {
+              color: white;
+              background: $text-link-color-hover;
+            }
+          }
+          &.upvoted {
+            color: white;
+            background: $logo-color;
+
+            &:hover {
+              background: darken($logo-color, 8%);
+            }
+          }
+          &.flag {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 36px;
+          }
         }
       }
     }
 
-    &__buttons {
+    &__menu {
       display: flex;
+      justify-content: center;
+      text-transform: uppercase;
+      @include rem(margin-top, 80);
+      @include rem(font-size, 14);
 
-      button {
-        background: white;
-        font-weight: 500;
-        border: none;
+      @include desktop {
+        justify-content: flex-start;
+      }
+
+      a {
         color: $text-color;
-        align-self: center;
-        cursor: pointer;
-        @include rem(font-size, 16);
-        @include rem2(padding, 6, 14);
 
-        &:nth-child(even) {
-          @include rem2(margin, 0, 10);
-        }
-
-        &.subscribe {
-          color: white;
-          background: $logo-color;
-
-          &:hover {
-            background: lighten($logo-color, 4%);
-          }
-
-          &:after {
-            content: 'Subscribe';
+        &:last-child {
+          div.table__header__menu__item {
+            margin-right: 0;
           }
         }
-        &.subscribed {
-          color: white;
-          background: $upvote-text-color;
+      }
 
-          &:hover {
-            background: darken($upvote-text-color, 8%);
-          }
+      &__item {
+        display: flex;
+        align-items: center;
+        @include rem(margin-right, 18);
 
-          &:after {
-            content: 'Unsubscribe';
-          }
+        @include desktop {
+          @include rem(margin-right, 36);
         }
 
-        &.upvote {
-          display: flex;
-          align-items: center;
-
-          div:first-child {
-            margin-right: 12px;
-          }
-
-          &:hover {
-            color: white;
-            background: $text-link-color-hover;
-          }
+        div:first-child {
+          @include rem(margin-top, -2);
+          @include rem(margin-right, 4);
         }
-        &.upvoted {
-          color: white;
-          background: $logo-color;
 
-          &:hover {
-            background: darken($logo-color, 8%);
-          }
-        }
-        &.flag {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          height: 36px;
+        @include desktop {
+
         }
       }
     }

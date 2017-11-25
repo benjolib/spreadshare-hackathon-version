@@ -43,11 +43,11 @@ body {
   a,
   a:active,
   a:visited {
-    color: #3baf71;
+    color: $text-color;
     text-decoration: none;
   }
   a:hover {
-    color: #3b9c5e;
+    color: $primary-color;
   }
   .bold {
     font-weight: bold;
