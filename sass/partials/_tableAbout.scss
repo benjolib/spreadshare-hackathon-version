@@ -1,0 +1,133 @@
+.tableAbout {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-between;
+  background: $background-color;
+  @include rem(padding, 50);
+  padding-top: 0;
+
+  @include desktop {
+    @include rem2(padding, 50, 100);
+    padding-top: 0;
+  }
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    &__content {
+      display: flex;
+      background: white;
+      border-radius: 6px;
+      color: $text-color-alternate;
+      @include rem2(padding, 10, 16);
+
+      &__item {
+        display: flex;
+
+        &--topic {
+          div {
+            @include rem(margin-right, 50);
+          }
+          span {
+            background: $logo-color;
+            color: white;
+            border-radius: 4px;
+            align-self: center;
+            @include rem(font-size, 14);
+            @include rem2(padding, 0, 6);
+          }
+        }
+        &--created, &--locations, &--creator {
+          display: flex;
+
+          div {
+            @include rem(margin-right, 32);
+          }
+          span {
+            color: $text-color;
+          }
+        }
+        &--type {
+          display: flex;
+
+          div {
+            @include rem(margin-right, 50);
+          }
+          span {
+            background: $upvote-text-color;
+            color: white;
+            border-radius: 4px;
+            align-self: center;
+            @include rem(font-size, 14);
+            @include rem2(padding, 0, 6);
+          }
+        }
+      }
+
+      &--left {
+        display: flex;
+        flex-direction: column;
+        width: 35%;
+      }
+      &--right {
+        display: flex;
+        flex-direction: column;
+        width: 35%;
+
+        div.tableAbout__info__content__item {
+          justify-content: space-between;
+
+          span {
+            color: $text-color;
+          }
+        }
+      }
+    }
+  }
+
+  &__sidebar {
+    background: white;
+    color: $text-color-alternate;
+    border-radius: 6px;
+    width: 20%;
+  }
+
+  &__comments {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: white;
+    border-radius: 6px;
+    color: $text-color;
+
+    &__container {
+      display: flex;
+      align-items: center;
+      @include rem(padding, 30);
+
+      &__avatar {
+        @include rem(margin-right, 20);
+
+        img {
+          border-radius: 4px;
+          width: 70px;
+          height: 70px;
+        }
+      }
+      &__content {
+        h4 {
+          font-weight: 500;
+          @include rem(font-size, 16);
+        }
+        p {
+          @include rem(font-size, 14);
+          color: $text-color-alternate;
+        }
+        &__stats {}
+      }
+    }
+  }
+}
