@@ -1,6 +1,6 @@
 // @flow
-import * as React from 'react';
-import styled from 'styled-components';
+import * as React from "react";
+import styled from "styled-components";
 
 const StyledDiv = styled.div`
   font-family: 'Montserrat', sans-serif;
@@ -80,7 +80,7 @@ const StyledDiv = styled.div`
 `;
 
 type Props = {
-  children?: React.Node,
+  children?: React.Node
 };
 
 const TableMain = (props: Props) =>

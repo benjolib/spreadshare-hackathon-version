@@ -172,6 +172,7 @@ class Tables
                                    Tables::class . ".id",
                                    Tables::class . ".title",
                                    Tables::class . ".tagline",
+                                   Tables::class . ".ownerUserId",
                                    TableStats::class . ".votesCount",
                                    TableStats::class . ".viewsCount",
                                    TableStats::class . ".commentsCount",

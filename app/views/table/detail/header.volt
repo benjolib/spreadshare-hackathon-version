@@ -5,8 +5,13 @@
     <h3>{{ table['tagline'] }}</h3>
   </div>
   <div class="table__header__buttons">
-    <button class="subscribe"></button>
-    <button class="upvote"><div class="upvote-icon small"></div><div>2.300</div></button>
+    <button class="subscribe" data-action="subscribe" data-id="{{ table['id'] }}"></button>
+
+    <button class="upvote {% if table['userHasVoted'] %}selected{% endif %}" data-action="upvote" data-id="{{ table['id'] }}" onclick="var event = arguments[0] || window.event; event.stopPropagation();">
+      <div class="upvote-icon small"></div>
+      <span>{{ table['votesCount'] +0 }}</span>
+    </button>
+
     <button class="flag"><div class="flag-icon"></div></button>
   </div>
 </div>

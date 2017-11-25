@@ -2,12 +2,12 @@
 
 namespace DS\Api;
 
-use DS\Model\Topics as TopicsModel;
+use DS\Traits\Api\GetAllTrait;
 
 /**
  * Spreadshare
  *
- * General Locations Api
+ * General Topics Api
  *
  * @author    Dennis Stücken
  * @license   proprietary
@@ -22,26 +22,10 @@ use DS\Model\Topics as TopicsModel;
 class Topics
     extends BaseApi
 {
-    /**
-     * Default columns to use for response
-     *
-     * @var string
-     */
-    private static $defaultColumns = 'id, title';
+    use GetAllTrait;
     
     /**
-     * Return all locations
-     *
-     * @return array
+     * @var string
      */
-    public static function getAll(): array
-    {
-        $locations = new TopicsModel;
-        
-        return $locations->find(
-            [
-                'columns' => self::$defaultColumns,
-            ]
-        )->toArray();
-    }
+    private static $modelClass = 'Topics';
 }
