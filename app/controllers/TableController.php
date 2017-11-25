@@ -26,7 +26,7 @@ class TableController
     {
         return true;
     }
-    
+
     /**
      * Table
      */

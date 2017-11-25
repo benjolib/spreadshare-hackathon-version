@@ -96,6 +96,13 @@ class Services
     const REDIS = 'redis';
 
     /**
+     * Predis caching service.
+     *
+     * @definition bootstrap/Services/Predis.php
+     */
+    const PREDIS = 'predis';
+
+    /**
      * Models manager
      *
      * @definition bootstrap/Services/Cache.php

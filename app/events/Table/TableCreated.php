@@ -6,6 +6,7 @@ use DS\Events\AbstractEvent;
 use DS\Model\DataSource\TableLogType;
 use DS\Model\TableLog;
 use DS\Model\Tables;
+use DS\Modules\Bernard;
 
 /**
  * Spreadshare
@@ -22,7 +23,7 @@ use DS\Model\Tables;
  */
 class TableCreated extends AbstractEvent
 {
-    
+
     /**
      * Issued after a table has been created
      *
@@ -31,6 +32,11 @@ class TableCreated extends AbstractEvent
      */
     public static function after(int $userId, Tables $table)
     {
+
+      Bernard::produce('newTable',[
+        'userId' => $userId
+      ]);
+
         // Initialize table log with a table created entry
         $tableLog = new TableLog();
         $tableLog->setTableId($table->getId())
@@ -40,5 +46,5 @@ class TableCreated extends AbstractEvent
                  ->setText('Table created.')
                  ->create();
     }
-    
+
 }

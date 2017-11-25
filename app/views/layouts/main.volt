@@ -67,34 +67,28 @@
       </div>
       <div class="footer__top__right">
         <div class="footer__top__right__column footer__top__right__column--first">
-          <p>About</p>
+          <p>HELLO</p>
           <ul>
-            <li><a href="/vision">Vision</a></li>
-            <li><a href="/team">Team</a></li>
-            <li><a href="/press">Press</a></li>
-            <li><a href="/invest">Invest</a></li>
-            <li><a href="/donate">Donate</a></li>
-            <li><a href="/jobs">Jobs</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/team">Blog</a></li>
           </ul>
         </div>
         <div class="footer__top__right__column footer__top__right__column--second">
-          <p>Useful links</p>
+          <p>GET INVOLVED</p>
           <ul>
+            <li><a href="/jobs">Tasks & Jobs</a></li>
             <li><a href="/feature-voting">Feature Voting</a></li>
-            <li><a href="/table-guideline">Table Guideline</a></li>
-            <li><a href="/faq">Frequently Asked</a></li>
-            <li><a href="/privacy">Privacy Policy</a></li>
-            <li><a href="/request-table">Request Table</a></li>
+            <li><a href="/earntoken">Token</a></li>
+            <li><a href="/donate">Contribute</a></li>
           </ul>
         </div>
         <div class="footer__top__right__column footer__top__right__column--third">
-          <p>Navigate</p>
+          <p>IMPORTANT</p>
           <ul>
-            <li><a href="/">Feed</a></li>
-            <li><a href="/ranking">Ranking</a></li>
-            <li><a href="/login">Sign In & Up</a></li>
-            <li><a href="/table/add">Create Table</a></li>
-            <li><a href="/topics">Topics</a></li>
+            <li><a href="/faq">Frequently Asked</a></li>
+            <li><a href="/terms">Terms Of Use</a></li>
+            <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="/disclaimer">Disclaimer</a></li>
           </ul>
         </div>
       </div>
