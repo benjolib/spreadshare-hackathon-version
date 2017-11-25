@@ -5,18 +5,17 @@ namespace DS\Controller\Api\v1\Comment;
 use DS\Controller\Api\ActionHandler;
 use DS\Controller\Api\Meta\Record;
 use DS\Controller\Api\MethodInterface;
-use DS\Model\Comments;
-use DS\Model\Decks;
+use DS\Model\TableComments;
+use DS\Model\TableStats;
 
 /**
  *
  * Spreadshare
  *
- * @author Dennis Stücken
- * @license proprietary
-
+ * @author    Dennis Stücken
+ * @license   proprietary
  * @copyright Spreadshare
- * @link https://www.spreadshare.co
+ * @link      https://www.spreadshare.co
  *
  * @version   $Version$
  * @package   DS\Controller
@@ -40,20 +39,19 @@ class Post extends ActionHandler implements MethodInterface
     {
         if ($this->request->isAjax())
         {
-            $deckId = $this->action;
-            $userId = $this->getServiceManager()->getAuth()->getUserId();
+            $tableId = $this->action;
+            $userId  = $this->getServiceManager()->getAuth()->getUserId();
             
             if ($userId > 0 && $this->request->getPost('comment'))
             {
-                $comments = new Comments();
-                $comments->setDeckId($deckId)
+                $comments = new TableComments();
+                $comments->setTableId($tableId)
                          ->setUserId($userId)
                          ->setComment($this->request->getPost('comment'))
-                         ->setCreatedAt(time())
                          ->create();
                 
-                $deck = Decks::findFirstById($deckId);
-                $deck->setCommentsCount($deck->getCommentsCount() + 1)->save();
+                $tableStats = TableStats::findByFieldValue('tableId', $tableId);
+                $tableStats->setCommentsCount($tableStats->getCommentsCount() + 1)->save();
                 
                 return new Record(['success' => 1]);
             }
