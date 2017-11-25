@@ -162,13 +162,21 @@ class Table extends Component<Props, State> {
                   ? {
                       readOnly: true,
                       data: "jsx",
-                      renderer: reactRenderer
+                      renderer: reactRenderer,
+                      width: 80
                     }
                   : {
                       readOnly: true
                     }
             )}
-            stretchH="all"
+            modifyColWidth={width => {
+              console.log(width);
+              if (width > 400) {
+                return 400;
+              }
+            }}
+            fixedColumnsLeft={1}
+            stretchH="last"
             contextMenuCopyPaste
             contextMenu={{
               callback: this.contextMenuCallback,

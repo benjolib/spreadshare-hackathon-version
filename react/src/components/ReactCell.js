@@ -1,34 +1,23 @@
 import React from "react";
+import styled from "styled-components";
+
+const StyledDiv = styled.div`
+  text-align: center;
+  height: 100%;
+`;
 
 class ReactCell extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { counter: 0 };
-  }
-
-  componentDidMount() {
-    const { row } = this.props;
-    this.interval = setInterval(
-      () =>
-        this.setState({
-          counter: this.state.counter + 1
-        }),
-      500
-    );
-    console.log("mounting", row);
-  }
-
-  componentWillUnmount() {
-    const { row } = this.props;
-    clearInterval(this.interval);
-    console.log("unmounting", row);
-  }
+  state = {
+    counter: 0
+  };
 
   render() {
     return (
-      <span onClick={() => console.log("jeff")}>
-        ROW: {this.props.row}, counter: {this.state.counter}
-      </span>
+      <StyledDiv
+        onClick={() => this.setState({ counter: this.state.counter + 1 })}
+      >
+        {this.state.counter}
+      </StyledDiv>
     );
   }
 }
