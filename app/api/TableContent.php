@@ -62,6 +62,25 @@ class TableContent
     
     /**
      * @param int    $tableId
+     * @param int    $lineNumber
+     * @param string $rowData
+     *
+     * @return $this
+     */
+    public function editRow(int $tableId, int $lineNumber, string $rowData)
+    {
+        if (is_array(json_decode($rowData)))
+        {
+            $tableRowModel = TableRows::findByTableIdAndLineNumber($tableId, $lineNumber);
+            $tableRowModel->setContent($rowData)
+                          ->save();
+        }
+        
+        return $this;
+    }
+    
+    /**
+     * @param int    $tableId
      * @param string $csvData
      * @param string $separator
      * @param bool   $hasHeaders
