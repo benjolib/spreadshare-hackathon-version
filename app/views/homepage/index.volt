@@ -45,11 +45,11 @@
   </div>
   {# sidebar #}
   <form method="GET" id="sidebarForm">
-    <div class="main__content__sidebar">
-      <div class="main__content__sidebar__option">
+    <div class="main__content__sidebar" id="filters">
+      <div class="main__content__sidebar__option" id="topicFilter">
         <span>Filter by topic</span><img src="/assets/icons/chevron-down.svg" />
       </div>
-      <ul class="filter">
+      <ul class="filter filter--topic">
         <li>
           <label {% if sidebarFilter.topic == "" %}class="selected"{% endif %}>
           <input type="radio" name="topic" {% if sidebarFilter.topic == "" %}checked="checked"{% endif %} value="" /> All
@@ -64,10 +64,10 @@
         {% endfor %}
       </ul>
 
-      <div class="main__content__sidebar__option">
+      <div class="main__content__sidebar__option" id="typeFilter">
         <span>Filter by Table Type</span><img src="/assets/icons/chevron-down.svg" />
       </div>
-      <ul class="filter">
+      <ul class="filter filter--type">
         <li>
           <label {% if sidebarFilter.type == "" %}class="selected"{% endif %}>
           <input type="radio" name="type" {% if sidebarFilter.type == "" %}checked="checked"{% endif %} value="" /> All
@@ -82,12 +82,12 @@
         {% endfor %}
       </ul>
 
-      <div class="main__content__sidebar__option">
+      <div class="main__content__sidebar__option" id="tagFilter">
         <span>Filter by Tags</span><img src="/assets/icons/chevron-down.svg" />
       </div>
       <div id="TagsSelect" data-name="tags[]" data-value="{{ reactArray(filteredTags) }}" data-submit-form-on-change="sidebarForm" data-placeholder="" class="react-component"></div>
 
-      <div class="main__content__sidebar__option">
+      <div class="main__content__sidebar__option" id="locationFilter">
         <span>Filter by location</span><img src="/assets/icons/chevron-down.svg" />
       </div>
       <div id="LocationSelect" data-name="locations[]" data-value="{{ reactArray(filteredLocations) }}" data-submit-form-on-change="sidebarForm" data-placeholder="" class="react-component"></div>
@@ -102,6 +102,19 @@
     $('#sidebarForm > div > ul > li > label').on('change', function (ev) {
       document.getElementById('sidebarForm').submit();
     });
+  });
+
+  $('.navbar__search__filter').on('click', function() {
+    $('.filter').toggleClass('open');
+    window.location.hash = "#filters";
+  });
+
+  $('#topicFilter').on('click', function() {
+    $('.filter--topic').toggleClass('open');
+  });
+
+  $('#typeFilter').on('click', function() {
+    $('.filter--type').toggleClass('open');
   });
 </script>
 {% endblock %}
