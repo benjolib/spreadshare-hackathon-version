@@ -18,8 +18,8 @@
     <div>
       <img src="/assets/icons/eye.svg" /><span><i>{{ table['viewsCount'] +0 }}</i> Views</span>
     </div>
-    <div>
+    <a href="/table/{{ table['id'] }}/about">
       <img src="/assets/icons/comment.svg" /><span><i>{{ table['commentsCount'] +0 }}</i> Comments</span>
-    </div>
+    </a>
   </div>
 </div>
