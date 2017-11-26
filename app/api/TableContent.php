@@ -34,15 +34,18 @@ class TableContent
      *
      * @return array
      */
-    public function getTableData(int $tableId): array
+    public function getTableData(int $tableId, int $userId): array
     {
         $tableRows = new TableRows();
-        $rows      = $tableRows->getRowsForTable($tableId);
+        $rows      = $tableRows->getRowsForTable($tableId, $userId);
         
         $columnData = $votesData = $rowData = [];
         foreach ($rows as $row)
         {
-            $votesData[] = $row->votesCount;
+            $votesData[] = [
+                'votes' => $row->votesCount,
+                'upvoted' => !!$row->userHasVoted,
+            ];
             $rowData[]   = json_decode($row->content);
         }
         
@@ -53,7 +56,7 @@ class TableContent
         }
         
         return [
-            'data' => Tables::get($tableId)->toArray(['title']),
+            'table' => Tables::get($tableId)->toArray(['title']),
             'votes' => $votesData,
             'columns' => $columnData,
             'rows' => $rowData,
@@ -83,6 +86,7 @@ class TableContent
      * @param int    $lineNumber
      * @param string $rowData
      *
+     * @deprecated, use editCell
      * @return $this
      */
     public function editRow(int $tableId, int $lineNumber, string $rowData): TableContent
@@ -167,9 +171,9 @@ class TableContent
                                  ->setLineNumber($line++)
                                  ->setCommentsCount(0)
                                  ->setVotesCount(0)
-                                 ->setContent(json_encode($row))
                                  ->create();
                         
+                        $cellData = [];
                         foreach ($row as $key => $cell)
                         {
                             if (isset($columnIds[$key]))
@@ -182,7 +186,16 @@ class TableContent
                                           ->setContent($cell)
                                           ->setLink('')
                                           ->create();
+                                
+                                $cellData[] = [
+                                    'id' => $cellModel->getId(),
+                                    'content' => $cellModel->getContent(),
+                                    'link' => $cellModel->getLink() ? $cellModel->getLink() : null,
+                                ];
                             }
+                            
+                            $rowModel->setContent(json_encode($cellData))
+                                     ->save();
                         }
                     }
                 }

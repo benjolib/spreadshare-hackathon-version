@@ -79,7 +79,7 @@ class Get extends ActionHandler implements MethodInterface
         
         $tableContent = new TableContent();
         
-        return new Records($tableContent->getTableData($tableId));
+        return new Records($tableContent->getTableData($tableId, $this->getServiceManager()->getAuth()->getUserId()));
     }
     
 }

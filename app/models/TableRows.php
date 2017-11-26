@@ -43,7 +43,7 @@ class TableRows
      *
      * @return Simple
      */
-    public function getRowsForTable(int $tableId)
+    public function getRowsForTable(int $tableId, int $userId)
     {
         $query = self::query()
                      ->columns(
@@ -52,6 +52,7 @@ class TableRows
                              TableRows::class . ".content",
                              TableRows::class . ".votesCount",
                              TableRows::class . ".lineNumber",
+                             "(SELECT " . TableRowVotes::class . ".createdAt FROM " . TableRowVotes::class . " WHERE " . TableRowVotes::class . ".rowId = " . TableRows::class . ".id AND " . TableRowVotes::class . ".userId = " . $userId . " LIMIT 1) as userHasVoted",
                          ]
                      )
                      ->orderBy(TableRows::class . ".id ASC")
