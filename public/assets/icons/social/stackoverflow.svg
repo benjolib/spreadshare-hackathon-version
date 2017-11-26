@@ -1,0 +1,12 @@
+<svg width="14" height="17" viewBox="0 0 14 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>stackoverflow</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(-5172 -36668)">
+<g id="stackoverflow">
+<use xlink:href="#path0_fill" transform="translate(5172.21 36668.6)" fill="#FFFFFF"/>
+</g>
+</g>
+<defs>
+<path id="path0_fill" fill-rule="evenodd" d="M 9.08594 0L 13.2651 5.61719L 12.1436 6.45703L 7.96436 0.839844L 9.08594 0ZM 6.50098 2.23438L 5.60742 3.3125L 10.9873 7.80859L 11.8809 6.73047L 6.50098 2.23438ZM 3.84668 6.42969L 4.43359 5.15234L 10.7861 8.12109L 10.1992 9.39453L 3.84668 6.42969ZM 3.23291 8.33203L 2.94385 9.70703L 9.8042 11.1445L 10.0933 9.77734L 3.23291 8.33203ZM 1.40186 14.3008L 11.1978 14.3008L 11.1978 10.0938L 12.5996 10.0938L 12.5996 15.7031L 0 15.7031L 0 10.0938L 1.40186 10.0938L 1.40186 14.3008ZM 2.79492 11.4961L 2.79492 12.8906L 9.8042 12.8906L 9.8042 11.4961L 2.79492 11.4961Z"/>
+</defs>
+</svg>

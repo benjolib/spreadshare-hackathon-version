@@ -1,0 +1,135 @@
+#connectedAccounts {
+  @include rem2(padding, 25, 55);
+}
+
+.connected {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+
+  &__item {
+    width: 47.5%;
+    background: $background-color;
+    @include rem(margin-bottom, 26);
+
+    &:nth-child(odd) {
+      margin-right: 5%;
+    }
+
+    &__logo {
+      position: relative;
+      width: 10%;
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
+
+      &[data-social="twitter"] {
+        background-color: #59ACE4;
+      }
+      &[data-social="instagram"] {
+        background-color: #3E99ED;
+      }
+      &[data-social="facebook"] {
+        background-color: #3F5C97;
+      }
+      &[data-social="vsco"] {
+        background-color: #1E2628;
+      }
+      &[data-social="medium"] {
+        background-color: #000000;
+      }
+      &[data-social="soundcloud"] {
+        background-color: #EF7C28;
+      }
+      &[data-social="dribbble"] {
+        background-color: #E2568B;
+      }
+      &[data-social="vimeo"] {
+        background-color: #38AFEC;
+      }
+      &[data-social="behance"] {
+        background-color: #0D53DE;
+      }
+      &[data-social="twitch"] {
+        background-color: #6349A3;
+      }
+      &[data-social="github"] {
+        background-color: #23282D;
+      }
+      &[data-social="patreon"] {
+        background-color: #DE4C2A;
+      }
+      &[data-social="gitlab"] {
+        background-color: #DE4639;
+      }
+      &[data-social="unknown"] {
+        background-color: #131313;
+      }
+      &[data-social="bitbucket"] {
+        background-color: #1F4972;
+      }
+      &[data-social="periscope"] {
+        background-color: #459BCA;
+      }
+      &[data-social="slack"] {
+        background-color: #82D1B5;
+      }
+      &[data-social="500px"] {
+        background-color: #38AFEC;
+      }
+      &[data-social="angellist"] {
+        background-color: #23282D;
+      }
+      &[data-social="codepen"] {
+        background-color: #232323;
+      }
+      &[data-social="googleplus"] {
+        background-color: #D35048;
+      }
+      &[data-social="unknown2"] {
+        background-color: #3DC749;
+      }
+      &[data-social="stackoverflow"] {
+        background-color: #F28033;
+      }
+      &[data-social="raspberrypi"] {
+        background-color: #BF1E42;
+      }
+      &[data-social="linkedin"] {
+        background-color: #1178B3;
+      }
+      &[data-social="discord"] {
+        background-color: #7387DF;
+      }
+      &[data-social="quora"] {
+        background-color: #E31F21;
+      }
+      &[data-social="youtube"] {
+        background-color: #DC3632;
+      }
+      &[data-social="reddit"] {
+        background-color: #EF8533;
+      }
+      &[data-social="unknown3"] {
+        background-color: #6799A7;
+      }
+      &[data-social="ycombinator"] {
+        background-color: #EF8533;
+      }
+      &[data-social="producthunt"] {
+        background-color: #D75731;
+      }
+
+      img {
+        position: absolute;
+        top: 3px;
+        left: 8px;
+        width: 18px;
+        height: 18px;
+      }
+      span {
+        visibility: hidden;
+      }
+    }
+  }
+}

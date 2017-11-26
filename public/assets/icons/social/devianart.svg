@@ -1,0 +1,16 @@
+<svg width="10" height="15" viewBox="0 0 10 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>devianart</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(-5605 -36614)">
+<g id="devianart">
+<g id="Symbol">
+<g id="da">
+<use xlink:href="#path0_fill" transform="translate(5605.78 36614)" fill="#FFFFFF"/>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_fill" d="M 9.0201 2.65073L 6.22635 8.00939L 9.0201 8.00939L 9.0201 11.5516L 4.38133 11.5516L 2.87003 14.455L 0 14.455L 0 12.0951L 2.92724 6.48379L 0 6.48379L 0 2.90817L 4.79133 2.90817L 6.31216 0L 9.0201 0L 9.0201 2.65073Z"/>
+</defs>
+</svg>
