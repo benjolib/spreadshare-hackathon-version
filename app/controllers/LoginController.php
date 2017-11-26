@@ -3,6 +3,7 @@
 namespace DS\Controller;
 
 use DS\Api\Login;
+use DS\Application;
 use DS\Component\Auth;
 use DS\Component\ServiceManager;
 use DS\Model\DataSource\UserStatus;
@@ -54,6 +55,11 @@ class LoginController
                     $this->flash->success("Your account has been successfully confirmed!");
                     $user->setStatus(UserStatus::Confirmed)->setConfirmed(1)->save();
                 }
+            }
+            
+            if ($this->request->get('code') && $this->request->get('state'))
+            {
+                return $this->loginWithGoogleAction();
             }
             
             // Login request from Twitter
@@ -110,6 +116,14 @@ class LoginController
     }
     
     /**
+     * Login with Twitter account
+     */
+    public function loginWithGoogleAction()
+    {
+        return $this->loginWith('Google');
+    }
+    
+    /**
      * Login with Facebook account
      */
     public function loginWithFacebookAction()
@@ -163,26 +177,35 @@ class LoginController
      */
     private function loginSucceeded(AdapterInterface $adapter, $provider)
     {
-        //Retrieve the user's profile
-        $userProfile = $adapter->getUserProfile();
-        
-        $user = User::addUserFromAuthService(
-            trim($userProfile->firstName . ' ' . $userProfile->lastName),
-            $this->cleanString(strtolower($userProfile->displayName), '-'),
-            $userProfile->emailVerified,
-            '',
-            $userProfile->description,
-            $userProfile->identifier,
-            $userProfile->photoURL,
-            $userProfile->city ? $userProfile->city : $userProfile->region,
-            $provider
-        );
-        
-        $this->serviceManager->getAuth()->storeSession($user);
-        
-        header('Location: /');
-        $this->response->redirect('/', false);
-        $this->view->disable();
+        try
+        {
+            //Retrieve the user's profile
+            $userProfile = $adapter->getUserProfile();
+            
+            $user = User::addUserFromAuthService(
+                trim($userProfile->firstName . ' ' . $userProfile->lastName),
+                $this->cleanString(strtolower($userProfile->displayName), '-'),
+                $userProfile->emailVerified,
+                '',
+                $userProfile->description,
+                $userProfile->identifier,
+                $userProfile->photoURL,
+                $userProfile->city ? $userProfile->city : $userProfile->region,
+                $provider
+            );
+            
+            $this->serviceManager->getAuth()->storeSession($user);
+            
+            header('Location: /');
+            $this->response->redirect('/', false);
+            $this->view->disable();
+        }
+        catch (\Exception $e)
+        {
+            Application::instance()->log($e->getMessage());
+            var_dump($e->getMessage());
+            die;
+        }
     }
     
     /**

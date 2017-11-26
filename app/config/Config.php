@@ -100,7 +100,7 @@ return [
         "debug_file" => ROOT_PATH . "/system/log/hybridauth",
         
         //Location where to redirect users once they authenticate with a provider
-        'callback' => 'http://spreadshare.docker:81/login',
+        'callback' => 'http://dev.spreadshare.co:81/login',
         
         //Providers specifics
         'providers' => [
@@ -112,12 +112,14 @@ return [
                     'secret' => 'imPH3BmKlk3XWzKY2DrcAXbll329NNwASRxgLK1Fw52pns2oGP',
                 ],
             ],
-            'Google' => [
-                'enabled' => false,
-                'keys' => [
-                    'id' => '...',
-                    'secret' => '...',
+            "Google" => [
+                "enabled" => true,
+                "keys" => [
+                    "id" => "1069128037243-4cua499nu3jf64l2q4irms93pmh7trsk.apps.googleusercontent.com",
+                    "secret" => "d59PePUgDSCGgB_JuxGerScB",
                 ],
+                "scope" => "https://www.googleapis.com/auth/plus.login ",
+                "approval_prompt" => "force",
             ],
             'Facebook' => [
                 'enabled' => true,

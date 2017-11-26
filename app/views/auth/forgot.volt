@@ -36,6 +36,10 @@
           <img src="/assets/icons/twitter.svg" />
           <a href="/login/twitter">Use Twitter</a>
         </div>
+        <div class="login__content__aside__social__google">
+          <img src="/assets/icons/google.svg" />
+          <a href="/login/google">Use Google</a>
+        </div>
       </div>
     </aside>
   </div>
