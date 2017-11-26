@@ -19,13 +19,15 @@ interface TableSubcontrollerInterface
 {
     
     /**
-     * Handle Subcontroller
+     * Handle subcontroller
      *
      * @param Tables $table
+     * @param int    $userId
+     * @param string $param
      *
-     * @return $this
+     * @return mixed
      */
-    public function handle(Tables $table, int $userId);
+    public function handle(Tables $table, int $userId, string $param);
     
     /**
      * Initialize controller

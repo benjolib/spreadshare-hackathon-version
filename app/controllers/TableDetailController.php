@@ -23,7 +23,7 @@ class TableDetailController
     /**
      * Table Detail
      */
-    public function indexAction($tableId = null, $tab = 'table')
+    public function indexAction($tableId = null, $tab = 'table', $param = '')
     {
         if (!$tableId)
         {
@@ -56,7 +56,7 @@ class TableDetailController
             if (is_a($subController, 'DS\Interfaces\TableSubcontrollerInterface'))
             {
                 $subController->initialize();
-                $subController->handle($tableModel, $this->serviceManager->getAuth()->getUserId());
+                $subController->handle($tableModel, $this->serviceManager->getAuth()->getUserId(), $param);
             }
         }
     }

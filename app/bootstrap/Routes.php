@@ -116,6 +116,14 @@ return [
         'methods' => ['GET', 'POST'],
     ],
     [
+        'url' => '/table/{id:[0-9]+}/{tab:[a-z]+}/{param:[a-z]+}',
+        'paths' => [
+            'controller' => 'Table_Detail',
+            'action' => 'index',
+        ],
+        'methods' => ['GET', 'POST'],
+    ],
+    [
         'url' => '/table/add',
         'paths' => [
             'controller' => 'Add_Table',

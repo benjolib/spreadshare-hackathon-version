@@ -32,7 +32,6 @@ CREATE TABLE `changeRequests` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-
 # Export von Tabelle cities
 # ------------------------------------------------------------
 
@@ -657,6 +656,20 @@ CREATE TABLE `wallet` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
+DROP TABLE IF EXISTS `tableFlags`;
+CREATE TABLE `tableFlags` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `tableId` int(11) unsigned NOT NULL,
+  `userId` int(11) unsigned DEFAULT NULL,
+  `flag` varchar(25) DEFAULT NULL,
+  `text` varchar(200) DEFAULT '',
+  `createdAt` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `userId` (`userId`),
+  KEY `tableId` (`tableId`),
+  CONSTRAINT `tableFlagsTableId` FOREIGN KEY (`tableId`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `tableFlagsUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;

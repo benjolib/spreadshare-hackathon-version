@@ -29,24 +29,23 @@
   </div>
   {% if auth.loggedIn() %}
   <div class="navbar__controls">
-    <a href="/table/add"><img src="/assets/icons/add.svg" class="navbar__controls__add" /></a>
-    <a href="#"><img src="/assets/icons/bell.svg" class="navbar__controls__notification" /></a>
-    <a href="#" onclick="return false;"><img src="{{ auth.getUser().getImage() }}" class="navbar__controls__profile" id="profileImage" /></a>
-    <div class="navbar__controls__dropdown">
+    <a href="javascript:;"><img src="/assets/icons/bell.svg" class="navbar__controls__notification" /></a>
+    <a href="javascript:;"><img src="{{ auth.getUser().getImage() }}" class="navbar__controls__profile" id="profileImage" /></a>
+    <div class="profile-menu navbar__controls__dropdown">
       <ul>
-       <li><a href="/table/add">Create a Table</a></li>
-       <li><a href="http://behance.net/patrickserrano">Feed</a></li>
-       <li><a href="/user/{{ auth.getUser().handle }}">Profile</a></li>
-       <li><a href="/settings/wallet">Wallet</a></li>
-       <li><a href="/settings/invite">Get Token</a></li>
-       <li><a href="/settings/account">Settings</a></li>
-       <li><a href="/logout">Sign out</a></li>
+        <li><a href="/table/add">Create a Table</a></li>
+        <li><a href="http://behance.net/patrickserrano">Feed</a></li>
+        <li><a href="/user/{{ auth.getUser().handle }}">Profile</a></li>
+        <li><a href="/settings/wallet">Wallet</a></li>
+        <li><a href="/settings/invite">Get Token</a></li>
+        <li><a href="/settings/account">Settings</a></li>
+        <li><a href="/logout">Sign out</a></li>
       </ul>
     </div>
   </div>
 
   {% else %}
-    <span class="navbar__login">
+  <span class="navbar__login">
       <a href="/login" class="navbar__login__login">Log in</a>
       <span>or</span>
       <a href="/signup" class="navbar__login__signup">Sign up</a>
@@ -115,7 +114,7 @@
   $(document).ready(function () {
     /* Popper */
     var referenceElement;
-    var onPopper = $('.navbar__controls__dropdown');
+    var onPopper = $('.profile-menu');
 
     // initial state
     if (window.innerWidth < 1024) {
@@ -124,32 +123,31 @@
       referenceElement = $('.navbar__controls__notification');
     }
     new Popper(referenceElement, onPopper, {
-      placement: 'bottom'
+      placement: 'bottom',
     });
 
     // event listener
-    $(window).resize(function() {
+    $(window).resize(function () {
       if (window.innerWidth < 1024) {
         referenceElement = $('.navbar__controls__add');
       } else {
         referenceElement = $('.navbar__controls__notification');
       }
       new Popper(referenceElement, onPopper, {
-        placement: 'bottom'
+        placement: 'bottom',
       });
-    })
-
-
+    });
 
     //toggle menu
-    $('#profileImage').click(function() {
-      $(onPopper).toggleClass("show");
+    $('#profileImage').click(function () {
+      $(onPopper).toggleClass('show');
     });
 
     /* Define API endpoints once and globally */
     $.fn.api.settings.api = {
       'upvote': '/api/v1/vote/{id}',
       'subscribe': '/api/v1/subscribe/{id}',
+      'flag': '/table/{id}/flag/{flag}',
     };
 
     $('div.upvote, button.upvote').api({
@@ -165,10 +163,9 @@
         }
       },
     });
-     $('button.subscribe').api({
+    $('button.subscribe').api({
       method: 'POST',
       onSuccess: function (response, button) {
-        console.log(response);
         var span = button.find('span');
         if (response.data.voted) {
           button.addClass('selected');

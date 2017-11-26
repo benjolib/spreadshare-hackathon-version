@@ -15,6 +15,15 @@
       <button class="flag">
         <div class="flag-icon"></div>
       </button>
+      <div class="table-menu navbar__controls__dropdown" style="margin-top:80px;">
+        <ul>
+          <li><a data-flag="duplicate" href="javascript:;">Duplicate</a></li>
+          <li><a data-flag="spam" href="javascript:;">Spam</a></li>
+          <li><a data-flag="copyright" href="javascript:;">Copyright</a></li>
+          <li><a data-flag="inappropriate" href="javascript:;">Inappropriate</a></li>
+          <li><a data-flag="other" href="javascript:;">Other</a></li>
+        </ul>
+      </div>
       {% else %}
       <button class="subscribe" type="button" onclick="document.location.href='/login';"></button>
       <button class="upvote" type="button" onclick="document.location.href='/login';">
