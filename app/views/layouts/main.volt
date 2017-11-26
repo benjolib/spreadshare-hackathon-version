@@ -29,6 +29,7 @@
   </div>
   {% if auth.loggedIn() %}
   <div class="navbar__controls">
+    <img src="/assets/icons/add.svg" class="navbar__controls__add" />
     <a href="javascript:;"><img src="/assets/icons/bell.svg" class="navbar__controls__notification" /></a>
     <a href="javascript:;"><img src="{{ auth.getUser().getImage() }}" class="navbar__controls__profile" id="profileImage" /></a>
     <div class="profile-menu navbar__controls__dropdown">

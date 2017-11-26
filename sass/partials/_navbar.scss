@@ -194,6 +194,7 @@
 
 
     &__add {
+      visibility: hidden;
       @include rem(width, 15);
       @include rem(height, 15);
 
