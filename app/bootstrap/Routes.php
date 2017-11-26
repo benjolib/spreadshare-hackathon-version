@@ -20,6 +20,14 @@ return [
         'methods' => ['GET'],
     ],
     [
+        'url' => '/login/google',
+        'paths' => [
+            'controller' => 'Login',
+            'action' => 'loginWithGoogle',
+        ],
+        'methods' => ['GET'],
+    ],
+    [
         'url' => '/signup',
         'paths' => [
             'controller' => 'Signup',
