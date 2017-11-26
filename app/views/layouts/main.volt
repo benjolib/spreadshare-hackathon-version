@@ -187,7 +187,7 @@
     });
   });
 </script>
-<script type="text/javascript" src="/js/react/main.f6706ce4.js"></script>
+<script type="text/javascript" src="/js/react/main.b3733b8d.js"></script>
 {% block scripts %}{% endblock %}
 </body>
 </html>

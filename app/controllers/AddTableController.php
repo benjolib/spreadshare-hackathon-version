@@ -117,7 +117,14 @@ class AddTableController
                         $tableApi = new Table();
                         $tableApi->publish($tableId);
                         
-                        $this->response->redirect('/');
+                        if ($this->request->get('redirectToTable'))
+                        {
+                            header('Location: /table/' . $tableId);
+                        }
+                        else
+                        {
+                            $this->response->redirect('/');
+                        }
                     }
                 }
             }
