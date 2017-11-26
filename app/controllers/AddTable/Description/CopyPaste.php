@@ -22,17 +22,18 @@ class CopyPaste
 {
     
     /**
-     * Handle Subcontroller
-     *
      * @param Tables $table
+     * @param int    $userId
+     * @param string $param
      *
      * @return $this
+     * @throws \Exception
      */
-    public function handle(Tables $table, int $userId)
+    public function handle(Tables $table, int $userId, string $param)
     {
         try
         {
-            $this->view->setVar('content', 'table/add/description');
+            $this->view->setVar('content', 'table/add/copy-paste');
             $this->view->setVar('action', '/table/add/description/copy-paste');
             $this->view->setVar('tab', 'description');
             

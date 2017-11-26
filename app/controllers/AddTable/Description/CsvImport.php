@@ -22,13 +22,14 @@ class CsvImport
 {
     
     /**
-     * Handle Subcontroller
-     *
      * @param Tables $table
+     * @param int    $userId
+     * @param string $param
      *
      * @return $this
+     * @throws \Exception
      */
-    public function handle(Tables $table, int $userId)
+    public function handle(Tables $table, int $userId, string $param)
     {
         try
         {

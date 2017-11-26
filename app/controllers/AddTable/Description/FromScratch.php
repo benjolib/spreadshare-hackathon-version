@@ -2,8 +2,6 @@
 
 namespace DS\Controller\AddTable\Description;
 
-use DS\Api\Table;
-use DS\Controller\BaseController;
 use DS\Events\Table\TableCreated;
 use DS\Interfaces\TableSubcontrollerInterface;
 use DS\Model\Tables;
@@ -25,17 +23,18 @@ class FromScratch
 {
     
     /**
-     * Handle Subcontroller
-     *
      * @param Tables $table
      * @param int    $userId
+     * @param string $param
      *
      * @return $this
+     * @throws \Exception
      */
-    public function handle(Tables $table, int $userId)
+    public function handle(Tables $table, int $userId, string $param)
     {
         try
         {
+            $this->view->setVar('hideChooseTable', true);
             $this->view->setVar('content', 'table/add/description');
             $this->view->setVar('action', '/table/add/description/from-scratch');
             $this->view->setVar('tab', 'description');
@@ -49,7 +48,7 @@ class FromScratch
                 
                 // Table successfully created
                 //$this->response->redirect();
-                header('Location: /table/add/confirm?tableId=' . $createdTableModel->getId());
+                header('Location: /table/add/confirm?tableId=' . $createdTableModel->getId() . '&redirectToTable');
             }
         }
         catch (\Exception $e)
