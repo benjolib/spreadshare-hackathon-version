@@ -5,6 +5,7 @@ namespace DS\Controller\User;
 use DS\Controller\BaseController;
 use DS\Interfaces\UserSubcontrollerInterface;
 use DS\Model\DataSource\TableFlags;
+use DS\Model\Helper\TableFilter;
 use DS\Model\Tables;
 use DS\Model\User;
 
@@ -35,7 +36,7 @@ class Contributed
     {
         try
         {
-            $tables = (new Tables())->selectTables($this->serviceManager->getAuth()->getUserId(), [], TableFlags::Published, 0)
+            $tables = (new Tables())->selectTables($this->serviceManager->getAuth()->getUserId(), new TableFilter(), TableFlags::Published, 0)
                                     ->filterContributed((int) $user->getId());
             
             $this->view->setVar('tables', $tables->getQuery()->execute()->toArray() ?: []);

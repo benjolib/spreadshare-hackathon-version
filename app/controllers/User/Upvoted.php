@@ -5,6 +5,7 @@ namespace DS\Controller\User;
 use DS\Controller\BaseController;
 use DS\Interfaces\UserSubcontrollerInterface;
 use DS\Model\DataSource\TableFlags;
+use DS\Model\Helper\TableFilter;
 use DS\Model\Tables;
 use DS\Model\User;
 use Phalcon\Exception;
@@ -36,7 +37,7 @@ class Upvoted
     {
         try
         {
-            $tables = (new Tables())->selectTables($this->serviceManager->getAuth()->getUserId(), [], TableFlags::Published, 0)
+            $tables = (new Tables())->selectTables($this->serviceManager->getAuth()->getUserId(), new TableFilter(), TableFlags::Published, 0)
                                     ->filterUpvoted((int) $user->getId());
             
             $this->view->setVar('tables', $tables->getQuery()->execute()->toArray() ?: []);

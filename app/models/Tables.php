@@ -136,7 +136,7 @@ class Tables
     {
         if (!$this->query)
         {
-            $this->selectTables($this->serviceManager->getAuth()->getUserId(), [], $flags = TableFlags::Published, 0, null, Paging::endlessScrollPortions);
+            $this->selectTables($this->serviceManager->getAuth()->getUserId(), new TableFilter(), $flags = TableFlags::Published, 0, null, Paging::endlessScrollPortions);
         }
     }
     
