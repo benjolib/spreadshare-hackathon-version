@@ -154,14 +154,29 @@ return function (\DS\Interfaces\GeneralApplication $application, Phalcon\Di\Fact
                     
                     switch ($exception->getCode())
                     {
+                        case PhDispatcher::EXCEPTION_CYCLIC_ROUTING:
+                        case PhDispatcher::EXCEPTION_INVALID_HANDLER:
+                        case PhDispatcher::EXCEPTION_INVALID_PARAMS:
                         case PhDispatcher::EXCEPTION_HANDLER_NOT_FOUND:
                         case PhDispatcher::EXCEPTION_ACTION_NOT_FOUND:
                             $dispatcher->forward(
                                 [
                                     'controller' => 'Error',
-                                    'action' => 'show',
+                                    'action' => 'notFound',
                                 ]
                             );
+                            break;
+                        case PhDispatcher::EXCEPTION_NO_DI:
+                            $dispatcher->forward(
+                                [
+                                    'controller' => 'Error',
+                                    'action' => 'error',
+                                    'params' => [
+                                        $exception,
+                                    ],
+                                ]
+                            );
+                            break;
                     }
                     
                     return false;

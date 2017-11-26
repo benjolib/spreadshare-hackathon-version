@@ -32,6 +32,7 @@ if (($_SERVER['REQUEST_METHOD'] === 'GET' || $_SERVER['REQUEST_METHOD'] === 'POS
     }
     catch (Exception $e)
     {
+        echo $e->getMessage();die;
         // also store error into file
         @file_put_contents('../system/errors', @file_get_contents('../system/errors') . "\n" . $e->getMessage() . " " . $e->getTraceAsString());
         

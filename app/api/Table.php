@@ -71,6 +71,21 @@ class Table
     ) {
         $table = Tables::findByFieldValue('title', $title);
         
+        if (!$title)
+        {
+            throw new \InvalidArgumentException('Please give a name for the table');
+        }
+        
+        if (strlen($title) < 4)
+        {
+            throw new \InvalidArgumentException('Please provide at least four chracters for the table name.');
+        }
+        
+        if (!$topic1Id)
+        {
+            throw new \InvalidArgumentException('Please select at least one topic for your table.');
+        }
+        
         if ($table)
         {
             throw new \InvalidArgumentException('A table with the exact same title already exists. Please choose another title');
@@ -80,10 +95,12 @@ class Table
         {
             $typeId = null;
         }
+        
         if ($topic1Id === 0)
         {
             $topic1Id = null;
         }
+        
         if ($topic2Id === 0)
         {
             $topic2Id = null;

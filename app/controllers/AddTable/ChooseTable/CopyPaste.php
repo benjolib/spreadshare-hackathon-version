@@ -7,6 +7,7 @@ use DS\Controller\BaseController;
 use DS\Events\Table\TableDataImported;
 use DS\Interfaces\TableSubcontrollerInterface;
 use DS\Model\Tables;
+use Phalcon\Exception;
 
 /**
  * Spreadshare
@@ -31,10 +32,15 @@ class CopyPaste
      *
      * @return $this
      */
-    public function handle(Tables $table, int $userId)
+    public function handle(Tables $table, int $userId, string $param)
     {
         try
         {
+            if ($table->getOwnerUserId() != $userId)
+            {
+                throw new Exception('You are not allowed to post data to this table!');
+            }
+            
             $this->view->setVar('content', 'table/add/copy-paste');
             $this->view->setVar('action', '/table/add/choose/copy-paste');
             $this->view->setVar('tab', 'choose-table');
@@ -66,10 +72,10 @@ class CopyPaste
                     {
                         $tableContentApi = new TableContent();
                         $tableContentApi->addfromCsvText($tableId, $csvText, $separator, !!$this->request->getPost('hasHeaders', null, false));
-    
+                        
                         // Fire event
                         TableDataImported::after($userId, $table);
-    
+                        
                         header('Location: /table/add/confirm?tableId=' . $tableId);
                     }
                 }

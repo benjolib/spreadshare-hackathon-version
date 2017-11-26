@@ -39,7 +39,7 @@ class ContentTypeSelect extends Component {
       <div>
         <Select
           name={this.props.name}
-          multi
+          multi={false}
           options={this.props.contentType}
           value={this.state.values}
           placeholder={

@@ -7,6 +7,7 @@ use DS\Controller\BaseController;
 use DS\Events\Table\TableDataImported;
 use DS\Interfaces\TableSubcontrollerInterface;
 use DS\Model\Tables;
+use Phalcon\Exception;
 
 /**
  * Spreadshare
@@ -35,6 +36,11 @@ class CsvImport
     {
         try
         {
+            if ($table->getOwnerUserId() != $userId)
+            {
+                throw new Exception('You are not allowed to post data to this table!');
+            }
+            
             $this->view->setVar('content', 'table/add/csv-import');
             $this->view->setVar('content_js', 'table/add/csv-import.js');
             $this->view->setVar('action', '/table/add/choose/csv-import');
@@ -54,7 +60,7 @@ class CsvImport
                     $files   = $this->request->getUploadedFiles(true);
                     foreach ($files as $file)
                     {
-                        $csvText    = file_get_contents($file->getTempName());
+                        $csvText = file_get_contents($file->getTempName());
                     }
                     
                     if ($csvText)

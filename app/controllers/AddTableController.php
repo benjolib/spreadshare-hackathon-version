@@ -5,6 +5,7 @@ namespace DS\Controller;
 use DS\Api\Table;
 use DS\Interfaces\LoginAwareController;
 use DS\Model\Tables;
+use Phalcon\Exception;
 
 /**
  * Spreadshare
@@ -44,12 +45,38 @@ class AddTableController
     {
         $this->view->setMainView('table/add');
         
-        if ($selection === 'from-scratch')
+        try
         {
-            $this->view->setVar('hideChooseTable', true);
+            $this->view->setVar('post', $this->request->getPost());
+            
+            $userId = $this->serviceManager->getAuth()->getUserId();
+            
+            if ($selection)
+            {
+                // Choose Table Step (onyl applies to copy-poast, csv-import and sheet-import)
+                $subClass = "DS\\Controller\\AddTable\\Description\\" . str_replace(' ', '', ucfirst(str_replace('-', ' ', $selection)));
+                if (class_exists($subClass))
+                {
+                    /**
+                     * @var \DS\Interfaces\TableSubcontrollerInterface $subController
+                     */
+                    $subController = new $subClass();
+                    if (is_a($subController, 'DS\Interfaces\TableSubcontrollerInterface'))
+                    {
+                        $subController->initialize();
+                        $subController->handle(/* pass dummy table model */
+                            new Tables(),
+                            $userId,
+                            ''
+                        );
+                    }
+                }
+            }
         }
-        
-        $this->callSubHandler($selection, 'Description', $this->serviceManager->getAuth()->getUserId());
+        catch (\Exception $e)
+        {
+            $this->flash->error($e->getMessage());
+        }
     }
     
     /**
@@ -60,20 +87,18 @@ class AddTableController
         $this->view->setMainView('table/add');
         $userId = $this->serviceManager->getAuth()->getUserId();
         
-        $this->callSubHandler($selection, 'ChooseTable', $userId);
-    }
-    
-    /**
-     * @param string $selection
-     * @param string $step
-     * @param int    $userId
-     */
-    private function callSubHandler(string $selection, string $step, int $userId)
-    {
         if ($selection)
         {
+            $tableId    = $this->request->get('tableId');
+            $tableModel = Tables::getInstance($tableId);
+            
+            if (!$tableModel->getId())
+            {
+                throw new Exception('Table does not exist!');
+            }
+            
             // Choose Table Step (onyl applies to copy-poast, csv-import and sheet-import)
-            $subClass = "DS\\Controller\\AddTable\\" . $step . "\\" . str_replace(' ', '', ucfirst(str_replace('-', ' ', $selection)));
+            $subClass = "DS\\Controller\\AddTable\\ChooseTable\\" . str_replace(' ', '', ucfirst(str_replace('-', ' ', $selection)));
             if (class_exists($subClass))
             {
                 /**
@@ -83,7 +108,7 @@ class AddTableController
                 if (is_a($subController, 'DS\Interfaces\TableSubcontrollerInterface'))
                 {
                     $subController->initialize();
-                    $subController->handle(new Tables(), $userId, '');
+                    $subController->handle(isset($tableModel) ? $tableModel : new Tables(), $userId, '');
                 }
             }
         }

@@ -36,7 +36,7 @@ class LocationSelect extends Component {
   }
 
   componentDidUpdate = (prevProps, prevState) => {
-    if (this.state.value) {
+    if (this.state.value && prevState.value) {
       if (this.state.value.length !== prevState.value.length) {
         if (this.props.submitFormOnChange) {
           const form = document.getElementById(this.props.submitFormOnChange);
