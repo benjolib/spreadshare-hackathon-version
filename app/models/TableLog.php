@@ -2,6 +2,7 @@
 
 namespace DS\Model;
 
+use DS\Constants\Paging;
 use DS\Model\Events\TableLogEvents;
 
 /**
@@ -21,32 +22,37 @@ class TableLog
     extends TableLogEvents
 {
     /**
-     * @param array $param
-     * @param int   $page
-     * @param int   $limit
+     * @param int $tableId
+     * @param int $page
+     * @param int $limit
      *
      * @return array
      */
-    /*
-    public function findCustom($param = [], $page = 0, $limit = Paging::endlessScrollPortions)
+    public function getLogs(int $tableId, $page = 0, $limit = Paging::endlessScrollPortions)
     {
-        if (count($param))
+        if (!$tableId)
         {
-            return self::query()
-                       ->columns(
-                           [
-                               TableLog::class . ".id",
-                           ]
-                       )
-                //->leftJoin(TableLog::class, TableLog::class . '.profileId = ' . Profile::class . '.id')
-                //->inWhere(Profile::class . '.id', $param)
-                       ->limit((int) $limit, (int) Paging::endlessScrollPortions * $page)
-                //->orderBy(sprintf('FIELD (id,%s)', implode(',', $param)))
-                       ->execute()
-                       ->toArray() ?: [];
+            throw new \InvalidArgumentException('Invalid table id.');
         }
         
-        return [];
+        return self::query()
+                   ->columns(
+                       [
+                           TableLog::class . ".id",
+                           TableLog::class . ".logType",
+                           TableLog::class . ".text",
+                           TableLog::class . ".placeholders",
+                           TableLog::class . ".createdAt",
+                           User::class . ".handle as userHandle",
+                           User::class . ".name as userName",
+                           User::class . ".image as userImage",
+                       ]
+                   )
+                   ->innerJoin(User::class, TableLog::class . '.userId = ' . User::class . '.id')
+                   ->where(TableLog::class . '.tableId = :tableId:', ['tableId' => $tableId])
+                   ->limit((int) $limit, (int) Paging::endlessScrollPortions * $page)
+                   ->orderBy(TableLog::class . '.id DESC')
+                   ->execute()
+                   ->toArray() ?: [];
     }
-    */
 }

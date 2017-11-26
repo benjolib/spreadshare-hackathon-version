@@ -4,6 +4,7 @@ namespace DS\Controller\Table;
 
 use DS\Controller\BaseController;
 use DS\Interfaces\TableSubcontrollerInterface;
+use DS\Model\TableLog;
 use DS\Model\Tables;
 
 /**
@@ -33,8 +34,10 @@ class Feed
     {
         try
         {
-            $this->view->setMainView('table/detail/feed');
+            $tableLog = new TableLog();
+            $this->view->setVar('logs', $tableLog->getLogs($table->getId()));
             
+            $this->view->setMainView('table/detail/feed');
             $this->view->setVar('selectedPage', 'feed');
         }
         catch (\Exception $e)
