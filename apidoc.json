@@ -2,7 +2,7 @@
   "name": "Spreadshare",
   "version": "1.0",
   "description": "Backend Api Documentation",
-  "sampleUrl": "https://api.spreadshare.co",
+  "sampleUrl": "http://spreadshare.docker:81",
   "apidoc": {
     "title": "Spreadshare Api Docs",
     "url": "https://apidocs.spreadshare.co"
