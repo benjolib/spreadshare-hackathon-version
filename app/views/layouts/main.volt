@@ -55,6 +55,7 @@
 </nav>
 {# main section #}
 <section class="main">
+  {{ flash.output() }}
   {# content #}
   {% block content %}{% endblock %}
   {# footer #}
@@ -143,6 +144,14 @@
     $('#profileImage').click(function () {
       $(onPopper).toggleClass('show');
     });
+
+    // flash messages timeout
+    var $flash = $('.flash');
+    if ($flash.length > 0) {
+      setTimeout(function() {
+        $flash.css('display', 'none');
+      }, 3800);
+    }
 
     /* Define API endpoints once and globally */
     $.fn.api.settings.api = {

@@ -19,13 +19,13 @@ return function (\DS\Interfaces\GeneralApplication $application, Phalcon\Di\Fact
         function () use ($application) {
             return new \Phalcon\Flash\Session(
                 [
-                    "error" => "ui negative aligned message",
-                    "success" => "ui positive aligned message",
-                    "notice" => "ui info aligned message",
-                    "warning" => "ui warning aligned message",
+                    "error" => "flash flash-error",
+                    "success" => "flash flash-success",
+                    "notice" => "flash flash-notice",
+                    "warning" => "flash flash-warning",
                 ]
             );
         }
     );
-    
+
 };

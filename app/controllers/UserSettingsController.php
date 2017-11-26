@@ -30,9 +30,9 @@ class UserSettingsController
      */
     public function indexAction($params = [])
     {
-    
+
     }
-    
+
     /**
      * @param int $id
      *
@@ -41,17 +41,17 @@ class UserSettingsController
     private function getUser($id)
     {
         $user = User::findByFieldValue('id', $id);
-        
+
         /*
         if (!$user)
         {
             $this->response->redirect('/');
         }
         */
-        
+
         return $user;
     }
-    
+
     /**
      * Settings actions
      *
@@ -64,49 +64,56 @@ class UserSettingsController
         try
         {
             $this->view->setVar('profile', $this->getUser($this->serviceManager->getAuth()->getUserId()));
-            
+
             switch ($page)
             {
                 case "notifications":
                     $this->notificationsAction();
+                    $this->flash->success("Your account has been successfully confirmed!");
                     break;
                 case "connected":
                     $this->connectedAction();
+                    $this->flash->success("Your account has been successfully confirmed!");
                     break;
                 case "invite":
                     $this->inviteAction();
+                    $this->flash->warning("Your account will be suspended in 8 days! Update payment info now to keep your account active.");
                     break;
                 case "account":
                     $this->accountAction();
+                    $this->flash->warning("Your account will be suspended in 8 days! Update payment info now to keep your account active.");
                     break;
                 case "wallet":
                     $this->walletAction();
+                    $this->flash->notice("SpreadShare will become inactive for a brief moment due maintenance in 10 hours.");
                     break;
                 case "donations":
                     $this->donationsAction();
+                    $this->flash->notice("SpreadShare will become inactive for a brief moment due maintenance in 10 hours.");
                     break;
                 default:
                 case "personal":
                     $this->personalAction();
+                    $this->flash->error("Your account has been deleted.");
                     break;
             }
-            
+
         }
         catch (Exception $e)
         {
             Application::instance()->log($e->getMessage(), Logger::CRITICAL);
         }
-        
+
         return null;
     }
-    
+
     /**
      * Personal
      */
     public function personalAction()
     {
         $userId = $this->serviceManager->getAuth()->getUserId();
-        
+
         if ($this->request->isPost())
         {
             if ($userId > 0)
@@ -125,7 +132,7 @@ class UserSettingsController
                         }
                     }
                 }
-                
+
                 // Save user settings
                 $userSettings = new UserSettings();
                 $user         = $userSettings->savePersonalSettings(
@@ -138,18 +145,18 @@ class UserSettingsController
                     $this->request->getPost('website'),
                     true
                 );
-                
+
                 // Send new user model to view
                 $this->view->setVar('profile', $user);
             }
         }
-        
+
         $locations = UserLocations::getUserLocations($userId);
         $this->view->setVar('locations', htmlentities(json_encode($locations)));
-        
+
         $this->view->setMainView('user/settings/personal');
     }
-    
+
     /**
      * Account
      */
@@ -168,10 +175,10 @@ class UserSettingsController
                 $this->view->setVar('profile', $user);
             }
         }
-        
+
         $this->view->setMainView('user/settings/account');
     }
-    
+
     /**
      * Notifications
      */
@@ -179,7 +186,7 @@ class UserSettingsController
     {
         $this->view->setMainView('user/settings/notifications');
     }
-    
+
     /**
      * Connected Accounts
      */
@@ -187,7 +194,7 @@ class UserSettingsController
     {
         $this->view->setMainView('user/settings/connected');
     }
-    
+
     /**
      * Invite
      */
@@ -195,7 +202,7 @@ class UserSettingsController
     {
         $this->view->setMainView('user/settings/invite');
     }
-    
+
     /**
      * Wallet
      */
@@ -203,7 +210,7 @@ class UserSettingsController
     {
         $this->view->setMainView('user/settings/wallet');
     }
-    
+
     /**
      * Donations
      */
@@ -211,5 +218,5 @@ class UserSettingsController
     {
         $this->view->setMainView('user/settings/donations');
     }
-    
+
 }
