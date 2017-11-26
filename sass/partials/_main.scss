@@ -90,14 +90,13 @@
         justify-content: center;
         color: $text-link-color;
         list-style-type: none;
-        text-transform: uppercase;
         @include rem(font-size, 12);
         @include rem(margin-bottom, 25);
 
         @include desktop {
           flex-direction: row;
           justify-content: space-between;
-          @include rem(font-size, 14);
+          @include rem(font-size, 13);
         }
 
         &__left {
@@ -108,14 +107,19 @@
           color: $text-link-color-active-alternative;
           @include rem(margin-top, 25);
 
+          &:hover {
+            cursor: pointer;
+          }
+
           @include desktop {
             order: 1;
             width: auto;
             margin-top: 0;
           }
 
-          li {
+          & > li {
             display: inline-flex;
+            text-transform: uppercase;
 
             &:hover {
               cursor: pointer;
@@ -147,16 +151,16 @@
               @include rem(margin-right, 32);
             }
 
-            &:hover {
-              cursor: pointer;
-              color: $text-link-color-hover;
+            a {
+              color: $text-link-color;
+
+              &:hover {
+                color: $text-link-color-hover;
+              }
             }
 
             &:last-child {
               margin-right: 0;
-            }
-            &:nth-child(2) {
-              color: $text-link-color-active;
             }
           }
 

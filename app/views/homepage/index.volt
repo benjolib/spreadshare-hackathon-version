@@ -22,17 +22,24 @@
     <div class="main__content__tables__filters">
       <div class="main__content__tables__filters__left">
         <li>Today</li>
-        <img src="/assets/icons/chevron-down.svg" />
+        <img src="/assets/icons/chevron-down-dark.svg" />
+        <div class="dropdown dropdown--filters">
+          <ul>
+            <li class="link-active"><a href="#">Today</a></li>
+            <li><a href="#">Yesterday</a></li>
+            <li><a href="#">Last week</a></li>
+            <li><a href="#">Last 30 Days</a></li>
+            <li><a href="#">Last 90 Days</a></li>
+            <li><a href="#">Last Year</a></li>
+            <li><a href="#">All Time</a></li>
+          </ul>
+        </div>
       </div>
       <div class="main__content__tables__filters__right">
-        <img src="/assets/icons/clock.svg" />
-        <li class="{% if order is 'newly-added' %}selected{% endif %}"><a href="/tables/newly-added">Newly Added</a></li>
-        <img src="/assets/icons/upvote.svg" />
-        <li class="{% if order is 'most-upvoted' %}selected{% endif %}"><a href="/tables/most-upvoted">Most Upvoted</a></li>
-        <img src="/assets/icons/eye.svg" />
-        <li class="{% if order is 'most-viewed' %}selected{% endif %}"><a href="/tables/most-viewed">Most Viewed</a></li>
-        <img src="/assets/icons/comment.svg" />
-        <li class="{% if order is 'most-contributed' %}selected{% endif %}"><a href="/tables/most-contributed">Most Contributed</a></li>
+        <li class="{% if order is 'newly-added' %}link-active{% endif %}"><a href="/tables/newly-added">Newest</a></li>
+        <li class="{% if order is 'most-upvoted' %}link-active{% endif %}"><a href="/tables/most-upvoted">Upvotes</a></li>
+        <li class="{% if order is 'most-viewed' %}link-active{% endif %}"><a href="/tables/most-viewed">Views</a></li>
+        <li class="{% if order is 'most-contributed' %}link-active{% endif %}"><a href="/tables/most-contributed">Contributions</a></li>
       </div>
     </div>
 
@@ -120,6 +127,25 @@
 
   $('#closeHero').on('click', function() {
     $('.main__hero').css('display', 'none');
+    createPopper();
+  });
+
+  /* Popper */
+  var $referenceElement = $('.main__content__tables__filters__left');
+  var $onPopper = $('.dropdown');
+
+  var createPopper = function(ref=$referenceElement, pop=$onPopper, place='bottom') {
+    new Popper(ref, pop, {
+      placement: place,
+    });
+  };
+
+  new Popper($referenceElement, $onPopper, {
+    placement: 'bottom',
+  });
+
+  $referenceElement.click(function() {
+    $onPopper.toggleClass('show');
   });
 </script>
 {% endblock %}

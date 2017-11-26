@@ -18,3 +18,22 @@
     }
   }
 }
+.link-active {
+  color: $text-link-color-hover !important;
+
+  a {
+    color: $text-link-color-hover !important;
+  }
+}
+.dropdown--filters {
+  .link-active {
+    a {
+      color: $text-link-color-hover !important;
+
+      &:after {
+        content: ' (selected)';
+        color: $logo-color;
+      }
+    }
+  }
+}
