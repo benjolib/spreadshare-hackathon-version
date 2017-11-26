@@ -108,6 +108,7 @@ class AddTableController
             if ($tableModel->getOwnerUserId() == $userId)
             {
                 $this->view->setVar('tableId', $this->request->get('tableId'));
+                $this->view->setVar('redirectToTable', $this->request->get('redirectToTable') === null ? 0 : 1);
                 
                 if ($this->request->isPost())
                 {
@@ -117,7 +118,7 @@ class AddTableController
                         $tableApi = new Table();
                         $tableApi->publish($tableId);
                         
-                        if ($this->request->get('redirectToTable'))
+                        if ($this->request->getPost('redirectToTable'))
                         {
                             header('Location: /table/' . $tableId);
                         }
