@@ -198,7 +198,7 @@ class Tables
                            ->innerJoin(User::class, Tables::class . '.ownerUserId = ' . User::class . '.id')
                            ->leftJoin(Types::class, Tables::class . '.typeId = ' . Types::class . '.id')
                            ->limit((int) $limit, (int) Paging::endlessScrollPortions * $page);
-
+        
         if ($orderBy)
         {
             $this->query->orderBy($orderBy);

@@ -148,6 +148,7 @@
       'upvote': '/api/v1/vote/{id}',
       'subscribe': '/api/v1/subscribe/{id}',
       'flag': '/table/{id}/flag/{flag}',
+      'follow-user': '/api/v1/follow-user/{id}',
     };
 
     $('div.upvote, button.upvote').api({
@@ -174,6 +175,13 @@
           button.removeClass('selected');
           span.text(parseInt(parseInt(span.text()) - 1));
         }
+      },
+    });
+    $('button.follow-user').api({
+      method: 'POST',
+      action: 'follow-user',
+      onSuccess: function (response, button) {
+        $(button).toggleClass('selected');
       },
     });
   });

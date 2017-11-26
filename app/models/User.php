@@ -3,6 +3,7 @@
 namespace DS\Model;
 
 use DS\Component\Mail\Events\SignupMail;
+use DS\Constants\Paging;
 use DS\Model\Events\UserEvents;
 use DS\Model\Helper\RandomUserImage;
 
@@ -28,6 +29,54 @@ class User
     public function getImage(): string
     {
         return str_replace('http://', '//', parent::getImage());
+    }
+    
+    /**
+     * @param int  $tableId
+     * @param bool $upvoters
+     * @param bool $subscribers
+     * @param bool $contributors
+     *
+     * @return array
+     */
+    public function getTableUsers(int $tableId, bool $upvoters = false, bool $subscribers = false, bool $contributors = false): array
+    {
+        $query = self::query()
+                     ->columns(
+                         [
+                             User::class . ".id",
+                             User::class . ".image",
+                             User::class . ".name",
+                             User::class . ".tagline",
+                             User::class . ".location",
+                             "(SELECT " . UserFollower::class . ".id FROM " . UserFollower::class . " WHERE " . UserFollower::class . ".userId = " . User::class . ".id AND " . UserFollower::class . ".followedByUserId = " .
+                             serviceManager()->getAuth()->getUserId() . ") as following",
+                         ]
+                     )
+                     ->leftJoin(Tables::class, Tables::class . '.ownerUserId = ' . User::class . '.id')
+                     ->leftJoin(TableVotes::class, TableVotes::class . '.userId = ' . User::class . '.id')
+                     ->leftJoin(TableSubscription::class, TableSubscription::class . '.userId = ' . User::class . '.id')
+                     ->leftJoin(TableCells::class, TableCells::class . '.userId = ' . User::class . '.id')
+                     ->groupBy(User::class . '.id')
+                     ->where(Tables::class . '.id = :tableId:', ['tableId' => $tableId])
+                     ->limit(Paging::endlessScrollPortions);
+        
+        if ($upvoters)
+        {
+            $query->andWhere('!ISNULL(' . TableVotes::class . '.userId)');
+        }
+        
+        if ($subscribers)
+        {
+            $query->andWhere('!ISNULL(' . TableSubscription::class . '.userId)');
+        }
+        
+        if ($contributors)
+        {
+            $query->andWhere('!ISNULL(' . TableCells::class . '.userId)');
+        }
+        
+        return $query->execute()->toArray();
     }
     
     /**

@@ -5,6 +5,7 @@ namespace DS\Controller\Table;
 use DS\Controller\BaseController;
 use DS\Interfaces\TableSubcontrollerInterface;
 use DS\Model\Tables;
+use DS\Model\User as UserModel;
 
 /**
  * Spreadshare
@@ -33,6 +34,10 @@ class User
     {
         try
         {
+            $userModel = new UserModel();
+            $tableUsers = $userModel->getTableUsers($table->getId());
+            $this->view->setVar('tableUsers', $tableUsers);
+            
             $this->view->setMainView('table/detail/user');
             
             $this->view->setVar('selectedPage', 'user');
