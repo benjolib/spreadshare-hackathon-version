@@ -21,7 +21,6 @@
     @include rem2(padding, 25, 50);
   }
 
-
   &__logo {
     order: 2;
     @include rem(margin-bottom, 15);
@@ -154,6 +153,8 @@
       background: #FFFFFF;
       box-shadow: 0 2px 4px 0 rgba(0,0,0,0.26);
       border-radius: 6px;
+      z-index: 1;
+
       ul {
          list-style-type: none;
          width: 224px;
