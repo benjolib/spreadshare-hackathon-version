@@ -35,9 +35,30 @@ class About
         try
         {
             $comments = new TableComments();
-            $this->view->setVar('comments', $comments->getComents($table->getId()));
             
+            if ($this->request->isPost())
+            {
+                if ($this->request->getPost('comment'))
+                {
+                    $comments->setUserId($this->serviceManager->getAuth()->getUserId())
+                             ->setTableId($table->getId())
+                             ->setParentId($this->request->getPost('parentId') ?: null)
+                             ->setVotesCount(0)
+                             ->setComment($this->request->getPost('comment'))
+                             ->create();
+                }
+            }
+            
+            $commentsArray = $comments->getComments($table->getId());
+            foreach ($commentsArray as $key => $comment)
+            {
+                $commentsArray[$key]['childs'] = $comments->getComments($table->getId(), $comment['id']);
+            }
+            
+            $this->view->setVar('comments', $commentsArray);
             $this->view->setMainView('table/detail/about');
+            
+            $this->view->setVar('selectedPage', 'about');
         }
         catch (\Exception $e)
         {

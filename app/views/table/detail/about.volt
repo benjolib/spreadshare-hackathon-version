@@ -34,10 +34,10 @@
         <div>Views</div>
         <span>{{ table['viewsCount'] }}</span>
       </div>
-      <!--<div class="tableAbout__info__content__item tableAbout__info__content__item--subscribers">
+      <div class="tableAbout__info__content__item tableAbout__info__content__item--subscribers">
         <div>Subscribers</div>
-        <span></span>
-      </div>-->
+        <span>{{ table['subscriberCount'] }}</span>
+      </div>
       <div class="tableAbout__info__content__item tableAbout__info__content__item--contributions">
         <div>Contributions</div>
         <span>{{ table['contributionCount'] }}</span>
@@ -51,44 +51,51 @@
         <span>{{ table['tokensCount'] }}</span>
       </div>
     </div>
+
     <aside class="tableAbout__sidebar">
-      <div class="tableAbout__sidebar__content">
-        <p>Sidebar</p>
+      <div class="tableAbout__sidebar__content tags">
+        <span>{{ implode('</span><span>', explode(', ', table['tags'])) }}</span>
       </div>
     </aside>
   </div>
 
-  <p>Comments <span>13</span></p>
+  <p>Comments <span>{{ comments|length }}</span></p>
   <div class="tableAbout__comments">
-    <div class="tableAbout__comments__container">
-      <div class="tableAbout__comments__container__avatar">
-      <img src="/assets/images/jim_hopper.png" />
+    {% for comment in comments %}
+      {{ partial('table/detail/comment') }}
+
+      <div style="margin-left:20px;padding-left:20px; border-left:1px solid #f2f2f8;">
+        {% for comment in comment['childs'] %}
+          {{ partial('table/detail/subcomment') }}
+        {% endfor %}
       </div>
-      <div class="tableAbout__comments__container__content">
-        <h4>Jim Hopper</h4>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sodales et leo eu cursus. Proin nec augue sed ante gravida aliquet vitae a libero. Cras id metus et dui aliquam dapibus. Integer eu iaculis lacus. In laoreet sem at ipsum convallis elementum. Phasellus eu facilisis justo, eget hendrerit elit. Mauris consectetur luctus arcu, non porta lorem
-        </p>
-        {#
-        <div class="tableAbout__comments__container__content__stats">
-          <div class="tableAbout__comments__container__content__stats__item">
-            <div class="icon"></div>
-            <div>23</div>
-          </div>
-          <div class="tableAbout__comments__container__content__stats__item">
-            <div class="icon"></div>
-            <div>Reply</div>
-          </div>
-          <div class="tableAbout__comments__container__content__stats__item">
-            <div class="icon"></div>
-            <div>Report</div>
-          </div>
-        </div>
-        #}
-      </div>
-      </div>
+    {% endfor %}
+
+    {% if auth.loggedIn() %}
+    <div>
+      <form method="POST" action="/table/{{ table['id'] }}/about">
+        <input type="hidden" name="parentId" id="commentParentId" value="" />
+        <textarea name="comment" id="commentTextArea" placeholder="Add a comment"></textarea>
+        <button>Send</button>
+      </form>
     </div>
+    {% endif %}
   </div>
 </div>
 
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('.tableAbout__comments__container').on('click', '.reply', function (ev) {
+      var target = $(ev.currentTarget);
+
+      $('#commentTextArea').val('@' + target.attr('data-handle') + ' ');
+      $('#commentParentId').val(target.attr('data-id'));
+
+      document.getElementById('commentTextArea').focus();
+    });
+  });
+</script>
 {% endblock %}

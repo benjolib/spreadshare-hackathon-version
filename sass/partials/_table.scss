@@ -158,11 +158,16 @@
         justify-content: flex-start;
       }
 
+      a.selected, a:hover {
+        color: $text-color !important;
+        background: transparent !important;
+      }
+
       a {
-        color: $text-color;
+        color: #cbd0db !important;
 
         &:last-child {
-          div.table__header__menu__item {
+          span.table__header__menu__item {
             margin-right: 0;
           }
         }
@@ -183,7 +188,6 @@
         }
 
         @include desktop {
-
         }
       }
     }

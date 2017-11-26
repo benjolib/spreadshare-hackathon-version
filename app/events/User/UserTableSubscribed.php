@@ -54,7 +54,11 @@ class UserTableSubscribed extends AbstractEvent
             ->create();
         
         $tableStats = TableStats::findByFieldValue('tableId', $tableId);
-        $tableStats->setSubscriberCount($tableStats->getSubscriberCount() + 1);
+        if (!$tableStats)
+        {
+            $tableStats = new TableStats;
+        }
+        $tableStats->setSubscriberCount($tableStats->getSubscriberCount() + 1)->save();
     }
     
 }

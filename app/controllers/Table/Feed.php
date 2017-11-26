@@ -34,6 +34,8 @@ class Feed
         try
         {
             $this->view->setMainView('table/detail/feed');
+            
+            $this->view->setVar('selectedPage', 'feed');
         }
         catch (\Exception $e)
         {

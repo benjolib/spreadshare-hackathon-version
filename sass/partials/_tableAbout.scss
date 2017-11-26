@@ -95,6 +95,19 @@
     width: 20%;
   }
 
+  .tags {
+    padding: 10px 10px 6px 10px;
+  }
+
+  .tags span {
+    @include rem(font-size, 14);
+    color: #6a7c93;
+    padding: 4px;
+    background: #dee0e7;
+    border-radius: 4px;
+    line-height: 30px;
+  }
+
   &__comments {
     display: flex;
     flex-direction: column;
@@ -126,7 +139,7 @@
           @include rem(font-size, 14);
           color: $text-color-alternate;
         }
-        &__stats {}
+        &__stats { }
       }
     }
   }

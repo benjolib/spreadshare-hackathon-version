@@ -28,24 +28,35 @@ class TableComments
      *
      * @return array
      */
-    public function getComents(int $tableId, $page = 0, $limit = Paging::endlessScrollPortions)
+    public function getComments(int $tableId, int $parentId = -1, $page = 0, $limit = Paging::endlessScrollPortions)
     {
-        return self::query()
-                   ->columns(
-                       [
-                           self::class . ".id",
-                           self::class . ".comment",
-                           self::class . ".votesCount",
-                           self::class . ".createdAt",
-                           User::class . ".name AS creator",
-                           User::class . ".image AS creatorImage",
-                       ]
-                   )
-                   ->innerJoin(User::class, self::class . '.userId = ' . User::class . '.id')
-                   ->where(self::class . '.tableId = :tableId:', ['tableId' => $tableId])
-                   ->limit((int) $limit, (int) Paging::endlessScrollPortions * $page)
-                   ->orderBy(self::class . '.id DESC')
-                   ->execute()
-                   ->toArray() ?: [];
+        $query = self::query()
+                     ->columns(
+                         [
+                             self::class . ".id",
+                             self::class . ".parentId",
+                             self::class . ".comment",
+                             self::class . ".votesCount",
+                             self::class . ".createdAt",
+                             User::class . ".name AS creator",
+                             User::class . ".handle AS creatorHandle",
+                             User::class . ".image AS creatorImage",
+                         ]
+                     )
+                     ->innerJoin(User::class, self::class . '.userId = ' . User::class . '.id')
+                     ->where(self::class . '.tableId = :tableId:', ['tableId' => $tableId])
+                     ->limit((int) $limit, (int) Paging::endlessScrollPortions * $page)
+                     ->orderBy(self::class . '.id DESC');
+        
+        if ($parentId === -1)
+        {
+            $query->andWhere('ISNULL(' . self::class . '.parentId)');
+        }
+        else
+        {
+            $query->andWhere(self::class . '.parentId = :parentId:', ['parentId' => $parentId]);
+        }
+        
+        return $query->execute()->toArray() ?: [];
     }
 }

@@ -34,6 +34,8 @@ class User
         try
         {
             $this->view->setMainView('table/detail/user');
+            
+            $this->view->setVar('selectedPage', 'user');
         }
         catch (\Exception $e)
         {

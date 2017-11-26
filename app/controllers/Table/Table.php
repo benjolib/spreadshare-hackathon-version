@@ -37,6 +37,8 @@ class Table
         {
             TableViewed::after($this->serviceManager->getAuth()->getUserId(), (int) $table->getId());
             $this->view->setMainView('table/detail/table');
+            
+            $this->view->setVar('selectedPage', 'table');
         }
         catch (\Exception $e)
         {
