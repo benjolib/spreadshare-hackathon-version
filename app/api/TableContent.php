@@ -34,7 +34,7 @@ class TableContent
      *
      * @return array
      */
-    public function getTableData(int $tableId)
+    public function getTableData(int $tableId): array
     {
         $tableRows = new TableRows();
         $rows      = $tableRows->getRowsForTable($tableId);
@@ -61,15 +61,34 @@ class TableContent
     }
     
     /**
+     * @param int    $cellId
+     * @param string $content
+     * @param string $link
+     *
+     * @return TableContent
+     */
+    public function editCell(int $cellId, string $content, string $link): TableContent
+    {
+        $cellModel = new TableCells();
+        $cellModel->get($cellId)
+                  ->setContent($content)
+                  ->setLink($link ?: null)
+                  ->save();
+        
+        return $this;
+    }
+    
+    /**
      * @param int    $tableId
      * @param int    $lineNumber
      * @param string $rowData
      *
      * @return $this
      */
-    public function editRow(int $tableId, int $lineNumber, string $rowData)
+    public function editRow(int $tableId, int $lineNumber, string $rowData): TableContent
     {
-        if (is_array(json_decode($rowData)))
+        $rowDataArray = json_decode($rowData);
+        if (is_array($rowDataArray))
         {
             $tableRowModel = TableRows::findByTableIdAndLineNumber($tableId, $lineNumber);
             $tableRowModel->setContent($rowData)
@@ -88,7 +107,7 @@ class TableContent
      * @return $this|TableContent
      * @throws Exception
      */
-    public function addfromCsvText(int $tableId, string $csvData = '', $separator = ',', $hasHeaders = false)
+    public function addfromCsvText(int $tableId, string $csvData = '', $separator = ',', $hasHeaders = false): TableContent
     {
         $userId = serviceManager()->getAuth()->getUserId();
         
