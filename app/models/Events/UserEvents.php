@@ -2,7 +2,6 @@
 
 namespace DS\Model\Events;
 
-use DS\Component\Mail\Events\SignupMail;
 use DS\Exceptions\UserValidationException;
 use DS\Model\Abstracts\AbstractUser;
 use DS\Model\DataSource\UserStatus;
@@ -29,11 +28,22 @@ abstract class UserEvents
     private $emailMinimumLength = 5;
     
     /**
-     * @return bool
+     * Before create
      */
     public function beforeCreate()
     {
-        parent::beforeCreate();
+        $this->emailConfirmationToken = preg_replace('/[^a-zA-Z0-9]/', '', base64_encode(openssl_random_pseudo_bytes(24)));
+        
+        $this->setConfirmed(0)
+             ->setStatus(UserStatus::Unconfirmed);
+    }
+    
+    /**
+     * @return bool
+     */
+    public function beforeValidationOnCreate()
+    {
+        parent::beforeValidationOnCreate();
         
         if (strlen($this->getEmail()) < $this->emailMinimumLength)
         {
@@ -55,10 +65,23 @@ abstract class UserEvents
             );
         }
         
-        $this->emailConfirmationToken = preg_replace('/[^a-zA-Z0-9]/', '', base64_encode(openssl_random_pseudo_bytes(24)));
+        // Check if username is given
+        if (!$this->getHandle())
+        {
+            return false;
+        }
         
-        $this->setConfirmed(0)
-             ->setStatus(UserStatus::Unconfirmed);
+        // Check if email is given
+        if (!$this->getEmail())
+        {
+            return false;
+        }
+        
+        // Check if user with hande or email address already exists
+        if (self::findFirstByHandleOrEmail($this->getHandle(), $this->getEmail()))
+        {
+            throw new UserValidationException('A user with this email address or username already exists.');
+        }
         
         return true;
     }
@@ -66,9 +89,9 @@ abstract class UserEvents
     /**
      * @return bool
      */
-    public function beforeSave()
+    public function beforeValidationOnUpdate()
     {
-        parent::beforeSave();
+        parent::beforeValidationOnUpdate();
         
         return true;
     }
@@ -90,31 +113,5 @@ abstract class UserEvents
                 "bind" => [$handle, $email],
             ]
         );
-    }
-    
-    /**
-     * @return bool
-     */
-    public function beforeValidationOnCreate()
-    {
-        // Check if username is given
-        if (!$this->getHandle())
-        {
-            return false;
-        }
-        
-        // Check if email is given
-        if (!$this->getEmail())
-        {
-            return false;
-        }
-        
-        // Check if user with hande or email address already exists
-        if (self::findFirstByHandleOrEmail($this->getHandle(), $this->getEmail()))
-        {
-            throw new UserValidationException('A user with this email address or username already exists.');
-        }
-        
-        return true;
     }
 }

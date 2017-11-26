@@ -397,7 +397,7 @@ abstract class Collection implements \Phalcon\Mvc\EntityInterface, \Phalcon\Mvc\
      *
      * class Robots extends \Phalcon\Mvc\Model
      * {
-     *     public function beforeSave()
+     *     public function beforeValidationOnUpdate()
      *     {
      *         if ($this->name === "Peter") {
      *             $message = new Message(

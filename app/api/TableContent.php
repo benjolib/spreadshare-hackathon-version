@@ -153,6 +153,9 @@ class TableContent
             
             if (count($columnIds))
             {
+                // Clear first if there is data already imported
+                (new TableRows())->deleteByFieldValue('tableId', $tableId);
+                
                 $line = 1;
                 foreach ($rows as $row)
                 {
@@ -169,14 +172,17 @@ class TableContent
                         
                         foreach ($row as $key => $cell)
                         {
-                            $cellModel = new TableCells();
-                            $cellModel->setUserId($userId)
-                                      ->setRowId($rowModel->getId())
-                                      ->setColumnId($columnIds[$key])
-                                      ->setContent($cell)
-                                      ->setLink('')// @todo may parse link and add it here
-                                      ->create();
-                            
+                            if (isset($columnIds[$key]))
+                            {
+                                $cellModel = new TableCells();
+                                $cellModel->setUserId($userId)
+                                          ->setUpdatedById($userId)
+                                          ->setRowId($rowModel->getId())
+                                          ->setColumnId($columnIds[$key])
+                                          ->setContent($cell)
+                                          ->setLink('')
+                                          ->create();
+                            }
                         }
                     }
                 }
@@ -186,6 +192,7 @@ class TableContent
         }
         catch (Exception $e)
         {
+            var_dump($e->getMessage());
             $db->rollback();
             throw $e;
         }

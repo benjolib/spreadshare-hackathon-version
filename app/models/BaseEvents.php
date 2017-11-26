@@ -25,7 +25,7 @@ abstract class BaseEvents
     /**
      * @return bool
      */
-    public function beforeCreate()
+    public function beforeValidationOnCreate()
     {
         $time = time();
         if (property_exists($this, 'updatedAt'))
@@ -44,7 +44,7 @@ abstract class BaseEvents
     /**
      * @return bool
      */
-    public function beforeSave()
+    public function beforeValidationOnUpdate()
     {
         if (property_exists($this, 'updatedAt'))
         {

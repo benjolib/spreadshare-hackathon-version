@@ -36,6 +36,7 @@ class AddTableController
         $this->view->setVar('tab', 'choose-method');
         $this->view->setVar('content', 'table/add/choose-method');
         $this->view->setVar('action', '/table/add/description');
+        $this->view->setVar('hideChooseTable', false);
     }
     
     /**
@@ -44,6 +45,7 @@ class AddTableController
     public function indexAction($selection = 'choose-method')
     {
         $this->view->setMainView('table/add');
+        $this->view->setVar('hideChooseTable', false);
         
         try
         {
@@ -84,33 +86,41 @@ class AddTableController
      */
     public function chooseAction($selection)
     {
-        $this->view->setMainView('table/add');
-        $userId = $this->serviceManager->getAuth()->getUserId();
-        
-        if ($selection)
+        try
         {
-            $tableId    = $this->request->get('tableId');
-            $tableModel = Tables::getInstance($tableId);
+            $this->view->setMainView('table/add');
+            $this->view->setVar('hideChooseTable', false);
+            $userId = $this->serviceManager->getAuth()->getUserId();
             
-            if (!$tableModel->getId())
+            if ($selection)
             {
-                throw new Exception('Table does not exist!');
-            }
-            
-            // Choose Table Step (onyl applies to copy-poast, csv-import and sheet-import)
-            $subClass = "DS\\Controller\\AddTable\\ChooseTable\\" . str_replace(' ', '', ucfirst(str_replace('-', ' ', $selection)));
-            if (class_exists($subClass))
-            {
-                /**
-                 * @var \DS\Interfaces\TableSubcontrollerInterface $subController
-                 */
-                $subController = new $subClass();
-                if (is_a($subController, 'DS\Interfaces\TableSubcontrollerInterface'))
+                $tableId    = $this->request->get('tableId');
+                $tableModel = Tables::getInstance($tableId);
+                
+                if (!$tableModel->getId())
                 {
-                    $subController->initialize();
-                    $subController->handle(isset($tableModel) ? $tableModel : new Tables(), $userId, '');
+                    throw new Exception('Table does not exist!');
+                }
+                
+                // Choose Table Step (onyl applies to copy-poast, csv-import and sheet-import)
+                $subClass = "DS\\Controller\\AddTable\\ChooseTable\\" . str_replace(' ', '', ucfirst(str_replace('-', ' ', $selection)));
+                if (class_exists($subClass))
+                {
+                    /**
+                     * @var \DS\Interfaces\TableSubcontrollerInterface $subController
+                     */
+                    $subController = new $subClass();
+                    if (is_a($subController, 'DS\Interfaces\TableSubcontrollerInterface'))
+                    {
+                        $subController->initialize();
+                        $subController->handle(isset($tableModel) ? $tableModel : new Tables(), $userId, '');
+                    }
                 }
             }
+        }
+        catch (\Exception $e)
+        {
+            $this->flash->error($e->getMessage());
         }
     }
     
@@ -119,120 +129,48 @@ class AddTableController
      */
     public function confirmAction()
     {
-        $this->view->setMainView('table/add');
-        $userId = $this->serviceManager->getAuth()->getUserId();
-        
-        $tableId = $this->request->get('tableId');
-        $this->view->setVar('action', '/table/add/confirm');
-        $this->view->setVar('content', 'table/add/confirm');
-        $this->view->setVar('tab', 'confirm');
-        
-        if ($tableId)
+        try
         {
-            $tableModel = Tables::get($tableId);
-            if ($tableModel->getOwnerUserId() == $userId)
+            $this->view->setMainView('table/add');
+            $userId = $this->serviceManager->getAuth()->getUserId();
+            
+            $tableId = $this->request->get('tableId');
+            $this->view->setVar('action', '/table/add/confirm');
+            $this->view->setVar('content', 'table/add/confirm');
+            $this->view->setVar('tab', 'confirm');
+            
+            if ($tableId)
             {
-                $this->view->setVar('tableId', $this->request->get('tableId'));
-                $this->view->setVar('redirectToTable', $this->request->get('redirectToTable') === null ? 0 : 1);
-                
-                if ($this->request->isPost())
+                $tableModel = Tables::get($tableId);
+                if ($tableModel->getOwnerUserId() == $userId)
                 {
-                    $tableId = $this->request->getPost('tableId');
-                    if ($tableId)
+                    $this->view->setVar('tableId', $this->request->get('tableId'));
+                    $this->view->setVar('redirectToTable', $this->request->get('redirectToTable') === null ? 0 : 1);
+                    
+                    if ($this->request->isPost())
                     {
-                        $tableApi = new Table();
-                        $tableApi->publish($tableId);
-                        
-                        if ($this->request->getPost('redirectToTable'))
+                        $tableId = $this->request->getPost('tableId');
+                        if ($tableId)
                         {
-                            header('Location: /table/' . $tableId);
-                        }
-                        else
-                        {
-                            $this->response->redirect('/');
+                            $tableApi = new Table();
+                            $tableApi->publish($tableId);
+                            
+                            if ($this->request->getPost('redirectToTable'))
+                            {
+                                header('Location: /table/' . $tableId);
+                            }
+                            else
+                            {
+                                $this->response->redirect('/');
+                            }
                         }
                     }
                 }
             }
         }
-    }
-    
-    /**
-     * Add table
-     */
-    public function addActionOld($action = '', $step = 0)
-    {
-        try
-        {
-            $this->view->setVar('nextstep', $step + 1);
-            
-            $userId = $this->serviceManager->getAuth()->getUserId();
-            switch ($action)
-            {
-                case 'empty':
-                    $this->view->setMainView('table/add/empty');
-                    
-                    break;
-                case 'csv-import':
-                    $this->view->setMainView('table/add/csv-import');
-                    
-                    if ($this->request->isPost())
-                    {
-                        switch ($step)
-                        {
-                            case "1":
-                                
-                                break;
-                            case "2":
-                                $this->view->setVar('tableId', $this->request->getPost('tableId'));
-                                $this->view->setVar('action', '/table/add/confirm');
-                                $this->view->setMainView('table/add/confirm');
-                                
-                                break;
-                        }
-                        
-                    }
-                    break;
-                case 'copy-paste':
-                    if ($this->request->isPost())
-                    {
-                        switch ($step)
-                        {
-                            case "3":
-                                try
-                                {
-                                
-                                }
-                                catch (\Exception $e)
-                                {
-                                    $this->view->setVar('nextstep', 1);
-                                    throw $e;
-                                }
-                                break;
-                        }
-                    }
-                    
-                    $this->view->setMainView('table/add/copy-paste');
-                    break;
-                case 'confirm':
-                    
-                    break;
-                default:
-                    $this->view->setVar('tableId', $this->request->getPost('tableId'));
-                    $this->view->setVar('action', '/table/add');
-                    $this->view->setMainView('table/add');
-                    break;
-            }
-        }
         catch (\Exception $e)
         {
-            if ($this->request->isPost())
-            {
-                $this->view->setVar('post', $this->request->getPost());
-            }
-            
             $this->flash->error($e->getMessage());
         }
     }
-    
 }

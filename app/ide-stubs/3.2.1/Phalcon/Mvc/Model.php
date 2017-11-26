@@ -662,7 +662,7 @@ abstract class Model implements \Phalcon\Mvc\EntityInterface, \Phalcon\Mvc\Model
      *
      * class Robots extends Model
      * {
-     *     public function beforeSave()
+     *     public function beforeValidationOnUpdate()
      *     {
      *         if ($this->name === "Peter") {
      *             $message = new Message(

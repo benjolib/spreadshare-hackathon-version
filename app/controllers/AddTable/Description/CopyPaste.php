@@ -33,7 +33,7 @@ class CopyPaste
     {
         try
         {
-            $this->view->setVar('content', 'table/add/copy-paste');
+            $this->view->setVar('content', 'table/add/description');
             $this->view->setVar('action', '/table/add/description/copy-paste');
             $this->view->setVar('tab', 'description');
             

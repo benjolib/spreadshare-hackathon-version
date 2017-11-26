@@ -7,18 +7,16 @@ use DS\Component\ServiceManager;
 use DS\Constants\Services;
 use Phalcon\Db\ResultInterface;
 use Phalcon\Di;
-use Phalcon\Mvc\Model;
 
 /**
  * Spreadshare
  *
  * Base model. Used for further method rollouts.
  *
- * @author Dennis Stücken
- * @license proprietary
-
+ * @author    Dennis Stücken
+ * @license   proprietary
  * @copyright Spreadshare
- * @link https://www.spreadshare.co
+ * @link      https://www.spreadshare.co
  *
  * @version   $Version$
  * @package   DS\Model
@@ -62,6 +60,15 @@ abstract class Base
         $this->defaultUserId = $defaultUserId;
         
         return $this;
+    }
+    
+    /**
+     * @param string $column
+     * @param string $id
+     */
+    public function deleteByFieldValue(string $column = 'id', string $id)
+    {
+        $this->getWriteConnection()->delete($this->getSource(), sprintf("%s = ?", $column), [$id]);
     }
     
     /**
@@ -305,7 +312,7 @@ abstract class Base
         $this->setWriteConnectionService('write-database');
         
         $this->serviceManager = ServiceManager::instance($this->getDI());
-        $this->defaultUserId = $this->serviceManager->getAuth()->getUserId();
+        $this->defaultUserId  = $this->serviceManager->getAuth()->getUserId();
         
     }
 }

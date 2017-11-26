@@ -24,9 +24,9 @@ abstract class UserTopicsEvents
     /**
      * @return bool
      */
-    public function beforeCreate()
+    public function beforeValidationOnCreate()
     {
-        parent::beforeCreate();
+        parent::beforeValidationOnCreate();
         
         return true;
     }
@@ -34,9 +34,9 @@ abstract class UserTopicsEvents
     /**
      * @return bool
      */
-    public function beforeSave()
+    public function beforeValidationOnUpdate()
     {
-        parent::beforeSave();
+        parent::beforeValidationOnUpdate();
         
         return true;
     }

@@ -12,7 +12,7 @@ namespace Phalcon\Mvc\Model;
  *
  * class Robots extends \Phalcon\Mvc\Model
  * {
- *     public function beforeSave()
+ *     public function beforeValidationOnUpdate()
  *     {
  *         if ($this->name === "Peter") {
  *             $text  = "A robot cannot be named Peter";

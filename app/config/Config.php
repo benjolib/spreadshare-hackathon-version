@@ -31,7 +31,7 @@ return [
         'password' => 'spreadshare',
         'dbname' => 'spreadshare',
         'charset' => 'utf8',
-        'profile' => false,
+        'profile' => true,
     ],
     'memcache' => [
         [
