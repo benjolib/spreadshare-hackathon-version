@@ -83,7 +83,7 @@ class AddTableController
                 if (is_a($subController, 'DS\Interfaces\TableSubcontrollerInterface'))
                 {
                     $subController->initialize();
-                    $subController->handle(new Tables(), $userId);
+                    $subController->handle(new Tables(), $userId, '');
                 }
             }
         }
