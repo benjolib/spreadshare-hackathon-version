@@ -10,6 +10,7 @@
 {% block content %}
 {# hero #}
 <div class="main__hero">
+  <img src="/assets/icons/close-hero.svg" id="closeHero" />
   <p>Collaborate with and get rewarded by the community</p>
   <h2>A marketplace for community-curated tables in the blockchain</h2>
 </div>
@@ -115,6 +116,10 @@
 
   $('#typeFilter').on('click', function() {
     $('.filter--type').toggleClass('open');
+  });
+
+  $('#closeHero').on('click', function() {
+    $('.main__hero').css('display', 'none');
   });
 </script>
 {% endblock %}

@@ -1,0 +1,21 @@
+<svg width="24" height="25" viewBox="0 0 24 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>Group</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(-3327 -12340)">
+<g id="Group">
+<g id="Oval 4">
+<use xlink:href="#path0_fill" transform="matrix(0.707107 0.707107 -0.707107 0.707107 3338.97 12336)" fill="#FFFFFF"/>
+</g>
+<g id="Rectangle">
+<use xlink:href="#path1_fill" transform="matrix(-0.707107 -0.707107 0.707107 -0.707107 3336.19 12356.8)" fill="#6A7C94"/>
+</g>
+<g id="Rectangle">
+<use xlink:href="#path1_fill" transform="matrix(-0.707107 0.707107 -0.707107 -0.707107 3343.14 12355.4)" fill="#6A7C94"/>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_fill" fill-rule="evenodd" d="M 11.7854 23.5708C 18.2943 23.5708 23.5708 18.2943 23.5708 11.7854C 23.5708 5.27651 18.2943 0 11.7854 0C 5.27651 0 0 5.27651 0 11.7854C 0 18.2943 5.27651 23.5708 11.7854 23.5708Z"/>
+<path id="path1_fill" fill-rule="evenodd" d="M 0 0.982118C 0 0.439709 0.439709 0 0.982117 0L 0.982117 0C 1.52453 0 1.96423 0.439709 1.96423 0.982117L 1.96423 8.83906C 1.96423 9.38146 1.52453 9.82117 0.982117 9.82117L 0.982117 9.82117C 0.439709 9.82117 0 9.38146 0 8.83906L 0 0.982118Z"/>
+</defs>
+</svg>

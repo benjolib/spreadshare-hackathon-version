@@ -5,6 +5,7 @@
   flex-direction: column;
 
   &__hero {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -18,6 +19,17 @@
     @include rem(height, 336);
     @include rem(margin, 28);
     @include rem2(padding, 0, 40);
+    margin-bottom: 0;
+
+    img {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
 
     p {
       margin: 0;
@@ -52,6 +64,7 @@
     box-sizing: border-box;
     width: 100%;
     @include rem2(padding, 15, 40);
+    @include rem(margin-top, 28);
 
     @include tablet {
       @include rem2(padding, 15, 80);
