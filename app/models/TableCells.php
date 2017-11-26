@@ -2,6 +2,7 @@
 
 namespace DS\Model;
 
+use DS\Model\Abstracts\AbstractTableCells;
 use DS\Model\Events\TableCellsEvents;
 
 /**
@@ -15,38 +16,26 @@ use DS\Model\Events\TableCellsEvents;
  * @version   $Version$
  * @package   DS\Model
  *
- * @method static findFirstById(int $id)
+ * @method static TableCells findFirstById(int $id)
+ * @method TableColumns getTableColumns()
  */
 class TableCells
     extends TableCellsEvents
 {
     /**
-     * @param array $param
-     * @param int   $page
-     * @param int   $limit
+     * @param int $columnId
+     * @param int $rowId
      *
-     * @return array
+     * @return AbstractTableCells|\Phalcon\Mvc\Model\ResultInterface
      */
-    /*
-    public function findCustom($param = [], $page = 0, $limit = Paging::endlessScrollPortions)
+    public static function findCellByColumnAndRow(int $columnId, int $rowId)
     {
-        if (count($param))
-        {
-            return self::query()
-                       ->columns(
-                           [
-                               TableCells::class . ".id",
-                           ]
-                       )
-                //->leftJoin(TableCells::class, TableCells::class . '.profileId = ' . Profile::class . '.id')
-                //->inWhere(Profile::class . '.id', $param)
-                       ->limit((int) $limit, (int) Paging::endlessScrollPortions * $page)
-                //->orderBy(sprintf('FIELD (id,%s)', implode(',', $param)))
-                       ->execute()
-                       ->toArray() ?: [];
-        }
-        
-        return [];
+        return self::findFirst(
+            [
+                "conditions" => "columnId = ?0 AND rowId = ?1",
+                "bind" => [$columnId, $rowId],
+                'order' => "columnId ASC",
+            ]
+        );
     }
-    */
 }
