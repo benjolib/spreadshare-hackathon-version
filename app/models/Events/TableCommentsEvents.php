@@ -3,11 +3,12 @@
 namespace DS\Model\Events;
 
 use DS\Model\Abstracts\AbstractTableComments;
+use DS\Model\TableStats;
 
 /**
  * Events for model TableComments
  *
- * @see https://docs.phalconphp.com/ar/3.2/db-models-events
+ * @see       https://docs.phalconphp.com/ar/3.2/db-models-events
  *
  * @author    Dennis Stücken
  * @license   proprietary
@@ -37,6 +38,16 @@ abstract class TableCommentsEvents
     public function beforeSave()
     {
         parent::beforeSave();
+        
+        return true;
+    }
+    
+    /**
+     * @return bool
+     */
+    public function afterSave()
+    {
+        (new TableStats())->increment($this->getTableId(), 'comments');
         
         return true;
     }
