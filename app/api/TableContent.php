@@ -43,7 +43,7 @@ class TableContent
         foreach ($rows as $row)
         {
             $votesData[] = $row->votesCount;
-            $rowData[]   = $row->content;
+            $rowData[]   = json_decode($row->content);
         }
         
         $tableColumns = TableColumns::findAllByFieldValue('tableId', $tableId);
