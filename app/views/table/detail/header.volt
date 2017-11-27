@@ -49,6 +49,23 @@
       <div class="feed-icon"></div>
       Feed
     </a>
+
+    {# OWNER TABS #}
+    {% if auth.getUserId() == table['ownerUserId'] %}
+    <a href="/table/{{table['id']}}/stats" class="table__header__menu__item{% if selectedPage == 'stats' %} selected{% endif %}">
+      <div class="feed-icon"></div>
+      Stats
+    </a>
+    <a href="/table/{{table['id']}}/commits" class="table__header__menu__item{% if selectedPage == 'commits' %} selected{% endif %}">
+      <div class="feed-icon"></div>
+      Commits
+    </a>
+    <a href="/table/{{table['id']}}/users" class="table__header__menu__item{% if selectedPage == 'users' %} selected{% endif %}">
+      <div class="feed-icon"></div>
+      Users
+    </a>
+    {%endif%}
+
     <a href="/table/{{table['id']}}/user" class="table__header__menu__item{% if selectedPage == 'user' %} selected{% endif %}">
       <div class="people-icon"></div>
       User
