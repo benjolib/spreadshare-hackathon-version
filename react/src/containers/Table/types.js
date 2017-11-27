@@ -2,16 +2,31 @@
 
 // Models
 
-type Field = string;
+export type Cell = {
+  id: string,
+  content: string,
+  link: string | null
+};
 
-export type Row = Array<Field>;
+export type Row = {
+  id: string,
+  content: Array<Cell>
+};
 
+export type Vote = {
+  rowId: string,
+  votes: string,
+  upvoted: boolean
+};
+
+export type Votes = Array<Vote>;
+export type Columns = Array<string>;
 export type Rows = Array<Row>;
 
 export type Table = {
-  votes: Array<string>,
+  votes: Array<Vote>,
   columns: Array<string>,
-  rows: Rows
+  rows: Array<Row>
 };
 
 export type TableDataWrapper = {
@@ -33,35 +48,43 @@ export type TablesAction =
   | { type: "FETCH_TABLE_SUCCESS", payload: { tableId: string, table: Table } }
   | { type: "FETCH_TABLE_ERROR", payload: { tableId: string, error: Error } }
   | {
-      type: "EDIT_ROW_REQUEST",
-      payload: { tableId: string, rowIndex: number, rowData: Row }
-    }
-  | {
-      type: "EDIT_ROW_SUCCESS",
-      payload: { tableId: string, rowIndex: number, rowData: Row }
-    }
-  | {
-      type: "EDIT_ROW_ERROR",
+      type: "EDIT_CELL_REQUEST",
       payload: {
         tableId: string,
-        rowIndex: number,
-        rowData: Row,
+        cellId: string,
+        cell: Cell
+      }
+    }
+  | {
+      type: "EDIT_CELL_SUCCESS",
+      payload: {
+        tableId: string,
+        cellId: string,
+        cell: Cell
+      }
+    }
+  | {
+      type: "EDIT_CELL_ERROR",
+      payload: {
+        tableId: string,
+        cellId: string,
+        cell: Cell,
         error: Error
       }
     }
   | {
       type: "VOTE_ROW_REQUEST",
-      payload: { tableId: string, rowIndex: number }
+      payload: { tableId: string, rowId: string }
     }
   | {
       type: "VOTE_ROW_SUCCESS",
-      payload: { tableId: string, rowIndex: number }
+      payload: { tableId: string, rowId: string }
     }
   | {
       type: "VOTE_ROW_ERROR",
       payload: {
         tableId: string,
-        rowIndex: number,
+        rowId: string,
         error: Error
       }
     };

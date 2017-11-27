@@ -42,10 +42,6 @@ const StyledDiv = styled.div`
     color: #6b7a91;
   }
 
-  .ht_clone_left table.htCore {
-    margin-top: -1px;
-  }
-
   .area.highlight {
     background: rgba(36, 174, 105, 0.3);
   }

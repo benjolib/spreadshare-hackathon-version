@@ -1,6 +1,6 @@
 // @flow
 import type { Dispatch, Action, ThunkAction } from "../../types";
-import type { Table, Row } from "./types";
+import type { Table, Cell } from "./types";
 import { fetchDataApi, saveDataApi } from "../../api";
 import dummyTable from "./dummyTable";
 
@@ -55,127 +55,133 @@ export const fetchTable = (tableId: string): ThunkAction => (
 
 // EDIT ROW ACTIONS
 
-export const editRowRequest = (
+export const editCellRequest = (
   tableId: string,
-  rowIndex: number,
-  rowData: Row
+  rowId: string,
+  cellId: string,
+  cell: Cell
 ): Action => ({
-  type: "EDIT_ROW_REQUEST",
+  type: "EDIT_CELL_REQUEST",
   payload: {
     tableId,
-    rowIndex,
-    rowData
+    rowId,
+    cellId,
+    cell
   }
 });
 
-export const editRowSuccess = (
+export const editCellSuccess = (
   tableId: string,
-  rowIndex: number,
-  rowData: Row
+  rowId: string,
+  cellId: string,
+  cell: Cell
 ): Action => ({
-  type: "EDIT_ROW_SUCCESS",
+  type: "EDIT_CELL_SUCCESS",
   payload: {
     tableId,
-    rowIndex,
-    rowData
+    rowId,
+    cellId,
+    cell
   }
 });
 
-export const editRowError = (
+export const editCellError = (
   tableId: string,
-  rowIndex: number,
-  rowData: Row,
+  rowId: string,
+  cellId: string,
+  cell: Cell,
   error: Error
 ): Action => ({
-  type: "EDIT_ROW_ERROR",
+  type: "EDIT_CELL_ERROR",
   payload: {
     tableId,
-    rowIndex,
-    rowData,
+    rowId,
+    cellId,
+    cell,
     error
   }
 });
 
 // thunk
 
-export const editRow = (
+export const editCell = (
   tableId: string,
-  rowIndex: number,
-  rowData: Row
+  rowId: string,
+  cellId: string,
+  cell: Cell
 ): ThunkAction => (dispatch: Dispatch) => {
-  dispatch(editRowRequest(tableId, rowIndex, rowData));
+  dispatch(editCellRequest(tableId, rowId, cellId, cell));
   if (process.env.NODE_ENV === "production") {
-    saveDataApi(`edit-row/${tableId}`, {
-      tableId,
-      lineNumber: rowIndex, // to be consistent with db naming
-      rowData
+    saveDataApi(`edit-cell/${tableId}`, {
+      rowId,
+      cellId,
+      cell
     }).then(({ error }: { error: Error }) => {
       if (error) {
-        dispatch(editRowError(tableId, rowIndex, rowData, new Error(error)));
+        dispatch(editCellError(tableId, rowId, cellId, cell, new Error(error)));
         return;
       }
 
-      dispatch(editRowSuccess(tableId, rowIndex, rowData));
+      dispatch(editCellSuccess(tableId, rowId, cellId, cell));
     });
   } else {
     setTimeout(() => {
-      dispatch(editRowSuccess(tableId, rowIndex, rowData));
+      dispatch(editCellSuccess(tableId, rowId, cellId, cell));
     }, 500);
   }
 };
 
 // VOTE ROW ACTIONS
 
-export const voteRowRequest = (tableId: string, rowIndex: number): Action => ({
+export const voteRowRequest = (tableId: string, rowId: string): Action => ({
   type: "VOTE_ROW_REQUEST",
   payload: {
     tableId,
-    rowIndex
+    rowId
   }
 });
 
-export const voteRowSuccess = (tableId: string, rowIndex: number): Action => ({
+export const voteRowSuccess = (tableId: string, rowId: string): Action => ({
   type: "VOTE_ROW_SUCCESS",
   payload: {
     tableId,
-    rowIndex
+    rowId
   }
 });
 
 export const voteRowError = (
   tableId: string,
-  rowIndex: number,
+  rowId: string,
   error: Error
 ): Action => ({
   type: "VOTE_ROW_ERROR",
   payload: {
     tableId,
-    rowIndex,
+    rowId,
     error
   }
 });
 
 // thunk
 
-export const voteRow = (tableId: string, rowIndex: number): ThunkAction => (
+export const voteRow = (tableId: string, rowId: string): ThunkAction => (
   dispatch: Dispatch
 ) => {
-  dispatch(voteRowRequest(tableId, rowIndex));
+  dispatch(voteRowRequest(tableId, rowId));
   if (process.env.NODE_ENV === "production") {
     saveDataApi(`vote-row/${tableId}`, {
-      tableId,
-      lineNumber: rowIndex // to be consistent with db naming
+      rowId
     }).then(({ error }: { error: Error }) => {
       if (error) {
-        dispatch(voteRowError(tableId, rowIndex, new Error(error)));
+        dispatch(voteRowError(tableId, rowId, new Error(error)));
         return;
       }
 
-      dispatch(voteRowSuccess(tableId, rowIndex));
+      dispatch(voteRowSuccess(tableId, rowId));
     });
   } else {
     setTimeout(() => {
-      dispatch(voteRowSuccess(tableId, rowIndex));
+      dispatch(voteRowSuccess(tableId, rowId));
     }, 500);
   }
 };

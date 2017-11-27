@@ -42,42 +42,18 @@ export const tablesReducer = (
       };
     }
 
-    case "EDIT_ROW_REQUEST": {
-      // TODO: maybe some sort of optimistic update or loader here
+    case "EDIT_CELL_REQUEST": {
+      // TODO: maybe show loader
       return state;
     }
 
-    case "EDIT_ROW_SUCCESS": {
-      console.log(action.payload);
-
-      if (!state[action.payload.tableId].table) {
-        return state;
-      }
-
-      // TODO: find a better way to do this (which still doesn't mutate), probably a util function
-      return {
-        ...state,
-        [action.payload.tableId]: {
-          ...state[action.payload.tableId],
-          table: {
-            ...state[action.payload.tableId].table,
-            rows: [
-              ...state[action.payload.tableId].table.rows.slice(
-                0,
-                action.payload.rowIndex
-              ),
-              action.payload.rowData,
-              ...state[action.payload.tableId].table.rows.slice(
-                action.payload.rowIndex + 1
-              )
-            ]
-          }
-        }
-      };
+    case "EDIT_CELL_SUCCESS": {
+      // TODO: show message like (success, your edit is now awaiting approval)
+      return state;
     }
 
-    case "EDIT_ROW_ERROR": {
-      // TODO: maybe show error toast message or something
+    case "EDIT_CELL_ERROR": {
+      // TODO: show error
       return state;
     }
 
@@ -87,40 +63,40 @@ export const tablesReducer = (
     }
 
     case "VOTE_ROW_SUCCESS": {
-      console.log(action.payload);
-
       if (!state[action.payload.tableId].table) {
         return state;
       }
 
-      // TODO: find a better way to do this (which still doesn't mutate), probably a util function
       return {
         ...state,
         [action.payload.tableId]: {
           ...state[action.payload.tableId],
           table: {
             ...state[action.payload.tableId].table,
-            votes: [
-              ...state[action.payload.tableId].table.votes.slice(
-                0,
-                action.payload.rowIndex
-              ),
-              (Number(
-                state[action.payload.tableId].table.votes[
-                  action.payload.rowIndex
-                ]
-              ) + 1).toString(),
-              ...state[action.payload.tableId].table.votes.slice(
-                action.payload.rowIndex + 1
-              )
-            ]
+            votes: state[action.payload.tableId].table.votes.map(vote => {
+              if (vote.rowId === action.payload.rowId) {
+                if (vote.upvoted) {
+                  return {
+                    ...vote,
+                    upvoted: !vote.upvoted,
+                    votes: `${Number(vote.votes) - 1}`
+                  };
+                }
+                return {
+                  ...vote,
+                  upvoted: !vote.upvoted,
+                  votes: `${Number(vote.votes) + 1}`
+                };
+              }
+              return vote;
+            })
           }
         }
       };
     }
 
     case "VOTE_ROW_ERROR": {
-      // TODO: maybe show error toast message or something
+      // TODO: show error
       return state;
     }
 
