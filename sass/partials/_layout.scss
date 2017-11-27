@@ -29,7 +29,16 @@
       @include desktop {
         width: 80%;
       }
+
+      form {
+        @include desktop {
+          width: 80%;          
+        }
+      }
+      
     }
+
+    
 
     &__title {
       width: 100%;
@@ -49,8 +58,8 @@
       width: 80%;
       margin: 0;
       font-weight: 300;
-      @include rem(margin-top, 16);
-      @include rem(margin-bottom, 16 * 2);
+      @include rem(margin-top, 0);
+      @include rem(margin-bottom, 24 * 2);
       @include rem(font-size, 16);
     }
 
@@ -125,7 +134,7 @@
 
       @include desktop {
         width: 20%;
-        @include rem(margin-top, 110);
+        @include rem(margin-top, 131);
       }
 
       &__box {
@@ -155,7 +164,7 @@
             }
 
             &:first-child {
-              @include rem(margin-bottom, 26);
+              @include rem(margin-bottom, 10);
             }
           }
         }
