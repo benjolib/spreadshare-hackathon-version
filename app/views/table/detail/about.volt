@@ -1,7 +1,6 @@
 {% extends 'layouts/main.volt' %}
 
 {% block content %}
-
 {{ partial('table/detail/header') }}
 
 <div class="tableAbout">
@@ -138,8 +137,6 @@
       </div>
     </div>
   </div>
-
-
 </div>
 {% endblock %}
 

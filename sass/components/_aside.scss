@@ -3,6 +3,8 @@
   flex-direction: column;
   background: white;
   border-radius: 6px;
+  align-self: flex-start;
+  width: 100%;
   @include rem(padding, 20);
 
   @include desktop {

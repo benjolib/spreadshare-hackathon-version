@@ -1,0 +1,92 @@
+.container--tableUsers {
+  width: 100%;
+
+  .container__content {
+    @include desktop {
+      width: 72.5%;
+      margin-bottom: 0;
+    }
+
+    .tableUsers {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      align-items: flex-start;
+      justify-content: center;
+      @include rem(margin-top, 16);
+
+      &__item {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        @include rem(margin-bottom, 16);
+
+        @include desktop {
+          @include rem(margin-right, 16);
+        }
+
+        &__avatar {
+          @include rem(margin-right, 8);
+
+          img {
+            border-radius: 4px;
+            @include rem(width, 50);
+            @include rem(height, 50);
+          }
+        }
+
+        &__info {
+          display: flex;
+          flex-direction: column;
+
+          &__title {
+            display: flex;
+
+            h5 {
+              color: $text-color;
+              font-weight: 600;
+              @include rem(font-size, 14);
+            }
+          }
+          &__subtitle {
+            display: flex;
+            justify-content: space-between;
+
+            p {
+              color: $text-color-alternate;
+              font-weight: 500;
+              @include rem(font-size, 12);
+            }
+          }
+        }
+
+        &__follow {
+          @include rem(margin-left, 10);
+
+          button {
+            background: $upvote-background-color;
+            color: $text-color;
+            border: none;
+            border-radius: 4px;
+            outline: none;
+            font-weight: 600;
+            @include rem(font-size, 14);
+            @include rem2(padding, 2, 8);
+
+            &:hover {
+              cursor: pointer;
+              background: darken($upvote-background-color, 6%);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  aside {
+    @include desktop {
+      width: 22.5%;
+      margin-bottom: 0;
+    }
+  }
+}

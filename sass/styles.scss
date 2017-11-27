@@ -1,6 +1,10 @@
 @import './partials/_variables.scss';
 @import './partials/_base.scss';
 @import './partials/_mixins.scss';
+@import './components/_dropdown.scss';
+@import './components/_flash.scss';
+@import './components/_aside.scss';
+@import './components/_container.scss';
 @import './partials/_navbar.scss';
 @import './partials/_main.scss';
 @import './partials/_footer.scss';
@@ -21,6 +25,4 @@
 @import './partials/_pages.scss';
 @import './partials/_tableAbout.scss';
 @import './partials/_tableFeed.scss';
-@import './components/_dropdown.scss';
-@import './components/_flash.scss';
-@import './components/_aside.scss';
+@import './partials/_tableUsers.scss';
