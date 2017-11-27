@@ -25,6 +25,9 @@ aside.aside {
 
     &:last-child {
       margin-bottom: 0;
+      .tableFeed__item__info {
+        border-bottom: none;
+      }
     }
 
     &__avatar {
