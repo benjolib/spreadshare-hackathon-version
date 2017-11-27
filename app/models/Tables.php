@@ -188,6 +188,7 @@ class Tables
                                    TableStats::class . ".contributionCount",
                                    TableStats::class . ".tokensCount",
                                    TableStats::class . ".subscriberCount",
+                                   Tables::class . ".typeId",
                                    Types::class . ".title as typeTitle",
                                    "(SELECT " . TableVotes::class . ".createdAt FROM " . TableVotes::class . " WHERE " . TableVotes::class . ".tableId = " . Tables::class . ".id AND " . TableVotes::class . ".userId = " . $userId . ") as userHasVoted",
                                    "(SELECT CUSTOM_GROUP_CONCAT(" . Tags::class . ".title, " . Tags::class . ".title, 'ASC', ', ') FROM " . TableTags::class . " INNER JOIN " . Tags::class . " ON " . Tags::class . ".id = " . TableTags::class . ".tagId WHERE " . TableTags::class . ".tableId = " . Tables::class . ".id) as tags",

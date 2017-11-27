@@ -2,23 +2,24 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import HandsOnTable from "react-handsontable";
-import _ from "lodash";
+import _ from "lodash/fp";
 import TableHeader from "../../components/TableHeader";
 import TableMain from "../../components/TableMain";
 import TableButton from "../../components/TableButton";
 import TableSearch from "../../components/TableSearch";
 import TableLoading from "../../components/TableLoading";
 import TableError from "../../components/TableError";
-import { voteRow, editRow, fetchTable } from "./actions";
+import { voteRow, editCell, fetchTable } from "./actions";
 import type { ReduxState } from "../../types";
-import type { TableDataWrapper, Rows } from "./types";
-import reactRenderer from "../../lib/reactRenderer";
+import type { TableDataWrapper, Rows, Votes } from "./types";
+import votesRenderer from "../../lib/votesRenderer";
+import cellRenderer from "../../lib/cellRenderer";
 
 type Props = {
   id: string, // from server markup
   data: TableDataWrapper,
   fetchTable: typeof fetchTable,
-  editRow: typeof editRow,
+  editCell: typeof editCell,
   voteRow: typeof voteRow
 };
 
@@ -36,7 +37,6 @@ class Table extends Component<Props, State> {
   componentDidMount() {
     this.props.fetchTable(this.props.id);
   }
-  rowIndexMap = {};
 
   props: Props;
 
@@ -48,71 +48,27 @@ class Table extends Component<Props, State> {
     }
   };
 
-  addVotesColumn = (rows: Rows, votes: Array<string>) =>
-    rows.map((row, rowIndex) => [votes[rowIndex], ...row]);
-
-  searchRows = (rows: Rows) =>
-    rows
-      .map((row, rowIndex) => ({
-        rowIndex,
-        row
-      }))
-      .filter(
-        row =>
-          row.row.filter(field =>
-            field.toLowerCase().includes(this.state.searchValue.toLowerCase())
-          ).length
-      )
-      .map((row, rowIndex) => {
-        this.rowIndexMap[rowIndex] = row.rowIndex;
-        return row.row;
-      });
-
   contextMenuCallback = (key, options) => {
-    if (key === "edit") {
-      setTimeout(() => {
-        // timeout is used to make sure the menu collapsed before prompt is shown
-        if (!_.isEqual(options.start, options.end)) {
-          // TODO: either disable edit when more than one cell selected or use better alert
-          alert("Select only one cell for edit");
-          return;
-        }
+    const cell = this.hot.hotInstance.getDataAtCell(
+      options.start.row,
+      options.start.col
+    );
+    setTimeout(() => {
+      if (!_.isEqual(options.start, options.end)) {
+        // TODO: either disable edit when more than one cell selected or use better alert
+        alert("Select only one cell for edit");
+        return;
+      }
 
-        const cell = options.start;
-
+      if (key === "edit") {
         // TODO: prompt is temporary until i make proper dropdown
         const newValue = prompt("Please type the new value for the cell");
 
-        console.log(newValue);
-
-        if (typeof newValue !== "string") {
-          return;
-        }
-
-        const rowData = [
-          ...this.props.data.table.rows[this.rowIndexMap[cell.row]].slice(
-            0,
-            cell.col
-          ),
-          newValue,
-          ...this.props.data.table.rows[this.rowIndexMap[cell.row]].slice(
-            cell.col + 1
-          )
-        ];
-
-        this.props.editRow(this.props.id, this.rowIndexMap[cell.row], rowData);
-      }, 100);
-    } else if (key === "delete") {
-      setTimeout(() => {
-        // timeout is used to make sure the menu collapsed before prompt is shown
-        if (!_.isEqual(options.start, options.end)) {
-          // TODO: either disable edit when more than one cell selected or use better alert
-          alert("Select only one cell for delete");
-          return;
-        }
-
-        const cell = options.start;
-
+        this.props.editCell(this.props.id, cell.rowId, cell.id, {
+          ...cell,
+          content: newValue
+        });
+      } else if (key === "delete") {
         // TODO: confirm is temporary until i make proper dropdown
         const confirmed = window.confirm("Are you sure?");
 
@@ -120,24 +76,32 @@ class Table extends Component<Props, State> {
           return;
         }
 
-        const rowData = [
-          ...this.props.data[this.props.id].table.rows[
-            this.rowIndexMap[cell.row]
-          ].slice(0, cell.col),
-          "",
-          ...this.props.data[this.props.id].table.rows[
-            this.rowIndexMap[cell.row]
-          ].slice(cell.col + 1)
-        ];
-
-        this.props.editRow(this.props.id, this.rowIndexMap[cell.row], rowData);
-      }, 100);
-    }
+        this.props.editCell(this.props.id, cell.rowId, cell.id, {
+          ...cell,
+          content: ""
+        });
+      }
+    });
   };
 
-  vote = row => {
-    this.props.voteRow(this.props.id, this.rowIndexMap[row]);
-  };
+  hotDataSearchRows = searchValue => (rows: Rows) =>
+    rows.filter(
+      row =>
+        row.content.filter(cell =>
+          cell.content.toLowerCase().includes(searchValue.toLowerCase())
+        ).length
+    );
+
+  hotDataAddVotes = (votes: Votes) => (rows: Rows) =>
+    rows.map(row => ({
+      ...row,
+      content: [
+        votes.find(vote => vote.rowId === row.id),
+        ...row.content.map(cell => ({ ...cell, rowId: row.id }))
+      ]
+    }));
+
+  hotDataFlattenRows = (rows: Rows) => rows.map(row => row.content);
 
   render() {
     if (!this.props.data || this.props.data.loading) {
@@ -150,12 +114,11 @@ class Table extends Component<Props, State> {
 
     console.log(this.props.data);
 
-    const rowsWithVotes = this.addVotesColumn(
-      this.props.data.table.rows,
-      this.props.data.table.votes
+    const hotData = _.pipe(
+      this.hotDataSearchRows(this.state.searchValue),
+      this.hotDataAddVotes(this.props.data.table.votes),
+      this.hotDataFlattenRows
     );
-
-    const searchedRows = this.searchRows(rowsWithVotes); // with side effect
 
     return (
       <div>
@@ -169,31 +132,36 @@ class Table extends Component<Props, State> {
         <TableMain>
           <HandsOnTable
             ref={ref => (this.hot = ref)}
-            colHeaders={this.props.data.table.columns}
-            data={searchedRows}
-            columns={this.props.data.table.columns.map(
-              (item, i) =>
-                i === 0
-                  ? {
-                      readOnly: true,
-                      data: "jsx",
-                      renderer: reactRenderer({
-                        searchedRows,
-                        vote: this.vote
-                      }),
-                      width: 80
-                    }
-                  : {
-                      readOnly: true
-                    }
-            )}
+            init={() => {
+              // recalculate height after cells render
+              setTimeout(() => {
+                this.hot.hotInstance.render();
+              }, 0);
+            }}
+            colHeaders={["Votes", ...this.props.data.table.columns]}
+            data={hotData(this.props.data.table.rows)}
+            columns={col => {
+              if (col === 0) {
+                return {
+                  readOnly: true,
+                  renderer: votesRenderer({
+                    tableId: this.props.id,
+                    voteRow: rowId => this.props.voteRow(this.props.id, rowId)
+                  })
+                };
+              }
+              return {
+                readOnly: true,
+                renderer: cellRenderer()
+              };
+            }}
             modifyColWidth={width => {
               if (width > 400) {
                 return 400;
               }
             }}
             fixedColumnsLeft={1}
-            stretchH="last"
+            stretchH="all"
             contextMenuCopyPaste
             contextMenu={{
               callback: this.contextMenuCallback,
@@ -203,9 +171,6 @@ class Table extends Component<Props, State> {
                 },
                 delete: {
                   name: "Delete"
-                },
-                copy: {
-                  name: "Copy"
                 }
               }
             }}
@@ -222,7 +187,7 @@ const mapStateToProps = (state: ReduxState, ownProps: Props) => ({
 
 const mapDispatchToProps = {
   fetchTable,
-  editRow,
+  editCell,
   voteRow
 };
 
