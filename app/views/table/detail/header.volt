@@ -63,10 +63,12 @@
 
     {# OWNER TABS #}
     {% if auth.getUserId() == table['ownerUserId'] %}
+    <!--
     <a href="/table/{{table['id']}}/stats" class="table__header__menu__item{% if selectedPage == 'stats' %} selected{% endif %}">
       <div class="feed-icon"></div>
       Stats
     </a>
+    -->
     <a href="/table/{{table['id']}}/changelog" class="table__header__menu__item{% if selectedPage == 'commits' %} selected{% endif %}">
       <div class="feed-icon"></div>
       Commits
