@@ -25,13 +25,13 @@
           <div class="profile__hero__info__website">
             {% if profile.website %}
             <span>●</span>
-            <a href="https://netflix.com/" target="_blank">{{profile.website}}</a>
+            <a href="{{ profile.website }}" target="_blank">{{profile.website}}</a>
             {% endif %}
           </div>
           <div class="profile__hero__info__mobile">
             <div class="profile__hero__info__mobile__website">
               {% if profile.website %}
-              <a href="https://netflix.com/" target="_blank">{{profile.website}}</a>
+              <a href="{{profile.website}}" target="_blank">{{profile.website}}</a>
               <span>●</span>
               {% endif %}
             </div>
