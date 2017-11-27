@@ -205,7 +205,6 @@ class TableContent
         }
         catch (Exception $e)
         {
-            var_dump($e->getMessage());
             $db->rollback();
             throw $e;
         }

@@ -2,12 +2,13 @@
 
 namespace DS\Model\Events;
 
+use DS\Events\Table\TabelCellChangeRequested;
 use DS\Model\Abstracts\AbstractChangeRequests;
 
 /**
  * Events for model ChangeRequests
  *
- * @see https://docs.phalconphp.com/ar/3.2/db-models-events
+ * @see       https://docs.phalconphp.com/ar/3.2/db-models-events
  *
  * @author    Dennis Stücken
  * @license   proprietary
@@ -20,6 +21,19 @@ use DS\Model\Abstracts\AbstractChangeRequests;
 abstract class ChangeRequestsEvents
     extends AbstractChangeRequests
 {
+    private $tableId;
+    
+    /**
+     * @param mixed $tableId
+     *
+     * @return $this
+     */
+    public function setTableId($tableId)
+    {
+        $this->tableId = $tableId;
+        
+        return $this;
+    }
     
     /**
      * @return bool
@@ -39,5 +53,20 @@ abstract class ChangeRequestsEvents
         parent::beforeValidationOnUpdate();
         
         return true;
+    }
+    
+    /**
+     * After creating the change request
+     */
+    public function afterCreate()
+    {
+        TabelCellChangeRequested::after(
+            $this->getUserId(),
+            $this->getCellId(),
+            $this->tableId,
+            $this->getId(),
+            $this->getFrom(),
+            $this->getTo()
+        );
     }
 }

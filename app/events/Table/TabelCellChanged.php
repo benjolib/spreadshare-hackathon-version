@@ -6,6 +6,7 @@ use DS\Events\AbstractEvent;
 use DS\Model\DataSource\TableLogType;
 use DS\Model\TableLog;
 use DS\Model\Tables;
+use DS\Model\User;
 
 /**
  * Spreadshare
@@ -18,28 +19,32 @@ use DS\Model\Tables;
  * @version   $Version$
  * @package   DS\Events\Table
  */
-class TableUpdated extends AbstractEvent
+class TabelCellChanged extends AbstractEvent
 {
     
     /**
-     * Issued after a table has been modified
+     * Issued after the rows of a table has been changed.
      *
-     * @param int    $userId
-     * @param Tables $table
+     * E.g. a table has been imported from CSV or a change request was accepted.
+     *
+     * @param User   $userId    User that triggered the change
+     * @param Tables $tableId   Table meta data
+     * @param string $changedTo Cell content changed to
+     *
      */
-    public static function after(int $userId, Tables $table)
+    public static function after(int $userId, int $tableId, string $changedTo)
     {
-        
         $tableLog = new TableLog();
         $tableLog
             ->setUserId($userId)
-            ->setTableId($table->getId())
-            ->setLogType(TableLogType::Updated)
-            ->setText('updated table settings.')
+            ->setTableId($tableId)
+            ->setLogType(TableLogType::ContributionCellChanged)
+            ->setText('contributed to table (cell content edited).')
             ->setPlaceholders(
                 json_encode(
                     [
                         $userId,
+                        $changedTo,
                     ]
                 )
             )

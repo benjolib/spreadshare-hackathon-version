@@ -50,6 +50,7 @@ abstract class TablesEvents
         return true;
     }
     
+    
     /**
      * @return bool
      */

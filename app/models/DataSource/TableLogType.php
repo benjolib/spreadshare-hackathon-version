@@ -19,13 +19,27 @@ class TableLogType
     
     const Updated = 2;
     
-    const Contributed = 3;
+    const Subscribed = 3;
     
-    const Voted = 4;
+    const Unsubscribed = 4;
     
     const Deleted = 5;
     
     const OwnerChagned = 5;
     
     const DataImported = 6;
+    
+    const ContributionCellDeleted = 7;
+    
+    const ContributionCellChanged = 8;
+    
+    const ContributionCellChangeRequested = 9;
+    
+    const ChangeRequestApproved = 10;
+    
+    const ChangeRequestRejected = 11;
+    
+    const Upvoted = 12;
+    
+    const Downvoted = 13;
 }

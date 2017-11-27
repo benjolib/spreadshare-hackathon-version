@@ -46,7 +46,7 @@ class TableCreated extends AbstractEvent
                  ->setLogType(TableLogType::Created)
                  ->setUserId($userId)
                  ->setPlaceholders('')
-                 ->setText('Table created.')
+                 ->setText('created this table.')
                  ->create();
     }
     

@@ -3,7 +3,6 @@
 {% block content %}
 {{ partial('table/detail/header') }}
 
-
 <div class="container container--tableFeed">
   <div class="container__content">
     {% for log in logs %}

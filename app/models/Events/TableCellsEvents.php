@@ -2,12 +2,13 @@
 
 namespace DS\Model\Events;
 
+use DS\Events\Table\TabelCellChanged;
 use DS\Model\Abstracts\AbstractTableCells;
 
 /**
  * Events for model TableCells
  *
- * @see https://docs.phalconphp.com/ar/3.2/db-models-events
+ * @see       https://docs.phalconphp.com/ar/3.2/db-models-events
  *
  * @author    Dennis Stücken
  * @license   proprietary
@@ -20,6 +21,22 @@ use DS\Model\Abstracts\AbstractTableCells;
 abstract class TableCellsEvents
     extends AbstractTableCells
 {
+    /**
+     * @var int
+     */
+    private $tableId;
+    
+    /**
+     * @param mixed $tableId
+     *
+     * @return $this
+     */
+    public function setTableId($tableId)
+    {
+        $this->tableId = $tableId;
+        
+        return $this;
+    }
     
     /**
      * @return bool
@@ -39,5 +56,14 @@ abstract class TableCellsEvents
         parent::beforeValidationOnUpdate();
         
         return true;
+    }
+    
+    public function afterSave()
+    {
+        TabelCellChanged::after(
+            $this->getUserId(),
+            $this->tableId,
+            $this->getContent()
+        );
     }
 }

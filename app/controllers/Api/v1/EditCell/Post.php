@@ -96,6 +96,7 @@ class Post extends ActionHandler implements MethodInterface
                 {
                     $changeRequest = new ChangeRequests();
                     $changeRequest->setCellId($cellId)
+                                  ->setTableId($tableId)
                                   ->setFrom($tableCell->getContent())
                                   ->setTo($content)
                                   ->setComment($comment)

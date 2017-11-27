@@ -3,7 +3,9 @@
 namespace DS\Events\User;
 
 use DS\Events\AbstractEvent;
+use DS\Model\DataSource\TableLogType;
 use DS\Model\DataSource\UserNotificationType;
+use DS\Model\TableLog;
 use DS\Model\Tables;
 use DS\Model\TableStats;
 use DS\Model\User;
@@ -48,6 +50,22 @@ class UserTableSubscribed extends AbstractEvent
                         $user->getName(),
                         $table->getId(),
                         $table->getTitle(),
+                    ]
+                )
+            )
+            ->create();
+        
+        $tableLog = new TableLog();
+        $tableLog
+            ->setUserId($userId)
+            ->setTableId($tableId)
+            ->setLogType(TableLogType::Subscribed)
+            ->setText('subscribed this table.')
+            ->setPlaceholders(
+                json_encode(
+                    [
+                        $user->getId(),
+                        $user->getName(),
                     ]
                 )
             )

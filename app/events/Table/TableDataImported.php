@@ -36,7 +36,7 @@ class TableDataImported extends AbstractEvent
                  ->setLogType(TableLogType::DataImported)
                  ->setUserId($userId)
                  ->setPlaceholders('')
-                 ->setText('Table data imported.')
+                 ->setText('imported data into this table.')
                  ->create();
         
     }

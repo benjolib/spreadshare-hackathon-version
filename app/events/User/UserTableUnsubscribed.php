@@ -3,7 +3,9 @@
 namespace DS\Events\User;
 
 use DS\Events\AbstractEvent;
+use DS\Model\DataSource\TableLogType;
 use DS\Model\DataSource\UserNotificationType;
+use DS\Model\TableLog;
 use DS\Model\Tables;
 use DS\Model\TableStats;
 use DS\Model\User;
@@ -40,7 +42,7 @@ class UserTableUnsubscribed extends AbstractEvent
         $userNotification
             ->setUserId($table->getOwnerUserId())
             ->setNotificationType(UserNotificationType::Follow)
-            ->setText(sprintf('%s unsubscribed your table %s', $user->getName(), $table->getTitle()))
+            ->setText(sprintf('unsubscribed your table %s', $user->getName(), $table->getTitle()))
             ->setPlaceholders(
                 json_encode(
                     [
@@ -48,6 +50,22 @@ class UserTableUnsubscribed extends AbstractEvent
                         $user->getName(),
                         $table->getId(),
                         $table->getTitle(),
+                    ]
+                )
+            )
+            ->create();
+        
+        $tableLog = new TableLog();
+        $tableLog
+            ->setUserId($userId)
+            ->setTableId($tableId)
+            ->setLogType(TableLogType::Unsubscribed)
+            ->setText('unsubscribed this table.')
+            ->setPlaceholders(
+                json_encode(
+                    [
+                        $user->getId(),
+                        $user->getName(),
                     ]
                 )
             )
