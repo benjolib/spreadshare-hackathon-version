@@ -16,8 +16,13 @@
               <h5>{{ user['name'] }}</h5>
             </div>
             <div class="tableUsers__item__info__subtitle">
-              <p>{{ user['location'] }}</p>
-              <p>{{ user['tagline'] }}</p>
+              {% if user['location'] and user['tagline']%}
+                <p>{{ user['location'] }} ● {{ user['tagline'] }}</p>
+              {% elseif user['location'] %}
+                <p>{{ user['location'] }}</p>
+              {% elseif user['tagline'] %}
+                <p>{{ user['tagline'] }}</p>
+              {% endif %}
             </div>
           </div>
           <div class="tableUsers__item__follow">
