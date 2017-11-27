@@ -15,6 +15,10 @@ body {
     margin: 0;
   }
 
+  input {
+    font-family: $primary-font !important;
+  }
+
   ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
     color: #dddde3;
     font-weight: lighter;

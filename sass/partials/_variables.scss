@@ -15,6 +15,14 @@ $card-tokens-background-color: #9BAABF;
 $facebook-color: #3B5998;
 $google-color: #4688f1;
 $twitter-color: #48A9E5;
+$medium-color: #1CB374;
+$linkedin-color: #1178B3;
+$googleplus-color: #D35048;
+$quora-color: #E31F21;
+$stackoverflow-color: #F28033;
+$github-color: #23282D;
+$ycombinator-color: #EF8533;
+$angellist-color: #23282D;
 $accept-color: $logo-color;
 $reject-color: #DF5364;
 $success: #8ed691;
@@ -24,10 +32,9 @@ $notice: #c4c4ff;
 
 
 // fonts
-@import url('https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i&subset=latin-ext');
+// @import url('https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i&subset=latin-ext');
 
-// $primary-font: 'Montserrat', sans-serif;
-$primary-font: 'Lato', sans-serif;
+$primary-font: 'Montserrat', sans-serif;
 
 // breakpoints
 $mobile-width: 280px;

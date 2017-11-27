@@ -7,22 +7,27 @@
     <p>
       {{ comment['comment'] }}
     </p>
-    <div class="tableAbout__comments__container__content__stats">
-      <div class="tableAbout__comments__container__content__stats__item">
-        <div class="icon"></div>
-        <span>{{ comment['votesCount'] }}</span>
-      </div>
+    <div class="tableAbout__comments__container__content__stats tableAbout__comments__container__content__stats--subcomments">
+      <a href="javascript:;">
+        <div class="tableAbout__comments__container__content__stats__item">
+          <div class="tableAbout__comments__container__content__stats__item__icon tableAbout__comments__container__content__stats__item__icon--vote"></div>
+          <span>{{ comment['votesCount'] }}</span>
+        </div>
+      </a>
       {% if auth.loggedIn() %}
-      <div class="tableAbout__comments__container__content__stats__item">
-        <div class="icon"></div>
-        <a class="reply" data-id="{{ comment['parentId'] }}" data-handle="{{ comment['creatorHandle'] }}">Reply</a>
-      </div>
-      <div class="tableAbout__comments__container__content__stats__item">
-        <div class="icon"></div>
-        <a class="reply" data-id="{{ comment['id'] }}">Report</a>
-      </div>
+        <a href="javascript:;" class="reply" data-id="{{ comment['id'] }}" data-handle="{{ comment['creatorHandle'] }}">
+          <div class="tableAbout__comments__container__content__stats__item">
+            <div class="tableAbout__comments__container__content__stats__item__icon tableAbout__comments__container__content__stats__item__icon--reply"></div>
+            <span>Reply</span>
+          </div>
+        </a>
+        <a href="javascript:;">
+          <div class="tableAbout__comments__container__content__stats__item">
+            <div class="tableAbout__comments__container__content__stats__item__icon tableAbout__comments__container__content__stats__item__icon--report"></div>
+            <span>Report</span>
+          </div>
+        </a>
       {% endif %}
     </div>
   </div>
-
 </div>

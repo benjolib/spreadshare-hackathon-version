@@ -1,0 +1,70 @@
+.container--tableFeed {
+  width: 100%;
+
+  .container__content {
+    @include desktop {
+      width: 72.5%;
+      margin-bottom: 0;
+    }
+  }
+}
+
+aside.aside {
+  @include desktop {
+    width: 22.5%;
+  }
+}
+
+.tableFeed {
+  &__item {
+    display: flex;
+    color: $text-color-alternate;
+    @include rem(margin-bottom, 10);
+
+    &:first-child {
+      margin-bottom: 0;
+    }
+
+    &__avatar {
+      @include rem(margin-right, 16);
+
+      img {
+        border-radius: 6px;
+        @include rem(width, 40);
+        @include rem(height, 40);
+      }
+    }
+    &__info {
+      display: flex;
+      flex-direction: column;
+
+      &__text {
+        @include rem(font-size, 12);
+
+        @include desktop {
+          @include rem(font-size, 15);
+        }
+
+        &__author {
+          font-weight: 500;
+          color: $text-color;
+        }
+        &__message {
+          font-weight: 500;
+        }
+      }
+      &__time {
+        @include rem(margin-top, -4);
+
+        span {
+          color: lighten($text-color-alternate, 12%);
+          @include rem(font-size, 10);
+
+          @include desktop {
+            @include rem(font-size, 12);
+          }
+        }
+      }
+    }
+  }
+}

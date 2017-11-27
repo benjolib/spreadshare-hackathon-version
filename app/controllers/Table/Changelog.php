@@ -37,7 +37,9 @@ class Changelog
     {
         try
         {
-            $changeRequests = ChangeRequests::findChangeRequests($table->getId());
+            $changeRequestsModel = new ChangeRequests;
+            $changeRequests = $changeRequestsModel->findChangeRequests($table->getId());
+            var_dump($changeRequests);die;
             $this->view->setVar('requests', $changeRequests);
 
             $this->view->setMainView('table/detail/changelog');

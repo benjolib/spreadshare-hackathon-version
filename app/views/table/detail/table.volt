@@ -49,6 +49,13 @@
           return settings;
         },
       });
+
+    $(document).ready(function() {
+      $subscribeButton = $('.subscribe');
+      $subscribeButton.on('click', function() {
+        $subscribeButton.toggleClass('subscribed');
+      });
+    });
   });
 </script>
 {% endblock %}

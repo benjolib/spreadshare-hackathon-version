@@ -37,3 +37,28 @@
     }
   }
 }
+
+.selected {
+  color: white !important;
+  background: #2ead6b !important;
+
+  &:hover {
+    background: darken(#2ead6b, 8%) !important;
+  }
+}
+
+.selected span,
+.selected p {
+  color: white;
+}
+
+.not-following-user {
+  &:after {
+    content: 'Follow';
+  }
+}
+.following-user {
+  &:after {
+    content: 'Unfollow';
+  }
+}

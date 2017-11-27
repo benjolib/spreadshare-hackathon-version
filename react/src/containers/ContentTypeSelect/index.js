@@ -1,24 +1,30 @@
 // @flow
-import React, { Component } from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import Select from "react-select";
-import "react-select/dist/react-select.css";
+import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
 
-import { fetchContentType } from "./actions";
+import { fetchContentType } from './actions';
 
 class ContentTypeSelect extends Component {
   static defaultProps = {
-    values: [],
-    name: "contentType[]",
-    placeholder: <span>Select contentType</span>
+    value: null,
+    name: 'contentType[]',
+    placeholder: <span>Select type</span>,
   };
 
   constructor(props) {
     super(props);
 
+    let value = typeof props.value === 'string' ? JSON.parse(props.value) : null;
+
+    if (value === '') {
+      value = null;
+    }
+
     this.state = {
-      values: typeof props.values === "string" ? JSON.parse(props.values) : []
+      value,
     };
   }
 
@@ -26,12 +32,10 @@ class ContentTypeSelect extends Component {
     this.props.fetchContentType();
   }
 
-  selectChanged = values => {
-    if (values.length <= 2) {
-      this.setState({
-        values
-      });
-    }
+  selectChanged = value => {
+    this.setState({
+      value,
+    });
   };
 
   render() {
@@ -41,9 +45,9 @@ class ContentTypeSelect extends Component {
           name={this.props.name}
           multi={false}
           options={this.props.contentType}
-          value={this.state.values}
+          value={this.state.value}
           placeholder={
-            this.props.loading ? "Loading.." : this.props.placeholder
+            this.props.loading ? 'Loading..' : this.props.placeholder
           }
           onChange={this.selectChanged}
         />
@@ -54,15 +58,15 @@ class ContentTypeSelect extends Component {
 
 const mapStateToProps = state => ({
   contentType: state.contentType.all,
-  loading: state.contentType.isFetching
+  loading: state.contentType.isFetching,
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      fetchContentType
+      fetchContentType,
     },
-    dispatch
+    dispatch,
   );
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContentTypeSelect);

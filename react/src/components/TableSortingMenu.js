@@ -1,59 +1,128 @@
 // @flow
 import React from "react";
-import type { TableDataWrapper } from "../containers/Table/types";
 // import styled from "styled-components";
 
-type Sortings = Array<{
+export type Sortings = Array<{
   by: string,
   direction: "ascending" | "descending"
 }>;
 
 type Props = {
   onApply: Sortings => void,
-  data: TableDataWrapper
+  colHeaders: Array<string>
+  // appliedSortings: Sortings
 };
 
 type State = {
-  appliedSortings: Sortings,
-  pendingSortings: Sortings
+  sortings: Sortings
 };
 
 class TableSortingMenu extends React.Component<Props, State> {
   state: State;
 
   state = {
-    appliedSortings: [],
-    pendingSortings: []
+    sortings: []
   };
 
   props: Props;
 
-  apply = () => {
-    this.setState({
-      appliedSortings: this.state.pendingSortings
-    });
+  applySortings = () => {
+    this.props.onApply(this.state.sortings);
+  };
+
+  deleteSortings = () => {
+    this.props.onApply([]);
   };
 
   addSorting = () => {
     this.setState({
-      pendingSortings: {
-        by: this.props.data.columns[0],
-        direction: "ascending"
-      }
+      sortings: [
+        ...this.state.sortings,
+        {
+          by: this.props.colHeaders[0],
+          direction: "ascending"
+        }
+      ]
+    });
+  };
+
+  removeSorting = i => {
+    this.setState({
+      sortings: [
+        ...this.state.sortings.slice(0, i),
+        ...this.state.sortings.slice(i + 1)
+      ]
+    });
+  };
+
+  byChange = (e, i) => {
+    this.setState({
+      sortings: [
+        ...this.state.sortings.slice(0, i),
+        {
+          ...this.state.sortings[i],
+          by: e.target.value
+        },
+        ...this.state.sortings.slice(i + 1)
+      ]
+    });
+  };
+
+  directionChange = (e, i) => {
+    this.setState({
+      sortings: [
+        ...this.state.sortings.slice(0, i),
+        {
+          ...this.state.sortings[i],
+          direction: e.target.value
+        },
+        ...this.state.sortings.slice(i + 1)
+      ]
     });
   };
 
   render() {
     return (
       <div>
-        {this.state.pendingSortings.map(sorting =>
-          <div>
-            Sort by {sorting.by} {sorting.direction}
-          </div>
-        )}
+        <table>
+          <tbody>
+            {this.state.sortings.map((sorting, i) =>
+              <tr key={sorting.by}>
+                <td>
+                  <button onClick={() => this.removeSorting(i)}>x</button>
+                </td>
+                <td>
+                  {i ? "Then" : "Sort by"}
+                </td>
+                <td>
+                  <select
+                    value={sorting.by}
+                    onChange={e => this.byChange(e, i)}
+                  >
+                    {this.props.colHeaders.map(colHeader =>
+                      <option key={colHeader}>
+                        {colHeader}
+                      </option>
+                    )}
+                  </select>
+                </td>
+                <td>
+                  <select
+                    value={sorting.direction}
+                    onChange={e => this.directionChange(e, i)}
+                  >
+                    <option>ascending</option>
+                    <option>descending</option>
+                  </select>
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
         <div>
-          <span onClick={this.addSorting}>Add a sorting</span> <a>Delete</a>{" "}
-          <button onClick={this.apply}>Apply</button>
+          <button onClick={this.addSorting}>Add a sorting</button>
+          <button onClick={this.deleteSortings}>Delete</button>
+          <button onClick={this.applySortings}>Apply</button>
         </div>
       </div>
     );

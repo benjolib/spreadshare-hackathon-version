@@ -8,7 +8,6 @@ use DS\Model\Helper\TableFilter;
 use DS\Model\TableLocations;
 use DS\Model\Tables;
 use DS\Model\TableTags;
-use DS\Model\Tags;
 use Phalcon\Acl\Exception;
 
 /**
@@ -26,7 +25,7 @@ class Settings
     extends BaseController
     implements TableSubcontrollerInterface
 {
-
+    
     /**
      * Handle Subcontroller
      *
@@ -45,14 +44,16 @@ class Settings
             {
                 throw new \InvalidArgumentException('Table does not exist.');
             }
-
-            if ($table[0]['ownerUserId'] != $userId)
+            
+            $loadedTable = $tables[0];
+            
+            if ($loadedTable['ownerUserId'] != $userId)
             {
                 throw new Exception('You are not allowed to edit the settings of this table.');
             }
-
-            $this->view->setVar('table', $table[0]);
-
+            
+            $this->view->setVar('table', $loadedTable);
+            
             $tags = [];
             foreach (TableTags::findByFieldValue('tableId', $table->getId()) as $tag)
             {
@@ -61,9 +62,9 @@ class Settings
                     'title' => $tag->getTitle(),
                 ];
             }
-
+            
             $this->view->setVar('tags', $tags);
-
+            
             $locations = [];
             foreach (TableLocations::findByFieldValue('tableId', $table->getId()) as $location)
             {
@@ -72,17 +73,29 @@ class Settings
                     'locationName' => $location->getTitle(),
                 ];
             }
-
             $this->view->setVar('locations', $locations);
-
-            $this->view->setMainView('table/detail/changelog');
+            
+            $topics = [
+                [
+                    'value' => $loadedTable['topic1Id'],
+                    'label' => $loadedTable['topic1'],
+                ],
+                [
+                    'value' => $loadedTable['topic2Id'],
+                    'label' => $loadedTable['topic2'],
+                ],
+            ];
+            $this->view->setVar('topics', $topics);
+            
+            
+            $this->view->setMainView('table/detail/settings');
             $this->view->setVar('selectedPage', 'changelog');
         }
         catch (\Exception $e)
         {
             throw $e;
         }
-
+        
         return $this;
     }
 }
