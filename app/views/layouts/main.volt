@@ -47,7 +47,7 @@
 
   {% else %}
   <span class="navbar__login">
-      <a href="/login" class="navbar__login__login">Log in</a>
+      <a href="/login" class="navbar__login__login">Login</a>
       <span>or</span>
       <a href="/signup" class="navbar__login__signup">Sign up</a>
     </span>

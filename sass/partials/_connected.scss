@@ -1,5 +1,5 @@
 #connectedAccounts {
-  @include rem2(padding, 25, 55);
+  // @include rem2(padding, 25, 55);
 }
 
 .connected {
@@ -12,16 +12,44 @@
     width: 47.5%;
     background: $background-color;
     @include rem(margin-bottom, 26);
+    height: 3.8%;
+
+    @include tablet {
+      width: 100%;
+      height: auto;
+    }
+    @include mobile {
+      width: 100%;
+      height: auto;
+    }
 
     &:nth-child(odd) {
       margin-right: 5%;
+
+      @include tablet {
+        margin-right: 0%;
+
+      }
+      @include mobile {
+        margin-right: 0%;        
+      }
+
     }
 
     &__logo {
       position: relative;
-      width: 10%;
+      width: 12%;
       border-top-left-radius: 4px;
       border-bottom-left-radius: 4px;
+      // padding: 8px;
+      height: 40px;
+
+      @include tablet {
+        width: 7%;
+      }
+      @include mobile {
+        width: 10%;
+      }
 
       &[data-social="twitter"] {
         background-color: #59ACE4;
@@ -108,7 +136,7 @@
         background-color: #DC3632;
       }
       &[data-social="reddit"] {
-        background-color: #EF8533;
+        background-color: #E94B27;
       }
       &[data-social="unknown3"] {
         background-color: #6799A7;
@@ -122,10 +150,14 @@
 
       img {
         position: absolute;
-        top: 3px;
-        left: 8px;
-        width: 18px;
-        height: 18px;
+        top: 0;
+        left: 0;
+        width: 50%;
+        height: 50%;
+        margin: auto;
+        display: block;
+        right: 0;
+        bottom: 0;
       }
       span {
         visibility: hidden;
