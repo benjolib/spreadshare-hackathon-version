@@ -16,4 +16,23 @@
     background: #6A7C94;
     color: white;
   }
+
+  &--smallest {
+    @include rem(font-size, 10);
+  }
+  &--small {
+    @include rem(font-size, 12);
+  }
+  &--normal {
+    @include rem(font-size, 14);
+  }
+  &--medium {
+    @include rem(font-size, 16);
+  }
+  &--large {
+    @include rem(font-size, 18);
+  }
+  &--largest {
+    @include rem(font-size, 20);
+  }
 }
