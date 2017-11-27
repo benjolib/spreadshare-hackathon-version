@@ -35,18 +35,20 @@ class Users
     {
         try
         {
-            if ($table->getOwnerUserId() != $userId)
-            {
-                throw new SecurityException('You are not allowed to view this section.');
-            }
-            
             $userModel  = new UserModel();
-            $tableUsers = $userModel->getTableUsers($table->getId());
+            $tableUsers = $userModel->getTableUsers(
+                $table->getId(),
+                $param === 'upvoters',
+                $param === 'subscribers',
+                $param === 'contributors',
+                $param === 'admins'
+            );
             $this->view->setVar('tableUsers', $tableUsers);
             
             $this->view->setMainView('table/detail/users');
             
             $this->view->setVar('selectedPage', 'user');
+            $this->view->setVar('userFilter', $param);
         }
         catch (\Exception $e)
         {
