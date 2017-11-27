@@ -40,12 +40,12 @@
     </a>
     <a href="#">
       <div class="aside__item">
-        <p>Upvoters</p>
+        <p>Subscribers</p>
       </div>
     </a>
     <a href="#">
       <div class="aside__item">
-        <p>Subscribers</p>
+        <p>Upvoted by</p>
       </div>
     </a>
     <a href="#">
@@ -55,7 +55,7 @@
     </a>
     <a href="#">
       <div class="aside__item">
-        <p>Admin & Owner</p>
+        <p>Admins</p>
       </div>
     </a>
   </aside>
