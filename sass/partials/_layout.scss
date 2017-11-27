@@ -31,8 +31,9 @@
       }
 
       form {
+        width: 100%;
         @include desktop {
-          width: 80%;          
+          width: 100%;          
         }
       }
       
@@ -45,7 +46,7 @@
       text-align: center;
       align-self: center;
       margin: 0;
-      font-weight: 600;
+      font-weight: 700;
       @include rem(font-size, 40);
 
       @include desktop {
@@ -61,6 +62,15 @@
       @include rem(margin-top, 0);
       @include rem(margin-bottom, 24 * 2);
       @include rem(font-size, 16);
+
+      @include desktop {
+        width: 80%;
+        text-align: left;
+      }
+
+      span {
+        text-decoration: underline;
+      }
     }
 
     &__main {
@@ -104,9 +114,12 @@
 
       span {
         font-weight: 300;
-        color: lighten($text-color, 10%);
-        @include rem(margin-top, 8);
+        // color: lighten($text-color, 10%);
+        color: #fff;
+        text-transform: capitalize;
+        @include rem(margin-top, 3);
         @include rem(font-size, 12);
+        font-size: 14px;
       }
 
       input {
@@ -120,7 +133,8 @@
         @include rem(height, 30);
 
         @include desktop {
-          @include rem(width, 400);
+          // @include rem(width, 90%);
+          width: 90%;
         }
       }
     }

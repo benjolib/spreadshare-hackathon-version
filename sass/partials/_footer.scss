@@ -31,7 +31,8 @@
     }
     @include desktop {
       flex-direction: row;
-      padding: 0;
+      padding-left: 6px;        
+      padding-right: 9px;      
     }
 
     &__left {
@@ -57,14 +58,14 @@
         margin: 0;
         color: $logo-color;
         @include rem(font-size, 28);
-        font-weight: 800;
+        font-weight: 700;        
       }
       h3 {
         margin: 0;
         line-height: 2rem;
         // color: $text-color-alternate;
         color: #6A7C94;        
-        font-weight: 500;
+        font-weight: 400;
         line-height: 32px;
         margin-top: 15px;        
 
@@ -94,7 +95,7 @@
       display: flex;
       justify-content: center;
       @include rem(font-size, 14);
-
+      
       @include tablet {
         @include rem(margin-top, 50);
       }
