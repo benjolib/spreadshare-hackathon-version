@@ -61,7 +61,7 @@
       @include rem(font-size, 16);
 
       @include desktop {
-        margin: 3px 0 42px 0;
+        margin: 3px 0 20px 0;
         @include rem(margin-top, 5);        
       }
 

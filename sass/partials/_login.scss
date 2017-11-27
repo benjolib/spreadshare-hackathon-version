@@ -282,7 +282,7 @@
           }
 
           img {
-            @include rem(margin-right, 25);
+            @include rem(margin-right, 10);
           }
         }
 
@@ -293,6 +293,7 @@
           font-weight: 300;
           border-radius: 4px;
           background: $twitter-color;
+          @include rem(margin-bottom, 16);          
           @include rem2(padding, 10, 15);
 
           &:hover {
@@ -301,9 +302,31 @@
           }
 
           img {
-            @include rem(margin-right, 25);
+            @include rem(margin-right, 10);
           }
         }
+
+        &__google {
+          display: inline-flex;
+          align-items: center;
+          text-transform: uppercase;
+          font-weight: 300;
+          border-radius: 4px;
+          background: $google-color;
+          @include rem2(padding, 10, 15);
+
+          &:hover {
+            cursor: pointer;
+            background: darken($google-color, 4%);
+          }
+
+          img {
+            @include rem(margin-right, 10);
+          }
+        }
+
+
+
       }
     }
   }
