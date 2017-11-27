@@ -47,6 +47,7 @@ class User
                              User::class . ".id",
                              User::class . ".image",
                              User::class . ".name",
+                             User::class . ".handle",
                              User::class . ".tagline",
                              User::class . ".location",
                              "(SELECT " . UserFollower::class . ".id FROM " . UserFollower::class . " WHERE " . UserFollower::class . ".userId = " . User::class . ".id AND " . UserFollower::class . ".followedByUserId = " .

@@ -45,7 +45,7 @@ class TableComments
                      )
                      ->innerJoin(User::class, self::class . '.userId = ' . User::class . '.id')
                      ->where(self::class . '.tableId = :tableId:', ['tableId' => $tableId])
-                     ->limit((int) $limit, (int) Paging::endlessScrollPortions * $page)
+                     ->limit((int) $limit, $limit * $page)
                      ->orderBy(self::class . '.id DESC');
         
         if ($parentId === -1)

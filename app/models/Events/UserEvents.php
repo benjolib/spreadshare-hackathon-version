@@ -45,6 +45,22 @@ abstract class UserEvents
     {
         parent::beforeValidationOnCreate();
         
+        // Check if user with hande or email address already exists
+        if (self::findFirstByHandleOrEmail($this->getHandle(), $this->getEmail()))
+        {
+            throw new UserValidationException('A user with this email address or username already exists.');
+        }
+        
+        return $this->beforeValidationOnUpdate();
+    }
+    
+    /**
+     * @return bool
+     */
+    public function beforeValidationOnUpdate()
+    {
+        parent::beforeValidationOnUpdate();
+        
         if (strlen($this->getEmail()) < $this->emailMinimumLength)
         {
             throw new UserValidationException(
@@ -65,6 +81,16 @@ abstract class UserEvents
             );
         }
         
+        if ($this->getWebsite() && !filter_var($this->getWebsite(), FILTER_VALIDATE_URL))
+        {
+            throw new UserValidationException(
+                'Please provide a valid website in the following format: [http://]www.example.com',
+                'website',
+                $this->getWebsite(),
+                'Please provide a valid website in the following format: [http://]www.example.com'
+            );
+        }
+        
         // Check if username is given
         if (!$this->getHandle())
         {
@@ -76,22 +102,6 @@ abstract class UserEvents
         {
             return false;
         }
-        
-        // Check if user with hande or email address already exists
-        if (self::findFirstByHandleOrEmail($this->getHandle(), $this->getEmail()))
-        {
-            throw new UserValidationException('A user with this email address or username already exists.');
-        }
-        
-        return true;
-    }
-    
-    /**
-     * @return bool
-     */
-    public function beforeValidationOnUpdate()
-    {
-        parent::beforeValidationOnUpdate();
         
         return true;
     }

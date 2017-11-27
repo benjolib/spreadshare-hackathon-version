@@ -194,7 +194,7 @@
       method: 'POST',
       action: 'follow-user',
       onSuccess: function (response, button) {
-        $(button).toggleClass('selected');
+        $(button).toggleClass('selected').toggleClass('following-user').toggleClass('not-following-user')
       },
     });
   });

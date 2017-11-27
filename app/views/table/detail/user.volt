@@ -6,14 +6,14 @@
 <div class="container container--tableUsers">
   <div class="container__content">
     <div class="tableUsers">
-      {% for user in tableUsers%}
+      {% for user in tableUsers %}
         <div class="tableUsers__item">
           <div class="tableUsers__item__avatar">
             <img src="{{ user['image'] }}" />
           </div>
           <div class="tableUsers__item__info">
             <div class="tableUsers__item__info__title">
-              <h5>{{ user['name'] }}</h5>
+              <h5><a href="/user/{{ user['handle'] }}">{{ user['name'] }}</a></h5>
             </div>
             <div class="tableUsers__item__info__subtitle">
               {% if user['location'] and user['tagline']%}
@@ -60,16 +60,4 @@
     </a>
   </aside>
 </div>
-{% endblock %}
-
-{% block scripts %}
-<script type="text/javascript">
-  $(document).ready(function () {
-    $followButton = $('.follow-user');
-    $followButton.on('click', function() {
-      $(this).toggleClass('not-following-user');
-      $(this).toggleClass('following-user');
-    });
-  });
-</script>
 {% endblock %}
