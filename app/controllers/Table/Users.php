@@ -18,7 +18,7 @@ use DS\Model\User as UserModel;
  * @version   $Version$
  * @package   DS\Controller\User
  */
-class User
+class Users
     extends BaseController
     implements TableSubcontrollerInterface
 {
@@ -38,7 +38,7 @@ class User
             $tableUsers = $userModel->getTableUsers($table->getId());
             $this->view->setVar('tableUsers', $tableUsers);
             
-            $this->view->setMainView('table/detail/user');
+            $this->view->setMainView('table/detail/users');
             
             $this->view->setVar('selectedPage', 'user');
         }

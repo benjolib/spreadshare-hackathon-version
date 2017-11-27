@@ -56,7 +56,7 @@
       <div class="feed-icon"></div>
       Stats
     </a>
-    <a href="/table/{{table['id']}}/commits" class="table__header__menu__item{% if selectedPage == 'commits' %} selected{% endif %}">
+    <a href="/table/{{table['id']}}/changelog" class="table__header__menu__item{% if selectedPage == 'commits' %} selected{% endif %}">
       <div class="feed-icon"></div>
       Commits
     </a>
@@ -64,11 +64,10 @@
       <div class="feed-icon"></div>
       Users
     </a>
-    {%endif%}
-
-    <a href="/table/{{table['id']}}/user" class="table__header__menu__item{% if selectedPage == 'user' %} selected{% endif %}">
+    <a href="/table/{{table['id']}}/settings" class="table__header__menu__item{% if selectedPage == 'settings' %} selected{% endif %}">
       <div class="people-icon"></div>
-      User
+      Settings
     </a>
+    {%endif%}
   </div>
 </div>
