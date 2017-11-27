@@ -1,6 +1,5 @@
 // @flow
 import React from "react";
-// import styled from "styled-components";
 
 export type Sortings = Array<{
   by: string,
@@ -10,10 +9,12 @@ export type Sortings = Array<{
 type Props = {
   onApply: Sortings => void,
   colHeaders: Array<string>
-  // appliedSortings: Sortings
 };
 
 type State = {
+  usedColHeaders: {
+    [string]: string
+  },
   sortings: Sortings
 };
 
@@ -21,8 +22,14 @@ class TableSortingMenu extends React.Component<Props, State> {
   state: State;
 
   state = {
+    usedColHeaders: {},
     sortings: []
   };
+
+  getUnusedColHeader = () =>
+    this.props.colHeaders.find(
+      colHeader => !this.state.usedColHeaders[colHeader]
+    );
 
   props: Props;
 
@@ -31,15 +38,29 @@ class TableSortingMenu extends React.Component<Props, State> {
   };
 
   deleteSortings = () => {
+    this.setState({
+      usedColHeaders: {},
+      sortings: []
+    });
     this.props.onApply([]);
   };
 
   addSorting = () => {
+    const by = this.getUnusedColHeader();
+
+    if (!by) {
+      return;
+    }
+
     this.setState({
+      usedColHeaders: {
+        ...this.state.usedColHeaders,
+        [by]: by
+      },
       sortings: [
         ...this.state.sortings,
         {
-          by: this.props.colHeaders[0],
+          by,
           direction: "ascending"
         }
       ]
@@ -48,6 +69,10 @@ class TableSortingMenu extends React.Component<Props, State> {
 
   removeSorting = i => {
     this.setState({
+      usedColHeaders: {
+        ...this.state.usedColHeaders,
+        [this.state.sortings[i].by]: undefined
+      },
       sortings: [
         ...this.state.sortings.slice(0, i),
         ...this.state.sortings.slice(i + 1)
@@ -57,6 +82,11 @@ class TableSortingMenu extends React.Component<Props, State> {
 
   byChange = (e, i) => {
     this.setState({
+      usedColHeaders: {
+        ...this.state.usedColHeaders,
+        [this.state.sortings[i].by]: undefined,
+        [e.target.value]: e.target.value
+      },
       sortings: [
         ...this.state.sortings.slice(0, i),
         {
@@ -82,6 +112,7 @@ class TableSortingMenu extends React.Component<Props, State> {
   };
 
   render() {
+    const unusedColHeader = this.getUnusedColHeader();
     return (
       <div>
         <table>
@@ -99,11 +130,18 @@ class TableSortingMenu extends React.Component<Props, State> {
                     value={sorting.by}
                     onChange={e => this.byChange(e, i)}
                   >
-                    {this.props.colHeaders.map(colHeader =>
-                      <option key={colHeader}>
-                        {colHeader}
-                      </option>
-                    )}
+                    <option>
+                      {sorting.by}
+                    </option>
+                    {this.props.colHeaders
+                      .filter(
+                        colHeader => !this.state.usedColHeaders[colHeader]
+                      )
+                      .map(colHeader =>
+                        <option key={colHeader}>
+                          {colHeader}
+                        </option>
+                      )}
                   </select>
                 </td>
                 <td>
@@ -120,7 +158,8 @@ class TableSortingMenu extends React.Component<Props, State> {
           </tbody>
         </table>
         <div>
-          <button onClick={this.addSorting}>Add a sorting</button>
+          {unusedColHeader &&
+            <button onClick={this.addSorting}>Add a sorting</button>}
           <button onClick={this.deleteSortings}>Delete</button>
           <button onClick={this.applySortings}>Apply</button>
         </div>

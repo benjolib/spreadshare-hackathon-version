@@ -12,7 +12,7 @@ import TableLoading from "../../components/TableLoading";
 import TableError from "../../components/TableError";
 import { voteRow, editCell, fetchTable } from "./actions";
 import type { ReduxState } from "../../types";
-import type { TableDataWrapper, Rows, Votes } from "./types";
+import type { TableDataWrapper, Rows, Votes, RowsWithVotes } from "./types";
 import votesRenderer from "../../lib/votesRenderer";
 import cellRenderer from "../../lib/cellRenderer";
 import TableSortingMenu from "../../components/TableSortingMenu";
@@ -95,7 +95,7 @@ class Table extends Component<Props, State> {
     });
   };
 
-  hotDataAddVotes = (votes: Votes) => (rows: Rows) =>
+  hotDataAddVotes = (votes: Votes) => (rows: RowsWithVotes) =>
     rows.map(row => ({
       ...row,
       content: [
@@ -106,7 +106,7 @@ class Table extends Component<Props, State> {
 
   hotDataFilters = x => x;
 
-  hotDataSearchRows = searchValue => (rows: Rows) =>
+  hotDataSearchRows = searchValue => (rows: RowsWithVotes) =>
     rows.filter(
       row =>
         row.content.filter(
@@ -117,20 +117,25 @@ class Table extends Component<Props, State> {
         ).length
     );
 
-  hotDataSortings = (colHeaders, sortings: Sortings) => (rows: Rows) =>
+  hotDataSortings = (colHeaders, sortings: Sortings) => (rows: RowsWithVotes) =>
     __.orderBy(
       rows,
-      sortings.map(sorting => () =>
-        sorting.by === "Votes"
-          ? rows.content[__.findIndex(colHeaders, sorting.by)].votes
-          : rows.content[__.findIndex(colHeaders, sorting.by)].content
-      ),
+      sortings.map(sorting => row => {
+        const i = __.findIndex(colHeaders, x => x === sorting.by);
+        const cell = row.content[i];
+        if (cell.content) {
+          return cell.content;
+        } else if (cell.votes) {
+          return cell.votes;
+        }
+        return "";
+      }),
       sortings.map(
         sorting => (sorting.direction === "ascending" ? "asc" : "desc")
       )
     );
 
-  hotDataFlattenRows = (rows: Rows) => rows.map(row => row.content);
+  hotDataFlattenRows = (rows: RowsWithVotes) => rows.map(row => row.content);
 
   render() {
     if (!this.props.data || this.props.data.loading) {
