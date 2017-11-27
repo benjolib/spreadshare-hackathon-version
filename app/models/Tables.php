@@ -190,6 +190,7 @@ class Tables
                                    TableStats::class . ".subscriberCount",
                                    Tables::class . ".typeId",
                                    Types::class . ".title as typeTitle",
+                                   "(SELECT " . TableSubscription::class . ".createdAt FROM " . TableSubscription::class . " WHERE " . TableSubscription::class . ".tableId = " . Tables::class . ".id AND " . TableSubscription::class . ".userId = " . $userId . ") as userHasSubscribed",
                                    "(SELECT " . TableVotes::class . ".createdAt FROM " . TableVotes::class . " WHERE " . TableVotes::class . ".tableId = " . Tables::class . ".id AND " . TableVotes::class . ".userId = " . $userId . ") as userHasVoted",
                                    "(SELECT CUSTOM_GROUP_CONCAT(" . Tags::class . ".title, " . Tags::class . ".title, 'ASC', ', ') FROM " . TableTags::class . " INNER JOIN " . Tags::class . " ON " . Tags::class . ".id = " . TableTags::class . ".tagId WHERE " . TableTags::class . ".tableId = " . Tables::class . ".id) as tags",
                                    "(SELECT CUSTOM_GROUP_CONCAT(" . Locations::class . ".locationName, " . Locations::class . ".locationName, 'ASC', ', ') FROM " . TableLocations::class . " INNER JOIN " . Locations::class . " ON " . Locations::class . ".id = " . TableLocations::class . ".locationId WHERE " . TableLocations::class . ".tableId = " . Tables::class . ".id) as locations",

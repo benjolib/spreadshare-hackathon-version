@@ -3,7 +3,6 @@
 namespace DS\Controller\Table;
 
 use DS\Controller\BaseController;
-use DS\Exceptions\SecurityException;
 use DS\Interfaces\TableSubcontrollerInterface;
 use DS\Model\Tables;
 use DS\Model\User as UserModel;
@@ -35,7 +34,13 @@ class Users
     {
         try
         {
-            $userModel  = new UserModel();
+            if (!$param)
+            {
+                $param = 'subscribers';
+            }
+            
+            $userModel = new UserModel();
+            
             $tableUsers = $userModel->getTableUsers(
                 $table->getId(),
                 $param === 'upvoters',

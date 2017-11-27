@@ -39,45 +39,62 @@ class User
      *
      * @return array
      */
-    public function getTableUsers(int $tableId, bool $upvoters = false, bool $subscribers = false, bool $contributors = false): array
+    public function getTableUsers(int $tableId, bool $upvoters = false, bool $subscribers = false, bool $contributors = false, bool $admins = false): array
     {
-        $query = self::query()
-                     ->columns(
-                         [
-                             User::class . ".id",
-                             User::class . ".image",
-                             User::class . ".name",
-                             User::class . ".handle",
-                             User::class . ".tagline",
-                             User::class . ".location",
-                             "(SELECT " . UserFollower::class . ".id FROM " . UserFollower::class . " WHERE " . UserFollower::class . ".userId = " . User::class . ".id AND " . UserFollower::class . ".followedByUserId = " .
-                             serviceManager()->getAuth()->getUserId() . ") as following",
-                         ]
-                     )
-                     ->leftJoin(Tables::class, Tables::class . '.ownerUserId = ' . User::class . '.id')
-                     ->leftJoin(TableVotes::class, TableVotes::class . '.userId = ' . User::class . '.id')
-                     ->leftJoin(TableSubscription::class, TableSubscription::class . '.userId = ' . User::class . '.id')
-                     ->leftJoin(TableCells::class, TableCells::class . '.userId = ' . User::class . '.id')
-                     ->groupBy(User::class . '.id')
-                     ->where(Tables::class . '.id = :tableId:', ['tableId' => $tableId])
-                     ->limit(Paging::endlessScrollPortions);
+        $columns = [
+            User::class . ".id",
+            User::class . ".image",
+            User::class . ".name",
+            User::class . ".handle",
+            User::class . ".tagline",
+            User::class . ".location",
+            "(SELECT " . UserFollower::class . ".id FROM " . UserFollower::class . " WHERE " . UserFollower::class . ".userId = " . User::class . ".id AND " . UserFollower::class . ".followedByUserId = " .
+            serviceManager()->getAuth()->getUserId() . ") as following",
+        ];
         
-        if ($upvoters)
-        {
-            $query->andWhere('!ISNULL(' . TableVotes::class . '.userId)');
-        }
+        $query = self::query()
+                     ->where(Tables::class . '.id = :tableId:', ['tableId' => $tableId])
+                     ->groupBy(User::class . '.id')
+                     ->limit(Paging::endlessScrollPortions);
         
         if ($subscribers)
         {
-            $query->andWhere('!ISNULL(' . TableSubscription::class . '.userId)');
+            $query->innerJoin(TableSubscription::class, TableSubscription::class . '.userId = ' . User::class . '.id');
+            $query->innerJoin(Tables::class, TableSubscription::class . '.tableId = ' . Tables::class . '.id');
+            $columns[] = TableSubscription::class . '.createdAt as subscribedAt';
+        }
+        else
+        {
+            $query->leftJoin(TableSubscription::class, TableSubscription::class . '.userId = ' . User::class . '.id');
+        }
+        
+        if ($upvoters)
+        {
+            $query->innerJoin(TableVotes::class, TableVotes::class . '.userId = ' . User::class . '.id');
+            $query->innerJoin(Tables::class, TableVotes::class . '.tableId = ' . Tables::class . '.id');
+        }
+        else
+        {
+            $query->leftJoin(TableVotes::class, TableVotes::class . '.userId = ' . User::class . '.id');
         }
         
         if ($contributors)
         {
-            $query->andWhere('!ISNULL(' . TableCells::class . '.userId)');
+            $query->innerJoin(TableCells::class, TableCells::class . '.userId = ' . User::class . '.id')
+                  ->innerJoin(TableRows::class, TableCells::class . '.rowId = ' . TableRows::class . '.id')
+                  ->innerJoin(Tables::class, TableRows::class . '.tableId = ' . Tables::class . '.id');
+        }
+        else
+        {
+            $query->leftJoin(TableCells::class, TableCells::class . '.userId = ' . User::class . '.id');
         }
         
-        return $query->execute()->toArray();
+        if ($admins)
+        {
+            $query->innerJoin(Tables::class, Tables::class . '.ownerUserId = ' . User::class . '.id');
+        }
+        
+        return $query->columns($columns)->execute()->toArray();
     }
     
     /**

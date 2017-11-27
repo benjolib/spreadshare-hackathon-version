@@ -151,7 +151,7 @@
     // flash messages timeout
     var $flash = $('.flash');
     if ($flash.length > 0) {
-      setTimeout(function() {
+      setTimeout(function () {
         $flash.css('display', 'none');
       }, 3800);
     }
@@ -180,21 +180,14 @@
     $('button.subscribe').api({
       method: 'POST',
       onSuccess: function (response, button) {
-        var span = button.find('span');
-        if (response.data.voted) {
-          button.addClass('selected');
-          span.text(parseInt(parseInt(span.text()) + 1));
-        } else {
-          button.removeClass('selected');
-          span.text(parseInt(parseInt(span.text()) - 1));
-        }
+        button.toggleClass('subscribed');
       },
     });
     $('button.follow-user').api({
       method: 'POST',
       action: 'follow-user',
       onSuccess: function (response, button) {
-        $(button).toggleClass('selected').toggleClass('following-user').toggleClass('not-following-user')
+        $(button).toggleClass('selected').toggleClass('following-user').toggleClass('not-following-user');
       },
     });
   });

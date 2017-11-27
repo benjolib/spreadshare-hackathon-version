@@ -15,7 +15,7 @@ use DS\Model\Tables;
  * @license   proprietary
  * @copyright Spreadshare
  * @link      https://www.spreadshare.co
- *
+ *  
  * @version   $Version$
  * @package   DS\Controller\User
  */

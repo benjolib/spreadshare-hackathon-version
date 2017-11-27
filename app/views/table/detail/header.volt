@@ -12,7 +12,13 @@
     </div>
     <div class="table__header__up__buttons">
       {% if auth.loggedIn() %}
-      <button class="subscribe" data-action="subscribe" data-id="{{ table['id'] }}"></button>
+
+      {% if table['userHasSubscribed'] %}
+        <button class="subscribed subscribe" data-action="subscribe" data-id="{{ table['id'] }}"></button>
+      {% else %}
+        <button class="subscribe" data-action="subscribe" data-id="{{ table['id'] }}"></button>
+      {% endif %}
+
       <button class="upvote {% if table['userHasVoted'] %}selected{% endif %}" data-action="upvote" data-id="{{ table['id'] }}" onclick="var event = arguments[0] || window.event; event.stopPropagation();">
         <div class="upvote-icon small"></div>
         <span>{{ table['votesCount'] +0 }}</span>
@@ -63,7 +69,7 @@
       Commits
     </a>
     {%endif%}
-    <a href="/table/{{table['id']}}/users" class="table__header__menu__item{% if selectedPage == 'users' %} selected{% endif %}">
+    <a href="/table/{{table['id']}}/users/subscribers" class="table__header__menu__item{% if selectedPage == 'users' %} selected{% endif %}">
       <div class="feed-icon"></div>
       Users
     </a>

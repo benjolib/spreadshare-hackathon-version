@@ -26,37 +26,38 @@
               {% endif %}
             </div>
           </div>
-          <div class="tableUsers__item__follow">
-            <button class="follow-user {% if user['following'] %}following-user selected {% else %}not-following-user {% endif %}" data-id="{{ user['id'] }}" type="button"></button>
-          </div>
+          {% if auth().getUserId() != user['id'] %}
+            <div class="tableUsers__item__follow">
+              <button class="follow-user {% if user['following'] %}following-user selected {% else %}not-following-user {% endif %}" data-id="{{ user['id'] }}" type="button"></button>
+            </div>
+          {% else %}
+            <div class="tableUsers__item__follow">
+              <button disabled type="button">It's you</button>
+            </div>
+          {% endif %}
         </div>
       {% endfor %}
     </div>
   </div>
   <aside class="aside aside--tableUsers">
     <p>Filter users</p>
-    <a href="#">
-      <div class="aside__item item-selected">
-        <p>All</p>
-      </div>
-    </a>
-    <a href="#">
-      <div class="aside__item">
+    <a href="/table/{{ table['id'] }}/users/subscribers">
+      <div class="aside__item {% if userFilter == 'subscribers' %}item-selected{% endif %}">
         <p>Subscribers</p>
       </div>
     </a>
-    <a href="#">
-      <div class="aside__item">
+    <a href="/table/{{ table['id'] }}/users/upvoters">
+      <div class="aside__item {% if userFilter == 'upvoters' %}item-selected{% endif %}">
         <p>Upvoted by</p>
       </div>
     </a>
-    <a href="#">
-      <div class="aside__item">
+    <a href="/table/{{ table['id'] }}/users/contributors">
+      <div class="aside__item {% if userFilter == 'contributors' %}item-selected{% endif %}">
         <p>Contributors</p>
       </div>
     </a>
-    <a href="#">
-      <div class="aside__item">
+    <a href="/table/{{ table['id'] }}/users/admins">
+      <div class="aside__item {% if userFilter == 'admins' %}item-selected{% endif %}">
         <p>Admins</p>
       </div>
     </a>
