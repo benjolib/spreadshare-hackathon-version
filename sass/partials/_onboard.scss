@@ -37,7 +37,7 @@
       text-align: center;
       align-self: center;
       margin: 0;
-      font-weight: 600;
+      font-weight: 700;
       @include rem(font-size, 30);
 
       @include tablet {
@@ -194,7 +194,7 @@
 
       @include desktop {
         width: 20%;
-        @include rem(margin-top, 110);
+        @include rem(margin-top, 130);
       }
 
       &__box {
@@ -224,7 +224,7 @@
             }
 
             &:first-child {
-              @include rem(margin-bottom, 26);
+              @include rem(margin-bottom, 14);
             }
           }
         }
@@ -268,7 +268,7 @@
       width: 100%;
 
       @include desktop {
-        width: 80%;
+        width: 100%;
       }
     }
 
@@ -277,7 +277,7 @@
       text-align: center;
       align-self: center;
       margin: 0;
-      font-weight: 600;
+      font-weight: 700;
       @include rem(font-size, 30);
 
       @include tablet {
@@ -342,9 +342,12 @@
 
           @include tablet {
             @include rem2(padding, 42, 84);
+            width: 288px;            
           }
           @include desktop {
             @include rem2(padding, 32, 64);
+            width: 288px;
+            display: block;
           }
 
           &:hover {
@@ -357,7 +360,7 @@
             text-transform: uppercase;
             font-weight: 300;
             color: white;
-          }
+            text-align: center;          }
         }
       }
     }
@@ -371,7 +374,7 @@
 
       @include desktop {
         width: 20%;
-        @include rem(margin-top, 110);
+        @include rem(margin-top, 130);
       }
 
       &__box {
@@ -401,7 +404,7 @@
             }
 
             &:first-child {
-              @include rem(margin-bottom, 26);
+              @include rem(margin-bottom, 14);
             }
           }
         }
@@ -454,7 +457,7 @@
       text-align: center;
       align-self: center;
       margin: 0;
-      font-weight: 600;
+      font-weight: 700;
       @include rem(font-size, 30);
 
       @include tablet {
@@ -664,7 +667,7 @@
 
       @include desktop {
         width: 20%;
-        @include rem(margin-top, 110);
+        @include rem(margin-top, 130);
       }
 
       &__box {
@@ -694,7 +697,7 @@
             }
 
             &:first-child {
-              @include rem(margin-bottom, 26);
+              @include rem(margin-bottom, 14);
             }
           }
         }
@@ -921,7 +924,7 @@
 
       @include desktop {
         width: 20%;
-        @include rem(margin-top, 110);
+        @include rem(margin-top, 130);
       }
 
       &__box {
@@ -951,7 +954,7 @@
             }
 
             &:first-child {
-              @include rem(margin-bottom, 26);
+              @include rem(margin-bottom, 14);
             }
           }
         }

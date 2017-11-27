@@ -140,7 +140,7 @@
 
       @include desktop {
         width: 20%;
-        @include rem(margin-top, 110);
+        @include rem(margin-top, 130);
       }
 
       &__box {
@@ -170,7 +170,7 @@
             }
 
             &:first-child {
-              @include rem(margin-bottom, 26);
+              @include rem(margin-bottom, 14);
             }
           }
         }
