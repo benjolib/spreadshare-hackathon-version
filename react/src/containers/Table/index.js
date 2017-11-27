@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import HandsOnTable from "react-handsontable";
 import _ from "lodash/fp";
+import __ from "lodash";
 import TableHeader from "../../components/TableHeader";
 import TableMain from "../../components/TableMain";
 import TableButton from "../../components/TableButton";
@@ -14,6 +15,8 @@ import type { ReduxState } from "../../types";
 import type { TableDataWrapper, Rows, Votes } from "./types";
 import votesRenderer from "../../lib/votesRenderer";
 import cellRenderer from "../../lib/cellRenderer";
+import TableSortingMenu from "../../components/TableSortingMenu";
+import type { Sortings } from "../../components/TableSortingMenu";
 
 type Props = {
   id: string, // from server markup
@@ -24,12 +27,14 @@ type Props = {
 };
 
 type State = {
-  searchValue: string
+  searchValue: string,
+  sortings: Sortings
 };
 
 class Table extends Component<Props, State> {
   state = {
-    searchValue: ""
+    searchValue: "",
+    sortings: []
   };
 
   state: State;
@@ -46,6 +51,12 @@ class Table extends Component<Props, State> {
         searchValue: e.target.value
       });
     }
+  };
+
+  updateTableSortings = (sortings: Sortings) => {
+    this.setState({
+      sortings
+    });
   };
 
   contextMenuCallback = (key, options) => {
@@ -84,14 +95,6 @@ class Table extends Component<Props, State> {
     });
   };
 
-  hotDataSearchRows = searchValue => (rows: Rows) =>
-    rows.filter(
-      row =>
-        row.content.filter(cell =>
-          cell.content.toLowerCase().includes(searchValue.toLowerCase())
-        ).length
-    );
-
   hotDataAddVotes = (votes: Votes) => (rows: Rows) =>
     rows.map(row => ({
       ...row,
@@ -100,6 +103,32 @@ class Table extends Component<Props, State> {
         ...row.content.map(cell => ({ ...cell, rowId: row.id }))
       ]
     }));
+
+  hotDataFilters = x => x;
+
+  hotDataSearchRows = searchValue => (rows: Rows) =>
+    rows.filter(
+      row =>
+        row.content.filter(
+          cell =>
+            cell.content
+              ? cell.content.toLowerCase().includes(searchValue.toLowerCase())
+              : false
+        ).length
+    );
+
+  hotDataSortings = (colHeaders, sortings: Sortings) => (rows: Rows) =>
+    __.orderBy(
+      rows,
+      sortings.map(sorting => () =>
+        sorting.by === "Votes"
+          ? rows.content[__.findIndex(colHeaders, sorting.by)].votes
+          : rows.content[__.findIndex(colHeaders, sorting.by)].content
+      ),
+      sortings.map(
+        sorting => (sorting.direction === "ascending" ? "asc" : "desc")
+      )
+    );
 
   hotDataFlattenRows = (rows: Rows) => rows.map(row => row.content);
 
@@ -114,9 +143,13 @@ class Table extends Component<Props, State> {
 
     console.log(this.props.data);
 
+    const colHeaders = ["Votes", ...this.props.data.table.columns];
+
     const hotData = _.pipe(
-      this.hotDataSearchRows(this.state.searchValue),
       this.hotDataAddVotes(this.props.data.table.votes),
+      this.hotDataFilters,
+      this.hotDataSearchRows(this.state.searchValue),
+      this.hotDataSortings(colHeaders, this.state.sortings),
       this.hotDataFlattenRows
     );
 
@@ -129,6 +162,11 @@ class Table extends Component<Props, State> {
           <TableSearch onChange={this.updateSearchValue} />
           <TableButton icon="eye" />
         </TableHeader>
+        <TableSortingMenu
+          onApply={this.updateTableSortings}
+          colHeaders={colHeaders}
+          appliedSortings={this.state.sortings}
+        />
         <TableMain>
           <HandsOnTable
             ref={ref => (this.hot = ref)}
@@ -138,7 +176,7 @@ class Table extends Component<Props, State> {
                 this.hot.hotInstance.render();
               }, 0);
             }}
-            colHeaders={["Votes", ...this.props.data.table.columns]}
+            colHeaders={colHeaders}
             data={hotData(this.props.data.table.rows)}
             columns={col => {
               if (col === 0) {
