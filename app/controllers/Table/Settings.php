@@ -103,16 +103,22 @@ class Settings
                     }
                     $this->view->setVar('locations', $locations);
                     
-                    $topics = [
-                        [
+                    $topics = [];
+                    if ($loadedTable['topic1Id'])
+                    {
+                        $topics[] = [
                             'value' => $loadedTable['topic1Id'],
                             'label' => $loadedTable['topic1'],
-                        ],
-                        [
+                        ];
+                    }
+                    if ($loadedTable['topic2Id'])
+                    {
+                        $topics[] = [
                             'value' => $loadedTable['topic2Id'],
                             'label' => $loadedTable['topic2'],
-                        ],
-                    ];
+                        ];
+                    }
+                    
                     $this->view->setVar('topics', $topics);
                     break;
             }
