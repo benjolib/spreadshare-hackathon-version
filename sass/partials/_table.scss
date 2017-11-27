@@ -28,19 +28,36 @@
         flex-direction: column;
         justify-content: flex-start;
 
-        span {
-          background: $text-color;
-          display: inline-flex;
-          align-self: center;
-          border-radius: 6px;
-          font-weight: 600;
-          @include rem2(padding, 2, 8);
-          @include rem(margin-bottom, 14);
-          @include rem(font-size, 14);
+        &__owner {
+          text-transform: uppercase;
+          font-weight: 500;
+          color: lighten($logo-color, 4%);
+          @include rem(font-size, 12);
+        }
 
-          @include desktop {
-            align-self: flex-start;
-            margin-bottom: 0;
+        &__info {
+          display: flex;
+          align-items: center;
+
+          &__tagline {
+            @include rem(margin-right, 12);
+          }
+
+          &__tokens {
+            background: $text-color;
+            display: inline-flex;
+            align-self: center;
+            border-radius: 6px;
+            text-transform: uppercase;
+            font-weight: 400;
+            @include rem2(padding, 2, 8);
+            @include rem(margin-bottom, 14);
+            @include rem(font-size, 12);
+
+            @include desktop {
+              align-self: flex-start;
+              margin-bottom: 0;
+            }
           }
         }
 
@@ -151,7 +168,8 @@
       display: flex;
       justify-content: center;
       text-transform: uppercase;
-      @include rem(margin-top, 80);
+      @include rem(margin-top, 50);
+      @include rem(margin-bottom, 16);
       @include rem(font-size, 14);
 
       @include desktop {

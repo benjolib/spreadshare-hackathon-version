@@ -2,6 +2,18 @@
   width: 100%;
 
   .container__content {
+    position: relative;
+
+    & > p {
+      position: absolute;
+      top: -30px;
+      left: 0;
+      color: $text-color-alternate;
+      font-weight: 500;
+      text-transform: uppercase;
+      @include rem(font-size, 14);
+    }
+
     @include desktop {
       width: 72.5%;
       margin-bottom: 0;
@@ -102,6 +114,18 @@
   }
 
   aside {
+    position: relative;
+
+    & > p {
+      position: absolute;
+      top: -30px;
+      left: 0;
+      color: $text-color-alternate;
+      font-weight: 500;
+      text-transform: uppercase;
+      @include rem(font-size, 14);
+    }
+
     @include desktop {
       width: 22.5%;
       margin-bottom: 0;

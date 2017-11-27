@@ -5,6 +5,7 @@
 
 <div class="container container--tableUsers">
   <div class="container__content">
+    <p>User overview</p>
     <div class="tableUsers">
       {% for user in tableUsers %}
         <div class="tableUsers__item">
@@ -32,7 +33,8 @@
       {% endfor %}
     </div>
   </div>
-  <aside class="aside">
+  <aside class="aside aside--tableUsers">
+    <p>Filter users</p>
     <a href="#">
       <div class="aside__item item-selected">
         <p>All</p>

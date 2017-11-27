@@ -2,11 +2,13 @@
   <div class="table__header__up">
     <div class="table__header__up__details">
       {% if auth.getUserId() == table['ownerUserId'] %}
-      <span class="owner">You are the owner of this table</span>
+        <span class="table__header__up__details__owner">You are the creator of this table</span>
       {% endif %}
-      <span>{{ table['tokensCount'] }} Token</span>
       <h1>{{ table['title'] }}</h1>
-      <h3>{{ table['tagline'] }}</h3>
+      <div class="table__header__up__details__info">
+        <h3 class="table__header__up__details__info__tagline">{{ table['tagline'] }}</h3>
+        <span class="table__header__up__details__info__tokens">{{ table['tokensCount'] }} Tokens</span>
+      </div>
     </div>
     <div class="table__header__up__buttons">
       {% if auth.loggedIn() %}
