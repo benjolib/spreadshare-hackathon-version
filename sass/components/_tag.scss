@@ -1,6 +1,8 @@
 .tag {
   display: flex;
   align-self: flex-start;
+  background: #6A7C94;
+  color: white;
   font-weight: 600;
   border-radius: 5px;
   @include rem(font-size, 14);
