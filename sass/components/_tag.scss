@@ -8,13 +8,26 @@
   @include rem(font-size, 14);
   @include rem2(padding, 2, 8);
 
+  &:hover {
+    cursor: pointer;
+    background: lighten(#6A7C94, 4%);
+  }
+
   &--green {
     background: #24AE69;
     color: white;
+
+    &:hover {
+      background: lighten(#24AE69, 4%);
+    }
   }
   &--gray {
     background: #6A7C94;
     color: white;
+
+    &:hover {
+      background: lighten(#6A7C94, 4%);
+    }
   }
 
   &--smallest {
