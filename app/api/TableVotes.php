@@ -2,6 +2,7 @@
 
 namespace DS\Api;
 
+use DS\Model\Tables;
 use DS\Model\TableStats;
 use DS\Model\TableVotes as TableVotesModel;
 
@@ -34,6 +35,17 @@ class TableVotes
      */
     public function voteForTable(int $userId, int $tableId): bool
     {
+        $table = Tables::findFirstById($tableId);
+        if (!$table)
+        {
+            throw new \InvalidArgumentException('Table does not exist.');
+        }
+        
+        if ($table->getOwnerUserId() == $this->serviceManager->getAuth()->getUserId())
+        {
+            throw new \InvalidArgumentException('You can not upvote your own table.');
+        }
+        
         $votes      = TableVotesModel::findVote($userId, $tableId);
         $tableStats = TableStats::findByFieldValue('tableId', $tableId);
         if (!$tableStats)
