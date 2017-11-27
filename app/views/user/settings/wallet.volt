@@ -17,7 +17,7 @@
             </div>
             <div class="layout__content__main__wallet__stats__data">
               <p>230,000</p>
-              <p><i>2.3%</i> <span>(to last week)<span></p>
+              <p><span class="up-arrow-icon">⬆</span><i>2.3%</i> <span>(to last week)<span></p>
             </div>
           </div>
         </div>
