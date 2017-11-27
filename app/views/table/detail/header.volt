@@ -1,6 +1,9 @@
 <div class="table__header">
   <div class="table__header__up">
     <div class="table__header__up__details">
+      {% if auth.getUserId() == table['ownerUserId'] %}
+      <span class="owner">You are the owner of this table</span>
+      {% endif %}
       <span>{{ table['tokensCount'] }} Token</span>
       <h1>{{ table['title'] }}</h1>
       <h3>{{ table['tagline'] }}</h3>
