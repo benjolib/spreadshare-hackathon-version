@@ -1,5 +1,6 @@
 .main {
-  font-family: 'Montserrat', sans-serif;
+  // font-family: 'Montserrat', sans-serif;
+  font-family: 'Lato', sans-serif;
   background: $background-color;
   display: flex;
   flex-direction: column;
@@ -33,7 +34,7 @@
 
     p {
       margin: 0;
-      font-weight: 800;
+      font-weight: 400;
       @include rem(font-size, 26);
       @include rem(padding-bottom, 32);
 

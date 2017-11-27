@@ -14,9 +14,9 @@
     padding: 0;
   }
 
-  a {
-    color: #6A7C94 !important;
-  }
+  // a {
+  //   color: #6A7C94 !important;
+  // }
 
   &__top {
     display: flex;
@@ -39,22 +39,54 @@
       flex-direction: column;
       @include rem(margin-top, 50);
 
+      @include desktop {
+        width: 57%;
+      }
+
+      @include tablet {
+        margin-right: 40px;
+        text-align: left;               
+      }
+
+      @include mobile {
+        margin-right: 40px; 
+        text-align: center;       
+      }
+
       h2 {
         margin: 0;
         color: $logo-color;
         @include rem(font-size, 28);
+        font-weight: 400;        
       }
       h3 {
         margin: 0;
         line-height: 2rem;
-        color: $text-color-alternate;
+        // color: $text-color-alternate;
+        color: #6A7C94;        
         font-weight: 400;
         line-height: 32px;
+        margin-top: 15px;        
 
-        @include rem(font-size, 16);
+        @include rem(font-size, 14);
       }
       p {
         @include rem(font-size, 14);
+        font-weight: 300;
+        color: #B1BBC7;
+        margin-top: 5px;
+        line-height: 26px;
+        margin-bottom: 20px;
+
+        @include desktop {
+          width: 320px;          
+        }
+
+        @include mobile {
+        }
+        @include tablet {
+          width: 320px;          
+        }
       }
     }
 
@@ -67,12 +99,16 @@
         @include rem(margin-top, 50);
       }
       @include desktop {
-        @include rem(margin-top, 50);
+        @include rem(margin-top, 112);
         justify-content: flex-start;
       }
 
       &__column {
         @include rem(margin-top, 50);
+
+        @include mobile {
+          margin-top: 20px;
+        }
 
         @include tablet {
           margin-top: 0;
@@ -82,16 +118,24 @@
         }
 
         &--first {
-          @include rem(margin-right, 32);
+          @include rem(margin-right, 80);
+
+          @include mobile {
+            margin-right: 3rem;
+          }
         }
         &--second {
-          @include rem(margin-right, 32);
+          @include rem(margin-right, 80);
+
+          @include mobile {
+            margin-right: 3rem;
+          }
         }
 
         p {
           color: $text-color-alternate;
           text-transform: uppercase;
-          text-align: right;
+          text-align: center;
           margin-bottom: 10px;
           @include rem(font-size, 12);
 
@@ -99,12 +143,16 @@
             @include rem(font-size, 14);
           }
           @include desktop {
-            @include rem(font-size, 16);
+            @include rem(font-size, 14);
+          }
+          @include mobile {
+            text-align: left;
           }
         }
 
         ul {
           padding-left: 0;
+          margin-top: 25px;          
           text-align: right;
           @include rem(font-size, 12);
 
@@ -112,12 +160,16 @@
             @include rem(font-size, 14);
           }
           @include desktop {
-            @include rem(font-size, 16);
+            @include rem(font-size, 14);
+          }
+          @include mobile {
+            text-align: left;
           }
 
           li {
             list-style-type: none;
             @include rem(margin-bottom, 12);
+            color: #6C7E95;            
 
             &:hover {
               cursor: pointer;
@@ -135,15 +187,17 @@
     align-items: center;
     color: $text-color-alternate;
     border-top: 2px solid #F7F7FB;
-
+    padding: 10px 0 20px 0; 
+       
     @include tablet {
       flex-direction: row;
       @include rem2(margin, 0, 50);
     }
     @include desktop {
       flex-direction: row;
-      @include rem2(margin, 0, 100);
+      @include rem2(margin, 0, 56);
     }
+
 
     &__rights {
       order: 2;
@@ -187,12 +241,16 @@
         li {
           display: inline-flex;
           list-style-type: none;
+          text-transform: uppercase;          
           @include rem(font-size, 12);
-          @include rem(margin-right, 8);
+          @include rem(margin-right, 3);
 
           &:hover {
             cursor: pointer;
           }
+        }
+        a {
+          color: #B1BBC7;
         }
       }
     }

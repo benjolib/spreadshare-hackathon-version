@@ -33,25 +33,45 @@
 
     &__title {
       width: 100%;
-      text-align: center;
+      text-align: left;
       align-self: center;
       margin: 0;
-      font-weight: 600;
+      font-weight: 400;
       @include rem(font-size, 40);
 
       @include desktop {
-        width: 80%;
+        width: 86%;
         text-align: left;
+      }
+      @include tablet {
+        text-align: center;
+      }
+      @include mobile {
+        text-align: center;
       }
     }
 
     &__subtitle {
-      width: 80%;
+      width: 86%;
       margin: 0;
       font-weight: 300;
       @include rem(margin-top, 16);
-      @include rem(margin-bottom, 16 * 2);
+      text-align: left;
+      @include rem(margin-bottom, 21 * 2);
       @include rem(font-size, 16);
+
+      @include desktop {
+        margin: 3px 0 42px 0;
+        @include rem(margin-top, 5);        
+      }
+
+      @include tablet {
+        text-align: center;
+      }
+      @include mobile {
+        text-align: center;
+        margin: 8px 0 42px 0;
+      }
     }
 
     &__form {
@@ -60,10 +80,12 @@
       background: white;
       border-radius: 8px;
       width: 80%;
+      margin-top: 20px;            
       @include rem2(padding, 25, 35);
 
       p {
-        color: lighten($text-color, 10%);
+        // color: lighten($text-color, 10%);
+        color:#B1BBC7;                
         font-weight: 300;
         text-transform: uppercase;
         @include rem(font-size, 14);
@@ -72,7 +94,8 @@
 
       span {
         font-weight: 300;
-        color: lighten($text-color, 10%);
+        // color: lighten($text-color, 10%);
+        color: #B3BDC9;                
         @include rem(margin-top, 8);
         @include rem(font-size, 12);
       }
@@ -124,7 +147,7 @@
           border: none;
           border-radius: 4px;
           @include rem(font-size, 15);
-          @include rem2(padding, 8, 16);
+          @include rem2(padding, 12, 20);
 
           &:hover {
             cursor: pointer;
@@ -143,7 +166,7 @@
 
       @include desktop {
         width: 20%;
-        @include rem(margin-top, 110);
+        @include rem(margin-top, 130);
       }
 
       &__box {
@@ -162,6 +185,11 @@
             text-decoration: none;
           }
 
+          .sign-box-selected {
+            color: #6A7C94;
+            margin-bottom: 15px;
+          }
+
           div {
             text-transform: uppercase;
             font-weight: 300;
@@ -173,7 +201,7 @@
             }
 
             &:first-child {
-              @include rem(margin-bottom, 26);
+              // @include rem(margin-bottom, 0);
             }
           }
         }
@@ -196,6 +224,8 @@
         a {
           text-decoration: none;
           color: white;
+          width: 100%;
+          text-align: center;
 
           &:hover {
             text-decoration: none;

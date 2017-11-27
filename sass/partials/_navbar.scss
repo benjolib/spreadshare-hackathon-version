@@ -47,12 +47,20 @@
 
     h1 {
       margin: 0;
-      font-weight: 800;
+      text-align: left;      
+      font-weight: 400;
       color: $logo-color;
       @include rem(font-size, 28);
+
+      @include mobile {
+        text-align: center;
+      }
+      @include tablet {
+        text-align: center;
+      }
     }
     h2 {
-      font-weight: 400;
+      font-weight: 300;
       color: $text-color;
       @include rem(font-size, 16);
     }
@@ -106,6 +114,9 @@
       &:-moz-placeholder {
         color: #dddde3;
         font-weight: lighter;
+      }
+      @include mobile {
+        min-width: 15.625rem;
       }
     }
     &__filter {
@@ -257,7 +268,7 @@
       font-weight: 300;
       border-radius: 3px;
       @include rem(font-size, 14);
-      @include rem2(padding, 8, 16);
+      @include rem2(padding, 13, 22);
 
       span {
         text-transform: lowercase;

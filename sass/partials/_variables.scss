@@ -22,9 +22,14 @@ $error: #ffc4c4;
 $warning: #ffc966;
 $notice: #c4c4ff;
 
+
 // fonts
-$primary-font: 'Montserrat', sans-serif;
+@import url('https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i&subset=latin-ext');
+
+// $primary-font: 'Montserrat', sans-serif;
+$primary-font: 'Lato', sans-serif;
 
 // breakpoints
+$mobile-width: 280px;
 $tablet-width: 768px;
 $desktop-width: 1024px;
