@@ -51,14 +51,17 @@ class About
             }
             
             $commentsArray = $comments->getComments($table->getId());
+            $commentsCount = count($commentsArray);
             foreach ($commentsArray as $key => $comment)
             {
                 $commentsArray[$key]['childs'] = $comments->getComments($table->getId(), $comment['id']);
+                $commentsCount                 += count($commentsArray[$key]['childs']);
             }
             
             $relatedTables = new TableRelations;
             $this->view->setVar('relatedTables', $relatedTables->findRelatedTables($table->getId()));
             
+            $this->view->setVar('commentsCount', $commentsCount);
             $this->view->setVar('comments', $commentsArray);
             $this->view->setMainView('table/detail/about');
             
