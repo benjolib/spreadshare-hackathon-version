@@ -57,14 +57,14 @@
         margin: 0;
         color: $logo-color;
         @include rem(font-size, 28);
-        font-weight: 400;        
+        font-weight: 800;
       }
       h3 {
         margin: 0;
         line-height: 2rem;
         // color: $text-color-alternate;
         color: #6A7C94;        
-        font-weight: 400;
+        font-weight: 500;
         line-height: 32px;
         margin-top: 15px;        
 
