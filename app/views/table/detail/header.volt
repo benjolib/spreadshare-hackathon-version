@@ -62,10 +62,12 @@
       <div class="feed-icon"></div>
       Commits
     </a>
+    {%endif%}
     <a href="/table/{{table['id']}}/users" class="table__header__menu__item{% if selectedPage == 'users' %} selected{% endif %}">
       <div class="feed-icon"></div>
       Users
     </a>
+    {% if auth.getUserId() == table['ownerUserId'] %}
     <a href="/table/{{table['id']}}/settings" class="table__header__menu__item{% if selectedPage == 'settings' %} selected{% endif %}">
       <div class="people-icon"></div>
       Settings
