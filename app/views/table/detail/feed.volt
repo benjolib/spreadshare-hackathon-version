@@ -34,7 +34,7 @@
     </a>
     <a href="#">
       <div class="aside__item">
-        <p>Newly Added</p>
+        <p>New adds</p>
       </div>
     </a>
     <a href="#">
