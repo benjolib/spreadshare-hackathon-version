@@ -2,7 +2,7 @@
   <div class="table__header__up">
     <div class="table__header__up__details">
       {% if auth.getUserId() == table['ownerUserId'] %}
-        <span class="table__header__up__details__owner">You are the creator of this table</span>
+      <span class="table__header__up__details__owner">You are the creator of this table</span>
       {% endif %}
       <h1>{{ table['title'] }}</h1>
       <div class="table__header__up__details__info">
@@ -13,19 +13,22 @@
     <div class="table__header__up__buttons">
       {% if auth.loggedIn() %}
 
-      {% if table['userHasSubscribed'] %}
+      {% if auth.getUserId() != table['ownerUserId'] %}
+        {% if table['userHasSubscribed'] %}
         <button class="subscribed subscribe" data-action="subscribe" data-id="{{ table['id'] }}"></button>
-      {% else %}
+        {% else %}
         <button class="subscribe" data-action="subscribe" data-id="{{ table['id'] }}"></button>
+        {% endif %}
+
+        <button class="upvote {% if table['userHasVoted'] %}selected{% endif %}" data-action="upvote" data-id="{{ table['id'] }}" onclick="var event = arguments[0] || window.event; event.stopPropagation();">
+          <div class="upvote-icon small"></div>
+          <span>{{ table['votesCount'] +0 }}</span>
+        </button>
+        <button class="flag">
+          <div class="flag-icon"></div>
+        </button>
       {% endif %}
 
-      <button class="upvote {% if table['userHasVoted'] %}selected{% endif %}" data-action="upvote" data-id="{{ table['id'] }}" onclick="var event = arguments[0] || window.event; event.stopPropagation();">
-        <div class="upvote-icon small"></div>
-        <span>{{ table['votesCount'] +0 }}</span>
-      </button>
-      <button class="flag">
-        <div class="flag-icon"></div>
-      </button>
       <div class="table-menu navbar__controls__dropdown" style="margin-top:80px;">
         <ul>
           <li><a data-flag="duplicate" href="javascript:;">Duplicate</a></li>
