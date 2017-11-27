@@ -56,7 +56,7 @@ class AddTableController
             if ($selection)
             {
                 // Choose Table Step (onyl applies to copy-poast, csv-import and sheet-import)
-                $subClass = "DS\\Controller\\AddTable\\Description\\" . str_replace(' ', '', ucfirst(str_replace('-', ' ', $selection)));
+                $subClass = "DS\\Controller\\AddTable\\Description\\" . str_replace(' ', '', ucwords(str_replace('-', ' ', $selection)));
                 if (class_exists($subClass))
                 {
                     /**
@@ -103,7 +103,7 @@ class AddTableController
                 }
                 
                 // Choose Table Step (onyl applies to copy-poast, csv-import and sheet-import)
-                $subClass = "DS\\Controller\\AddTable\\ChooseTable\\" . str_replace(' ', '', ucfirst(str_replace('-', ' ', $selection)));
+                $subClass = "DS\\Controller\\AddTable\\ChooseTable\\" . str_replace(' ', '', ucwords(str_replace('-', ' ', $selection)));
                 if (class_exists($subClass))
                 {
                     /**
