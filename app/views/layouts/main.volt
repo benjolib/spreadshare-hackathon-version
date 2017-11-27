@@ -194,12 +194,12 @@
       method: 'POST',
       action: 'follow-user',
       onSuccess: function (response, button) {
-        $(button).toggleClass('selected');
+        $(button).toggleClass('selected').toggleClass('following-user').toggleClass('not-following-user')
       },
     });
   });
 </script>
-<script type="text/javascript" src="/js/react/main.81ecf880.js"></script>
+<script type="text/javascript" src="/js/react/main.3ce8b31a.js"></script>
 {% block scripts %}{% endblock %}
 </body>
 </html>

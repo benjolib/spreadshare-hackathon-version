@@ -182,9 +182,12 @@ class LoginController
             //Retrieve the user's profile
             $userProfile = $adapter->getUserProfile();
             
+            $name   = trim($userProfile->firstName . ' ' . $userProfile->lastName);
+            $handle = $this->cleanString(strtolower($userProfile->displayName), '-');
+            
             $user = User::addUserFromAuthService(
-                trim($userProfile->firstName . ' ' . $userProfile->lastName),
-                $this->cleanString(strtolower($userProfile->displayName), '-'),
+                $name ?: $userProfile->identifier,
+                $handle ?: $userProfile->identifier,
                 $userProfile->emailVerified,
                 '',
                 $userProfile->description,

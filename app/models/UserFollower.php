@@ -2,6 +2,7 @@
 
 namespace DS\Model;
 
+use DS\Constants\Paging;
 use DS\Model\Events\UserFollowerEvents;
 
 /**
@@ -36,6 +37,44 @@ class UserFollower
                 "limit" => 1,
             ]
         );
+    }
+    
+    /**
+     * @return string
+     */
+    public static function followingSubSelect()
+    {
+        return "(SELECT " . UserFollower::class . ".id FROM " . UserFollower::class . " WHERE " . UserFollower::class . ".userId = " . User::class . ".id AND " . UserFollower::class . ".followedByUserId = " .
+            serviceManager()->getAuth()->getUserId() . ") as following";
+    }
+    
+    /**
+     * @param int $userId
+     * @param int $limit
+     * @param int $page
+     *
+     * @return array
+     */
+    public static function findAllFollower(int $userId, $limit = Paging::endlessScrollPortions, $page = 0)
+    {
+        $query = self::query()
+                     ->columns(
+                         [
+                             User::class . ".id",
+                             User::class . ".image",
+                             User::class . ".name",
+                             User::class . ".handle",
+                             User::class . ".tagline",
+                             User::class . ".location",
+                             self::followingSubSelect(),
+                         ]
+                     )
+                     ->innerJoin(User::class, self::class . '.followedByUserId = ' . User::class . '.id')
+                     ->limit((int) $limit, $limit * $page)
+                     ->where(self::class . '.userId = ?0', [$userId])
+                     ->orderBy(self::class . '.id DESC');
+        
+        return $query->execute()->toArray() ?: [];
     }
     
     /**

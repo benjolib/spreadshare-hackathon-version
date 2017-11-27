@@ -60,7 +60,7 @@ class Post extends ActionHandler implements MethodInterface
             $userId = $this->getServiceManager()->getAuth()->getUserId();
             
             $followUser = new UserFollower();
-            $followUser->toggleFollow($userId, $this->action);
+            $followUser->toggleFollow($this->action, $userId);
             
             return new Record($followUser->toArray());
         }

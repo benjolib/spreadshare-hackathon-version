@@ -1,6 +1,9 @@
 <div class="table__header">
   <div class="table__header__up">
     <div class="table__header__up__details">
+      {% if auth.getUserId() == table['ownerUserId'] %}
+      <span class="owner">You are the owner of this table</span>
+      {% endif %}
       <span>{{ table['tokensCount'] }} Token</span>
       <h1>{{ table['title'] }}</h1>
       <h3>{{ table['tagline'] }}</h3>
@@ -46,9 +49,25 @@
       <div class="feed-icon"></div>
       Feed
     </a>
-    <a href="/table/{{table['id']}}/user" class="table__header__menu__item{% if selectedPage == 'user' %} selected{% endif %}">
-      <div class="people-icon"></div>
-      User
+
+    {# OWNER TABS #}
+    {% if auth.getUserId() == table['ownerUserId'] %}
+    <a href="/table/{{table['id']}}/stats" class="table__header__menu__item{% if selectedPage == 'stats' %} selected{% endif %}">
+      <div class="feed-icon"></div>
+      Stats
     </a>
+    <a href="/table/{{table['id']}}/changelog" class="table__header__menu__item{% if selectedPage == 'commits' %} selected{% endif %}">
+      <div class="feed-icon"></div>
+      Commits
+    </a>
+    <a href="/table/{{table['id']}}/users" class="table__header__menu__item{% if selectedPage == 'users' %} selected{% endif %}">
+      <div class="feed-icon"></div>
+      Users
+    </a>
+    <a href="/table/{{table['id']}}/settings" class="table__header__menu__item{% if selectedPage == 'settings' %} selected{% endif %}">
+      <div class="people-icon"></div>
+      Settings
+    </a>
+    {%endif%}
   </div>
 </div>

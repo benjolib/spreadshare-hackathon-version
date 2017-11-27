@@ -19,6 +19,13 @@ export type Vote = {
   upvoted: boolean
 };
 
+export type RowWithVote = {
+  id: string,
+  content: Array<Cell | Vote>
+};
+
+export type RowsWithVotes = Array<RowWithVote>;
+
 export type Votes = Array<Vote>;
 export type Columns = Array<string>;
 export type Rows = Array<Row>;

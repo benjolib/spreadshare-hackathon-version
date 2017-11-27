@@ -118,7 +118,9 @@ return [
                     "id" => "1069128037243-4cua499nu3jf64l2q4irms93pmh7trsk.apps.googleusercontent.com",
                     "secret" => "d59PePUgDSCGgB_JuxGerScB",
                 ],
-                "scope" => "https://www.googleapis.com/auth/plus.login ",
+                "scope" =>
+                    "https://www.googleapis.com/auth/userinfo.profile " .
+                    "https://www.googleapis.com/auth/userinfo.email",
                 "approval_prompt" => "force",
             ],
             'Facebook' => [

@@ -5,6 +5,7 @@ namespace DS\Controller\User;
 use DS\Controller\BaseController;
 use DS\Interfaces\UserSubcontrollerInterface;
 use DS\Model\User;
+use DS\Model\UserFollower;
 
 /**
  * Spreadshare
@@ -31,6 +32,8 @@ class Followers
      */
     public function handle(User $user)
     {
+        $this->view->setVar('users', UserFollower::findAllFollower($user->getId()));
+        
         return $this;
     }
 }

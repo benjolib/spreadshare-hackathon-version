@@ -1,0 +1,53 @@
+.tag {
+  display: flex;
+  align-self: flex-start;
+  background: #6A7C94;
+  color: white;
+  font-weight: 600;
+  border-radius: 5px;
+  @include rem(font-size, 14);
+  @include rem2(padding, 2, 8);
+
+  &:hover {
+    cursor: pointer;
+    background: lighten(#6A7C94, 4%);
+  }
+
+  // Color modifiers
+  &--green {
+    background: #24AE69;
+    color: white;
+
+    &:hover {
+      background: lighten(#24AE69, 4%);
+    }
+  }
+  &--gray {
+    background: #6A7C94;
+    color: white;
+
+    &:hover {
+      background: lighten(#6A7C94, 4%);
+    }
+  }
+
+  // Size modifiers
+  &--smallest {
+    @include rem(font-size, 10);
+  }
+  &--small {
+    @include rem(font-size, 12);
+  }
+  &--normal {
+    @include rem(font-size, 14);
+  }
+  &--medium {
+    @include rem(font-size, 16);
+  }
+  &--large {
+    @include rem(font-size, 18);
+  }
+  &--largest {
+    @include rem(font-size, 20);
+  }
+}

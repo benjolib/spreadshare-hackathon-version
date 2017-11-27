@@ -9,7 +9,7 @@ import { fetchContentType } from './actions';
 
 class ContentTypeSelect extends Component {
   static defaultProps = {
-    value: null,
+    value: '',
     name: 'contentType[]',
     placeholder: <span>Select type</span>,
   };
@@ -17,10 +17,12 @@ class ContentTypeSelect extends Component {
   constructor(props) {
     super(props);
 
-    let value = typeof props.value === 'string' ? JSON.parse(props.value) : null;
-
-    if (value === '') {
-      value = null;
+    let value = '';
+    if (props.value && typeof props.value === 'string') {
+      value = JSON.parse(props.value);
+      if (!value) {
+        value = '';
+      }
     }
 
     this.state = {

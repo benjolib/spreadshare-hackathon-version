@@ -25,25 +25,37 @@
           <div class="profile__hero__info__website">
             {% if profile.website %}
             <span>●</span>
-            <a href="https://netflix.com/" target="_blank">{{profile.website}}</a>
+            <a href="{{ profile.website }}" target="_blank">{{profile.website}}</a>
             {% endif %}
           </div>
           <div class="profile__hero__info__mobile">
             <div class="profile__hero__info__mobile__website">
               {% if profile.website %}
-              <a href="https://netflix.com/" target="_blank">{{profile.website}}</a>
+              <a href="{{profile.website}}" target="_blank">{{profile.website}}</a>
               <span>●</span>
               {% endif %}
             </div>
             <div class="profile__hero__info__mobile__social">
               <ul>
+                <!--
                 <li><a href="#"><img src="/assets/icons/twitter.svg" /></a></li>
                 <li><a href="#"><img src="/assets/icons/facebook.svg" /></a></li>
+                -->
               </ul>
             </div>
           </div>
         </div>
         <div class="profile__row profile__row--pushToBottom">
+          {% if auth.loggedIn() and auth.getUserId() != profile.id %}
+          <div class="profile__hero__info__edit">
+            {% if following %}
+            <button class="follow-user following-user" data-id="{{ profile.id }}" type="button"></button>
+            {% else %}
+            <button class="follow-user not-following-user selected" data-id="{{ profile.id }}" type="button"></button>
+            {% endif %}
+          </div>
+          {% endif %}
+
           {% if auth.loggedIn() and auth.getUserId() == profile.id %}
           <div class="profile__hero__info__edit">
             <button onclick="window.location.href='/settings/personal';">Edit</button>
@@ -51,8 +63,10 @@
           {% endif %}
           <div class="profile__hero__info__social">
             <ul>
+              <!--
               <li><a href="#"><img src="/assets/icons/twitter.svg" /></a></li>
               <li><a href="#"><img src="/assets/icons/facebook.svg" /></a></li>
+              -->
             </ul>
           </div>
         </div>
@@ -66,6 +80,38 @@
           {% for table in tables %}
           {{ partial('partials/table') }}
           {% endfor %}
+
+          {% if users %}
+          <div class="tableUsers">
+            {% for user in users %}
+            <div class="tableUsers__item">
+              <div class="tableUsers__item__avatar">
+                <img src="{{ user['image'] }}" />
+              </div>
+              <div class="tableUsers__item__info">
+                <div class="tableUsers__item__info__title">
+                  <h5><a href="/user/{{ user['handle'] }}">{{ user['name'] }}</a></h5>
+                </div>
+                <div class="tableUsers__item__info__subtitle">
+                  {% if user['location'] and user['tagline']%}
+                  <p>{{ user['location'] }} ● {{ user['tagline'] }}</p>
+                  {% elseif user['location'] %}
+                  <p>{{ user['location'] }}</p>
+                  {% elseif user['tagline'] %}
+                  <p>{{ user['tagline'] }}</p>
+                  {% endif %}
+                </div>
+              </div>
+              {% if auth.loggedIn() and auth.getUserId() == profile.id %}
+              <div class="tableUsers__item__follow">
+                <button class="follow-user {% if user['following'] %}following-user selected {% else %}not-following-user {% endif %}" data-id="{{ user['id'] }}" type="button"></button>
+              </div>
+              {% endif %}
+            </div>
+            {% endfor %}
+          </div>
+          {% endif %}
+
         </div>
       </div>
       <aside class="profile__content__aside">
