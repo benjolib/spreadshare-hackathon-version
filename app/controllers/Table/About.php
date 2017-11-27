@@ -59,7 +59,7 @@ class About
             }
             
             $relatedTables = new TableRelations;
-            $this->view->setVar('relatedTables', $relatedTables->findRelatedTables($table->getId()));
+            $this->view->setVar('relatedTables', $relatedTables->findRelatedTables($table->getId(), 0, 5));
             
             $this->view->setVar('commentsCount', $commentsCount);
             $this->view->setVar('comments', $commentsArray);
