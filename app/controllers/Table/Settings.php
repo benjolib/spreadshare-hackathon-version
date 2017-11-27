@@ -3,12 +3,12 @@
 namespace DS\Controller\Table;
 
 use DS\Controller\BaseController;
+use DS\Exceptions\SecurityException;
 use DS\Interfaces\TableSubcontrollerInterface;
 use DS\Model\Helper\TableFilter;
 use DS\Model\TableLocations;
 use DS\Model\Tables;
 use DS\Model\TableTags;
-use Phalcon\Acl\Exception;
 
 /**
  * Spreadshare
@@ -38,6 +38,11 @@ class Settings
     {
         try
         {
+            if ($table->getOwnerUserId() != $userId)
+            {
+                throw new SecurityException('You are not allowed to edit the settings of this table.');
+            }
+            
             $tableModel = new Tables();
             $tables     = $tableModel->findTablesAsArray($userId, new TableFilter(), 0);
             if (!count($tables))
@@ -46,11 +51,6 @@ class Settings
             }
             
             $loadedTable = $tables[0];
-            
-            if ($loadedTable['ownerUserId'] != $userId)
-            {
-                throw new Exception('You are not allowed to edit the settings of this table.');
-            }
             
             $this->view->setVar('table', $loadedTable);
             
@@ -86,7 +86,6 @@ class Settings
                 ],
             ];
             $this->view->setVar('topics', $topics);
-            
             
             $this->view->setMainView('table/detail/settings');
             $this->view->setVar('selectedPage', 'changelog');

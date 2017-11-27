@@ -3,6 +3,7 @@
 namespace DS\Controller\Table;
 
 use DS\Controller\BaseController;
+use DS\Exceptions\SecurityException;
 use DS\Interfaces\TableSubcontrollerInterface;
 use DS\Model\Tables;
 use DS\Model\User as UserModel;
@@ -34,7 +35,12 @@ class Users
     {
         try
         {
-            $userModel = new UserModel();
+            if ($table->getOwnerUserId() != $userId)
+            {
+                throw new SecurityException('You are not allowed to view this section.');
+            }
+            
+            $userModel  = new UserModel();
             $tableUsers = $userModel->getTableUsers($table->getId());
             $this->view->setVar('tableUsers', $tableUsers);
             

@@ -3,6 +3,7 @@
 namespace DS\Controller\Table;
 
 use DS\Controller\BaseController;
+use DS\Exceptions\SecurityException;
 use DS\Interfaces\TableSubcontrollerInterface;
 use DS\Model\Tables;
 
@@ -34,6 +35,11 @@ class Stats
     {
         try
         {
+            if ($table->getOwnerUserId() != $userId)
+            {
+                throw new SecurityException('You are not allowed to view this section.');
+            }
+            
             $this->view->setMainView('table/detail/stats');
             $this->view->setVar('selectedPage', 'stats');
         }
