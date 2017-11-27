@@ -13,6 +13,7 @@
     background: lighten(#6A7C94, 4%);
   }
 
+  // Color modifiers
   &--green {
     background: #24AE69;
     color: white;
@@ -30,6 +31,7 @@
     }
   }
 
+  // Size modifiers
   &--smallest {
     @include rem(font-size, 10);
   }
