@@ -74,7 +74,7 @@
       Users
     </a>
     {% if auth.getUserId() == table['ownerUserId'] %}
-    <a href="/table/{{table['id']}}/settings" class="table__header__menu__item{% if selectedPage == 'settings' %} selected{% endif %}">
+    <a href="/table/{{table['id']}}/settings/details" class="table__header__menu__item{% if selectedPage == 'settings' %} selected{% endif %}">
       <div class="people-icon"></div>
       Settings
     </a>

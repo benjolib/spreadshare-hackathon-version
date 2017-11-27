@@ -11,8 +11,12 @@
           <div class="tableAbout__info__content__item tableAbout__info__content__item--topic">
             <div>Topic</div>
             <div>
+              {% if table['topic1'] %}
               <span>{{ table['topic1'] }}</span>
+              {% endif %}
+              {% if table['topic2'] %}
               <span>{{ table['topic2'] }}</span>
+              {% endif %}
             </div>
           </div>
           <div class="tableAbout__info__content__item tableAbout__info__content__item--created">
@@ -67,24 +71,14 @@
         <p class="tableAbout__sidebars__title">Related Tables</p>
         <aside class="tableAbout__sidebar tableAbout__sidebar--related">
           <div class="tableAbout__sidebar__content">
-            <a href="#">
+            {% for related in relatedTables %}
+            <a href="/table/{{ related['id'] }}">
               <div class="tableAbout__sidebar__content__item">
-                <h5>Tech Journalist Database</5>
-                <p>A list of 300 Tech Journalists from all top publications.</p>
+                <h5>{{ related['title'] }}</h5>
+                <p>{{ related['tagline'] }}</p>
               </div>
             </a>
-            <a href="#">
-              <div class="tableAbout__sidebar__content__item">
-                <h5>Tech Journalist Database</5>
-                <p>A list of 300 Tech Journalists from all top publications.</p>
-              </div>
-            </a>
-            <a href="#">
-              <div class="tableAbout__sidebar__content__item">
-                <h5>Tech Journalist Database</5>
-                <p>A list of 300 Tech Journalists from all top publications.</p>
-              </div>
-            </a>
+            {% endfor %}
           </div>
         </aside>
 

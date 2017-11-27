@@ -42,6 +42,29 @@ class Table
     }
     
     /**
+     * Searches a table by name
+     *
+     * @param string $name
+     * @param int    $limit
+     *
+     * @return array
+     */
+    public static function searchTableByName(string $name, int $limit = 100)
+    {
+        $locations = new Tables();
+        
+        return $locations->find(
+            [
+                "conditions" => "title LIKE ?0",
+                'columns' => ['id', 'title'],
+                "order" => "title ASC",
+                "limit" => $limit,
+                "bind" => [$name . '%'],
+            ]
+        )->toArray();
+    }
+    
+    /**
      * Creates a new table.
      *
      * @param int    $ownerUserId

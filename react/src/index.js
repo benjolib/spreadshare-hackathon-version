@@ -8,6 +8,7 @@ import "sanitize.css/sanitize.css";
 import "./globalStyles";
 import configureStore from "./store";
 import Table from "./containers/Table";
+import TableSelect from "./containers/TableSelect";
 import LocationSelect from "./containers/LocationSelect";
 import TopicsSelect from "./containers/TopicsSelect";
 import ContentTypeSelect from "./containers/ContentTypeSelect";
@@ -21,7 +22,8 @@ if (process.env.NODE_ENV === "production") {
     LocationSelect,
     TopicsSelect,
     ContentTypeSelect,
-    TagsSelect
+    TagsSelect,
+    TableSelect,
   };
 
   const renderAppInDom = el => {
@@ -50,6 +52,10 @@ if (process.env.NODE_ENV === "production") {
         <div>
           <h1>LocationSelect</h1>
           <LocationSelect />
+        </div>
+        <div>
+          <h1>TableSelect</h1>
+          <TableSelect />
         </div>
         <div>
           <h1>TopicsSelect</h1>

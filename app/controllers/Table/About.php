@@ -5,6 +5,7 @@ namespace DS\Controller\Table;
 use DS\Controller\BaseController;
 use DS\Interfaces\TableSubcontrollerInterface;
 use DS\Model\TableComments;
+use DS\Model\TableRelations;
 use DS\Model\Tables;
 
 /**
@@ -54,6 +55,9 @@ class About
             {
                 $commentsArray[$key]['childs'] = $comments->getComments($table->getId(), $comment['id']);
             }
+            
+            $relatedTables = new TableRelations;
+            $this->view->setVar('relatedTables', $relatedTables->findRelatedTables($table->getId()));
             
             $this->view->setVar('comments', $commentsArray);
             $this->view->setMainView('table/detail/about');

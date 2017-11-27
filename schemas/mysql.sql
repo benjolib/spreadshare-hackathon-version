@@ -212,6 +212,7 @@ CREATE TABLE `tableRelations` (
   `createdAt` int(10) unsigned DEFAULT NULL COMMENT 'timestamp',
   PRIMARY KEY (`tableId`,`relatedTableId`),
   KEY `tableRelationsRelatedTableId` (`relatedTableId`),
+  KEY `createdAt` (`createdAt`),
   CONSTRAINT `tableRelationsRelatedTableId` FOREIGN KEY (`relatedTableId`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tableRelationsTableId` FOREIGN KEY (`tableId`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
