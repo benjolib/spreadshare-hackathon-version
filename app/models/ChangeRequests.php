@@ -2,6 +2,7 @@
 
 namespace DS\Model;
 
+use DS\Constants\Paging;
 use DS\Model\Events\ChangeRequestsEvents;
 
 /**
@@ -21,32 +22,33 @@ class ChangeRequests
     extends ChangeRequestsEvents
 {
     /**
-     * @param array $param
-     * @param int   $page
-     * @param int   $limit
+     * @param int $tableId
+     * @param int $limit
+     * @param int $page
      *
      * @return array
      */
-    /*
-    public function findCustom($param = [], $page = 0, $limit = Paging::endlessScrollPortions)
+    public static function findChangeRequests(int $tableId, int $limit = 75, int $page = 0): array
     {
-        if (count($param))
-        {
-            return self::query()
-                       ->columns(
-                           [
-                               ChangeRequests::class . ".id",
-                           ]
-                       )
-                //->leftJoin(ChangeRequests::class, ChangeRequests::class . '.profileId = ' . Profile::class . '.id')
-                //->inWhere(Profile::class . '.id', $param)
-                       ->limit((int) $limit, (int) Paging::endlessScrollPortions * $page)
-                //->orderBy(sprintf('FIELD (id,%s)', implode(',', $param)))
-                       ->execute()
-                       ->toArray() ?: [];
-        }
-        
-        return [];
+        $query = self::query()
+                            ->columns(
+                                [
+                                    self::class . ".id",
+                                    self::class . ".from",
+                                    self::class . ".to",
+                                    self::class . ".comment",
+                                    self::class . ".status",
+                                    self::class . ".createdAt",
+                                    self::class . ".cellId",
+                                    User::class . '.handle',
+                                    User::class . '.name',
+                                ]
+                            )
+                            ->innerJoin(User::class, self::class . '.userId = ' . User::class . '.id')
+                            ->where(self::class . '.tableId = :tableId:', ['tableId' => $tableId])
+                            ->limit((int) $limit, (int) Paging::endlessScrollPortions * $page)
+                            ->orderBy(self::class . '.id DESC');
+
+               return $query->execute()->toArray() ?: [];
     }
-    */
 }
