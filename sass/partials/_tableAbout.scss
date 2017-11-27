@@ -7,6 +7,11 @@
   @include rem(padding, 50);
   padding-top: 0;
 
+  @include desktop {
+    @include rem2(padding, 50, 100);
+    padding-top: 0;
+  }
+
   &__outer {
     display: flex;
     flex-direction: column;
@@ -21,11 +26,6 @@
       flex-direction: row;
       justify-content: space-between;
     }
-  }
-
-  @include desktop {
-    @include rem2(padding, 50, 100);
-    padding-top: 0;
   }
 
   &__info {

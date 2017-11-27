@@ -1,0 +1,88 @@
+.tableFeed {
+  display: flex;
+  flex-direction: column;
+  background: $background-color;
+  @include rem(padding, 50);
+  padding-top: 0;
+
+  @include desktop {
+    flex-direction: row;
+    justify-content: space-between;
+    @include rem2(padding, 50, 100);
+    padding-top: 0;
+  }
+
+  &__content {
+    border-radius: 6px;
+    display: flex;
+    background: white;
+    width: 100%;
+    @include rem(padding, 24);
+    @include rem(margin-bottom, 16);
+
+    @include desktop {
+      width: 72.5%;
+      margin-bottom: 0;
+    }
+
+    &__item {
+      display: flex;
+      color: $text-color-alternate;
+      @include rem(margin-bottom, 10);
+
+      &:first-child {
+        margin-bottom: 0;
+      }
+
+      &__avatar {
+        @include rem(margin-right, 16);
+
+        img {
+          border-radius: 6px;
+          @include rem(width, 40);
+          @include rem(height, 40);
+        }
+      }
+      &__info {
+        display: flex;
+        flex-direction: column;
+
+        &__text {
+          @include rem(font-size, 12);
+
+          @include desktop {
+            @include rem(font-size, 15);
+          }
+
+          &__author {
+            font-weight: 500;
+            color: $text-color;
+          }
+          &__message {
+            font-weight: 500;
+          }
+        }
+        &__time {
+          @include rem(margin-top, -4);
+
+          span {
+            color: lighten($text-color-alternate, 12%);
+            @include rem(font-size, 10);
+
+            @include desktop {
+              @include rem(font-size, 12);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  aside.aside {
+    width: 100%;
+
+    @include desktop {
+      width: 22.5%;
+    }
+  }
+}
