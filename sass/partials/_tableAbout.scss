@@ -14,6 +14,7 @@
 
   &__info {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     width: 100%;
 
@@ -24,88 +25,289 @@
       color: $text-color-alternate;
       @include rem2(padding, 10, 16);
 
-      &__item {
-        display: flex;
-
-        &--topic {
-          div {
-            @include rem(margin-right, 50);
-          }
-          span {
-            background: $logo-color;
-            color: white;
-            border-radius: 4px;
-            align-self: center;
-            @include rem(font-size, 14);
-            @include rem2(padding, 0, 6);
-          }
-        }
-        &--created, &--locations, &--creator {
-          display: flex;
-
-          div {
-            @include rem(margin-right, 32);
-          }
-          span {
-            color: $text-color;
-          }
-        }
-        &--type {
-          display: flex;
-
-          div {
-            @include rem(margin-right, 50);
-          }
-          span {
-            background: $upvote-text-color;
-            color: white;
-            border-radius: 4px;
-            align-self: center;
-            @include rem(font-size, 14);
-            @include rem2(padding, 0, 6);
-          }
-        }
-      }
-
       &--left {
         display: flex;
         flex-direction: column;
-        width: 35%;
+        @include rem(margin-bottom, 16);
       }
       &--right {
         display: flex;
         flex-direction: column;
-        width: 35%;
+      }
 
-        div.tableAbout__info__content__item {
-          justify-content: space-between;
+      &__item {
+        display: flex;
+        justify-content: space-between;
 
-          span {
-            color: $text-color;
+        &--topic {
+          align-items: center;
+
+          div:first-child {
+            font-weight: 500;
+            @include rem(font-size, 12);
+          }
+          div:last-child {
+            @include rem(margin-top, -3);
+
+            span {
+              background: $logo-color;
+              color: white;
+              border-radius: 4px;
+              @include rem(font-size, 10);
+              @include rem2(padding, 0, 4);
+            }
+          }
+        }
+        &--created, &--locations {
+          align-items: center;
+
+          div:first-child {
+            font-weight: 500;
+            @include rem(font-size, 12);
+          }
+          div:last-child {
+            @include rem(margin-top, -3);
+
+            span {
+              color: $text-color;
+              @include rem(font-size, 11);
+            }
+          }
+        }
+        &--type {
+          align-items: center;
+
+          div:first-child {
+            font-weight: 500;
+            @include rem(font-size, 12);
+          }
+
+          div:last-child {
+            @include rem(margin-top, -3);
+
+            span {
+              color: white;
+              background: $upvote-text-color;
+              border-radius: 4px;
+              @include rem(font-size, 10);
+              @include rem2(padding, 0, 4);
+            }
+          }
+        }
+        &--creator {
+          align-items: center;
+
+          div:first-child {
+            font-weight: 500;
+            @include rem(font-size, 12);
+          }
+
+          div:last-child {
+            @include rem(margin-top, -3);
+
+            span {
+              img {
+                border-radius: 3px;
+                @include rem(width, 16);
+                @include rem(height, 16);
+              }
+              i {
+                font-style: normal;
+                color: $upvote-text-color;
+                @include rem(font-size, 12);
+              }
+            }
+          }
+        }
+        &--views, &--subscribers, &--contributions, &--contributors, &--token {
+          div:first-child {
+            font-weight: 500;
+            @include rem(font-size, 12);
+          }
+          div:last-child {
+            @include rem(font-size, 10);
           }
         }
       }
     }
   }
 
-  &__sidebar {
-    background: white;
-    color: $text-color-alternate;
-    border-radius: 6px;
-    width: 20%;
-  }
+  &__sidebars {
+    p.tableAbout__sidebars__title {
+      color: $text-color;
+      font-weight: 500;
+      text-transform: uppercase;
+      @include rem(font-size, 12);
+      @include rem(margin-top, 16);
+      @include rem(margin-bottom, 2);
+    }
 
-  .tags {
-    padding: 10px 10px 6px 10px;
-  }
+    .tableAbout__sidebar {
+      background: white;
+      color: $text-color-alternate;
+      border-radius: 6px;
+      width: 100%;
 
-  .tags span {
-    @include rem(font-size, 14);
-    color: #6a7c93;
-    padding: 4px;
-    background: #dee0e7;
-    border-radius: 4px;
-    line-height: 30px;
+      &:last-child {
+        @include rem(margin-bottom, 16 * 2);
+      }
+
+      &--related {
+        .tableAbout__sidebar__content {
+          @include rem(padding, 16);
+
+          a {
+            color: $text-color-alternate;
+            &:hover {
+              color: $text-link-color-hover;
+            }
+
+            &:last-child {
+              .tableAbout__sidebar__content__item {
+                margin-bottom: 0;
+              }
+            }
+          }
+
+          &__item {
+            @include rem(font-size, 14);
+            @include rem(margin-bottom, 16);
+
+            h5, p {
+              text-overflow: ellipsis;
+              overflow: hidden;
+              white-space: nowrap;
+            }
+            h5 {
+              font-weight: 500;
+            }
+            p {
+              font-weight: 400;
+            }
+          }
+        }
+      }
+      &--tags {
+        .tableAbout__sidebar__content {
+          @include rem(padding, 12);
+
+          span {
+            background: $upvote-background-color;
+            color: $text-color;
+            border-radius: 4px;
+            @include rem(font-size, 14);
+            @include rem(margin-right, 8);
+            @include rem2(padding, 2, 8);
+
+            &:last-child {
+              margin-right: 0;
+            }
+
+            &:hover {
+              cursor: pointer;
+              background: darken($upvote-background-color, 8%);
+            }
+          }
+        }
+      }
+      &--share {
+        .tableAbout__sidebar__content {
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+          width: 100%;
+          @include rem4(padding, 12 * 2, 12, 12, 12);
+
+          &__item {
+            width: 28px;
+            height: 28px;
+            @include rem(margin-right, 16);
+            @include rem(margin-bottom, 16);
+
+            &--twitter {
+              background: url("/assets/icons/social/twitter.svg");
+              background-color: $twitter-color;
+              background-position: center;
+              background-repeat: no-repeat;
+              background-size: 16px 16px;
+              border-radius: 4px;
+            }
+            &--facebook {
+              background: url("/assets/icons/social/facebook.svg");
+              background-color: $facebook-color;
+              background-position: center;
+              background-repeat: no-repeat;
+              background-size: 16px 16px;
+              border-radius: 4px;
+            }
+            &--medium {
+              background: url("/assets/icons/social/medium.svg");
+              background-color: $facebook-color;
+              background-position: center;
+              background-repeat: no-repeat;
+              background-size: 16px 16px;
+              border-radius: 4px;
+            }
+            &--linkedin {
+              background: url("/assets/icons/social/linkedin.svg");
+              background-color: $linkedin-color;
+              background-position: center;
+              background-repeat: no-repeat;
+              background-size: 16px 16px;
+              border-radius: 4px;
+            }
+            &--googleplus {
+              background: url("/assets/icons/social/googleplus.svg");
+              background-color: $googleplus-color;
+              background-position: center;
+              background-repeat: no-repeat;
+              background-size: 16px 16px;
+              border-radius: 4px;
+            }
+            &--quora {
+              background: url("/assets/icons/social/quora.svg");
+              background-color: $quora-color;
+              background-position: center;
+              background-repeat: no-repeat;
+              background-size: 16px 16px;
+              border-radius: 4px;
+            }
+            &--stackoverflow {
+              background: url("/assets/icons/social/stackoverflow.svg");
+              background-color: $stackoverflow-color;
+              background-position: center;
+              background-repeat: no-repeat;
+              background-size: 16px 16px;
+              border-radius: 4px;
+            }
+            &--github {
+              background: url("/assets/icons/social/github.svg");
+              background-color: $github-color;
+              background-position: center;
+              background-repeat: no-repeat;
+              background-size: 16px 16px;
+              border-radius: 4px;
+            }
+            &--ycombinator {
+              background: url("/assets/icons/social/ycombinator.svg");
+              background-color: $ycombinator-color;
+              background-position: center;
+              background-repeat: no-repeat;
+              background-size: 16px 16px;
+              border-radius: 4px;
+            }
+            &--angellist {
+              background: url("/assets/icons/social/angellist.svg");
+              background-color: $angellist-color;
+              background-position: center;
+              background-repeat: no-repeat;
+              background-size: 16px 16px;
+              border-radius: 4px;
+            }
+          }
+        }
+      }
+    }
   }
 
   &__comments {
@@ -116,31 +318,169 @@
     border-radius: 6px;
     color: $text-color;
 
+    &__content {
+      &__send {
+        position: relative;
+
+        form {
+          display: flex;
+          justify-content: center;
+          background: #F8F8FB;
+          border-bottom-left-radius: 6px;
+          border-bottom-right-radius: 6px;
+
+          input[name="comment"] {
+            width: 90%;
+            border: none;
+            background: white;
+            color: $text-color;
+            font-weight: 400;
+            outline: none;
+            @include rem(font-size, 14);
+            @include rem(padding, 10);
+            @include rem2(margin, 12, 0);
+          }
+
+          button {
+            background: $background-color;
+            color: $text-color;
+            font-weight: 500;
+            outline: none;
+            border: none;
+            border-radius: 4px;
+            position: absolute;
+            top: 28%;
+            right: 6%;
+            @include rem2(padding, 3, 9);
+
+            &:hover {
+              cursor: pointer;
+              background: darken($background-color, 4%);
+            }
+          }
+        }
+      }
+
+      &__subcomments {
+        @include rem(margin-left, 16);
+        @include rem(padding-left, 16);
+        border-left: 2px solid #f2f2f8;
+
+        .tableAbout__comments__container__content {
+          overflow: hidden;
+
+          h4 {
+            font-weight: 500;
+            @include rem(font-size, 11);
+            word-wrap: break-word;
+          }
+          p {
+            font-weight: 400;
+            @include rem(font-size, 11);
+            color: $text-color-alternate;
+            word-wrap: break-word;
+          }
+        }
+      }
+    }
+
     &__container {
       display: flex;
       align-items: center;
-      @include rem(padding, 30);
+      @include rem(padding, 20);
 
       &__avatar {
-        @include rem(margin-right, 20);
+        align-self: flex-start;
+        @include rem(margin-right, 12);
 
         img {
           border-radius: 4px;
-          width: 70px;
-          height: 70px;
+          width: 40px;
+          height: 40px;
         }
       }
       &__content {
+        overflow: hidden;
+
         h4 {
           font-weight: 500;
-          @include rem(font-size, 16);
+          @include rem(font-size, 14);
+          word-wrap: break-word;
         }
         p {
+          font-weight: 400;
           @include rem(font-size, 14);
           color: $text-color-alternate;
+          word-wrap: break-word;
         }
-        &__stats { }
+
+        &__stats {
+          display: flex;
+
+          &--subcomments {
+            .tableAbout__comments__container__content__stats__item {
+              @include rem(font-size, 8);
+
+              &__icon {
+                @include rem(width, 9);
+                @include rem(height, 9);
+              }
+            }
+          }
+
+          &__item {
+            display: flex;
+            font-weight: 500;
+            @include rem(font-size, 10);
+            @include rem(margin-top, 12);
+            @include rem(margin-right, 12);
+
+            &__icon {
+              display: flex;
+              @include rem(width, 11);
+              @include rem(height, 11);
+              @include rem(margin-right, 4);
+
+              &--vote {
+                background: url("/assets/icons/chevron-up.svg");
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: contain;
+              }
+              &--reply {
+                background: url("/assets/icons/comment.svg");
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: contain;
+              }
+              &--report {
+                background: url("/assets/icons/flag.svg");
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: contain;
+              }
+            }
+          }
+        }
       }
     }
+  }
+}
+
+#commentsCount {
+  color: $text-color-alternate;
+  font-weight: 500;
+  text-transform: uppercase;
+  @include rem(font-size, 12);
+  @include rem(margin-top, 16);
+  @include rem(margin-bottom, 10);
+
+  span {
+    color: white;
+    background: $text-color;
+    border-radius: 3px;
+    @include rem(font-size, 11);
+    @include rem(margin-left, 3);
+    @include rem2(padding, 3, 6);
   }
 }
