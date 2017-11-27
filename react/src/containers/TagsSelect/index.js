@@ -21,7 +21,7 @@ export const loadTags = searchTerm => {
 
 class LocationSelect extends Component {
   static defaultProps = {
-    value: [],
+    value: '',
     name: 'tag[]',
     placeholder: <span>Select tags</span>,
   };
@@ -29,9 +29,17 @@ class LocationSelect extends Component {
   constructor(props) {
     super(props);
 
+    let value = [];
+    if (props.value && typeof props.value === 'string') {
+      value = JSON.parse(props.value);
+      if (!value) {
+        value = [];
+      }
+    }
+
     // Initial state
     this.state = {
-      value: typeof props.value === 'string' ? JSON.parse(props.value) : [],
+      value,
     };
   }
 
