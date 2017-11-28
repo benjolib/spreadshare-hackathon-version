@@ -8,16 +8,17 @@
   <div class="layout__content">
     <div class="layout__content__wrapper">
       <p class="layout__content__title">Account</p>
-      <p class="layout__content__subtitle">Manage your account and wallet. Invite friends and receive 20 tokens (you invited 10 so far)</p>
+      <p class="layout__content__subtitle">Manage your account and wallet. Invite friends and receive 20 tokens (you invited 0 so far)</p>
       <div class="layout__content__main layout__content__main__wallet">
+        {% if tableTokens %}
         <div class="layout__content__main__wallet__stats">
           <div class="layout__content__main__wallet__column">
             <div class="layout__content__main__wallet__stats__text">
               <p>Your token overview</p>
             </div>
             <div class="layout__content__main__wallet__stats__data">
-              <p>230,000</p>
-              <p><span class="up-arrow-icon">⬆</span><i>2.3%</i> <span>(to last week)<span></p>
+              <p>{{ wallet.tokens }}</p>
+              <p><span class="up-arrow-icon">⬆</span><i>0%</i> <span>(to last week)<span></p>
             </div>
           </div>
         </div>
@@ -44,95 +45,48 @@
               </div>
             </div>
             <div class="layout__content__main__wallet__tables__cells">
+              {% for tokens in tableTokens %}
               <div class="layout__content__main__wallet__tables__cells__item">
-                <div>Lorem ipsum</div>
-                <div>Owner</div>
-                <div>10.12%</div>
-                <div>3,245.23</div>
+                <div>{{ tokens['tableTitle'] }}</div>
+                <div>{% if tokens['type'] == 1 %}Owner{% endif %}</div>
+                <div>{{ tokens['ownership'] }}%</div>
+                <div>{{ tokens['tokensEarned'] }}</div>
               </div>
-              <div class="layout__content__main__wallet__tables__cells__item">
-                <div>Lorem ipsum</div>
-                <div>Owner</div>
-                <div>10.12%</div>
-                <div>3,245.23</div>
-              </div>
-              <div class="layout__content__main__wallet__tables__cells__item">
-                <div>Lorem ipsum</div>
-                <div>Owner</div>
-                <div>10.12%</div>
-                <div>3,245.23</div>
-              </div>
-              <div class="layout__content__main__wallet__tables__cells__item">
-                <div>Lorem ipsum</div>
-                <div>Owner</div>
-                <div>10.12%</div>
-                <div>3,245.23</div>
-              </div>
-              <div class="layout__content__main__wallet__tables__cells__item">
-                <div>Lorem ipsum</div>
-                <div>Owner</div>
-                <div>10.12%</div>
-                <div>3,245.23</div>
-              </div>
-              <div class="layout__content__main__wallet__tables__cells__item">
-                <div>Lorem ipsum</div>
-                <div>Owner</div>
-                <div>10.12%</div>
-                <div>3,245.23</div>
-              </div>
-              <div class="layout__content__main__wallet__tables__cells__item">
-                <div>Lorem ipsum</div>
-                <div>Owner</div>
-                <div>10.12%</div>
-                <div>3,245.23</div>
-              </div>
-              <div class="layout__content__main__wallet__tables__cells__item">
-                <div>Lorem ipsum</div>
-                <div>Owner</div>
-                <div>10.12%</div>
-                <div>3,245.23</div>
-              </div>
-              <div class="layout__content__main__wallet__tables__cells__item">
-                <div>Lorem ipsum</div>
-                <div>Owner</div>
-                <div>10.12%</div>
-                <div>3,245.23</div>
-              </div>
-              <div class="layout__content__main__wallet__tables__cells__item">
-                <div>Lorem ipsum</div>
-                <div>Owner</div>
-                <div>10.12%</div>
-                <div>3,245.23</div>
-              </div>
-              <div class="layout__content__main__wallet__tables__cells__item">
-                <div>Lorem ipsum</div>
-                <div>Owner</div>
-                <div>10.12%</div>
-                <div>3,245.23</div>
-              </div>
-              <div class="layout__content__main__wallet__tables__cells__item">
-                <div>Lorem ipsum</div>
-                <div>Owner</div>
-                <div>10.12%</div>
-                <div>3,245.23</div>
-              </div>
+              {% endfor %}
             </div>
           </div>
         </div>
-        <div class="layout__content__main__buttons">
-          <a href="/">Cancel</a>
-          <button type="submit">Save Changes</button>
+        {% else %}
+        <div class="tables__content__main__cards__item center" style="padding:40px;">
+          <div>
+            <img src="/assets/images/boombox.png" alt="" />
+            <p>You haven't contributed anything so you unfortunately didn't earn any tokens, yet.</p>
+            <p><a href="/table/add">Create a Table</a></p>
+          </div>
         </div>
+        {% endif %}
       </div>
     </div>
     <aside class="layout__content__aside">
       <div class="layout__content__aside__box">
-        <a href="/settings/personal"><div>Personal</div></a>
-        <a href="/settings/account"><div>Account</div></a>
-        <a href="/settings/notifications"><div>Notifications</div></a>
-        <a href="/settings/connected"><div>Connect Accounts</div></a>
-        <a href="/settings/wallet"><div class="settings-box-selected">Wallet</div></a>
-        <a href="/settings/invite"><div>Invite</div></a>
+        <a href="/settings/personal">
+          <div>Personal</div>
+        </a>
+        <a href="/settings/account">
+          <div>Account</div>
+        </a>
+        <a href="/settings/notifications">
+          <div>Notifications</div>
+        </a>
+        <a href="/settings/connected">
+          <div>Connect Accounts</div>
+        </a>
+        <a href="/settings/wallet">
+          <div class="settings-box-selected">Wallet</div>
+        </a>
+        <a href="/settings/invite">
+          <div>Invite</div>
+        </a>
       </div>
     </aside>
   </div>

@@ -4,10 +4,11 @@ namespace DS\Controller;
 
 use DS\Api\UserSettings;
 use DS\Application;
-use DS\Model\Decks;
+use DS\Model\TableTokens;
 use DS\Model\User;
 use DS\Model\UserLocations;
-use DS\Model\Votes;
+use DS\Model\Wallet;
+use DS\Traits\Controller\NeedsLoginTrait;
 use Phalcon\Exception;
 use Phalcon\Logger;
 
@@ -25,6 +26,8 @@ use Phalcon\Logger;
 class UserSettingsController
     extends BaseController
 {
+    use NeedsLoginTrait;
+    
     /**
      * Home
      */
@@ -63,6 +66,11 @@ class UserSettingsController
     {
         try
         {
+            if (!$this->serviceManager->getAuth()->getUserId())
+            {
+                header('Location: /login');
+            }
+            
             $this->view->setVar('profile', $this->getUser($this->serviceManager->getAuth()->getUserId()));
             
             switch ($page)
@@ -208,6 +216,14 @@ class UserSettingsController
      */
     public function walletAction()
     {
+        $userId = $this->serviceManager->getAuth()->getUserId();
+        
+        $walletModel = Wallet::findByFieldValue('userId', $userId);
+        $this->view->setVar('wallet', $walletModel);
+        
+        $tableTokensModel = new TableTokens();
+        $this->view->setVar('tableTokens', $tableTokensModel->getTokens($userId));
+        
         $this->view->setMainView('user/settings/wallet');
     }
     

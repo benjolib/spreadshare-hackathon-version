@@ -6,6 +6,7 @@ use DS\Exceptions\UserValidationException;
 use DS\Model\Abstracts\AbstractUser;
 use DS\Model\DataSource\UserStatus;
 use DS\Model\User;
+use DS\Model\Wallet;
 use Phalcon\Mvc\Model;
 
 /**
@@ -36,6 +37,19 @@ abstract class UserEvents
         
         $this->setConfirmed(0)
              ->setStatus(UserStatus::Unconfirmed);
+    }
+    
+    /**
+     * After create
+     */
+    public function afterCreate()
+    {
+        // Create users wallet
+        (new Wallet())->setUserId($this->getId())
+                      ->setTokens(0)
+                      ->setContractAddress('')
+                      ->setData('')
+                      ->create();
     }
     
     /**

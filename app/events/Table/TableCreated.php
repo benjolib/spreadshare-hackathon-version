@@ -3,9 +3,12 @@
 namespace DS\Events\Table;
 
 use DS\Events\AbstractEvent;
+use DS\Model\DataSource\DefaultTokenDistribution;
 use DS\Model\DataSource\TableLogType;
+use DS\Model\DataSource\TokenDistributionType;
 use DS\Model\TableLog;
 use DS\Model\Tables;
+use DS\Model\TableTokens;
 use DS\Modules\Bernard;
 
 /**
@@ -48,6 +51,15 @@ class TableCreated extends AbstractEvent
                  ->setPlaceholders('')
                  ->setText('created this table.')
                  ->create();
+        
+        // Initialize table tokens for user
+        $tableTokens = new TableTokens();
+        $tableTokens->setOwnership(DefaultTokenDistribution::OwnershipPercentage)
+                    ->setUserId($userId)
+                    ->setTableId($table->getId())
+                    ->setType(TokenDistributionType::Owner)
+                    ->setTokensEarned(DefaultTokenDistribution::TableCreation)
+                    ->create();
     }
     
 }

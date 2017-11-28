@@ -353,15 +353,16 @@ DROP TABLE IF EXISTS `tableTokens`;
 CREATE TABLE `tableTokens` (
   `tableId` int(11) unsigned NOT NULL,
   `userId` int(11) unsigned NOT NULL,
+  `type` tinyint(1) DEFAULT NULL,
   `ownership` float DEFAULT NULL,
   `tokensEarned` float DEFAULT NULL,
   PRIMARY KEY (`tableId`,`userId`),
   KEY `userId` (`userId`),
+  KEY `tokensEarned` (`tokensEarned`),
+  KEY `ownership` (`ownership`),
   CONSTRAINT `tableTokensTableId` FOREIGN KEY (`tableId`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tableTokensUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
 
 # Export von Tabelle tableViews
 # ------------------------------------------------------------

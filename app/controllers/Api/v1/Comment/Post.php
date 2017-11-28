@@ -35,7 +35,7 @@ class Post extends ActionHandler implements MethodInterface
      *
      * @api               {post} /api/v1/comment/:id Post and edited row
      * @apiVersion        1.0.0
-     * @apiName           Table
+     * @apiName           Comment
      * @apiGroup          Public
      *
      * @apiSuccess {Object} _meta Meta object
