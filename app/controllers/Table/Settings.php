@@ -124,7 +124,7 @@ class Settings
             }
             
             $this->view->setMainView('table/detail/settings');
-            $this->view->setVar('selectedPage', 'changelog');
+            $this->view->setVar('selectedPage', 'settings');
         }
         catch (\Exception $e)
         {

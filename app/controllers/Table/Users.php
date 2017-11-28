@@ -52,7 +52,7 @@ class Users
             
             $this->view->setMainView('table/detail/users');
             
-            $this->view->setVar('selectedPage', 'user');
+            $this->view->setVar('selectedPage', 'users');
             $this->view->setVar('userFilter', $param);
         }
         catch (\Exception $e)
