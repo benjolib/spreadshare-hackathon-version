@@ -45,8 +45,10 @@ class TabelCellChangeRequested extends AbstractEvent
                 json_encode(
                     [
                         $changeId,
-                        $user->getId(),
-                        $user->getName(),
+                        $cellId,
+                        $changeId,
+                        $changeFrom,
+                        $changeTo,
                     ]
                 )
             )

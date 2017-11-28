@@ -48,9 +48,7 @@ class UserTableUnsubscribed extends AbstractEvent
             ->setPlaceholders(
                 json_encode(
                     [
-                        $user->getId(),
                         $user->getName(),
-                        $table->getId(),
                         $table->getTitle(),
                     ]
                 )

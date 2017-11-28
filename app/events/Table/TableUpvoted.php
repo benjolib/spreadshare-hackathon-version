@@ -39,14 +39,14 @@ class TableUpvoted extends AbstractEvent
         $userNotification = new UserNotifications();
         $userNotification
             ->setUserId($table->getOwnerUserId())
+            ->setSourceUserId($userId)
+            ->setSourceTableId($tableId)
             ->setNotificationType(UserNotificationType::TableUpvoted)
-            ->setText(sprintf('%s upvoted your table %s', $user->getName(), $table->getTitle()))
+            ->setText(sprintf('upvoted your table %s', $table->getTitle()))
             ->setPlaceholders(
                 json_encode(
                     [
-                        $user->getId(),
                         $user->getName(),
-                        $table->getId(),
                         $table->getTitle(),
                     ]
                 )
