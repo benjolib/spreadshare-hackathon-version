@@ -37,10 +37,9 @@
             </div>
             <div class="profile__hero__info__mobile__social">
               <ul>
-                <!--
-                <li><a href="#"><img src="/assets/icons/twitter.svg" /></a></li>
-                <li><a href="#"><img src="/assets/icons/facebook.svg" /></a></li>
-                -->
+                {% for connection in connections %}
+                <li><a href="{{ connection['link'] }}"><img src="/assets/icons/{{ connection['name'] }}.svg" /></a></li>
+                {% endfor %}
               </ul>
             </div>
           </div>
@@ -63,10 +62,9 @@
           {% endif %}
           <div class="profile__hero__info__social">
             <ul>
-              <!--
-              <li><a href="#"><img src="/assets/icons/twitter.svg" /></a></li>
-              <li><a href="#"><img src="/assets/icons/facebook.svg" /></a></li>
-              -->
+              {% for connection in connections %}
+              <li><a href="{{ connection['link'] }}"><img src="/assets/icons/{{ connection['name'] }}.svg" /></a></li>
+              {% endfor %}
             </ul>
           </div>
         </div>
@@ -79,17 +77,17 @@
         <div class="profile__content__tables__cards">
           {% if tables OR users %}
 
-            {{ partial('user/profile/tables') }}
-            {{ partial('user/profile/users') }}
+          {{ partial('user/profile/tables') }}
+          {{ partial('user/profile/users') }}
 
           {% else %}
-            <div class="container__content center" style="width:100%;padding: 40px;">
-              <div class="center" style="width:100%;">
-                <img src="/assets/images/desktop.png" alt="" />
-                <p>&nbsp;</p>
-                <p>There are no items available for your filter "<strong>{{ currentPage }}</strong>".</p>
-              </div>
+          <div class="container__content center" style="width:100%;padding: 40px;">
+            <div class="center" style="width:100%;">
+              <img src="/assets/images/desktop.png" alt="" />
+              <p>&nbsp;</p>
+              <p>There are no items available for your filter "<strong>{{ currentPage }}</strong>".</p>
             </div>
+          </div>
           {% endif %}
         </div>
       </div>

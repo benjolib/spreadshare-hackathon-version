@@ -353,15 +353,16 @@ DROP TABLE IF EXISTS `tableTokens`;
 CREATE TABLE `tableTokens` (
   `tableId` int(11) unsigned NOT NULL,
   `userId` int(11) unsigned NOT NULL,
+  `type` tinyint(1) DEFAULT NULL,
   `ownership` float DEFAULT NULL,
   `tokensEarned` float DEFAULT NULL,
   PRIMARY KEY (`tableId`,`userId`),
   KEY `userId` (`userId`),
+  KEY `tokensEarned` (`tokensEarned`),
+  KEY `ownership` (`ownership`),
   CONSTRAINT `tableTokensTableId` FOREIGN KEY (`tableId`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tableTokensUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
 
 # Export von Tabelle tableViews
 # ------------------------------------------------------------
@@ -486,8 +487,7 @@ CREATE TABLE `user` (
 DROP TABLE IF EXISTS `userConnections`;
 
 CREATE TABLE `userConnections` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `userId` int(11) unsigned DEFAULT NULL,
+  `userId` int(11) unsigned NOT NULL,
   `twitter` varchar(200) DEFAULT NULL,
   `facebook` varchar(200) DEFAULT NULL,
   `medium` varchar(200) DEFAULT NULL,
@@ -499,7 +499,7 @@ CREATE TABLE `userConnections` (
   `slack` varchar(200) DEFAULT NULL,
   `angellist` varchar(200) DEFAULT NULL,
   `googleplus` varchar(200) DEFAULT NULL,
-  `stackoverlflow` varchar(200) DEFAULT NULL,
+  `stackoverflow` varchar(200) DEFAULT NULL,
   `linkedin` varchar(200) DEFAULT NULL,
   `quora` varchar(200) DEFAULT NULL,
   `reddit` varchar(200) DEFAULT NULL,
@@ -507,11 +507,20 @@ CREATE TABLE `userConnections` (
   `instagram` varchar(200) DEFAULT NULL,
   `visco` varchar(200) DEFAULT NULL,
   `soundcloud` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `userId` (`userId`),
+  `vsco` varchar(200) DEFAULT NULL,
+  `fivehundretpx` varchar(200) DEFAULT NULL,
+  `codepen` varchar(200) DEFAULT NULL,
+  `producthunt` varchar(200) DEFAULT NULL,
+  `discord` varchar(200) DEFAULT NULL,
+  `raspberrypi` varchar(200) DEFAULT NULL,
+  `periscope` varchar(200) DEFAULT NULL,
+  `vimeo` varchar(200) DEFAULT NULL,
+  `twitch` varchar(200) DEFAULT NULL,
+  `patreon` varchar(200) DEFAULT NULL,
+  `youtube` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`userId`),
   CONSTRAINT `userConnectionsUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 DROP TABLE IF EXISTS `userTopics`;
 

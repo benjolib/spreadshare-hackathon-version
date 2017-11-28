@@ -2,6 +2,7 @@
 
 namespace DS\Model;
 
+use DS\Constants\Paging;
 use DS\Model\Events\TableTokensEvents;
 
 /**
@@ -21,32 +22,35 @@ class TableTokens
     extends TableTokensEvents
 {
     /**
-     * @param array $param
-     * @param int   $page
-     * @param int   $limit
+     * @param int    $userId
+     * @param string $orderBy
+     * @param int    $page
+     * @param int    $limit
      *
      * @return array
      */
-    /*
-    public function findCustom($param = [], $page = 0, $limit = Paging::endlessScrollPortions)
+    public function getTokens(int $userId, $orderBy = 'tokensEarned', $page = 0, $limit = Paging::endlessScrollPortions)
     {
-        if (count($param))
+        if ($userId)
         {
             return self::query()
                        ->columns(
                            [
-                               TableTokens::class . ".id",
+                               self::class . ".ownership",
+                               self::class . ".tokensEarned",
+                               self::class . ".type",
+                               Tables::class . ".title as tableTitle",
+                               Tables::class . ".tagline as tableTagline",
                            ]
                        )
-                //->leftJoin(TableTokens::class, TableTokens::class . '.profileId = ' . Profile::class . '.id')
-                //->inWhere(Profile::class . '.id', $param)
+                       ->innerJoin(Tables::class, TableTokens::class . '.tableId = ' . Tables::class . '.id')
+                       ->where(self::class . '.userId = ?0', [$userId])
                        ->limit((int) $limit, (int) Paging::endlessScrollPortions * $page)
-                //->orderBy(sprintf('FIELD (id,%s)', implode(',', $param)))
+                       ->orderBy(self::class . '.' . $orderBy . ' DESC')
                        ->execute()
                        ->toArray() ?: [];
         }
         
         return [];
     }
-    */
 }

@@ -10,7 +10,7 @@
       <!-- <form method="post" enctype="multipart/form-data"> -->
         <p class="layout__content__title">Account</p>
         <p class="layout__content__subtitle">
-          Manage your account and wallet. Invite friends and receive 20 tokens (<span>you invited 10 so far</span>)
+          Manage your account and wallet. Invite friends and receive 20 tokens (<span>you invited 0 so far</span>)
         </p>
         <div class="layout__content__main layout__content__main__personal">
           <div class="layout__content__main__personal__profile">

@@ -4,10 +4,12 @@ namespace DS\Controller;
 
 use DS\Api\UserSettings;
 use DS\Application;
-use DS\Model\Decks;
+use DS\Model\TableTokens;
 use DS\Model\User;
+use DS\Model\UserConnections;
 use DS\Model\UserLocations;
-use DS\Model\Votes;
+use DS\Model\Wallet;
+use DS\Traits\Controller\NeedsLoginTrait;
 use Phalcon\Exception;
 use Phalcon\Logger;
 
@@ -25,6 +27,8 @@ use Phalcon\Logger;
 class UserSettingsController
     extends BaseController
 {
+    use NeedsLoginTrait;
+    
     /**
      * Home
      */
@@ -63,6 +67,11 @@ class UserSettingsController
     {
         try
         {
+            if (!$this->serviceManager->getAuth()->getUserId())
+            {
+                header('Location: /login');
+            }
+            
             $this->view->setVar('profile', $this->getUser($this->serviceManager->getAuth()->getUserId()));
             
             switch ($page)
@@ -192,6 +201,34 @@ class UserSettingsController
      */
     public function connectedAction()
     {
+        $connectedAccounts = UserConnections::get($this->serviceManager->getAuth()->getUserId(), 'userId');
+        if ($this->request->isPost())
+        {
+            if (!$connectedAccounts->getUserId())
+            {
+                $connectedAccounts->setUserId($this->serviceManager->getAuth()->getUserId());
+            }
+            
+            foreach ($this->request->getPost('link', null, []) as $key => $value)
+            {
+                if (method_exists($connectedAccounts, 'set' . ucfirst($key)))
+                {
+                
+                }
+                call_user_func(
+                    [
+                        $connectedAccounts,
+                        'set' . ucfirst($key),
+                    ],
+                    $value
+                );
+            }
+            
+            $connectedAccounts->save();
+            
+        }
+        
+        $this->view->setVar('connections', $connectedAccounts);
         $this->view->setMainView('user/settings/connected');
     }
     
@@ -208,6 +245,14 @@ class UserSettingsController
      */
     public function walletAction()
     {
+        $userId = $this->serviceManager->getAuth()->getUserId();
+        
+        $walletModel = Wallet::findByFieldValue('userId', $userId);
+        $this->view->setVar('wallet', $walletModel);
+        
+        $tableTokensModel = new TableTokens();
+        $this->view->setVar('tableTokens', $tableTokensModel->getTokens($userId));
+        
         $this->view->setMainView('user/settings/wallet');
     }
     

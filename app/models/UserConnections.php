@@ -21,6 +21,49 @@ class UserConnections
     extends UserConnectionsEvents
 {
     /**
+     * @return array
+     */
+    public function getConnectionList()
+    {
+        //$vars = get_object_vars($this);
+        //unset($vars[0];
+        //return $vars;
+        
+        return [
+            'twitter',
+            'facebook',
+            'medium',
+            'dribbble',
+            'behance',
+            'github',
+            'gitlab',
+            'bitbucket',
+            'slack',
+            'angellist',
+            'googleplus',
+            'stackoverflow',
+            'linkedin',
+            'quora',
+            'reddit',
+            'ycombinator',
+            'instagram',
+            'visco',
+            'soundcloud',
+            'vsco',
+            'fivehundretpx',
+            'codepen',
+            'producthunt',
+            'discord',
+            'raspberrypi',
+            'periscope',
+            'vimeo',
+            'twitch',
+            'patreon',
+            'youtube',
+        ];
+    }
+    
+    /**
      * @param array $param
      * @param int   $page
      * @param int   $limit
