@@ -15,7 +15,7 @@ use DS\Model\Events\TableColumnsEvents;
  * @version   $Version$
  * @package   DS\Model
  *
- * @method static findFirstById(int $id)
+ * @method static TableColumns findFirstById(int $id)
  */
 class TableColumns
     extends TableColumnsEvents
