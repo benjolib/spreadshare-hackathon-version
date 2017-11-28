@@ -8,7 +8,9 @@
     {% for log in logs %}
       <div class="tableFeed__item">
         <div class="tableFeed__item__avatar">
-          <img src="{{ log['userImage'] }}" />
+          <a href="/user/{{ notification['userHandle'] }}">
+            <img src="{{ log['userImage'] }}" />
+          </a>
         </div>
         <div class="tableFeed__item__info">
           <div class="tableFeed__item__info__text">

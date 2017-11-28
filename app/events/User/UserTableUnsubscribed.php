@@ -42,6 +42,8 @@ class UserTableUnsubscribed extends AbstractEvent
         $userNotification
             ->setUserId($table->getOwnerUserId())
             ->setNotificationType(UserNotificationType::Follow)
+            ->setSourceUserId($userId)
+            ->setSourceTableId($tableId)
             ->setText(sprintf('unsubscribed your table %s', $user->getName(), $table->getTitle()))
             ->setPlaceholders(
                 json_encode(

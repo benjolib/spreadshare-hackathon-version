@@ -2,6 +2,7 @@
 
 namespace DS\Model;
 
+use DS\Constants\Paging;
 use DS\Model\Events\UserNotificationsEvents;
 
 /**
@@ -21,32 +22,45 @@ class UserNotifications
     extends UserNotificationsEvents
 {
     /**
-     * @param array $param
-     * @param int   $page
-     * @param int   $limit
+     * @param int $userId
+     * @param int $page
+     * @param int $limit
      *
      * @return array
      */
-    /*
-    public function findCustom($param = [], $page = 0, $limit = Paging::endlessScrollPortions)
+    public function findNotifications(int $userId, $type = null, $page = 0, $limit = Paging::endlessScrollPortions): array
     {
-        if (count($param))
+        if ($userId > 0)
         {
-            return self::query()
-                       ->columns(
-                           [
-                               UserNotifications::class . ".id",
-                           ]
-                       )
-                //->leftJoin(UserNotifications::class, UserNotifications::class . '.profileId = ' . Profile::class . '.id')
-                //->inWhere(Profile::class . '.id', $param)
-                       ->limit((int) $limit, (int) Paging::endlessScrollPortions * $page)
-                //->orderBy(sprintf('FIELD (id,%s)', implode(',', $param)))
-                       ->execute()
-                       ->toArray() ?: [];
+            $query = self::query()
+                         ->columns(
+                             [
+                                 self::class . ".id",
+                                 self::class . ".notificationType",
+                                 self::class . ".text",
+                                 self::class . ".placeholders",
+                                 self::class . ".createdAt",
+                                 User::class . ".handle as userHandle",
+                                 User::class . ".name as userName",
+                                 User::class . ".image as userImage",
+                             ]
+                         )
+                         ->leftJoin(User::class, self::class . '.sourceUserId = ' . User::class . '.id')
+                         ->leftJoin(Tables::class, self::class . '.sourceTableId = ' . Tables::class . '.id')
+                         ->where(self::class . '.userId = :userId:', ['userId' => $userId])
+                         ->limit((int) $limit, (int) Paging::endlessScrollPortions * $page)
+                         ->orderBy(UserNotifications::class . '.id DESC');
+            
+            if ($type)
+            {
+                $query->where(self::class . '.notificationType = :type', ['type' => $type]);
+            }
+            
+            return $query
+                ->execute()
+                ->toArray() ?: [];
         }
         
         return [];
     }
-    */
 }
