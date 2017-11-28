@@ -141,7 +141,7 @@ abstract class AbstractTableViews extends \DS\Model\Base
     {
         $this->setSchema("spreadshare");
         $this->setSource("tableViews");
-        $this->belongsTo('userId', 'DS\Model\Abstracts\User', 'id', ['alias' => 'User']);
+        $this->belongsTo('userId', 'DS\Model\User', 'id', ['alias' => 'User']);
     }
 
     /**

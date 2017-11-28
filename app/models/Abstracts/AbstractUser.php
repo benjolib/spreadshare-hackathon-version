@@ -646,30 +646,30 @@ abstract class AbstractUser extends \DS\Model\Base
     {
         $this->setSchema("spreadshare");
         $this->setSource("user");
-        $this->hasMany('id', 'DS\Model\Abstracts\ChangeRequests', 'userId', ['alias' => 'ChangeRequests']);
-        $this->hasMany('id', 'DS\Model\Abstracts\TableCells', 'lastEditedById', ['alias' => 'TableCells']);
-        $this->hasMany('id', 'DS\Model\Abstracts\TableCells', 'userId', ['alias' => 'TableCells']);
-        $this->hasMany('id', 'DS\Model\Abstracts\TableColumns', 'userId', ['alias' => 'TableColumns']);
-        $this->hasMany('id', 'DS\Model\Abstracts\TableCommentVotes', 'userId', ['alias' => 'TableCommentVotes']);
-        $this->hasMany('id', 'DS\Model\Abstracts\TableComments', 'userId', ['alias' => 'TableComments']);
-        $this->hasMany('id', 'DS\Model\Abstracts\TableRowVotes', 'userId', ['alias' => 'TableRowVotes']);
-        $this->hasMany('id', 'DS\Model\Abstracts\TableRows', 'userId', ['alias' => 'TableRows']);
-        $this->hasMany('id', 'DS\Model\Abstracts\TableSubscription', 'userId', ['alias' => 'TableSubscription']);
-        $this->hasMany('id', 'DS\Model\Abstracts\TableTokens', 'userId', ['alias' => 'TableTokens']);
-        $this->hasMany('id', 'DS\Model\Abstracts\TableViews', 'userId', ['alias' => 'TableViews']);
-        $this->hasMany('id', 'DS\Model\Abstracts\TableVotes', 'userId', ['alias' => 'TableVotes']);
-        $this->hasMany('id', 'DS\Model\Abstracts\Tables', 'ownerUserId', ['alias' => 'Tables']);
-        $this->hasMany('id', 'DS\Model\Abstracts\Tags', 'userId', ['alias' => 'Tags']);
-        $this->hasMany('id', 'DS\Model\Abstracts\UserConnections', 'userId', ['alias' => 'UserConnections']);
-        $this->hasMany('id', 'DS\Model\Abstracts\UserFollower', 'followedByUserId', ['alias' => 'UserFollower']);
-        $this->hasMany('id', 'DS\Model\Abstracts\UserFollower', 'userId', ['alias' => 'UserFollower']);
-        $this->hasMany('id', 'DS\Model\Abstracts\UserLocations', 'userId', ['alias' => 'UserLocations']);
-        $this->hasMany('id', 'DS\Model\Abstracts\UserNotifications', 'userId', ['alias' => 'UserNotifications']);
-        $this->hasMany('id', 'DS\Model\Abstracts\UserResetPassword', 'userId', ['alias' => 'UserResetPassword']);
-        $this->hasMany('id', 'DS\Model\Abstracts\UserSettings', 'userId', ['alias' => 'UserSettings']);
-        $this->hasMany('id', 'DS\Model\Abstracts\UserStats', 'userId', ['alias' => 'UserStats']);
-        $this->hasMany('id', 'DS\Model\Abstracts\UserTopics', 'userId', ['alias' => 'UserTopics']);
-        $this->hasMany('id', 'DS\Model\Abstracts\Wallet', 'userId', ['alias' => 'Wallet']);
+        $this->hasMany('id', 'DS\Model\ChangeRequests', 'userId', ['alias' => 'ChangeRequests']);
+        $this->hasMany('id', 'DS\Model\TableCells', 'lastEditedById', ['alias' => 'TableCells']);
+        $this->hasMany('id', 'DS\Model\TableCells', 'userId', ['alias' => 'TableCells']);
+        $this->hasMany('id', 'DS\Model\TableColumns', 'userId', ['alias' => 'TableColumns']);
+        $this->hasMany('id', 'DS\Model\TableCommentVotes', 'userId', ['alias' => 'TableCommentVotes']);
+        $this->hasMany('id', 'DS\Model\TableComments', 'userId', ['alias' => 'TableComments']);
+        $this->hasMany('id', 'DS\Model\TableRowVotes', 'userId', ['alias' => 'TableRowVotes']);
+        $this->hasMany('id', 'DS\Model\TableRows', 'userId', ['alias' => 'TableRows']);
+        $this->hasMany('id', 'DS\Model\TableSubscription', 'userId', ['alias' => 'TableSubscription']);
+        $this->hasMany('id', 'DS\Model\TableTokens', 'userId', ['alias' => 'TableTokens']);
+        $this->hasMany('id', 'DS\Model\TableViews', 'userId', ['alias' => 'TableViews']);
+        $this->hasMany('id', 'DS\Model\TableVotes', 'userId', ['alias' => 'TableVotes']);
+        $this->hasMany('id', 'DS\Model\Tables', 'ownerUserId', ['alias' => 'Tables']);
+        $this->hasMany('id', 'DS\Model\Tags', 'userId', ['alias' => 'Tags']);
+        $this->hasMany('id', 'DS\Model\UserConnections', 'userId', ['alias' => 'UserConnections']);
+        $this->hasMany('id', 'DS\Model\UserFollower', 'followedByUserId', ['alias' => 'UserFollower']);
+        $this->hasMany('id', 'DS\Model\UserFollower', 'userId', ['alias' => 'UserFollower']);
+        $this->hasMany('id', 'DS\Model\UserLocations', 'userId', ['alias' => 'UserLocations']);
+        $this->hasMany('id', 'DS\Model\UserNotifications', 'userId', ['alias' => 'UserNotifications']);
+        $this->hasMany('id', 'DS\Model\UserResetPassword', 'userId', ['alias' => 'UserResetPassword']);
+        $this->hasMany('id', 'DS\Model\UserSettings', 'userId', ['alias' => 'UserSettings']);
+        $this->hasMany('id', 'DS\Model\UserStats', 'userId', ['alias' => 'UserStats']);
+        $this->hasMany('id', 'DS\Model\UserTopics', 'userId', ['alias' => 'UserTopics']);
+        $this->hasMany('id', 'DS\Model\Wallet', 'userId', ['alias' => 'Wallet']);
     }
 
     /**

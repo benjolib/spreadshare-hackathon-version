@@ -111,8 +111,8 @@ abstract class AbstractUserLocations extends \DS\Model\Base
     {
         $this->setSchema("spreadshare");
         $this->setSource("userLocations");
-        $this->belongsTo('locationId', 'DS\Model\Abstracts\Locations', 'id', ['alias' => 'Locations']);
-        $this->belongsTo('userId', 'DS\Model\Abstracts\User', 'id', ['alias' => 'User']);
+        $this->belongsTo('locationId', 'DS\Model\Locations', 'id', ['alias' => 'Locations']);
+        $this->belongsTo('userId', 'DS\Model\User', 'id', ['alias' => 'User']);
     }
 
     /**

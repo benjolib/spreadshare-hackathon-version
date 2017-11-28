@@ -111,8 +111,8 @@ abstract class AbstractTableCommentVotes extends \DS\Model\Base
     {
         $this->setSchema("spreadshare");
         $this->setSource("tableCommentVotes");
-        $this->belongsTo('commentId', 'DS\Model\Abstracts\TableComments', 'id', ['alias' => 'TableComments']);
-        $this->belongsTo('userId', 'DS\Model\Abstracts\User', 'id', ['alias' => 'User']);
+        $this->belongsTo('commentId', 'DS\Model\TableComments', 'id', ['alias' => 'TableComments']);
+        $this->belongsTo('userId', 'DS\Model\User', 'id', ['alias' => 'User']);
     }
 
     /**

@@ -81,8 +81,8 @@ abstract class AbstractTableLocations extends \DS\Model\Base
     {
         $this->setSchema("spreadshare");
         $this->setSource("tableLocations");
-        $this->belongsTo('locationId', 'DS\Model\Abstracts\Locations', 'id', ['alias' => 'Locations']);
-        $this->belongsTo('tableId', 'DS\Model\Abstracts\Tables', 'id', ['alias' => 'Tables']);
+        $this->belongsTo('locationId', 'DS\Model\Locations', 'id', ['alias' => 'Locations']);
+        $this->belongsTo('tableId', 'DS\Model\Tables', 'id', ['alias' => 'Tables']);
     }
 
     /**

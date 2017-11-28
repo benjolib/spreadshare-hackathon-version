@@ -261,9 +261,9 @@ abstract class AbstractUserNotifications extends \DS\Model\Base
     {
         $this->setSchema("spreadshare");
         $this->setSource("userNotifications");
-        $this->belongsTo('sourceTableId', 'DS\Model\Abstracts\Tables', 'id', ['alias' => 'Tables']);
-        $this->belongsTo('sourceUserId', 'DS\Model\Abstracts\User', 'id', ['alias' => 'User']);
-        $this->belongsTo('userId', 'DS\Model\Abstracts\User', 'id', ['alias' => 'User']);
+        $this->belongsTo('sourceTableId', 'DS\Model\Tables', 'id', ['alias' => 'Tables']);
+        $this->belongsTo('sourceUserId', 'DS\Model\User', 'id', ['alias' => 'User']);
+        $this->belongsTo('userId', 'DS\Model\User', 'id', ['alias' => 'User']);
     }
 
     /**

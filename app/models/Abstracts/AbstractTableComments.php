@@ -231,11 +231,11 @@ abstract class AbstractTableComments extends \DS\Model\Base
     {
         $this->setSchema("spreadshare");
         $this->setSource("tableComments");
-        $this->hasMany('id', 'DS\Model\Abstracts\TableCommentVotes', 'commentId', ['alias' => 'TableCommentVotes']);
-        $this->hasMany('id', 'DS\Model\Abstracts\TableComments', 'parentId', ['alias' => 'TableComments']);
-        $this->belongsTo('parentId', 'DS\Model\Abstracts\TableComments', 'id', ['alias' => 'TableComments']);
-        $this->belongsTo('tableId', 'DS\Model\Abstracts\Tables', 'id', ['alias' => 'Tables']);
-        $this->belongsTo('userId', 'DS\Model\Abstracts\User', 'id', ['alias' => 'User']);
+        $this->hasMany('id', 'DS\Model\TableCommentVotes', 'commentId', ['alias' => 'TableCommentVotes']);
+        $this->hasMany('id', 'DS\Model\TableComments', 'parentId', ['alias' => 'TableComments']);
+        $this->belongsTo('parentId', 'DS\Model\TableComments', 'id', ['alias' => 'TableComments']);
+        $this->belongsTo('tableId', 'DS\Model\Tables', 'id', ['alias' => 'Tables']);
+        $this->belongsTo('userId', 'DS\Model\User', 'id', ['alias' => 'User']);
     }
 
     /**

@@ -171,9 +171,9 @@ abstract class AbstractTopics extends \DS\Model\Base
     {
         $this->setSchema("spreadshare");
         $this->setSource("topics");
-        $this->hasMany('id', 'DS\Model\Abstracts\Tables', 'topic1Id', ['alias' => 'Tables']);
-        $this->hasMany('id', 'DS\Model\Abstracts\Tables', 'topic2Id', ['alias' => 'Tables']);
-        $this->hasMany('id', 'DS\Model\Abstracts\UserTopics', 'topicId', ['alias' => 'UserTopics']);
+        $this->hasMany('id', 'DS\Model\Tables', 'topic1Id', ['alias' => 'Tables']);
+        $this->hasMany('id', 'DS\Model\Tables', 'topic2Id', ['alias' => 'Tables']);
+        $this->hasMany('id', 'DS\Model\UserTopics', 'topicId', ['alias' => 'UserTopics']);
     }
 
     /**

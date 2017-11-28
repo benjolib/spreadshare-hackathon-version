@@ -141,7 +141,7 @@ abstract class AbstractUserStats extends \DS\Model\Base
     {
         $this->setSchema("spreadshare");
         $this->setSource("userStats");
-        $this->belongsTo('userId', 'DS\Model\Abstracts\User', 'id', ['alias' => 'User']);
+        $this->belongsTo('userId', 'DS\Model\User', 'id', ['alias' => 'User']);
     }
 
     /**

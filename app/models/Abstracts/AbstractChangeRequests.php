@@ -261,8 +261,8 @@ abstract class AbstractChangeRequests extends \DS\Model\Base
     {
         $this->setSchema("spreadshare");
         $this->setSource("changeRequests");
-        $this->belongsTo('cellId', 'DS\Model\Abstracts\TableCells', 'id', ['alias' => 'TableCells']);
-        $this->belongsTo('userId', 'DS\Model\Abstracts\User', 'id', ['alias' => 'User']);
+        $this->belongsTo('cellId', 'DS\Model\TableCells', 'id', ['alias' => 'TableCells']);
+        $this->belongsTo('userId', 'DS\Model\User', 'id', ['alias' => 'User']);
     }
 
     /**

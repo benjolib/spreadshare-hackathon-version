@@ -231,7 +231,7 @@ abstract class AbstractCities extends \DS\Model\Base
     {
         $this->setSchema("spreadshare");
         $this->setSource("cities");
-        $this->hasMany('id', 'DS\Model\Abstracts\Locations', 'cityId', ['alias' => 'Locations']);
+        $this->hasMany('id', 'DS\Model\Locations', 'cityId', ['alias' => 'Locations']);
     }
 
     /**

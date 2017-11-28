@@ -651,7 +651,7 @@ abstract class AbstractUserConnections extends \DS\Model\Base
     {
         $this->setSchema("spreadshare");
         $this->setSource("userConnections");
-        $this->belongsTo('userId', 'DS\Model\Abstracts\User', 'id', ['alias' => 'User']);
+        $this->belongsTo('userId', 'DS\Model\User', 'id', ['alias' => 'User']);
     }
 
     /**
