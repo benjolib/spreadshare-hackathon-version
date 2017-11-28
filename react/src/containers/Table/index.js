@@ -279,7 +279,7 @@ class Table extends Component<Props, State> {
           <TableButton icon="filter" onClick={this.toggleFilters} />
           <TableButton icon="add" onClick={this.showAdd} />
           <TableSearch onChange={this.updateSearchValue} />
-          <TableButton icon="eye" />
+          <TableButton icon="dots" />
         </TableHeader>
         <div style={{ position: "relative" }}>
           <TableSortingMenu
@@ -289,6 +289,7 @@ class Table extends Component<Props, State> {
             appliedSortings={this.state.sortings}
           />
           <TableFilterMenu
+            sortShown={this.state.showSortings}
             hide={!this.state.showFilters}
             onApply={this.updateTableFilters}
             colHeaders={colHeaders}

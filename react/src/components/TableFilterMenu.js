@@ -7,7 +7,7 @@ const StyledDiv = styled.div`
   background: #fff;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
   top: -10px;
-  left: 410px;
+  left: ${props => (props.sortShown ? "420px" : "10px")};
   height: 200px;
   width: 400px;
   padding: 10px;
@@ -128,7 +128,7 @@ class TableFilterMenu extends React.Component<Props, State> {
   render() {
     const unusedColHeader = this.getUnusedColHeader();
     return (
-      <StyledDiv hide={this.props.hide}>
+      <StyledDiv hide={this.props.hide} sortShown={this.props.sortShown}>
         <table>
           <tbody>
             {this.state.filters.map((filter, i) => (
