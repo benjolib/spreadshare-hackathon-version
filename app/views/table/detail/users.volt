@@ -7,36 +7,44 @@
   <div class="container__content">
     <p>User overview</p>
     <div class="tableUsers">
-      {% for user in tableUsers %}
-        <div class="tableUsers__item">
-          <div class="tableUsers__item__avatar">
-            <img src="{{ user['image'] }}" />
+      {% if tableUsers %}
+        {% for user in tableUsers %}
+          <div class="tableUsers__item">
+            <div class="tableUsers__item__avatar">
+              <img src="{{ user['image'] }}" />
+            </div>
+            <div class="tableUsers__item__info">
+              <div class="tableUsers__item__info__title">
+                <h5><a href="/user/{{ user['handle'] }}">{{ user['name'] }}</a></h5>
+              </div>
+              <div class="tableUsers__item__info__subtitle">
+                {% if user['location'] and user['tagline']%}
+                  <p>{{ user['location'] }} ● {{ user['tagline'] }}</p>
+                {% elseif user['location'] %}
+                  <p>{{ user['location'] }}</p>
+                {% elseif user['tagline'] %}
+                  <p>{{ user['tagline'] }}</p>
+                {% endif %}
+              </div>
+            </div>
+            {% if auth().getUserId() != user['id'] %}
+              <div class="tableUsers__item__follow">
+                <button class="follow-user {% if user['following'] %}following-user selected {% else %}not-following-user {% endif %}" data-id="{{ user['id'] }}" type="button"></button>
+              </div>
+            {% else %}
+              <div class="tableUsers__item__follow">
+                <button disabled type="button">It's you</button>
+              </div>
+            {% endif %}
           </div>
-          <div class="tableUsers__item__info">
-            <div class="tableUsers__item__info__title">
-              <h5><a href="/user/{{ user['handle'] }}">{{ user['name'] }}</a></h5>
-            </div>
-            <div class="tableUsers__item__info__subtitle">
-              {% if user['location'] and user['tagline']%}
-                <p>{{ user['location'] }} ● {{ user['tagline'] }}</p>
-              {% elseif user['location'] %}
-                <p>{{ user['location'] }}</p>
-              {% elseif user['tagline'] %}
-                <p>{{ user['tagline'] }}</p>
-              {% endif %}
-            </div>
-          </div>
-          {% if auth().getUserId() != user['id'] %}
-            <div class="tableUsers__item__follow">
-              <button class="follow-user {% if user['following'] %}following-user selected {% else %}not-following-user {% endif %}" data-id="{{ user['id'] }}" type="button"></button>
-            </div>
-          {% else %}
-            <div class="tableUsers__item__follow">
-              <button disabled type="button">It's you</button>
-            </div>
-          {% endif %}
+        {% endfor %}
+      {% else %}
+        <div class="center">
+          <img src="/assets/images/laptop.png" alt="" />
+          <p>&nbsp;</p>
+          <p>There are no users matching your filter, yet.</p>
         </div>
-      {% endfor %}
+      {% endif %}
     </div>
   </div>
   <aside class="aside aside--tableUsers">

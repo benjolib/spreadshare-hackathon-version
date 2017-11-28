@@ -33,13 +33,11 @@
       form {
         width: 100%;
         @include desktop {
-          width: 100%;          
+          width: 100%;
         }
       }
-      
-    }
 
-    
+    }
 
     &__title {
       width: 100%;
@@ -114,7 +112,6 @@
 
       span {
         font-weight: 300;
-        // color: lighten($text-color, 10%);
         color: #fff;
         text-transform: capitalize;
         @include rem(margin-top, 3);
