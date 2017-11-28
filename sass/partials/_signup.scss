@@ -40,7 +40,7 @@
       @include rem(font-size, 40);
 
       @include desktop {
-        width: 86%;
+        width: 80%;
         text-align: left;
       }
       @include tablet {
@@ -52,7 +52,7 @@
     }
 
     &__subtitle {
-      width: 86%;
+      width: 80%;
       margin: 0;
       font-weight: 300;
       @include rem(margin-top, 16);
@@ -90,6 +90,7 @@
         text-transform: uppercase;
         @include rem(font-size, 14);
         @include rem(margin-top, 32);
+        margin-bottom: 15px;
       }
 
       span {
@@ -120,6 +121,7 @@
         justify-content: flex-end;
         align-items: center;
         background: #f8f8fb;
+        font-weight: 500;
         @include rem2(margin, 0, -35);
         @include rem(margin-top, 32 * 2);
         @include rem(margin-bottom, -25);
@@ -127,8 +129,6 @@
 
         @include desktop {
           margin-top: 0;
-          margin-right: 116px;
-          margin-left: 116px;
           border-bottom-left-radius: 6px;
           border-bottom-right-radius: 6px;       
              
@@ -136,8 +136,8 @@
 
         a {
           text-decoration: none;
-          font-weight: 300;
-          text-transform: uppercase;
+          font-weight: 500;
+          text-transform: capitalize;
           color: #b1bbc7;
           background: transparent;
           @include rem(margin-right, 24);
@@ -149,8 +149,8 @@
         }
 
         button {
-          font-weight: 300;
-          text-transform: uppercase;
+          font-weight: 500;
+          text-transform: capitalize;
           color: white;
           background: $logo-color;
           border: none;
@@ -251,8 +251,8 @@
         &__facebook {
           display: inline-flex;
           align-items: center;
-          text-transform: uppercase;
-          font-weight: 300;
+          text-transform: initial;
+          font-weight: 500;
           border-radius: 4px;
           background: $facebook-color;
           @include rem(margin-bottom, 16);
@@ -271,8 +271,8 @@
         &__twitter {
           display: inline-flex;
           align-items: center;
-          text-transform: uppercase;
-          font-weight: 300;
+          text-transform: initial;
+          font-weight: 500;
           border-radius: 4px;
           background: $twitter-color;
           @include rem(margin-bottom, 16);
@@ -291,8 +291,8 @@
         &__google {
           display: inline-flex;
           align-items: center;
-          text-transform: uppercase;
-          font-weight: 300;
+          text-transform: initial;
+          font-weight: 500;
           border-radius: 4px;
           background: $google-color;
           @include rem2(padding, 10, 15);

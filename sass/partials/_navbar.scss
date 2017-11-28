@@ -265,7 +265,7 @@
       background: $logo-color;
       color: white;
       text-align: center;
-      text-transform: uppercase;
+      text-transform: capitalize;
       text-decoration: none;
       font-weight: 300;
       border-radius: 3px;
@@ -283,7 +283,7 @@
     &__login {
       color: white;
       text-decoration: none;
-      font-weight: 400;
+      font-weight: 600;
       
 
       &:hover {
@@ -293,7 +293,7 @@
     &__signup {
       color: white;
       text-decoration: none;
-      font-weight: 400;
+      font-weight: 600;
       
       &:hover {
         cursor: pointer;

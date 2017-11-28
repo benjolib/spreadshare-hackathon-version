@@ -35,15 +35,15 @@
       <div class="login__content__aside__social">
         <div class="login__content__aside__social__facebook">
           <img src="/assets/icons/facebook.svg" />
-          <a href="/login/facebook">Use Facebook</a>
+          <a href="/login/facebook">connect via Facebook</a>
         </div>
         <div class="login__content__aside__social__twitter">
           <img src="/assets/icons/twitter.svg" />
-          <a href="/login/twitter">Use Twitter</a>
+          <a href="/login/twitter">conect via Twitter</a>
         </div>
         <div class="login__content__aside__social__google">
           <img src="/assets/icons/google.svg" />
-          <a href="/login/google">Use Google</a>
+          <a href="/login/google">connect via Google</a>
         </div>
       </div>
     </aside>
