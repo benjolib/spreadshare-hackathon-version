@@ -15,8 +15,8 @@
     "ext-phalcon": ">=3.1.0",
     "ext-json": "*",
     "ext-pdo": "*",
-    "ext-redis" : "~2.2",
-    "predis/predis" : "~0.8",
+    "ext-redis": "~2.2",
+    "predis/predis": "~0.8",
     "phalcon/incubator": "^3.2",
     "khill/php-duration": "^1.0",
     "ruflin/elastica": "^5.0.0",
@@ -33,6 +33,7 @@
     "league/flysystem": "^1.0",
     "league/flysystem-aws-s3-v3": "^1.0",
     "league/flysystem-cached-adapter": "^1.0",
+    "league/csv": "^9.0",
     "mailgun/mailgun-php": "^2.3",
     "bernard/bernard": "^1.0@dev"
   },
