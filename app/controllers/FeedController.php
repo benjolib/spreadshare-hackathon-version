@@ -2,12 +2,10 @@
 
 namespace DS\Controller;
 
-use DS\Application;
 use DS\Exceptions\SecurityException;
 use DS\Model\DataSource\UserNotificationType;
 use DS\Model\UserNotifications;
 use Phalcon\Exception;
-use Phalcon\Logger;
 
 /**
  * Spreadshare
@@ -30,6 +28,8 @@ class FeedController
     {
         try
         {
+            $this->view->setMainView('feed/feed');
+            
             $userId = $this->serviceManager->getAuth()->getUserId();
             
             if (!$userId)
@@ -45,12 +45,12 @@ class FeedController
             
             $userNotifications = new UserNotifications;
             $this->view->setVar('notifications', $userNotifications->findNotifications($userId, $typeId));
+            $this->view->setVar('type', $type);
             
-            $this->view->setMainView('feed/feed');
         }
         catch (Exception $e)
         {
-            Application::instance()->log($e->getMessage(), Logger::CRITICAL);
+            throw $e;
         }
     }
 }
