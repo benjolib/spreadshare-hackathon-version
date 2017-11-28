@@ -5,4 +5,19 @@ body {
   .mt10 {
     margin-top: 10px;
   }
+
+  .bold {
+    font-weight: 600;
+  }
+
+  a.button {
+    background: #6b7c93;
+    color: #fff;
+    border-radius: 6px;
+    padding: 10px;
+  }
+
+  a.button:hover {
+    background: lighten(#6b7c93, 10);
+  }
 }

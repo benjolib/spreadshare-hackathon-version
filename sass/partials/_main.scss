@@ -16,6 +16,7 @@
     background-position: center;
     background-size: cover;
     border-radius: 8px;
+    color: white;
     @include rem(height, 336);
     @include rem(margin, 28);
     @include rem2(padding, 0, 40);
