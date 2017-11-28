@@ -125,6 +125,15 @@
         @include rem(margin-bottom, -25);
         @include rem(padding, 16);
 
+        @include desktop {
+          margin-top: 0;
+          margin-right: 116px;
+          margin-left: 116px;
+          border-bottom-left-radius: 6px;
+          border-bottom-right-radius: 6px;       
+             
+        }
+
         a {
           text-decoration: none;
           font-weight: 300;

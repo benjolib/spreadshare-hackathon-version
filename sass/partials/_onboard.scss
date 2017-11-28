@@ -314,6 +314,9 @@
       border-radius: 8px;
       width: 80%;
 
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+
       &__cards {
         display: flex;
         justify-content: center;
@@ -344,10 +347,21 @@
             @include rem2(padding, 42, 84);
             width: 288px;            
           }
+
+          @include mobile {
+            // @include rem2(padding, 42, 84);
+            width: 288px;            
+          }
+
           @include desktop {
-            @include rem2(padding, 32, 64);
-            width: 288px;
+            width: 214px;
             display: block;
+            padding: 37px 17px;
+            margin: 0;
+            margin-bottom: 0px;
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 14px;
           }
 
           &:hover {
