@@ -502,7 +502,17 @@
     &__container {
       display: flex;
       align-items: center;
-      @include rem(padding, 20);
+      // @include rem(padding, 0, 20);
+      padding: 10px 25px;
+      border-bottom: 2px solid #F2F2F8;
+      margin: 10px 25px 10px 25px;
+
+      &:last-child() {
+        border: 0;
+      }
+      &:nth-child() {
+        border: 0;
+      }
 
       &__avatar {
         align-self: flex-start;
@@ -561,19 +571,25 @@
                 background-position: center;
                 background-repeat: no-repeat;
                 background-size: contain;
+                margin-top: 2px;
               }
               &--reply {
                 background: url("/assets/icons/comment.svg");
                 background-position: center;
                 background-repeat: no-repeat;
                 background-size: contain;
+                margin-top: 2px;
               }
               &--report {
                 background: url("/assets/icons/flag.svg");
                 background-position: center;
                 background-repeat: no-repeat;
                 background-size: contain;
+                margin-top: 2px;
               }
+            }
+            span {
+               color: #CDD4DF;
             }
           }
         }

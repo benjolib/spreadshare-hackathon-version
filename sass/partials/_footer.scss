@@ -79,9 +79,7 @@
         line-height: 26px;
         margin-bottom: 20px;
 
-        @include desktop {
-          width: 320px;          
-        }
+        
 
         @include mobile {
         }

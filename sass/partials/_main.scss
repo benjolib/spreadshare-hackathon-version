@@ -66,6 +66,7 @@
     width: 100%;
     @include rem2(padding, 15, 40);
     @include rem(margin-top, 28);
+    margin-bottom: 80px;
 
     @include tablet {
       @include rem2(padding, 15, 80);
@@ -376,6 +377,7 @@
         }
 
         label {
+          font-size: 12px;
           cursor: pointer;
           white-space: nowrap;
           border-radius: 6px;
