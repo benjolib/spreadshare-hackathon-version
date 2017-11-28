@@ -80,7 +80,7 @@ CREATE TABLE `tableCells` (
   `userId` INT(11) UNSIGNED NOT NULL COMMENT 'author (user id)',
   `columnId` INT(11) UNSIGNED DEFAULT NULL COMMENT 'associated column (tableColumns.id)',
   `rowId` INT(11) UNSIGNED DEFAULT NULL,
-  `content` TEXT NOT NULL COMMENT 'text content of row',
+  `content` TEXT DEFAULT NULL COMMENT 'text content of row',
   `link` VARCHAR(255) DEFAULT NULL COMMENT 'optional link (http://..)',
   `updatedById` INT(11) UNSIGNED NOT NULL COMMENT 'last edited (user id)',
   `updatedAt` INT(11) UNSIGNED NOT NULL COMMENT 'timestamp',

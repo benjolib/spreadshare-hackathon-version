@@ -61,24 +61,29 @@ class Post extends ActionHandler implements MethodInterface
      */
     public function process()
     {
-        if ($this->request->isAjax())
+        $tableId = $this->action;
+        $post    = json_decode($this->request->getRawBody(), true);
+        $cellId  = $post['cellId'];
+        $cell    = $post['cell'] ?: [
+            'id' => null,
+            'content' => null,
+            'link' => null,
+        ];
+        
+        if ($tableId > 0 && $cellId > 0)
         {
-            $cellId  = $this->action;
-            $comment = $this->request->getPost('comment');
-            $content = $this->request->getPost('content');
-            $link    = $this->request->getPost('link');
+            $link    = filter_var(strval($cell['link']), FILTER_SANITIZE_STRING);
+            $content = filter_var(strval($cell['content']), FILTER_SANITIZE_STRING);
             
-            if ($cellId > 0 && $content)
+            $tableCell = TableCells::findFirstById($cellId);
+            
+            if (!$tableCell)
             {
-                $tableCell = TableCells::findFirstById($cellId);
-                
-                if (!$tableCell)
-                {
-                    throw new \InvalidArgumentException('The cell that you want to edit does not exist.');
-                }
-                
-                $tableId = $tableCell->getTableColumns()->getTableId();
-                
+                throw new \InvalidArgumentException('The cell that you want to edit does not exist.');
+            }
+            
+            if ($tableId > 0)
+            {
                 $tableModel = Tables::findFirstById($tableId);
                 if (!$tableModel)
                 {
@@ -89,7 +94,7 @@ class Post extends ActionHandler implements MethodInterface
                 if ($tableModel->getOwnerUserId() == $this->getServiceManager()->getAuth()->getUserId())
                 {
                     $tableContent = new TableContent();
-                    $tableContent->editCell($tableId, $content, $link ? $link : null);
+                    $tableContent->editCell($cellId, $content ? $content : '', $link ? $link : '');
                 }
                 // User contribution has to be confirmed first.
                 else
@@ -99,7 +104,7 @@ class Post extends ActionHandler implements MethodInterface
                                   ->setTableId($tableId)
                                   ->setFrom($tableCell->getContent())
                                   ->setTo($content)
-                                  ->setComment($comment)
+                                  ->setComment('')// not implemented, yet
                                   ->create();
                 }
                 

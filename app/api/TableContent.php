@@ -76,11 +76,14 @@ class TableContent
      */
     public function editCell(int $cellId, string $content, string $link): TableContent
     {
-        $cellModel = new TableCells();
-        $cellModel->get($cellId)
-                  ->setContent($content)
-                  ->setLink($link ?: null)
-                  ->save();
+        $cellModel = (TableCells::findFirstById($cellId));
+        
+        if ($cellModel)
+        {
+            $cellModel->setContent($content)
+                      ->setLink($link ?: null)
+                      ->save();
+        }
         
         return $this;
     }

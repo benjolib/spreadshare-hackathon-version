@@ -56,15 +56,23 @@ abstract class TableCellsEvents
     {
         parent::beforeValidationOnUpdate();
         
+        if ($this->content === null)
+        {
+            $this->setContent('');
+        }
+        
         return true;
     }
     
+    /**
+     * After Save
+     */
     public function afterSave()
     {
         TabelCellChanged::after(
             $this->getUserId(),
-            (TableRows::get($this->getRowId())->getTableId()),
-            $this->getContent()
+            TableRows::get($this->getRowId()),
+            $this
         );
     }
 }

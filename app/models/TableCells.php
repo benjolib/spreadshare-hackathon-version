@@ -2,6 +2,7 @@
 
 namespace DS\Model;
 
+use DS\Events\Table\TabelCellChanged;
 use DS\Model\Abstracts\AbstractTableCells;
 use DS\Model\Events\TableCellsEvents;
 

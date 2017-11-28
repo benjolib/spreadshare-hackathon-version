@@ -8,7 +8,6 @@ use DS\Controller\Api\Meta\Record;
 use DS\Controller\Api\MethodInterface;
 use DS\Model\TableRows;
 use DS\Model\Tables;
-use Phalcon\Exception;
 
 /**
  *
@@ -84,59 +83,56 @@ class Post extends ActionHandler implements MethodInterface
      */
     public function process()
     {
-        if ($this->request->isAjax())
+        $tableId       = $this->action;
+        $insertAfterId = $this->request->getPost('insertAfterId');
+        $rowData       = json_decode($this->request->getPost('rowData'), true);
+        $userId        = $this->getServiceManager()->getAuth()->getUserId();
+        
+        if ($userId > 0 && $tableId > 0 && is_array($rowData))
         {
-            $tableId       = $this->action;
-            $insertAfterId = $this->request->getPost('insertAfterId');
-            $rowData       = json_decode($this->request->getPost('rowData'), true);
-            $userId        = $this->getServiceManager()->getAuth()->getUserId();
-            
-            if ($userId > 0 && $tableId > 0 && is_array($rowData))
+            $tableModel = Tables::findFirstById($tableId);
+            if (!$tableModel)
             {
-                $tableModel = Tables::findFirstById($tableId);
-                if (!$tableModel)
-                {
-                    throw new \InvalidArgumentException('The table that you want to edit does not exist.');
-                }
-                
-                // User is Owner and can directly edit!
-                if ($tableModel->getOwnerUserId() == $userId)
-                {
-                    $tableContent = new TableContent();
-                    $newRow       = $tableContent->addRow($tableId, $rowData, $insertAfterId);
-                    
-                    $action = 'updated';
-                }
-                // User contribution has to be confirmed first.
-                else
-                {
-                    /**
-                     * @todo not implemented yet!
-                     */
-                    $newRow = new TableRows();
-                    /*
-                    $cellId = null;
-                    $changeRequest = new ChangeRequests();
-                    $changeRequest->setTableId($tableId)
-                                  ->setUserId($userId)
-                                  ->setFrom('')
-                                  ->setTo('')
-                                  ->setStatus(ChangeRequestStatus::Unconfirmed)
-                                  ->setComment('')
-                                  ->setCellId($cellId);
-                    */
-                    
-                    $action = 'changeRequested';
-                }
-                
-                return new Record(
-                    [
-                        'id' => $newRow->getId(),
-                        'cells' => $newRow->getContent(),
-                        'action' => $action,
-                    ]
-                );
+                throw new \InvalidArgumentException('The table that you want to edit does not exist.');
             }
+            
+            // User is Owner and can directly edit!
+            if ($tableModel->getOwnerUserId() == $userId)
+            {
+                $tableContent = new TableContent();
+                $newRow       = $tableContent->addRow($tableId, $rowData, $insertAfterId);
+                
+                $action = 'updated';
+            }
+            // User contribution has to be confirmed first.
+            else
+            {
+                /**
+                 * @todo not implemented yet!
+                 */
+                $newRow = new TableRows();
+                /*
+                $cellId = null;
+                $changeRequest = new ChangeRequests();
+                $changeRequest->setTableId($tableId)
+                              ->setUserId($userId)
+                              ->setFrom('')
+                              ->setTo('')
+                              ->setStatus(ChangeRequestStatus::Unconfirmed)
+                              ->setComment('')
+                              ->setCellId($cellId);
+                */
+                
+                $action = 'changeRequested';
+            }
+            
+            return new Record(
+                [
+                    'id' => $newRow->getId(),
+                    'cells' => $newRow->getContent(),
+                    'action' => $action,
+                ]
+            );
         }
         
         throw new Exception('Error adding the row. Either you are not loggedin, or the table-id or submitted row is incorrect.');
