@@ -316,6 +316,7 @@
       flex-direction: column;
       width: 100%;
       justify-content: space-between;
+      margin-bottom: 50px;
 
       @include desktop {
         flex-direction: row;
@@ -334,6 +335,9 @@
       &__cards {
         display: flex;
         flex-direction: column;
+        background-color: #fff;
+        padding: 20px 30px 20px 30px;
+        border-radius: 8px;
 
         &__item {
           display: flex;
@@ -497,7 +501,7 @@
             }
 
             &:first-child {
-              @include rem(margin-bottom, 14);
+              @include rem(margin-bottom, 10);
             }
           }
         }

@@ -19,6 +19,8 @@ import votesRenderer from "../../lib/votesRenderer";
 import cellRenderer from "../../lib/cellRenderer";
 import TableSortingMenu from "../../components/TableSortingMenu";
 import type { Sortings } from "../../components/TableSortingMenu";
+import TableFilterMenu from "../../components/TableFilterMenu";
+import type { Filters } from "../../components/TableFilterMenu";
 
 type Props = {
   id: string, // from server markup
@@ -32,7 +34,10 @@ type Props = {
 type State = {
   searchValue: string,
   sortings: Sortings,
+  filters: Filters,
   showAdd: boolean,
+  showSortings: boolean,
+  showFilters: boolean,
   addRowDataGetters: Array<Function>
 };
 
@@ -40,6 +45,7 @@ class Table extends Component<Props, State> {
   state = {
     searchValue: "",
     sortings: [],
+    filters: [],
     showSortings: false,
     showFilters: false,
     showAdd: false,
@@ -65,6 +71,12 @@ class Table extends Component<Props, State> {
   updateTableSortings = (sortings: Sortings) => {
     this.setState({
       sortings
+    });
+  };
+
+  updateTableFilters = (filters: Filters) => {
+    this.setState({
+      filters
     });
   };
 
@@ -124,7 +136,8 @@ class Table extends Component<Props, State> {
   addRow = () => {
     this.props.addRow(
       this.props.id,
-      this.state.addRowDataGetters.map(x => x())
+      this.state.addRowDataGetters.map(x => x()),
+      this.props.data.table.rows[this.props.data.table.rows.length - 1].id
     );
     this.hideAdd();
   };
@@ -266,7 +279,7 @@ class Table extends Component<Props, State> {
           <TableButton icon="filter" onClick={this.toggleFilters} />
           <TableButton icon="add" onClick={this.showAdd} />
           <TableSearch onChange={this.updateSearchValue} />
-          <TableButton icon="eye" />
+          <TableButton icon="dots" />
         </TableHeader>
         <div style={{ position: "relative" }}>
           <TableSortingMenu
@@ -274,6 +287,13 @@ class Table extends Component<Props, State> {
             onApply={this.updateTableSortings}
             colHeaders={colHeaders}
             appliedSortings={this.state.sortings}
+          />
+          <TableFilterMenu
+            sortShown={this.state.showSortings}
+            hide={!this.state.showFilters}
+            onApply={this.updateTableFilters}
+            colHeaders={colHeaders}
+            appliedFilters={this.state.filters}
           />
         </div>
         <TableMain>

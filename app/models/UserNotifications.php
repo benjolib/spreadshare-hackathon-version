@@ -53,7 +53,7 @@ class UserNotifications
             
             if ($type)
             {
-                $query->where(self::class . '.notificationType = :type', ['type' => $type]);
+                $query->andWhere(self::class . '.notificationType = :type:', ['type' => $type]);
             }
             
             return $query

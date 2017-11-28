@@ -31,7 +31,7 @@
         img {
           display: block;
           border-radius: 6px;
-          @include rem(width, 60);
+          @include rem(width, 42);
           @include rem(margin-right, 16);
         }
       }
@@ -481,6 +481,10 @@
 
         .active {
           background: $logo-color;
+          margin: 5px;
+          padding: 9px 11px;
+          font-size: 12px;
+          border-radius: 6px;
         }
       }
 
@@ -974,8 +978,8 @@
     a {
       text-decoration: none;
       font-size: 14px;
-      font-weight: 300;
-      text-transform: uppercase;
+      font-weight: 500;
+      text-transform: capitalize;
       color: #B1BBC7;
       background: transparent;
       @include rem(margin-right, 24);
@@ -987,10 +991,10 @@
     }
 
     button {
-      font-weight: 400;
-      text-transform: uppercase;
+      font-weight: 500;
+      text-transform: capitalize;
       color: white;
-      background: $logo-color;
+      background: $logo-color; 
       border: none;
       border-radius: 4px;
       @include rem(font-size, 14);

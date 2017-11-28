@@ -43,10 +43,14 @@ class TableContent
         foreach ($rows as $row)
         {
             $votesData[] = [
-                'votes' => $row->votesCount,
-                'upvoted' => !!$row->userHasVoted,
+                'rowId' => $row['id'],
+                'votes' => $row['votesCount'],
+                'upvoted' => !!$row['userHasVoted'],
             ];
-            $rowData[]   = json_decode($row->content);
+            $rowData[]   = [
+                'id' => $row['id'],
+                'content' => json_decode($row->content),
+            ];
         }
         
         $tableColumns = TableColumns::findAllByFieldValue('tableId', $tableId);

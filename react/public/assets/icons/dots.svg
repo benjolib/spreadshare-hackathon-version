@@ -1,0 +1,35 @@
+<svg width="41" height="40" viewBox="0 0 41 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>Rectangle 2</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(-1761 -20608)">
+<rect x="1761" y="20608" width="41" height="40" fill="#FFFFFF"/>
+<clipPath id="clip-0" clip-rule="evenodd">
+<path d="M 382 20131L 1822 20131L 1822 22131L 382 22131L 382 20131Z" fill="#FFFFFF"/>
+</clipPath>
+<g id="Detail Page (User) - Table " clip-path="url(#clip-0)">
+<path d="M 382 20131L 1822 20131L 1822 22131L 382 22131L 382 20131Z" fill="#F2F2F8"/>
+<g id="Rectangle 16">
+<use xlink:href="#path0_fill" transform="matrix(1 0 0 -1 382 20668)" fill="#FFFFFF"/>
+</g>
+<g id="Search bar">
+<g id="Rectangle 2">
+<use xlink:href="#path1_fill" transform="matrix(-1 0 0 1 1801.03 20608)" fill="#F2F2F8"/>
+</g>
+<g id="Rectangle 17">
+<use xlink:href="#path2_fill" transform="translate(1779.03 20626)" fill="#9BAABF"/>
+</g>
+<g id="Rectangle 17">
+<use xlink:href="#path2_fill" transform="translate(1779.03 20632)" fill="#9BAABF"/>
+</g>
+<g id="Rectangle 17">
+<use xlink:href="#path2_fill" transform="translate(1779.03 20620)" fill="#9BAABF"/>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_fill" fill-rule="evenodd" d="M 0 0L 1440 0L 1440 80L 0 80L 0 0Z"/>
+<path id="path1_fill" fill-rule="evenodd" d="M 0 4C 0 1.79086 1.79086 0 4 0L 36 0C 38.2091 0 40 1.79086 40 4L 40 36C 40 38.2091 38.2091 40 36 40L 4 40C 1.79086 40 0 38.2091 0 36L 0 4Z"/>
+<path id="path2_fill" fill-rule="evenodd" d="M 0 1C 0 0.447715 0.447715 0 1 0L 3 0C 3.55228 0 4 0.447715 4 1L 4 3C 4 3.55228 3.55228 4 3 4L 1 4C 0.447715 4 0 3.55228 0 3L 0 1Z"/>
+</defs>
+</svg>

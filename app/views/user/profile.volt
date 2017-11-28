@@ -77,41 +77,20 @@
     <div class="profile__content__wrapper">
       <div class="profile__content__tables">
         <div class="profile__content__tables__cards">
-          {% for table in tables %}
-          {{ partial('partials/table') }}
-          {% endfor %}
+          {% if tables OR users %}
 
-          {% if users %}
-          <div class="tableUsers">
-            {% for user in users %}
-            <div class="tableUsers__item">
-              <div class="tableUsers__item__avatar">
-                <img src="{{ user['image'] }}" />
+            {{ partial('user/profile/tables') }}
+            {{ partial('user/profile/users') }}
+
+          {% else %}
+            <div class="container__content center" style="width:100%;padding: 40px;">
+              <div class="center" style="width:100%;">
+                <img src="/assets/images/desktop.png" alt="" />
+                <p>&nbsp;</p>
+                <p>There are no items available for your filter "<strong>{{ currentPage }}</strong>".</p>
               </div>
-              <div class="tableUsers__item__info">
-                <div class="tableUsers__item__info__title">
-                  <h5><a href="/user/{{ user['handle'] }}">{{ user['name'] }}</a></h5>
-                </div>
-                <div class="tableUsers__item__info__subtitle">
-                  {% if user['location'] and user['tagline']%}
-                  <p>{{ user['location'] }} ● {{ user['tagline'] }}</p>
-                  {% elseif user['location'] %}
-                  <p>{{ user['location'] }}</p>
-                  {% elseif user['tagline'] %}
-                  <p>{{ user['tagline'] }}</p>
-                  {% endif %}
-                </div>
-              </div>
-              {% if auth.loggedIn() and auth.getUserId() == profile.id %}
-              <div class="tableUsers__item__follow">
-                <button class="follow-user {% if user['following'] %}following-user selected {% else %}not-following-user {% endif %}" data-id="{{ user['id'] }}" type="button"></button>
-              </div>
-              {% endif %}
             </div>
-            {% endfor %}
-          </div>
           {% endif %}
-
         </div>
       </div>
       <aside class="profile__content__aside">

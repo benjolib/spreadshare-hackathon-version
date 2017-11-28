@@ -76,6 +76,14 @@ return [
         'methods' => ['GET'],
     ],
     [
+        'url' => '/feed/{type:[a-zA-Z0-9\-]+}',
+        'paths' => [
+            'controller' => 'Feed',
+            'action' => 'index',
+        ],
+        'methods' => ['GET'],
+    ],
+    [
         'url' => '/settings',
         'paths' => [
             'controller' => 'User_Settings',

@@ -70,7 +70,6 @@
     padding: 6px 16px;
     margin-top: 0 !important;
     vertical-align: middle !important;
-    padding: 6px 16px;
     margin-bottom: 3px;
     position: relative;
     margin: 0 !important;
@@ -126,6 +125,12 @@
   }
 
   .Select-input {
-    height: 50px !important;
+    height: 40px !important;
   }
+}
+
+.Select-input > input {
+  padding: 0px 0 0px !important;
+  margin-top: 0px !important;
+  height: 36px !important;  
 }

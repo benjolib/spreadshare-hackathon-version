@@ -23,9 +23,9 @@
           </div>
         </div>
       </div>
-      <div class="signup__content__form__buttons">
+      <!-- <div class="signup__content__form__buttons">
         <button class="button">CONTINUE</button>
-      </div>
+      </div> -->
     </form>
     <aside class="topics__content__aside">
       <div class="topics__content__aside__box">

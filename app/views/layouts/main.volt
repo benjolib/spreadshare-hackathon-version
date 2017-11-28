@@ -56,61 +56,12 @@
 {# main section #}
 <section class="main">
   {{ flash.output() }}
+
   {# content #}
   {% block content %}{% endblock %}
+
   {# footer #}
-  <footer class="footer">
-    <div class="footer__top">
-      <div class="footer__top__left">
-        <h2>SpreadShare</h2>
-        <h3>Community curated Tables</h3>
-        <p>Explore community-curated tables for startups and professionals</p>
-      </div>
-      <div class="footer__top__right">
-        <div class="footer__top__right__column footer__top__right__column--first">
-          <p>HELLO</p>
-          <ul>
-            <li><a href="/about">About</a></li>
-            <li><a href="/team">Blog</a></li>
-          </ul>
-        </div>
-        <div class="footer__top__right__column footer__top__right__column--second">
-          <p>GET INVOLVED</p>
-          <ul>
-            <li><a href="/jobs">Tasks & Jobs</a></li>
-            <li><a href="/feature-voting">Feature Voting</a></li>
-            <li><a href="/token">Token</a></li>
-            <li><a href="/donate">Contribute</a></li>
-          </ul>
-        </div>
-        <div class="footer__top__right__column footer__top__right__column--third">
-          <p>IMPORTANT</p>
-          <ul>
-            <li><a href="/faq">Frequently Asked</a></li>
-            <li><a href="/terms">Terms Of Use</a></li>
-            <li><a href="/privacy">Privacy Policy</a></li>
-            <li><a href="/disclaimer">Disclaimer</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="footer__bottom">
-      <div class="footer__bottom__rights">
-        <p>All Rights Reserved @ spreadshare.co</p>
-      </div>
-      <div class="footer__bottom__social">
-        <ul>
-          <li><a href="https://www.facebook.com/groups/403500643362775">Facebook</a></li>
-          <li>●</li>
-          <li><a href="https://twitter.com/SpreadShareCo">Twitter</a></li>
-          <li>●</li>
-          <li><a href="https://medium.com/spreadshare">Medium</a></li>
-          <li>●</li>
-          <li><a href="https://www.producthunt.com/posts/spreadshare">Product Hunt</a></li>
-        </ul>
-      </div>
-    </div>
-  </footer>
+  {{ partial('layouts/footer') }}
 </section>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
@@ -180,19 +131,24 @@
     $('button.subscribe').api({
       method: 'POST',
       onSuccess: function (response, button) {
-        button.toggleClass('subscribed');
+        if (response.data.subscribed) {
+          button.addClass('subscribed');
+        } else {
+          button.removeClass('subscribed');
+        }
       },
     });
     $('button.follow-user').api({
       method: 'POST',
       action: 'follow-user',
+      onRequest: showLoading,
       onSuccess: function (response, button) {
         $(button).toggleClass('selected').toggleClass('following-user').toggleClass('not-following-user');
       },
     });
   });
 </script>
-<script type="text/javascript" src="/js/react/main.dc2f38dd.js"></script>
+<script type="text/javascript" src="/js/react/main.4fef1596.js"></script>
 {% block scripts %}{% endblock %}
 </body>
 </html>
