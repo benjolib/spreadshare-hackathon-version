@@ -39,6 +39,7 @@ class TableRows
      * @param int $tableId
      * @param int $lineNumber
      *
+     * @deprecated currently unused, delete maybe
      * @return Abstracts\AbstractTableRows|\Phalcon\Mvc\Model\ResultInterface
      */
     public static function findByTableIdAndLineNumber(int $tableId, int $lineNumber)

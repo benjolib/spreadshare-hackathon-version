@@ -39,7 +39,7 @@
         </div>
         <div class="login__content__aside__social__twitter">
           <img src="/assets/icons/twitter.svg" />
-          <a href="/login/twitter">conect via Twitter</a>
+          <a href="/login/twitter">connect via Twitter</a>
         </div>
         <div class="login__content__aside__social__google">
           <img src="/assets/icons/google.svg" />

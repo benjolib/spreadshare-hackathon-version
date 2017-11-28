@@ -49,18 +49,17 @@ class TableContent
             ];
             $rowData[]   = [
                 'id' => $row['id'],
-<<<<<<< HEAD
-                'content' => json_decode($row->content),
-=======
                 'content' => json_decode($row->content, true),
->>>>>>> 9de25582cb16ee23c1ac75ea5f54360b837d2141
             ];
         }
         
         $tableColumns = TableColumns::findAllByFieldValue('tableId', $tableId);
         foreach ($tableColumns as $col)
         {
-            $columnData[] = $col->getTitle();
+            $columnData[] = [
+                'id' => $col->getId(),
+                'title' => $col->getTitle(),
+            ];
         }
         
         return [
@@ -155,18 +154,18 @@ class TableContent
     
     /**
      * @param int    $tableId
-     * @param int    $lineNumber
+     * @param int    $rowId
      * @param string $rowData
      *
      * @deprecated, use editCell
      * @return $this
      */
-    public function editRow(int $tableId, int $lineNumber, string $rowData): TableContent
+    public function editRow(int $tableId, int $rowId, string $rowData): TableContent
     {
         $rowDataArray = json_decode($rowData);
         if (is_array($rowDataArray))
         {
-            $tableRowModel = TableRows::findByTableIdAndLineNumber($tableId, $lineNumber);
+            $tableRowModel = TableRows::findFirstById($rowId);
             $tableRowModel->setContent($rowData)
                           ->save();
         }
