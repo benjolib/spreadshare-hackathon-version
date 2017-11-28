@@ -94,4 +94,20 @@ export type TablesAction =
         rowId: string,
         error: Error
       }
+    }
+  | {
+      type: "ADD_ROW_REQUEST",
+      payload: { tableId: string, row: Array<string> }
+    }
+  | {
+      type: "ADD_ROW_SUCCESS",
+      payload: { tableId: string, row: Array<string> }
+    }
+  | {
+      type: "ADD_ROW_ERROR",
+      payload: {
+        tableId: string,
+        row: Array<string>,
+        error: Error
+      }
     };

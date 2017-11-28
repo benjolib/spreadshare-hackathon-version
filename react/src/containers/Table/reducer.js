@@ -100,6 +100,21 @@ export const tablesReducer = (
       return state;
     }
 
+    case "ADD_ROW_REQUEST": {
+      // TODO: maybe show loader
+      return state;
+    }
+
+    case "ADD_ROW_SUCCESS": {
+      // TODO: show message like (success, your edit is now awaiting approval)
+      return state;
+    }
+
+    case "ADD_ROW_ERROR": {
+      // TODO: show error
+      return state;
+    }
+
     default: {
       return state;
     }

@@ -1,6 +1,6 @@
 // @flow
 import type { Dispatch, Action, ThunkAction } from "../../types";
-import type { Table, Cell } from "./types";
+import type { Table, Row, Cell } from "./types";
 import { fetchDataApi, saveDataApi } from "../../api";
 import dummyTable from "./dummyTable";
 
@@ -53,7 +53,7 @@ export const fetchTable = (tableId: string): ThunkAction => (
   }
 };
 
-// EDIT ROW ACTIONS
+// EDIT CELL ACTIONS
 
 export const editCellRequest = (
   tableId: string,
@@ -182,6 +182,61 @@ export const voteRow = (tableId: string, rowId: string): ThunkAction => (
   } else {
     setTimeout(() => {
       dispatch(voteRowSuccess(tableId, rowId));
+    }, 500);
+  }
+};
+
+// ADD ROW ACTIONS
+
+export const addRowRequest = (tableId: string, row: Array<string>): Action => ({
+  type: "ADD_ROW_REQUEST",
+  payload: {
+    tableId,
+    row
+  }
+});
+
+export const addRowSuccess = (tableId: string, row: Array<string>): Action => ({
+  type: "ADD_ROW_SUCCESS",
+  payload: {
+    tableId,
+    row
+  }
+});
+
+export const addRowError = (
+  tableId: string,
+  row: Array<string>,
+  error: Error
+): Action => ({
+  type: "ADD_ROW_ERROR",
+  payload: {
+    tableId,
+    row,
+    error
+  }
+});
+
+// thunk
+
+export const addRow = (tableId: string, row: Array<string>): ThunkAction => (
+  dispatch: Dispatch
+) => {
+  dispatch(addRowRequest(tableId, row));
+  if (process.env.NODE_ENV === "production") {
+    saveDataApi(`add-row/${tableId}`, {
+      row
+    }).then(({ error }: { error: Error }) => {
+      if (error) {
+        dispatch(addRowError(tableId, row, new Error(error)));
+        return;
+      }
+
+      dispatch(addRowSuccess(tableId, row));
+    });
+  } else {
+    setTimeout(() => {
+      dispatch(addRowSuccess(tableId, row));
     }, 500);
   }
 };

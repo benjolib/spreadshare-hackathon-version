@@ -23,7 +23,7 @@ if (process.env.NODE_ENV === "production") {
     TopicsSelect,
     ContentTypeSelect,
     TagsSelect,
-    TableSelect,
+    TableSelect
   };
 
   const renderAppInDom = el => {
@@ -63,7 +63,7 @@ if (process.env.NODE_ENV === "production") {
         </div>
         <div>
           <h1>ContentTypeSelect</h1>
-          <ContentTypeSelect />
+          {/* <ContentTypeSelect /> */}
         </div>
         <div>
           <h1>TagsSelect</h1>

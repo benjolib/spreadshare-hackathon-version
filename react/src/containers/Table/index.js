@@ -10,9 +10,11 @@ import TableButton from "../../components/TableButton";
 import TableSearch from "../../components/TableSearch";
 import TableLoading from "../../components/TableLoading";
 import TableError from "../../components/TableError";
-import { voteRow, editCell, fetchTable } from "./actions";
+import { addRow, voteRow, editCell, fetchTable } from "./actions";
 import type { ReduxState } from "../../types";
-import type { TableDataWrapper, Rows, Votes, RowsWithVotes } from "./types";
+import type { TableDataWrapper, Votes, RowsWithVotes } from "./types";
+import addButtonRenderer from "../../lib/addButtonRenderer";
+import addInputRenderer from "../../lib/addInputRenderer";
 import votesRenderer from "../../lib/votesRenderer";
 import cellRenderer from "../../lib/cellRenderer";
 import TableSortingMenu from "../../components/TableSortingMenu";
@@ -23,18 +25,23 @@ type Props = {
   data: TableDataWrapper,
   fetchTable: typeof fetchTable,
   editCell: typeof editCell,
-  voteRow: typeof voteRow
+  voteRow: typeof voteRow,
+  addRow: typeof addRow
 };
 
 type State = {
   searchValue: string,
-  sortings: Sortings
+  sortings: Sortings,
+  showAdd: boolean,
+  addRowDataGetters: Array<Function>
 };
 
 class Table extends Component<Props, State> {
   state = {
     searchValue: "",
-    sortings: []
+    sortings: [],
+    showAdd: false,
+    addRowDataGetters: []
   };
 
   state: State;
@@ -57,6 +64,44 @@ class Table extends Component<Props, State> {
     this.setState({
       sortings
     });
+  };
+
+  showAdd = () => {
+    this.setState({
+      showAdd: true
+    });
+    // recalculate height after cells render
+    setTimeout(() => {
+      this.hot.hotInstance.render();
+    }, 0);
+  };
+
+  hideAdd = () => {
+    this.setState({
+      showAdd: false,
+      addRowDataGetters: []
+    });
+  };
+
+  addRow = () => {
+    this.props.addRow(
+      this.props.id,
+      this.state.addRowDataGetters.map(x => x())
+    );
+    this.hideAdd();
+  };
+
+  setupDataGetter = (col: number, dataGetter: Function) => {
+    console.log(this.state.addRowDataGetters);
+    console.log(col);
+    console.log(dataGetter);
+    this.setState(prevState => ({
+      addRowDataGetters: [
+        ...prevState.addRowDataGetters.slice(0, col - 1),
+        dataGetter,
+        ...prevState.addRowDataGetters.slice(col)
+      ]
+    }));
   };
 
   contextMenuCallback = (key, options) => {
@@ -135,6 +180,23 @@ class Table extends Component<Props, State> {
       )
     );
 
+  hotDataMaybeShowAdd = (colHeaders, showAdd: boolean) => (
+    rows: RowsWithVotes
+  ) => {
+    console.log(showAdd);
+    if (showAdd) {
+      const rowsWithAdd: RowsWithVotes = [
+        {
+          id: null,
+          content: colHeaders.map((colHeader, i) => "")
+        },
+        ...rows
+      ];
+      return rowsWithAdd;
+    }
+    return rows;
+  };
+
   hotDataFlattenRows = (rows: RowsWithVotes) => rows.map(row => row.content);
 
   render() {
@@ -155,6 +217,7 @@ class Table extends Component<Props, State> {
       this.hotDataFilters,
       this.hotDataSearchRows(this.state.searchValue),
       this.hotDataSortings(colHeaders, this.state.sortings),
+      this.hotDataMaybeShowAdd(colHeaders, this.state.showAdd),
       this.hotDataFlattenRows
     );
 
@@ -163,7 +226,7 @@ class Table extends Component<Props, State> {
         <TableHeader>
           <TableButton icon="sort" />
           <TableButton icon="filter" />
-          <TableButton icon="add" />
+          <TableButton icon="add" onClick={this.showAdd} />
           <TableSearch onChange={this.updateSearchValue} />
           <TableButton icon="eye" />
         </TableHeader>
@@ -183,12 +246,28 @@ class Table extends Component<Props, State> {
             }}
             colHeaders={colHeaders}
             data={hotData(this.props.data.table.rows)}
-            columns={col => {
+            cells={(row, col) => {
+              if (this.state.showAdd && row === 0) {
+                if (col === 0) {
+                  return {
+                    readOnly: true,
+                    renderer: addButtonRenderer({
+                      addRow: this.addRow,
+                      hideAdd: this.hideAdd
+                    })
+                  };
+                }
+                return {
+                  readOnly: true,
+                  renderer: addInputRenderer({
+                    setupDataGetter: this.setupDataGetter
+                  })
+                };
+              }
               if (col === 0) {
                 return {
                   readOnly: true,
                   renderer: votesRenderer({
-                    tableId: this.props.id,
                     voteRow: rowId => this.props.voteRow(this.props.id, rowId)
                   })
                 };
@@ -204,6 +283,7 @@ class Table extends Component<Props, State> {
               }
             }}
             fixedColumnsLeft={1}
+            fixedRowsTop={this.state.showAdd ? 1 : 0}
             stretchH="all"
             contextMenuCopyPaste
             contextMenu={{
@@ -231,7 +311,8 @@ const mapStateToProps = (state: ReduxState, ownProps: Props) => ({
 const mapDispatchToProps = {
   fetchTable,
   editCell,
-  voteRow
+  voteRow,
+  addRow
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Table);

@@ -16,9 +16,10 @@ type Props = {
   icon: string
 };
 
-const TableButton = (props: Props) =>
-  <StyledButton>
+const TableButton = (props: Props) => (
+  <StyledButton {...props}>
     <img src={`/assets/icons/${props.icon}.svg`} alt="" />
-  </StyledButton>;
+  </StyledButton>
+);
 
 export default TableButton;
