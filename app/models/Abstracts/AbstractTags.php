@@ -141,8 +141,8 @@ abstract class AbstractTags extends \DS\Model\Base
     {
         $this->setSchema("spreadshare");
         $this->setSource("tags");
-        $this->hasMany('id', 'DS\Model\Abstracts\TableTags', 'tagId', ['alias' => 'TableTags']);
-        $this->belongsTo('userId', 'DS\Model\Abstracts\User', 'id', ['alias' => 'User']);
+        $this->hasMany('id', 'DS\Model\TableTags', 'tagId', ['alias' => 'TableTags']);
+        $this->belongsTo('userId', 'DS\Model\User', 'id', ['alias' => 'User']);
     }
 
     /**

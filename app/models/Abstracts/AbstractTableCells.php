@@ -291,11 +291,11 @@ abstract class AbstractTableCells extends \DS\Model\Base
     {
         $this->setSchema("spreadshare");
         $this->setSource("tableCells");
-        $this->hasMany('id', 'DS\Model\Abstracts\ChangeRequests', 'cellId', ['alias' => 'ChangeRequests']);
-        $this->belongsTo('columnId', 'DS\Model\Abstracts\TableColumns', 'id', ['alias' => 'TableColumns']);
-        $this->belongsTo('rowId', 'DS\Model\Abstracts\TableRows', 'id', ['alias' => 'TableRows']);
-        $this->belongsTo('updatedById', 'DS\Model\Abstracts\User', 'id', ['alias' => 'User']);
-        $this->belongsTo('userId', 'DS\Model\Abstracts\User', 'id', ['alias' => 'User']);
+        $this->hasMany('id', 'DS\Model\ChangeRequests', 'cellId', ['alias' => 'ChangeRequests']);
+        $this->belongsTo('columnId', 'DS\Model\TableColumns', 'id', ['alias' => 'TableColumns']);
+        $this->belongsTo('rowId', 'DS\Model\TableRows', 'id', ['alias' => 'TableRows']);
+        $this->belongsTo('updatedById', 'DS\Model\User', 'id', ['alias' => 'User']);
+        $this->belongsTo('userId', 'DS\Model\User', 'id', ['alias' => 'User']);
     }
 
     /**

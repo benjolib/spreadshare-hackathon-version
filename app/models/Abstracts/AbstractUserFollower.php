@@ -141,8 +141,8 @@ abstract class AbstractUserFollower extends \DS\Model\Base
     {
         $this->setSchema("spreadshare");
         $this->setSource("userFollower");
-        $this->belongsTo('followedByUserId', 'DS\Model\Abstracts\User', 'id', ['alias' => 'User']);
-        $this->belongsTo('userId', 'DS\Model\Abstracts\User', 'id', ['alias' => 'User']);
+        $this->belongsTo('followedByUserId', 'DS\Model\User', 'id', ['alias' => 'User']);
+        $this->belongsTo('userId', 'DS\Model\User', 'id', ['alias' => 'User']);
     }
 
     /**

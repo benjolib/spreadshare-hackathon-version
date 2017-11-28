@@ -81,8 +81,8 @@ abstract class AbstractUserTopics extends \DS\Model\Base
     {
         $this->setSchema("spreadshare");
         $this->setSource("userTopics");
-        $this->belongsTo('topicId', 'DS\Model\Abstracts\Topics', 'id', ['alias' => 'Topics']);
-        $this->belongsTo('userId', 'DS\Model\Abstracts\User', 'id', ['alias' => 'User']);
+        $this->belongsTo('topicId', 'DS\Model\Topics', 'id', ['alias' => 'Topics']);
+        $this->belongsTo('userId', 'DS\Model\User', 'id', ['alias' => 'User']);
     }
 
     /**

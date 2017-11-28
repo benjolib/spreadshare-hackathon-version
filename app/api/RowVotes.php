@@ -25,19 +25,19 @@ class RowVotes
 {
     
     /**
-     * Vote for a table. Returns true if user upvoted, false if downvoted.
+     * Vote for a table's row
      *
-     * @param int   $userId
-     * @param array $topicIds
+     * @param int $userId
+     * @param int $rowId
      *
      * @return bool
      */
-    public function voteForRow(int $userId, int $tableId, int $lineNumber): bool
+    public function voteForRow(int $userId, int $rowId): bool
     {
-        $row = TableRows::findByTableIdAndLineNumber($tableId, $lineNumber);
-        if ($row)
+        $row = TableRows::findFirstById($rowId);
+        if (!$row)
         {
-            throw new \InvalidArgumentException('Line number does not exist for this table.');
+            throw new \InvalidArgumentException('This row does not exist.');
         }
         
         $votes = TableRowVotes::findVote($userId, $row->getId());

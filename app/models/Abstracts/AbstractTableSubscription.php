@@ -111,8 +111,8 @@ abstract class AbstractTableSubscription extends \DS\Model\Base
     {
         $this->setSchema("spreadshare");
         $this->setSource("tableSubscription");
-        $this->belongsTo('tableId', 'DS\Model\Abstracts\Tables', 'id', ['alias' => 'Tables']);
-        $this->belongsTo('userId', 'DS\Model\Abstracts\User', 'id', ['alias' => 'User']);
+        $this->belongsTo('tableId', 'DS\Model\Tables', 'id', ['alias' => 'Tables']);
+        $this->belongsTo('userId', 'DS\Model\User', 'id', ['alias' => 'User']);
     }
 
     /**

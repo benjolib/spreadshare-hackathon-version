@@ -62,13 +62,20 @@ class Post extends ActionHandler implements MethodInterface
      */
     public function process()
     {
-        if ($this->request->isAjax() && $this->action)
+        if ($this->action)
         {
             $userId = $this->getServiceManager()->getAuth()->getUserId();
             
             if ($userId > 0)
             {
-                return new Record(['voted' => (new RowVotes())->voteForRow($userId, $this->action, $this->request->getPost('lineNumber'))]);
+                $data = $this->request->getJsonRawBody(true);
+                
+                if (!isset($data['rowId']))
+                {
+                    throw new \InvalidArgumentException('Parameter rowId missing.');
+                }
+                
+                return new Record(['voted' => (new RowVotes())->voteForRow($userId, $data['rowId'])]);
             }
         }
         

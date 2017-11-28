@@ -111,8 +111,8 @@ abstract class AbstractTableRowVotes extends \DS\Model\Base
     {
         $this->setSchema("spreadshare");
         $this->setSource("tableRowVotes");
-        $this->belongsTo('rowId', 'DS\Model\Abstracts\TableRows', 'id', ['alias' => 'TableRows']);
-        $this->belongsTo('userId', 'DS\Model\Abstracts\User', 'id', ['alias' => 'User']);
+        $this->belongsTo('rowId', 'DS\Model\TableRows', 'id', ['alias' => 'TableRows']);
+        $this->belongsTo('userId', 'DS\Model\User', 'id', ['alias' => 'User']);
     }
 
     /**

@@ -111,8 +111,8 @@ abstract class AbstractTableRelations extends \DS\Model\Base
     {
         $this->setSchema("spreadshare");
         $this->setSource("tableRelations");
-        $this->belongsTo('relatedTableId', 'DS\Model\Abstracts\Tables', 'id', ['alias' => 'Tables']);
-        $this->belongsTo('tableId', 'DS\Model\Abstracts\Tables', 'id', ['alias' => 'Tables']);
+        $this->belongsTo('relatedTableId', 'DS\Model\Tables', 'id', ['alias' => 'Tables']);
+        $this->belongsTo('tableId', 'DS\Model\Tables', 'id', ['alias' => 'Tables']);
     }
 
     /**

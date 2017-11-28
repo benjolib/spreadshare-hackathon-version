@@ -351,22 +351,22 @@ abstract class AbstractTables extends \DS\Model\Base
     {
         $this->setSchema("spreadshare");
         $this->setSource("tables");
-        $this->hasMany('id', 'DS\Model\Abstracts\TableColumns', 'tableId', ['alias' => 'TableColumns']);
-        $this->hasMany('id', 'DS\Model\Abstracts\TableComments', 'tableId', ['alias' => 'TableComments']);
-        $this->hasMany('id', 'DS\Model\Abstracts\TableLocations', 'tableId', ['alias' => 'TableLocations']);
-        $this->hasMany('id', 'DS\Model\Abstracts\TableLog', 'tableId', ['alias' => 'TableLog']);
-        $this->hasMany('id', 'DS\Model\Abstracts\TableRelations', 'relatedTableId', ['alias' => 'TableRelations']);
-        $this->hasMany('id', 'DS\Model\Abstracts\TableRelations', 'tableId', ['alias' => 'TableRelations']);
-        $this->hasMany('id', 'DS\Model\Abstracts\TableRows', 'tableId', ['alias' => 'TableRows']);
-        $this->hasMany('id', 'DS\Model\Abstracts\TableStats', 'tableId', ['alias' => 'TableStats']);
-        $this->hasMany('id', 'DS\Model\Abstracts\TableSubscription', 'tableId', ['alias' => 'TableSubscription']);
-        $this->hasMany('id', 'DS\Model\Abstracts\TableTags', 'tableId', ['alias' => 'TableTags']);
-        $this->hasMany('id', 'DS\Model\Abstracts\TableTokens', 'tableId', ['alias' => 'TableTokens']);
-        $this->hasMany('id', 'DS\Model\Abstracts\TableVotes', 'tableId', ['alias' => 'TableVotes']);
-        $this->belongsTo('ownerUserId', 'DS\Model\Abstracts\User', 'id', ['alias' => 'User']);
-        $this->belongsTo('topic1Id', 'DS\Model\Abstracts\Topics', 'id', ['alias' => 'Topics']);
-        $this->belongsTo('topic2Id', 'DS\Model\Abstracts\Topics', 'id', ['alias' => 'Topics']);
-        $this->belongsTo('typeId', 'DS\Model\Abstracts\Types', 'id', ['alias' => 'Types']);
+        $this->hasMany('id', 'DS\Model\TableColumns', 'tableId', ['alias' => 'TableColumns']);
+        $this->hasMany('id', 'DS\Model\TableComments', 'tableId', ['alias' => 'TableComments']);
+        $this->hasMany('id', 'DS\Model\TableLocations', 'tableId', ['alias' => 'TableLocations']);
+        $this->hasMany('id', 'DS\Model\TableLog', 'tableId', ['alias' => 'TableLog']);
+        $this->hasMany('id', 'DS\Model\TableRelations', 'relatedTableId', ['alias' => 'TableRelations']);
+        $this->hasMany('id', 'DS\Model\TableRelations', 'tableId', ['alias' => 'TableRelations']);
+        $this->hasMany('id', 'DS\Model\TableRows', 'tableId', ['alias' => 'TableRows']);
+        $this->hasMany('id', 'DS\Model\TableStats', 'tableId', ['alias' => 'TableStats']);
+        $this->hasMany('id', 'DS\Model\TableSubscription', 'tableId', ['alias' => 'TableSubscription']);
+        $this->hasMany('id', 'DS\Model\TableTags', 'tableId', ['alias' => 'TableTags']);
+        $this->hasMany('id', 'DS\Model\TableTokens', 'tableId', ['alias' => 'TableTokens']);
+        $this->hasMany('id', 'DS\Model\TableVotes', 'tableId', ['alias' => 'TableVotes']);
+        $this->belongsTo('ownerUserId', 'DS\Model\User', 'id', ['alias' => 'User']);
+        $this->belongsTo('topic1Id', 'DS\Model\Topics', 'id', ['alias' => 'Topics']);
+        $this->belongsTo('topic2Id', 'DS\Model\Topics', 'id', ['alias' => 'Topics']);
+        $this->belongsTo('typeId', 'DS\Model\Types', 'id', ['alias' => 'Types']);
     }
 
     /**

@@ -291,7 +291,7 @@ abstract class AbstractTableStats extends \DS\Model\Base
     {
         $this->setSchema("spreadshare");
         $this->setSource("tableStats");
-        $this->belongsTo('tableId', 'DS\Model\Abstracts\Tables', 'id', ['alias' => 'Tables']);
+        $this->belongsTo('tableId', 'DS\Model\Tables', 'id', ['alias' => 'Tables']);
     }
 
     /**

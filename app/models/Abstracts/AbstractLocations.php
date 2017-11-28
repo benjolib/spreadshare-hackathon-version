@@ -201,9 +201,9 @@ abstract class AbstractLocations extends \DS\Model\Base
     {
         $this->setSchema("spreadshare");
         $this->setSource("locations");
-        $this->hasMany('id', 'DS\Model\Abstracts\TableLocations', 'locationId', ['alias' => 'TableLocations']);
-        $this->hasMany('id', 'DS\Model\Abstracts\UserLocations', 'locationId', ['alias' => 'UserLocations']);
-        $this->belongsTo('cityId', 'DS\Model\Abstracts\Cities', 'id', ['alias' => 'Cities']);
+        $this->hasMany('id', 'DS\Model\TableLocations', 'locationId', ['alias' => 'TableLocations']);
+        $this->hasMany('id', 'DS\Model\UserLocations', 'locationId', ['alias' => 'UserLocations']);
+        $this->belongsTo('cityId', 'DS\Model\Cities', 'id', ['alias' => 'Cities']);
     }
 
     /**

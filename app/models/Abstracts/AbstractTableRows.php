@@ -291,10 +291,10 @@ abstract class AbstractTableRows extends \DS\Model\Base
     {
         $this->setSchema("spreadshare");
         $this->setSource("tableRows");
-        $this->hasMany('id', 'DS\Model\Abstracts\TableCells', 'rowId', ['alias' => 'TableCells']);
-        $this->hasMany('id', 'DS\Model\Abstracts\TableRowVotes', 'rowId', ['alias' => 'TableRowVotes']);
-        $this->belongsTo('tableId', 'DS\Model\Abstracts\Tables', 'id', ['alias' => 'Tables']);
-        $this->belongsTo('userId', 'DS\Model\Abstracts\User', 'id', ['alias' => 'User']);
+        $this->hasMany('id', 'DS\Model\TableCells', 'rowId', ['alias' => 'TableCells']);
+        $this->hasMany('id', 'DS\Model\TableRowVotes', 'rowId', ['alias' => 'TableRowVotes']);
+        $this->belongsTo('tableId', 'DS\Model\Tables', 'id', ['alias' => 'Tables']);
+        $this->belongsTo('userId', 'DS\Model\User', 'id', ['alias' => 'User']);
     }
 
     /**

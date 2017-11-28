@@ -59,34 +59,31 @@ class Post extends ActionHandler implements MethodInterface
      */
     public function process()
     {
-        if ($this->request->isAjax())
+        $tableId    = $this->action;
+        $lineNumber = $this->request->getPost('lineNumber');
+        $rowData    = $this->request->getPost('rowData');
+        
+        if ($tableId > 0 && $lineNumber > 0 && $rowData)
         {
-            $tableId    = $this->action;
-            $lineNumber = $this->request->getPost('lineNumber');
-            $rowData    = $this->request->getPost('rowData');
-            
-            if ($tableId > 0 && $lineNumber > 0 && $rowData)
+            $tableModel = Tables::findFirstById($tableId);
+            if (!$tableModel)
             {
-                $tableModel = Tables::findFirstById($tableId);
-                if (!$tableModel)
-                {
-                    throw new \InvalidArgumentException('The table that you want to edit does not exist.');
-                }
-                
-                // User is Owner and can directly edit!
-                if ($tableModel->getOwnerUserId() == $this->getServiceManager()->getAuth()->getUserId())
-                {
-                    $tableContent = new TableContent();
-                    $tableContent->editRow($tableId, $lineNumber, $rowData);
-                }
-                // User contribution has to be confirmed first.
-                else
-                {
-                
-                }
-                
-                return new Record(true);
+                throw new \InvalidArgumentException('The table that you want to edit does not exist.');
             }
+            
+            // User is Owner and can directly edit!
+            if ($tableModel->getOwnerUserId() == $this->getServiceManager()->getAuth()->getUserId())
+            {
+                $tableContent = new TableContent();
+                $tableContent->editRow($tableId, $lineNumber, $rowData);
+            }
+            // User contribution has to be confirmed first.
+            else
+            {
+                
+            }
+            
+            return new Record(true);
         }
         
         return new Record(false);

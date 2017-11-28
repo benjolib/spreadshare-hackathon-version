@@ -171,7 +171,7 @@ abstract class AbstractTypes extends \DS\Model\Base
     {
         $this->setSchema("spreadshare");
         $this->setSource("types");
-        $this->hasMany('id', 'DS\Model\Abstracts\Tables', 'typeId', ['alias' => 'Tables']);
+        $this->hasMany('id', 'DS\Model\Tables', 'typeId', ['alias' => 'Tables']);
     }
 
     /**
