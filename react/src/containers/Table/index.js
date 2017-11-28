@@ -19,6 +19,8 @@ import votesRenderer from "../../lib/votesRenderer";
 import cellRenderer from "../../lib/cellRenderer";
 import TableSortingMenu from "../../components/TableSortingMenu";
 import type { Sortings } from "../../components/TableSortingMenu";
+import TableFilterMenu from "../../components/TableFilterMenu";
+import type { Filters } from "../../components/TableFilterMenu";
 
 type Props = {
   id: string, // from server markup
@@ -32,7 +34,10 @@ type Props = {
 type State = {
   searchValue: string,
   sortings: Sortings,
+  filters: Filters,
   showAdd: boolean,
+  showSortings: boolean,
+  showFilters: boolean,
   addRowDataGetters: Array<Function>
 };
 
@@ -40,6 +45,7 @@ class Table extends Component<Props, State> {
   state = {
     searchValue: "",
     sortings: [],
+    filters: [],
     showSortings: false,
     showFilters: false,
     showAdd: false,
@@ -65,6 +71,12 @@ class Table extends Component<Props, State> {
   updateTableSortings = (sortings: Sortings) => {
     this.setState({
       sortings
+    });
+  };
+
+  updateTableFilters = (filters: Filters) => {
+    this.setState({
+      filters
     });
   };
 
@@ -275,6 +287,12 @@ class Table extends Component<Props, State> {
             onApply={this.updateTableSortings}
             colHeaders={colHeaders}
             appliedSortings={this.state.sortings}
+          />
+          <TableFilterMenu
+            hide={!this.state.showFilters}
+            onApply={this.updateTableFilters}
+            colHeaders={colHeaders}
+            appliedFilters={this.state.filters}
           />
         </div>
         <TableMain>

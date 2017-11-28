@@ -1,5 +1,19 @@
 // @flow
 import React from "react";
+import styled from "styled-components";
+
+const StyledDiv = styled.div`
+  position: absolute;
+  background: #fff;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+  top: -10px;
+  left: 410px;
+  height: 200px;
+  width: 400px;
+  padding: 10px;
+  z-index: 1000;
+  display: ${props => (props.hide ? "none" : "block")};
+`;
 
 export type Filters = Array<{
   by: string,
@@ -114,31 +128,25 @@ class TableFilterMenu extends React.Component<Props, State> {
   render() {
     const unusedColHeader = this.getUnusedColHeader();
     return (
-      <div>
+      <StyledDiv hide={this.props.hide}>
         <table>
           <tbody>
-            {this.state.filters.map((filter, i) =>
+            {this.state.filters.map((filter, i) => (
               <tr key={filter.by}>
                 <td>
                   <button onClick={() => this.removeFilter(i)}>x</button>
                 </td>
-                <td>
-                  {i ? "Where" : "And"}
-                </td>
+                <td>{i ? "Where" : "And"}</td>
                 <td>
                   <select value={filter.by} onChange={e => this.byChange(e, i)}>
-                    <option>
-                      {filter.by}
-                    </option>
+                    <option>{filter.by}</option>
                     {this.props.colHeaders
                       .filter(
                         colHeader => !this.state.usedColHeaders[colHeader]
                       )
-                      .map(colHeader =>
-                        <option key={colHeader}>
-                          {colHeader}
-                        </option>
-                      )}
+                      .map(colHeader => (
+                        <option key={colHeader}>{colHeader}</option>
+                      ))}
                   </select>
                 </td>
                 <td>
@@ -151,16 +159,17 @@ class TableFilterMenu extends React.Component<Props, State> {
                   </select>
                 </td>
               </tr>
-            )}
+            ))}
           </tbody>
         </table>
         <div>
-          {unusedColHeader &&
-            <button onClick={this.addFilter}>Add a filter</button>}
+          {unusedColHeader && (
+            <button onClick={this.addFilter}>Add a filter</button>
+          )}
           <button onClick={this.deleteFilters}>Delete</button>
           <button onClick={this.applyFilters}>Apply</button>
         </div>
-      </div>
+      </StyledDiv>
     );
   }
 }
