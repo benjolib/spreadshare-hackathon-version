@@ -1,5 +1,19 @@
 // @flow
 import React from "react";
+import styled from "styled-components";
+
+const StyledDiv = styled.div`
+  position: absolute;
+  background: #fff;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+  top: -10px;
+  left: 10px;
+  height: 200px;
+  width: 400px;
+  padding: 10px;
+  z-index: 1000;
+  display: ${props => (props.hide ? "none" : "block")};
+`;
 
 export type Sortings = Array<{
   by: string,
@@ -114,34 +128,28 @@ class TableSortingMenu extends React.Component<Props, State> {
   render() {
     const unusedColHeader = this.getUnusedColHeader();
     return (
-      <div>
+      <StyledDiv hide={this.props.hide}>
         <table>
           <tbody>
-            {this.state.sortings.map((sorting, i) =>
+            {this.state.sortings.map((sorting, i) => (
               <tr key={sorting.by}>
                 <td>
                   <button onClick={() => this.removeSorting(i)}>x</button>
                 </td>
-                <td>
-                  {i ? "Then" : "Sort by"}
-                </td>
+                <td>{i ? "Then" : "Sort by"}</td>
                 <td>
                   <select
                     value={sorting.by}
                     onChange={e => this.byChange(e, i)}
                   >
-                    <option>
-                      {sorting.by}
-                    </option>
+                    <option>{sorting.by}</option>
                     {this.props.colHeaders
                       .filter(
                         colHeader => !this.state.usedColHeaders[colHeader]
                       )
-                      .map(colHeader =>
-                        <option key={colHeader}>
-                          {colHeader}
-                        </option>
-                      )}
+                      .map(colHeader => (
+                        <option key={colHeader}>{colHeader}</option>
+                      ))}
                   </select>
                 </td>
                 <td>
@@ -154,16 +162,17 @@ class TableSortingMenu extends React.Component<Props, State> {
                   </select>
                 </td>
               </tr>
-            )}
+            ))}
           </tbody>
         </table>
         <div>
-          {unusedColHeader &&
-            <button onClick={this.addSorting}>Add a sorting</button>}
+          {unusedColHeader && (
+            <button onClick={this.addSorting}>Add a sorting</button>
+          )}
           <button onClick={this.deleteSortings}>Delete</button>
           <button onClick={this.applySortings}>Apply</button>
         </div>
-      </div>
+      </StyledDiv>
     );
   }
 }

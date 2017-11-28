@@ -10,6 +10,7 @@ const StyledButton = styled.button`
   height: 40px;
   background: #f2f2f8;
   margin: 0 4px;
+  cursor: pointer;
 `;
 
 type Props = {

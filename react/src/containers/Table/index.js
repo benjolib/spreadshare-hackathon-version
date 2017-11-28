@@ -40,6 +40,8 @@ class Table extends Component<Props, State> {
   state = {
     searchValue: "",
     sortings: [],
+    showSortings: false,
+    showFilters: false,
     showAdd: false,
     addRowDataGetters: []
   };
@@ -63,6 +65,42 @@ class Table extends Component<Props, State> {
   updateTableSortings = (sortings: Sortings) => {
     this.setState({
       sortings
+    });
+  };
+
+  showSortings = () => {
+    this.setState({
+      showSortings: true
+    });
+  };
+
+  hideSortings = () => {
+    this.setState({
+      showSortings: false
+    });
+  };
+
+  toggleSortings = () => {
+    this.setState({
+      showSortings: !this.state.showSortings
+    });
+  };
+
+  showFilters = () => {
+    this.setState({
+      showFilters: true
+    });
+  };
+
+  hideFilters = () => {
+    this.setState({
+      showFilters: false
+    });
+  };
+
+  toggleFilters = () => {
+    this.setState({
+      showFilters: !this.state.showFilters
     });
   };
 
@@ -224,17 +262,20 @@ class Table extends Component<Props, State> {
     return (
       <div>
         <TableHeader>
-          <TableButton icon="sort" />
-          <TableButton icon="filter" />
+          <TableButton icon="sort" onClick={this.toggleSortings} />
+          <TableButton icon="filter" onClick={this.toggleFilters} />
           <TableButton icon="add" onClick={this.showAdd} />
           <TableSearch onChange={this.updateSearchValue} />
           <TableButton icon="eye" />
         </TableHeader>
-        <TableSortingMenu
-          onApply={this.updateTableSortings}
-          colHeaders={colHeaders}
-          appliedSortings={this.state.sortings}
-        />
+        <div style={{ position: "relative" }}>
+          <TableSortingMenu
+            hide={!this.state.showSortings}
+            onApply={this.updateTableSortings}
+            colHeaders={colHeaders}
+            appliedSortings={this.state.sortings}
+          />
+        </div>
         <TableMain>
           <HandsOnTable
             ref={ref => (this.hot = ref)}
