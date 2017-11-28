@@ -3,6 +3,7 @@
 namespace DS\Controller;
 
 use DS\Model\User;
+use DS\Model\UserConnections;
 use DS\Model\UserFollower;
 
 /**
@@ -40,6 +41,22 @@ class UserController
             {
                 $this->response->redirect('/');
             }
+            
+            $connections    = UserConnections::findByFieldValue('userId', $user->getId());
+            $connectionList = [];
+            foreach ($connections->getConnectionList() as $connection)
+            {
+                $connectionLink = call_user_func([$connections, 'get' . ucfirst($connection)]);
+                
+                if ($connectionLink)
+                {
+                    $connectionList[] = [
+                        'name' => $connection,
+                        'link' => $connectionLink,
+                    ];
+                }
+            }
+            $this->view->setVar('connections', $connectionList);
             
             $this->view->setVar('following', UserFollower::findFollower($user->getId(), $this->serviceManager->getAuth()->getUserId()));
             $this->view->setVar('currentPage', $page);
