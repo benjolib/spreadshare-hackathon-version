@@ -188,55 +188,72 @@ export const voteRow = (tableId: string, rowId: string): ThunkAction => (
 
 // ADD ROW ACTIONS
 
-export const addRowRequest = (tableId: string, row: Array<string>): Action => ({
+export const addRowRequest = (
+  tableId: string,
+  rowData: Array<string>,
+  insertAfterId: string
+): Action => ({
   type: "ADD_ROW_REQUEST",
   payload: {
     tableId,
-    row
+    rowData,
+    insertAfterId
   }
 });
 
-export const addRowSuccess = (tableId: string, row: Array<string>): Action => ({
+export const addRowSuccess = (
+  tableId: string,
+  rowData: Array<string>,
+  insertAfterId: string
+): Action => ({
   type: "ADD_ROW_SUCCESS",
   payload: {
     tableId,
-    row
+    rowData,
+    insertAfterId
   }
 });
 
 export const addRowError = (
   tableId: string,
-  row: Array<string>,
+  rowData: Array<string>,
+  insertAfterId: string,
   error: Error
 ): Action => ({
   type: "ADD_ROW_ERROR",
   payload: {
     tableId,
-    row,
+    rowData,
+    insertAfterId,
     error
   }
 });
 
 // thunk
 
-export const addRow = (tableId: string, row: Array<string>): ThunkAction => (
-  dispatch: Dispatch
-) => {
-  dispatch(addRowRequest(tableId, row));
+export const addRow = (
+  tableId: string,
+  rowData: Array<string>,
+  insertAfterId: string
+): ThunkAction => (dispatch: Dispatch) => {
+  dispatch(addRowRequest(tableId, rowData, insertAfterId));
   if (process.env.NODE_ENV === "production") {
     saveDataApi(`add-row/${tableId}`, {
-      row
+      rowData,
+      insertAfterId
     }).then(({ error }: { error: Error }) => {
       if (error) {
-        dispatch(addRowError(tableId, row, new Error(error)));
+        dispatch(
+          addRowError(tableId, rowData, insertAfterId, new Error(error))
+        );
         return;
       }
 
-      dispatch(addRowSuccess(tableId, row));
+      dispatch(addRowSuccess(tableId, rowData, insertAfterId));
     });
   } else {
     setTimeout(() => {
-      dispatch(addRowSuccess(tableId, row));
+      dispatch(addRowSuccess(tableId, rowData, insertAfterId));
     }, 500);
   }
 };
