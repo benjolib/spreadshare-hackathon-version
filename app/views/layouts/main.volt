@@ -131,12 +131,17 @@
     $('button.subscribe').api({
       method: 'POST',
       onSuccess: function (response, button) {
-        button.toggleClass('subscribed');
+        if (response.data.subscribed) {
+          button.addClass('subscribed');
+        } else {
+          button.removeClass('subscribed');
+        }
       },
     });
     $('button.follow-user').api({
       method: 'POST',
       action: 'follow-user',
+      onRequest: showLoading,
       onSuccess: function (response, button) {
         $(button).toggleClass('selected').toggleClass('following-user').toggleClass('not-following-user');
       },
