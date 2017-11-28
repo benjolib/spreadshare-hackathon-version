@@ -92,6 +92,7 @@
 
         @include desktop {
           justify-content: flex-start;
+          display: none;          
         }
 
         button {

@@ -49,6 +49,7 @@
       &--left {
         display: flex;
         flex-direction: column;
+        margin-top: 36px;
         @include rem(margin-bottom, 16);
 
         @include desktop {
@@ -61,7 +62,8 @@
       &--right {
         display: flex;
         flex-direction: column;
-
+        margin-top: 36px;
+        
         @include desktop {
           width: 47.5%;
           height: 30%;
@@ -72,6 +74,7 @@
       &__item {
         display: flex;
         justify-content: space-between;
+        margin-bottom: 5px;
 
         &--topic {
           align-items: center;
@@ -83,6 +86,7 @@
             @include desktop {
               text-transform: uppercase;
               @include rem(font-size, 13);
+              margin-top: 2px;
             }
           }
           div:last-child {
@@ -230,12 +234,13 @@
     }
 
     p.tableAbout__sidebars__title {
-      color: $text-color;
+      // color: $text-color;
+      color: #B1BBC7;
       font-weight: 500;
       text-transform: uppercase;
       @include rem(font-size, 12);
-      @include rem(margin-top, 16);
-      @include rem(margin-bottom, 2);
+      @include rem(margin-top, 28);
+      @include rem(margin-bottom, 18);
 
       &:first-child {
         @include desktop {
@@ -587,6 +592,7 @@
 
   @include desktop {
     @include rem(margin-top, -310);
+    margin-bottom: 16px;
   }
 
   span {

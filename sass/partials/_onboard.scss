@@ -840,6 +840,7 @@
               }
               p {
                 @include rem(font-size, 16);
+                padding-bottom: 10px;
               }
             }
 
@@ -894,14 +895,14 @@
               &:first-child {
                 background: $logo-color;
                 border-radius: 3px;
-                @include rem2(padding, 2, 4);
+                @include rem2(padding, 2, 8);
                 color: white;
               }
               &:nth-child(2) {
                 background: $card-tokens-background-color;
                 border-radius: 3px;
                 color: white;
-                @include rem2(padding, 2, 4);
+                @include rem2(padding, 2, 8);
               }
               &:nth-child(3), &:last-child {
                 display: flex;
@@ -980,4 +981,13 @@
       }
     }
   }
+}
+
+.tables__content__main__cards__item__stats a {
+  margin-top: 16px;
+}
+.tables__content__main__cards__item__stats a span i {
+  font-style: normal;
+  padding-left: 5px;
+  color: #b1bbc7;
 }
