@@ -49,7 +49,7 @@ class TableContent
             ];
             $rowData[]   = [
                 'id' => $row['id'],
-                'content' => json_decode($row->content),
+                'content' => json_decode($row->content, true),
             ];
         }
         

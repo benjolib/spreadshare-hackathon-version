@@ -124,6 +124,14 @@ return [
         'methods' => ['GET'],
     ],
     [
+        'url' => '/download/table/{id:[0-9]+}/{format:[a-z]+}',
+        'paths' => [
+            'controller' => 'Table_Download',
+            'action' => 'index',
+        ],
+        'methods' => ['GET'],
+    ],
+    [
         'url' => '/table/{id:[0-9]+}/{tab:[a-z]+}',
         'paths' => [
             'controller' => 'Table_Detail',

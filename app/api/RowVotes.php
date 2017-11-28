@@ -33,7 +33,7 @@ class RowVotes
      * @return bool
      */
     public function voteForRow(int $userId, int $rowId): bool
-    {   
+    {
         $row = TableRows::findFirstById($rowId);
         if (!$row)
         {
