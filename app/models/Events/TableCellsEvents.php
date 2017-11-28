@@ -4,6 +4,7 @@ namespace DS\Model\Events;
 
 use DS\Events\Table\TabelCellChanged;
 use DS\Model\Abstracts\AbstractTableCells;
+use DS\Model\TableRows;
 
 /**
  * Events for model TableCells
@@ -62,7 +63,7 @@ abstract class TableCellsEvents
     {
         TabelCellChanged::after(
             $this->getUserId(),
-            $this->tableId,
+            (TableRows::get($this->getRowId())->getTableId()),
             $this->getContent()
         );
     }

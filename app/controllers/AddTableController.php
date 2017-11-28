@@ -120,7 +120,8 @@ class AddTableController
         }
         catch (\Exception $e)
         {
-            $this->flash->error($e->getMessage());
+            // $this->flash->error($e->getMessage());
+            header('Location: /table/add');
         }
     }
     

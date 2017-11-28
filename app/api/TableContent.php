@@ -82,6 +82,67 @@ class TableContent
     }
     
     /**
+     * Adds a new row
+     *
+     * @param int   $tableId
+     * @param array $rowData
+     * @param int   $insertAfterRowId Set to 0 if you want to add the row to the top
+     *
+     * @return TableRows
+     */
+    public function addRow(int $tableId, array $rowData, int $insertAfterRowId = 0): TableContent
+    {
+        try
+        {
+            $newRow = new TableRows();
+            $newRow->getWriteConnection()->begin();
+            
+            if (count($rowData))
+            {
+                if (is_array($rowData))
+                {
+                    $allRowsForTable = TableRows::findRowsFrom($tableId, $insertAfterRowId ? $insertAfterRowId : 0);
+                    
+                    if (count($allRowsForTable))
+                    {
+                        $newRow->increaseLineNumbers($tableId, 0);
+                        
+                        $newRow = $newRow
+                            ->setTableId($tableId)
+                            ->setUserId($this->serviceManager->getAuth()->getUserId());
+                        
+                        if (!$insertAfterRowId)
+                        {
+                            $newRow->setLineNumber(1);
+                        }
+                        else
+                        {
+                            $afterRow = TableRows::findFirstById($insertAfterRowId);
+                            
+                            if (!$afterRow)
+                            {
+                                throw new \InvalidArgumentException('The given rowId does not exist.');
+                            }
+                            $newRow->setLineNumber($afterRow->getLineNumber() - 1);
+                        }
+                        
+                        $newRow->create();
+                    }
+                }
+                $newRow->getWriteConnection()->commit();
+            }
+        }
+        catch (\Exception $e)
+        {
+            $newRow->getWriteConnection()->rollback();
+            
+            throw $e;
+        }
+        
+        return $newRow;
+    }
+    
+    /**
      * @param int    $tableId
      * @param int    $lineNumber
      * @param string $rowData
@@ -100,6 +161,34 @@ class TableContent
         }
         
         return $this;
+    }
+    
+    /**
+     * Add a cell and return data for tableRows.content
+     *
+     * @param TableRows $rowModel
+     * @param int       $userId
+     * @param int       $columnId
+     * @param string    $cell
+     *
+     * @return array
+     */
+    private function addCell(TableRows $rowModel, int $userId, int $columnId, string $cell): array
+    {
+        $cellModel = new TableCells();
+        $cellModel->setUserId($userId)
+                  ->setUpdatedById($userId)
+                  ->setRowId($rowModel->getId())
+                  ->setColumnId($columnId)
+                  ->setContent($cell)
+                  ->setLink('')
+                  ->create();
+        
+        return [
+            'id' => $cellModel->getId(),
+            'content' => $cellModel->getContent(),
+            'link' => $cellModel->getLink() ? $cellModel->getLink() : null,
+        ];
     }
     
     /**
@@ -178,20 +267,12 @@ class TableContent
                         {
                             if (isset($columnIds[$key]))
                             {
-                                $cellModel = new TableCells();
-                                $cellModel->setUserId($userId)
-                                          ->setUpdatedById($userId)
-                                          ->setRowId($rowModel->getId())
-                                          ->setColumnId($columnIds[$key])
-                                          ->setContent($cell)
-                                          ->setLink('')
-                                          ->create();
-                                
-                                $cellData[] = [
-                                    'id' => $cellModel->getId(),
-                                    'content' => $cellModel->getContent(),
-                                    'link' => $cellModel->getLink() ? $cellModel->getLink() : null,
-                                ];
+                                $cellData[] = $this->addCell(
+                                    $rowModel,
+                                    $userId,
+                                    $columnIds[$key],
+                                    $cell
+                                );
                             }
                             
                             $rowModel->setContent(json_encode($cellData))

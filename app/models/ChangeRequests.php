@@ -3,6 +3,7 @@
 namespace DS\Model;
 
 use DS\Constants\Paging;
+use DS\Model\DataSource\ChangeRequestStatus;
 use DS\Model\Events\ChangeRequestsEvents;
 use Phalcon\Db;
 
@@ -29,7 +30,7 @@ class ChangeRequests
      *
      * @return array
      */
-    public function findChangeRequests(int $tableId, int $limit = 75, int $page = 0): array
+    public function findChangeRequests(int $tableId, int $status = ChangeRequestStatus::All, int $limit = 75, int $page = 0): array
     {
         /*
         $query = self::query()
@@ -53,15 +54,24 @@ class ChangeRequests
                      ->orderBy(self::class . '.id DESC');
         */
         
+        $params = [
+            'tableId' => $tableId,
+            'limit' => (int) $limit,
+            'offset' => (int) Paging::endlessScrollPortions * $page,
+        ];
+        
+        $statusCheck = '';
+        if ($status !== ChangeRequestStatus::All)
+        {
+            $statusCheck      = 'AND status = :status';
+            $params['status'] = $status;
+        }
+        
         $query = $this->readQuery(
             "SELECT `changeRequests`.`id` AS `id`, `changeRequests`.`to` AS `to`, `changeRequests`.`from` AS `from`, `changeRequests`.`comment` AS `comment`, `changeRequests`.`createdAt` AS `createdAt`, `changeRequests`.`status` AS `status`, `user`.`handle` AS `userHandle`, `user`.`name` AS `user` " .
             "FROM `spreadshare`.`changeRequests`  INNER JOIN `spreadshare`.`user` ON `changeRequests`.`userId` = `user`.`id` INNER JOIN `spreadshare`.`tableCells` ON `changeRequests`.`cellId` = `tableCells`.`id` INNER JOIN `spreadshare`.`tableRows` ON `tableCells`.`rowId` = `tableRows`.`id` " .
-            "WHERE `tableRows`.`tableId` = :tableId ORDER BY `changeRequests`.`id` DESC LIMIT :limit OFFSET :offset",
-            [
-                'tableId' => $tableId,
-                'limit' => (int) $limit,
-                'offset' => (int) Paging::endlessScrollPortions * $page,
-            ],
+            "WHERE `tableRows`.`tableId` = :tableId $statusCheck ORDER BY `changeRequests`.`id` DESC LIMIT :limit OFFSET :offset",
+            $params,
             [
                 'limit' => 1,
                 'offset' => 1,

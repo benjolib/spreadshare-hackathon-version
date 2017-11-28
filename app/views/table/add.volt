@@ -8,9 +8,9 @@
       <p class="addTable__content__subtitle">As a table owner you receive 2.5% of all tokens a table generates</p>
       <div class="addTable__content__main">
         <div class="addTable__content__main__options" style="width: 100%;">
-          {{ flash.output() }}
-
           <form id="addTableForm" method="post" action="{{ action }}" enctype="multipart/form-data">
+            {{ flash.output() }}
+
             <input type="hidden" name="tableId" value="{{ tableId }}" />
             {% include content %}
           </form>

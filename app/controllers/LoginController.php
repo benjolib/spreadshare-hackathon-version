@@ -197,10 +197,20 @@ class LoginController
                 $provider
             );
             
+            // Redirect to topics page if the user was created
+            if ((int) $user->getOperationMade() === (int) $user::OP_CREATE)
+            {
+                $redirect = '/signup/topics';
+            }
+            else
+            {
+                $redirect = '/';
+            }
             $this->serviceManager->getAuth()->storeSession($user);
             
-            header('Location: /');
-            $this->response->redirect('/', false);
+            header('Location: ' . $redirect);
+            //$this->response->redirect('/', false);
+            
             $this->view->disable();
         }
         catch (\Exception $e)

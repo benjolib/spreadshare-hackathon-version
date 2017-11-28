@@ -16,11 +16,25 @@ use Phalcon\Mvc\Model\Resultset\Simple;
  * @version   $Version$
  * @package   DS\Model
  *
- * @method static findFirstById(int $id)
+ * @method static TableRows findFirstById(int $id)
  */
 class TableRows
     extends TableRowsEvents
 {
+    /**
+     * @param int $tableId
+     * @param int $beginningAtRowId
+     *
+     * @return bool
+     */
+    public function increaseLineNumbers(int $tableId, int $beginningAtRowId = 0): bool
+    {
+        return $this->getWriteConnection()->execute(
+            'UPDATE tableRows SET lineNumber = lineNumber +1 WHERE (tableId = :tableId AND rowId > :rowId);',
+            ['tableId' => $tableId, 'rowId' => $beginningAtRowId]
+        );
+    }
+    
     /**
      * @param int $tableId
      * @param int $lineNumber
@@ -34,6 +48,22 @@ class TableRows
                 "conditions" => "tableId = ?0 AND lineNumber = ?1",
                 "limit" => 1,
                 "bind" => [$tableId, $lineNumber],
+            ]
+        );
+    }
+    
+    /**
+     * @param int $tableId
+     * @param int $beginningRowId
+     *
+     * @return Abstracts\AbstractTableRows|Abstracts\AbstractTableRows[]|\Phalcon\Mvc\Model\ResultSetInterface
+     */
+    public static function findRowsFrom(int $tableId, int $beginningRowId = 0)
+    {
+        return parent::find(
+            [
+                "conditions" => "tableId = ?0 AND id > ?1",
+                "bind" => [$tableId, $beginningRowId],
             ]
         );
     }
