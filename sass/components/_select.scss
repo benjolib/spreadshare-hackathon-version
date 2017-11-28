@@ -22,104 +22,110 @@
             color: $text-color !important;
           }
         }
+        .Select-placeholder {
+          span {
+            color: #e2e2e8 !important;
+            margin-top: 8px !important;
+            font-family: 'Montserrat', sans-serif !important;
+            font-size: 16px !important;
+          }
+        }
       }
     }
   }
 }
 
-  .Select-control {
-    width: 90% !important;
-    display: flex;
-    align-items: center;
-    background: #F8F8FB !important;
-    border: none !important;
-    overflow: auto !important;
-    padding: 5px 0 !important;
+.Select-control {
+  width: 90% !important;
+  display: flex;
+  align-items: center;
+  background: #F8F8FB !important;
+  border: none !important;
+  overflow: auto !important;
+  padding: 5px 0 !important;
 
-    &:hover {
-      box-shadow: none !important;
-    }
+  &:hover {
+    box-shadow: none !important;
+  }
 
-    .Select--multi,
-    .Select-multi-value-wrapper {
-      padding: 0 !important;
-      display: flex !important;
-      align-items: center !important;
-      height: 40px !important;
-      margin-top: 0 !important;
+  .Select--multi,
+  .Select-multi-value-wrapper {
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    height: 40px !important;
+    margin-top: 0 !important;
 
-      .Select-placeholder {
-        color: #e2e2e8 !important;
-        margin-top: 8px !important;
-        font-family: 'Montserrat', sans-serif;
-        font-size: 16px;
-      }
-    }
-
-    .Select-value {
-      color: white;
-      background-color: #9BAABE !important;
-      padding: 6px 16px;
-      margin-top: 0 !important;
-      vertical-align: middle !important;
-      padding: 6px 16px;
-      margin-bottom: 3px;
-
-      &-label {
-        color: white;
-      }
-
-      &:first-child {
-        margin-left: 8px !important;
-      }
-      &:last-child {
-        margin-right: 8px !important;
-      }
-
-      position: relative;
-      margin: 0 !important;
-      border: none !important;
-      border-radius: 6px !important;
-      margin-right: 8px !important;
-
-      &-icon {
-        color: $text-color;
-        position: absolute;
-        padding: 0 !important;
-        top: 0;
-        right: 0;
-        display: flex;
-        align-self: center;
-        justify-content: center;
-        text-align: center;
-        border-top-right-radius: 6px;
-        border-bottom-right-radius: 6px;
-        border-top-left-radius: 0px !important;
-        border-bottom-left-radius: 0px !important;
-        border-right: none !important;
-        background: white;
-        margin-top: 0;
-        height: 100%;
-        align-items: center;
-        font-size: 26px;
-        width: 30px;
-
-        &:hover {
-          background: white !important;
-          color: $text-color !important;
-        }
-      }
-
-      &-label {
-        margin-right: 30px;
-        margin-top: 0;
-        color: white;
-        font-weight: 400;
-      }
-    }
-
-    .Select-input {
-      height: 50px !important;
-      color: red !important;
+    .Select-placeholder {
+      color: #e2e2e8 !important;
+      margin-top: 8px !important;
+      font-family: 'Montserrat', sans-serif !important;
+      font-size: 16px !important;
     }
   }
+
+  .Select-value {
+    color: white;
+    background-color: #9BAABE !important;
+    padding: 6px 16px;
+    margin-top: 0 !important;
+    vertical-align: middle !important;
+    padding: 6px 16px;
+    margin-bottom: 3px;
+    position: relative;
+    margin: 0 !important;
+    border: none !important;
+    border-radius: 6px !important;
+    margin-right: 8px !important;
+
+    &-label {
+      color: white;
+    }
+
+    &:first-child {
+      margin-left: 8px !important;
+    }
+    &:last-child {
+      margin-right: 8px !important;
+    }
+
+    &-icon {
+      color: $text-color;
+      position: absolute;
+      padding: 0 !important;
+      top: 0;
+      right: 0;
+      display: flex;
+      align-self: center;
+      justify-content: center;
+      text-align: center;
+      border-top-right-radius: 6px;
+      border-bottom-right-radius: 6px;
+      border-top-left-radius: 0px !important;
+      border-bottom-left-radius: 0px !important;
+      border-right: none !important;
+      background: white;
+      margin-top: 0;
+      height: 100%;
+      align-items: center;
+      font-size: 26px;
+      width: 30px;
+
+      &:hover {
+        background: white !important;
+        color: $text-color !important;
+      }
+    }
+
+    &-label {
+      margin-right: 30px;
+      margin-top: 0;
+      color: white;
+      font-weight: 400;
+    }
+  }
+
+  .Select-input {
+    height: 50px !important;
+  }
+}
