@@ -570,6 +570,8 @@ DROP TABLE IF EXISTS `userNotifications`;
 CREATE TABLE `userNotifications` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `userId` int(11) unsigned DEFAULT NULL,
+  `sourceTableId` int(11) unsigned DEFAULT NULL,
+  `sourceUserId` int(11) unsigned DEFAULT NULL,
   `notificationType` tinyint(5) unsigned DEFAULT NULL,
   `text` mediumtext,
   `placeholders` text,
@@ -578,8 +580,12 @@ CREATE TABLE `userNotifications` (
   KEY `userId` (`userId`),
   KEY `notificationType` (`notificationType`),
   KEY `createdAt` (`createdAt`),
+  KEY `sourceTableId` (`sourceTableId`),
+  KEY `sourceUserId` (`sourceUserId`),
+  CONSTRAINT `userNotifcationsSourceTableId` FOREIGN KEY (`sourceTableId`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `userNotifcationsSourceUserId` FOREIGN KEY (`sourceUserId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `userNotificationsUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 
 

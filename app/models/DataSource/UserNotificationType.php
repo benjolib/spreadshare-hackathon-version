@@ -35,4 +35,27 @@ class UserNotificationType
      */
     const TableDownvoted = 4;
     
+    /**
+     * A user has commented in a table
+     */
+    const Commented = 5;
+    
+    /**
+     * A user has changed a table
+     */
+    const Changed = 6;
+    
+    /**
+     * Map string to constants
+     *
+     * @var array
+     */
+    public static $map = [
+        'followers' => self::Follow,
+        'comments' => self::Commented,
+        'changes' => self::Changed,
+        'subscribed' => self::TableSubscribed,
+        'upvoets' => self::TableUpvoted,
+    ];
+    
 }
