@@ -71,21 +71,31 @@
         <p class="tableAbout__sidebars__title">Related Tables</p>
         <aside class="tableAbout__sidebar tableAbout__sidebar--related">
           <div class="tableAbout__sidebar__content">
-            {% for related in relatedTables %}
-            <a href="/table/{{ related['id'] }}">
-              <div class="tableAbout__sidebar__content__item">
-                <h5>{{ related['title'] }}</h5>
-                <p>{{ related['tagline'] }}</p>
+            {% if relatedTables %}
+              {% for related in relatedTables %}
+              <a href="/table/{{ related['id'] }}">
+                <div class="tableAbout__sidebar__content__item">
+                  <h5>{{ related['title'] }}</h5>
+                  <p>{{ related['tagline'] }}</p>
+                </div>
+              </a>
+              {% endfor %}
+            {% else %}
+              <div class="center">
+                <img src="/assets/images/gameboy.png" alt="" />
+                <p>&nbsp;</p>
+                <p>No related tables assigned, yet.</p>
               </div>
-            </a>
-            {% endfor %}
+            {% endif %}
           </div>
         </aside>
 
         <p class="tableAbout__sidebars__title">Tags</p>
         <aside class="tableAbout__sidebar tableAbout__sidebar--tags">
           <div class="tableAbout__sidebar__content">
-            <span>{{ implode('</span><span>', explode(', ', table['tags'])) }}</span>
+            {% if table['tags'] %}
+              <span>{{ implode('</span><span>', explode(', ', table['tags'])) }}</span>
+            {% endif %}
           </div>
         </aside>
 
