@@ -4,10 +4,10 @@
 {% endblock %}
 
 {% block content %}
-<div class="layout">
-  <div class="layout__content">
-    <div class="layout__content__wrapper">
-      <form method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data">
+  <div class="layout">
+    <div class="layout__content">
+      <div class="layout__content__wrapper">
         <p class="layout__content__title">Account</p>
         <p class="layout__content__subtitle">
           Manage your account and wallet. Invite friends and receive 20 tokens (<span>you invited 0 so far</span>)
@@ -96,32 +96,32 @@
             <button type="submit">Save Changes</button>
           </div>
         </div>
-      </form>
-    </div>
-    <aside class="layout__content__aside">
-      <div class="layout__content__aside__box">
-        <a href="/settings/personal">
-          <div class="settings-box-selected">Personal</div>
-        </a>
-        <a href="/settings/account">
-          <div>Account</div>
-        </a>
-        <a href="/settings/notifications">
-          <div>Notifications</div>
-        </a>
-        <a href="/settings/connected">
-          <div>Connect Accounts</div>
-        </a>
-        <a href="/settings/wallet">
-          <div>Wallet</div>
-        </a>
-        <a href="/settings/invite">
-          <div>Invite</div>
-        </a>
       </div>
-    </aside>
+      <aside class="layout__content__aside">
+        <div class="layout__content__aside__box">
+          <a href="/settings/personal">
+            <div class="settings-box-selected">Personal</div>
+          </a>
+          <a href="/settings/account">
+            <div>Account</div>
+          </a>
+          <a href="/settings/notifications">
+            <div>Notifications</div>
+          </a>
+          <a href="/settings/connected">
+            <div>Connect Accounts</div>
+          </a>
+          <a href="/settings/wallet">
+            <div>Wallet</div>
+          </a>
+          <a href="/settings/invite">
+            <div>Invite</div>
+          </a>
+        </div>
+      </aside>
+    </div>
   </div>
-</div>
+</form>
 
 <script type="text/javascript">
   window.addEventListener('load', function () {
