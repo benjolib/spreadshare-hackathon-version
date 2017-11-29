@@ -12,28 +12,83 @@
   <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-  {# navbar #}
-  {{ partial('layouts/navbar') }}
+{# navbar #}
+<nav class="navbar">
+  <div class="navbar__logo">
+    <a href="/"><h1>SpreadShare</h1></a>
+    <h2>Community curated Tables</h2>
+  </div>
+  <div class="navbar__search">
+    <div class="navbar__search__icon">
+      <img src="/assets/icons/search.svg" />
+    </div>
+    <input type="text" class="navbar__search__field" placeholder="Find anything" />
+    <div class="navbar__search__filter">
+      <img class="navbar__search__filter__icon" src="/assets/icons/filter.svg" />
+    </div>
+  </div>
+  {% if auth.loggedIn() %}
+  <div class="navbar__controls">
+    <img src="/assets/icons/add.svg" class="navbar__controls__add navbar__controls__add--notification" />
+    <img src="/assets/icons/add.svg" class="navbar__controls__add navbar__controls__add--menu" />
+    <a id="notificationButton" href="javascript:;"><img src="/assets/icons/bell.svg" class="navbar__controls__notification" /></a>
+    <div class="dropdown dropdown--notifications">
+      <ul>
+        <li><a href="#">Today</a></li>
+        <li><a href="#">Benjamin Libor started following you</a></li>
+        <li><a href="#">Benjamin Libor started to subscribe your Table Press & Journalist contacts</a></li>
+        <li><a href="#">Benjamin Libor started following you</a></li>
+        <li><a href="#">Benjamin Libor started to subscribe your Table
+Press & Journalist contacts</a></li>
+        <li><a href="#">Benjamin Libor started following you</a></li>
+        <li><a href="#">Benjamin Libor started to subscribe your Table
+Press & Journalist contacts</a></li>
+        <li><a href="#">Benjamin Libor started to subscribe your Table
+Press & Journalist contacts</a></li>
+        <li><a href="#">Benjamin Libor started following you</a></li>
+        <li><a href="#">Benjamin Libor started to subscribe your Table
+Press & Journalist contacts</a></li>
+      </ul>
+    </div>
+    <a id="profileImage" href="javascript:;"><img src="{{ auth.getUser().getImage() }}" class="navbar__controls__profile" /></a>
+    <div class="profile-menu navbar__controls__dropdown">
+      <ul>
+        <li><a href="/table/add">Create a Table</a></li>
+        <li><a href="/feed">Feed</a></li>
+        <li><a href="/user/{{ auth.getUser().handle }}">Profile</a></li>
+        <li><a href="/settings/wallet">Wallet</a></li>
+        <li><a href="/settings/invite">Get Token</a></li>
+        <li><a href="/settings/account">Settings</a></li>
+        <li><a href="/logout">Sign out</a></li>
+      </ul>
+    </div>
+  </div>
 
-  {# main section #}
-  <section class="main">
-    {{ flash.output() }}
+  {% else %}
+  <span class="navbar__login">
+      <a href="/login" class="navbar__login__login">Login</a>
+      <span>or</span>
+      <a href="/signup" class="navbar__login__signup">Sign up</a>
+    </span>
+  {% endif %}
+</nav>
+{# main section #}
+<section class="main">
+  {{ flash.output() }}
 
-    {# content #}
-    {% block content %}{% endblock %}
+  {# content #}
+  {% block content %}{% endblock %}
 
-    {# footer #}
-    {{ partial('layouts/footer') }}
-  </section>
+  {# footer #}
+  {{ partial('layouts/footer') }}
+</section>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+<script type="text/javascript" src="/js/api.js"></script>
 
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
-  <script type="text/javascript" src="/js/api.js"></script>
+{{ partial('layouts/scripts') }}
 
-  {{ partial('layouts/scripts') }}
-
-  <script type="text/javascript" src="/js/react/main.4fef1596.js"></script>
-
-  {% block scripts %}{% endblock %}
+<script type="text/javascript" src="/js/react/main.bfb73ed6.js"></script>
+{% block scripts %}{% endblock %}
 </body>
 </html>

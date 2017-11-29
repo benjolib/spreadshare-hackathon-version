@@ -23,7 +23,7 @@ class LocationSelect extends Component {
   static defaultProps = {
     value: '',
     name: 'tag[]',
-    placeholder: <span>Select tags</span>,
+    placeholder: <span>Search for tags (2 characters minimum)</span>,
   };
 
   constructor(props) {
