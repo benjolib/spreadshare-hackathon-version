@@ -4,6 +4,7 @@ namespace DS\Controller;
 
 use DS\Api\UserSettings;
 use DS\Application;
+use DS\Model\Locations;
 use DS\Model\TableTokens;
 use DS\Model\User;
 use DS\Model\UserConnections;
@@ -44,14 +45,12 @@ class UserSettingsController
      */
     private function getUser($id)
     {
-        $user = User::findByFieldValue('id', $id);
+        $user = User::get($id);
         
-        /*
-        if (!$user)
+        if (!$user->getId())
         {
             $this->response->redirect('/');
         }
-        */
         
         return $user;
     }
@@ -114,10 +113,11 @@ class UserSettingsController
      */
     public function personalAction()
     {
-        $userId = $this->serviceManager->getAuth()->getUserId();
+        $userId    = $this->serviceManager->getAuth()->getUserId();
         
         if ($this->request->isPost())
         {
+            $locations = Locations::getByIds($this->request->getPost('locations', null, []));
             try
             {
                 if ($userId > 0)
@@ -139,7 +139,7 @@ class UserSettingsController
                     
                     // Save user settings
                     $userSettings = new UserSettings();
-                    $user         = $userSettings->savePersonalSettings(
+                    $userSettings->savePersonalSettings(
                         $userId,
                         $imagePath,
                         $this->request->getPost('name'),
@@ -150,17 +150,23 @@ class UserSettingsController
                         true
                     );
                     
-                    // Send new user model to view
-                    $this->view->setVar('profile', $user);
                 }
             }
             catch (\Exception $e)
             {
                 $this->flash->error($e->getMessage());
             }
+            finally
+            {
+                // Send new user model to view
+                $this->view->setVar('post', $this->request->getPost());
+            }
+        }
+        else
+        {
+            $locations = UserLocations::getUserLocations($userId);
         }
         
-        $locations = UserLocations::getUserLocations($userId);
         $this->view->setVar('locations', htmlentities(json_encode($locations)));
         
         $this->view->setMainView('user/settings/personal');

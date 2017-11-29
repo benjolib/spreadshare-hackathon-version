@@ -27,7 +27,7 @@ class Locations
      *
      * @return array
      */
-    public function getByIds(array $ids = [], $limit = Paging::endlessScrollPortions)
+    public static function getByIds(array $ids = [], $limit = Paging::endlessScrollPortions)
     {
         if (count($ids))
         {

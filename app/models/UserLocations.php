@@ -58,7 +58,7 @@ class UserLocations
                              Locations::class . ".locationName",
                          ]
                      )
-                     ->leftJoin(Locations::class, self::class . '.locationId = ' . Locations::class . '.id')
+                     ->innerJoin(Locations::class, self::class . '.locationId = ' . Locations::class . '.id')
                      ->where(UserLocations::class . '.userId = ?0', [$userId])
                      ->orderBy(Locations::class . ".locationName ASC");
         
