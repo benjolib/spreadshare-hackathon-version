@@ -70,7 +70,7 @@
     <div class="profile-menu navbar__controls__dropdown">
       <ul>
         <li><a href="/table/add">Create a Table</a></li>
-        <li><a href="/">Rankings</a></li>
+        <li><a href="/feed">Ranking</a></li>
         <li><a href="/user/{{ auth.getUser().handle }}">Profile</a></li>
         <li><a href="/settings/wallet">Wallet</a></li>
         <li><a href="/settings/invite">Get Token</a></li>
