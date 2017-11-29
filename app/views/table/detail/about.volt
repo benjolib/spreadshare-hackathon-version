@@ -40,7 +40,7 @@
           <div class="tableAbout__info__content__item tableAbout__info__content__item--creator">
             <div>Creator</div>
             <div>
-              <span><img src="{{ table['creatorImage'] }}" height="20" /> <i>{{ table['creator'] }}</i></span>
+              <span><a href="/user/{{ table['creatorHandle'] }}"><img src="{{ table['creatorImage'] }}" height="20" /> <i>{{ table['creator'] }}</i></a></span>
             </div>
           </div>
         </div>
