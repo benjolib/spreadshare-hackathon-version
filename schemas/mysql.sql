@@ -352,6 +352,7 @@ DROP TABLE IF EXISTS `tableTokens`;
 
 CREATE TABLE `tableTokens` (
   `tableId` int(11) unsigned NOT NULL,
+  `rowId` int(11) unsigned DEFAULT NULL,
   `userId` int(11) unsigned NOT NULL,
   `type` tinyint(1) DEFAULT NULL,
   `ownership` float DEFAULT NULL,
