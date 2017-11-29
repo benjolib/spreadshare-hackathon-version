@@ -28,6 +28,9 @@ abstract class TableRowsEvents
     {
         parent::beforeValidationOnCreate();
         
+        // Default
+        $this->setVotesCount(0);
+        
         return true;
     }
     

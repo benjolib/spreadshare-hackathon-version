@@ -100,7 +100,7 @@ class TableContent
      *
      * @return TableRows
      */
-    public function addRow(int $tableId, array $rowData, int $insertAfterRowId = 0): TableContent
+    public function addRow(int $tableId, array $rowData, int $insertAfterRowId = 0): TableRows
     {
         try
         {
@@ -109,36 +109,52 @@ class TableContent
             
             if (count($rowData))
             {
-                if (is_array($rowData))
+                // $allRowsForTable = TableRows::findRowsFrom($tableId, $insertAfterRowId ? $insertAfterRowId : 0);
+                
+                $newRow->increaseLineNumbers($tableId, $insertAfterRowId);
+                
+                $newRow = $newRow
+                    ->setTableId($tableId)
+                    ->setUserId($this->serviceManager->getAuth()->getUserId());
+                
+                if (!$insertAfterRowId)
                 {
-                    $allRowsForTable = TableRows::findRowsFrom($tableId, $insertAfterRowId ? $insertAfterRowId : 0);
-                    
-                    if (count($allRowsForTable))
-                    {
-                        $newRow->increaseLineNumbers($tableId, 0);
-                        
-                        $newRow = $newRow
-                            ->setTableId($tableId)
-                            ->setUserId($this->serviceManager->getAuth()->getUserId());
-                        
-                        if (!$insertAfterRowId)
-                        {
-                            $newRow->setLineNumber(1);
-                        }
-                        else
-                        {
-                            $afterRow = TableRows::findFirstById($insertAfterRowId);
-                            
-                            if (!$afterRow)
-                            {
-                                throw new \InvalidArgumentException('The given rowId does not exist.');
-                            }
-                            $newRow->setLineNumber($afterRow->getLineNumber() - 1);
-                        }
-                        
-                        $newRow->create();
-                    }
+                    $newRow->setLineNumber(1);
                 }
+                else
+                {
+                    $afterRow = TableRows::findFirstById($insertAfterRowId);
+                    
+                    if (!$afterRow)
+                    {
+                        throw new \InvalidArgumentException('The given rowId does not exist.');
+                    }
+                    $newRow->setLineNumber($afterRow->getLineNumber() + 1);
+                }
+                $newRow->create();
+                
+                $columns = TableColumns::findAllByFieldValue('tableId', $tableId);
+                
+                $rowContent = [];
+                foreach ($rowData as $key => $row)
+                {
+                    $cell = new TableCells();
+                    $cell->setRowId($newRow->getId())
+                         ->setContent($row)
+                         ->setLink('')
+                         ->setColumnId(isset($columns[$key]) ? $columns[$key]->getId() : null)
+                         ->setUserId($newRow->getUserId())
+                         ->create();
+                    
+                    $rowContent[] = [
+                        'id' => $cell->getId(),
+                        'content' => $cell->getContent(),
+                        'link' => $cell->getLink(),
+                    ];
+                }
+                
+                $newRow->setContent(json_encode($rowContent))->save();
+                
                 $newRow->getWriteConnection()->commit();
             }
         }
@@ -294,9 +310,10 @@ class TableContent
             
             $db->commit();
         }
-        catch (Exception $e)
+        catch (\Exception $e)
         {
             $db->rollback();
+            
             throw $e;
         }
         
