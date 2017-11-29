@@ -3,7 +3,7 @@
     /* Profile Menu Popper */
     var referenceElement;
     var onPopper = $('.profile-menu');
-
+    
     /* Notifications Popper */
     var refElem;
     var popper = $('.dropdown--notifications');

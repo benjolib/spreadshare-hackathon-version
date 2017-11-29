@@ -11,6 +11,22 @@
     <div class="navbar__search__filter">
       <img class="navbar__search__filter__icon" src="/assets/icons/filter.svg" />
     </div>
+    <!-- Begin Search Auto Complete Component !-->
+    <div class="search-autocomplete search__dropdown">
+        <div class="title-block">
+            <div class="description">
+                TABLE TITLE
+            </div>
+            <div class="result-count">
+            </div>
+            <div id="search-items"></div>
+            <hr class="divider">
+            <div class="all-results">All Results</div>
+        </div>
+    </div>
+
+    <!-- End Search Auto Complete Component !-->
+
   </div>
   {% if auth.loggedIn() %}
   <div class="navbar__controls">
