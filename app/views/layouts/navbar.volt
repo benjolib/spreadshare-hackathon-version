@@ -33,39 +33,7 @@
     <img src="/assets/icons/add.svg" class="navbar__controls__add navbar__controls__add--notification" />
     <img src="/assets/icons/add.svg" class="navbar__controls__add navbar__controls__add--menu" />
     <a id="notificationButton" href="javascript:;"><img src="/assets/icons/bell.svg" class="navbar__controls__notification" /></a>
-    <div class="dropdown dropdown--notifications">
-      {% if notifications is defined %}
-        {% for notification in notifications %}
-          <div class="tableFeed__item">
-            <div class="tableFeed__item__avatar">
-              <a href="/user/{{ notification['userHandle'] }}">
-                <img src="{{ notification['userImage'] }}" />
-              </a>
-            </div>
-            <div class="tableFeed__item__info">
-              <div class="tableFeed__item__info__text">
-                  <span class="tableFeed__item__info__text__author">
-                    {{ notification['userName'] }}
-                  </span>
-                <span class="tableFeed__item__info__text__message">
-                    {{ notification['text'] }}
-                  </span>
-              </div>
-              <div class="tableFeed__item__info__time">
-                <span>{{ formatTimestamp(notification['createdAt']) }}</span>
-              </div>
-            </div>
-          </div>
-        {% endfor %}
-        <div class="center">
-          <a href="/feed"><p>All Notifications ⚡</p></a>
-        </div>
-      {% else %}
-        <div class="center">
-          <p>There are no notifications available for you 😢</p>
-        </div>
-      {% endif%}
-    </div>
+    <div class="dropdown dropdown--notifications"><br/><div class="loading"></div><br/></div>
     <a id="profileImage" href="javascript:;"><img src="{{ auth.getUser().getImage() }}" class="navbar__controls__profile" /></a>
     <div class="profile-menu navbar__controls__dropdown">
       <ul>

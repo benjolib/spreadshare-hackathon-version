@@ -1,67 +1,67 @@
 <script type="text/javascript">
   $(document).ready(function () {
 
-   var timer;
-   var delay = 600; // 0.6 seconds delay after last input
-   // autoCompleteHandler to handle response
-   function autoCompleteHandler(response){
+    var timer;
+    var delay = 600; // 0.6 seconds delay after last input
+    // autoCompleteHandler to handle response
+    function autoCompleteHandler(response) {
 
-    // search item list selector
-    var searchItems = $('#search-items');
-    // hits object
-    var hits = response.data.hits.hits;
-    // Insert total results value
-    $('.result-count').html(hits.length + " RESULTS");
-    // create item array
-    var items = [];
-    // empty the existing list
-    $(searchItems).empty();
-    // foreach array
-    $.each(hits, function(key,val) {
-       // item
-       items.push("<a href='/table/" +  val._source.id + "'><div class='item'><div class='title'>" + val._source.title + "</div><div class='tagline'>" + val._source.tagline + "</div></div></a>");
-    });
-    // append list to array
-    $(searchItems).append(items.join(''));
+      // search item list selector
+      var searchItems = $('#search-items');
+      // hits object
+      var hits = response.data.hits.hits;
+      // Insert total results value
+      $('.result-count').html(hits.length + " RESULTS");
+      // create item array
+      var items = [];
+      // empty the existing list
+      $(searchItems).empty();
+      // foreach array
+      $.each(hits, function (key, val) {
+        // item
+        items.push("<a href='/table/" + val._source.id + "'><div class='item'><div class='title'>" + val._source.title + "</div><div class='tagline'>" + val._source.tagline + "</div></div></a>");
+      });
+      // append list to array
+      $(searchItems).append(items.join(''));
 
     }
 
     var searchFieldEl = $("input.navbar__search__field");
     var onSearchPopper = $('.search-autocomplete');
     // On change of the field
-    $(searchFieldEl).on("change paste keyup", function() {
+    $(searchFieldEl).on("change paste keyup", function () {
 
-     /* Popper */
-     var searchReferenceElement = $(this);
+      /* Popper */
+      var searchReferenceElement = $(this);
 
-     var searchEl = $(this).val();
-     // When the search query is greater than 3
-     if (searchEl.length > 3) {
+      var searchEl = $(this).val();
+      // When the search query is greater than 3
+      if (searchEl.length > 3) {
 
-       window.clearTimeout(timer);
-       timer = window.setTimeout(function(){
-       // AJAX Query
-       $.ajax({
-         url: "/api/v1/search/",
-         method: "GET",
-         crossDomain: true,
-         dataType: "JSON",
-         data: {"query":  searchEl},
-         success: function(response) { autoCompleteHandler(response) }
-       });
+        window.clearTimeout(timer);
+        timer = window.setTimeout(function () {
+          // AJAX Query
+          $.ajax({
+            url: "/api/v1/search/",
+            method: "GET",
+            crossDomain: true,
+            dataType: "JSON",
+            data: { "query": searchEl },
+            success: function (response) {
+              autoCompleteHandler(response)
+            }
+          });
 
-       }, delay);
+        }, delay);
 
+        onSearchPopper.addClass('show');
 
-       onSearchPopper.addClass('show');
-
-       new Popper(searchReferenceElement, onSearchPopper, {
-         placement: 'bottom',
-       });
-     }
+        new Popper(searchReferenceElement, onSearchPopper, {
+          placement: 'bottom',
+        });
+      }
 
     });
-
 
     //$('.navbar__search').focusout(function() { // if(!flag) onSearchPopper.removeClass('show') });
 
@@ -121,20 +121,26 @@
       $('#notificationButton').click(function () {
         onPopper.removeClass('show');
         $(popper).toggleClass('show');
+
+        $.get("/api/v1/notifications?p=" + 0, function (data) {
+          $(popper).html(data);
+        });
       });
     }
 
-    $(document).bind('click',function(e) {
+    $(document).bind('click', function (e) {
       var closestSearch = $(e.target).closest('.navbar__search');
       var closestControl = $(e.target).closest('.navbar__controls');
       // If not closest hide popper for search
-      if(!closestSearch.length) onSearchPopper.removeClass('show');
+      if (!closestSearch.length) {
+        onSearchPopper.removeClass('show');
+      }
       //console.log("closestControl", closestControl.length);
-      if(!closestControl.length) onPopper.removeClass('show');
+      if (!closestControl.length) {
+        onPopper.removeClass('show');
+      }
 
     });
-
-
 
     // flash messages timeout
     var $flash = $('.flash');
