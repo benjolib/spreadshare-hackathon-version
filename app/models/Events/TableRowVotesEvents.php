@@ -2,6 +2,7 @@
 
 namespace DS\Model\Events;
 
+use DS\Events\Table\TableRowDownvoted;
 use DS\Events\Table\TableRowUpvoted;
 use DS\Model\Abstracts\AbstractTableRowVotes;
 use DS\Model\TableRows;
@@ -54,8 +55,8 @@ abstract class TableRowVotesEvents
     /**
      * After creating a row vote
      */
-    public function beforeDelete()
+    public function afterDelete()
     {
-        TableRowUpvoted::after($this->getUserId(), (new TableRows())->get($this->getRowId()));
+        TableRowDownvoted::after($this->getUserId(), (new TableRows())->get($this->getRowId()));
     }
 }

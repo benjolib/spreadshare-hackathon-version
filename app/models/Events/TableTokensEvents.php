@@ -63,7 +63,7 @@ abstract class TableTokensEvents
     /**
      * Before deleting a distributed token
      */
-    public function beforeDelete()
+    public function afterDelete()
     {
         if ($this->getTableId() && $this->getTokensEarned())
         {
@@ -75,5 +75,7 @@ abstract class TableTokensEvents
         {
             Wallet::decrementTokens($this->getUserId());
         }
+        
+        return true;
     }
 }
