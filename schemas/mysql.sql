@@ -357,10 +357,15 @@ CREATE TABLE `tableTokens` (
   `type` tinyint(1) DEFAULT NULL,
   `ownership` float DEFAULT NULL,
   `tokensEarned` float DEFAULT NULL,
+  `createdAt` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`tableId`,`userId`),
   KEY `userId` (`userId`),
   KEY `tokensEarned` (`tokensEarned`),
   KEY `ownership` (`ownership`),
+  KEY `rowId` (`rowId`),
+  KEY `createdAt` (`createdAt`),
+  KEY `type` (`type`),
+  CONSTRAINT `tableTokensRowId` FOREIGN KEY (`rowId`) REFERENCES `tableRows` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tableTokensTableId` FOREIGN KEY (`tableId`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tableTokensUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -687,6 +692,19 @@ CREATE TABLE `tableFlags` (
   CONSTRAINT `tableFlagsTableId` FOREIGN KEY (`tableId`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tableFlagsUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+
+
+DROP TABLE IF EXISTS `tableContributors`;
+CREATE TABLE `tableContributors` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `tableId` int(11) unsigned DEFAULT NULL COMMENT 'table.id',
+  `userId` int(11) unsigned DEFAULT NULL COMMENT 'contributor user.id',
+  `type` tinyint(1) unsigned DEFAULT NULL COMMENT 'contribution type',
+  `tableOwnership` float DEFAULT NULL,
+  `createdAt` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
