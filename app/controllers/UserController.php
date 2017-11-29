@@ -42,18 +42,21 @@ class UserController
                 $this->response->redirect('/');
             }
             
-            $connections    = UserConnections::findByFieldValue('userId', $user->getId());
             $connectionList = [];
-            foreach ($connections->getConnectionList() as $connection)
+            $connections    = UserConnections::findByFieldValue('userId', $user->getId());
+            if ($connections)
             {
-                $connectionLink = call_user_func([$connections, 'get' . ucfirst($connection)]);
-                
-                if ($connectionLink)
+                foreach ($connections->getConnectionList() as $connection)
                 {
-                    $connectionList[] = [
-                        'name' => $connection,
-                        'link' => $connectionLink,
-                    ];
+                    $connectionLink = call_user_func([$connections, 'get' . ucfirst($connection)]);
+                    
+                    if ($connectionLink)
+                    {
+                        $connectionList[] = [
+                            'name' => $connection,
+                            'link' => $connectionLink,
+                        ];
+                    }
                 }
             }
             $this->view->setVar('connections', $connectionList);
