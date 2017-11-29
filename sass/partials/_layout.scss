@@ -120,6 +120,7 @@
       }
 
       input {
+        // padding: 20px 10px;        
         border: none;
         outline: none;
         background: $background-color;
@@ -132,6 +133,17 @@
         @include desktop {
           // @include rem(width, 90%);
           width: 90%;
+          padding: 20px 10px;
+        }
+        @include tablet {
+          // @include rem(width, 90%);
+          width: 90%;
+          padding: 20px 10px;
+        }
+        @include mobile {
+          // @include rem(width, 90%);
+          width: 90%;
+          padding: 20px 10px;
         }
       }
     }

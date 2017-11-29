@@ -12,6 +12,7 @@
     background: $background-color;
     @include rem(margin-bottom, 26);
     height: 3.8%;
+    display: flex;
 
     @include tablet {
       width: 100%;
