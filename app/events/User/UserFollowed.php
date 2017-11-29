@@ -34,8 +34,8 @@ class UserFollowed extends AbstractEvent
         
         $userNotification = new UserNotifications;
         $userNotification
-            ->setUserId($userId)
-            ->setSourceUserId($user->getId())
+            ->setUserId($user->getId())
+            ->setSourceUserId($userId)
             ->setNotificationType(UserNotificationType::Follow)
             ->setText('started following you')
             ->setPlaceholders(

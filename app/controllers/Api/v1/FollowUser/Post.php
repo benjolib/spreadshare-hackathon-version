@@ -34,7 +34,7 @@ class Post extends ActionHandler implements MethodInterface
      *
      * @api               {post} /api/v1/follow-user/:userId Follow a user
      * @apiVersion        1.0.0
-     * @apiName           Topics
+     * @apiName           Follow User
      * @apiGroup          Public
      *
      * @apiSuccess {Object} _meta Meta object
