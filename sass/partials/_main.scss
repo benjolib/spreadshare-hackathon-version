@@ -377,7 +377,7 @@
         }
 
         label {
-          font-size: 12px;
+          font-size: 13px;
           cursor: pointer;
           white-space: nowrap;
           border-radius: 6px;
@@ -389,11 +389,12 @@
           display: block;
           text-overflow: ellipsis;
           width: 100%;
+          font-weight:600;
         }
 
         label.selected {
-          background: #ebebf4 !important;
-          color: #6a7c93;
+          background: #f2f2f8 !important;
+          color: #6b7c94 !important;
         }
       }
     }
