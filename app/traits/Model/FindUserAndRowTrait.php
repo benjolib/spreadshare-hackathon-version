@@ -21,7 +21,7 @@ trait FindUserAndRowTrait
      *
      * @return self
      */
-    public static function findByUserIdAndRow(int $userId, int $rowId): self
+    public static function findByUserIdAndRow(int $userId, int $rowId)
     {
         return self::findFirst(
             [
