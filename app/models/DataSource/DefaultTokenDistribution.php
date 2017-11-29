@@ -29,4 +29,9 @@ class DefaultTokenDistribution
      * Amount of tokens users receive per table view
      */
     const PerView = .01;
+    
+    /**
+     * Amount of tokens users receive per table or table row vote
+     */
+    const PerVote = 1;
 }

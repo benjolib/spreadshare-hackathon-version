@@ -26,8 +26,12 @@ class TokenDistributionType
     const Contributor = 2;
     
     /**
+     * Upvoted a table or row
+     */
+    const Upvote = 3;
+    
+    /**
      * Invited another user
      */
-    const Invite = 2;
-    
+    const Invite = 10;
 }
