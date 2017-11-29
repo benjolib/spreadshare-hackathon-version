@@ -4,10 +4,8 @@ namespace DS\Model\Events;
 
 use DS\Events\Table\TableCreated;
 use DS\Model\Abstracts\AbstractTables;
-use DS\Model\DataSource\TableLogType;
-use DS\Model\TableLog;
+use DS\Model\Tables;
 use DS\Model\TableStats;
-use DS\Model\TableTokens;
 
 /**
  * Events for model Tables
@@ -45,11 +43,13 @@ abstract class TablesEvents
         $tableStats = new TableStats();
         $tableStats->setTableId($this->getId())->create();
         
-        TableCreated::after($this->getOwnerUserId(), $this);
+        if ($this instanceof Tables)
+        {
+            TableCreated::after($this->getOwnerUserId(), $this);
+        }
         
         return true;
     }
-    
     
     /**
      * @return bool

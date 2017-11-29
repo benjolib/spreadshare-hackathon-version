@@ -2,9 +2,10 @@
 
 namespace DS\Controller\AddTable\Description;
 
-use DS\Events\Table\TableCreated;
+use DS\Api\TableContent;
 use DS\Interfaces\TableSubcontrollerInterface;
 use DS\Model\Tables;
+use League\Csv\Exception;
 
 /**
  * Spreadshare
@@ -43,8 +44,27 @@ class FromScratch
             
             if ($createdTableModel && $createdTableModel->getId())
             {
-                // Fire event
-                TableCreated::after($userId, $table);
+                try
+                {
+                    // Adding some empty cells
+                    $tableContent = new TableContent();
+                    $tableContent->addfromCsvText(
+                        $createdTableModel->getId(),
+                        'A,B,C,D,E,F
+" "," "," "," "," "," ",
+" "," "," "," "," "," ",
+" "," "," "," "," "," ",
+" "," "," "," "," "," ",
+" "," "," "," "," "," ",
+" "," "," "," "," "," ",
+',
+                        ',',
+                        true
+                    );
+                } catch (Exception $e)
+                {
+                    $createdTableModel->delete();
+                }
                 
                 // Table successfully created
                 //$this->response->redirect();
@@ -53,6 +73,11 @@ class FromScratch
         }
         catch (\Exception $e)
         {
+            if (isset($createdTableModel) && $createdTableModel->getId())
+            {
+                $createdTableModel->delete();
+            }
+            
             throw $e;
         }
         
