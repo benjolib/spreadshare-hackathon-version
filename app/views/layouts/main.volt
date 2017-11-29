@@ -30,6 +30,8 @@
 <script type="text/javascript" src="/js/api.js"></script>
 <script type="text/javascript">
   $(document).ready(function () {
+     var timer;
+     var delay = 600; // 0.6 seconds delay after last input
      // autoCompleteHandler to handle response
      function autoCompleteHandler(response){
 
@@ -55,14 +57,22 @@
      }
 
      var searchFieldEl = $("input.navbar__search__field");
+
      // On change of the field
      $(searchFieldEl).on("change paste keyup", function() {
+
+
       /* Popper */
       var searchReferenceElement = $(this);
       var onSearchPopper = $('.search-autocomplete');
       var searchEl = $(this).val();
       // When the search query is greater than 3
       if (searchEl.length > 3) {
+
+
+        window.clearTimeout(timer);
+        timer = window.setTimeout(function(){
+
         // AJAX Query
         $.ajax({
           url: "/api/v1/search/",
@@ -73,12 +83,16 @@
           success: function(response) { autoCompleteHandler(response) }
         });
 
+        }, delay);
+
+
         onSearchPopper.addClass('show');
 
         new Popper(searchReferenceElement, onSearchPopper, {
           placement: 'bottom',
         });
       }
+
 
 
 
