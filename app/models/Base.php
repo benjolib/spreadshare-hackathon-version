@@ -39,6 +39,11 @@ abstract class Base
     protected $serviceManager;
     
     /**
+     * @var static[]
+     */
+    protected static $getCache = [];
+    
+    /**
      * Get the user id that is checked for every user-related database entries.
      *
      * @return int
@@ -80,12 +85,20 @@ abstract class Base
      */
     public static function get($id, $column = 'id')
     {
-        return self::findFirst(
-            [
-                "conditions" => sprintf("%s = ?0", $column),
-                "bind" => [$id],
-            ]
-        ) ?: new static();
+        /**
+         * @todo Use memcache or redis for this with a lower lifetime of e.g. 5 minutes
+         */
+        if (!isset(static::$getCache[$id]))
+        {
+            static::$getCache[$id] = static::findFirst(
+                [
+                    "conditions" => sprintf("%s = ?0", $column),
+                    "bind" => [$id],
+                ]
+            ) ?: new static();
+        }
+        
+        return static::$getCache[$id];
     }
     
     /**
