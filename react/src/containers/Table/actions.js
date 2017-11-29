@@ -257,3 +257,73 @@ export const addRow = (
     }, 500);
   }
 };
+
+// ADD COLUMN ACTIONS
+
+export const addColRequest = (
+  tableId: string,
+  title: string,
+  insertAfterId: string
+): Action => ({
+  type: "ADD_COL_REQUEST",
+  payload: {
+    tableId,
+    title,
+    insertAfterId
+  }
+});
+
+export const addColSuccess = (
+  tableId: string,
+  title: string,
+  insertAfterId: string
+): Action => ({
+  type: "ADD_COL_SUCCESS",
+  payload: {
+    tableId,
+    title,
+    insertAfterId
+  }
+});
+
+export const addColError = (
+  tableId: string,
+  title: string,
+  insertAfterId: string,
+  error: Error
+): Action => ({
+  type: "ADD_COL_ERROR",
+  payload: {
+    tableId,
+    title,
+    insertAfterId,
+    error
+  }
+});
+
+// thunk
+
+export const addCol = (
+  tableId: string,
+  title: string,
+  insertAfterId: string
+): ThunkAction => (dispatch: Dispatch) => {
+  dispatch(addColRequest(tableId, title, insertAfterId));
+  if (process.env.NODE_ENV === "production") {
+    saveDataApi(`add-col/${tableId}`, {
+      title,
+      insertAfterId
+    }).then(({ error }: { error: Error }) => {
+      if (error) {
+        dispatch(addColError(tableId, title, insertAfterId, new Error(error)));
+        return;
+      }
+
+      dispatch(addColSuccess(tableId, title, insertAfterId));
+    });
+  } else {
+    setTimeout(() => {
+      dispatch(addColSuccess(tableId, title, insertAfterId));
+    }, 500);
+  }
+};

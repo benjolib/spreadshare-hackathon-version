@@ -49,6 +49,7 @@ export const tablesReducer = (
 
     case "EDIT_CELL_SUCCESS": {
       // TODO: show message like (success, your edit is now awaiting approval)
+      // TODO: if permission is admin edit instantly
       return state;
     }
 
@@ -107,10 +108,52 @@ export const tablesReducer = (
 
     case "ADD_ROW_SUCCESS": {
       // TODO: show message like (success, your edit is now awaiting approval)
+      // TODO: if permission is admin edit instantly
       return state;
     }
 
     case "ADD_ROW_ERROR": {
+      // TODO: show error
+      return state;
+    }
+
+    case "ADD_COL_REQUEST": {
+      // TODO: maybe show loader
+      return state;
+    }
+
+    case "ADD_COL_SUCCESS": {
+      // no approval needed since this is an admin action
+      // TODO: we need a column id back or something and cell ids
+      return {
+        ...state,
+        [action.payload.tableId]: {
+          ...state[action.payload.tableId],
+          table: {
+            ...state[action.payload.tableId].table,
+            columns: [
+              ...state[action.payload.tableId].table.columns,
+              {
+                id: "REPLACE",
+                title: action.payload.title
+              }
+            ],
+            rows: state[action.payload.tableId].table.rows.map(row => ({
+              ...row,
+              content: [
+                ...row.content,
+                {
+                  id: "REPLACE",
+                  content: ""
+                }
+              ]
+            }))
+          }
+        }
+      };
+    }
+
+    case "ADD_COL_ERROR": {
       // TODO: show error
       return state;
     }

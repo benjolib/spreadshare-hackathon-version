@@ -24,16 +24,21 @@ export type RowWithVote = {
   content: Array<Cell | Vote>
 };
 
+export type Column = {
+  id: string,
+  title: string
+};
+
 export type RowsWithVotes = Array<RowWithVote>;
 
 export type Votes = Array<Vote>;
-export type Columns = Array<string>;
+export type Columns = Array<Column>;
 export type Rows = Array<Row>;
 
 export type Table = {
-  votes: Array<Vote>,
-  columns: Array<string>,
-  rows: Array<Row>
+  votes: Votes,
+  columns: Columns,
+  rows: Rows
 };
 
 export type TableDataWrapper = {
@@ -97,17 +102,51 @@ export type TablesAction =
     }
   | {
       type: "ADD_ROW_REQUEST",
-      payload: { tableId: string, row: Array<string> }
+      payload: {
+        tableId: string,
+        rowData: Array<string>,
+        insertAfterId: string
+      }
     }
   | {
       type: "ADD_ROW_SUCCESS",
-      payload: { tableId: string, row: Array<string> }
+      payload: {
+        tableId: string,
+        rowData: Array<string>,
+        insertAfterId: string
+      }
     }
   | {
       type: "ADD_ROW_ERROR",
       payload: {
         tableId: string,
-        row: Array<string>,
+        rowData: Array<string>,
+        insertAfterId: string,
+        error: Error
+      }
+    }
+  | {
+      type: "ADD_COL_REQUEST",
+      payload: {
+        tableId: string,
+        title: string,
+        insertAfterId: string
+      }
+    }
+  | {
+      type: "ADD_COL_SUCCESS",
+      payload: {
+        tableId: string,
+        title: string,
+        insertAfterId: string
+      }
+    }
+  | {
+      type: "ADD_COL_ERROR",
+      payload: {
+        tableId: string,
+        title: string,
+        insertAfterId: string,
         error: Error
       }
     };

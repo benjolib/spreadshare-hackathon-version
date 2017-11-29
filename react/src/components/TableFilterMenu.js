@@ -7,7 +7,7 @@ const StyledDiv = styled.div`
   background: #fff;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
   top: -10px;
-  left: ${props => (props.sortShown ? "420px" : "10px")};
+  left: ${props => (props.sortShown ? "420px" : "60px")};
   height: 200px;
   width: 400px;
   padding: 10px;

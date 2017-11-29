@@ -10,7 +10,7 @@ import TableButton from "../../components/TableButton";
 import TableSearch from "../../components/TableSearch";
 import TableLoading from "../../components/TableLoading";
 import TableError from "../../components/TableError";
-import { addRow, voteRow, editCell, fetchTable } from "./actions";
+import { addCol, addRow, voteRow, editCell, fetchTable } from "./actions";
 import type { ReduxState } from "../../types";
 import type { TableDataWrapper, Votes, RowsWithVotes } from "./types";
 import addButtonRenderer from "../../lib/addButtonRenderer";
@@ -21,9 +21,11 @@ import TableSortingMenu from "../../components/TableSortingMenu";
 import type { Sortings } from "../../components/TableSortingMenu";
 import TableFilterMenu from "../../components/TableFilterMenu";
 import type { Filters } from "../../components/TableFilterMenu";
+import TableDropdownMenu from "../../components/TableDropdownMenu";
 
 type Props = {
   id: string, // from server markup
+  permission: string,
   data: TableDataWrapper,
   fetchTable: typeof fetchTable,
   editCell: typeof editCell,
@@ -38,6 +40,7 @@ type State = {
   showAdd: boolean,
   showSortings: boolean,
   showFilters: boolean,
+  showDropdown: boolean,
   addRowDataGetters: Array<Function>
 };
 
@@ -116,6 +119,24 @@ class Table extends Component<Props, State> {
     });
   };
 
+  showDropdown = () => {
+    this.setState({
+      showDropdown: true
+    });
+  };
+
+  hideDropdown = () => {
+    this.setState({
+      showDropdown: false
+    });
+  };
+
+  toggleDropdown = () => {
+    this.setState({
+      showDropdown: !this.state.showDropdown
+    });
+  };
+
   showAdd = () => {
     this.setState({
       showAdd: true
@@ -167,7 +188,7 @@ class Table extends Component<Props, State> {
         return;
       }
 
-      if (key === "edit") {
+      if (key === "my_edit") {
         // TODO: prompt is temporary until i make proper dropdown
         const newValue = prompt("Please type the new value for the cell");
 
@@ -175,7 +196,7 @@ class Table extends Component<Props, State> {
           ...cell,
           content: newValue
         });
-      } else if (key === "delete") {
+      } else if (key === "my_delete") {
         // TODO: confirm is temporary until i make proper dropdown
         const confirmed = window.confirm("Are you sure?");
 
@@ -261,7 +282,10 @@ class Table extends Component<Props, State> {
 
     console.log(this.props.data);
 
-    const colHeaders = ["Votes", ...this.props.data.table.columns];
+    const colHeaders = [
+      "Votes",
+      ...this.props.data.table.columns.map(col => col.title)
+    ];
 
     const hotData = _.pipe(
       this.hotDataAddVotes(this.props.data.table.votes),
@@ -272,6 +296,8 @@ class Table extends Component<Props, State> {
       this.hotDataFlattenRows
     );
 
+    console.log(colHeaders);
+
     return (
       <div>
         <TableHeader>
@@ -279,7 +305,7 @@ class Table extends Component<Props, State> {
           <TableButton icon="filter" onClick={this.toggleFilters} />
           <TableButton icon="add" onClick={this.showAdd} />
           <TableSearch onChange={this.updateSearchValue} />
-          <TableButton icon="dots" />
+          <TableButton icon="dots" onClick={this.toggleDropdown} />
         </TableHeader>
         <div style={{ position: "relative" }}>
           <TableSortingMenu
@@ -294,6 +320,14 @@ class Table extends Component<Props, State> {
             onApply={this.updateTableFilters}
             colHeaders={colHeaders}
             appliedFilters={this.state.filters}
+          />
+          <TableDropdownMenu
+            tableId={this.props.id}
+            hide={!this.state.showDropdown}
+            showAdd={this.showAdd}
+            permission={this.props.permission}
+            columns={this.props.data.table.columns}
+            addCol={this.props.addCol}
           />
         </div>
         <TableMain>
@@ -350,13 +384,31 @@ class Table extends Component<Props, State> {
             contextMenu={{
               callback: this.contextMenuCallback,
               items: {
-                edit: {
-                  name: "Edit"
+                my_copy: {
+                  name: "Copy"
                 },
-                delete: {
-                  name: "Delete"
-                }
+                ...(this.props.permission === "1" ||
+                this.props.permission === "2"
+                  ? {
+                      hsep1: "---------",
+                      my_edit: {
+                        name: "Edit"
+                      },
+                      my_delete: {
+                        name: "Delete"
+                      }
+                    }
+                  : {})
               }
+            }}
+            // high perm stuff
+            afterCreateCol={(...args) => {
+              console.log(...args);
+            }}
+            onAfterChange={(changes, source, ...args) => {
+              console.log(changes);
+              console.log(source);
+              console.log(...args);
             }}
           />
         </TableMain>
@@ -373,7 +425,8 @@ const mapDispatchToProps = {
   fetchTable,
   editCell,
   voteRow,
-  addRow
+  addRow,
+  addCol
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Table);

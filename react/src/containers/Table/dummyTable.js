@@ -87,7 +87,24 @@ const dummyTable = {
       upvoted: false
     }
   ],
-  columns: ["Name", "Functionality", "URL", "Price"],
+  columns: [
+    {
+      id: "1",
+      title: "Name"
+    },
+    {
+      id: "2",
+      title: "Functionality"
+    },
+    {
+      id: "3",
+      title: "URL"
+    },
+    {
+      id: "4",
+      title: "Price"
+    }
+  ],
   rows: [
     {
       id: "1",
