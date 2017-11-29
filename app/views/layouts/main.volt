@@ -28,79 +28,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
 <script type="text/javascript" src="/js/api.js"></script>
-<script type="text/javascript">
-  $(document).ready(function () {
-     var timer;
-     var delay = 600; // 0.6 seconds delay after last input
-     // autoCompleteHandler to handle response
-     function autoCompleteHandler(response){
 
-       // search item list selector
-       var searchItems = $('#search-items');
-       // hits object
-       var hits = response.data.hits.hits;
-       // Insert total results value
-       $('.result-count').html(hits.length + " RESULTS");
-       // create item array
-       var items = [];
-       // empty the existing list
-       $(searchItems).empty();
-       // foreach array
-       $.each(hits, function(key,val) {
-          // item
-          items.push("<a href='/table/" +  val._source.id + "'><div class='item'><div class='title'>" + val._source.title + "</div><div class='tagline'>" + val._source.tagline + "</div></div></a>");
-       });
-      // append list to array
-       $(searchItems).append(items.join(''));
-
-
-     }
-
-     var searchFieldEl = $("input.navbar__search__field");
-
-     // On change of the field
-     $(searchFieldEl).on("change paste keyup", function() {
-
-
-      /* Popper */
-      var searchReferenceElement = $(this);
-      var onSearchPopper = $('.search-autocomplete');
-      var searchEl = $(this).val();
-      // When the search query is greater than 3
-      if (searchEl.length > 3) {
-
-
-        window.clearTimeout(timer);
-        timer = window.setTimeout(function(){
-
-        // AJAX Query
-        $.ajax({
-          url: "/api/v1/search/",
-          method: "GET",
-          crossDomain: true,
-          dataType: "JSON",
-          data: {"query":  searchEl},
-          success: function(response) { autoCompleteHandler(response) }
-        });
-
-        }, delay);
-
-
-        onSearchPopper.addClass('show');
-
-        new Popper(searchReferenceElement, onSearchPopper, {
-          placement: 'bottom',
-        });
-      }
-
-
-
-
-    });
-
-
-  });
-</script>
 {{ partial('layouts/scripts') }}
 
 <script type="text/javascript" src="/js/react/main.5d352c3b.js"></script>
