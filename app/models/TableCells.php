@@ -2,7 +2,6 @@
 
 namespace DS\Model;
 
-use DS\Events\Table\TabelCellChanged;
 use DS\Model\Abstracts\AbstractTableCells;
 use DS\Model\Events\TableCellsEvents;
 
@@ -38,5 +37,32 @@ class TableCells
                 'order' => "columnId ASC",
             ]
         );
+    }
+    
+    /**
+     * @param int $rowId
+     *
+     * @return array
+     */
+    public static function findCellsByRow(int $rowId): array
+    {
+        $query = self::query()
+                     ->columns(
+                         [
+                             self::class . ".id",
+                             self::class . ".content",
+                             self::class . ".link",
+                             self::class . ".userId",
+                             self::class . ".rowId",
+                             self::class . ".columnId",
+                             TableColumns::class . ".title as columnTitle",
+            
+                         ]
+                     )
+                     ->innerJoin(TableColumns::class, TableColumns::class . '.id = ' . self::class . '.columnId')
+                     ->orderBy(TableColumns::class . ".position ASC")
+                     ->where(self::class . ".rowId = ?0", [$rowId]);
+        
+        return $query->execute()->toArray() ?: [];
     }
 }

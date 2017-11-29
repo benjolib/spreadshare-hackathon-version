@@ -69,7 +69,7 @@
       <div class="main__content__sidebar__option" id="topicFilter">
         <span>Filter by topic</span><img src="/assets/icons/chevron-down.svg" />
       </div>
-      <ul class="filter filter--topic">
+      <ul class="filter filter--topic {% if sidebarFilter.topic %}open{% endif %}">
         <li>
           <label {% if sidebarFilter.topic == "" %}class="selected"{% endif %}>
           <input type="radio" name="topic" {% if sidebarFilter.topic == "" %}checked="checked"{% endif %} value="" /> All
@@ -87,7 +87,7 @@
       <div class="main__content__sidebar__option" id="typeFilter">
         <span>Filter by Table Type</span><img src="/assets/icons/chevron-down.svg" />
       </div>
-      <ul class="filter filter--type">
+      <ul class="filter filter--type {% if sidebarFilter.type %}open{% endif %}">
         <li>
           <label {% if sidebarFilter.type == "" %}class="selected"{% endif %}>
           <input type="radio" name="type" {% if sidebarFilter.type == "" %}checked="checked"{% endif %} value="" /> All

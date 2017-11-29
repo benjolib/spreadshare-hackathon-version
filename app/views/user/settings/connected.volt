@@ -103,7 +103,7 @@
               <input type="text" name="link[gitlab]" value="{{ connections.gitlab }}" />
             </div>
             <div class="connected__item">
-              UNKNWON - FIX
+              <!-- UNKNWON - FIX -->
               <div class="connected__item__logo" data-social="unknown">
                 <img src="/assets/icons/social/unknown.svg" />
                 <span>Unknown</span>
@@ -159,7 +159,7 @@
               <input type="text" name="link[googleplus]" value="{{ connections.googleplus }}" />
             </div>
             <div class="connected__item">
-              UNKNOWN - FIX
+              <!-- UNKNOWN - FIX -->
               <div class="connected__item__logo" data-social="unknown2">
                 <img src="/assets/icons/social/unknown2.svg" />
                 <span>Unknown 2</span>
@@ -216,7 +216,7 @@
               <input type="text" name="link[reddit]" value="{{ connections.reddit }}" />
             </div>
             <div class="connected__item">
-              UNKNOWN - FIX
+              <!-- UNKNOWN - FIX -->
               <div class="connected__item__logo" data-social="unknown3">
                 <img src="/assets/icons/social/unknown3.svg" />
                 <span>Unknown 3</span>

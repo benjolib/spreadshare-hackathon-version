@@ -114,9 +114,10 @@ CREATE TABLE `tableColumns` (
   PRIMARY KEY (`id`),
   KEY `tableId` (`tableId`),
   KEY `userId` (`userId`),
+  KEY `position` (`position`),
   CONSTRAINT `tableColumnsTableId` FOREIGN KEY (`tableId`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tableColumnsUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
 

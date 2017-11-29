@@ -332,3 +332,25 @@
     }
   }
 }
+
+.display-flex {
+  @include desktop {
+    width: 50%;    
+  }
+  @include tablet{
+    width: 100% !important;
+  }
+  @include mobile{
+    width: 100% !important;
+  }
+}
+.flex-display{
+  margin-bottom: 35px;
+  @include desktop {
+    width: 100%;   
+    display: inherit; 
+  }
+}
+.signup__content__form input {
+  width: 95%;
+}

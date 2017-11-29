@@ -1,12 +1,11 @@
 <?php
 
-namespace DS\Controller\Api\v1\AddRow;
+namespace DS\Controller\Api\v1\AddCol;
 
-use DS\Api\TableContent;
 use DS\Controller\Api\ActionHandler;
 use DS\Controller\Api\Meta\Record;
 use DS\Controller\Api\MethodInterface;
-use DS\Model\TableRows;
+use DS\Model\TableColumns;
 use DS\Model\Tables;
 
 /**
@@ -34,11 +33,11 @@ class Post extends ActionHandler implements MethodInterface
     /**
      * Process Post Method
      *
-     * @api               {post} /api/v1/add-row/:tableId Post a new row (:tableId is the id of the table)
-     * @apiParam {String} [rowData]  The row as a json string
+     * @api               {post} /api/v1/add-coll/:tableId Post a new row (:tableId is the id of the table)
+     * @apiParam {String} [title]  Column title
      * @apiParam {String} [insertAfterId]  Inserts the row after given id - This has to be a rowId!
      * @apiVersion        1.0.0
-     * @apiName           Add Row
+     * @apiName           Add Column
      * @apiGroup          Public
      *
      * @apiSuccess {Object} _meta Meta object
@@ -54,30 +53,11 @@ class Post extends ActionHandler implements MethodInterface
      *            "success": true
      *          },
      *          "data": {
-     *             "id": null
-     *             "cells": null,
-     *             "action" => "changeRequested"
+     *             "id": 123
+     *             "action" => "added"
      *          }
      *      }
      *
-     * @apiSuccessExample Success-Response:
-     *     HTTP/1.1 200 OK
-     *     {
-     *          "_meta": {
-     *            "total": 1,
-     *            "success": true
-     *          },
-     *          "data": {
-     *             "id": 312312
-     *             "cells": {
-     *                "32": {
-     *                  "id": "32",
-     *                  "content" "cell-content"
-     *                }
-     *             },
-     *             "action" => "updated"
-     *          }
-     *      }
      *
      * @return mixed
      */
@@ -87,29 +67,34 @@ class Post extends ActionHandler implements MethodInterface
         $post    = $this->request->getJsonRawBody(true);
         $userId  = $this->getServiceManager()->getAuth()->getUserId();
         
-        if (!isset($post['insertAfterId']) || !isset($post['rowData']))
+        if (!isset($post['insertAfterId']) || !isset($post['title']))
         {
             throw new \InvalidArgumentException('Invalid post package sent.');
         }
         
         $insertAfterId = $post['insertAfterId'];
-        $rowData       = $post['rowData'];
+        $title         = $post['title'];
         
-        if ($userId > 0 && $tableId > 0 && is_array($rowData))
+        if (!$title)
+        {
+            throw new \InvalidArgumentException('Please provide a title');
+        }
+        
+        if ($userId > 0 && $tableId > 0)
         {
             $tableModel = Tables::findFirstById($tableId);
             if (!$tableModel)
             {
                 throw new \InvalidArgumentException('The table that you want to edit does not exist.');
             }
-    
+            
             // User is Owner and can directly edit!
             if ($tableModel->getOwnerUserId() == $userId)
             {
-                $tableContent = new TableContent();
-                $newRow       = $tableContent->addRow($tableId, $rowData, $insertAfterId);
-        
-                $action = 'updated';
+                $tableColumn = new TableColumns();
+                $column      = $tableColumn->add($userId, $tableId, $title);
+                
+                $action = 'added';
             }
             // User contribution has to be confirmed first.
             else
@@ -117,7 +102,8 @@ class Post extends ActionHandler implements MethodInterface
                 /**
                  * @todo not implemented yet!
                  */
-                $newRow = new TableRows();
+                $column = new TableColumns();
+                
                 /*
                 $cellId = null;
                 $changeRequest = new ChangeRequests();
@@ -129,14 +115,13 @@ class Post extends ActionHandler implements MethodInterface
                               ->setComment('')
                               ->setCellId($cellId);
                 */
-        
+                
                 $action = 'changeRequested';
             }
-    
+            
             return new Record(
                 [
-                    'id' => $newRow->getId(),
-                    'cells' => json_decode($newRow->getContent(), true),
+                    'id' => $column->getId(),
                     'action' => $action,
                 ]
             );

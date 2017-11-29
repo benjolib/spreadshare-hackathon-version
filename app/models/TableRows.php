@@ -21,6 +21,45 @@ use Phalcon\Mvc\Model\Resultset\Simple;
 class TableRows
     extends TableRowsEvents
 {
+    
+    /**
+     * @param int $tableId
+     *
+     * @return Abstracts\AbstractTableRows|Abstracts\AbstractTableRows[]|\Phalcon\Mvc\Model\ResultSetInterface
+     */
+    public function rebuildRowCache(int $tableId)
+    {
+        return $this->rebuildRowCacheWithRows(self::findRowsFrom($tableId), $tableId);
+    }
+    
+    /**
+     * @param Abstracts\AbstractTableRows|Abstracts\AbstractTableRows[]|\Phalcon\Mvc\Model\ResultSetInterface $rows
+     * @param int                                                                                             $tableId
+     *
+     * @return array
+     */
+    public function rebuildRowCacheWithRows(Simple $rows, int $tableId)
+    {
+        foreach ($rows as $row)
+        {
+            $rowData = [];
+            $cells   = TableCells::findCellsByRow($row->getId());
+            
+            foreach ($cells as $cell)
+            {
+                $rowData[] = [
+                    'id' => $cell['id'],
+                    'content' => $cell['content'],
+                    'link' => $cell['link'],
+                ];
+            }
+            
+            $row->setContent(json_encode($rowData))->save();
+        }
+        
+        return $rows;
+    }
+    
     /**
      * @param int $tableId
      * @param int $beginningAtRowId
@@ -30,7 +69,7 @@ class TableRows
     public function increaseLineNumbers(int $tableId, int $beginningAtRowId = 0): bool
     {
         return $this->getWriteConnection()->execute(
-            'UPDATE tableRows SET lineNumber = lineNumber +1 WHERE (tableId = :tableId AND rowId > :rowId);',
+            'UPDATE tableRows SET lineNumber = lineNumber +1 WHERE (id > :rowId AND tableId = :tableId);',
             ['tableId' => $tableId, 'rowId' => $beginningAtRowId]
         );
     }

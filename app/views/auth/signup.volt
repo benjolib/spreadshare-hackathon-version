@@ -9,18 +9,31 @@
       <p class="signup__content__title">Join now</p>
       <p class="signup__content__subtitle">Discover and contribute to the community of data lovers.</p>
       <form class="signup__content__form" method="post">
-        <p>Your name</p>
-        <input type="text" name="name" value="{{ post['name'] }}" autofocus />
-        <span>We’re big on real names around here, so people know who’s who</span>
-        <p>Username</p>
-        <input type="text" name="handle" value="{{ post['handle'] }}" />
-        <span>Your Spreadshare URL: <span style="color:#444;">spreadshare.co/USERNAME</span></span>
-        <p>Email</p>
-        <input type="email" name="email" value="{{ post['email'] }}" />
-        <p>Password</p>
-        <input type="password" id="password" name="password" />
-        <div id="showPassword">
-          <img src="/assets/icons/eye.svg" /><span id="showPasswordSpan" onclick="togglePassword('password');">Show Password</span>
+        <div class="flex-display">
+          <div class="display-flex">
+            <p>Your name</p>
+            <input name="name" value="" autofocus="" type="text"></br>
+            <span>We’re big on real names around here, so people know who’s who</span>
+          </div>
+          <div class="display-flex">
+            <p>Username</p>
+            <input name="handle" value="" type="text"></br>
+            <span>Your Spreadshare URL: <span style="color:#444;">spreadshare.co/USERNAME</span></span>
+          </div>
+        </div>
+
+        <div class="flex-display">
+          <div class="display-flex">
+            <p>Email</p>
+            <input type="email" name="email" value="{{ post['email'] }}" />
+          </div>
+          <div class="display-flex">
+            <p>Password</p>
+            <input type="password" id="password" name="password" />
+            <div id="showPassword">
+              <img src="/assets/icons/eye.svg" /><span id="showPasswordSpan" onclick="togglePassword('password');">Show Password</span>
+            </div>
+          </div>
         </div>
         <p style="color:darkred;">{{ errorMessage }}</p>
         <div class="signup__content__form__buttons">

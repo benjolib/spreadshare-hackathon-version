@@ -48,10 +48,10 @@ abstract class TableTokensEvents
      */
     public function afterCreate()
     {
-        if ($this->getTableId())
+        if ($this->getTableId() && $this->getTokensEarned())
         {
             $tableStats = TableStats::findByFieldValue('tableId', $this->getTableId());
-            $tableStats->setTokensCount($tableStats->getTokensCount() + 1)->save();
+            $tableStats->setTokensCount($tableStats->getTokensCount() + $this->getTokensEarned())->save();
         }
         
         if ($this->getUserId())
@@ -63,17 +63,19 @@ abstract class TableTokensEvents
     /**
      * Before deleting a distributed token
      */
-    public function beforeDelete()
+    public function afterDelete()
     {
-        if ($this->getTableId())
+        if ($this->getTableId() && $this->getTokensEarned())
         {
             $tableStats = TableStats::findByFieldValue('tableId', $this->getTableId());
-            $tableStats->setTokensCount($tableStats->getTokensCount() - 1)->save();
+            $tableStats->setTokensCount($tableStats->getTokensCount() - $this->getTokensEarned())->save();
         }
         
         if ($this->getUserId())
         {
             Wallet::decrementTokens($this->getUserId());
         }
+        
+        return true;
     }
 }

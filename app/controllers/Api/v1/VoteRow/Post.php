@@ -35,7 +35,7 @@ class Post extends ActionHandler implements MethodInterface
      * @api               {get} /api/v1/vote-row/:tableId Request all content types
      * @apiParam          {Number} tableId Id of table
      * @apiVersion        1.0.0
-     * @apiName           Topics
+     * @apiName           Vote Row
      * @apiGroup          Public
      *
      * @apiSuccess {Object} _meta Meta object
