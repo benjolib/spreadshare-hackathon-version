@@ -174,14 +174,45 @@
     .dropdown {
       &--notifications {
         width: 360px !important;
+        @include rem2(padding, 12, 16);
 
-        .leftZero {
-          left: 0 !important;
+        .tableFeed__item__avatar {
+          img {
+            @include rem(width, 34);
+            @include rem(height, 34);
+          }
+        }
+        .tableFeed__item__info__text {
+          @include rem(font-size, 13);
+
+          &__author {
+            font-weight: 500;
+          }
+          &__message {
+            font-weight: 400;
+          }
+        }
+        .tableFeed__item__info__text {
+          font-weight: 300;
         }
 
-        ul {
-          width: 100% !important;
-          @include rem(padding-right, 50);
+        .center {
+          color: $text-color;
+          font-weight: 500;
+          @include rem(font-size, 13);
+
+          a {
+            color: $logo-color;
+
+            &:hover {
+              color: darken($logo-color, 6%);
+            }
+          }
+        }
+
+        // css hack for responsive notifications dropdown
+        .leftZero {
+          left: 0 !important;
         }
       }
     }
