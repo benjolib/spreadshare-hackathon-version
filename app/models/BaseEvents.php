@@ -33,6 +33,11 @@ abstract class BaseEvents
             $this->updatedAt = $time;
         }
         
+        if (property_exists($this, 'updatedById'))
+        {
+            $this->updatedById = auth()->getUserId();
+        }
+        
         if (property_exists($this, 'createdAt'))
         {
             $this->createdAt = $time;
@@ -49,6 +54,11 @@ abstract class BaseEvents
         if (property_exists($this, 'updatedAt'))
         {
             $this->updatedAt = time();
+        }
+        
+        if (property_exists($this, 'updatedById'))
+        {
+            $this->updatedById = auth()->getUserId();
         }
         
         return true;
