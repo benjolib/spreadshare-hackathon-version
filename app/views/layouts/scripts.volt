@@ -19,41 +19,43 @@
       popper.addClass('left160');
     }
 
-    // create poppers
-    new Popper(referenceElement, onPopper, {
-      placement: 'bottom'
-    });
-    new Popper(refElem, popper, {
-      placement: 'bottom'
-    });
-
-    // event listener
-    $(window).resize(function () {
-      if (window.innerWidth < 1024) {
-        referenceElement = $('.navbar__controls__add--menu');
-        refElem = $('.navbar__controls__add--notification');
-        popper.removeClass('left160');
-      } else {
-        referenceElement = $('.navbar__controls__notification');
-        refElem = $('.navbar__search__filter');
-        popper.addClass('left160');
-      }
+    if (onPopper.length > 0 && popper.length > 0) {
+      // create poppers
       new Popper(referenceElement, onPopper, {
         placement: 'bottom'
       });
       new Popper(refElem, popper, {
         placement: 'bottom'
       });
-    });
 
-    //toggle menu
-    $('#profileImage').click(function () {
-      $(onPopper).toggleClass('show');
-    });
-    // toggle notifications
-    $('#notificationButton').click(function () {
-      $(popper).toggleClass('show');
-    });
+      // event listener
+      $(window).resize(function () {
+        if (window.innerWidth < 1024) {
+          referenceElement = $('.navbar__controls__add--menu');
+          refElem = $('.navbar__controls__add--notification');
+          popper.removeClass('left160');
+        } else {
+          referenceElement = $('.navbar__controls__notification');
+          refElem = $('.navbar__search__filter');
+          popper.addClass('left160');
+        }
+        new Popper(referenceElement, onPopper, {
+          placement: 'bottom'
+        });
+        new Popper(refElem, popper, {
+          placement: 'bottom'
+        });
+      });
+
+      //toggle menu
+      $('#profileImage').click(function () {
+        $(onPopper).toggleClass('show');
+      });
+      // toggle notifications
+      $('#notificationButton').click(function () {
+        $(popper).toggleClass('show');
+      });
+    }
 
     // flash messages timeout
     var $flash = $('.flash');
