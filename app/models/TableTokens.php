@@ -4,6 +4,8 @@ namespace DS\Model;
 
 use DS\Constants\Paging;
 use DS\Model\Events\TableTokensEvents;
+use DS\Traits\Model\FindUserAndRowTrait;
+use DS\Traits\Model\FindUserAndTableTrait;
 
 /**
  * TableTokens
@@ -21,6 +23,8 @@ use DS\Model\Events\TableTokensEvents;
 class TableTokens
     extends TableTokensEvents
 {
+    use FindUserAndRowTrait, FindUserAndTableTrait;
+    
     /**
      * @param int    $userId
      * @param string $orderBy
