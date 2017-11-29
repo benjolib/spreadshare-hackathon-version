@@ -60,7 +60,7 @@
          placement: 'bottom',
        });
      }
-=======
+
     $(searchFieldEl).on("change paste keyup", function () {
 
       /* Popper */
