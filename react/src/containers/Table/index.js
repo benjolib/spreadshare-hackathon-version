@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import HandsOnTable from "react-handsontable";
+import swal from "sweetalert2";
 import _ from "lodash/fp";
 import __ from "lodash";
 import TableHeader from "../../components/TableHeader";
@@ -197,16 +198,38 @@ class Table extends Component<Props, State> {
           content: newValue
         });
       } else if (key === "my_delete") {
-        // TODO: confirm is temporary until i make proper dropdown
-        const confirmed = window.confirm("Are you sure?");
+        swal({
+          title: "Are you sure?",
+          text: "Once deleted, you will not be able to recover this cell!",
+          showLoaderOnConfirm: true,
+          preConfirm: confirmed => {
+            if (!confirmed) {
+              return;
+            }
 
-        if (!confirmed) {
-          return;
-        }
+            return new Promise(resolve => {
+              this.props.editCell(
+                this.props.id,
+                cell.rowId,
+                cell.id,
+                {
+                  ...cell,
+                  content: ""
+                },
+                err => {
+                  if (!err) {
+                    swal.showValidationError("Couldn't delete cell");
+                  }
 
-        this.props.editCell(this.props.id, cell.rowId, cell.id, {
-          ...cell,
-          content: ""
+                  resolve();
+                }
+              );
+            });
+          }
+        }).then(result => {
+          if (result.value) {
+            swal("Deleted!", "Your file has been deleted.", "success");
+          }
         });
       }
     });
@@ -330,7 +353,7 @@ class Table extends Component<Props, State> {
             addCol={this.props.addCol}
           />
         </div>
-        <TableMain>
+        <TableMain showAdd={this.state.showAdd}>
           <HandsOnTable
             ref={ref => (this.hot = ref)}
             init={() => {
@@ -378,27 +401,29 @@ class Table extends Component<Props, State> {
               }
             }}
             fixedColumnsLeft={1}
-            fixedRowsTop={this.state.showAdd ? 1 : 0}
             stretchH="all"
+            disableVisualSelection={this.state.showAdd}
             contextMenuCopyPaste
             contextMenu={{
               callback: this.contextMenuCallback,
               items: {
-                my_copy: {
-                  name: "Copy"
-                },
                 ...(this.props.permission === "1" ||
                 this.props.permission === "2"
                   ? {
-                      hsep1: "---------",
                       my_edit: {
                         name: "Edit"
                       },
                       my_delete: {
                         name: "Delete"
+                      },
+                      my_add_url: {
+                        name: "Add URL"
                       }
                     }
-                  : {})
+                  : {}),
+                my_copy: {
+                  name: "Copy"
+                }
               }
             }}
             // high perm stuff

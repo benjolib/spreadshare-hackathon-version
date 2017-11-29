@@ -121,7 +121,8 @@ class Post extends ActionHandler implements MethodInterface
             
             return new Record(
                 [
-                    'id' => $column->getId(),
+                    'id' => $column['colId'],
+                    'cells' => $column['cells'],
                     'action' => $action,
                 ]
             );

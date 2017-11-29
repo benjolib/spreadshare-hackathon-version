@@ -25,9 +25,9 @@ class TableColumns
      * @param int    $tableId
      * @param string $title
      *
-     * @return $this
+     * @return array
      */
-    public function add(int $userId, int $tableId, string $title)
+    public function add(int $userId, int $tableId, string $title): array
     {
         // @todo optimize this for better performance:
         $columns   = self::findAllByFieldValue('tableId', $tableId);
@@ -42,6 +42,7 @@ class TableColumns
         
         $rows = TableRows::findRowsFrom($tableId);
         
+        $createdCells = [];
         foreach ($rows as $row)
         {
             $cell = new TableCells();
@@ -52,12 +53,20 @@ class TableColumns
                  ->setUpdatedById($userId)
                  ->setUserId($userId)
                  ->create();
+            
+            $createdCells[] = [
+                'id' => $cell->getId(),
+                'rowId' => $row->getId(),
+            ];
         }
         
         // Recreate cache
         (new TableRows())->rebuildRowCacheWithRows($rows, $tableId);
         
-        return $this;
+        return [
+            'colId' => $this->getId(),
+            'cells' => $createdCells,
+        ];
     }
     
     /**
