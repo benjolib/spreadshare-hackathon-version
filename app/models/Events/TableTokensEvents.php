@@ -48,10 +48,10 @@ abstract class TableTokensEvents
      */
     public function afterCreate()
     {
-        if ($this->getTableId())
+        if ($this->getTableId() && $this->getTokensEarned())
         {
             $tableStats = TableStats::findByFieldValue('tableId', $this->getTableId());
-            $tableStats->setTokensCount($tableStats->getTokensCount() + 1)->save();
+            $tableStats->setTokensCount($tableStats->getTokensCount() + $this->getTokensEarned())->save();
         }
         
         if ($this->getUserId())
@@ -65,10 +65,10 @@ abstract class TableTokensEvents
      */
     public function beforeDelete()
     {
-        if ($this->getTableId())
+        if ($this->getTableId() && $this->getTokensEarned())
         {
             $tableStats = TableStats::findByFieldValue('tableId', $this->getTableId());
-            $tableStats->setTokensCount($tableStats->getTokensCount() - 1)->save();
+            $tableStats->setTokensCount($tableStats->getTokensCount() - $this->getTokensEarned())->save();
         }
         
         if ($this->getUserId())
