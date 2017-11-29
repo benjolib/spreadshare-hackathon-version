@@ -61,6 +61,9 @@ return [
             'url' => 'api.mailgun.net/v3/spreadshare.co',
         ],
     ],
+    'sentry' => [
+        'key' => 'https://fcdde304c3344126b70b8f8365df7650:1ef8823d9153412a9f77250fa9d45235@sentry.io/240812',
+    ],
     'files' => [
         'service' => 'local',
         'local' => [
