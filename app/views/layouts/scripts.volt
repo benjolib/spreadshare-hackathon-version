@@ -1,34 +1,58 @@
 <script type="text/javascript">
   $(document).ready(function () {
-    /* Popper */
+    /* Profile Menu Popper */
     var referenceElement;
     var onPopper = $('.profile-menu');
 
+    /* Notifications Popper */
+    var refElem;
+    var popper = $('.dropdown--notifications');
+
     // initial state
     if (window.innerWidth < 1024) {
-      referenceElement = $('.navbar__controls__add');
+      referenceElement = $('.navbar__controls__add--menu');
+      refElem = $('.navbar__controls__add--notification');
+      popper.removeClass('left160');
     } else {
       referenceElement = $('.navbar__controls__notification');
+      refElem = $('.navbar__search__filter');
+      popper.addClass('left160');
     }
+
+    // create poppers
     new Popper(referenceElement, onPopper, {
-      placement: 'bottom',
+      placement: 'bottom'
+    });
+    new Popper(refElem, popper, {
+      placement: 'bottom'
     });
 
     // event listener
     $(window).resize(function () {
       if (window.innerWidth < 1024) {
-        referenceElement = $('.navbar__controls__add');
+        referenceElement = $('.navbar__controls__add--menu');
+        refElem = $('.navbar__controls__add--notification');
+        popper.removeClass('left160');
       } else {
         referenceElement = $('.navbar__controls__notification');
+        refElem = $('.navbar__search__filter');
+        popper.addClass('left160');
       }
       new Popper(referenceElement, onPopper, {
-        placement: 'bottom',
+        placement: 'bottom'
+      });
+      new Popper(refElem, popper, {
+        placement: 'bottom'
       });
     });
 
     //toggle menu
     $('#profileImage').click(function () {
       $(onPopper).toggleClass('show');
+    });
+    // toggle notifications
+    $('#notificationButton').click(function () {
+      $(popper).toggleClass('show');
     });
 
     // flash messages timeout
@@ -63,11 +87,7 @@
     $('button.subscribe').api({
       method: 'POST',
       onSuccess: function (response, button) {
-        if (response.data.subscribed) {
-          button.addClass('subscribed');
-        } else {
-          button.removeClass('subscribed');
-        }
+        button.toggleClass('subscribed');
       },
     });
     $('button.follow-user').api({

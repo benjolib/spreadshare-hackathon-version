@@ -47,7 +47,7 @@
 
     h1 {
       margin: 0;
-      text-align: left;      
+      text-align: left;
       font-weight: 700;
       color: $logo-color;
       @include rem(font-size, 28);
@@ -158,6 +158,34 @@
       justify-content: flex-start;
     }
 
+    a#notificationButton {
+      @include rem(margin-left, 30);
+    }
+    a#profileImage {
+      @include rem(margin-left, 30);
+    }
+
+    img {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .dropdown {
+      &--notifications {
+        width: 360px !important;
+
+        .leftZero {
+          left: 0 !important;
+        }
+
+        ul {
+          width: 100% !important;
+          @include rem(padding-right, 50);
+        }
+      }
+    }
+
     &__dropdown {
       visibility: hidden;
       position: absolute;
@@ -196,20 +224,17 @@
 
        li:last-child{
           margin-top: 14px;
-          margin-bottom: 14px;          
+          margin-bottom: 14px;
           a {
             color: #B1BBC7;
             letter-spacing: -0.43px;
           }
         }
       }
-
     }
 
-
-
     &__add {
-      visibility: hidden;
+      // visibility: hidden;
       @include rem(width, 15);
       @include rem(height, 15);
 
@@ -217,6 +242,11 @@
         @include rem(width, 20);
         @include rem(height, 20);
       }
+
+      &--notification {
+        @include rem(margin-right, 80);
+      }
+      &--menu {}
     }
 
     &__notification {
@@ -237,23 +267,6 @@
       @include desktop {
         @include rem(width, 32);
         @include rem(height, 32);
-      }
-
-
-    }
-
-    a {
-      &:nth-child(2) {
-        @include rem(margin-left, 30);
-      }
-      &:nth-child(3) {
-        @include rem(margin-left, 30);
-      }
-    }
-
-    img {
-      &:hover {
-        cursor: pointer;
       }
     }
   }
@@ -286,7 +299,6 @@
       color: white;
       text-decoration: none;
       font-weight: 600;
-      
 
       &:hover {
         cursor: pointer;
@@ -296,7 +308,7 @@
       color: white;
       text-decoration: none;
       font-weight: 600;
-      
+
       &:hover {
         cursor: pointer;
       }

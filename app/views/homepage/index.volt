@@ -140,11 +140,12 @@
   $('#closeHero').on('click', function() {
     $('.main__hero').css('display', 'none');
     createPopper();
+    createPopper($('.navbar__search__filter'), $('.dropdown--notifications'));
   });
 
   /* Popper */
   var $referenceElement = $('.main__content__tables__filters__left');
-  var $onPopper = $('.dropdown');
+  var $onPopper = $('.dropdown--filters');
 
   var createPopper = function(ref=$referenceElement, pop=$onPopper, place='bottom') {
     new Popper(ref, pop, {
