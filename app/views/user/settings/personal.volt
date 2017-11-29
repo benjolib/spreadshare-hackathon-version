@@ -7,7 +7,7 @@
 <div class="layout">
   <div class="layout__content">
     <div class="layout__content__wrapper">
-      <!-- <form method="post" enctype="multipart/form-data"> -->
+      <form method="post" enctype="multipart/form-data">
         <p class="layout__content__title">Account</p>
         <p class="layout__content__subtitle">
           Manage your account and wallet. Invite friends and receive 20 tokens (<span>you invited 0 so far</span>)
@@ -96,7 +96,7 @@
             <button type="submit">Save Changes</button>
           </div>
         </div>
-      <!-- </form> -->
+      </form>
     </div>
     <aside class="layout__content__aside">
       <div class="layout__content__aside__box">

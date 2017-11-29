@@ -12,38 +12,38 @@
     </div>
     <div class="table__header__up__buttons">
       {% if auth.loggedIn() %}
+        {% if auth.getUserId() != table['ownerUserId'] %}
 
-      {% if auth.getUserId() != table['ownerUserId'] %}
-        {% if table['userHasSubscribed'] %}
-        <button class="subscribed subscribe" data-action="subscribe" data-id="{{ table['id'] }}"></button>
-        {% else %}
-        <button class="subscribe" data-action="subscribe" data-id="{{ table['id'] }}"></button>
+          {% if table['userHasSubscribed'] %}
+          <button class="subscribed subscribe" data-action="subscribe" data-id="{{ table['id'] }}"></button>
+          {% else %}
+          <button class="subscribe" data-action="subscribe" data-id="{{ table['id'] }}"></button>
+          {% endif %}
+
+          <button class="upvote {% if table['userHasVoted'] %}selected{% endif %}" data-action="upvote" data-id="{{ table['id'] }}" onclick="var event = arguments[0] || window.event; event.stopPropagation();">
+            <div class="upvote-icon small"></div>
+            <span>{{ table['votesCount'] +0 }}</span>
+          </button>
+          <button class="flag">
+            <div class="flag-icon"></div>
+          </button>
         {% endif %}
 
-        <button class="upvote {% if table['userHasVoted'] %}selected{% endif %}" data-action="upvote" data-id="{{ table['id'] }}" onclick="var event = arguments[0] || window.event; event.stopPropagation();">
+        <div class="table-menu navbar__controls__dropdown" style="margin-top:80px;">
+          <ul>
+            <li><a data-flag="duplicate" href="javascript:;">Duplicate</a></li>
+            <li><a data-flag="spam" href="javascript:;">Spam</a></li>
+            <li><a data-flag="copyright" href="javascript:;">Copyright</a></li>
+            <li><a data-flag="inappropriate" href="javascript:;">Inappropriate</a></li>
+            <li><a data-flag="other" href="javascript:;">Other</a></li>
+          </ul>
+        </div>
+      {% else %}
+        <button class="subscribe" type="button" onclick="document.location.href='/login';"></button>
+        <button class="upvote" type="button" onclick="document.location.href='/login';">
           <div class="upvote-icon small"></div>
           <span>{{ table['votesCount'] +0 }}</span>
         </button>
-        <button class="flag">
-          <div class="flag-icon"></div>
-        </button>
-      {% endif %}
-
-      <div class="table-menu navbar__controls__dropdown" style="margin-top:80px;">
-        <ul>
-          <li><a data-flag="duplicate" href="javascript:;">Duplicate</a></li>
-          <li><a data-flag="spam" href="javascript:;">Spam</a></li>
-          <li><a data-flag="copyright" href="javascript:;">Copyright</a></li>
-          <li><a data-flag="inappropriate" href="javascript:;">Inappropriate</a></li>
-          <li><a data-flag="other" href="javascript:;">Other</a></li>
-        </ul>
-      </div>
-      {% else %}
-      <button class="subscribe" type="button" onclick="document.location.href='/login';"></button>
-      <button class="upvote" type="button" onclick="document.location.href='/login';">
-        <div class="upvote-icon small"></div>
-        <span>{{ table['votesCount'] +0 }}</span>
-      </button>
       {% endif %}
     </div>
   </div>
