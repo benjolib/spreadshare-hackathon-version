@@ -138,3 +138,5 @@ public/js/webtools.js
 
 # dist
 system/uploads/userimages
+.idea/codeStyles/codeStyleConfig.xml
+.idea/codeStyles/Project.xml
