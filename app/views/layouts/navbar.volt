@@ -34,7 +34,7 @@
     <img src="/assets/icons/add.svg" class="navbar__controls__add navbar__controls__add--menu" />
     <a id="notificationButton" href="javascript:;"><img src="/assets/icons/bell.svg" class="navbar__controls__notification" /></a>
     <div class="dropdown dropdown--notifications">
-      {% if notifications %}
+      {% if notifications is defined %}
         {% for notification in notifications %}
           <div class="tableFeed__item">
             <div class="tableFeed__item__avatar">
