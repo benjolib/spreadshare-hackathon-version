@@ -45,6 +45,7 @@ class TableTokens
                                self::class . ".type",
                                Tables::class . ".title as tableTitle",
                                Tables::class . ".tagline as tableTagline",
+                               Tables::class . ".ownerUserId",
                            ]
                        )
                        ->innerJoin(Tables::class, TableTokens::class . '.tableId = ' . Tables::class . '.id')

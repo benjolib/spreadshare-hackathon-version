@@ -25,9 +25,8 @@ trait FindUserAndTableTrait
     {
         return self::findFirst(
             [
-                "conditions" => 'userId = ?0 AND tableId = ?1',
-                "bind" => [$userId, $tableId],
-                "limit" => 1,
+                "conditions" => 'tableId = ?0 AND userId = ?1',
+                "bind" => [$tableId, $userId],
             ]
         );
     }

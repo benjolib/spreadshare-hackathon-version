@@ -3,10 +3,13 @@
 namespace DS\Events\Table;
 
 use DS\Events\AbstractEvent;
+use DS\Model\DataSource\DefaultTokenDistribution;
 use DS\Model\DataSource\TableLogType;
+use DS\Model\DataSource\TokenDistributionType;
 use DS\Model\DataSource\UserNotificationType;
 use DS\Model\TableLog;
 use DS\Model\Tables;
+use DS\Model\TableTokens;
 use DS\Model\User;
 use DS\Model\UserNotifications;
 
@@ -33,8 +36,8 @@ class TableUpvoted extends AbstractEvent
     public static function after(int $userId, int $tableId)
     {
         
-        $user  = User::findFirstById($userId);
-        $table = Tables::findFirstById($tableId);
+        $user  = User::get($userId);
+        $table = Tables::get($tableId);
         
         $userNotification = new UserNotifications();
         $userNotification
@@ -68,6 +71,17 @@ class TableUpvoted extends AbstractEvent
                 )
             )
             ->create();
+        
+        /**
+         * Give a token to this user for this upvote
+         */
+        $tableToken = new TableTokens();
+        $tableToken->setUserId($table->getOwnerUserId()) // Its important to credit the owner of the table not the user
+                   ->setTokensEarned(DefaultTokenDistribution::PerVote)
+                   ->setOwnership(0)
+                   ->setTableId($tableId)
+                   ->setType(TokenDistributionType::Upvote)
+                   ->create();
     }
     
 }

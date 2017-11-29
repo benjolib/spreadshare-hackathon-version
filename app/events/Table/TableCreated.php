@@ -6,6 +6,7 @@ use DS\Events\AbstractEvent;
 use DS\Model\DataSource\DefaultTokenDistribution;
 use DS\Model\DataSource\TableLogType;
 use DS\Model\DataSource\TokenDistributionType;
+use DS\Model\TableContributions;
 use DS\Model\TableLog;
 use DS\Model\Tables;
 use DS\Model\TableTokens;
@@ -52,10 +53,15 @@ class TableCreated extends AbstractEvent
                  ->setText('created this table.')
                  ->create();
         
+        $tableContributions = new TableContributions();
+        $tableContributions->setTableOwnership(100)
+            ->setUserId($table->getOwnerUserId())
+            ->setType()
+            ->create();
+        
         // Initialize table tokens for user
         $tableTokens = new TableTokens();
-        $tableTokens->setOwnership(DefaultTokenDistribution::OwnershipPercentage)
-                    ->setUserId($userId)
+        $tableTokens->setUserId($table->getOwnerUserId())
                     ->setTableId($table->getId())
                     ->setType(TokenDistributionType::Owner)
                     ->setTokensEarned(DefaultTokenDistribution::TableCreation)

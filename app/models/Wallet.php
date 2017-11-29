@@ -49,4 +49,32 @@ class Wallet
         return [];
     }
     */
+    
+    /**
+     * @param int $userId
+     * @param int $incrementBy
+     *
+     * @return Wallet
+     */
+    public static function incrementTokens(int $userId, $incrementBy = 1): Wallet
+    {
+        $wallet = self::get($userId, 'userId');
+        $wallet->setTokens($wallet->getTokens() + $incrementBy)->save();
+        
+        return $wallet;
+    }
+    
+    /**
+     * @param int $userId
+     * @param int $incrementBy
+     *
+     * @return Wallet
+     */
+    public static function decrementTokens(int $userId, $decrementBy = 1): Wallet
+    {
+        $wallet = self::get($userId, 'userId');
+        $wallet->setTokens($wallet->getTokens() - $decrementBy)->save();
+        
+        return $wallet;
+    }
 }

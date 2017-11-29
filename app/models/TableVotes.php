@@ -4,6 +4,7 @@ namespace DS\Model;
 
 use DS\Component\ServiceManager;
 use DS\Model\Events\TableVotesEvents;
+use DS\Traits\Model\FindUserAndTableTrait;
 
 /**
  * TableVotes
@@ -21,24 +22,7 @@ use DS\Model\Events\TableVotesEvents;
 class TableVotes
     extends TableVotesEvents
 {
-    /**
-     * Check if a user voted for a specific table
-     *
-     * @param int $userId
-     * @param int $tableId
-     *
-     * @return TableVotes|\Phalcon\Mvc\Model\ResultInterface
-     */
-    public static function findVote(int $userId, int $tableId)
-    {
-        return TableVotes::findFirst(
-            [
-                "conditions" => 'userId = ?0 AND tableId = ?1',
-                "bind" => [$userId, $tableId],
-                "limit" => 1,
-            ]
-        );
-    }
+    use FindUserAndTableTrait;
     
     /**
      * Get tables that are upvoted by userId
@@ -74,6 +58,6 @@ class TableVotes
             $userId = ServiceManager::instance($this->getDI())->getAuth()->getUserId();
         }
         
-        return self::findVote($userId, $tableId) ? true : false;
+        return $this->findByUserIdAndTable($userId, $tableId) ? true : false;
     }
 }

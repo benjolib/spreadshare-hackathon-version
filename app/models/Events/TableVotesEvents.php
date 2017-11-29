@@ -5,6 +5,7 @@ namespace DS\Model\Events;
 use DS\Events\Table\TableDownvoted;
 use DS\Events\Table\TableUpvoted;
 use DS\Model\Abstracts\AbstractTableVotes;
+use DS\Model\TableStats;
 
 /**
  * Events for model TableVotes
@@ -48,6 +49,8 @@ abstract class TableVotesEvents
      */
     public function afterCreate()
     {
+        (new TableStats)->increment($this->getTableId(), 'votes');
+        
         // trigger Table upvote event
         TableUpvoted::after($this->getUserId(), $this->getTableId());
     }
@@ -57,7 +60,10 @@ abstract class TableVotesEvents
      */
     public function afterDelete()
     {
+        (new TableStats)->decrement($this->getTableId(), 'votes');
+        
         // trigger Table downvote event
         TableDownvoted::after($this->getUserId(), $this->getTableId());
+
     }
 }

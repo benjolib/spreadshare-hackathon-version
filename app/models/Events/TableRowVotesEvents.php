@@ -2,12 +2,14 @@
 
 namespace DS\Model\Events;
 
+use DS\Events\Table\TableRowUpvoted;
 use DS\Model\Abstracts\AbstractTableRowVotes;
+use DS\Model\TableRows;
 
 /**
  * Events for model TableRowVotes
  *
- * @see https://docs.phalconphp.com/ar/3.2/db-models-events
+ * @see       https://docs.phalconphp.com/ar/3.2/db-models-events
  *
  * @author    Dennis Stücken
  * @license   proprietary
@@ -39,5 +41,21 @@ abstract class TableRowVotesEvents
         parent::beforeValidationOnUpdate();
         
         return true;
+    }
+    
+    /**
+     * After creating a row vote
+     */
+    public function afterCreate()
+    {
+        TableRowUpvoted::after($this->getUserId(), (new TableRows())->get($this->getRowId()));
+    }
+    
+    /**
+     * After creating a row vote
+     */
+    public function beforeDelete()
+    {
+        TableRowUpvoted::after($this->getUserId(), (new TableRows())->get($this->getRowId()));
     }
 }

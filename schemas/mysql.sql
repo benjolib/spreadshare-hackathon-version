@@ -351,6 +351,7 @@ CREATE TABLE `tableTags` (
 DROP TABLE IF EXISTS `tableTokens`;
 
 CREATE TABLE `tableTokens` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `tableId` int(11) unsigned NOT NULL,
   `rowId` int(11) unsigned DEFAULT NULL,
   `userId` int(11) unsigned NOT NULL,
@@ -358,17 +359,18 @@ CREATE TABLE `tableTokens` (
   `ownership` float DEFAULT NULL,
   `tokensEarned` float DEFAULT NULL,
   `createdAt` int(10) unsigned DEFAULT NULL,
-  PRIMARY KEY (`tableId`,`userId`),
-  KEY `userId` (`userId`),
+  PRIMARY KEY (`id`),
   KEY `tokensEarned` (`tokensEarned`),
   KEY `ownership` (`ownership`),
   KEY `rowId` (`rowId`),
   KEY `createdAt` (`createdAt`),
   KEY `type` (`type`),
+  KEY `tableId` (`tableId`,`userId`),
+  KEY `tableTokensUserId` (`userId`),
   CONSTRAINT `tableTokensRowId` FOREIGN KEY (`rowId`) REFERENCES `tableRows` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tableTokensTableId` FOREIGN KEY (`tableId`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tableTokensUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 # Export von Tabelle tableViews
 # ------------------------------------------------------------

@@ -46,18 +46,11 @@ class TableVotes
             throw new \InvalidArgumentException('You can not upvote your own table.');
         }
         
-        $votes      = TableVotesModel::findVote($userId, $tableId);
-        $tableStats = TableStats::findByFieldValue('tableId', $tableId);
-        if (!$tableStats)
-        {
-            $tableStats = new TableStats();
-            $tableStats->setTableId($tableId)->create();
-        }
+        $votes      = TableVotesModel::findByUserIdAndTable($userId, $tableId);
         
         if ($votes)
         {
             $votes->delete();
-            $tableStats->setVotesCount($tableStats->getVotesCount() - 1)->save();
             
             return false;
         }
@@ -66,8 +59,6 @@ class TableVotes
         $tableVotes->setUserId($userId)
                    ->setTableId($tableId)
                    ->create();
-        
-        $tableStats->setVotesCount($tableStats->getVotesCount() + 1)->save();
         
         return true;
     }

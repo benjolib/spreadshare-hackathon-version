@@ -7,6 +7,7 @@ use DS\Model\DataSource\TableLogType;
 use DS\Model\DataSource\UserNotificationType;
 use DS\Model\TableLog;
 use DS\Model\Tables;
+use DS\Model\TableTokens;
 use DS\Model\User;
 use DS\Model\UserNotifications;
 
@@ -32,8 +33,8 @@ class TableDownvoted extends AbstractEvent
      */
     public static function after(int $userId, int $tableId)
     {
-        $user  = User::findFirstById($userId);
-        $table = Tables::findFirstById($tableId);
+        $user  = User::get($userId);
+        $table = Tables::get($tableId);
         
         $userNotification = new UserNotifications();
         $userNotification
@@ -67,6 +68,15 @@ class TableDownvoted extends AbstractEvent
                 )
             )
             ->create();
+        
+        /**
+         * Delete owners's token on downvote
+         */
+        $tableToken = TableTokens::findByUserIdAndTable($table->getOwnerUserId(), $tableId);
+        if ($tableToken)
+        {
+            $tableToken->delete();
+        }
     }
     
 }

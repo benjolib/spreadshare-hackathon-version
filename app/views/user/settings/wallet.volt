@@ -25,7 +25,7 @@
         <div class="layout__content__main__wallet__tables">
           <div class="layout__content__main__wallet__column">
             <div class="layout__content__main__wallet__tables__text">
-              <p>Your tables</p>
+              <p>Your earned tokens</p>
             </div>
             <div class="layout__content__main__wallet__tables__titles">
               <div>
@@ -35,10 +35,12 @@
                 <p>Your role</p>
                 <img src="/assets/icons/sort.svg" />
               </div>
+                <!--
               <div>
                 <p>% Ownership</p>
                 <img src="/assets/icons/sort.svg" />
               </div>
+              -->
               <div>
                 <p>Tokens earned</p>
                 <img src="/assets/icons/sort.svg" />
@@ -48,8 +50,8 @@
               {% for tokens in tableTokens %}
               <div class="layout__content__main__wallet__tables__cells__item">
                 <div>{{ tokens['tableTitle'] }}</div>
-                <div>{% if tokens['type'] == 1 %}Owner{% endif %}</div>
-                <div>{{ tokens['ownership'] }}%</div>
+                <div>{% if tokens['ownerUserId'] == auth.getUserId() %}Owner{% else %}Contributor{% endif %}</div>
+                <!--<div>{{ tokens['ownership'] }}%</div>-->
                 <div>{{ tokens['tokensEarned'] }}</div>
               </div>
               {% endfor %}
