@@ -62,7 +62,7 @@
     if ($flash.length > 0) {
       setTimeout(function () {
         $flash.css('display', 'none');
-      }, 3800);
+      }, 7000);
     }
 
     /* Define API endpoints once and globally */
