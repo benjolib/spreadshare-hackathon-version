@@ -1,5 +1,6 @@
 .container--tableFeed {
   width: 100%;
+  @include rem(margin-top, 66);
 
   .container__content {
     flex-direction: column;
@@ -18,6 +19,23 @@ aside.aside {
 }
 
 .tableFeed {
+  position: relative;
+
+  &__title {
+    position: absolute;
+    top: 40px;
+    left: 50px;
+    color: #B1BBC7;
+    text-transform: uppercase;
+    font-weight: 400;
+    @include rem(font-size, 13);
+
+    @include desktop {
+      font-weight: 500;
+      left: 100px;
+    }
+  }
+
   &__item {
     display: flex;
     color: $text-color-alternate;

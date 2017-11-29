@@ -4,7 +4,11 @@
 {% block title %}SpreadShare - Feed - Community curated Tables{% endblock %}
 
 {% block content %}
-<h3>Recent activity</h3>
+
+<div class="tableFeed">
+<div class="tableFeed__title">
+  <p>Recent activity</p>
+</div>
 <div class="container container--tableFeed">
   <div class="container__content">
     {% if notifications %}
@@ -70,6 +74,7 @@
       </div>
     </a>
   </aside>
+</div>
 </div>
 
 {% endblock %}
