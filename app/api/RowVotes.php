@@ -34,13 +34,13 @@ class RowVotes
      */
     public function voteForRow(int $userId, int $rowId): bool
     {
-        $row = TableRows::findFirstById($rowId);
-        if (!$row)
+        $row = TableRows::get($rowId);
+        if (!$row->getTableId())
         {
             throw new \InvalidArgumentException('This row does not exist.');
         }
         
-        $votes = TableRowVotes::findVote($userId, $row->getId());
+        $votes = TableRowVotes::findByUserIdAndRow($userId, $row->getId());
         
         if ($votes)
         {

@@ -4,6 +4,7 @@ namespace DS\Model;
 
 use DS\Component\ServiceManager;
 use DS\Model\Events\TableRowVotesEvents;
+use DS\Traits\Model\FindUserAndRowTrait;
 
 /**
  * TableRowVotes
@@ -21,22 +22,7 @@ use DS\Model\Events\TableRowVotesEvents;
 class TableRowVotes
     extends TableRowVotesEvents
 {
-    /**
-     * @param int $userId
-     * @param int $rowId
-     *
-     * @return self
-     */
-    public static function findVote(int $userId, int $rowId)
-    {
-        return self::findFirst(
-            [
-                "conditions" => 'userId = ?0 AND rowId = ?1',
-                "bind" => [$userId, $rowId],
-                "limit" => 1,
-            ]
-        );
-    }
+    use FindUserAndRowTrait;
     
     /**
      * @param int $userId
