@@ -38,9 +38,9 @@ class UserSettings
      */
     public function savePersonalSettings(int $userId, $imagePath, $name, $handle, $tagline, array $locationIds, $website, $showTokensOnProfilePage = true)
     {
-        $user = User::findFirstById($userId);
+        $user = User::get($userId);
         
-        if (!$user)
+        if (!$user->getId())
         {
             throw new \InvalidArgumentException('User id does not exist!');
         }
@@ -53,8 +53,9 @@ class UserSettings
         $user->setName($name)
              ->setHandle($handle)
              ->setTagline($tagline)
-             ->setWebsite($website)
-             ->save();
+             ->setWebsite($website);
+        
+        $user->save();
         
         if (count($locationIds))
         {
