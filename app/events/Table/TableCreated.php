@@ -4,6 +4,7 @@ namespace DS\Events\Table;
 
 use DS\Events\AbstractEvent;
 use DS\Model\DataSource\DefaultTokenDistribution;
+use DS\Model\DataSource\TableContributionType;
 use DS\Model\DataSource\TableLogType;
 use DS\Model\DataSource\TokenDistributionType;
 use DS\Model\TableContributions;
@@ -27,7 +28,7 @@ use DS\Modules\Bernard;
  */
 class TableCreated extends AbstractEvent
 {
-
+    
     /**
      * Issued after a table has been created
      *
@@ -36,16 +37,20 @@ class TableCreated extends AbstractEvent
      */
     public static function after(int $userId, Tables $table)
     {
-
-       if($table->id){
-        // DataSource
-        $datasource = ['tableId' => $table->id, 'tableTitle' => $table->title, 'tableTagline' => $table->tagline ];
-        // Send Table Creation Event To ES Queue
-        Bernard::produce('newTable', $datasource);
-       }
-
-
-
+        
+        if ($table->getId())
+        {
+            // DataSource
+            $datasource = [
+                'tableId' => $table->getId(),
+                'tableTitle' => $table->getTitle(),
+                'tableTagline' => $table->getTagline(),
+            ];
+            
+            // Send Table Creation Event To ES Queue
+            Bernard::produce('newTable', $datasource);
+        }
+        
         // Initialize table log with a table created entry
         $tableLog = new TableLog();
         $tableLog->setTableId($table->getId())
@@ -54,13 +59,13 @@ class TableCreated extends AbstractEvent
                  ->setPlaceholders('')
                  ->setText('created this table.')
                  ->create();
-
+        
         $tableContributions = new TableContributions();
         $tableContributions->setTableOwnership(100)
-            ->setUserId($table->getOwnerUserId())
-            ->setType()
-            ->create();
-
+                           ->setUserId($table->getOwnerUserId())
+                           ->setType(TableContributionType::Create)
+                           ->create();
+        
         // Initialize table tokens for user
         $tableTokens = new TableTokens();
         $tableTokens->setUserId($table->getOwnerUserId())
@@ -69,5 +74,5 @@ class TableCreated extends AbstractEvent
                     ->setTokensEarned(DefaultTokenDistribution::TableCreation)
                     ->create();
     }
-
+    
 }

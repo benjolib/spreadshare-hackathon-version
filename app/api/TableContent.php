@@ -289,17 +289,14 @@ class TableContent
                                  ->create();
                         
                         $cellData = [];
-                        foreach ($row as $key => $cell)
+                        foreach ($columnIds as $key => $colId)
                         {
-                            if (isset($columnIds[$key]))
-                            {
-                                $cellData[] = $this->addCell(
-                                    $rowModel,
-                                    $userId,
-                                    $columnIds[$key],
-                                    $cell
-                                );
-                            }
+                            $cellData[] = $this->addCell(
+                                $rowModel,
+                                $userId,
+                                $colId,
+                                isset($row[$key]) ? $row[$key] : ''
+                            );
                             
                             $rowModel->setContent(json_encode($cellData))
                                      ->save();
