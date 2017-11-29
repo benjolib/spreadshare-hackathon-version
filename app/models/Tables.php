@@ -175,6 +175,7 @@ class Tables
                                    Tables::class . ".tagline",
                                    Tables::class . ".ownerUserId",
                                    User::class . ".image as creatorImage",
+                                   User::class . ".handle as creatorHandle",
                                    User::class . ".name as creator",
                                    Tables::class . ".createdAt",
                                    Tables::class . ".topic1Id",
