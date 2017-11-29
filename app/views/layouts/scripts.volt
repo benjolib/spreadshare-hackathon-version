@@ -46,7 +46,7 @@
          method: "GET",
          crossDomain: true,
          dataType: "JSON",
-         data: {"query":  searchEl},
+         data: {"query":  (searchEl + '*')},
          success: function(response) { autoCompleteHandler(response) }
        });
 
