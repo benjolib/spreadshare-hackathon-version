@@ -21,4 +21,17 @@ injectGlobal`
   button:disabled {
     opacity: 0.5;
   }
+
+  .htContextMenu table.htCore {
+    background: #fff;
+    border: none !important;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+    overflow: hidden;
+  }
+
+  .htContextMenu table tbody tr td {
+    padding: 8px 4px !important;
+    color: #a8afbb;
+  }
 `;

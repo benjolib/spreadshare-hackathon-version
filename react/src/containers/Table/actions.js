@@ -108,7 +108,8 @@ export const editCell = (
   tableId: string,
   rowId: string,
   cellId: string,
-  cell: Cell
+  cell: Cell,
+  callback: Function = () => null
 ): ThunkAction => (dispatch: Dispatch) => {
   dispatch(editCellRequest(tableId, rowId, cellId, cell));
   if (process.env.NODE_ENV === "production") {
@@ -118,14 +119,17 @@ export const editCell = (
       cell
     }).then(({ error }: { error: Error }) => {
       if (error) {
+        callback(new Error(error));
         dispatch(editCellError(tableId, rowId, cellId, cell, new Error(error)));
         return;
       }
 
+      callback();
       dispatch(editCellSuccess(tableId, rowId, cellId, cell));
     });
   } else {
     setTimeout(() => {
+      callback();
       dispatch(editCellSuccess(tableId, rowId, cellId, cell));
     }, 500);
   }
