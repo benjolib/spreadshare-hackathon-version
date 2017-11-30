@@ -245,6 +245,42 @@ export const tablesReducer = (
       return state;
     }
 
+    case "EDIT_COL_REQUEST": {
+      // TODO: maybe show loader
+      return state;
+    }
+
+    case "EDIT_COL_SUCCESS": {
+      // no approval needed since this is an admin action
+      // TODO: we need a column id back or something and cell ids
+      if (action.payload.permission === "2") {
+        return {
+          ...state,
+          [action.payload.tableId]: {
+            ...state[action.payload.tableId],
+            table: {
+              ...state[action.payload.tableId].table,
+              columns: state[action.payload.tableId].table.columns.map(
+                col =>
+                  col.id === action.payload.colId
+                    ? {
+                        ...col,
+                        title: action.payload.title
+                      }
+                    : col
+              )
+            }
+          }
+        };
+      }
+      return state;
+    }
+
+    case "EDIT_COL_ERROR": {
+      // TODO: show error
+      return state;
+    }
+
     default: {
       return state;
     }
