@@ -243,6 +243,17 @@ class Tables
             
         }
         
+        if ($tableFilter->getDateRange())
+        {
+            $this->query->andWhere(
+                Tables::class . '.createdAt > :dateFrom: AND ' . Tables::class . '.createdAt < :dateTo:',
+                [
+                    'dateFrom' => $tableFilter->getDateRange()->getFrom(),
+                    'dateTo' => $tableFilter->getDateRange()->getTo(),
+                ]
+            );
+        }
+        
         return $this;
     }
 }
