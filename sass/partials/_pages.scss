@@ -1,6 +1,6 @@
 .__page__top{
   // margin: 40px 20px 10px 20px;
-  margin: 40px 60px 10px;
+  margin: 0px 40px 10px;
   h1 {
     text-align:left;
     font-size: 2em;
@@ -9,15 +9,66 @@
 }
 
 
+.__page__sidebar {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    color: #B1BBC7;
+    font-weight: 300;
+    text-transform: uppercase;
+    margin-left: 4.125rem;
+    max-height: 200px;
+
+    ul {
+       list-style-type: none;
+       width: 225px;
+       padding: 10px;
+       background-color: #FFF;
+       border-radius: 8px;
+
+     li {
+         padding: 5px;
+         margin: 10px;
+         color: #9BAABF;
+
+
+         a {
+           font-size: 16px;
+           color: #6A7C94;
+           letter-spacing: -0.43px;
+           line-height: 32px;
+         }
+       }
+
+    }
+
+    .active {
+       border-radius: 5px;
+       background-color: #F2F2F8;
+       color: #6A7C94;
+    }
+}
+
+.__page__container {
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  padding: .9375rem 2.5rem;
+  margin-bottom: 80px;
+}
 .__page__wrapper {
   background: #FFFFFF;
   border-radius: 8px;
   color: #6A7C94;
   // margin: 20px;
-  margin: 15px 0 50px 60px;
+  //margin: 15px 0 50px 60px;
   padding: 35px;
   line-height: 2em;
-  width: 80%;
+  width: 70%;
+
+  a {
+    color: #2ead6b !important;
+  }
 
   h3 {
     margin: 15px 0 15px 0;
@@ -26,4 +77,3 @@
     margin: 15px 0 15px 0;
   }
 }
-
