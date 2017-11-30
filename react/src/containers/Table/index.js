@@ -172,6 +172,7 @@ class Table extends Component<Props, State> {
   };
 
   addRow = () => {
+    console.log(this.state.addRowDataGetters.map(x => x()));
     this.props
       .addRow(
         this.props.id,
