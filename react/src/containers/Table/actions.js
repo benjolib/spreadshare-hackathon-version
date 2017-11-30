@@ -126,7 +126,6 @@ export const editCell = (
         cell
       }).then(({ error }: { error: Error }) => {
         if (error) {
-          reject(new Error(error));
           dispatch(
             editCellError(
               tableId,
@@ -137,16 +136,17 @@ export const editCell = (
               new Error(error)
             )
           );
+          reject(new Error(error));
           return;
         }
 
-        resolve();
         dispatch(editCellSuccess(tableId, rowId, cellId, cell, permission));
+        resolve();
       });
     } else {
       setTimeout(() => {
-        resolve();
         dispatch(editCellSuccess(tableId, rowId, cellId, cell, permission));
+        resolve();
       }, 500);
     }
   });
@@ -266,18 +266,18 @@ export const addRow = (
         insertAfterId: "0" // TODO: for now we just add row like this
       }).then(({ error, data }: { error: Error }) => {
         if (error) {
-          reject();
           dispatch(addRowError(tableId, rowData, permission, new Error(error)));
+          reject();
           return;
         }
 
-        resolve();
         dispatch(addRowSuccess(tableId, rowData, permission, data));
+        resolve();
       });
     } else {
       setTimeout(() => {
-        resolve();
         dispatch(addRowSuccess(tableId, rowData, permission, {}));
+        resolve();
       }, 500);
     }
   });
@@ -342,18 +342,18 @@ export const addCol = (
         insertAfterId: "0" // TODO: for now we just add row like this
       }).then(({ error, data }: { error: Error }) => {
         if (error) {
-          reject();
           dispatch(addColError(tableId, title, permission, new Error(error)));
+          reject();
           return;
         }
 
-        resolve();
         dispatch(addColSuccess(tableId, title, permission, data));
+        resolve();
       });
     } else {
       setTimeout(() => {
-        resolve();
         dispatch(addColSuccess(tableId, title, permission, {}));
+        resolve();
       }, 500);
     }
   });

@@ -354,12 +354,12 @@ class Table extends Component<Props, State> {
       return <TableError />;
     }
 
-    console.log(this.props.data);
-
     const colHeaders = [
       "Votes",
       ...this.props.data.table.columns.map(col => col.title)
     ];
+
+    console.log(this.props.data);
 
     const hotData = _.pipe(
       this.hotDataAddVotes(this.props.data.table.votes),
@@ -369,6 +369,8 @@ class Table extends Component<Props, State> {
       this.hotDataMaybeShowAdd(colHeaders, this.state.showAdd),
       this.hotDataFlattenRows
     );
+
+    console.log(hotData(this.props.data.table.rows));
 
     console.log(colHeaders);
 
