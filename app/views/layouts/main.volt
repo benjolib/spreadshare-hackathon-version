@@ -25,13 +25,15 @@
   {# footer #}
   {{ partial('layouts/footer') }}
 </section>
+
+<div class="white-overlay"></div>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
 <script type="text/javascript" src="/js/api.js"></script>
 
 {{ partial('layouts/scripts') }}
 
-<script type="text/javascript" src="/js/react/main.af384a22.js"></script>
+<script type="text/javascript" src="/js/react/main.c20f37de.js"></script>
 {% block scripts %}{% endblock %}
 </body>
 </html>

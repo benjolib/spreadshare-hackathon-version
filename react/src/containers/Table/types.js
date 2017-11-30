@@ -107,14 +107,16 @@ export type TablesAction =
       type: "ADD_ROW_REQUEST",
       payload: {
         tableId: string,
-        rowData: Array<string>
+        rowData: Array<string>,
+        permission: string
       }
     }
   | {
       type: "ADD_ROW_SUCCESS",
       payload: {
         tableId: string,
-        rowData: Array<string>
+        rowData: Array<string>,
+        permission: string
       }
     }
   | {
@@ -122,6 +124,7 @@ export type TablesAction =
       payload: {
         tableId: string,
         rowData: Array<string>,
+        permission: string,
         error: Error
       }
     }
@@ -129,6 +132,7 @@ export type TablesAction =
       type: "ADD_COL_REQUEST",
       payload: {
         tableId: string,
+        permission: string,
         title: string
       }
     }
@@ -136,6 +140,7 @@ export type TablesAction =
       type: "ADD_COL_SUCCESS",
       payload: {
         tableId: string,
+        permission: string,
         title: string
       }
     }
@@ -143,7 +148,36 @@ export type TablesAction =
       type: "ADD_COL_ERROR",
       payload: {
         tableId: string,
+        permission: string,
         title: string,
+        error: Error
+      }
+    }
+  | {
+      type: "EDIT_COL_REQUEST",
+      payload: {
+        tableId: string,
+        colId: string,
+        title: string,
+        permission: string
+      }
+    }
+  | {
+      type: "EDIT_COL_SUCCESS",
+      payload: {
+        tableId: string,
+        colId: string,
+        title: string,
+        permission: string
+      }
+    }
+  | {
+      type: "EDIT_COL_ERROR",
+      payload: {
+        tableId: string,
+        colId: string,
+        title: string,
+        permission: string,
         error: Error
       }
     };
