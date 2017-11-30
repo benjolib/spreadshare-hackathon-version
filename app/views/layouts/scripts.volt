@@ -1,6 +1,18 @@
 <script type="text/javascript">
   $(document).ready(function () {
 
+
+  $('.__page__sidebar').stickySidebar({
+    topSpacing: 60,
+    bottomSpacing: 60
+  });
+
+   $(".__page__sidebar ul li").click(function() {
+     $(".__page__sidebar ul li").removeClass('active');
+     $(this).addClass('active');
+   });
+
+
     var timer;
     var delay = 600; // 0.6 seconds delay after last input
     // autoCompleteHandler to handle response
