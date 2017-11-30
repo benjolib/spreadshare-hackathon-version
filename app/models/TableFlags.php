@@ -20,5 +20,4 @@ use DS\Model\Abstracts\AbstractTableFlags;
 class TableFlags
     extends AbstractTableFlags
 {
-
 }

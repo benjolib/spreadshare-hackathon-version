@@ -3,6 +3,7 @@
 namespace DS\Model;
 
 use DS\Model\Events\TableTagsEvents;
+use DS\Traits\Model\ClearByTableIdTrait;
 
 /**
  * TableTags
@@ -20,6 +21,8 @@ use DS\Model\Events\TableTagsEvents;
 class TableTags
     extends TableTagsEvents
 {
+    use ClearByTableIdTrait;
+    
     /**
      * @param array $param
      * @param int   $page

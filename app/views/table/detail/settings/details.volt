@@ -18,7 +18,7 @@
 <div class="addTableEmpty__content__main__options__item">
   <div class="addTableEmpty__content__main__options__item__column">
     <p>Topics</p>
-    <div id="TopicsSelect" data-name="topics[]" data-values="{{ reactArray(table['topics']) }}" data-placeholder="Add topics" class="react-component"></div>
+    <div id="TopicsSelect" data-name="topics[]" data-values="{{ reactArray(topics) }}" data-placeholder="Add topics" class="react-component"></div>
     <span>Max <i>2</i> topics</span>
   </div>
 </div>
@@ -26,21 +26,21 @@
 <div class="addTableEmpty__content__main__options__item">
   <div class="addTableEmpty__content__main__options__item__column">
     <p>Content type</p>
-    <div id="ContentTypeSelect" data-name="type" data-value="{{ table['type'] }}" class="react-component"></div>
+    <div id="ContentTypeSelect" data-name="type" data-value="{{ table['typeId'] }}" class="react-component"></div>
   </div>
 </div>
 {# tags #}
 <div class="addTableEmpty__content__main__options__item">
   <div class="addTableEmpty__content__main__options__item__column">
     <p>Tags</p>
-    <div id="TagsSelect" data-name="tags[]" data-values="{{ reactArray(table['tags']) }}" class="react-component"></div>
+    <div id="TagsSelect" data-name="tags[]" data-value="{{ reactArray(tags) }}" class="react-component"></div>
   </div>
 </div>
 {# locations #}
 <div class="addTableEmpty__content__main__options__item">
   <div class="addTableEmpty__content__main__options__item__column">
     <p>Locations</p>
-    <div id="LocationSelect" data-name="location[]" data-value="{{ reactArray(table['location']) }}" class="react-component"></div>
+    <div id="LocationSelect" data-name="location[]" data-value="{{ reactArray(locations) }}" class="react-component"></div>
   </div>
 </div>
 

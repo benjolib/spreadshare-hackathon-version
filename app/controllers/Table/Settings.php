@@ -2,14 +2,16 @@
 
 namespace DS\Controller\Table;
 
-use DS\Controller\BaseController;
+use DS\Controller\AddTable\Description\BaseDescription;
 use DS\Exceptions\SecurityException;
 use DS\Interfaces\TableSubcontrollerInterface;
 use DS\Model\Helper\TableFilter;
+use DS\Model\Locations;
 use DS\Model\TableLocations;
 use DS\Model\TableRelations;
 use DS\Model\Tables;
 use DS\Model\TableTags;
+use DS\Model\Tags;
 
 /**
  * Spreadshare
@@ -23,7 +25,7 @@ use DS\Model\TableTags;
  * @package   DS\Controller\User
  */
 class Settings
-    extends BaseController
+    extends BaseDescription
     implements TableSubcontrollerInterface
 {
     
@@ -43,13 +45,6 @@ class Settings
             {
                 throw new SecurityException('You are not allowed to edit the settings of this table.');
             }
-            $tableModel = new Tables();
-            $tables     = $tableModel->findTablesAsArray($userId, new TableFilter(), 0);
-            if (!count($tables))
-            {
-                throw new \InvalidArgumentException('Table does not exist.');
-            }
-            $loadedTable = $tables[0];
             
             if (!$param)
             {
@@ -80,26 +75,48 @@ class Settings
                 
                 default:
                 case 'details':
+                    if ($this->request->isPost())
+                    {
+                        try
+                        {
+                            $this->prepareModelFromPost($table, $userId)->save();
+                            
+                            $tableApi = new \DS\Api\Table();
+                            $tableApi->handleTagAndLocationAssignment(
+                                $table,
+                                $this->request->getPost('tags', null, []),
+                                $this->request->getPost('location', null, [])
+                            );
+                        }
+                        catch (\Exception $e)
+                        {
+                            $this->flash->error($e->getMessage());
+                        }
+                    }
+                    
+                    $tableModel = new Tables();
+                    $tables     = $tableModel->findTablesAsArray($userId, (new TableFilter())->setTableIds([$table->getId()]), 0);
+                    if (!count($tables))
+                    {
+                        throw new \InvalidArgumentException('Table does not exist.');
+                    }
+                    $loadedTable = $tables[0];
+                    
                     $this->view->setVar('table', $loadedTable);
                     
                     $tags = [];
-                    foreach (TableTags::findByFieldValue('tableId', $table->getId()) as $tag)
+                    foreach (TableTags::findAllByFieldValue('tableId', $table->getId()) as $tag)
                     {
-                        $tags[] = [
-                            'id' => $tag->getId(),
-                            'title' => $tag->getTitle(),
-                        ];
+                        $tagModel = Tags::get($tag->getTagId());
+                        $tags[]   = $tagModel->toArray(['id', 'title']);
                     }
-                    
                     $this->view->setVar('tags', $tags);
                     
                     $locations = [];
-                    foreach (TableLocations::findByFieldValue('tableId', $table->getId()) as $location)
+                    foreach (TableLocations::findAllByFieldValue('tableId', $table->getId()) as $location)
                     {
-                        $locations[] = [
-                            'id' => $location->getId(),
-                            'locationName' => $location->getTitle(),
-                        ];
+                        $locationModel = Locations::get($location->getLocationId());
+                        $locations[]   = $locationModel->toArray(['id', 'locationName']);
                     }
                     $this->view->setVar('locations', $locations);
                     
