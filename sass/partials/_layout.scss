@@ -120,7 +120,7 @@
       }
 
       input {
-        // padding: 20px 10px;        
+        // padding: 20px 10px;
         border: none;
         outline: none;
         background: $background-color;
@@ -179,8 +179,9 @@
 
           div {
             text-transform: uppercase;
-            font-weight: 300;
+            font-weight: 400;
             border-radius: 4px;
+            @include rem(font-size, 14);
             @include rem2(padding, 10, 15);
 
             &:hover {
