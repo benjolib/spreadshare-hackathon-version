@@ -59,6 +59,12 @@ class Settings
                     if ($this->request->isPost())
                     {
                         $tableId = $this->request->getPost('tableId');
+                        
+                        if ($tableId == $table->getId())
+                        {
+                            throw new \InvalidArgumentException('You cannot add a relation to the same table.');
+                        }
+                        
                         if ($tableId)
                         {
                             if (!TableRelations::findRelatedTable($table->getId(), $tableId))

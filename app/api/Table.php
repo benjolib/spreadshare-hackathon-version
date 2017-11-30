@@ -58,7 +58,7 @@ class Table
                 'columns' => ['id', 'title'],
                 "order" => "title ASC",
                 "limit" => $limit,
-                "bind" => [$name . '%'],
+                "bind" => ['%' . $name . '%'],
             ]
         )->toArray();
     }
