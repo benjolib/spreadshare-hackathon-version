@@ -4,21 +4,27 @@ import swal from "sweetalert2";
 import styled from "styled-components";
 import { URL } from "../config";
 import { addCol } from "../containers/Table/actions";
-import type { Columns } from "../containers/Table/types";
 
 const StyledDiv = styled.div`
   position: absolute;
   background: #fff;
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
   top: -10px;
   right: 10px;
-  height: 200px;
   width: 200px;
-  padding: 10px;
   z-index: 1000;
+  overflow: hidden;
   display: ${props => (props.hide ? "none" : "block")};
   a {
     display: block;
+    padding: 8px 16px !important;
+    color: #a8afbb;
+    cursor: pointer;
+    text-decoration: none;
+    &:hover {
+      background: #f3f3f3;
+    }
   }
 `;
 

@@ -1,6 +1,7 @@
 // @flow
 import React from "react";
 import styled from "styled-components";
+import UpvoteIcon from "./icons/UpvoteIcon";
 
 const StyledDiv = styled.div`
   text-align: center;
@@ -41,7 +42,7 @@ class VotesCell extends React.Component<Props> {
           this.props.voteRow(this.props.rowId);
         }}
       >
-        ^
+        <UpvoteIcon />
         {this.props.votes}
       </StyledDiv>
     );

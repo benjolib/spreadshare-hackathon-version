@@ -160,13 +160,13 @@ class Table extends Component<Props, State> {
       .addRow(this.props.id, this.state.addRowDataGetters.map(x => x()))
       .then(() => {
         this.hideAdd();
-        if (this.props.permission === "2") {
+        if (this.props.permission === "1") {
           swal(
             "Success!",
             "The request to add this row is awaiting approval.",
             "success"
           );
-        } else if (this.props.permission === "3") {
+        } else if (this.props.permission === "2") {
           swal("Success!", "The row has been added.", "success");
         }
       });
@@ -309,16 +309,18 @@ class Table extends Component<Props, State> {
   hotDataSortings = (colHeaders, sortings: Sortings) => (rows: RowsWithVotes) =>
     __.orderBy(
       rows,
-      sortings.map(sorting => row => {
-        const i = __.findIndex(colHeaders, x => x === sorting.by);
-        const cell = row.content[i];
-        if (cell.content) {
-          return cell.content;
-        } else if (cell.votes) {
-          return cell.votes;
-        }
-        return "";
-      }),
+      [
+        ...sortings.map(sorting => row => {
+          const i = __.findIndex(colHeaders, x => x === sorting.by);
+          const cell = row.content[i];
+          if (cell.content) {
+            return cell.content;
+          } else if (cell.votes) {
+            return cell.votes;
+          }
+          return "";
+        })
+      ],
       sortings.map(
         sorting => (sorting.direction === "ascending" ? "asc" : "desc")
       )

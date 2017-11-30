@@ -18,6 +18,11 @@ injectGlobal`
     background: #f2f2f8;
   }
 
+  button, input, select {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
+      sans-serif;
+  }
+
   button:disabled {
     opacity: 0.5;
   }
