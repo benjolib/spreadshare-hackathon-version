@@ -33,7 +33,7 @@
 
 {{ partial('layouts/scripts') }}
 
-<script type="text/javascript" src="/js/react/main.7ba1a280.js"></script>
+<script type="text/javascript" src="/js/react/main.4c0f5a2c.js"></script>
 {% block scripts %}{% endblock %}
 </body>
 </html>
