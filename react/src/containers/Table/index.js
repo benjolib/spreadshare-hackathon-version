@@ -166,8 +166,7 @@ class Table extends Component<Props, State> {
 
   hideAdd = () => {
     this.setState({
-      showAdd: false,
-      addRowDataGetters: []
+      showAdd: false
     });
   };
 
