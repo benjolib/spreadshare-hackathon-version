@@ -217,7 +217,7 @@ class Table extends Component<Props, State> {
                   content: ""
                 },
                 err => {
-                  if (!err) {
+                  if (err) {
                     swal.showValidationError("Couldn't delete cell");
                   }
 
@@ -251,7 +251,7 @@ class Table extends Component<Props, State> {
       row =>
         row.content.filter(
           cell =>
-            cell.content
+            typeof cell.content === "string"
               ? cell.content.toLowerCase().includes(searchValue.toLowerCase())
               : false
         ).length

@@ -85,6 +85,11 @@ const dummyTable = {
       rowId: "17",
       votes: "2000",
       upvoted: false
+    },
+    {
+      rowId: "18",
+      votes: "1",
+      upvoted: false
     }
   ],
   columns: [
@@ -538,6 +543,31 @@ const dummyTable = {
         {
           id: "68",
           content: "Starting at $49/m",
+          link: null
+        }
+      ]
+    },
+    {
+      id: "18",
+      content: [
+        {
+          id: "69",
+          content: "",
+          link: null
+        },
+        {
+          id: "70",
+          content: "",
+          link: null
+        },
+        {
+          id: "71",
+          content: "",
+          link: null
+        },
+        {
+          id: "72",
+          content: "",
           link: null
         }
       ]
