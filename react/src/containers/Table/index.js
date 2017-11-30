@@ -578,20 +578,16 @@ class Table extends Component<Props, State> {
                 return;
               }
               const cell = this.hot.hotInstance.getDataAtCell(row, col);
-              this.setState({
-                selectedCell: cell
-              });
-            }}
-            afterSelectionEnd={(row, col) => {
-              if (this.state.showAdd && row === 0) {
-                return;
-              }
-              if (col === 0) {
-                return;
-              }
-              const cell = this.hot.hotInstance.getDataAtCell(row, col);
               if (cell.link) {
-                window.open(cell.link, "_blank");
+                setTimeout(() => {
+                  this.setState({
+                    selectedCell: cell
+                  });
+                }, 1000);
+              } else {
+                this.setState({
+                  selectedCell: cell
+                });
               }
             }}
             outsideClickDeselects={false}

@@ -58,7 +58,6 @@ class TableAdminEditInput extends React.Component<Props> {
       this.setState({
         value: nextProps.selectedCell.content
       });
-      console.log(this.nameInput);
       setTimeout(() => {
         this.nameInput.focus();
       }, 0);
