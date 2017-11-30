@@ -59,14 +59,16 @@ export const editCellRequest = (
   tableId: string,
   rowId: string,
   cellId: string,
-  cell: Cell
+  cell: Cell,
+  permission: string
 ): Action => ({
   type: "EDIT_CELL_REQUEST",
   payload: {
     tableId,
     rowId,
     cellId,
-    cell
+    cell,
+    permission
   }
 });
 
@@ -74,14 +76,16 @@ export const editCellSuccess = (
   tableId: string,
   rowId: string,
   cellId: string,
-  cell: Cell
+  cell: Cell,
+  permission: string
 ): Action => ({
   type: "EDIT_CELL_SUCCESS",
   payload: {
     tableId,
     rowId,
     cellId,
-    cell
+    cell,
+    permission
   }
 });
 
@@ -90,6 +94,7 @@ export const editCellError = (
   rowId: string,
   cellId: string,
   cell: Cell,
+  permission: string,
   error: Error
 ): Action => ({
   type: "EDIT_CELL_ERROR",
@@ -98,6 +103,7 @@ export const editCellError = (
     rowId,
     cellId,
     cell,
+    permission,
     error
   }
 });
@@ -109,31 +115,41 @@ export const editCell = (
   rowId: string,
   cellId: string,
   cell: Cell,
-  callback: Function = () => null
-): ThunkAction => (dispatch: Dispatch) => {
-  dispatch(editCellRequest(tableId, rowId, cellId, cell));
-  if (process.env.NODE_ENV === "production") {
-    saveDataApi(`edit-cell/${tableId}`, {
-      rowId,
-      cellId,
-      cell
-    }).then(({ error }: { error: Error }) => {
-      if (error) {
-        callback(new Error(error));
-        dispatch(editCellError(tableId, rowId, cellId, cell, new Error(error)));
-        return;
-      }
+  permission: string
+): ThunkAction => (dispatch: Dispatch) =>
+  new Promise((resolve, reject) => {
+    dispatch(editCellRequest(tableId, rowId, cellId, cell, permission));
+    if (process.env.NODE_ENV === "production") {
+      saveDataApi(`edit-cell/${tableId}`, {
+        rowId,
+        cellId,
+        cell
+      }).then(({ error }: { error: Error }) => {
+        if (error) {
+          dispatch(
+            editCellError(
+              tableId,
+              rowId,
+              cellId,
+              cell,
+              permission,
+              new Error(error)
+            )
+          );
+          reject(new Error(error));
+          return;
+        }
 
-      callback();
-      dispatch(editCellSuccess(tableId, rowId, cellId, cell));
-    });
-  } else {
-    setTimeout(() => {
-      callback();
-      dispatch(editCellSuccess(tableId, rowId, cellId, cell));
-    }, 500);
-  }
-};
+        dispatch(editCellSuccess(tableId, rowId, cellId, cell, permission));
+        resolve();
+      });
+    } else {
+      setTimeout(() => {
+        dispatch(editCellSuccess(tableId, rowId, cellId, cell, permission));
+        resolve();
+      }, 500);
+    }
+  });
 
 // VOTE ROW ACTIONS
 
@@ -194,35 +210,43 @@ export const voteRow = (tableId: string, rowId: string): ThunkAction => (
 
 export const addRowRequest = (
   tableId: string,
-  rowData: Array<string>
+  rowData: Array<string>,
+  permission: string
 ): Action => ({
   type: "ADD_ROW_REQUEST",
   payload: {
     tableId,
-    rowData
+    rowData,
+    permission
   }
 });
 
 export const addRowSuccess = (
   tableId: string,
-  rowData: Array<string>
+  rowData: Array<string>,
+  permission: string,
+  response: Object
 ): Action => ({
   type: "ADD_ROW_SUCCESS",
   payload: {
     tableId,
-    rowData
+    rowData,
+    permission,
+    response
   }
 });
 
 export const addRowError = (
   tableId: string,
   rowData: Array<string>,
+  permission: string,
   error: Error
 ): Action => ({
   type: "ADD_ROW_ERROR",
   payload: {
     tableId,
     rowData,
+    permission,
     error
   }
 });
@@ -231,80 +255,105 @@ export const addRowError = (
 
 export const addRow = (
   tableId: string,
-  rowData: Array<string>
-): ThunkAction => (dispatch: Dispatch) => {
-  dispatch(addRowRequest(tableId, rowData));
-  if (process.env.NODE_ENV === "production") {
-    saveDataApi(`add-row/${tableId}`, {
-      rowData,
-      insertAfterId: "0" // TODO: for now we just add row like this
-    }).then(({ error }: { error: Error }) => {
-      if (error) {
-        dispatch(addRowError(tableId, rowData, new Error(error)));
-        return;
-      }
+  rowData: Array<string>,
+  permission: string
+): ThunkAction => (dispatch: Dispatch) =>
+  new Promise((resolve, reject) => {
+    dispatch(addRowRequest(tableId, rowData, permission));
+    if (process.env.NODE_ENV === "production") {
+      saveDataApi(`add-row/${tableId}`, {
+        rowData,
+        insertAfterId: "0" // TODO: for now we just add row like this
+      }).then(({ error, data }: { error: Error }) => {
+        if (error) {
+          dispatch(addRowError(tableId, rowData, permission, new Error(error)));
+          reject();
+          return;
+        }
 
-      dispatch(addRowSuccess(tableId, rowData));
-    });
-  } else {
-    setTimeout(() => {
-      dispatch(addRowSuccess(tableId, rowData));
-    }, 500);
-  }
-};
+        dispatch(addRowSuccess(tableId, rowData, permission, data));
+        resolve();
+      });
+    } else {
+      setTimeout(() => {
+        dispatch(addRowSuccess(tableId, rowData, permission, {}));
+        resolve();
+      }, 500);
+    }
+  });
 
 // ADD COLUMN ACTIONS
 
-export const addColRequest = (tableId: string, title: string): Action => ({
+export const addColRequest = (
+  tableId: string,
+  title: string,
+  permission: string
+): Action => ({
   type: "ADD_COL_REQUEST",
   payload: {
     tableId,
-    title
+    title,
+    permission
   }
 });
 
-export const addColSuccess = (tableId: string, title: string): Action => ({
+export const addColSuccess = (
+  tableId: string,
+  title: string,
+  permission: string,
+  response: Object
+): Action => ({
   type: "ADD_COL_SUCCESS",
   payload: {
     tableId,
-    title
+    title,
+    permission,
+    response
   }
 });
 
 export const addColError = (
   tableId: string,
   title: string,
+  permission: string,
   error: Error
 ): Action => ({
   type: "ADD_COL_ERROR",
   payload: {
     tableId,
     title,
+    permission,
     error
   }
 });
 
 // thunk
 
-export const addCol = (tableId: string, title: string): ThunkAction => (
-  dispatch: Dispatch
-) => {
-  dispatch(addColRequest(tableId, title));
-  if (process.env.NODE_ENV === "production") {
-    saveDataApi(`add-col/${tableId}`, {
-      title,
-      insertAfterId: "0" // TODO: for now we just add row like this
-    }).then(({ error }: { error: Error }) => {
-      if (error) {
-        dispatch(addColError(tableId, title, new Error(error)));
-        return;
-      }
+export const addCol = (
+  tableId: string,
+  title: string,
+  permission: string
+): ThunkAction => (dispatch: Dispatch) =>
+  new Promise((resolve, reject) => {
+    dispatch(addColRequest(tableId, title, permission));
+    if (process.env.NODE_ENV === "production") {
+      saveDataApi(`add-col/${tableId}`, {
+        title,
+        insertAfterId: "0" // TODO: for now we just add row like this
+      }).then(({ error, data }: { error: Error }) => {
+        if (error) {
+          dispatch(addColError(tableId, title, permission, new Error(error)));
+          reject();
+          return;
+        }
 
-      dispatch(addColSuccess(tableId, title));
-    });
-  } else {
-    setTimeout(() => {
-      dispatch(addColSuccess(tableId, title));
-    }, 500);
-  }
-};
+        dispatch(addColSuccess(tableId, title, permission, data));
+        resolve();
+      });
+    } else {
+      setTimeout(() => {
+        dispatch(addColSuccess(tableId, title, permission, {}));
+        resolve();
+      }, 500);
+    }
+  });

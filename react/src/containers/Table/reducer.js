@@ -48,8 +48,34 @@ export const tablesReducer = (
     }
 
     case "EDIT_CELL_SUCCESS": {
-      // TODO: show message like (success, your edit is now awaiting approval)
-      // TODO: if permission is admin edit instantly
+      if (action.payload.permission === "2") {
+        return {
+          ...state,
+          [action.payload.tableId]: {
+            ...state[action.payload.tableId],
+            table: {
+              ...state[action.payload.tableId].table,
+              rows: state[action.payload.tableId].table.rows.map(
+                row =>
+                  row.id === action.payload.rowId
+                    ? {
+                        ...row,
+                        content: row.content.map(
+                          cell =>
+                            cell.id === action.payload.cellId
+                              ? {
+                                  ...cell,
+                                  content: action.payload.cell.content
+                                }
+                              : cell
+                        )
+                      }
+                    : row
+              )
+            }
+          }
+        };
+      }
       return state;
     }
 
@@ -109,7 +135,7 @@ export const tablesReducer = (
             ...state[action.payload.tableId].table,
             votes: state[action.payload.tableId].table.votes.map(vote => {
               if (vote.rowId === action.payload.rowId) {
-                if (!vote.upvoted) {
+                if (vote.upvoted) {
                   return {
                     ...vote,
                     upvoted: !vote.upvoted,
@@ -135,8 +161,36 @@ export const tablesReducer = (
     }
 
     case "ADD_ROW_SUCCESS": {
-      // TODO: show message like (success, your edit is now awaiting approval)
-      // TODO: if permission is admin edit instantly
+      if (action.payload.permission === "2") {
+        console.log(state);
+        console.log(action);
+        const blah = {
+          ...state,
+          [action.payload.tableId]: {
+            ...state[action.payload.tableId],
+            table: {
+              ...state[action.payload.tableId].table,
+              votes: [
+                ...state[action.payload.tableId].table.votes,
+                {
+                  votes: "0",
+                  upvoted: false,
+                  rowId: action.payload.response.id
+                }
+              ],
+              rows: [
+                ...state[action.payload.tableId].table.rows,
+                {
+                  id: action.payload.response.id,
+                  content: action.payload.response.cells
+                }
+              ]
+            }
+          }
+        };
+        console.log(blah);
+        return blah;
+      }
       return state;
     }
 
@@ -153,32 +207,37 @@ export const tablesReducer = (
     case "ADD_COL_SUCCESS": {
       // no approval needed since this is an admin action
       // TODO: we need a column id back or something and cell ids
-      return {
-        ...state,
-        [action.payload.tableId]: {
-          ...state[action.payload.tableId],
-          table: {
-            ...state[action.payload.tableId].table,
-            columns: [
-              ...state[action.payload.tableId].table.columns,
-              {
-                id: "REPLACE",
-                title: action.payload.title
-              }
-            ],
-            rows: state[action.payload.tableId].table.rows.map(row => ({
-              ...row,
-              content: [
-                ...row.content,
+      if (action.payload.permission === "2") {
+        return {
+          ...state,
+          [action.payload.tableId]: {
+            ...state[action.payload.tableId],
+            table: {
+              ...state[action.payload.tableId].table,
+              columns: [
+                ...state[action.payload.tableId].table.columns,
                 {
-                  id: "REPLACE",
-                  content: ""
+                  id: action.payload.response.id,
+                  title: action.payload.title
                 }
-              ]
-            }))
+              ],
+              rows: state[action.payload.tableId].table.rows.map(row => ({
+                ...row,
+                content: [
+                  ...row.content,
+                  {
+                    id: action.payload.response.cells.find(
+                      cell => (cell.rowId === row.id ? cell.id : false)
+                    ),
+                    content: ""
+                  }
+                ]
+              }))
+            }
           }
-        }
-      };
+        };
+      }
+      return state;
     }
 
     case "ADD_COL_ERROR": {

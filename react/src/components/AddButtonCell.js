@@ -30,8 +30,7 @@ const StyledDiv = styled.div`
 `;
 
 type Props = {
-  colIndex: number,
-  addRow: (colIndex: number) => void,
+  addRow: () => void,
   hideAdd: Function
 };
 
@@ -40,9 +39,7 @@ class AddButtonCell extends React.Component<Props> {
   render() {
     return (
       <StyledDiv>
-        <button onClick={() => this.props.addRow(this.props.colIndex - 1)}>
-          ADD
-        </button>
+        <button onClick={() => this.props.addRow()}>ADD</button>
         <div onClick={this.props.hideAdd}>x</div>
       </StyledDiv>
     );
