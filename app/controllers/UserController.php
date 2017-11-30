@@ -52,6 +52,11 @@ class UserController
                     
                     if ($connectionLink)
                     {
+                        if ($connection == 'fivehundretpx')
+                        {
+                            $connection = '500px';
+                        }
+                        
                         $connectionList[] = [
                             'name' => $connection,
                             'link' => $connectionLink,
