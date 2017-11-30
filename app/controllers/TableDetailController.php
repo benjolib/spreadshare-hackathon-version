@@ -5,6 +5,7 @@ namespace DS\Controller;
 use DS\Model\DataSource\TableFlags;
 use DS\Model\Helper\TableFilter;
 use DS\Model\Tables;
+use Phalcon\Exception;
 
 /**
  * Spreadshare
@@ -34,6 +35,17 @@ class TableDetailController
         
         // Assign table data to UI
         $tableModel = Tables::get($tableId);
+        
+        // Check if table is deleted
+        if ($tableModel->getFlags() == TableFlags::Deleted)
+        {
+            throw new Exception('This table has been deleted!');
+        }
+        
+        if ($tableModel->getFlags() == TableFlags::Archived)
+        {
+            throw new Exception('This table has been archived! It was maybe flagged as inappropriate content.');
+        }
         
         $subClass = "DS\\Controller\\Table\\" . ucfirst($tab);
         if (class_exists($subClass))

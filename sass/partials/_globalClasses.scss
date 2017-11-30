@@ -23,13 +23,33 @@ body {
     display: block;
   }
 
+  button.button,
   a.button {
     background: #6b7c93;
+    border: 1px solid darken(#6b7c93, 10);
     color: #fff !important;
     border-radius: 6px;
+  }
+
+  a.button {
     padding: 10px;
   }
 
+  button.button {
+    padding: 5px 10px;
+  }
+
+  button.button.red {
+    background: rgba(255, 180, 208, 0.16);
+    border: 1px solid darken(rgba(255, 180, 208, 0.16), 10);
+    color: darken(rgba(255, 180, 208, 0.50), 50) !important;
+  }
+
+  button.button.red:hover {
+    background: lighten(rgba(255, 180, 208, 0.16), 10);
+  }
+
+  button.button:hover,
   a.button:hover {
     background: lighten(#6b7c93, 10);
   }
