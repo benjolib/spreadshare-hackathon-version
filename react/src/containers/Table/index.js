@@ -595,7 +595,8 @@ class Table extends Component<Props, State> {
             contextMenu={{
               callback: this.contextMenuCallback,
               items: {
-                ...(this.props.permission === "1"
+                ...(this.props.permission === "1" ||
+                this.props.permission === "2"
                   ? {
                       my_edit: {
                         name: "Edit Cell"
