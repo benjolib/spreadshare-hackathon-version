@@ -90,8 +90,10 @@ class Post extends ActionHandler implements MethodInterface
                     throw new \InvalidArgumentException('The table that you want to edit does not exist.');
                 }
                 
+                $userId = $this->getServiceManager()->getAuth()->getUserId();
+                
                 // User is Owner and can directly edit!
-                if ($tableModel->getOwnerUserId() == $this->getServiceManager()->getAuth()->getUserId())
+                if ($tableModel->getOwnerUserId() == $userId)
                 {
                     $tableContent = new TableContent();
                     $tableContent->editCell($cellId, $content ? $content : '', $link ? $link : '');
@@ -101,6 +103,7 @@ class Post extends ActionHandler implements MethodInterface
                 {
                     $changeRequest = new ChangeRequests();
                     $changeRequest->setCellId($cellId)
+                                  ->setUserId($userId)
                                   ->setTableId($tableId)
                                   ->setFrom($tableCell->getContent())
                                   ->setTo($content)
