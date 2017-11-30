@@ -166,12 +166,12 @@ class Table extends Component<Props, State> {
 
   hideAdd = () => {
     this.setState({
-      showAdd: false,
-      addRowDataGetters: []
+      showAdd: false
     });
   };
 
   addRow = () => {
+    console.log(this.state.addRowDataGetters.map(x => x()));
     this.props
       .addRow(
         this.props.id,
@@ -214,7 +214,49 @@ class Table extends Component<Props, State> {
       //   return;
       // }
 
-      if (key === "my_edit_col") {
+      if (key === "my_add_url") {
+        swal({
+          title: "Adding URL",
+          input: "text",
+          text: "Please type the new url for the cell",
+          inputValue: cell.link || "",
+          showCancelButton: true,
+          showLoaderOnConfirm: true,
+          preConfirm: newValue => {
+            if (!typeof newValue === "string") {
+              return;
+            }
+
+            return this.props.editCell(
+              this.props.id,
+              cell.rowId,
+              cell.id,
+              {
+                ...cell,
+                link: newValue
+              },
+              this.props.permission
+            );
+          }
+        })
+          .then(result => {
+            if (!result.value) {
+              return;
+            }
+            if (this.props.permission === "1") {
+              swal(
+                "Success!",
+                "The request to link this cell is awaiting approval.",
+                "success"
+              );
+            } else if (this.props.permission === "2") {
+              swal("Success!", "The cell has been linked.", "success");
+            }
+          })
+          .catch(() => {
+            swal("Oops", "Something has gone wrong!", "error");
+          });
+      } else if (key === "my_edit_col") {
         swal({
           title: "Editing Column Title",
           input: "text",
@@ -314,7 +356,8 @@ class Table extends Component<Props, State> {
               cell.id,
               {
                 ...cell,
-                content: ""
+                content: "",
+                link: ""
               },
               this.props.permission
             );
@@ -535,9 +578,17 @@ class Table extends Component<Props, State> {
                 return;
               }
               const cell = this.hot.hotInstance.getDataAtCell(row, col);
-              this.setState({
-                selectedCell: cell
-              });
+              if (cell.link) {
+                setTimeout(() => {
+                  this.setState({
+                    selectedCell: cell
+                  });
+                }, 1000);
+              } else {
+                this.setState({
+                  selectedCell: cell
+                });
+              }
             }}
             outsideClickDeselects={false}
             contextMenuCopyPaste
@@ -554,10 +605,10 @@ class Table extends Component<Props, State> {
                         name: "Edit Column"
                       },
                       my_delete: {
-                        name: "Delete Cell"
+                        name: "Clear Cell"
                       },
                       my_add_url: {
-                        name: "Add Cell URL"
+                        name: "Edit Cell URL"
                       }
                     }
                   : {}),

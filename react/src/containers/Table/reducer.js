@@ -65,7 +65,8 @@ export const tablesReducer = (
                             cell.id === action.payload.cellId
                               ? {
                                   ...cell,
-                                  content: action.payload.cell.content
+                                  content: action.payload.cell.content,
+                                  link: action.payload.cell.link
                                 }
                               : cell
                         )
