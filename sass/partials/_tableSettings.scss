@@ -1,104 +1,120 @@
-.tableSettings {
+// table details
+.container.container--tableDetails {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  @include rem(margin-bottom, 160);
+  @include rem(margin-top, 25);
 
-  @include desktop {
-    flex-direction: row;
-  }
-
-  .addTable__content__main {
+  .container__content {
     position: relative;
-    flex-direction: column;
-    align-self: center;
-    width: 90%;
+    @include rem(margin-bottom, 100);
 
     @include desktop {
-      width: 60%;
-      @include rem(margin-right, 30);
+      width: 72.5%;
     }
 
-    &__options {
+    .addTable__content__main__options {
+      width: 100%;
+      @include rem2(padding, 10, 16);
+
       form {
+        .addTableEmpty__content__main__options__item {
+          &__column {
+            p {
+              font-weight: 400;
+            }
+          }
+        }
         .addTableEmpty__content__main__buttons {
           position: absolute;
           width: 100%;
-          margin-top: 0;
-          margin-bottom: 0;
-          @include rem(margin-left, -30);
+          @include rem(margin-left, -40);
         }
       }
     }
   }
 
-  .addTable__content__aside {
-    align-self: center;
-    margin-right: 0;
-    margin-left: 0;
-    width: 90%;
-    @include rem(margin-top, 100);
+  aside.aside.aside--tableDetails {
+    margin-bottom: 0;
+    background: white !important;
 
     @include desktop {
-      align-self: flex-start;
-      width: 20%;
-      margin-top: 0;
-      @include rem(margin-left, 30);
+      width: 22.5%;
+      margin-bottom: 0;
+    }
+  }
+}
+
+// related tables
+.tableRelated {
+  width: 100%;
+  position: relative;
+
+  &__title {
+    color: #B1BBC7;
+    font-weight: 500;
+    text-transform: uppercase;
+    @include rem(font-size, 13);
+    @include rem(margin-bottom, 7);
+
+    &--addRelated {
+      @include rem(margin-top, 36);
     }
   }
 
-  // related tables
-  .tableRelated {
-    position: relative;
+  &__tables {
+    .addTableEmpty__content__main__options__item {
+      @include rem(margin-bottom, 16);
+    }
+  }
 
-    &__title {
-      color: #B1BBC7;
+  .tableAbout__sidebar__content__item {
+    background: #F2F2F8 !important;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: center;
+    text-transform: capitalize;
+    @include rem2(padding, 4, 16);
+
+    h5 {
       font-weight: 500;
-      text-transform: uppercase;
-      @include rem(font-size, 13);
-      @include rem(margin-bottom, 7);
-
-      &--addRelated {
-        @include rem(margin-top, 36);
-      }
+      @include rem(font-size, 14);
     }
-
-    &__tables {
-      .addTableEmpty__content__main__options__item {
-        @include rem(margin-bottom, 16);
-      }
-    }
-
-    .tableAbout__sidebar__content__item {
-      background: #F2F2F8 !important;
-      border-radius: 4px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      align-self: center;
+    p {
+      margin-bottom: 0;
       text-transform: capitalize;
-      @include rem2(padding, 4, 16);
-
-      h5 {
-        font-weight: 500;
-        @include rem(font-size, 14);
-      }
-      p {
-        margin-bottom: 0;
-        text-transform: capitalize;
-        font-weight: 400;
-        @include rem(font-size, 12);
-      }
+      font-weight: 400;
+      @include rem(font-size, 12);
     }
+  }
 
-    #TableSelect {
-      @include rem(margin-bottom, 60);
+  #TableSelect {
+    @include rem(margin-bottom, 60);
 
-      .Select-control {
-        background: #F2F2F8 !important;
-      }
+    .Select-control {
+      background: #F2F2F8 !important;
+    }
+  }
+
+  aside.aside.aside--tableDetails {
+    background: #F2F2F8 !important;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: center;
+    text-transform: capitalize;
+    @include rem2(padding, 4, 16);
+
+    h5 {
+      font-weight: 500;
+      @include rem(font-size, 14);
+    }
+    p {
+      margin-bottom: 0;
+      text-transform: capitalize;
+      font-weight: 400;
+      @include rem(font-size, 12);
     }
   }
 }

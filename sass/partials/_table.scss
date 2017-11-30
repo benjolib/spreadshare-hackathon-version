@@ -11,6 +11,7 @@
 
     @include desktop {
       @include rem2(padding, 50, 100);
+      @include rem(padding-bottom, 10);
     }
 
     &__up {
