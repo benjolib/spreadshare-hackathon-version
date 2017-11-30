@@ -135,7 +135,7 @@ export const tablesReducer = (
             ...state[action.payload.tableId].table,
             votes: state[action.payload.tableId].table.votes.map(vote => {
               if (vote.rowId === action.payload.rowId) {
-                if (!vote.upvoted) {
+                if (vote.upvoted) {
                   return {
                     ...vote,
                     upvoted: !vote.upvoted,
@@ -162,7 +162,9 @@ export const tablesReducer = (
 
     case "ADD_ROW_SUCCESS": {
       if (action.payload.permission === "2") {
-        return {
+        console.log(state);
+        console.log(action);
+        const blah = {
           ...state,
           [action.payload.tableId]: {
             ...state[action.payload.tableId],
@@ -186,6 +188,8 @@ export const tablesReducer = (
             }
           }
         };
+        console.log(blah);
+        return blah;
       }
       return state;
     }
