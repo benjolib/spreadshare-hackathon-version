@@ -52,33 +52,19 @@
 .selected p {
   color: white;
 }
-.follow-user {
-  padding: 8px 15px !important;  
-}
+
 .not-following-user {
   &:after {
     content: 'Follow';
-    background: transparent !important;
-    padding: 0;
   }
 }
 .following-user {
   &:after {
     content: 'Unfollow';
-    @include rem(font-size, 14);
-    background: transparent !important;
-    padding: 0;
+    @include rem(font-size, 10);
   }
 }
-.following-user {
-  &:before {
-    background: none !important;
-    padding: 0;
-  }
-}
-.profile__hero__info__edit {
-  padding: 0;
-}
+
 // css hacks for responsive navbar dropdowns
 .left160 {
   left: 160px !important;
