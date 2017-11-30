@@ -61,6 +61,7 @@
 .following-user {
   &:after {
     content: 'Unfollow';
+    @include rem(font-size, 10);
   }
 }
 
