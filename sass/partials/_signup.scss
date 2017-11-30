@@ -354,3 +354,107 @@
 .signup__content__form input {
   width: 95%;
 }
+
+.topics__content form .signup__content__form__buttons {
+  position: absolute !important;
+  background: none;
+
+  @include desktop {
+    top: 0 !important;
+    right: 66px !important;
+    margin-top: 20px;
+  }
+  @include tablet {
+    top: 0 !important;
+    right: 35px !important;
+    margin-top: 5px;    
+  }
+  @include mobile {
+    top: 0 !important;
+    right: 30px !important;
+    margin-top: 4px;  
+  }
+}
+
+.follow__content .signup__content__form__buttons {
+  position: absolute !important;
+  background: none;
+
+  @include desktop {
+    top: 0 !important;
+    right: 66px !important;
+    margin-top: 20px;
+  }
+  @include tablet {
+    top: 0 !important;
+    right: 35px !important;
+    margin-top: 5px;    
+  }
+  @include mobile {
+    top: 0 !important;
+    right: 30px !important;
+    margin-top: 4px;  
+  }
+}
+
+.locations__content .signup__content__form__buttons {
+  position: absolute !important;
+  background: none;
+
+  @include desktop {
+    top: 0 !important;
+    right: 66px !important;
+    margin-top: 20px;
+  }
+  @include tablet {
+    top: 0 !important;
+    right: 35px !important;
+    margin-top: 5px;    
+  }
+  @include mobile {
+    top: 0 !important;
+    right: 30px !important;
+    margin-top: 4px;  
+  }
+}
+
+.tables__content .signup__content__form__buttons {
+  position: absolute !important;
+  background: none;
+
+  @include desktop {
+    top: 0 !important;
+    right: 40px !important;
+    margin-top: 20px;
+  }
+  @include tablet {
+    top: 0 !important;
+    right: 10px !important;
+    margin-top: 5px;    
+  }
+  @include mobile {
+    top: 0 !important;
+    right: 10px !important;
+    margin-top: 4px;  
+  }
+}
+.tables__content .signup__content__form__buttons a {
+  font-weight: 500;
+  text-transform: capitalize;
+  color: #fff;
+  background: #2ead6b;
+  border: none;
+  border-radius: 4px;
+  font-size: 15px;
+  font-size: .9375rem;
+  padding: .75rem 1.25rem;
+}
+
+
+
+// .navbar__controls {
+//   display: none;
+// }
+// .navbar__search {
+//   display: none;
+// }

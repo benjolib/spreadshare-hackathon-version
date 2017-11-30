@@ -6,7 +6,7 @@
 {% block content %}
 <div class="tables">
   <div class="tables__content">
-    <div class="tables__content__wrapper" style="position:relative;">
+    <div class="tables__content__wrapper">
       <div class="signup__content__form__buttons" style="position:absolute;top:-50px;right:180px;">
         <a href="/" class="button">CONTINUE</a>
       </div>
