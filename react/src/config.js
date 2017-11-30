@@ -1,1 +1,1 @@
-export const URL = "http://staging.spreadshare.co";
+export const URL = "";
