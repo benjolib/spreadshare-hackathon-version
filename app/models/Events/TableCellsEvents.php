@@ -4,6 +4,7 @@ namespace DS\Model\Events;
 
 use DS\Events\Table\TabelCellChanged;
 use DS\Model\Abstracts\AbstractTableCells;
+use DS\Model\ChangeRequests;
 use DS\Model\TableRows;
 
 /**
@@ -69,10 +70,26 @@ abstract class TableCellsEvents
      */
     public function afterSave()
     {
-        TabelCellChanged::after(
-            $this->getUserId(),
-            TableRows::get($this->getRowId()),
-            $this
-        );
+        // Determine wheather this change has happened via a change request or a direct edit
+        $changeRequest = ChangeRequests::findByFieldValue('cellId', $this->getId());
+        
+        if ($changeRequest)
+        {
+            // If so, credit the change requestor with the change
+            // by emitting the cellchanged event with that user id
+            TabelCellChanged::after(
+                $changeRequest->getUserId(),
+                TableRows::get($this->getRowId()),
+                $this
+            );
+        }
+        else
+        {
+            TabelCellChanged::after(
+                $this->getUserId(),
+                TableRows::get($this->getRowId()),
+                $this
+            );
+        }
     }
 }

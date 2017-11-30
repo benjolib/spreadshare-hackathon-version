@@ -6,8 +6,8 @@
 
 {{ partial('table/detail/header') }}
 
+{% if requests %}
 <div class="container container--changelog">
-    {% if requests %}
     {% for request in requests %}
     <form method="POST">
         <div class="container__content">
@@ -76,6 +76,17 @@
     </form>
     {% endfor %}
 
+    {% else %}
+    <div class="center" style="background:white;-webkit-border-radius: 8px;-moz-border-radius: 8px;border-radius: 8px;padding:50px;">
+        <img src="/assets/images/desktop.png" alt="" />
+        <p>&nbsp;</p>
+        <p>There are no change requests yet or no one is matching your filter "{{ page }}".</p>
+
+        {% if auth().getUserId() != table['ownerUserId'] %}
+        <p><a href="/table/{{ table['id'] }}">Go</a> and make your first contribution to this table.</p>
+        {% endif %}
+    </div>
+    {% endif %}
     <aside class="aside aside--changelog">
         <a href="/table/{{ table['id'] }}/changelog">
             <div class="aside__item {% if page == '' %}item-selected{% endif %}">
@@ -109,18 +120,6 @@
         </a>
     </aside>
 </div>
-
-{% else %}
-<div class="center" style="background:white;-webkit-border-radius: 8px;-moz-border-radius: 8px;border-radius: 8px;padding:50px;">
-    <img src="/assets/images/desktop.png" alt="" />
-    <p>&nbsp;</p>
-    <p>There are no change requests, yet.</p>
-
-    {% if auth().getUserId() != table['ownerUserId'] %}
-    <p><a href="/table/{{ table['id'] }}">Go</a> and make your first contribution to this table.</p>
-    {% endif %}
-</div>
-{% endif %}
 
 {% endblock %}
 
