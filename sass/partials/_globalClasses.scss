@@ -2,6 +2,7 @@ body {
   .center {
     text-align: center;
   }
+
   .mt10 {
     margin-top: 10px;
   }
@@ -10,9 +11,21 @@ body {
     font-weight: 600;
   }
 
+  .filter {
+    display: none;
+  }
+
+  .show {
+    visibility: visible;
+  }
+
+  .open {
+    display: block;
+  }
+
   a.button {
     background: #6b7c93;
-    color: #fff;
+    color: #fff !important;
     border-radius: 6px;
     padding: 10px;
   }
@@ -27,7 +40,7 @@ body {
     text-shadow: none !important;
     color: transparent !important;
     opacity: 1;
-    width:100%;
+    width: 100%;
     pointer-events: auto;
     -webkit-transition: all 0s linear, opacity 0.1s ease;
     transition: all 0s linear, opacity 0.1s ease;

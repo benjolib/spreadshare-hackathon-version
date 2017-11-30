@@ -45,20 +45,15 @@ class TableDropdownMenu extends React.Component<Props, State> {
       return;
     }
 
-    this.props.addCol(
-      this.props.tableId,
-      newTitle,
-      this.props.columns[this.props.columns.length - 1].id
-    );
+    this.props.addCol(this.props.tableId, newTitle);
   };
 
   render() {
     return (
       <StyledDiv hide={this.props.hide}>
         <a onClick={this.props.showAdd}>Add new row</a>
-        {this.props.permission === "2" && (
-          <a onClick={this.addColumn}>Add new column</a>
-        )}
+        {this.props.permission === "2" &&
+          <a onClick={this.addColumn}>Add new column</a>}
         <a href={`${URL}/download/table/3/csv`}>Download as CSV</a>
       </StyledDiv>
     );

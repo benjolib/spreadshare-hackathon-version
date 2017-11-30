@@ -3,6 +3,7 @@
 namespace DS\Model;
 
 use DS\Model\Events\TableLocationsEvents;
+use DS\Traits\Model\ClearByTableIdTrait;
 
 /**
  * TableLocations
@@ -20,6 +21,8 @@ use DS\Model\Events\TableLocationsEvents;
 class TableLocations
     extends TableLocationsEvents
 {
+    use ClearByTableIdTrait;
+    
     /**
      * @param array $param
      * @param int   $page

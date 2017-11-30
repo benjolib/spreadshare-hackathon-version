@@ -60,10 +60,6 @@ export const tablesReducer = (
 
     case "VOTE_ROW_REQUEST": {
       // TODO: maybe some sort of optimistic update or loader here
-      return state;
-    }
-
-    case "VOTE_ROW_SUCCESS": {
       if (!state[action.payload.tableId].table) {
         return state;
       }
@@ -96,9 +92,41 @@ export const tablesReducer = (
       };
     }
 
-    case "VOTE_ROW_ERROR": {
-      // TODO: show error
+    case "VOTE_ROW_SUCCESS": {
       return state;
+    }
+
+    case "VOTE_ROW_ERROR": {
+      if (!state[action.payload.tableId].table) {
+        return state;
+      }
+
+      return {
+        ...state,
+        [action.payload.tableId]: {
+          ...state[action.payload.tableId],
+          table: {
+            ...state[action.payload.tableId].table,
+            votes: state[action.payload.tableId].table.votes.map(vote => {
+              if (vote.rowId === action.payload.rowId) {
+                if (!vote.upvoted) {
+                  return {
+                    ...vote,
+                    upvoted: !vote.upvoted,
+                    votes: `${Number(vote.votes) - 1}`
+                  };
+                }
+                return {
+                  ...vote,
+                  upvoted: !vote.upvoted,
+                  votes: `${Number(vote.votes) + 1}`
+                };
+              }
+              return vote;
+            })
+          }
+        }
+      };
     }
 
     case "ADD_ROW_REQUEST": {

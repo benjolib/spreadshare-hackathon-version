@@ -1,0 +1,120 @@
+// table details
+.container.container--tableDetails {
+  width: 100%;
+  @include rem(margin-top, 25);
+
+  .container__content {
+    position: relative;
+    @include rem(margin-bottom, 100);
+
+    @include desktop {
+      width: 72.5%;
+    }
+
+    .addTable__content__main__options {
+      width: 100%;
+      @include rem2(padding, 10, 16);
+
+      form {
+        .addTableEmpty__content__main__options__item {
+          &__column {
+            p {
+              font-weight: 400;
+            }
+          }
+        }
+        .addTableEmpty__content__main__buttons {
+          position: absolute;
+          width: 100%;
+          @include rem(margin-left, -40);
+        }
+      }
+    }
+  }
+
+  aside.aside.aside--tableDetails {
+    margin-bottom: 0;
+    background: white !important;
+
+    @include desktop {
+      width: 22.5%;
+      margin-bottom: 0;
+    }
+  }
+}
+
+// related tables
+.tableRelated {
+  width: 100%;
+  position: relative;
+
+  &__title {
+    color: #B1BBC7;
+    font-weight: 500;
+    text-transform: uppercase;
+    @include rem(font-size, 13);
+    @include rem(margin-bottom, 7);
+
+    &--addRelated {
+      @include rem(margin-top, 36);
+    }
+  }
+
+  &__tables {
+    .addTableEmpty__content__main__options__item {
+      @include rem(margin-bottom, 16);
+    }
+  }
+
+  .tableAbout__sidebar__content__item {
+    background: #F2F2F8 !important;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: center;
+    text-transform: capitalize;
+    @include rem2(padding, 4, 16);
+
+    h5 {
+      font-weight: 500;
+      @include rem(font-size, 14);
+    }
+    p {
+      margin-bottom: 0;
+      text-transform: capitalize;
+      font-weight: 400;
+      @include rem(font-size, 12);
+    }
+  }
+
+  #TableSelect {
+    @include rem(margin-bottom, 60);
+
+    .Select-control {
+      background: #F2F2F8 !important;
+    }
+  }
+
+  aside.aside.aside--tableDetails {
+    background: #F2F2F8 !important;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: center;
+    text-transform: capitalize;
+    @include rem2(padding, 4, 16);
+
+    h5 {
+      font-weight: 500;
+      @include rem(font-size, 14);
+    }
+    p {
+      margin-bottom: 0;
+      text-transform: capitalize;
+      font-weight: 400;
+      @include rem(font-size, 12);
+    }
+  }
+}

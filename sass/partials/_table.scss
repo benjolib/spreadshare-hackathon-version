@@ -11,6 +11,7 @@
 
     @include desktop {
       @include rem2(padding, 50, 100);
+      @include rem(padding-bottom, 10);
     }
 
     &__up {
@@ -220,4 +221,67 @@
 .dxTqwX a {
   margin-bottom: 8px;
   color: #B1BBC7;
+}
+.bAvots {
+  padding: 0 !important;
+  border-radius: 7px;
+  height: auto !important;
+}
+.bAvots div {
+  background: #F8F8FB;
+  padding: 10px;
+  border-radius: 7px;
+}
+.bAvots div button {
+  border: none;
+  width: 25%;
+  color: #B1BBC7;
+  cursor: pointer;
+}
+.bAvots div button:first-child {
+  width: 50%;
+  text-align: left;
+  color: #6A7C94;
+}  
+
+.bAvots div button:last-child {
+  border: none;
+  background: #6A7C94;
+  color: white;
+  border-radius: 4px;
+  padding: 5px 10px;
+  width: 25%;
+}
+#sidebarForm {
+  @include mobile {
+    display: none;
+  }
+  @include tablet {
+    display: none;
+  }
+}
+.sc-dnqmqq table {
+  margin: 10px;
+  color: #B1BBC7;
+}
+.sc-dnqmqq select {
+  margin: 0 15px;
+  border: none;
+  background: transparent;
+  text-align: center;
+}
+.sc-dnqmqq option {
+  margin: 0 15px;
+  border: none;
+  background: transparent;
+}
+.sc-dnqmqq table button {
+  border-radius: 50%;
+  border: none;
+  background: #6A7C94;
+  font-weight: 500;
+  color: #fff;
+  padding: 2px 6px;
+  font-size: 10px;
+  margin: 0 10px 0 0;
 }

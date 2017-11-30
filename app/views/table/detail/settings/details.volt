@@ -33,19 +33,19 @@
 <div class="addTableEmpty__content__main__options__item">
   <div class="addTableEmpty__content__main__options__item__column">
     <p>Tags</p>
-    <div id="TagsSelect" data-name="tags[]" data-values="{{ reactArray(table['tags']) }}" class="react-component"></div>
+    <div id="TagsSelect" data-name="tags[]" data-value="{{ reactArray(tags) }}" class="react-component"></div>
   </div>
 </div>
 {# locations #}
 <div class="addTableEmpty__content__main__options__item">
   <div class="addTableEmpty__content__main__options__item__column">
     <p>Locations</p>
-    <div id="LocationSelect" data-name="location[]" data-value="{{ reactArray(table['locations']) }}" class="react-component"></div>
+    <div id="LocationSelect" data-name="location[]" data-value="{{ reactArray(locations) }}" class="react-component"></div>
   </div>
 </div>
 
 {# buttons #}
 <div class="addTableEmpty__content__main__buttons">
-  <a href="/table/{{ table['id'] }}">Cancel</a>
+  <a href="/table/add">Cancel</a>
   <button type="submit">Save Changes</button>
 </div>

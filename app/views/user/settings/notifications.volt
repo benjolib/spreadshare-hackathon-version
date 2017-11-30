@@ -22,10 +22,10 @@
                 <div class="layout__content__main__notifications__row">
                   <div class="layout__content__main__notifications__switch__buttons">
                     <div class="layout__content__main__notifications__switch__buttons layout__content__main__notifications__switch__buttons--left active">
-                      On
+                      Y
                     </div>
                     <div class="layout__content__main__notifications__switch__buttons layout__content__main__notifications__switch__buttons--right">
-                      Off
+                      N
                     </div>
                   </div>
                   <div class="layout__content__main__notifications__switch__info">
@@ -40,10 +40,10 @@
                 <div class="layout__content__main__notifications__row">
                   <div class="layout__content__main__notifications__switch__buttons">
                     <div class="layout__content__main__notifications__switch__buttons layout__content__main__notifications__switch__buttons--left active">
-                      On
+                      Y
                     </div>
                     <div class="layout__content__main__notifications__switch__buttons layout__content__main__notifications__switch__buttons--right">
-                      Off
+                      N
                     </div>
                   </div>
                   <div class="layout__content__main__notifications__switch__info">
@@ -58,10 +58,10 @@
                 <div class="layout__content__main__notifications__row">
                   <div class="layout__content__main__notifications__switch__buttons">
                     <div class="layout__content__main__notifications__switch__buttons layout__content__main__notifications__switch__buttons--left active">
-                      On
+                      Y
                     </div>
                     <div class="layout__content__main__notifications__switch__buttons layout__content__main__notifications__switch__buttons--right">
-                      Off
+                      N
                     </div>
                   </div>
                   <div class="layout__content__main__notifications__switch__info">
@@ -76,10 +76,10 @@
                 <div class="layout__content__main__notifications__row">
                   <div class="layout__content__main__notifications__switch__buttons">
                     <div class="layout__content__main__notifications__switch__buttons layout__content__main__notifications__switch__buttons--left active">
-                      On
+                      Y
                     </div>
                     <div class="layout__content__main__notifications__switch__buttons layout__content__main__notifications__switch__buttons--right">
-                      Off
+                      N
                     </div>
                   </div>
                   <div class="layout__content__main__notifications__switch__info">

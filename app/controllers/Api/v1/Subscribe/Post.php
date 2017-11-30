@@ -34,7 +34,7 @@ class Post extends ActionHandler implements MethodInterface
      *
      * @api               {post} /api/v1/subscribe/:tableId Subscribe to table (:tableId is the id of the table)
      * @apiVersion        1.0.0
-     * @apiName           Topics
+     * @apiName           Subscribe
      * @apiGroup          Public
      *
      * @apiSuccess {Object} _meta Meta object

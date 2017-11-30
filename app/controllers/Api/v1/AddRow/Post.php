@@ -83,10 +83,17 @@ class Post extends ActionHandler implements MethodInterface
      */
     public function process()
     {
-        $tableId       = $this->action;
-        $insertAfterId = $this->request->getPost('insertAfterId');
-        $rowData       = json_decode($this->request->getPost('rowData'), true);
-        $userId        = $this->getServiceManager()->getAuth()->getUserId();
+        $tableId = $this->action;
+        $post    = $this->request->getJsonRawBody(true);
+        $userId  = $this->getServiceManager()->getAuth()->getUserId();
+        
+        if (!isset($post['insertAfterId']) || !isset($post['rowData']))
+        {
+            throw new \InvalidArgumentException('Invalid post package sent.');
+        }
+        
+        $insertAfterId = $post['insertAfterId'];
+        $rowData       = $post['rowData'];
         
         if ($userId > 0 && $tableId > 0 && is_array($rowData))
         {
@@ -95,13 +102,13 @@ class Post extends ActionHandler implements MethodInterface
             {
                 throw new \InvalidArgumentException('The table that you want to edit does not exist.');
             }
-            
+    
             // User is Owner and can directly edit!
             if ($tableModel->getOwnerUserId() == $userId)
             {
                 $tableContent = new TableContent();
                 $newRow       = $tableContent->addRow($tableId, $rowData, $insertAfterId);
-                
+        
                 $action = 'updated';
             }
             // User contribution has to be confirmed first.
@@ -122,20 +129,20 @@ class Post extends ActionHandler implements MethodInterface
                               ->setComment('')
                               ->setCellId($cellId);
                 */
-                
+        
                 $action = 'changeRequested';
             }
-            
+    
             return new Record(
                 [
                     'id' => $newRow->getId(),
-                    'cells' => $newRow->getContent(),
+                    'cells' => json_decode($newRow->getContent(), true),
                     'action' => $action,
                 ]
             );
         }
         
-        throw new Exception('Error adding the row. Either you are not loggedin, or the table-id or submitted row is incorrect.');
+        throw new \InvalidArgumentException('Error adding the row. Either you are not loggedin, or the table-id or submitted row is incorrect.');
     }
     
 }

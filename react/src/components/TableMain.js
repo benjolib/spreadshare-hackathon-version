@@ -24,12 +24,12 @@ const StyledDiv = styled.div`
   }
 
   .colHeader {
-    padding-left: 4px;
+    padding-left: 16px;
     padding-right: 4px;
   }
 
   td {
-    padding-left: 8px;
+    padding-left: 16px;
     padding-right: 8px;
     color: #6e7d96 !important;
     font-weight: 500;
@@ -49,12 +49,28 @@ const StyledDiv = styled.div`
   .wtBorder {
     background-color: #24ae69 !important;
   }
+
+  .ht_clone_left .htCore {
+    box-shadow: 4px 0 #f3f2f8;
+  }
+
+  ${props =>
+    props.showAdd &&
+    `
+    .handsontable td {
+      background: #f4f3f9;
+      color: #e4e4ec !important;
+    }
+  `};
 `;
 
 type Props = {
   children?: React.Node
 };
 
-const TableMain = (props: Props) => <StyledDiv>{props.children}</StyledDiv>;
+const TableMain = (props: Props) =>
+  <StyledDiv showAdd={props.showAdd}>
+    {props.children}
+  </StyledDiv>;
 
 export default TableMain;

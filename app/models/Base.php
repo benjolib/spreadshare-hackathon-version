@@ -88,9 +88,9 @@ abstract class Base
         /**
          * @todo Use memcache or redis for this with a lower lifetime of e.g. 5 minutes
          */
-        if (!isset(static::$getCache[$id]))
+        if (!isset(static::$getCache[static::class][$id]))
         {
-            static::$getCache[$id] = static::findFirst(
+            static::$getCache[static::class][$id] = static::findFirst(
                 [
                     "conditions" => sprintf("%s = ?0", $column),
                     "bind" => [$id],
@@ -98,7 +98,7 @@ abstract class Base
             ) ?: new static();
         }
         
-        return static::$getCache[$id];
+        return static::$getCache[static::class][$id];
     }
     
     /**

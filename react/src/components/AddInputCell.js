@@ -5,6 +5,16 @@ import styled from "styled-components";
 const StyledDiv = styled.div`
   text-align: center;
   height: 100%;
+  padding: 0 0 8px 0;
+  input {
+    width: 100%;
+    background: white;
+    border-radius: 6px;
+    border: none;
+    height: 40px;
+    text-indent: 12px;
+    color: #808a9a;
+  }
 `;
 
 type Props = {
@@ -43,12 +53,6 @@ class AddInputCell extends React.Component<Props> {
     return (
       <StyledDiv>
         <input type="text" onChange={this.onChange} value={this.state.value} />
-        {/* <input
-          type="text"
-          onChange={e =>
-            this.props.updateAddValues(this.props.colIndex, e.target.value)}
-          value={this.props.value}
-        /> */}
       </StyledDiv>
     );
   }

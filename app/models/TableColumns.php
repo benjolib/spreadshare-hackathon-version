@@ -21,6 +21,55 @@ class TableColumns
     extends TableColumnsEvents
 {
     /**
+     * @param int    $userId
+     * @param int    $tableId
+     * @param string $title
+     *
+     * @return array
+     */
+    public function add(int $userId, int $tableId, string $title): array
+    {
+        // @todo optimize this for better performance:
+        $columns   = self::findAllByFieldValue('tableId', $tableId);
+        $latestCol = $columns[count($columns) - 1];
+        
+        $this->setUserId($userId)
+             ->setTitle($title)
+             ->setTableId($tableId)
+             ->setPosition($latestCol->getPosition() + 1)
+             ->setWidth(100)
+             ->create();
+        
+        $rows = TableRows::findRowsFrom($tableId);
+        
+        $createdCells = [];
+        foreach ($rows as $row)
+        {
+            $cell = new TableCells();
+            $cell->setContent('')
+                 ->setLink('')
+                 ->setRowId($row->getId())
+                 ->setColumnId($this->getId())
+                 ->setUpdatedById($userId)
+                 ->setUserId($userId)
+                 ->create();
+            
+            $createdCells[] = [
+                'id' => $cell->getId(),
+                'rowId' => $row->getId(),
+            ];
+        }
+        
+        // Recreate cache
+        (new TableRows())->rebuildRowCacheWithRows($rows, $tableId);
+        
+        return [
+            'colId' => $this->getId(),
+            'cells' => $createdCells,
+        ];
+    }
+    
+    /**
      * @param array $param
      * @param int   $page
      * @param int   $limit

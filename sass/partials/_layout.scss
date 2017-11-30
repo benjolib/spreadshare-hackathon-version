@@ -79,6 +79,10 @@
       width: 80%;
       @include rem2(padding, 25, 35);
 
+      @include mobile {
+        width: 100%;
+      }
+
       p {
         color: lighten($text-color, 10%);
         font-weight: 300;
@@ -120,7 +124,7 @@
       }
 
       input {
-        // padding: 20px 10px;        
+        // padding: 20px 10px;
         border: none;
         outline: none;
         background: $background-color;
@@ -170,7 +174,7 @@
 
         a {
           text-decoration: none;
-          color: $text-color;
+          color: #B1BBC7 !important;
 
           &:hover {
             color: $text-color;
@@ -179,8 +183,9 @@
 
           div {
             text-transform: uppercase;
-            font-weight: 300;
+            font-weight: 400;
             border-radius: 4px;
+            @include rem(font-size, 14);
             @include rem2(padding, 10, 15);
 
             &:hover {
@@ -195,4 +200,22 @@
       }
     }
   }
+}
+
+.dropdown--filters {
+
+  @include desktop {
+    position: absolute;
+    transform: translate3d(111px, 542px, 0px) !important;
+    top: 0px;
+    left: 0px;
+    will-change: transform;
+  }
+  @include tablet {
+    transform: translate3d(82px,721px,0) !important;
+  }
+  @include mobile {
+    transform: translate3d(40px,721px,0) !important;    
+  }
+  
 }

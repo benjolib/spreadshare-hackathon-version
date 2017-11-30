@@ -8,7 +8,7 @@
  * @package   DS\Config
  */
 return [
-    'domain' => 'spreadshare.docker:81',
+    'domain' => 'dev.spreadshare.co:81',
     'elasticsearch' => [
         'host' => 'elasticsearch',
         'port' => '9200',
@@ -94,17 +94,18 @@ return [
         'DS\Tests' => ROOT_PATH . '/app/tests/',
         'DS\Api' => ROOT_PATH . '/app/api/',
         'DS\Events' => ROOT_PATH . '/app/events/',
+        'DS\Listeners' => ROOT_PATH. '/app/listeners',
         'DS\Exceptions' => ROOT_PATH . '/app/exceptions/',
     ],
     'mode' => 'production',
-    
+
     'hybridauth' => [
         "debug_mode" => true,
         "debug_file" => ROOT_PATH . "/system/log/hybridauth",
-        
+
         //Location where to redirect users once they authenticate with a provider
         'callback' => 'http://dev.spreadshare.co:81/login',
-        
+
         //Providers specifics
         'providers' => [
             'Twitter' => [

@@ -6,7 +6,6 @@ use DS\Model\DataSource\TableFlags;
 use DS\Model\TableLocations;
 use DS\Model\Tables;
 use DS\Model\TableTags;
-use DS\Model\Types;
 use Phalcon\Exception;
 
 /**
@@ -59,28 +58,13 @@ class Table
                 'columns' => ['id', 'title'],
                 "order" => "title ASC",
                 "limit" => $limit,
-                "bind" => [$name . '%'],
+                "bind" => ['%' . $name . '%'],
             ]
         )->toArray();
     }
     
-    /**
-     * Creates a new table.
-     *
-     * @param int    $ownerUserId
-     * @param string $title
-     * @param string $tagline
-     * @param string $image
-     * @param int    $typeId
-     * @param int    $topic1Id
-     * @param int    $topic2Id
-     * @param array  $tags
-     * @param int    $flags
-     *
-     * @return Tables|static
-     * @throws Exception
-     */
-    public function createTable(
+    public function saveTable(
+        int $tableId,
         int $ownerUserId,
         string $title,
         string $tagline,
@@ -92,96 +76,77 @@ class Table
         array $locations = [],
         int $flags = TableFlags::Normal
     ) {
-        $table = Tables::findByFieldValue('title', $title);
+    
+    }
+    
+    /**
+     * Create a table
+     *
+     * @param Tables $preparedTableModel
+     * @param array  $tags
+     * @param array  $locations
+     *
+     * @return Tables
+     * @throws Exception
+     */
+    public function createTable(
+        Tables $preparedTableModel,
+        array $tags = [],
+        array $locations = []
+    ) {
         
-        if (!$title)
-        {
-            throw new \InvalidArgumentException('Please give a name for the table');
-        }
+        // Create table entry
+        $preparedTableModel->create();
         
-        if (strlen($title) < 4)
-        {
-            throw new \InvalidArgumentException('Please provide at least four chracters for the table name.');
-        }
-        
-        if (!$topic1Id)
-        {
-            throw new \InvalidArgumentException('Please select at least one topic for your table.');
-        }
-        
-        if ($table)
-        {
-            throw new \InvalidArgumentException('A table with the exact same title already exists. Please choose another title');
-        }
-        
-        if ($typeId === 0)
-        {
-            $typeId = null;
-        }
-        
-        if ($topic1Id === 0)
-        {
-            $topic1Id = null;
-        }
-        
-        if ($topic2Id === 0)
-        {
-            $topic2Id = null;
-        }
-        
-        if ($typeId && Types::findFirstById($typeId) === false)
-        {
-            throw new \InvalidArgumentException("Your selected type is invalid. Please select another one.");
-        }
-        
-        $table = new Tables();
-        $table->setOwnerUserId($ownerUserId)
-              ->setTitle($title)
-              ->setTagline($tagline)
-              ->setTypeId($typeId)
-              ->setImage($image)
-              ->setTopic1Id($topic1Id)
-              ->setTopic2Id($topic2Id)
-              ->setFlags($flags)
-              ->create();
-        
-        if (!$table->getId())
+        if (!$preparedTableModel->getId())
         {
             throw new Exception('There was an error creating the table. Please try again later or contact our support.');
         }
         
+        $this->handleTagAndLocationAssignment($preparedTableModel, $tags, $locations);
+        
+        return $preparedTableModel;
+    }
+    
+    /**
+     * @param Tables $preparedTableModel
+     * @param array  $tags
+     * @param array  $locations
+     */
+    public function handleTagAndLocationAssignment(Tables $preparedTableModel, array $tags = [], array $locations = [])
+    {
         // Add tags to table
-        $tagsModel = new TableTags();
+        (new TableTags())->clear($preparedTableModel->getId());
         foreach ($tags as $tag)
         {
             try
             {
-                $tagsModel->setTableId($table->getId())
+                $tagsModel = new TableTags();
+                $tagsModel->setTableId($preparedTableModel->getId())
                           ->setTagId($tag)
                           ->create();
             }
-            catch (Exception $e)
+            catch (\Exception $e)
             {
                 // Tag id may not existing..?
             }
         }
         
         // Add locations to table
-        $locationModel = new TableLocations();
+        (new TableLocations())->clear($preparedTableModel->getId());
         foreach ($locations as $location)
         {
             try
             {
-                $locationModel->setTableId($table->getId())
+                $locationModel = new TableLocations();
+                $locationModel->setTableId($preparedTableModel->getId())
                               ->setLocationId($location)
                               ->create();
             }
-            catch (Exception $e)
+            catch (\Exception $e)
             {
                 // Location id may not existing..?
             }
         }
-        
-        return $table;
     }
 }

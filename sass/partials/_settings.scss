@@ -181,28 +181,33 @@
       &__buttons {
         display: flex;
         color: white;
-        // background: $background-color;
         background-color: #DEE0E7;
         font-weight: 300;
         border-radius: 5px;
 
+        
+       
+        
+
         &--left {
-          border-top-left-radius: 5px;
-          border-bottom-left-radius: 5px;
-          border-top-right-radius: 0;
-          border-bottom-right-radius: 0;          
-          @include rem2(padding, 10, 10);
+          border-top-right-radius: 0px;
+          border-bottom-right-radius: 0px;
+          @include rem2(padding, 10, 12);
+          font-weight: 800; 
 
           &:hover {
             cursor: pointer;
             background: darken($background-color, 8%);
           }
         }
+        
         &--right {
-          border-top-right-radius: 3px;
-          border-bottom-right-radius: 3px;
-          border-radius: 5px;
-          @include rem2(padding, 10, 10);
+          border-top-right-radius: 5px;
+          border-bottom-right-radius: 5px;
+          @include rem2(padding, 10, 12);
+          font-weight: 800;
+          padding: 5px 10px;
+          margin: 5px;               
 
           &:hover {
             cursor: pointer;
@@ -215,6 +220,10 @@
 
         .active {
           background: $logo-color;
+          margin: 5px;
+          padding: 9px 14px;
+          font-size: 12px;
+          border-radius: 6px;
         }
       }
     }
@@ -395,6 +404,7 @@
           display: flex;
           align-items: center;
           @include rem2(padding, 8, 16);
+          width: 50%;
 
           &:hover {
             cursor: pointer;
@@ -404,12 +414,13 @@
           img {
             @include rem(width, 20);
             @include rem(margin-right, 10);
+            display: none;
           }
 
           span {
             margin: 0;
             font-weight: 300;
-            text-transform: uppercase;
+            text-transform: capitalize;
             color: white;
             align-self: center;
             @include rem(font-size, 16);
@@ -459,6 +470,7 @@
           border-top-right-radius: 0px;
           border-bottom-right-radius: 0px;
           @include rem2(padding, 10, 12);
+          font-weight: 800;                   
 
           &:hover {
             cursor: pointer;
@@ -471,6 +483,9 @@
           border-top-right-radius: 5px;
           border-bottom-right-radius: 5px;
           @include rem2(padding, 10, 12);
+          font-weight: 800;
+          padding: 5px 10px;
+          margin: 5px;
 
           &:hover {
             cursor: pointer;
@@ -482,7 +497,7 @@
         .active {
           background: $logo-color;
           margin: 5px;
-          padding: 9px 11px;
+          padding: 9px 14px;
           font-size: 12px;
           border-radius: 6px;
         }
@@ -761,7 +776,7 @@
             display: inline-flex;
             color: white;
             text-transform: uppercase;
-            margin-top: 7%;
+            margin-top: 14%;
           }
         }
       }
@@ -839,7 +854,7 @@
             display: inline-flex;
             color: white;
             text-transform: uppercase;
-            margin-top: 7%;
+            margin-top: 14%;
           }
         }
       }

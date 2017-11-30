@@ -6,14 +6,28 @@
 
 {{ flash.output() }}
 
-<form method="POST">
-  {% if page == "related" %}
-    {{ partial('table/detail/settings/related') }}
-  {% endif %}
+<div class="container container--tableDetails">
+  <div class="container__content">
+    <div class="addTable__content__main__options">
+      <form method="POST">
+        {% if page == "related" %}
+          {{ partial('table/detail/settings/related') }}
+        {% endif %}
 
-  {% if page == "details" %}
-    {{ partial('table/detail/settings/details') }}
-  {% endif %}
-</form>
+        {% if page == "details" %}
+          {{ partial('table/detail/settings/details') }}
+        {% endif %}
+      </form>
+    </div>
+  </div>
 
+  <aside class="aside aside--tableDetails">
+    <a href="#">
+      <div class="aside__item item-selected"><p>Table Details</p></div>
+    </a>
+    <a href="#">
+      <div class="aside__item"><p>Related Table</p></div>
+    </a>
+  </aside>
+</div>
 {% endblock %}

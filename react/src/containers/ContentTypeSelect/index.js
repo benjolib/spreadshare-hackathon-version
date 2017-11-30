@@ -17,16 +17,8 @@ class ContentTypeSelect extends Component {
   constructor(props) {
     super(props);
 
-    let value = '';
-    if (props.value && typeof props.value === 'string') {
-      value = JSON.parse(props.value);
-      if (!value) {
-        value = '';
-      }
-    }
-
     this.state = {
-      value,
+      value: props.value,
     };
   }
 

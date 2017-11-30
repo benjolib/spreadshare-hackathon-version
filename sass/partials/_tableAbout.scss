@@ -505,13 +505,15 @@
       // @include rem(padding, 0, 20);
       padding: 10px 25px;
       border-bottom: 2px solid #F2F2F8;
-      margin: 10px 25px 10px 25px;
+      margin: 10px 25px -2px 25px;
 
       &:last-child() {
         border: 0;
+        margin-bottom: 0;
       }
       &:nth-child() {
         border: 0;
+        margin-bottom: 0;        
       }
 
       &__avatar {

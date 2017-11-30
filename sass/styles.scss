@@ -1,4 +1,5 @@
 @import './partials/_variables.scss';
+@import './partials/_globalClasses.scss';
 @import './partials/_base.scss';
 @import './partials/_mixins.scss';
 @import './components/_dropdown.scss';
@@ -28,4 +29,5 @@
 @import './partials/_tableAbout.scss';
 @import './partials/_tableFeed.scss';
 @import './partials/_tableUsers.scss';
-@import './partials/_globalClasses.scss';
+@import './partials/_tableSettings.scss';
+@import './partials/_search.scss';

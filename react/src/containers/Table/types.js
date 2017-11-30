@@ -104,16 +104,14 @@ export type TablesAction =
       type: "ADD_ROW_REQUEST",
       payload: {
         tableId: string,
-        rowData: Array<string>,
-        insertAfterId: string
+        rowData: Array<string>
       }
     }
   | {
       type: "ADD_ROW_SUCCESS",
       payload: {
         tableId: string,
-        rowData: Array<string>,
-        insertAfterId: string
+        rowData: Array<string>
       }
     }
   | {
@@ -121,7 +119,6 @@ export type TablesAction =
       payload: {
         tableId: string,
         rowData: Array<string>,
-        insertAfterId: string,
         error: Error
       }
     }
@@ -129,16 +126,14 @@ export type TablesAction =
       type: "ADD_COL_REQUEST",
       payload: {
         tableId: string,
-        title: string,
-        insertAfterId: string
+        title: string
       }
     }
   | {
       type: "ADD_COL_SUCCESS",
       payload: {
         tableId: string,
-        title: string,
-        insertAfterId: string
+        title: string
       }
     }
   | {
@@ -146,7 +141,6 @@ export type TablesAction =
       payload: {
         tableId: string,
         title: string,
-        insertAfterId: string,
         error: Error
       }
     };

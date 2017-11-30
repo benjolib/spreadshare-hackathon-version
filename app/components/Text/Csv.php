@@ -2,6 +2,8 @@
 
 namespace DS\Component\Text;
 
+use League\Csv\Reader;
+
 /**
  * Spreadshare
  *
@@ -18,15 +20,25 @@ class Csv
     /**
      * Parse multiline csv text string to array
      *
-     * @param        $csvString
+     * @param string $csvString
      * @param string $delimiter
      * @param bool   $skipEmptyLines
      * @param bool   $trimFields
      *
-     * @return array
+     * @return \Iterator
      */
-    public function parseFromText($csvString, $delimiter = ",", $skipEmptyLines = true, $trimFields = true)
+    public function parseFromText(string $csvString, string $delimiter = ",", $skipEmptyLines = true, $trimFields = false)
     {
+        if (!ini_get("auto_detect_line_endings"))
+        {
+            ini_set("auto_detect_line_endings", '1');
+        }
+        
+        //$reader = Reader::createFromString($csvString);
+        //$reader->setDelimiter($delimiter);
+        
+        //return $reader->getRecords();
+        
         $enc   = preg_replace('/(?<!")""/', '!!Q!!', $csvString);
         $enc   = preg_replace_callback(
             '/"(.*?)"/s',
