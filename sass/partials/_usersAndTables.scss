@@ -2,119 +2,133 @@
   width: 100%;
   @include rem(margin-top, 50);
 
+  // content
   .container__content {
-    position: relative;
+    // users
+    &--users {
+      position: relative;
 
-    & > p {
-      position: absolute;
-      top: -30px;
-      left: 0;
-      color: $text-color-alternate;
-      font-weight: 500;
-      text-transform: uppercase;
-      @include rem(font-size, 14);
-    }
+      & > p {
+        position: absolute;
+        top: -30px;
+        left: 0;
+        color: $text-color-alternate;
+        font-weight: 500;
+        text-transform: uppercase;
+        @include rem(font-size, 14);
+      }
 
-    @include desktop {
-      width: 72.5%;
-    }
+      @include desktop {
+        width: 72.5%;
+      }
 
-    .tableUsers {
-      display: flex;
-      flex-wrap: wrap;
-      width: 100%;
-      align-items: flex-start;
-      justify-content: center;
-      @include rem(margin-top, 16);
-      @include rem2(padding, 0, 16);
-
-      &__item {
+      .tableUsers {
         display: flex;
-        align-items: center;
-        flex-direction: column;
-        @include rem(margin-bottom, 16);
-        margin-right: 10px;
+        flex-wrap: wrap;
+        width: 100%;
+        align-items: flex-start;
+        justify-content: center;
+        @include rem(margin-top, 16);
+        @include rem2(padding, 0, 16);
 
-        @include desktop {
-          flex-direction: row;
-          justify-content: space-between;
-        }
-
-        &__avatar {
-          @include desktop {
-            @include rem(margin-right, 8);
-          }
-
-          img {
-            border-radius: 4px;
-            @include rem(width, 50);
-            @include rem(height, 50);
-          }
-        }
-
-        &__info {
+        &__item {
           display: flex;
-          flex-direction: column;
           align-items: center;
+          flex-direction: column;
+          @include rem(margin-bottom, 16);
+          margin-right: 10px;
 
           @include desktop {
-            align-items: flex-start;
+            flex-direction: row;
+            justify-content: space-between;
           }
 
-          &__title {
-            display: flex;
+          &__avatar {
+            @include desktop {
+              @include rem(margin-right, 8);
+            }
 
-            h5 {
-              color: $text-color;
-              font-weight: 600;
-              @include rem(font-size, 14);
+            img {
+              border-radius: 4px;
+              @include rem(width, 50);
+              @include rem(height, 50);
             }
           }
-          &__subtitle {
+
+          &__info {
             display: flex;
-            justify-content: space-between;
-            text-align: center;
+            flex-direction: column;
+            align-items: center;
 
             @include desktop {
-              text-align: left;
+              align-items: flex-start;
             }
 
-            p {
-              color: $text-color-alternate;
-              font-weight: 400;
-              white-space: nowrap;
-              text-overflow: ellipsis;
-              overflow: hidden;
-              @include rem(width, 140);
-              @include rem(font-size, 12);
+            &__title {
+              display: flex;
+
+              h5 {
+                color: $text-color;
+                font-weight: 600;
+                @include rem(font-size, 14);
+              }
+            }
+            &__subtitle {
+              display: flex;
+              justify-content: space-between;
+              text-align: center;
+
+              @include desktop {
+                text-align: left;
+              }
+
+              p {
+                color: $text-color-alternate;
+                font-weight: 400;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                @include rem(width, 140);
+                @include rem(font-size, 12);
+              }
             }
           }
-        }
 
-        &__follow {
-          display: flex;
-          justify-content: flex-end;
+          &__follow {
+            display: flex;
+            justify-content: flex-end;
 
-          button {
-            background: $upvote-background-color;
-            color: $text-color;
-            border: none;
-            border-radius: 4px;
-            outline: none;
-            font-weight: 600;
-            @include rem(font-size, 14);
-            @include rem2(padding, 9, 18);
+            button {
+              background: $upvote-background-color;
+              color: $text-color;
+              border: none;
+              border-radius: 4px;
+              outline: none;
+              font-weight: 600;
+              @include rem(font-size, 14);
+              @include rem2(padding, 9, 18);
 
-            &:hover {
-              cursor: pointer;
-              background: darken($upvote-background-color, 6%);
+              &:hover {
+                cursor: pointer;
+                background: darken($upvote-background-color, 6%);
+              }
             }
           }
         }
       }
     }
+
+    // tables
+    &--tables {
+      background: transparent;
+      display: flex;
+      flex-direction: column;
+      width: 72.5%;
+      padding: 0;
+    }
   }
 
+  // asides
   aside {
     position: relative;
     @include rem(margin-top, 60);
@@ -137,6 +151,7 @@
   }
 }
 
+// others
 .tableUsers__item {
   display: flex;
   margin: 10px 0 10px 0;
