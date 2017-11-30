@@ -1,5 +1,7 @@
 {% extends 'layouts/main.volt' %}
 
+{% block title %}SpreadShare - {{ profile.name }} - {{ profile.handle }} - {{ profile.location }}{% endblock %}
+
 {% block header %}
 {% endblock %}
 

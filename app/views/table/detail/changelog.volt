@@ -1,5 +1,7 @@
 {% extends 'layouts/main.volt' %}
 
+{% block title %}SpreadShare - Changelog for table {{ table['title'] }}{% endblock %}
+
 {% block content %}
 
 {{ partial('table/detail/header') }}

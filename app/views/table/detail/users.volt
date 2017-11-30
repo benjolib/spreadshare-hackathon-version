@@ -1,5 +1,7 @@
 {% extends 'layouts/main.volt' %}
 
+{% block title %}SpreadShare - Users of {{ table['title'] }}{% endblock %}
+
 {% block content %}
 {{ partial('table/detail/header') }}
 
