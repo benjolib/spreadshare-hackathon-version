@@ -64,7 +64,8 @@ export type TablesAction =
       payload: {
         tableId: string,
         cellId: string,
-        cell: Cell
+        cell: Cell,
+        permission: string
       }
     }
   | {
@@ -72,7 +73,8 @@ export type TablesAction =
       payload: {
         tableId: string,
         cellId: string,
-        cell: Cell
+        cell: Cell,
+        permission: string
       }
     }
   | {
@@ -81,6 +83,7 @@ export type TablesAction =
         tableId: string,
         cellId: string,
         cell: Cell,
+        permission: string,
         error: Error
       }
     }
