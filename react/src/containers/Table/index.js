@@ -591,9 +591,7 @@ class Table extends Component<Props, State> {
               }
               const cell = this.hot.hotInstance.getDataAtCell(row, col);
               if (cell.link) {
-                setTimeout(() => {
-                  window.open(cell.link, "_blank");
-                }, 1000);
+                window.open(cell.link, "_blank");
               }
             }}
             outsideClickDeselects={false}
