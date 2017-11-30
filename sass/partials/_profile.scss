@@ -335,8 +335,8 @@
       &__cards {
         display: flex;
         flex-direction: column;
-        background-color: #fff;
-        padding: 20px 30px 20px 30px;
+        // background-color: #fff;
+        padding: 0px 30px 20px 30px;
         border-radius: 8px;
 
         &__item {
@@ -483,7 +483,8 @@
 
         a {
           text-decoration: none;
-          color: $text-color;
+          // color: $text-color;
+          color: #B1BBC7 !important;
 
           &:hover {
             color: $text-color;
@@ -492,8 +493,9 @@
 
           div {
             text-transform: uppercase;
-            font-weight: 300;
+            font-weight: 400;
             border-radius: 4px;
+            @include rem(font-size, 14);
             @include rem2(padding, 10, 15);
 
             &:hover {
@@ -513,4 +515,8 @@
       }
     }
   }
+}
+
+.sign-box-selected {
+  color: #6B7D94;
 }

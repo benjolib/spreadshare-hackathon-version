@@ -77,11 +77,9 @@
     if (window.innerWidth < 1024) {
       referenceElement = $('.navbar__controls__add--menu');
       refElem = $('.navbar__controls__add--notification');
-      popper.removeClass('left160');
     } else {
       referenceElement = $('.navbar__controls__notification');
-      refElem = $('.navbar__search__filter');
-      popper.addClass('left160');
+      refElem = $('.navbar__controls__add--notification');
     }
 
     if (onPopper.length > 0 && popper.length > 0) {
@@ -101,8 +99,7 @@
           popper.removeClass('left160');
         } else {
           referenceElement = $('.navbar__controls__notification');
-          refElem = $('.navbar__search__filter');
-          popper.addClass('left160');
+          refElem = $('.navbar__controls__add--notification');
         }
         new Popper(referenceElement, onPopper, {
           placement: 'bottom'
@@ -156,7 +153,20 @@
       'subscribe': '/api/v1/subscribe/{id}',
       'flag': '/table/{id}/flag/{flag}',
       'follow-user': '/api/v1/follow-user/{id}',
+      'comment-upvote': '/api/v1/vote-comment/{id}',
     };
+
+    $('a.comment-upvote').api({
+      method: 'POST',
+      onSuccess: function (response, button) {
+        var span = button.find('span');
+        if (response.data.voted) {
+          span.text(parseInt(parseInt(span.text()) + 1));
+        } else {
+          span.text(parseInt(parseInt(span.text()) - 1));
+        }
+      },
+    });
 
     $('div.upvote, button.upvote').api({
       method: 'POST',
@@ -164,6 +174,7 @@
         var span = button.find('span');
         if (response.data.voted) {
           button.addClass('selected');
+          button.find('.chevronUp').find('svg').find('.fillColor').addClass('white');
           span.text(parseInt(parseInt(span.text()) + 1));
         } else {
           button.removeClass('selected');

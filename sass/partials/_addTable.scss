@@ -70,6 +70,8 @@
       }
 
       &__options {
+        position: relative;
+        width: 100%;
         display: flex;
         flex-direction: column;
         @include rem2(padding, 25, 30);
@@ -199,5 +201,5 @@
 
   }
 
-  
+
 }

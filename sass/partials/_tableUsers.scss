@@ -1,5 +1,6 @@
 .container--tableUsers {
   width: 100%;
+  @include rem(margin-top, 50);
 
   .container__content {
     position: relative;
@@ -16,7 +17,6 @@
 
     @include desktop {
       width: 72.5%;
-      margin-bottom: 0;
     }
 
     .tableUsers {
@@ -115,6 +115,7 @@
 
   aside {
     position: relative;
+    @include rem(margin-top, 60);
 
     & > p {
       position: absolute;
@@ -129,6 +130,7 @@
     @include desktop {
       width: 22.5%;
       margin-bottom: 0;
+      margin-top: 0;
     }
   }
 }
@@ -150,9 +152,9 @@
 .follow-user  {
   background: #f2f2f8;
   padding: 10px 20px;
-  border: none; 
+  border: none;
   border-radius: 5px;
-  font-weight: 600; 
+  font-weight: 600;
 }
 .follow-user:hover  {
   cursor: pointer;

@@ -1,6 +1,7 @@
 // @flow
 import React from "react";
 import styled from "styled-components";
+import UpvoteIcon from "./icons/UpvoteIcon";
 
 const StyledDiv = styled.div`
   text-align: center;
@@ -24,7 +25,8 @@ type Props = {
   rowId: string,
   votes: string,
   upvoted: boolean,
-  voteRow: (rowId: string) => void
+  voteRow: (rowId: string) => void,
+  permission: string
 };
 
 class VotesCell extends React.Component<Props> {
@@ -33,9 +35,14 @@ class VotesCell extends React.Component<Props> {
     return (
       <StyledDiv
         upvoted={this.props.upvoted}
-        onClick={() => this.props.voteRow(this.props.rowId)}
+        onClick={() => {
+          if (this.props.permission === "0") {
+            return;
+          }
+          this.props.voteRow(this.props.rowId);
+        }}
       >
-        {this.props.upvoted && "^"}
+        <UpvoteIcon />
         {this.props.votes}
       </StyledDiv>
     );

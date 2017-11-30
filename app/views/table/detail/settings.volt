@@ -6,8 +6,8 @@
 
 {{ flash.output() }}
 
-<div class="tableSettings">
-  <div class="addTable__content__main">
+<div class="container container--tableDetails">
+  <div class="container__content">
     <div class="addTable__content__main__options">
       <form method="POST">
         {% if page == "related" %}
@@ -21,15 +21,17 @@
     </div>
   </div>
 
-  <aside class="addTable__content__aside">
-    <div class="addTable__content__aside__box">
-      <a href="#">
-        <div class="sign-box-selected">Table Details</div>
-      </a>
-      <a href="#">
-        <div>Related Table</div>
-      </a>
-    </div>
+  <aside class="aside aside--tableDetails">
+    <a href="#">
+      <div class="aside__item item-selected"><p>Table Details</p></div>
+    </a>
+    <a href="#">
+      <div class="aside__item"><p>Related Table</p></div>
+    </a>
   </aside>
 </div>
+{% endblock %}
+
+{% block scripts %}
+{{ partial('table/detail/flag') }}
 {% endblock %}

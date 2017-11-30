@@ -1,6 +1,6 @@
 .container--tableFeed {
   width: 100%;
-  @include rem(margin-top, 66);
+  @include rem(margin-top, 25);
 
   .container__content {
     flex-direction: column;
@@ -18,21 +18,29 @@ aside.aside {
   }
 }
 
+.dropdown .tableFeed {
+  &__item {
+    &:first-child {
+      margin-top: 10px;
+    }
+  }
+}
+
 .tableFeed {
   position: relative;
 
   &__title {
     position: absolute;
-    top: 40px;
-    left: 50px;
-    color: #B1BBC7;
+    top: 50px;
+    left: 70px;
+    color: #b1bbc7;
     text-transform: uppercase;
     font-weight: 400;
     @include rem(font-size, 13);
 
     @include desktop {
       font-weight: 500;
-      left: 100px;
+      left: 120px;
     }
   }
 
@@ -40,6 +48,10 @@ aside.aside {
     display: flex;
     color: $text-color-alternate;
     @include rem(margin-bottom, 16);
+
+    &:first-child {
+      margin-top: 50px;
+    }
 
     &:last-child {
       margin-bottom: 0;

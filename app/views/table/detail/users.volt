@@ -72,3 +72,7 @@
   </aside>
 </div>
 {% endblock %}
+
+{% block scripts %}
+{{ partial('table/detail/flag') }}
+{% endblock %}

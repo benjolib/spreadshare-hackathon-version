@@ -1,0 +1,162 @@
+.container--usersAndTables {
+  width: 100%;
+  @include rem(margin-top, 50);
+
+  // content
+  .container__content {
+    // users
+    &--users {
+      position: relative;
+
+      & > p {
+        position: absolute;
+        top: -30px;
+        left: 0;
+        color: $text-color-alternate;
+        font-weight: 500;
+        text-transform: uppercase;
+        @include rem(font-size, 14);
+      }
+
+      @include desktop {
+        width: 75%;
+      }
+
+      .tableUsers {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        align-items: flex-start;
+        justify-content: center;
+        @include rem(margin-top, 16);
+        @include rem2(padding, 0, 16);
+
+        &__item {
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          @include rem(margin-bottom, 16);
+          margin-right: 10px;
+
+          @include desktop {
+            flex-direction: row;
+            justify-content: space-between;
+          }
+
+          &__avatar {
+            @include desktop {
+              @include rem(margin-right, 8);
+            }
+
+            img {
+              border-radius: 4px;
+              @include rem(width, 50);
+              @include rem(height, 50);
+            }
+          }
+
+          &__info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            @include desktop {
+              align-items: flex-start;
+            }
+
+            &__title {
+              display: flex;
+
+              h5 {
+                color: $text-color;
+                font-weight: 600;
+                @include rem(font-size, 14);
+              }
+            }
+            &__subtitle {
+              display: flex;
+              justify-content: space-between;
+              text-align: center;
+
+              @include desktop {
+                text-align: left;
+              }
+
+              p {
+                color: $text-color-alternate;
+                font-weight: 400;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                @include rem(width, 140);
+                @include rem(font-size, 12);
+              }
+            }
+          }
+
+          &__follow {
+            display: flex;
+            justify-content: flex-end;
+
+            button {
+              background: $upvote-background-color;
+              color: $text-color;
+              border: none;
+              border-radius: 4px;
+              outline: none;
+              font-weight: 600;
+              @include rem(font-size, 14);
+              @include rem2(padding, 9, 18);
+
+              &:hover {
+                cursor: pointer;
+                background: darken($upvote-background-color, 6%);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // tables
+    &--tables {
+      background: transparent;
+      display: flex;
+      flex-direction: column;
+      width: 75%;
+      padding: 0;
+
+      .tables__content__main__cards__item {
+        &__info {
+          &__title {
+            p {
+              color: $card-tokens-background-color;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // asides
+  aside {
+    position: relative;
+    @include rem(margin-top, 60);
+
+    & > p {
+      position: absolute;
+      top: -30px;
+      left: 0;
+      color: $text-color-alternate;
+      font-weight: 500;
+      text-transform: uppercase;
+      @include rem(font-size, 14);
+    }
+
+    @include desktop {
+      width: 22.5%;
+      margin-bottom: 0;
+      margin-top: 0;
+    }
+  }
+}

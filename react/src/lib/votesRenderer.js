@@ -17,6 +17,7 @@ const votesRenderer = data => (instance, td, row, col, prop, value) => {
         votes={value.votes}
         upvoted={value.upvoted}
         voteRow={data.voteRow}
+        permission={data.permission}
       />
     )
   });

@@ -140,12 +140,17 @@
       }
 
       &__buttons {
+        position: absolute;
+        bottom: -40px;
+        left: 0;
+        width: 100%;
         display: flex;
         justify-content: flex-end;
         align-items: center;
         background: #F8F8FB;
         border-bottom-left-radius: 6px;
         border-bottom-right-radius: 6px;
+        margin-left: 0;
         @include rem(margin-top, 5);
         @include rem(margin-bottom, -25);
         @include rem(padding, 16);

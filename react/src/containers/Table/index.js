@@ -156,12 +156,24 @@ class Table extends Component<Props, State> {
   };
 
   addRow = () => {
-    this.props.addRow(
-      this.props.id,
-      this.state.addRowDataGetters.map(x => x()),
-      this.props.data.table.rows[this.props.data.table.rows.length - 1].id
-    );
-    this.hideAdd();
+    this.props
+      .addRow(
+        this.props.id,
+        this.state.addRowDataGetters.map(x => x()),
+        this.props.permission
+      )
+      .then(() => {
+        this.hideAdd();
+        if (this.props.permission === "1") {
+          swal(
+            "Success!",
+            "The request to add this row is awaiting approval.",
+            "success"
+          );
+        } else if (this.props.permission === "2") {
+          swal("Success!", "The row has been added.", "success");
+        }
+      });
   };
 
   setupDataGetter = (col: number, dataGetter: Function) => {
@@ -190,47 +202,88 @@ class Table extends Component<Props, State> {
       }
 
       if (key === "my_edit") {
-        // TODO: prompt is temporary until i make proper dropdown
-        const newValue = prompt("Please type the new value for the cell");
+        swal({
+          title: "Editing Cell",
+          input: "text",
+          text: "Please type the new value for the cell",
+          inputValue: cell.content,
+          showCancelButton: true,
+          showLoaderOnConfirm: true,
+          preConfirm: newValue => {
+            if (!typeof newValue === "string") {
+              return;
+            }
 
-        this.props.editCell(this.props.id, cell.rowId, cell.id, {
-          ...cell,
-          content: newValue
-        });
+            return this.props.editCell(
+              this.props.id,
+              cell.rowId,
+              cell.id,
+              {
+                ...cell,
+                content: newValue
+              },
+              this.props.permission
+            );
+          }
+        })
+          .then(result => {
+            if (!result.value) {
+              return;
+            }
+            if (this.props.permission === "1") {
+              swal(
+                "Success!",
+                "The request to edit this cell is awaiting approval.",
+                "success"
+              );
+            } else if (this.props.permission === "2") {
+              swal("Success!", "The cell has been edited.", "success");
+            }
+          })
+          .catch(() => {
+            swal("Oops", "Something has gone wrong!", "error");
+          });
       } else if (key === "my_delete") {
         swal({
           title: "Are you sure?",
+          type: "warning",
           text: "Once deleted, you will not be able to recover this cell!",
           showLoaderOnConfirm: true,
+          showCancelButton: true,
           preConfirm: confirmed => {
             if (!confirmed) {
               return;
             }
 
-            return new Promise(resolve => {
-              this.props.editCell(
-                this.props.id,
-                cell.rowId,
-                cell.id,
-                {
-                  ...cell,
-                  content: ""
-                },
-                err => {
-                  if (err) {
-                    swal.showValidationError("Couldn't delete cell");
-                  }
-
-                  resolve();
-                }
+            return this.props.editCell(
+              this.props.id,
+              cell.rowId,
+              cell.id,
+              {
+                ...cell,
+                content: ""
+              },
+              this.props.permission
+            );
+          }
+        })
+          .then(result => {
+            if (!result.value) {
+              return;
+            }
+            if (this.props.permission === "1") {
+              swal(
+                "Success!",
+                "The request to delete this cell is awaiting approval.",
+                "success"
               );
-            });
-          }
-        }).then(result => {
-          if (result.value) {
-            swal("Deleted!", "Your file has been deleted.", "success");
-          }
-        });
+            } else if (this.props.permission === "2") {
+              swal("Success!", "The cell has been deleted.", "success");
+            }
+          })
+          .catch(() => {
+            swal("Oops", "Something has gone wrong!", "error");
+          });
       }
     });
   };
@@ -260,16 +313,18 @@ class Table extends Component<Props, State> {
   hotDataSortings = (colHeaders, sortings: Sortings) => (rows: RowsWithVotes) =>
     __.orderBy(
       rows,
-      sortings.map(sorting => row => {
-        const i = __.findIndex(colHeaders, x => x === sorting.by);
-        const cell = row.content[i];
-        if (cell.content) {
-          return cell.content;
-        } else if (cell.votes) {
-          return cell.votes;
-        }
-        return "";
-      }),
+      [
+        ...sortings.map(sorting => row => {
+          const i = __.findIndex(colHeaders, x => x === sorting.by);
+          const cell = row.content[i];
+          if (cell.content) {
+            return cell.content;
+          } else if (cell.votes) {
+            return cell.votes;
+          }
+          return "";
+        })
+      ],
       sortings.map(
         sorting => (sorting.direction === "ascending" ? "asc" : "desc")
       )
@@ -303,12 +358,12 @@ class Table extends Component<Props, State> {
       return <TableError />;
     }
 
-    console.log(this.props.data);
-
     const colHeaders = [
       "Votes",
       ...this.props.data.table.columns.map(col => col.title)
     ];
+
+    console.log(this.props.data);
 
     const hotData = _.pipe(
       this.hotDataAddVotes(this.props.data.table.votes),
@@ -319,6 +374,8 @@ class Table extends Component<Props, State> {
       this.hotDataFlattenRows
     );
 
+    console.log(hotData(this.props.data.table.rows));
+
     console.log(colHeaders);
 
     return (
@@ -326,7 +383,9 @@ class Table extends Component<Props, State> {
         <TableHeader>
           <TableButton icon="sort" onClick={this.toggleSortings} />
           <TableButton icon="filter" onClick={this.toggleFilters} />
-          <TableButton icon="add" onClick={this.showAdd} />
+          {this.props.permission !== "0" && (
+            <TableButton icon="add" onClick={this.showAdd} />
+          )}
           <TableSearch onChange={this.updateSearchValue} />
           <TableButton icon="dots" onClick={this.toggleDropdown} />
         </TableHeader>
@@ -349,7 +408,6 @@ class Table extends Component<Props, State> {
             hide={!this.state.showDropdown}
             showAdd={this.showAdd}
             permission={this.props.permission}
-            columns={this.props.data.table.columns}
             addCol={this.props.addCol}
           />
         </div>
@@ -386,7 +444,8 @@ class Table extends Component<Props, State> {
                 return {
                   readOnly: true,
                   renderer: votesRenderer({
-                    voteRow: rowId => this.props.voteRow(this.props.id, rowId)
+                    voteRow: rowId => this.props.voteRow(this.props.id, rowId),
+                    permission: this.props.permission
                   })
                 };
               }
@@ -425,15 +484,6 @@ class Table extends Component<Props, State> {
                   name: "Copy"
                 }
               }
-            }}
-            // high perm stuff
-            afterCreateCol={(...args) => {
-              console.log(...args);
-            }}
-            onAfterChange={(changes, source, ...args) => {
-              console.log(changes);
-              console.log(source);
-              console.log(...args);
             }}
           />
         </TableMain>

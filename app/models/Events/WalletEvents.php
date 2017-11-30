@@ -2,12 +2,13 @@
 
 namespace DS\Model\Events;
 
+use DS\Exceptions\ModelFieldNotNullException;
 use DS\Model\Abstracts\AbstractWallet;
 
 /**
  * Events for model Wallet
  *
- * @see https://docs.phalconphp.com/ar/3.2/db-models-events
+ * @see       https://docs.phalconphp.com/ar/3.2/db-models-events
  *
  * @author    Dennis Stücken
  * @license   proprietary
@@ -28,6 +29,11 @@ abstract class WalletEvents
     {
         parent::beforeValidationOnCreate();
         
+        if (!$this->getUserId())
+        {
+            throw new ModelFieldNotNullException($this, "There was no user id set for the wallet.");
+        }
+        
         return true;
     }
     
@@ -37,6 +43,11 @@ abstract class WalletEvents
     public function beforeValidationOnUpdate()
     {
         parent::beforeValidationOnUpdate();
+        
+        if (!$this->getUserId())
+        {
+            throw new ModelFieldNotNullException($this, "There was no user id set for the wallet.");
+        }
         
         return true;
     }
