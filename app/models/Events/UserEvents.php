@@ -95,7 +95,11 @@ abstract class UserEvents
             );
         }
         
-        if ($this->getWebsite() && !filter_var($this->getWebsite(), FILTER_VALIDATE_URL))
+        $urlPattern = "/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i";
+        if ($this->getWebsite() && !preg_match(
+                $urlPattern,
+                $this->getWebsite()
+            ))
         {
             throw new UserValidationException(
                 'Please provide a valid website in the following format: [http://]www.example.com',

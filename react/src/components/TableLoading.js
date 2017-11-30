@@ -1,9 +1,6 @@
 // @flow
 import React from "react";
-import styled from "styled-components";
 
-const StyledDiv = styled.div``;
-
-const TableLoading = () => <StyledDiv>Loading...</StyledDiv>;
+const TableLoading = () => <div className="loading" style={{ height: 100 }} />;
 
 export default TableLoading;

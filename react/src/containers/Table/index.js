@@ -166,12 +166,12 @@ class Table extends Component<Props, State> {
 
   hideAdd = () => {
     this.setState({
-      showAdd: false,
-      addRowDataGetters: []
+      showAdd: false
     });
   };
 
   addRow = () => {
+    console.log(this.state.addRowDataGetters.map(x => x()));
     this.props
       .addRow(
         this.props.id,
@@ -214,14 +214,7 @@ class Table extends Component<Props, State> {
       //   return;
       // }
 
-      if (key === "my_visit_url") {
-        if (!cell.link) {
-          swal("Oops", "This cell does not have a URL set", "error");
-          return;
-        }
-
-        window.open(cell.link, "_blank");
-      } else if (key === "my_add_url") {
+      if (key === "my_add_url") {
         swal({
           title: "Adding URL",
           input: "text",
@@ -363,7 +356,8 @@ class Table extends Component<Props, State> {
               cell.id,
               {
                 ...cell,
-                content: ""
+                content: "",
+                link: ""
               },
               this.props.permission
             );
@@ -497,7 +491,7 @@ class Table extends Component<Props, State> {
           )}
           <TableButton icon="sort" onClick={this.toggleSortings} />
           {/* <TableButton icon="filter" onClick={this.toggleFilters} /> */}
-          {this.props.permission !== "0" && (
+          {this.props.permission === "2" && (
             <TableButton icon="add" onClick={this.showAdd} />
           )}
           <TableSearch onChange={this.updateSearchValue} />
@@ -584,12 +578,20 @@ class Table extends Component<Props, State> {
                 return;
               }
               const cell = this.hot.hotInstance.getDataAtCell(row, col);
-              this.setState({
-                selectedCell: cell
-              });
+              if (cell.link) {
+                setTimeout(() => {
+                  this.setState({
+                    selectedCell: cell
+                  });
+                }, 1000);
+              } else {
+                this.setState({
+                  selectedCell: cell
+                });
+              }
             }}
             outsideClickDeselects={false}
-            contextMenuCopyPaste
+            // contextMenuCopyPaste
             contextMenu={{
               callback: this.contextMenuCallback,
               items: {
@@ -599,9 +601,6 @@ class Table extends Component<Props, State> {
                       my_edit: {
                         name: "Edit Cell"
                       },
-                      my_edit_col: {
-                        name: "Edit Column"
-                      },
                       my_delete: {
                         name: "Clear Cell"
                       },
@@ -610,12 +609,13 @@ class Table extends Component<Props, State> {
                       }
                     }
                   : {}),
-                my_visit_url: {
-                  name: "Follow Link"
-                },
-                my_copy: {
-                  name: "Copy"
-                }
+                ...(this.props.permission === "2"
+                  ? {
+                      my_edit_col: {
+                        name: "Edit Column"
+                      }
+                    }
+                  : {})
               }
             }}
           />

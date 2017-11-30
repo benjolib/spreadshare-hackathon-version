@@ -11,6 +11,7 @@
     height: 12px;
   }
 }
+
 .flag-icon {
   background: url('/assets/icons/flag.svg');
   background-position: center;
@@ -24,8 +25,13 @@
     height: 12px;
   }
 }
+
+.table__header__menu__item.selected .table-icon {
+  background-image: url('/assets/icons/table.svg');
+}
+
 .table-icon {
-  background: url('/assets/icons/table.svg');
+  background-image: url('/assets/icons/table-light.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -37,8 +43,13 @@
     height: 12px;
   }
 }
+
+.table__header__menu__item.selected .info-icon {
+  background-image: url('/assets/icons/info.svg');
+}
+
 .info-icon {
-  background: url('/assets/icons/info.svg');
+  background-image: url('/assets/icons/info-light.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -50,8 +61,13 @@
     height: 12px;
   }
 }
+
+.table__header__menu__item.selected .feed-icon {
+  background-image: url('/assets/icons/feed.svg');
+}
+
 .feed-icon {
-  background: url('/assets/icons/feed.svg');
+  background-image: url('/assets/icons/feed-light.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -63,8 +79,49 @@
     height: 12px;
   }
 }
+
+.table__header__menu__item.selected .people-icon {
+  background-image: url('/assets/icons/people.svg');
+}
+
 .people-icon {
-  background: url('/assets/icons/people.svg');
+  background-image: url('/assets/icons/people-light.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 16px;
+  height: 16px;
+
+  &.small {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+.table__header__menu__item.selected .settings-icon {
+  background-image: url('/assets/icons/settings.svg');
+}
+
+.settings-icon {
+  background-image: url('/assets/icons/settings-light.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 16px;
+  height: 16px;
+
+  &.small {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+.table__header__menu__item.selected .changelog-icon {
+  background-image: url('/assets/icons/changelog.svg');
+}
+
+.changelog-icon {
+  background-image: url('/assets/icons/changelog-light.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;

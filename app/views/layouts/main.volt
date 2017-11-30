@@ -21,10 +21,10 @@
 
   {# content #}
   {% block content %}{% endblock %}
-
-  {# footer #}
-  {{ partial('layouts/footer') }}
 </section>
+
+{# footer #}
+{{ partial('layouts/footer') }}
 
 <div class="white-overlay"></div>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -33,7 +33,7 @@
 
 {{ partial('layouts/scripts') }}
 
-<script type="text/javascript" src="/js/react/main.9cb839a5.js"></script>
+<script type="text/javascript" src="/js/react/main.e0a70259.js"></script>
 {% block scripts %}{% endblock %}
 </body>
 </html>

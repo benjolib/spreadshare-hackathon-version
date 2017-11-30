@@ -5,6 +5,7 @@ namespace DS\Model;
 use DS\Constants\Paging;
 use DS\Model\DataSource\ChangeRequestStatus;
 use DS\Model\Events\ChangeRequestsEvents;
+use DS\Model\Helper\ChangeRequestsFilter;
 use Phalcon\Db;
 
 /**
@@ -24,13 +25,15 @@ class ChangeRequests
     extends ChangeRequestsEvents
 {
     /**
-     * @param int $tableId
-     * @param int $limit
-     * @param int $page
+     * @param int                  $tableId
+     * @param ChangeRequestsFilter $filter
+     * @param int                  $status
+     * @param int                  $limit
+     * @param int                  $page
      *
      * @return array
      */
-    public function findChangeRequests(int $tableId, int $status = ChangeRequestStatus::All, int $limit = 75, int $page = 0): array
+    public function findChangeRequests(int $tableId, ChangeRequestsFilter $filter, int $status = ChangeRequestStatus::All, int $limit = 75, int $page = 0): array
     {
         /*
         $query = self::query()
@@ -63,14 +66,27 @@ class ChangeRequests
         $statusCheck = '';
         if ($status !== ChangeRequestStatus::All)
         {
-            $statusCheck      = 'AND status = :status';
+            $statusCheck      = 'AND `changeRequests`.`status` = :status';
             $params['status'] = $status;
         }
         
+        if ($filter->getShowOnly() === ChangeRequestsFilter::ONLY_EDITS)
+        {
+            $showOnlyFilter = 'AND `changeRequests`.`to` != ""';
+        }
+        elseif ($filter->getShowOnly() === ChangeRequestsFilter::ONLY_DELETES)
+        {
+            $showOnlyFilter = 'AND `changeRequests`.`to` = ""';
+        }
+        elseif ($filter->getShowOnly() === ChangeRequestsFilter::ONLY_DELETES)
+        {
+            $showOnlyFilter = 'AND `changeRequests`.`to` = ""';
+        }
+        
         $query = $this->readQuery(
-            "SELECT `changeRequests`.`id` AS `id`, `changeRequests`.`to` AS `to`, `changeRequests`.`from` AS `from`, `changeRequests`.`comment` AS `comment`, `changeRequests`.`createdAt` AS `createdAt`, `changeRequests`.`status` AS `status`, `user`.`handle` AS `userHandle`, `user`.`name` AS `user` " .
+            "SELECT `changeRequests`.`id` AS `id`, `changeRequests`.`to` AS `to`, `changeRequests`.`from` AS `from`, `changeRequests`.`comment` AS `comment`, `changeRequests`.`createdAt` AS `createdAt`, `changeRequests`.`status` AS `status`, `user`.`handle` AS `userHandle`, `user`.`image` AS `userImage`, `user`.`name` AS `user` " .
             "FROM `spreadshare`.`changeRequests`  INNER JOIN `spreadshare`.`user` ON `changeRequests`.`userId` = `user`.`id` INNER JOIN `spreadshare`.`tableCells` ON `changeRequests`.`cellId` = `tableCells`.`id` INNER JOIN `spreadshare`.`tableRows` ON `tableCells`.`rowId` = `tableRows`.`id` " .
-            "WHERE `tableRows`.`tableId` = :tableId $statusCheck ORDER BY `changeRequests`.`id` DESC LIMIT :limit OFFSET :offset",
+            "WHERE `tableRows`.`tableId` = :tableId $statusCheck $showOnlyFilter ORDER BY `changeRequests`.`id` DESC LIMIT :limit OFFSET :offset",
             $params,
             [
                 'limit' => 1,

@@ -16,6 +16,7 @@ injectGlobal`
     font-size: 1rem;
     line-height: 1.5;
     background: #f2f2f8;
+    overflow-x: hidden;
   }
 
   button, input, select {

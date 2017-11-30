@@ -48,7 +48,7 @@
     </div>
   </div>
   <div class="table__header__menu">
-    <a href="/table/{{table['id']}}" class="table__header__menu__item{% if selectedPage == 'table' %} selected{% endif %}">
+    <a href="/table/{{table['id']}}" class="table__header__menu__item {% if selectedPage == 'table' %} selected{% endif %}">
       <div class="table-icon"></div>
       Table
     </a>
@@ -69,18 +69,18 @@
       Stats
     </a>
     -->
-    <a href="/table/{{table['id']}}/changelog" class="table__header__menu__item{% if selectedPage == 'changelog' %} selected{% endif %}">
-      <div class="feed-icon"></div>
+    <a href="/table/{{table['id']}}/changelog/new" class="table__header__menu__item{% if selectedPage == 'changelog' %} selected{% endif %}">
+      <div class="changelog-icon"></div>
       changelog
     </a>
     {%endif%}
     <a href="/table/{{table['id']}}/users/subscribers" class="table__header__menu__item{% if selectedPage == 'users' %} selected{% endif %}">
-      <div class="feed-icon"></div>
+      <div class="people-icon"></div>
       Users
     </a>
     {% if auth.getUserId() == table['ownerUserId'] %}
     <a href="/table/{{table['id']}}/settings/details" class="table__header__menu__item{% if selectedPage == 'settings' %} selected{% endif %}">
-      <div class="people-icon"></div>
+      <div class="settings-icon"></div>
       Settings
     </a>
     {%endif%}

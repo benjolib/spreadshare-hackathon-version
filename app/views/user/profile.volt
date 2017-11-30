@@ -40,7 +40,7 @@
             <div class="profile__hero__info__mobile__social">
               <ul>
                 {% for connection in connections %}
-                <li><a href="{{ connection['link'] }}"><img src="/assets/icons/{{ connection['name'] }}.svg" /></a></li>
+                <li><a href="{{ connection['link'] }}"><img src="/assets/icons/social/{{ connection['name'] }}.svg" /></a></li>
                 {% endfor %}
               </ul>
             </div>
@@ -65,7 +65,7 @@
           <div class="profile__hero__info__social">
             <ul>
               {% for connection in connections %}
-              <li><a href="{{ connection['link'] }}"><img src="/assets/icons/{{ connection['name'] }}.svg" /></a></li>
+              <li><a href="{{ connection['link'] }}"><img src="/assets/icons/social/{{ connection['name'] }}.svg" /></a></li>
               {% endfor %}
             </ul>
           </div>

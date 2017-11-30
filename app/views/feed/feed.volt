@@ -7,7 +7,7 @@
 
 <div class="tableFeed">
 <div class="tableFeed__title">
-  <p>Recent activity</p>
+  <p>Your Notifications</p>
 </div>
 <div class="container container--tableFeed">
   <div class="container__content">

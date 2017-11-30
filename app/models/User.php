@@ -171,14 +171,17 @@ class User
      * @param        $authUid
      * @param        $profileImage
      * @param        $city
+     * @param        $website
      * @param string $provider
      *
      * @return User|\Phalcon\Mvc\Model\ResultInterface
      */
-    public static function addUserFromAuthService($name, $handle, $email, $description, $tagline, $authUid, $profileImage, $city, $provider = 'Facebook')
+    public static function addUserFromAuthService($name, $handle, $email, $description, $tagline, $authUid, $profileImage, $city, $website = '', $provider = 'Facebook')
     {
         $email = $email ? $email : "{$authUid}@" . strtolower($provider) . ".com";
         $user  = User::findFirst(" email='$email' OR authUid='" . $authUid . "' ");
+        
+        $urlPattern = "/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i";
         
         if (!$user)
         {
@@ -193,8 +196,14 @@ class User
                  ->setLocation($city)
                  ->setDescription($description)
                  ->setTagline($tagline)
-                 ->setLastLogin(time())
-                 ->create();
+                 ->setLastLogin(time());
+            
+            if ($website && preg_match($urlPattern, $website))
+            {
+                $user->setWebsite($website);
+            }
+            
+            $user->create();
         }
         else
         {
@@ -205,8 +214,14 @@ class User
                  ->setLastLogin(time())
                  ->setTagline($tagline)
                  ->setDescription($description)
-                 ->setLocation($city)
-                 ->save();
+                 ->setLocation($city);
+            
+            if ($website && preg_match($urlPattern, $website))
+            {
+                $user->setWebsite($website);
+            }
+            
+            $user->save();
         }
         
         return $user;

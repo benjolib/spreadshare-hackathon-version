@@ -194,6 +194,7 @@ class LoginController
                 $userProfile->identifier,
                 $userProfile->photoURL,
                 $userProfile->city ? $userProfile->city : $userProfile->region,
+                $userProfile->webSiteURL,
                 $provider
             );
             

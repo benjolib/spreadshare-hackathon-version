@@ -1,6 +1,7 @@
 {% extends 'layouts/main.volt' %}
 
 {% block header %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" />
 {% endblock %}
 
 {% block content %}
@@ -21,12 +22,12 @@
               <div class="layout__content__main__notifications__column">
                 <div class="layout__content__main__notifications__row">
                   <div class="layout__content__main__notifications__switch__buttons">
-                    <div class="layout__content__main__notifications__switch__buttons layout__content__main__notifications__switch__buttons--left active">
+                    <button class="layout__content__main__notifications__switch__buttons layout__content__main__notifications__switch__buttons--left YSwitch active" value="1">
                       Y
-                    </div>
-                    <div class="layout__content__main__notifications__switch__buttons layout__content__main__notifications__switch__buttons--right">
+                    </button>
+                    <button class="layout__content__main__notifications__switch__buttons layout__content__main__notifications__switch__buttons--right NSwitch" value="0">
                       N
-                    </div>
+                    </button>
                   </div>
                   <div class="layout__content__main__notifications__switch__info">
                     <p>Follower Digest</p>
@@ -39,12 +40,12 @@
               <div class="layout__content__main__notifications__column">
                 <div class="layout__content__main__notifications__row">
                   <div class="layout__content__main__notifications__switch__buttons">
-                    <div class="layout__content__main__notifications__switch__buttons layout__content__main__notifications__switch__buttons--left active">
+                    <button class="layout__content__main__notifications__switch__buttons layout__content__main__notifications__switch__buttons--left YSwitch active" value="1">
                       Y
-                    </div>
-                    <div class="layout__content__main__notifications__switch__buttons layout__content__main__notifications__switch__buttons--right">
+                    </button>
+                    <button class="layout__content__main__notifications__switch__buttons layout__content__main__notifications__switch__buttons--right NSwitch" value="0">
                       N
-                    </div>
+                    </button>
                   </div>
                   <div class="layout__content__main__notifications__switch__info">
                     <p>Topic Digest</p>
@@ -57,12 +58,12 @@
               <div class="layout__content__main__notifications__column">
                 <div class="layout__content__main__notifications__row">
                   <div class="layout__content__main__notifications__switch__buttons">
-                    <div class="layout__content__main__notifications__switch__buttons layout__content__main__notifications__switch__buttons--left active">
+                    <button class="layout__content__main__notifications__switch__buttons layout__content__main__notifications__switch__buttons--left YSwitch active" value="1">
                       Y
-                    </div>
-                    <div class="layout__content__main__notifications__switch__buttons layout__content__main__notifications__switch__buttons--right">
+                    </button>
+                    <button class="layout__content__main__notifications__switch__buttons layout__content__main__notifications__switch__buttons--right NSwitch" value="0">
                       N
-                    </div>
+                    </button>
                   </div>
                   <div class="layout__content__main__notifications__switch__info">
                     <p>New product announcements</p>
@@ -75,12 +76,12 @@
               <div class="layout__content__main__notifications__column">
                 <div class="layout__content__main__notifications__row">
                   <div class="layout__content__main__notifications__switch__buttons">
-                    <div class="layout__content__main__notifications__switch__buttons layout__content__main__notifications__switch__buttons--left active">
+                    <button class="layout__content__main__notifications__switch__buttons layout__content__main__notifications__switch__buttons--left YSwitch active" value="1">
                       Y
-                    </div>
-                    <div class="layout__content__main__notifications__switch__buttons layout__content__main__notifications__switch__buttons--right">
+                    </button>
+                    <button class="layout__content__main__notifications__switch__buttons layout__content__main__notifications__switch__buttons--right NSwitch" value="0">
                       N
-                    </div>
+                    </button>
                   </div>
                   <div class="layout__content__main__notifications__switch__info">
                     <p>All</p>
@@ -109,4 +110,37 @@
     </aside>
   </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+  <script type="text/javascript">
+    $(document).ready(function () {
+      var $NoSwitch = $('.NSwitch');
+      var $YesSwitch = $('.YSwitch');
+
+      $NoSwitch.click(function() {
+        var $this = $(this);
+
+        if (!$this.hasClass('active')) {
+          $this.toggleClass('active');
+          $this.toggleClass('animated bounceIn');
+          $this.prev().removeClass('active animated bounceIn');
+          $this.prop('disabled', true);
+          $this.prev().prop('disabled', false);
+        }
+      });
+
+      $YesSwitch.click(function() {
+        var $this = $(this);
+
+        if (!$this.hasClass('active')) {
+          $this.toggleClass('active');
+          $this.toggleClass('animated bounceIn');
+          $this.next().removeClass('active animated bounceIn');
+          $this.prop('disabled', true);
+          $this.next().prop('disabled', false);
+        }
+      });
+    });
+  </script>
 {% endblock %}
