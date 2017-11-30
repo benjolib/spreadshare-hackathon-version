@@ -214,14 +214,7 @@ class Table extends Component<Props, State> {
       //   return;
       // }
 
-      if (key === "my_visit_url") {
-        if (!cell.link) {
-          swal("Oops", "This cell does not have a URL set", "error");
-          return;
-        }
-
-        window.open(cell.link, "_blank");
-      } else if (key === "my_add_url") {
+      if (key === "my_add_url") {
         swal({
           title: "Adding URL",
           input: "text",
@@ -363,7 +356,8 @@ class Table extends Component<Props, State> {
               cell.id,
               {
                 ...cell,
-                content: ""
+                content: "",
+                link: ""
               },
               this.props.permission
             );
@@ -588,6 +582,20 @@ class Table extends Component<Props, State> {
                 selectedCell: cell
               });
             }}
+            afterSelectionEnd={(row, col) => {
+              if (this.state.showAdd && row === 0) {
+                return;
+              }
+              if (col === 0) {
+                return;
+              }
+              const cell = this.hot.hotInstance.getDataAtCell(row, col);
+              if (cell.link) {
+                setTimeout(() => {
+                  window.open(cell.link, "_blank");
+                }, 1000);
+              }
+            }}
             outsideClickDeselects={false}
             contextMenuCopyPaste
             contextMenu={{
@@ -610,9 +618,6 @@ class Table extends Component<Props, State> {
                       }
                     }
                   : {}),
-                my_visit_url: {
-                  name: "Follow Link"
-                },
                 my_copy: {
                   name: "Copy"
                 }
