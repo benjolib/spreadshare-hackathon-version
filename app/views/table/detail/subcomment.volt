@@ -8,7 +8,7 @@
       {{ comment['comment'] }}
     </p>
     <div class="tableAbout__comments__container__content__stats tableAbout__comments__container__content__stats--subcomments">
-      <a href="javascript:;">
+      <a href="javascript:;" class="comment-upvote" data-action="comment-upvote" data-id="{{ comment['id'] }}">
         <div class="tableAbout__comments__container__content__stats__item">
           <div class="tableAbout__comments__container__content__stats__item__icon tableAbout__comments__container__content__stats__item__icon--vote"></div>
           <span>{{ comment['votesCount'] }}</span>
@@ -21,12 +21,14 @@
             <span>Reply</span>
           </div>
         </a>
+        <!--
         <a href="javascript:;">
           <div class="tableAbout__comments__container__content__stats__item">
             <div class="tableAbout__comments__container__content__stats__item__icon tableAbout__comments__container__content__stats__item__icon--report"></div>
             <span>Report</span>
           </div>
         </a>
+        -->
       {% endif %}
     </div>
   </div>

@@ -88,7 +88,7 @@ abstract class Base
         /**
          * @todo Use memcache or redis for this with a lower lifetime of e.g. 5 minutes
          */
-        if (!isset(static::$getCache[static::class][$id]))
+        //if (!isset(static::$getCache[static::class][$id]))
         {
             static::$getCache[static::class][$id] = static::findFirst(
                 [

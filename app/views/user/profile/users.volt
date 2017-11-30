@@ -31,5 +31,4 @@
         {% endfor %}
     </div>
   </div>
-  {{ partial('partials/profileAside') }}
 {% endif %}

@@ -609,7 +609,7 @@
   @include rem(margin-bottom, 10);
 
   @include desktop {
-    @include rem(margin-top, -310);
+    @include rem(margin-top, -225);
     margin-bottom: 16px;
   }
 

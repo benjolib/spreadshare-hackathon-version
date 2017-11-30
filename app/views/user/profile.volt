@@ -76,7 +76,7 @@
       {{ partial('user/profile/tables') }}
       {{ partial('user/profile/users') }}
     {% else %}
-      <div class="container__content">
+      <div class="container__content" style="margin-right:40px;">
         <div class="container__content center" style="width:100%;padding: 40px;">
           <div class="center" style="width:100%;">
             <img src="/assets/images/desktop.png" alt="" />
@@ -86,6 +86,7 @@
         </div>
       </div>
     {% endif %}
+    {{ partial('partials/profileAside') }}
   </div>
 </div>
 {% endblock %}

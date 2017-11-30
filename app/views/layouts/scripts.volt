@@ -153,7 +153,20 @@
       'subscribe': '/api/v1/subscribe/{id}',
       'flag': '/table/{id}/flag/{flag}',
       'follow-user': '/api/v1/follow-user/{id}',
+      'comment-upvote': '/api/v1/vote-comment/{id}',
     };
+
+    $('a.comment-upvote').api({
+      method: 'POST',
+      onSuccess: function (response, button) {
+        var span = button.find('span');
+        if (response.data.voted) {
+          span.text(parseInt(parseInt(span.text()) + 1));
+        } else {
+          span.text(parseInt(parseInt(span.text()) - 1));
+        }
+      },
+    });
 
     $('div.upvote, button.upvote').api({
       method: 'POST',

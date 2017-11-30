@@ -4,5 +4,4 @@
       {{ partial('partials/table') }}
     {% endfor %}
   </div>
-  {{ partial('partials/profileAside') }}
 {% endif %}

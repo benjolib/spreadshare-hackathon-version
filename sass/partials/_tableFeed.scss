@@ -23,8 +23,8 @@ aside.aside {
 
   &__title {
     position: absolute;
-    top: 40px;
-    left: 50px;
+    top: 50px;
+    left: 70px;
     color: #B1BBC7;
     text-transform: uppercase;
     font-weight: 400;
@@ -32,7 +32,7 @@ aside.aside {
 
     @include desktop {
       font-weight: 500;
-      left: 100px;
+      left: 120px;
     }
   }
 
@@ -40,6 +40,10 @@ aside.aside {
     display: flex;
     color: $text-color-alternate;
     @include rem(margin-bottom, 16);
+
+    &:first-child {
+      margin-top: 50px;
+    }
 
     &:last-child {
       margin-bottom: 0;

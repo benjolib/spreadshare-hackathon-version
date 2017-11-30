@@ -20,33 +20,55 @@ use DS\Model\Events\TableCommentVotesEvents;
 class TableCommentVotes
     extends TableCommentVotesEvents
 {
+    
     /**
-     * @param array $param
-     * @param int   $page
-     * @param int   $limit
+     * @param int $userId
+     * @param int $commentId
      *
-     * @return array
+     * @return bool
      */
-    /*
-    public function findCustom($param = [], $page = 0, $limit = Paging::endlessScrollPortions)
+    public function vote(int $userId, int $commentId): bool
     {
-        if (count($param))
+        $row = TableComments::get($commentId);
+        if (!$row->getTableId())
         {
-            return self::query()
-                       ->columns(
-                           [
-                               TableCommentVotes::class . ".id",
-                           ]
-                       )
-                //->leftJoin(TableCommentVotes::class, TableCommentVotes::class . '.profileId = ' . Profile::class . '.id')
-                //->inWhere(Profile::class . '.id', $param)
-                       ->limit((int) $limit, (int) Paging::endlessScrollPortions * $page)
-                //->orderBy(sprintf('FIELD (id,%s)', implode(',', $param)))
-                       ->execute()
-                       ->toArray() ?: [];
+            throw new \InvalidArgumentException('This comment does not exist.');
         }
         
-        return [];
+        $votes = self::findByUserIdAndComment($userId, $row->getId());
+        
+        if ($votes)
+        {
+            $votes->delete();
+            $row->setVotesCount($row->getVotesCount() - 1)->save();
+            
+            return false;
+        }
+        
+        $tableVotes = new self();
+        $tableVotes->setUserId($userId)
+                   ->setCommentId($row->getId())
+                   ->create();
+        
+        $row->setVotesCount($row->getVotesCount() + 1)->save();
+        
+        return true;
     }
-    */
+    
+    /**
+     * @param int $userId
+     * @param int $rowId
+     *
+     * @return self
+     */
+    public static function findByUserIdAndComment(int $userId, int $commentId)
+    {
+        return self::findFirst(
+            [
+                "conditions" => 'userId = ?0 AND commentId = ?1',
+                "bind" => [$userId, $commentId],
+                "limit" => 1,
+            ]
+        );
+    }
 }
