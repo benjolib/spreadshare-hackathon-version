@@ -622,3 +622,10 @@
     @include rem2(padding, 3, 6);
   }
 }
+
+.tableAbout__comments__content__send form input[name=comment] {
+  width: 95%;
+}
+.tableAbout__comments__content__send form button {
+  right: 3%;
+}

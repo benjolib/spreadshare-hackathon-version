@@ -128,23 +128,26 @@
     height: 40px !important;
   }
 }
-.Select--multi .Select-value-label {
+#sidebarForm .Select--multi .Select-value-label {
   font-size: 10px !important;
 }
 
-.Select-input > input {
+#sidebarForm .Select-input > input {
   padding: 0px 0 0px !important;
   margin-top: 0px !important;
   height: 36px !important;  
 }
-.Select--multi .Select-value-icon {
+#sidebarForm .Select--multi .Select-value-icon {
   font-weight: 500;
 }
-// .Select--multi {
-//   background: white;
-//   padding: 10px 15px 50px 15px;
-// }
-// .Select-value {
-//   position: absolute;
-//   top: 50px;
-// }
+#sidebarForm .Select-value-icon {
+  background: #F2F2F8 !important;
+}
+#sidebarForm .Select--multi {
+  background: white;
+  padding: 10px 15px 50px 15px;
+}
+#sidebarForm .Select-value {
+  position: absolute;
+  top: 50px;
+}
