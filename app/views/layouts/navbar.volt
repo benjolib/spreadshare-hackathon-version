@@ -39,7 +39,7 @@
         <li><a href="/user/{{ auth.getUser().handle }}">Profile</a></li>
         <li><a href="/settings/wallet">Wallet</a></li>
         <li><a href="/settings/invite">Get Token</a></li>
-        <li><a href="/settings/account">Settings</a></li>
+        <li><a href="/settings/personal">Settings</a></li>
         <li><a href="/logout">Sign out</a></li>
       </ul>
     </div>
