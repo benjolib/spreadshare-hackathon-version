@@ -4,7 +4,11 @@ namespace DS\Events\Table;
 
 use DS\Events\AbstractEvent;
 use DS\Model\DataSource\TableLogType;
+use DS\Model\DataSource\UserNotificationType;
 use DS\Model\TableLog;
+use DS\Model\Tables;
+use DS\Model\User;
+use DS\Model\UserNotifications;
 
 /**
  * Spreadshare
@@ -35,6 +39,25 @@ class TabelCellChangeRequested extends AbstractEvent
      */
     public static function after(int $userId, int $cellId, int $tableId, int $changeId, string $changeFrom, string $changeTo)
     {
+        $userNotification = new UserNotifications();
+        
+        $table = Tables::get($tableId);
+        $userNotification
+            ->setUserId($table->getOwnerUserId())
+            ->setSourceTableId($tableId)
+            ->setPlaceholders(
+                json_encode(
+                    [
+                        User::get($userId)->getName(),
+                        $table->getTitle(),
+                    ]
+                )
+            )
+            ->setSourceUserId($userId)
+            ->setNotificationType(UserNotificationType::ChangeRequested)
+            ->setText(sprintf('requested a change for your table %s', $table->getTitle()))
+            ->create();
+        
         $tableLog = new TableLog();
         $tableLog
             ->setUserId($userId)

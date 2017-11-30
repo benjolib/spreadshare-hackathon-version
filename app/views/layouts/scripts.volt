@@ -30,36 +30,37 @@
     var onSearchPopper = $('.search-autocomplete');
     // On change of the field
 
-    $(searchFieldEl).on("change paste keyup", function() {
+    $(searchFieldEl).on("change paste keyup", function () {
 
-     /* Popper */
-     var searchReferenceElement = $(this);
+      /* Popper */
+      var searchReferenceElement = $(this);
 
-     var searchEl = $(this).val();
-     // When the search query is greater than 3
-     if (searchEl.length > 3) {
+      var searchEl = $(this).val();
+      // When the search query is greater than 3
+      if (searchEl.length > 3) {
 
-       window.clearTimeout(timer);
-       timer = window.setTimeout(function(){
-       // AJAX Query
-       $.ajax({
-         url: "/api/v1/search/",
-         method: "GET",
-         crossDomain: true,
-         dataType: "JSON",
-         data: {"query":  (searchEl + '*')},
-         success: function(response) { autoCompleteHandler(response) }
-       });
+        window.clearTimeout(timer);
+        timer = window.setTimeout(function () {
+          // AJAX Query
+          $.ajax({
+            url: "/api/v1/search/",
+            method: "GET",
+            crossDomain: true,
+            dataType: "JSON",
+            data: { "query": (searchEl + '*') },
+            success: function (response) {
+              autoCompleteHandler(response)
+            }
+          });
 
-       }, delay);
+        }, delay);
 
+        onSearchPopper.addClass('show');
 
-       onSearchPopper.addClass('show');
-
-       new Popper(searchReferenceElement, onSearchPopper, {
-         placement: 'bottom',
-       });
-     }
+        new Popper(searchReferenceElement, onSearchPopper, {
+          placement: 'bottom',
+        });
+      }
 
     });
 
@@ -147,53 +148,71 @@
       }, 7000);
     }
 
-    /* Define API endpoints once and globally */
-    $.fn.api.settings.api = {
-      'upvote': '/api/v1/vote/{id}',
-      'subscribe': '/api/v1/subscribe/{id}',
-      'flag': '/table/{id}/flag/{flag}',
-      'follow-user': '/api/v1/follow-user/{id}',
-      'comment-upvote': '/api/v1/vote-comment/{id}',
-    };
+    {% if auth.loggedIn() %}
+        /* Define API endpoints once and globally */
+        $.fn.api.settings.api = {
+          'upvote': '/api/v1/vote/{id}',
+          'subscribe': '/api/v1/subscribe/{id}',
+          'flag': '/table/{id}/flag/{flag}',
+          'follow-user': '/api/v1/follow-user/{id}',
+          'comment-upvote': '/api/v1/vote-comment/{id}',
+          'change-request': '/api/v1/change-request/{id}',
+        };
 
-    $('a.comment-upvote').api({
-      method: 'POST',
-      onSuccess: function (response, button) {
-        var span = button.find('span');
-        if (response.data.voted) {
-          span.text(parseInt(parseInt(span.text()) + 1));
-        } else {
-          span.text(parseInt(parseInt(span.text()) - 1));
-        }
-      },
-    });
+        $('a.comment-upvote').api({
+          method: 'POST',
+          onSuccess: function (response, button) {
+            var span = button.find('span');
+            if (response.data.voted) {
+              span.text(parseInt(parseInt(span.text()) + 1));
+            } else {
+              span.text(parseInt(parseInt(span.text()) - 1));
+            }
+          },
+        });
 
-    $('div.upvote, button.upvote').api({
-      method: 'POST',
-      onSuccess: function (response, button) {
-        var span = button.find('span');
-        if (response.data.voted) {
-          button.addClass('selected');
-          button.find('.chevronUp').find('svg').find('.fillColor').addClass('white');
-          span.text(parseInt(parseInt(span.text()) + 1));
-        } else {
-          button.removeClass('selected');
-          span.text(parseInt(parseInt(span.text()) - 1));
-        }
-      },
-    });
-    $('button.subscribe').api({
-      method: 'POST',
-      onSuccess: function (response, button) {
-        button.toggleClass('subscribed');
-      },
-    });
-    $('button.follow-user').api({
-      method: 'POST',
-      action: 'follow-user',
-      onSuccess: function (response, button) {
-        $(button).toggleClass('selected').toggleClass('following-user').toggleClass('not-following-user');
-      },
-    });
+        $('div.upvote, button.upvote').api({
+          method: 'POST',
+          onSuccess: function (response, button) {
+            var span = button.find('span');
+            if (response.data.voted) {
+              button.addClass('selected');
+              button.find('.chevronUp').find('svg').find('.fillColor').addClass('white');
+              span.text(parseInt(parseInt(span.text()) + 1));
+            } else {
+              button.removeClass('selected');
+              span.text(parseInt(parseInt(span.text()) - 1));
+            }
+          },
+        });
+        $('button.subscribe').api({
+          method: 'POST',
+          onSuccess: function (response, button) {
+            button.toggleClass('subscribed');
+          },
+        });
+        $('button.follow-user').api({
+          method: 'POST',
+          action: 'follow-user',
+          onSuccess: function (response, button) {
+            $(button).toggleClass('selected').toggleClass('following-user').toggleClass('not-following-user');
+          },
+        });
+
+        $('button.review-change-request').api({
+          method: 'POST',
+          action: 'change-request',
+          beforeSend: function(settings) {
+            settings.data = {
+              comment: $('.changelog-comment-' + $(this).data('id')).val(),
+              type: $(this).data('type')
+            };
+            return settings;
+          },
+          onSuccess: function (response, button) {
+            location.reload();
+          },
+        });
+    {% endif %}
   });
 </script>

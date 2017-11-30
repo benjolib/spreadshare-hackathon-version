@@ -50,18 +50,21 @@ class FromScratch
                     $tableContent = new TableContent();
                     $tableContent->addfromCsvText(
                         $createdTableModel->getId(),
-                        'A,B,C,D,E,F
-" "," "," "," "," "," ",
-" "," "," "," "," "," ",
-" "," "," "," "," "," ",
-" "," "," "," "," "," ",
-" "," "," "," "," "," ",
-" "," "," "," "," "," ",
+                        'A,B,C,D,E,F,G,H,I,J,K
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
 ',
                         ',',
                         true
                     );
-                } catch (Exception $e)
+                }
+                catch (Exception $e)
                 {
                     $createdTableModel->delete();
                 }

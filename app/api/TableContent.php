@@ -196,10 +196,11 @@ class TableContent
      * @param int       $userId
      * @param int       $columnId
      * @param string    $cell
+     * @param string    $link
      *
      * @return array
      */
-    private function addCell(TableRows $rowModel, int $userId, int $columnId, string $cell): array
+    private function addCell(TableRows $rowModel, int $userId, int $columnId, string $cell, string $link = ''): array
     {
         $cellModel = new TableCells();
         $cellModel->setUserId($userId)
@@ -207,7 +208,7 @@ class TableContent
                   ->setRowId($rowModel->getId())
                   ->setColumnId($columnId)
                   ->setContent($cell)
-                  ->setLink('')
+                  ->setLink($link)
                   ->create();
         
         return [
@@ -295,7 +296,8 @@ class TableContent
                                 $rowModel,
                                 $userId,
                                 $colId,
-                                isset($row[$key]) ? $row[$key] : ''
+                                isset($row[$key]) && $row[$key] !== null ? $row[$key] : '',
+                                ''
                             );
                             
                             $rowModel->setContent(json_encode($cellData))
