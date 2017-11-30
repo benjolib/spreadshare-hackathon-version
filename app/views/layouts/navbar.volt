@@ -7,10 +7,7 @@
     <div class="navbar__search__icon">
       <img src="/assets/icons/search.svg" />
     </div>
-    <input type="text" class="navbar__search__field" placeholder="Find anything" />
-    <div class="navbar__search__filter">
-      <img class="navbar__search__filter__icon" src="/assets/icons/filter.svg" />
-    </div>
+    <input type="text" class="navbar__search__field" placeholder="Search" />
     <!-- Begin Search Auto Complete Component !-->
     <div class="search-autocomplete search__dropdown">
         <div class="title-block">

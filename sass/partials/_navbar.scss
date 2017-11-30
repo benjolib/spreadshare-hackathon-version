@@ -8,9 +8,6 @@
   background: white;
   color: black;
   position: relative;
-  -webkit-box-shadow: 0px -8px 28px 0px rgba(0,0,0,0.7);
-  -moz-box-shadow: 0px -8px 28px 0px rgba(0,0,0,0.7);
-  box-shadow: 0px -8px 28px 0px rgba(0,0,0,0.7);
   @include rem(padding-top, 25);
   @include rem(padding-bottom, 35);
 
@@ -85,7 +82,7 @@
       img {
         align-self: center;
         @include rem(padding-left, 5);
-        width: 25px;
+        width: 20px;
       }
     }
     &__field {
@@ -95,9 +92,10 @@
       background: #F2F2F8;
       border: none;
       outline: none;
-      border-radius: 3px;
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px;
       @include rem(padding-left, 5);
-      @include rem(min-width, 330);
+      @include rem(min-width, 264);
       @include rem(height, 40);
 
       &::-webkit-input-placeholder {
@@ -118,25 +116,6 @@
       }
       @include mobile {
         min-width: 15.625rem;
-      }
-    }
-    &__filter {
-      display: none;
-
-      @include desktop {
-        display: flex;
-        align-self: center;
-        justify-content: center;
-        background: #F2F2F8;
-        border-radius: 3px;
-        @include rem(margin-left, 20);
-        @include rem(width, 40);
-        @include rem(height, 40);
-
-        &:hover {
-          cursor: pointer;
-          background: #e8ebf2;
-        }
       }
     }
   }

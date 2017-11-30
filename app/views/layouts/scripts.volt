@@ -77,11 +77,9 @@
     if (window.innerWidth < 1024) {
       referenceElement = $('.navbar__controls__add--menu');
       refElem = $('.navbar__controls__add--notification');
-      popper.removeClass('left160');
     } else {
       referenceElement = $('.navbar__controls__notification');
-      refElem = $('.navbar__search__filter');
-      popper.addClass('left160');
+      refElem = $('.navbar__controls__add--notification');
     }
 
     if (onPopper.length > 0 && popper.length > 0) {
@@ -101,8 +99,7 @@
           popper.removeClass('left160');
         } else {
           referenceElement = $('.navbar__controls__notification');
-          refElem = $('.navbar__search__filter');
-          popper.addClass('left160');
+          refElem = $('.navbar__controls__add--notification');
         }
         new Popper(referenceElement, onPopper, {
           placement: 'bottom'
