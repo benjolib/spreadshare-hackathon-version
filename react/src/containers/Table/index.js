@@ -157,7 +157,11 @@ class Table extends Component<Props, State> {
 
   addRow = () => {
     this.props
-      .addRow(this.props.id, this.state.addRowDataGetters.map(x => x()))
+      .addRow(
+        this.props.id,
+        this.state.addRowDataGetters.map(x => x()),
+        this.props.permission
+      )
       .then(() => {
         this.hideAdd();
         if (this.props.permission === "1") {
