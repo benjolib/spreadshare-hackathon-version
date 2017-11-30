@@ -46,6 +46,21 @@ class UserNotificationType
     const Changed = 6;
     
     /**
+     * A user has requested a changed in a table
+     */
+    const ChangeRequested = 7;
+    
+    /**
+     * Change request has been confirmed
+     */
+    const ChangeRequestedConfirmed = 8;
+    
+    /**
+     * Change request has been rejected
+     */
+    const ChangeRequestedRejected = 9;
+    
+    /**
      * Map string to constants
      *
      * @var array
@@ -55,7 +70,10 @@ class UserNotificationType
         'comments' => self::Commented,
         'changes' => self::Changed,
         'subscribed' => self::TableSubscribed,
-        'upvoets' => self::TableUpvoted,
+        'upvotes' => self::TableUpvoted,
+        'change-requests' => self::ChangeRequested,
+        'change-confirmed' => self::ChangeRequestedConfirmed,
+        'change-rejected' => self::ChangeRequestedRejected,
     ];
     
 }

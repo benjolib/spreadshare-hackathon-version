@@ -18,7 +18,7 @@ use Phalcon\Db;
  * @version   $Version$
  * @package   DS\Model
  *
- * @method static findFirstById(int $id)
+ * @method static ChangeRequests findFirstById(int $id)
  */
 class ChangeRequests
     extends ChangeRequestsEvents

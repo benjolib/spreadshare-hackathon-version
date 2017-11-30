@@ -23,7 +23,7 @@ class ChangeRequestStatus
     /**
      * If dataset was created and not confirmed
      */
-    const Unconfirmed = 0;
+    const AwaitingApproval = 0;
     
     /**
      * Confirmed state

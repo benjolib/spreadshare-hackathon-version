@@ -357,3 +357,86 @@ export const addCol = (
       }, 500);
     }
   });
+
+// EDIT COL ACTIONS
+
+export const editColRequest = (
+  tableId: string,
+  colId: string,
+  title: string,
+  permission: string
+): Action => ({
+  type: "EDIT_COL_REQUEST",
+  payload: {
+    tableId,
+    colId,
+    title,
+    permission
+  }
+});
+
+export const editColSuccess = (
+  tableId: string,
+  colId: string,
+  title: string,
+  permission: string
+): Action => ({
+  type: "EDIT_COL_SUCCESS",
+  payload: {
+    tableId,
+    colId,
+    title,
+    permission
+  }
+});
+
+export const editColError = (
+  tableId: string,
+  colId: string,
+  title: string,
+  permission: string,
+  error: Error
+): Action => ({
+  type: "EDIT_COL_ERROR",
+  payload: {
+    tableId,
+    colId,
+    title,
+    permission,
+    error
+  }
+});
+
+// thunk
+
+export const editCol = (
+  tableId: string,
+  colId: string,
+  title: string,
+  permission: string
+): ThunkAction => (dispatch: Dispatch) =>
+  new Promise((resolve, reject) => {
+    dispatch(editColRequest(tableId, colId, title, permission));
+    if (process.env.NODE_ENV === "production") {
+      saveDataApi(`edit-column/${tableId}`, {
+        title,
+        columnId: colId
+      }).then(({ error }: { error: Error }) => {
+        if (error) {
+          dispatch(
+            editColError(tableId, colId, title, permission, new Error(error))
+          );
+          reject();
+          return;
+        }
+
+        dispatch(editColSuccess(tableId, colId, title, permission));
+        resolve();
+      });
+    } else {
+      setTimeout(() => {
+        dispatch(editColSuccess(tableId, colId, title, permission));
+        resolve();
+      }, 500);
+    }
+  });

@@ -3,7 +3,11 @@
 namespace DS\Model\Events;
 
 use DS\Events\Table\TabelCellChangeRequested;
+use DS\Events\Table\TabelCellChangeReviewed;
+use DS\Exceptions\ModelFieldNotNullException;
 use DS\Model\Abstracts\AbstractChangeRequests;
+use DS\Model\DataSource\ChangeRequestStatus;
+use DS\Model\TableCells;
 
 /**
  * Events for model ChangeRequests
@@ -42,7 +46,7 @@ abstract class ChangeRequestsEvents
     {
         parent::beforeValidationOnCreate();
         
-        return true;
+        return $this->beforeValidationOnUpdate();
     }
     
     /**
@@ -52,7 +56,34 @@ abstract class ChangeRequestsEvents
     {
         parent::beforeValidationOnUpdate();
         
+        if (!$this->getUserId())
+        {
+            throw new ModelFieldNotNullException('Invalid user for change request.');
+        }
+        
+        if (!$this->getCellId())
+        {
+            throw new ModelFieldNotNullException('Invalid cell for change request.');
+        }
+        
         return true;
+    }
+    
+    /**
+     * Perform cell change if status is confirmed
+     */
+    public function afterSave()
+    {
+        if ($this->getStatus() == ChangeRequestStatus::Confirmed && $this->getCellId())
+        {
+            $cell = TableCells::get($this->getCellId());
+            $cell->setContent($this->getTo())->save();
+        }
+        
+        if ($this->getStatus() != ChangeRequestStatus::AwaitingApproval)
+        {
+            TabelCellChangeReviewed::after($this, $this->tableId);
+        }
     }
     
     /**

@@ -49,7 +49,7 @@ class TableRows
             {
                 $rowData[] = [
                     'id' => $cell['id'],
-                    'content' => $cell['content'],
+                    'content' => $cell['content'] !== null ? $cell['content'] : '',
                     'link' => $cell['link'],
                 ];
             }

@@ -7,6 +7,7 @@ use DS\Controller\Api\ActionHandler;
 use DS\Controller\Api\Meta\Record;
 use DS\Controller\Api\MethodInterface;
 use DS\Model\ChangeRequests;
+use DS\Model\DataSource\ChangeRequestStatus;
 use DS\Model\TableCells;
 use DS\Model\Tables;
 
@@ -107,6 +108,7 @@ class Post extends ActionHandler implements MethodInterface
                                   ->setTableId($tableId)
                                   ->setFrom($tableCell->getContent())
                                   ->setTo($content)
+                                  ->setStatus(ChangeRequestStatus::AwaitingApproval)
                                   ->setComment('')// not implemented, yet
                                   ->create();
                 }

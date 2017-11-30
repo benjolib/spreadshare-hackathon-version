@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from "react";
+import styled from "styled-components";
 import { connect } from "react-redux";
 import HandsOnTable from "react-handsontable";
 import swal from "sweetalert2";
@@ -11,18 +12,31 @@ import TableButton from "../../components/TableButton";
 import TableSearch from "../../components/TableSearch";
 import TableLoading from "../../components/TableLoading";
 import TableError from "../../components/TableError";
-import { addCol, addRow, voteRow, editCell, fetchTable } from "./actions";
+import {
+  addCol,
+  editCol,
+  addRow,
+  voteRow,
+  editCell,
+  fetchTable
+} from "./actions";
 import type { ReduxState } from "../../types";
-import type { TableDataWrapper, Votes, RowsWithVotes } from "./types";
+import type { TableDataWrapper, Votes, RowsWithVotes, Cell } from "./types";
 import addButtonRenderer from "../../lib/addButtonRenderer";
 import addInputRenderer from "../../lib/addInputRenderer";
 import votesRenderer from "../../lib/votesRenderer";
 import cellRenderer from "../../lib/cellRenderer";
 import TableSortingMenu from "../../components/TableSortingMenu";
 import type { Sortings } from "../../components/TableSortingMenu";
-import TableFilterMenu from "../../components/TableFilterMenu";
+// import TableFilterMenu from "../../components/TableFilterMenu";
 import type { Filters } from "../../components/TableFilterMenu";
 import TableDropdownMenu from "../../components/TableDropdownMenu";
+import TableAdminEditInput from "../../components/TableAdminEditInput";
+
+const TableStyles = styled.div`
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
+    sans-serif;
+`;
 
 type Props = {
   id: string, // from server markup
@@ -31,7 +45,8 @@ type Props = {
   fetchTable: typeof fetchTable,
   editCell: typeof editCell,
   voteRow: typeof voteRow,
-  addRow: typeof addRow
+  addRow: typeof addRow,
+  editCol: typeof editCol
 };
 
 type State = {
@@ -53,7 +68,8 @@ class Table extends Component<Props, State> {
     showSortings: false,
     showFilters: false,
     showAdd: false,
-    addRowDataGetters: []
+    addRowDataGetters: [],
+    selectedCell: false
   };
 
   state: State;
@@ -177,9 +193,6 @@ class Table extends Component<Props, State> {
   };
 
   setupDataGetter = (col: number, dataGetter: Function) => {
-    console.log(this.state.addRowDataGetters);
-    console.log(col);
-    console.log(dataGetter);
     this.setState(prevState => ({
       addRowDataGetters: [
         ...prevState.addRowDataGetters.slice(0, col - 1),
@@ -195,13 +208,53 @@ class Table extends Component<Props, State> {
       options.start.col
     );
     setTimeout(() => {
-      if (!_.isEqual(options.start, options.end)) {
-        // TODO: either disable edit when more than one cell selected or use better alert
-        alert("Select only one cell for edit");
-        return;
-      }
+      // if (!_.isEqual(options.start, options.end)) {
+      //   // TODO: either disable edit when more than one cell selected or use better alert
+      //   alert("Select only one cell for edit");
+      //   return;
+      // }
 
-      if (key === "my_edit") {
+      if (key === "my_edit_col") {
+        swal({
+          title: "Editing Column Title",
+          input: "text",
+          text: "Please type the new value for the column title.",
+          inputValue: this.props.data.table.columns.find(
+            col => (col.id === cell.colId ? col.title : false)
+          ).title,
+          showCancelButton: true,
+          showLoaderOnConfirm: true,
+          preConfirm: newValue => {
+            if (!typeof newValue === "string") {
+              return;
+            }
+
+            return this.props.editCol(
+              this.props.id,
+              cell.colId,
+              newValue,
+              this.props.permission
+            );
+          }
+        })
+          .then(result => {
+            if (!result.value) {
+              return;
+            }
+            if (this.props.permission === "1") {
+              swal(
+                "Success!",
+                "The request to edit this column is awaiting approval.",
+                "success"
+              );
+            } else if (this.props.permission === "2") {
+              swal("Success!", "The column has been edited.", "success");
+            }
+          })
+          .catch(() => {
+            swal("Oops", "Something has gone wrong!", "error");
+          });
+      } else if (key === "my_edit") {
         swal({
           title: "Editing Cell",
           input: "text",
@@ -288,12 +341,16 @@ class Table extends Component<Props, State> {
     });
   };
 
-  hotDataAddVotes = (votes: Votes) => (rows: RowsWithVotes) =>
+  hotDataAddVotes = (columns, votes: Votes) => (rows: RowsWithVotes) =>
     rows.map(row => ({
       ...row,
       content: [
         votes.find(vote => vote.rowId === row.id),
-        ...row.content.map(cell => ({ ...cell, rowId: row.id }))
+        ...row.content.map((cell, i) => ({
+          ...cell,
+          rowId: row.id,
+          colId: columns[i].id
+        }))
       ]
     }));
 
@@ -323,17 +380,20 @@ class Table extends Component<Props, State> {
             return cell.votes;
           }
           return "";
-        })
+        }),
+        row => row.content[0].votes
       ],
-      sortings.map(
-        sorting => (sorting.direction === "ascending" ? "asc" : "desc")
-      )
+      [
+        ...sortings.map(
+          sorting => (sorting.direction === "ascending" ? "asc" : "desc")
+        ),
+        "desc"
+      ]
     );
 
   hotDataMaybeShowAdd = (colHeaders, showAdd: boolean) => (
     rows: RowsWithVotes
   ) => {
-    console.log(showAdd);
     if (showAdd) {
       const rowsWithAdd: RowsWithVotes = [
         {
@@ -363,10 +423,11 @@ class Table extends Component<Props, State> {
       ...this.props.data.table.columns.map(col => col.title)
     ];
 
-    console.log(this.props.data);
-
     const hotData = _.pipe(
-      this.hotDataAddVotes(this.props.data.table.votes),
+      this.hotDataAddVotes(
+        this.props.data.table.columns,
+        this.props.data.table.votes
+      ),
       this.hotDataFilters,
       this.hotDataSearchRows(this.state.searchValue),
       this.hotDataSortings(colHeaders, this.state.sortings),
@@ -374,15 +435,19 @@ class Table extends Component<Props, State> {
       this.hotDataFlattenRows
     );
 
-    console.log(hotData(this.props.data.table.rows));
-
-    console.log(colHeaders);
-
     return (
-      <div>
+      <TableStyles>
         <TableHeader>
+          {this.props.permission === "2" && (
+            <TableAdminEditInput
+              tableId={this.props.id}
+              permission={this.props.permission}
+              selectedCell={this.state.selectedCell}
+              editCell={this.props.editCell}
+            />
+          )}
           <TableButton icon="sort" onClick={this.toggleSortings} />
-          <TableButton icon="filter" onClick={this.toggleFilters} />
+          {/* <TableButton icon="filter" onClick={this.toggleFilters} /> */}
           {this.props.permission !== "0" && (
             <TableButton icon="add" onClick={this.showAdd} />
           )}
@@ -396,13 +461,13 @@ class Table extends Component<Props, State> {
             colHeaders={colHeaders}
             appliedSortings={this.state.sortings}
           />
-          <TableFilterMenu
+          {/* <TableFilterMenu
             sortShown={this.state.showSortings}
             hide={!this.state.showFilters}
             onApply={this.updateTableFilters}
             colHeaders={colHeaders}
             appliedFilters={this.state.filters}
-          />
+          /> */}
           <TableDropdownMenu
             tableId={this.props.id}
             hide={!this.state.showDropdown}
@@ -462,6 +527,19 @@ class Table extends Component<Props, State> {
             fixedColumnsLeft={1}
             stretchH="all"
             disableVisualSelection={this.state.showAdd}
+            afterSelection={(row, col) => {
+              if (this.state.showAdd && row === 0) {
+                return;
+              }
+              if (col === 0) {
+                return;
+              }
+              const cell = this.hot.hotInstance.getDataAtCell(row, col);
+              this.setState({
+                selectedCell: cell
+              });
+            }}
+            outsideClickDeselects={false}
             contextMenuCopyPaste
             contextMenu={{
               callback: this.contextMenuCallback,
@@ -470,13 +548,16 @@ class Table extends Component<Props, State> {
                 this.props.permission === "2"
                   ? {
                       my_edit: {
-                        name: "Edit"
+                        name: "Edit Cell"
+                      },
+                      my_edit_col: {
+                        name: "Edit Column"
                       },
                       my_delete: {
-                        name: "Delete"
+                        name: "Delete Cell"
                       },
                       my_add_url: {
-                        name: "Add URL"
+                        name: "Add Cell URL"
                       }
                     }
                   : {}),
@@ -487,7 +568,7 @@ class Table extends Component<Props, State> {
             }}
           />
         </TableMain>
-      </div>
+      </TableStyles>
     );
   }
 }
@@ -501,7 +582,8 @@ const mapDispatchToProps = {
   editCell,
   voteRow,
   addRow,
-  addCol
+  addCol,
+  editCol
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Table);

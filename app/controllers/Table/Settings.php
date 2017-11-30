@@ -5,6 +5,7 @@ namespace DS\Controller\Table;
 use DS\Controller\AddTable\Description\BaseDescription;
 use DS\Exceptions\SecurityException;
 use DS\Interfaces\TableSubcontrollerInterface;
+use DS\Model\DataSource\TableFlags;
 use DS\Model\Helper\TableFilter;
 use DS\Model\Locations;
 use DS\Model\TableLocations;
@@ -85,14 +86,23 @@ class Settings
                     {
                         try
                         {
-                            $this->prepareModelFromPost($table, $userId)->save();
-                            
-                            $tableApi = new \DS\Api\Table();
-                            $tableApi->handleTagAndLocationAssignment(
-                                $table,
-                                $this->request->getPost('tags', null, []),
-                                $this->request->getPost('location', null, [])
-                            );
+                            if ($this->request->getPost('action') === 'delete')
+                            {
+                                $table->setFlags(TableFlags::Deleted)->save();
+                                
+                                header('Location: /?msg=1');
+                            }
+                            else
+                            {
+                                $this->prepareModelFromPost($table, $userId)->save();
+    
+                                $tableApi = new \DS\Api\Table();
+                                $tableApi->handleTagAndLocationAssignment(
+                                    $table,
+                                    $this->request->getPost('tags', null, []),
+                                    $this->request->getPost('location', null, [])
+                                );
+                            }
                         }
                         catch (\Exception $e)
                         {
