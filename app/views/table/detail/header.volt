@@ -69,7 +69,7 @@
       Stats
     </a>
     -->
-    <a href="/table/{{table['id']}}/changelog" class="table__header__menu__item{% if selectedPage == 'changelog' %} selected{% endif %}">
+    <a href="/table/{{table['id']}}/changelog/new" class="table__header__menu__item{% if selectedPage == 'changelog' %} selected{% endif %}">
       <div class="changelog-icon"></div>
       changelog
     </a>
