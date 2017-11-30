@@ -35,6 +35,19 @@ class IndexController
     {
         try
         {
+            // Message hack
+            // @todo implement a better way for this
+            if ($this->request->get('msg'))
+            {
+                switch ($this->request->get('msg'))
+                {
+                    case "1":
+                        $this->flash->success('Your table has been successfully deleted.');
+                        break;
+                }
+                
+            }
+            
             // Prepare ordering
             switch ($order)
             {

@@ -3,6 +3,7 @@
   background: $background-color;
   display: flex;
   flex-direction: column;
+  @include rem(padding, 28);
 
   &__hero {
     position: relative;
@@ -18,7 +19,6 @@
     border-radius: 8px;
     color: white;
     @include rem(height, 336);
-    @include rem(margin, 28);
     @include rem2(padding, 0, 40);
     margin-bottom: 0;
 

@@ -26,7 +26,7 @@
         .addTableEmpty__content__main__buttons {
           position: absolute;
           width: 100%;
-          @include rem(margin-left, -40);
+          @include rem(margin-left, 0);
         }
       }
     }

@@ -4,15 +4,15 @@
   display: flex;
   border: 1px solid black;
   border-radius: 6px;
-  width: 90%;
+  width: 100%;
   align-self: center;
   @include rem2(padding, 5, 10);
-  @include rem(margin-top, 10);
+  @include rem(margin-bottom, 30);
 
  &-success {
   background: $success;
   border-color: darken($success, 8%);
-  color: darken($success, 30%);
+  color: lighten($success, 60%);
  }
  &-warning {
   background: $warning;

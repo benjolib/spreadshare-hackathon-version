@@ -1,5 +1,7 @@
 {% extends 'layouts/main.volt' %}
 
+{% block title %}SpreadShare - {{ table['title'] }} - {{ table['topic1'] }}{% endblock %}
+
 {% block content %}
 <div class="table">
   {{ partial('table/detail/header') }}
