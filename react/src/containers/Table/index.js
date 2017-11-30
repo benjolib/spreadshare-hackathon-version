@@ -380,11 +380,15 @@ class Table extends Component<Props, State> {
             return cell.votes;
           }
           return "";
-        })
+        }),
+        row => row.content[0].votes
       ],
-      sortings.map(
-        sorting => (sorting.direction === "ascending" ? "asc" : "desc")
-      )
+      [
+        ...sortings.map(
+          sorting => (sorting.direction === "ascending" ? "asc" : "desc")
+        ),
+        "desc"
+      ]
     );
 
   hotDataMaybeShowAdd = (colHeaders, showAdd: boolean) => (
