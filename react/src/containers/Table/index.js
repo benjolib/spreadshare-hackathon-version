@@ -21,16 +21,17 @@ import {
   fetchTable
 } from "./actions";
 import type { ReduxState } from "../../types";
-import type { TableDataWrapper, Votes, RowsWithVotes } from "./types";
+import type { TableDataWrapper, Votes, RowsWithVotes, Cell } from "./types";
 import addButtonRenderer from "../../lib/addButtonRenderer";
 import addInputRenderer from "../../lib/addInputRenderer";
 import votesRenderer from "../../lib/votesRenderer";
 import cellRenderer from "../../lib/cellRenderer";
 import TableSortingMenu from "../../components/TableSortingMenu";
 import type { Sortings } from "../../components/TableSortingMenu";
-import TableFilterMenu from "../../components/TableFilterMenu";
+// import TableFilterMenu from "../../components/TableFilterMenu";
 import type { Filters } from "../../components/TableFilterMenu";
 import TableDropdownMenu from "../../components/TableDropdownMenu";
+import TableAdminEditInput from "../../components/TableAdminEditInput";
 
 const TableStyles = styled.div`
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
@@ -67,7 +68,8 @@ class Table extends Component<Props, State> {
     showSortings: false,
     showFilters: false,
     showAdd: false,
-    addRowDataGetters: []
+    addRowDataGetters: [],
+    selectedCell: false
   };
 
   state: State;
@@ -444,8 +446,16 @@ class Table extends Component<Props, State> {
     return (
       <TableStyles>
         <TableHeader>
+          {this.props.permission === "2" && (
+            <TableAdminEditInput
+              tableId={this.props.id}
+              permission={this.props.permission}
+              selectedCell={this.state.selectedCell}
+              editCell={this.props.editCell}
+            />
+          )}
           <TableButton icon="sort" onClick={this.toggleSortings} />
-          <TableButton icon="filter" onClick={this.toggleFilters} />
+          {/* <TableButton icon="filter" onClick={this.toggleFilters} /> */}
           {this.props.permission !== "0" && (
             <TableButton icon="add" onClick={this.showAdd} />
           )}
@@ -459,13 +469,13 @@ class Table extends Component<Props, State> {
             colHeaders={colHeaders}
             appliedSortings={this.state.sortings}
           />
-          <TableFilterMenu
+          {/* <TableFilterMenu
             sortShown={this.state.showSortings}
             hide={!this.state.showFilters}
             onApply={this.updateTableFilters}
             colHeaders={colHeaders}
             appliedFilters={this.state.filters}
-          />
+          /> */}
           <TableDropdownMenu
             tableId={this.props.id}
             hide={!this.state.showDropdown}
@@ -525,6 +535,16 @@ class Table extends Component<Props, State> {
             fixedColumnsLeft={1}
             stretchH="all"
             disableVisualSelection={this.state.showAdd}
+            afterSelection={(row, col) => {
+              console.log("hi");
+              console.log(row, col);
+              const cell = this.hot.hotInstance.getDataAtCell(row, col);
+              console.log(cell);
+              this.setState({
+                selectedCell: cell
+              });
+            }}
+            outsideClickDeselects={false}
             contextMenuCopyPaste
             contextMenu={{
               callback: this.contextMenuCallback,
