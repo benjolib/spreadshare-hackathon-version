@@ -18,6 +18,14 @@ aside.aside {
   }
 }
 
+.dropdown .tableFeed {
+  &__item {
+    &:first-child {
+      margin-top: 10px;
+    }
+  }
+}
+
 .tableFeed {
   position: relative;
 
@@ -25,7 +33,7 @@ aside.aside {
     position: absolute;
     top: 50px;
     left: 70px;
-    color: #B1BBC7;
+    color: #b1bbc7;
     text-transform: uppercase;
     font-weight: 400;
     @include rem(font-size, 13);

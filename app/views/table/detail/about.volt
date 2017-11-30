@@ -135,4 +135,6 @@
     });
   });
 </script>
+
+{{ partial('table/detail/flag') }}
 {% endblock %}
