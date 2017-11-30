@@ -38,12 +38,18 @@ class TableDownloadController
                 $this->$format($tableData);
             }
         }
-        catch (Exception $e)
+        catch (\Exception $e)
         {
             Application::instance()->log($e->getMessage(), Logger::CRITICAL);
         }
     }
     
+    /**
+     * @param array $tableData
+     *
+     * @throws Exception
+     * @throws \League\Csv\CannotInsertRecord
+     */
     private function csv(array $tableData)
     {
         if (isset($tableData['rows']))
@@ -55,7 +61,7 @@ class TableDownloadController
                 $csvRow = [];
                 foreach ($row['content'] as $cell)
                 {
-                    if ($cell['link'])
+                    if (isset($cell['link']))
                     {
                         $csvRow[] = $cell['content'] . ' (' . $cell['link'] . ')';
                     }
