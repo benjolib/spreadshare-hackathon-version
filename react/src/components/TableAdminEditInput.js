@@ -58,6 +58,10 @@ class TableAdminEditInput extends React.Component<Props> {
       this.setState({
         value: nextProps.selectedCell.content
       });
+      console.log(this.nameInput);
+      setTimeout(() => {
+        this.nameInput.focus();
+      }, 0);
     }
   }
 
@@ -81,6 +85,9 @@ class TableAdminEditInput extends React.Component<Props> {
         </button>
         <input
           type="text"
+          ref={input => {
+            this.nameInput = input;
+          }}
           placeholder="Edit Cell Content"
           value={this.state.value}
           onChange={this.onChange}

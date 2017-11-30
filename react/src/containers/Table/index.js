@@ -193,9 +193,6 @@ class Table extends Component<Props, State> {
   };
 
   setupDataGetter = (col: number, dataGetter: Function) => {
-    console.log(this.state.addRowDataGetters);
-    console.log(col);
-    console.log(dataGetter);
     this.setState(prevState => ({
       addRowDataGetters: [
         ...prevState.addRowDataGetters.slice(0, col - 1),
@@ -206,8 +203,6 @@ class Table extends Component<Props, State> {
   };
 
   contextMenuCallback = (key, options) => {
-    console.log(key);
-    console.log(options);
     const cell = this.hot.hotInstance.getDataAtCell(
       options.start.row,
       options.start.col
@@ -395,7 +390,6 @@ class Table extends Component<Props, State> {
   hotDataMaybeShowAdd = (colHeaders, showAdd: boolean) => (
     rows: RowsWithVotes
   ) => {
-    console.log(showAdd);
     if (showAdd) {
       const rowsWithAdd: RowsWithVotes = [
         {
@@ -425,8 +419,6 @@ class Table extends Component<Props, State> {
       ...this.props.data.table.columns.map(col => col.title)
     ];
 
-    console.log(this.props.data);
-
     const hotData = _.pipe(
       this.hotDataAddVotes(
         this.props.data.table.columns,
@@ -438,10 +430,6 @@ class Table extends Component<Props, State> {
       this.hotDataMaybeShowAdd(colHeaders, this.state.showAdd),
       this.hotDataFlattenRows
     );
-
-    console.log(hotData(this.props.data.table.rows));
-
-    console.log(colHeaders);
 
     return (
       <TableStyles>
@@ -536,10 +524,13 @@ class Table extends Component<Props, State> {
             stretchH="all"
             disableVisualSelection={this.state.showAdd}
             afterSelection={(row, col) => {
-              console.log("hi");
-              console.log(row, col);
+              if (this.state.showAdd && row === 0) {
+                return;
+              }
+              if (col === 0) {
+                return;
+              }
               const cell = this.hot.hotInstance.getDataAtCell(row, col);
-              console.log(cell);
               this.setState({
                 selectedCell: cell
               });
