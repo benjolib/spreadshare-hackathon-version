@@ -63,7 +63,7 @@ class Post extends ActionHandler implements MethodInterface
     {
         $tableId = $this->action;
         $post    = json_decode($this->request->getRawBody(), true);
-        $cellId  = $post['cellId'];
+        $cellId  = isset($post['cellId']) ? $post['cellId'] : null;
         $cell    = $post['cell'] ?: [
             'id' => null,
             'content' => null,
