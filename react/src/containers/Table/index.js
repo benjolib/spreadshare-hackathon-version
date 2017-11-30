@@ -491,7 +491,7 @@ class Table extends Component<Props, State> {
           )}
           <TableButton icon="sort" onClick={this.toggleSortings} />
           {/* <TableButton icon="filter" onClick={this.toggleFilters} /> */}
-          {this.props.permission !== "0" && (
+          {this.props.permission === "2" && (
             <TableButton icon="add" onClick={this.showAdd} />
           )}
           <TableSearch onChange={this.updateSearchValue} />
@@ -591,18 +591,14 @@ class Table extends Component<Props, State> {
               }
             }}
             outsideClickDeselects={false}
-            contextMenuCopyPaste
+            // contextMenuCopyPaste
             contextMenu={{
               callback: this.contextMenuCallback,
               items: {
-                ...(this.props.permission === "1" ||
-                this.props.permission === "2"
+                ...(this.props.permission === "1"
                   ? {
                       my_edit: {
                         name: "Edit Cell"
-                      },
-                      my_edit_col: {
-                        name: "Edit Column"
                       },
                       my_delete: {
                         name: "Clear Cell"
@@ -612,9 +608,13 @@ class Table extends Component<Props, State> {
                       }
                     }
                   : {}),
-                my_copy: {
-                  name: "Copy"
-                }
+                ...(this.props.permission === "2"
+                  ? {
+                      my_edit_col: {
+                        name: "Edit Column"
+                      }
+                    }
+                  : {})
               }
             }}
           />

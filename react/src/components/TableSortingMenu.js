@@ -8,7 +8,7 @@ const StyledDiv = styled.div`
   border-radius: 10px;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
   top: -10px;
-  left: 80px;
+  left: 10px;
   width: 400px;
   overflow: hidden;
   z-index: 1000;
