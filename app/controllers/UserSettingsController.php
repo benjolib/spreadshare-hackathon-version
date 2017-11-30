@@ -150,6 +150,8 @@ class UserSettingsController
                         true
                     );
                     
+                    // Reload user data
+                    $this->view->setVar('profile', $this->getUser($userId));
                 }
             }
             catch (\Exception $e)

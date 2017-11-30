@@ -166,8 +166,7 @@ class Table extends Component<Props, State> {
 
   hideAdd = () => {
     this.setState({
-      showAdd: false,
-      addRowDataGetters: []
+      showAdd: false
     });
   };
 
@@ -492,7 +491,7 @@ class Table extends Component<Props, State> {
           )}
           <TableButton icon="sort" onClick={this.toggleSortings} />
           {/* <TableButton icon="filter" onClick={this.toggleFilters} /> */}
-          {this.props.permission !== "0" && (
+          {this.props.permission === "2" && (
             <TableButton icon="add" onClick={this.showAdd} />
           )}
           <TableSearch onChange={this.updateSearchValue} />
@@ -592,7 +591,7 @@ class Table extends Component<Props, State> {
               }
             }}
             outsideClickDeselects={false}
-            contextMenuCopyPaste
+            // contextMenuCopyPaste
             contextMenu={{
               callback: this.contextMenuCallback,
               items: {
@@ -602,9 +601,6 @@ class Table extends Component<Props, State> {
                       my_edit: {
                         name: "Edit Cell"
                       },
-                      my_edit_col: {
-                        name: "Edit Column"
-                      },
                       my_delete: {
                         name: "Clear Cell"
                       },
@@ -613,9 +609,13 @@ class Table extends Component<Props, State> {
                       }
                     }
                   : {}),
-                my_copy: {
-                  name: "Copy"
-                }
+                ...(this.props.permission === "2"
+                  ? {
+                      my_edit_col: {
+                        name: "Edit Column"
+                      }
+                    }
+                  : {})
               }
             }}
           />

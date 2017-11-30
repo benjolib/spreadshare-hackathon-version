@@ -24,12 +24,12 @@ class DateRange
     /**
      * @var int
      */
-    private $from = 0;
+    private $from;
     
     /**
      * @var int
      */
-    private $to = 0;
+    private $to;
     
     /**
      * @return int
@@ -187,7 +187,7 @@ class DateRange
      * @param int $from
      * @param int $to
      */
-    public function __construct(int $from, int $to)
+    public function __construct(int $from = 0, int $to = 0)
     {
         $this->from = $from;
         $this->to   = $to;

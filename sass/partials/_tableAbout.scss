@@ -507,11 +507,11 @@
       border-bottom: 2px solid #F2F2F8;
       margin: 10px 25px -2px 25px;
 
-      &:last-child() {
+      &:last-child {
         border: 0;
         margin-bottom: 0;
       }
-      &:nth-child() {
+      &:nth-child {
         border: 0;
         margin-bottom: 0;        
       }

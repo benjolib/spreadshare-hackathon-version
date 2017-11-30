@@ -21,19 +21,20 @@
 
   {# content #}
   {% block content %}{% endblock %}
-
-  {# footer #}
-  {{ partial('layouts/footer') }}
 </section>
+
+{# footer #}
+{{ partial('layouts/footer') }}
 
 <div class="white-overlay"></div>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
 <script type="text/javascript" src="/js/api.js"></script>
+<script type="text/javascript" src="/js/jquery.sticky-sidebar.min.js"></script>
 
 {{ partial('layouts/scripts') }}
 
-<script type="text/javascript" src="/js/react/main.0529eda8.js"></script>
+<script type="text/javascript" src="/js/react/main.e0a70259.js"></script>
 {% block scripts %}{% endblock %}
 </body>
 </html>

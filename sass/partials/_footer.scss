@@ -5,6 +5,7 @@
   background: white;
   color: $text-color;
   box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
 
   @include tablet {
     @include rem2(padding, 0, 36);
@@ -13,10 +14,6 @@
   @include desktop {
     padding: 0;
   }
-
-  // a {
-  //   color: #6A7C94 !important;
-  // }
 
   &__top {
     display: flex;

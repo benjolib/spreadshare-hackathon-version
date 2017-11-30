@@ -116,6 +116,14 @@ return [
         'methods' => ['GET'],
     ],
     [
+        'url' => '/tables/{order:[a-z0-9\-]+}/{date:[a-z0-9\-]+}',
+        'paths' => [
+            'controller' => 'Index',
+            'action' => 'index',
+        ],
+        'methods' => ['GET'],
+    ],
+    [
         'url' => '/table/{id:[0-9]+}',
         'paths' => [
             'controller' => 'Table_Detail',

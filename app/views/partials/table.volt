@@ -26,10 +26,10 @@
     <div class="tableCard__stats">
         {# table type #}
         <a class="tableCard__stats__item tableCard__stats__item--type" href="/?topic=&type={{ table['typeId'] }}">
-            {% if table['typeTitle'] %}
-            <span>{{ table['typeTitle'] }}</span>
+            {% if table['topic1'] %}
+            <span>{{ table['topic1'] }}</span>
             {% else %}
-            <span>Uncategorized</span>
+            <span></span>
             {% endif %}
         </a>
         {# tokens #}

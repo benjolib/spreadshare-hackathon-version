@@ -80,6 +80,10 @@ class Get extends ActionHandler implements MethodInterface
                         
                         }
                     }
+                    
+                    $output .= '<div class="tableFeed__item" style="margin-left:42%;">
+    <a href="/feed">See all</a>
+</div>';
                 }
                 else
                 {

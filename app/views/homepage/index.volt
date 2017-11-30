@@ -115,25 +115,25 @@
         {# filters #}
         <div class="main__content__tables__filters">
             <div class="main__content__tables__filters__left">
-                <li>Today</li>
+                <li>{{ activeDateRangeString }}</li>
                 <img src="/assets/icons/chevron-down-dark.svg" />
                 <div class="dropdown dropdown--filters">
                     <ul>
-                        <li class="link-active"><a href="#">Today</a></li>
-                        <li><a href="#">Yesterday</a></li>
-                        <li><a href="#">Last week</a></li>
-                        <li><a href="#">Last 30 Days</a></li>
-                        <li><a href="#">Last 90 Days</a></li>
-                        <li><a href="#">Last Year</a></li>
-                        <li><a href="#">All Time</a></li>
+                        <li class="{% if activeDateFilter == 'today' %}link-active{% endif %}"><a href="#">Today</a></li>
+                        <li class="{% if activeDateFilter == 'yesterday' %}link-active{% endif %}"><a href="/tables/{{ order }}/yesterday">Yesterday</a></li>
+                        <li class="{% if activeDateFilter == 'last-week' %}link-active{% endif %}"><a href="/tables/{{ order }}/last-week">Last week</a></li>
+                        <li class="{% if activeDateFilter == 'last-30-days' %}link-active{% endif %}"><a href="/tables/{{ order }}/last-30-days">Last 30 Days</a></li>
+                        <li class="{% if activeDateFilter == 'last-90-days' %}link-active{% endif %}"><a href="/tables/{{ order }}/last-90-days">Last 90 Days</a></li>
+                        <li class="{% if activeDateFilter == 'last-year' %}link-active{% endif %}"><a href="/tables/{{ order }}/last-year">Last Year</a></li>
+                        <li class="{% if activeDateFilter == 'all-time' %}link-active{% endif %}"><a href="/tables/{{ order }}/all-time">All Time</a></li>
                     </ul>
                 </div>
             </div>
             <div class="main__content__tables__filters__right">
-                <li class="{% if order is 'newly-added' %}link-active{% endif %}"><a href="/tables/newly-added">Newest</a></li>
-                <li class="{% if order is 'most-upvoted' %}link-active{% endif %}"><a href="/tables/most-upvoted">Upvotes</a></li>
-                <li class="{% if order is 'most-viewed' %}link-active{% endif %}"><a href="/tables/most-viewed">Views</a></li>
-                <li class="{% if order is 'most-contributed' %}link-active{% endif %}"><a href="/tables/most-contributed">Contributions</a></li>
+                <li class="{% if order is 'newest' %}link-active{% endif %}"><a href="/tables/newest/{{ activeDateFilter }}">Newest</a></li>
+                <li class="{% if order is 'most-upvoted' %}link-active{% endif %}"><a href="/tables/most-upvoted/{{ activeDateFilter }}">Upvotes</a></li>
+                <li class="{% if order is 'most-viewed' %}link-active{% endif %}"><a href="/tables/most-viewed/{{ activeDateFilter }}">Views</a></li>
+                <li class="{% if order is 'most-contributed' %}link-active{% endif %}"><a href="/tables/most-contributed/{{ activeDateFilter }}">Contributions</a></li>
             </div>
         </div>
 

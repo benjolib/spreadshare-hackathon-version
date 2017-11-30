@@ -2,6 +2,7 @@
 import React from "react";
 import styled from "styled-components";
 import UpvoteIcon from "./icons/UpvoteIcon";
+import { URL } from "../config";
 
 const StyledDiv = styled.div`
   text-align: center;
@@ -37,6 +38,7 @@ class VotesCell extends React.Component<Props> {
         upvoted={this.props.upvoted}
         onClick={() => {
           if (this.props.permission === "0") {
+            window.open(`${URL}/login`);
             return;
           }
           this.props.voteRow(this.props.rowId);

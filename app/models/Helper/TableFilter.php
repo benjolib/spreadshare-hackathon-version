@@ -43,6 +43,31 @@ class TableFilter
     public $tableIds = [];
     
     /**
+     * @var DateRange
+     */
+    public $dateRange = null;
+    
+    /**
+     * @return DateRange|null
+     */
+    public function getDateRange()
+    {
+        return $this->dateRange;
+    }
+    
+    /**
+     * @param DateRange $dateRange
+     *
+     * @return $this
+     */
+    public function setDateRange($dateRange)
+    {
+        $this->dateRange = $dateRange;
+        
+        return $this;
+    }
+    
+    /**
      * @param int $tableId
      *
      * @return TableFilter

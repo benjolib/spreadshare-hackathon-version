@@ -228,9 +228,10 @@ export const tablesReducer = (
                   ...row.content,
                   {
                     id: action.payload.response.cells.find(
-                      cell => (cell.rowId === row.id ? cell.id : false)
-                    ),
-                    content: ""
+                      cell => cell.rowId === row.id
+                    ).id,
+                    content: "",
+                    link: null
                   }
                 ]
               }))

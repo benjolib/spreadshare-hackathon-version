@@ -4,6 +4,7 @@ namespace DS\Controller;
 
 use DS\Application;
 use DS\Model\DataSource\TableFlags;
+use DS\Model\Helper\DateRange;
 use DS\Model\Helper\TableFilter;
 use DS\Model\Locations;
 use DS\Model\Tables;
@@ -31,7 +32,7 @@ class IndexController
     /**
      * Home
      */
-    public function indexAction($order = 'newly-added')
+    public function indexAction($order = 'newly-added', $date = 'today')
     {
         try
         {
@@ -61,10 +62,37 @@ class IndexController
                     $orderBy = TableStats::class . ".contributionCount DESC";
                     break;
                 default:
-                case 'newly-added':
+                case 'newest':
                     $orderBy = Tables::class . '.createdAt DESC';
                     break;
             }
+            
+            // Prepare date range filtering
+            switch ($date) {
+                case 'all-time':
+                    break;
+                case 'last-90-days':
+                    $range = DateRange::initLastDays(90);
+                    break;
+                case 'last-30-days':
+                    $range = DateRange::initLastDays(30);
+                    break;
+                case 'last-week':
+                    $range = DateRange::initLastWeek();
+                    break;
+                case 'last-year':
+                    $range = DateRange::initLastYear();
+                    break;
+                case 'yesterday':
+                    $range = DateRange::initYesterday();
+                    break;
+                default:
+                case 'today':
+                    $range = DateRange::initToday();
+                    break;
+            }
+            $this->view->setVar('activeDateRangeString', str_replace('-', ' ', $date));
+            $this->view->setVar('activeDateFilter', $date);
             
             // Assign all topics and types for the sidebar
             $this->view->setVar('topics', Topics::find());
@@ -76,6 +104,11 @@ class IndexController
             $tableFilter->type      = $this->request->get('type', null, '');
             $tableFilter->locations = $this->request->get('locations', null, []);
             $tableFilter->tags      = $this->request->get('tags', null, []);
+            
+            if (isset($range))
+            {
+                $tableFilter->setDateRange($range);
+            }
             
             // Assign locations and tags with title and id mapping so that react-select has got a valid pre-selection
             $locations = new Locations;
