@@ -21,7 +21,7 @@ return [
         'password' => 'spreadshare',
         'dbname' => 'spreadshare',
         'charset' => 'utf8',
-        'profile' => true,
+        'profile' => false,
     ],
     'write-database' => [
         'adapter' => 'Mysql',
