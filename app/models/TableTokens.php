@@ -50,6 +50,7 @@ class TableTokens
                        )
                        ->innerJoin(Tables::class, TableTokens::class . '.tableId = ' . Tables::class . '.id')
                        ->where(self::class . '.userId = ?0', [$userId])
+                       ->andWhere(self::class . ".tokensEarned > 0")
                        ->limit((int) $limit, (int) Paging::endlessScrollPortions * $page)
                        ->orderBy(self::class . '.' . $orderBy . ' DESC')
                        ->execute()
