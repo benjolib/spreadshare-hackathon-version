@@ -25,6 +25,8 @@
   {# footer #}
   {{ partial('layouts/footer') }}
 </section>
+
+<div class="white-overlay"></div>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
 <script type="text/javascript" src="/js/api.js"></script>

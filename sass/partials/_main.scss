@@ -5,6 +5,46 @@
   flex-direction: column;
   @include rem(padding, 28);
 
+  &__hero__tables.hidden {
+    display: none;
+  }
+
+  .pages {
+    background: #f2f2f8 !important;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 8px;
+    color: white;
+    @include rem(height, 336);
+    @include rem2(padding, 0, 40);
+    margin-bottom: 0;
+    z-index: 1000;
+    overflow: hidden;
+
+    div:first-child {
+      z-index: 2000;
+    }
+
+    .circle {
+      z-index: 1000;
+      position: absolute;
+      top: -50%;
+      left: 10%;
+      bottom: -50%;
+      right: 10%;
+      background: #dee0e7;
+      border-radius: 50%;
+    }
+  }
+
   &__hero {
     position: relative;
     display: flex;
@@ -22,6 +62,43 @@
     @include rem2(padding, 0, 40);
     margin-bottom: 0;
 
+    div.hidden {
+      display: none;
+    }
+
+    div {
+      color: #6a7c93 !important;
+
+      h3 {
+        margin-top: 75px;
+        margin-bottom: 20px;
+        @include rem(font-size, 38);
+      }
+
+      h4 {
+        margin: 0;
+        font-weight: 400;
+        @include rem(font-size, 15);
+
+        @include tablet {
+          @include rem(font-size, 17);
+        }
+        @include desktop {
+          @include rem(font-size, 18);
+        }
+      }
+
+      a.blue {
+        background: #6a7c93;
+      }
+
+      p.page {
+        @include rem(font-size, 13);
+        font-weight: 400;
+        margin-top: 10px;
+      }
+    }
+
     img {
       position: absolute;
       top: -6px;
@@ -33,7 +110,7 @@
     }
 
     p {
-      margin: 0;
+      margin: 20px 0;
       font-weight: 600;
       @include rem(font-size, 26);
       @include rem(padding-bottom, 32);
@@ -45,10 +122,15 @@
         @include rem(font-size, 36);
       }
     }
+    h1 {
+      margin-top: 60px;
+      margin-bottom: 20px;
+      @include rem(font-size, 38);
+    }
     h2 {
       margin: 0;
-      font-weight: 300;
-      @include rem(font-size, 16);
+      font-weight: 400;
+      @include rem(font-size, 15);
 
       @include tablet {
         @include rem(font-size, 17);
@@ -56,6 +138,20 @@
       @include desktop {
         @include rem(font-size, 18);
       }
+    }
+
+    a.button {
+      font-weight: 600;
+      color: white;
+      border-radius: 4px;
+      padding: 10px 12px;
+      background: #106c49;
+      border: 1px solid darken(#106c49, 2) !important;
+      @include rem(font-size, 15);
+    }
+    a.button:hover {
+      background: lighten(#106c49, 10) !important;
+      border: 1px solid lighten(#106c49, 8) !important;
     }
   }
 
@@ -389,7 +485,7 @@
           display: block;
           text-overflow: ellipsis;
           width: 100%;
-          font-weight:600;
+          font-weight: 600;
         }
 
         label.selected {
