@@ -1,6 +1,6 @@
 // @flow
 import React from "react";
 
-const TableLoading = () => <div className="loading" style={{ height: 200 }} />;
+const TableLoading = () => <div className="loading" />;
 
 export default TableLoading;
