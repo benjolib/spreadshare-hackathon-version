@@ -1,6 +1,7 @@
 {% extends 'layouts/main.volt' %}
 
 {% block header %}
+
 {% endblock %}
 
 {% block content %}
@@ -23,26 +24,27 @@
           </div>
         </div>
       </div>
+      <aside class="topics__content__aside">
+        <div class="topics__content__aside__box">
+          <a href="/signup/topics">
+            <div class="sign-box-selected">Topics</div>
+          </a>
+          <a href="/signup/follow">
+            <div>People</div>
+          </a>
+          <a href="/signup/location">
+            <div>Regions</div>
+          </a>
+          <a href="/signup/tables">
+            <div>Tables</div>
+          </a>
+        </div>
+      </aside>
       <div class="signup__content__form__buttons">
         <button class="button">CONTINUE</button>
       </div>
     </form>
-    <aside class="topics__content__aside">
-      <div class="topics__content__aside__box">
-        <a href="/signup/topics">
-          <div class="sign-box-selected">Topics</div>
-        </a>
-        <a href="/signup/follow">
-          <div>People</div>
-        </a>
-        <a href="/signup/location">
-          <div>Regions</div>
-        </a>
-        <a href="/signup/tables">
-          <div>Tables</div>
-        </a>
-      </div>
-    </aside>
+    
   </div>
 </div>
 {% endblock %}

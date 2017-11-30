@@ -202,20 +202,8 @@
   }
 }
 
-.dropdown--filters {
-
-  @include desktop {
-    position: absolute;
-    transform: translate3d(111px, 542px, 0px) !important;
-    top: 0px;
-    left: 0px;
-    will-change: transform;
-  }
-  @include tablet {
-    transform: translate3d(82px,721px,0) !important;
-  }
-  @include mobile {
-    transform: translate3d(40px,721px,0) !important;    
-  }
-  
+.navbar__controls .dropdown--notifications {
+  width: 420px!important;
+  padding: .75rem 1rem;
+  margin-top: 20px;
 }

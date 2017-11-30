@@ -10,7 +10,6 @@ const StyledDiv = styled.div`
   width: 100%;
   height: 80vh;
   background: #f3f2f8;
-  padding-left: 20px;
 
   th {
     background: #f3f2f8;
@@ -68,9 +67,8 @@ type Props = {
   children?: React.Node
 };
 
-const TableMain = (props: Props) =>
-  <StyledDiv showAdd={props.showAdd}>
-    {props.children}
-  </StyledDiv>;
+const TableMain = (props: Props) => (
+  <StyledDiv showAdd={props.showAdd}>{props.children}</StyledDiv>
+);
 
 export default TableMain;

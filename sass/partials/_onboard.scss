@@ -127,6 +127,7 @@
               &:last-child {
                 font-weight: 300;
                 color: $text-color;
+                font-size: 14px !important;
                 @include rem(margin-top, 2.5);
                 @include rem(font-size, 14);
 
@@ -268,7 +269,7 @@
       width: 100%;
 
       @include desktop {
-        width: 100%;
+        width: 80%;
       }
     }
 
@@ -314,13 +315,11 @@
       border-radius: 8px;
       width: 80%;
 
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-
       &__cards {
         display: flex;
         justify-content: center;
         flex-wrap: wrap;
+
         @include rem(padding, 25);
 
         @include tablet {
@@ -329,7 +328,7 @@
         }
         @include desktop {
           justify-content: space-between;
-          @include rem(padding, 15);
+          @include rem(padding, 30);
         }
 
         &__item {
@@ -339,27 +338,32 @@
           background-position: center;
           background-repeat: no-repeat;
           background-size: cover;
-          border-radius: 4px;
+          border-radius: 7px;
           @include rem(margin, 5);
           @include rem2(padding, 52, 104);
 
           @include tablet {
-            @include rem2(padding, 42, 84);
-            width: 288px;
+            width: 236px;
+            padding: 45px 0px;
+            text-align: center;
+            display: block;
           }
 
           @include mobile {
-            // @include rem2(padding, 42, 84);
-            width: 288px;
+            width: 268px;
+            padding: 45px 0px;   
+            display: block;
+            text-align: center;            
           }
 
           @include desktop {
-            width: 214px;
+            width: 197px;
             display: block;
-            padding: 37px 17px;
+            padding: 45px 0px;
             margin: 0;
-            margin-bottom: 0px;
             margin-bottom: 10px;
+            margin-left: 5px;
+            margin-right: 5px;
             text-align: center;
             font-size: 14px;
           }
@@ -374,7 +378,8 @@
             text-transform: uppercase;
             font-weight: 300;
             color: white;
-            text-align: center;          }
+            text-align: center;          
+          }
         }
       }
     }
@@ -992,3 +997,29 @@
     }
   }
 }
+#onboardingForm {
+  @include desktop {
+    display: flex;
+  }
+}
+
+@media (min-width: 1230px) and (max-width: 1320px) { 
+  
+  #sidebarForm {
+    font-size: 12px;
+  }
+  .tableCard__stats__item {
+    font-size: 10px;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1231px) { 
+  .tableCard__stats__item {
+    font-size: 7px;
+  }
+  #sidebarForm {
+    font-size: 10px;
+  }
+}  
+
+

@@ -9,7 +9,7 @@
     <div class="layout__content__wrapper">
       <p class="layout__content__title">Account</p>
       <p class="layout__content__subtitle">
-        Manage your account and wallet. Invite friends and receive 20 tokens (<span>you invited 0 so far</span>)
+        Manage everything related to your account, profile, wallet and tokens here.
       </p>
       <div class="layout__content__main layout__content__main__notifications">
         <div class="layout__content__main__notifications__wrapper">
