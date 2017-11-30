@@ -125,6 +125,16 @@
       flex-direction: column;
       width: 72.5%;
       padding: 0;
+
+      .tables__content__main__cards__item {
+        &__info {
+          &__title {
+            p {
+              color: $card-tokens-background-color;
+            }
+          }
+        }
+      }
     }
   }
 
@@ -149,31 +159,4 @@
       margin-top: 0;
     }
   }
-}
-
-// others
-.tableUsers__item {
-  display: flex;
-  margin: 10px 0 10px 0;
-}
-.tableUsers__item img {
-  width: 80px;
-}
-.tableUsers__item__info {
-  padding: 5px 10px 10px 20px;
-  @include rem(padding-left, 5);
-}
-.tableUsers__item__follow {
-  margin: auto;
-  display: block;
-}
-.follow-user  {
-  background: #f2f2f8;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  font-weight: 600;
-}
-.follow-user:hover  {
-  cursor: pointer;
 }

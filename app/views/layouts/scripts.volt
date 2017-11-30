@@ -164,6 +164,7 @@
         var span = button.find('span');
         if (response.data.voted) {
           button.addClass('selected');
+          button.find('.chevronUp').find('svg').find('.fillColor').addClass('white');
           span.text(parseInt(parseInt(span.text()) + 1));
         } else {
           button.removeClass('selected');

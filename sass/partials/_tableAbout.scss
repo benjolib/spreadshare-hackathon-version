@@ -63,7 +63,7 @@
         display: flex;
         flex-direction: column;
         margin-top: 36px;
-        
+
         @include desktop {
           width: 47.5%;
           height: 30%;
@@ -600,7 +600,7 @@
   }
 }
 
-#commentsCount {
+#comments {
   color: $text-color-alternate;
   font-weight: 500;
   text-transform: uppercase;

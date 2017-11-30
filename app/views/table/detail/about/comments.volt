@@ -1,9 +1,7 @@
-<br />
-<p id="commentsCount">Comments <span>{{ commentsCount }}</span></p>
+<p id="comments">Comments <span>{{ commentsCount }}</span></p>
 <div class="tableAbout__comments">
   <div class="tableAbout__comments__content">
     {% if comments %}
-
       {% for comment in comments %}
         {{ partial('table/detail/comment') }}
 
