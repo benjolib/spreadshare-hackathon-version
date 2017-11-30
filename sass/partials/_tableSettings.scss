@@ -1,0 +1,52 @@
+.tableSettings {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  @include rem(margin-bottom, 160);
+
+  @include desktop {
+    flex-direction: row;
+  }
+
+  .addTable__content__main {
+    flex-direction: column;
+    align-self: center;
+    width: 90%;
+
+    @include desktop {
+      width: 60%;
+      @include rem(margin-right, 30);
+    }
+
+    &__options {
+      position: relative;
+
+      form {
+        .addTableEmpty__content__main__buttons {
+          position: absolute;
+          width: 100%;
+          margin-top: 0;
+          margin-bottom: 0;
+          @include rem(margin-left, -30);
+        }
+      }
+    }
+  }
+
+  .addTable__content__aside {
+    align-self: center;
+    margin-right: 0;
+    margin-left: 0;
+    width: 90%;
+    @include rem(margin-top, 100);
+
+    @include desktop {
+      align-self: flex-start;
+      width: 20%;
+      margin-top: 0;
+      @include rem(margin-left, 30);
+    }
+  }
+}
