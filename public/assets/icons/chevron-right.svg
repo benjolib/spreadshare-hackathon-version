@@ -1,0 +1,17 @@
+<svg width="7" height="12" viewBox="0 0 7 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>Chevron Right</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(-5575 -16033)">
+<g id="chevron-right">
+<g id="Rectangle 4">
+<use xlink:href="#path0_fill" transform="matrix(-0.707107 -0.707107 0.707107 -0.707107 5576.15 16045)" fill="#9BAABF"/>
+</g>
+<g id="Rectangle 4">
+<use xlink:href="#path0_fill" transform="matrix(0.707107 -0.707107 0.707107 0.707107 5574.64 16035)" fill="#9BAABF"/>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_fill" fill-rule="evenodd" d="M 0 1.06894C 0 0.47858 0.47858 0 1.06894 0C 1.6593 0 2.13788 0.47858 2.13788 1.06894L 2.13788 7.02445C 2.13788 7.61481 1.6593 8.09339 1.06894 8.09339C 0.47858 8.09339 0 7.61481 0 7.02445L 0 1.06894Z"/>
+</defs>
+</svg>
