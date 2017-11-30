@@ -173,14 +173,14 @@ export const tablesReducer = (
                 {
                   votes: "0",
                   upvoted: false,
-                  rowId: action.payload.response.data.id
+                  rowId: action.payload.response.id
                 }
               ],
               rows: [
                 ...state[action.payload.tableId].table.rows,
                 {
-                  id: action.payload.response.data.id,
-                  content: action.payload.response.data.cells
+                  id: action.payload.response.id,
+                  content: action.payload.response.cells
                 }
               ]
             }
@@ -213,7 +213,7 @@ export const tablesReducer = (
               columns: [
                 ...state[action.payload.tableId].table.columns,
                 {
-                  id: action.payload.response.data.id,
+                  id: action.payload.response.id,
                   title: action.payload.title
                 }
               ],
@@ -222,7 +222,7 @@ export const tablesReducer = (
                 content: [
                   ...row.content,
                   {
-                    id: action.payload.response.data.cells.find(
+                    id: action.payload.response.cells.find(
                       cell => (cell.rowId === row.id ? cell.id : false)
                     ),
                     content: ""

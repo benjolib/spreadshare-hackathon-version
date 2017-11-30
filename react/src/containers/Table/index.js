@@ -375,7 +375,9 @@ class Table extends Component<Props, State> {
         <TableHeader>
           <TableButton icon="sort" onClick={this.toggleSortings} />
           <TableButton icon="filter" onClick={this.toggleFilters} />
-          <TableButton icon="add" onClick={this.showAdd} />
+          {this.props.permission !== "0" && (
+            <TableButton icon="add" onClick={this.showAdd} />
+          )}
           <TableSearch onChange={this.updateSearchValue} />
           <TableButton icon="dots" onClick={this.toggleDropdown} />
         </TableHeader>
@@ -434,7 +436,8 @@ class Table extends Component<Props, State> {
                 return {
                   readOnly: true,
                   renderer: votesRenderer({
-                    voteRow: rowId => this.props.voteRow(this.props.id, rowId)
+                    voteRow: rowId => this.props.voteRow(this.props.id, rowId),
+                    permission: this.props.permission
                   })
                 };
               }
