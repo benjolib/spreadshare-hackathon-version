@@ -25,9 +25,17 @@
       }
 
       &__details {
+        position: relative;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
+        width: 66%;
+
+        h1 {
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
 
         &__owner {
           text-transform: uppercase;
@@ -42,15 +50,21 @@
 
           &__tagline {
             @include rem(margin-right, 12);
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
           }
 
           &__tokens {
+            position: absolute;
+            top: -24px;
+            left: 0;
             background: $text-color;
             display: inline-flex;
             align-self: center;
             border-radius: 6px;
             text-transform: uppercase;
-            font-weight: 400;
+            font-weight: 500;
             color: #fff;
             @include rem2(padding, 2, 8);
             @include rem(margin-bottom, 14);
@@ -242,7 +256,7 @@
   width: 50%;
   text-align: left;
   color: #6A7C94;
-}  
+}
 
 .bAvots div button:last-child {
   border: none;
