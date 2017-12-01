@@ -150,7 +150,7 @@ class UserSettingsController
                         true
                     );
                     
-                    $userSettingsModel = \DS\Model\UserSettings::get($userId, 'userId');
+                    $userSettingsModel = \DS\Model\UserSettings::get($userId, 'userId')->setUserId($userId);
                     $userSettingsModel->setShowTokensOnProfilePage($this->request->getPost('showTokensOnProfilePage'))->save();
                     $this->view->setVar('settings', $userSettingsModel);
                     
@@ -208,20 +208,15 @@ class UserSettingsController
         $userId = $this->serviceManager->getAuth()->getUserId();
         if ($userId > 0)
         {
-            $userSettingsModel = \DS\Model\UserSettings::findByFieldValue('userId', $userId);
-            if (!$userSettingsModel)
+            $userSettingsModel = \DS\Model\UserSettings::get($userId, 'userId')->setUserId($userId);
+            
+            if ($this->request->isPost())
             {
-                $userSettingsModel = new \DS\Model\UserSettings;
-                $userSettingsModel->setUserId($userId);
+                $userSettingsModel->setTopicDigest($this->request->getPost('topicDigest'))
+                                  ->setFollowDigest($this->request->getPost('followerDigest'))
+                                  ->setNewProductAnnouncements($this->request->getPost('newProductAnnouncements'))
+                                  ->save();;
             }
-        }
-        
-        if ($this->request->isPost())
-        {
-            $userSettingsModel->setTopicDigest($this->request->getPost('topicDigest'))
-                              ->setFollowDigest($this->request->getPost('followerDigest'))
-                              ->setNewProductAnnouncements($this->request->getPost('newProductAnnouncements'))
-                              ->save();;
         }
         
         $this->view->setVar('settings', \DS\Model\UserSettings::findByFieldValue('userId', $userId));
