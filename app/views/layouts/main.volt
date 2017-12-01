@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
   <link rel="stylesheet" href="/css/styles.css">
   <link href="/css/main.508c7389.css" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/assets/icons/favicon.png">
   {% block header %}{% endblock %}
   <title>{% block title %}{% endblock %}</title>
 </head>
@@ -27,6 +28,7 @@
 {{ partial('layouts/footer') }}
 
 <div class="white-overlay"></div>
+<a class="button green found-a-bug" href="https://betterresearch.typeform.com/to/o3W0BI" target="_blank">Report a Bug 🐞</a>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
 <script type="text/javascript" src="/js/api.js"></script>
