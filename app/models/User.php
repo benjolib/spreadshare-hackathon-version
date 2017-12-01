@@ -179,12 +179,24 @@ class User
     public static function addUserFromAuthService($name, $handle, $email, $description, $tagline, $authUid, $profileImage, $city, $website = '', $provider = 'Facebook')
     {
         $email = $email ? $email : "{$authUid}@" . strtolower($provider) . ".com";
-        $user  = User::findFirst(" email='$email' OR authUid='" . $authUid . "' ");
+        $user  = User::findFirst(
+            [
+                "conditions" => " email = ?0 OR authUid = ?1",
+                "bind" => [$email, $authUid],
+            ]
+        );
         
         $urlPattern = "/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i";
         
         if (!$user)
         {
+            $userHandle = User::findByFieldValue('handle', $handle);
+            // Add Auth UserId to handle if a user with the same handle already exists
+            if ($userHandle)
+            {
+                $handle .= '-' . $authUid;
+            }
+            
             $user = new self();
             
             $user->setEmail($email)
@@ -209,12 +221,13 @@ class User
         {
             $user->setEmail($email)
                  ->setName($name)
-                 ->setHandle($handle)
                  ->setImage($profileImage)
-                 ->setLastLogin(time())
-                 ->setTagline($tagline)
+                 ->setAuthProvider($provider)
+                 ->setAuthUid($authUid)
+                 ->setHandle($handle)
+                 ->setLocation($city)
                  ->setDescription($description)
-                 ->setLocation($city);
+                 ->setTagline($tagline);
             
             if ($website && preg_match($urlPattern, $website))
             {
