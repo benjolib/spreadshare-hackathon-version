@@ -447,9 +447,14 @@
   border-radius: 4px;
   font-size: 15px;
   font-size: .9375rem;
-  padding: .75rem 1.25rem;
+  padding: 10px 30px !important;
 }
 
+.signup__content__form__buttons {
+  button {
+    padding: 10px 16px !important;
+  }
+}
 
 
 // .navbar__controls {
