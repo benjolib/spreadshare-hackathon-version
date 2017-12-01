@@ -45,6 +45,9 @@ class IndexController
                     case "1":
                         $this->flash->success('Your table has been successfully deleted.');
                         break;
+                    case "2":
+                        $this->flash->success('Authorization request has been denied.');
+                        break;
                 }
                 
             }

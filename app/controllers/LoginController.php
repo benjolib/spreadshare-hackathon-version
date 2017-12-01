@@ -12,6 +12,7 @@ use Hybridauth\Adapter\AdapterInterface;
 use Hybridauth\Exception\AuthorizationDeniedException;
 use Hybridauth\Hybridauth;
 use Phalcon\Exception;
+use Phalcon\Logger;
 
 /**
  * Spreadshare
@@ -57,21 +58,17 @@ class LoginController
                 }
             }
             
-            if ($this->request->get('code') && $this->request->get('state'))
-            {
-                return $this->loginWithGoogleAction();
-            }
-            
-            // Login request from Twitter
+            // Login request callback from Twitter
             if ($this->request->get('oauth_token'))
             {
                 return $this->loginWithTwitterAction();
             }
             
-            // Login request from Facebook
-            if ($this->request->get('code'))
+            // Login request callback from Facebook or Google
+            if ($this->request->get('state') && $this->request->get('code'))
             {
-                return $this->loginWithFacebookAction();
+                $this->loginWithFacebookAction();
+                $this->loginWithGoogleAction();
             }
             
             /**
@@ -161,11 +158,14 @@ class LoginController
         }
         catch (AuthorizationDeniedException $e)
         {
-            $this->response->redirect('/');
+            //$this->response->redirect('/');
+            header('Location: /?msg=2');
         }
         catch (\Exception $e)
         {
-            $this->response->redirect('/');
+            //$this->response->redirect('/');
+            Application::instance()->log($e->getMessage(), Logger::NOTICE);
+            header('Location: /');
         }
         
         return null;
