@@ -190,8 +190,10 @@
       @include rem(margin-right, 50);
 
       @include desktop {
-        width: 20%;
-        @include rem(margin-top, 125);
+        //width: 20%;
+        //@include rem(margin-top, 125);
+        width: 26%;
+        @include rem(margin-top, 130);        
       }
 
       &__box {
@@ -236,7 +238,7 @@
             text-overflow: ellipsis;
             width: 100%;
             font-weight: 600;
-            
+
             &:hover {
               cursor: pointer;
             }
