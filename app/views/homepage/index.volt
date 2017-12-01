@@ -88,6 +88,8 @@
 		<span class="circle"></span>
 	</div>
 </div>
+
+<form method="GET" id="sidebarForm">
 {# content #}
 <div class="container container--home">
     {# tables content #}
@@ -137,6 +139,7 @@
 			</div>
     </div>
 
+
 	{# sidebar wrapper #}
 	<div class="aside__wrapper">
 		{# sidebar 1 #}
@@ -144,7 +147,6 @@
 			<div class="main__content__sidebar__option" id="topicFilter">
 				<span>Filter by Topic</span>
 			</div>
-			<form method="GET" id="sidebarForm">
 				<ul class="filter open filter--topic {% if sidebarFilter.topic %}open{% endif %}">
 					<li>
 						<label {% if sidebarFilter.topic== "" %}class="selected"{% endif %}>
@@ -159,7 +161,6 @@
 						</li>
 					{% endfor %}
 				</ul>
-			</form>
 		</aside>
 
 		{# sidebar 2 #}
@@ -167,21 +168,19 @@
 			<div class="main__content__sidebar__option" id="typeFilter">
 				<span>Filter by Table Type</span>
 			</div>
-			<form method="GET" id="sidebarForm">
-				<ul class="filter open filter--type {% if sidebarFilter.type %}open{% endif %}">
-					<li>
-						<label {% if sidebarFilter.type== "" %}class="selected"{% endif %}>
-						<input type="radio" name="type" {% if sidebarFilter.type== "" %}checked="checked"{% endif %} value="" />All</label>
-					</li>
-					{% for type in types %}
-						<li>
-							<label {% if sidebarFilter.type== type.id %}class="selected" {% endif %} title="{{ type.title|e }}">
-								<input type="radio" name="type" {% if sidebarFilter.type== type.id %}checked="checked" {% endif %} value="{{ type.id }}" /> {{ type.title|e }}
-							</label>
-						</li>
-					{% endfor %}
-				</ul>
-			</form>
+            <ul class="filter open filter--type {% if sidebarFilter.type %}open{% endif %}">
+                <li>
+                    <label {% if sidebarFilter.type== "" %}class="selected"{% endif %}>
+                    <input type="radio" name="type" {% if sidebarFilter.type== "" %}checked="checked"{% endif %} value="" />All</label>
+                </li>
+                {% for type in types %}
+                    <li>
+                        <label {% if sidebarFilter.type== type.id %}class="selected" {% endif %} title="{{ type.title|e }}">
+                            <input type="radio" name="type" {% if sidebarFilter.type== type.id %}checked="checked" {% endif %} value="{{ type.id }}" /> {{ type.title|e }}
+                        </label>
+                    </li>
+                {% endfor %}
+            </ul>
 		</aside>
 
 		{# sidebar 3 #}
@@ -189,9 +188,7 @@
 			<div class="main__content__sidebar__option" id="tagFilter">
 				<span>Filter by Tags</span>
 			</div>
-			<form>
-				<div id="TagsSelect" data-name="tags[]" data-value="{{ reactArray(filteredTags) }}" data-submit-form-on-change="sidebarForm" data-placeholder="" class="react-component"></div>
-			</form>
+			<div id="TagsSelect" data-name="tags[]" data-value="{{ reactArray(filteredTags) }}" data-submit-form-on-change="sidebarForm" data-placeholder="" class="react-component"></div>
 		</aside>
 
 		{# sidebar 4 #}
@@ -199,12 +196,11 @@
 			<div class="main__content__sidebar__option" id="locationFilter">
 				<span>Filter by location</span>
 			</div>
-			<form>
-				<div id="LocationSelect" data-name="locations[]" data-value="{{ reactArray(filteredLocations) }}" data-submit-form-on-change="sidebarForm" data-placeholder="" class="react-component"></div>
-			</form>
+            <div id="LocationSelect" data-name="locations[]" data-value="{{ reactArray(filteredLocations) }}" data-submit-form-on-change="sidebarForm" data-placeholder="" class="react-component"></div>
 		</aside>
 	</div>
 </div>
+</form>
 {% endblock %}
 
 {% block scripts %}
@@ -222,7 +218,7 @@
 				}
 			});
 
-			$('#sidebarForm > ul > li > label').on('change', function (ev) {
+			$('#sidebarForm ul.filter > li > label').on('change', function (ev) {
 				document.getElementById('sidebarForm').submit();
 			});
 		});
