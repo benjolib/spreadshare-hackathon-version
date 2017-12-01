@@ -2,6 +2,7 @@
 import type { Dispatch, Action, ThunkAction } from "../../types";
 import type { Table, Row, Cell } from "./types";
 import { fetchDataApi, saveDataApi } from "../../api";
+import fixInvalidData from "../../lib/fixInvalidData";
 import dummyTable from "./dummyTable";
 
 // FETCH TABLE ACTIONS
@@ -44,11 +45,15 @@ export const fetchTable = (tableId: string): ThunkAction => (
         return;
       }
 
-      dispatch(fetchTableSuccess(tableId, data));
+      const validData = fixInvalidData(data);
+
+      dispatch(fetchTableSuccess(tableId, validData));
     });
   } else {
     setTimeout(() => {
-      dispatch(fetchTableSuccess(tableId, dummyTable));
+      const validData = fixInvalidData(dummyTable);
+
+      dispatch(fetchTableSuccess(tableId, validData));
     }, 500);
   }
 };

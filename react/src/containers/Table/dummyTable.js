@@ -113,29 +113,7 @@ const dummyTable = {
   rows: [
     {
       id: "1",
-      content: [
-        {
-          id: "1",
-          content: "Talkus",
-          link: null
-        },
-        {
-          id: "2",
-          content:
-            "Centralize all your customer feedback (livechat, email, sms, twitter, facebook) in one place, Slack",
-          link: null
-        },
-        {
-          id: "3",
-          content: "http://talkus.io",
-          link: null
-        },
-        {
-          id: "4",
-          content: "$48/mo unlimited agents",
-          link: null
-        }
-      ]
+      content: null
     },
     {
       id: "2",
