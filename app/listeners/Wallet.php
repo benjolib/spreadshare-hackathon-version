@@ -3,56 +3,45 @@
 namespace DS\Listeners;
 
 use DS\Application;
-use Elastica\Document;
-use Elastica\Exception\ResponseException;
-use Elastica\Index;
-use Elastica\Response;
+use GuzzleHttp\Client;
+use DS\Model\Wallet;
 use Bernard\Message\PlainMessage;
 use DS\Component\ServiceManager;
 
 
-class ElasticSearch
+class Wallet
 {
 
 
-    public function newTable(PlainMessage $message)
+    public function newWallet(PlainMessage $message)
     {
 
       try {
 
-        // Create a table
-        $tableData = [
-          'id' => $message->get('tableId'),
-          'title' => $message->get('tableTitle'),
-          'tagline' => $message->get('tableTagline')
+        // Create a data
+        $data = [
+          'userId' => $message->get('userId'),
+          'email' => $message->get('email')
         ];
 
-        // getClient
-        $elasticaClient = self::getClient();
-        // Load index
-        $elasticaIndex = $elasticaClient->getIndex('tables');
+        $client = new Client([
+            'headers' => [ 'Content-Type' => 'application/json' ]
+        ]);
 
-        if (!$elasticaIndex->exists()) {
-          # Create index
-          $elasticaIndex->create();
-        }
+        $response = $client->post('http://ec2-18-217-109-204.us-east-2.compute.amazonaws.com/address',
+            ['body' => json_encode($data)]
+        );
 
-        // Get type
-        $elasticaType = $elasticaIndex->getType('table');
 
-        // Document addition
-        $tableDocument = new \Elastica\Document($message->get('tableId'), $tableData);
+        $object = json_decode($response->getBody()->getContents());
 
-        // Add table to type
-        $elasticaType->addDocument($tableDocument);
+        Wallet::findByFieldValue($data['userId'], 'userId')->setUserId($data['userId'])->setContractAddress($object->address)->save();
 
 
 
-      } catch (ResponseException $e) {
+      } catch (Exception $e) {
 
-        $error = $e->getResponse()->getFullError();
-
-        Application::instance()->log($error['type'].':'.$error['reason'], Logger::CRITICAL);
+        Application::instance()->log($e->getMessage(), Logger::CRITICAL);
 
       }
 

@@ -2,7 +2,10 @@
 
 {% block content %}
 
-  <div class="__page__top"><h1>About</h1></div>
+  <div class="__page__top">
+    <h1>About</h1>
+    <h2>We shape our Data and therefore our Data shape Us</h2>
+  </div>
 
   <div class="__page__container">
 

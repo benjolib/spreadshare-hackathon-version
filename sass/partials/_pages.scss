@@ -4,6 +4,13 @@
   h1 {
     text-align:left;
     font-size: 2em;
+    font-weight: normal;
+    color: #6A7C94;
+  }
+  h2 {
+    text-align:left;
+    font-size: 1em;
+    font-weight: normal;
     color: #6A7C94;
   }
 }
@@ -27,6 +34,7 @@
        border-radius: 8px;
 
      li {
+         font-family: $primary-font;
          padding: 5px;
          margin: 10px;
          color: #9BAABF;
