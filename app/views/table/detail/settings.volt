@@ -21,6 +21,14 @@
         {% endif %}
       </form>
     </div>
+    {# buttons #}
+    <div class="addTableEmpty__content__main__buttons">
+      <div class="" style="position: absolute;left: 20px;top: 20px;">
+        <button name="action" value="delete" class="button red">Delete Table</button>
+      </div>
+      <a href="/table/add">Cancel</a>
+      <button type="submit">Save Changes</button>
+    </div>
   </div>
 
   <aside class="aside aside--tableDetails">
