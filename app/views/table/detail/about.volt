@@ -30,13 +30,15 @@
                     <div class="tableAbout__info__content__item tableAbout__info__content__item--type">
                         <div>Type</div>
                         <div>
+                            {% if table['typeTitle'] %}
                             <span>{{ table['typeTitle'] }}</span>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="tableAbout__info__content__item tableAbout__info__content__item--locations">
                         <div>Locations</div>
                         <div>
-                            <span>{{ implode('</span><span>', explode(', ', table['locations'])) }}</span>
+                            <span>{{ implode('</span>, <span>', explode(', ', table['locations'])) }}</span>
                         </div>
                     </div>
                     <div class="tableAbout__info__content__item tableAbout__info__content__item--creator">
