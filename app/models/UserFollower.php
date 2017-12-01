@@ -117,7 +117,7 @@ class UserFollower
         // .. and recrete them:
         foreach ($followerUserIds as $id)
         {
-            (new self())->setUserId($userId)->setFollowedByUserId($id)->create();
+            (new self())->setUserId($id)->setFollowedByUserId($userId)->create();
         }
         
         return $this;

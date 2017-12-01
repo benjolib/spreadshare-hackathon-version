@@ -4,6 +4,7 @@ namespace DS\Controller;
 
 use DS\Application;
 use DS\Model\DataSource\TableFlags;
+use DS\Model\DataSource\UserStatus;
 use DS\Model\Helper\TableFilter;
 use DS\Model\Tables;
 use DS\Model\Topics;
@@ -28,7 +29,7 @@ use Phalcon\Logger;
 class SignupController
     extends BaseController
 {
-
+    
     /**
      * Redirect user to Homepage if he/she is not logged in
      */
@@ -39,7 +40,7 @@ class SignupController
             $this->response->redirect('/');
         }
     }
-
+    
     /**
      * Signup form
      */
@@ -57,14 +58,14 @@ class SignupController
                         $this->request->getPost('email'),
                         $this->request->getPost('password')
                     );
-
+                
                 // User is now directly logged in:
                 $this->serviceManager->getAuth()->storeSession($userModel);
-
+                
                 // Redirect to topics page
                 header('Location: /signup/topics');
                 //$this->response->redirect('/signup/topics', false);
-
+                
                 // Disable further rendering
                 $this->view->disable();
             }
@@ -75,10 +76,10 @@ class SignupController
             $this->view->setVar('errorMessage', $e->getMessage());
             $this->view->setVar('post', $this->request->getPost());
         }
-
+        
         $this->view->setMainView('auth/signup');
     }
-
+    
     /**
      * Topics
      */
@@ -87,9 +88,15 @@ class SignupController
         try
         {
             $this->redirectIfNotLoggedIn();
-
+            
+            if ($this->serviceManager->getAuth()->getUser()->getStatus() != UserStatus::OnboardingIncomplete && $this->serviceManager->getAuth()->getUser()->getStatus() != UserStatus::Unconfirmed)
+            {
+                // Onboarding already done
+                header('Location: /');
+            }
+            
             $topics = (new Topics())->find();
-
+            
             $this->view->setVar('topics', $topics);
             $this->view->setMainView('auth/onboarding/topics');
         }
@@ -98,7 +105,7 @@ class SignupController
             Application::instance()->log($e->getMessage(), Logger::CRITICAL);
         }
     }
-
+    
     /**
      * Follow
      */
@@ -107,7 +114,7 @@ class SignupController
         try
         {
             $this->redirectIfNotLoggedIn();
-
+            
             if ($this->request->isPost())
             {
                 $topics = $this->request->getPost('topic');
@@ -120,7 +127,7 @@ class SignupController
                     );
                 }
             }
-
+            
             $users = (new User())->find(
                 [
                     'conditions' => 'id != ?0',
@@ -130,7 +137,7 @@ class SignupController
                 ]
             );
             $this->view->setVar('users', $users);
-
+            
             $this->view->setMainView('auth/onboarding/follow');
         }
         catch (Exception $e)
@@ -138,7 +145,7 @@ class SignupController
             Application::instance()->log($e->getMessage(), Logger::CRITICAL);
         }
     }
-
+    
     /**
      * Location
      */
@@ -147,7 +154,7 @@ class SignupController
         try
         {
             $this->redirectIfNotLoggedIn();
-
+            
             if ($this->request->isPost())
             {
                 $users = $this->request->getPost('user');
@@ -160,7 +167,7 @@ class SignupController
                     );
                 }
             }
-
+            
             $this->view->setMainView('auth/onboarding/location');
         }
         catch (Exception $e)
@@ -168,7 +175,7 @@ class SignupController
             Application::instance()->log($e->getMessage(), Logger::CRITICAL);
         }
     }
-
+    
     /**
      * Tables
      */
@@ -177,7 +184,7 @@ class SignupController
         try
         {
             $this->redirectIfNotLoggedIn();
-
+            
             if ($this->request->isPost())
             {
                 $locations = $this->request->getPost('locations');
@@ -190,9 +197,9 @@ class SignupController
                     );
                 }
             }
-
+            
             $this->view->setVar('tables', (new Tables())->findTablesAsArray($this->serviceManager->getAuth()->getUserId(), new TableFilter(), TableFlags::Published, 0, 'RAND()'));
-
+            
             $this->view->setMainView('auth/onboarding/tables');
         }
         catch (Exception $e)
@@ -200,16 +207,19 @@ class SignupController
             Application::instance()->log($e->getMessage(), Logger::CRITICAL);
         }
     }
-
+    
     /**
      * Onboarding Finished
      */
     public function finishedAction()
     {
         $this->redirectIfNotLoggedIn();
-
+        
+        $this->serviceManager->getAuth()->getUser()->setStatus(UserStatus::Confirmed)->save();
+        
         if ($this->request->isPost())
         {
+            
             $locations = $this->request->getPost('locations');
             if (is_array($locations) && count($locations))
             {
@@ -220,7 +230,7 @@ class SignupController
                 );
             }
         }
-
+        
         $this->response->redirect('/');
     }
 }

@@ -4,6 +4,7 @@ namespace DS\Controller;
 
 use DS\Application;
 use DS\Model\DataSource\TableFlags;
+use DS\Model\DataSource\UserStatus;
 use DS\Model\Helper\DateRange;
 use DS\Model\Helper\TableFilter;
 use DS\Model\Locations;
@@ -36,6 +37,12 @@ class IndexController
     {
         try
         {
+            if ($this->serviceManager->getAuth()->loggedIn() && $this->serviceManager->getAuth()->getUser()->getStatus() == UserStatus::OnboardingIncomplete)
+            {
+                // do the onboarding
+                header('Location: /signup/topics');
+            }
+            
             // Message hack
             // @todo implement a better way for this
             if ($this->request->get('msg'))

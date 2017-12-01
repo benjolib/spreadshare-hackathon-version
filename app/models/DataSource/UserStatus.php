@@ -28,4 +28,9 @@ class UserStatus
      * Inactive / hidden dataset
      */
     const Deleted = 2;
+    
+    /**
+     * Omboarding process not done, yet
+     */
+    const OnboardingIncomplete = 3;
 }

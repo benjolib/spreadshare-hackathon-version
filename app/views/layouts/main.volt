@@ -36,5 +36,14 @@
 
 <script type="text/javascript" src="/js/react/main.e0a70259.js"></script>
 {% block scripts %}{% endblock %}
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-110506889-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-110506889-1');
+</script>
 </body>
 </html>
