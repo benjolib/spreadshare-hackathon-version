@@ -113,7 +113,7 @@ class UserSettingsController
      */
     public function personalAction()
     {
-        $userId    = $this->serviceManager->getAuth()->getUserId();
+        $userId = $this->serviceManager->getAuth()->getUserId();
         
         if ($this->request->isPost())
         {
@@ -149,6 +149,10 @@ class UserSettingsController
                         $this->request->getPost('website'),
                         true
                     );
+                    
+                    $userSettingsModel = \DS\Model\UserSettings::get($userId, 'userId');
+                    $userSettingsModel->setShowTokensOnProfilePage($this->request->getPost('showTokensOnProfilePage'))->save();
+                    $this->view->setVar('settings', $userSettingsModel);
                     
                     // Reload user data
                     $this->view->setVar('profile', $this->getUser($userId));
@@ -201,6 +205,26 @@ class UserSettingsController
      */
     public function notificationsAction()
     {
+        $userId = $this->serviceManager->getAuth()->getUserId();
+        if ($userId > 0)
+        {
+            $userSettingsModel = \DS\Model\UserSettings::findByFieldValue('userId', $userId);
+            if (!$userSettingsModel)
+            {
+                $userSettingsModel = new \DS\Model\UserSettings;
+                $userSettingsModel->setUserId($userId);
+            }
+        }
+        
+        if ($this->request->isPost())
+        {
+            $userSettingsModel->setTopicDigest($this->request->getPost('topicDigest'))
+                              ->setFollowDigest($this->request->getPost('followerDigest'))
+                              ->setNewProductAnnouncements($this->request->getPost('newProductAnnouncements'))
+                              ->save();;
+        }
+        
+        $this->view->setVar('settings', \DS\Model\UserSettings::findByFieldValue('userId', $userId));
         $this->view->setMainView('user/settings/notifications');
     }
     

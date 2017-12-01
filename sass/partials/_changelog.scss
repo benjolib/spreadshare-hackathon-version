@@ -1,9 +1,33 @@
 .container.container--changelog {
   display: flex;
+  @include rem(margin-top, 25);
+
+  @include mobile {
+    padding: 0;
+    margin-top: 0;
+  }
+  @include tablet {
+    padding: 0;
+    margin-top: 0;
+  }
 
   .container__content {
     position: relative;
     width: 100%;
+
+    &--row {
+      width: 100%;
+      align-self: center;
+      padding: 0;
+
+      @include desktop {
+        width: 72.5%;
+        padding-top: 0;
+        padding-left: 0;
+        flex-direction: column;
+        align-self: flex-start;
+      }
+    }
 
     &--column {
       flex-direction: column;

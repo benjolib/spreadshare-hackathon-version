@@ -5,122 +5,124 @@
 
 {% block content %}
 <form method="post" enctype="multipart/form-data">
-  <div class="layout">
-    <div class="layout__content">
-      <div class="layout__content__wrapper">
-        <p class="layout__content__title">Account</p>
-        <p class="layout__content__subtitle">
-          Manage everything related to your account, profile, wallet and tokens here.
-        </p>
-        <div class="layout__content__main layout__content__main__personal">
-          <div class="layout__content__main__personal__profile">
-            <div class="layout__content__main__personal__column">
-              <div class="layout__content__main__personal__profile__text">
-                <p>Profile Photo</p>
-              </div>
-              <div class="layout__content__main__personal__row">
-                <div class="layout__content__main__personal__profile__photo">
-                  <img class="profileImage" id="profileImage" src="{{ profile.image }}" />
+    <div class="layout">
+        <div class="layout__content">
+            <div class="layout__content__wrapper">
+                <p class="layout__content__title">Account</p>
+                <p class="layout__content__subtitle">
+                    Manage everything related to your account, profile, wallet and tokens here.
+                </p>
+                <div class="layout__content__main layout__content__main__personal">
+                    <div class="layout__content__main__personal__profile">
+                        <div class="layout__content__main__personal__column">
+                            <div class="layout__content__main__personal__profile__text">
+                                <p>Profile Photo</p>
+                            </div>
+                            <div class="layout__content__main__personal__row">
+                                <div class="layout__content__main__personal__profile__photo">
+                                    <img class="profileImage" id="profileImage" src="{{ profile.image }}" />
+                                </div>
+                                <div class="layout__content__main__personal__profile__add">
+                                    <button type="button" id="profileImageReplace">Replace</button>
+                                </div>
+                                <div class="layout__content__main__personal__profile__remove">
+                                    <a href="javascript:" onclick="removeImage();">Remove</a>
+                                </div>
+                                <input type="hidden" name="removeProfileImage" id="removeProfileImage" value="0" />
+                                <input type="file" name="image" id="fileUpload" style="opacity:0; height:0;width:0;" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layout__content__main__personal__name">
+                        <div class="layout__content__main__personal__column">
+                            <div class="layout__content__main__personal__name__text">
+                                <p>Full name</p>
+                            </div>
+                            <input type="text" name="name" value="{{ profile.name }}" />
+                        </div>
+                    </div>
+                    <div class="layout__content__main__personal__username">
+                        <div class="layout__content__main__personal__column">
+                            <div class="layout__content__main__personal__username__text">
+                                <p>Username</p>
+                            </div>
+                            <input type="text" name="handle" value="{{ profile.handle }}" />
+                        </div>
+                    </div>
+                    <div class="layout__content__main__personal__tagline">
+                        <div class="layout__content__main__personal__column">
+                            <div class="layout__content__main__personal__tagline__text">
+                                <p>Tagline</p>
+                            </div>
+                            <input type="text" name="tagline" value="{{ profile.tagline }}" />
+                            <span>Max <i>140</i> characters</span>
+                        </div>
+                    </div>
+                    <div class="layout__content__main__personal__locations">
+                        <div class="layout__content__main__personal__column">
+                            <div class="layout__content__main__personal__locations__text">
+                                <p>Locations</p>
+                            </div>
+                            <div id="LocationSelect" data-name="locations[]" data-value="{{ locations }}" data-placeholder="Add a location" class="react-component"></div>
+                        </div>
+                    </div>
+                    <div class="layout__content__main__personal__website">
+                        <div class="layout__content__main__personal__column">
+                            <div class="layout__content__main__personal__website__text">
+                                <p>Website</p>
+                            </div>
+                            <input type="text" name="website" value="{{ profile.website }}" />
+                        </div>
+                    </div>
+
+                    <div class="layout__content__main__personal__switch">
+                        <div class="layout__content__main__personal__column">
+                            <div class="layout__content__main__personal__switch__text">
+                                <p>Show tokens on profile page</p>
+                            </div>
+                            <div class="layout__content__main__notifications__switch__buttons">
+                                <input type="hidden" name="showTokensOnProfilePage" value="{{ settings.showTokensOnProfilePage }}" />
+                                <button type="button" class="layout__content__main__notifications__switch__buttons layout__content__main__notifications__switch__buttons--left YSwitch {% if settings.showTokensOnProfilePage %}active{% endif %}"
+                                        data-name="showTokensOnProfilePage" value="1">
+                                    Y
+                                </button>
+                                <button type="button" class="layout__content__main__notifications__switch__buttons layout__content__main__notifications__switch__buttons--right NSwitch  {% if !settings.showTokensOnProfilePage %}active{% endif %}"
+                                        data-name="showTokensOnProfilePage" value="0">
+                                    N
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layout__content__main__buttons">
+                        <a href="/">Cancel</a>
+                        <button type="submit">Save Changes</button>
+                    </div>
                 </div>
-                <div class="layout__content__main__personal__profile__add">
-                  <button type="button" id="profileImageReplace">Replace</button>
+            </div>
+            <aside class="layout__content__aside">
+                <div class="layout__content__aside__box">
+                    <a href="/settings/personal">
+                        <div class="settings-box-selected">Personal</div>
+                    </a>
+                    <a href="/settings/account">
+                        <div>Account</div>
+                    </a>
+                    <a href="/settings/notifications">
+                        <div>Notifications</div>
+                    </a>
+                    <a href="/settings/connected">
+                        <div>Connect Accounts</div>
+                    </a>
+                    <a href="/settings/wallet">
+                        <div>Wallet</div>
+                    </a>
+                    <a href="/settings/invite">
+                        <div>Invite</div>
+                    </a>
                 </div>
-                <div class="layout__content__main__personal__profile__remove">
-                  <a href="javascript:" onclick="removeImage();">Remove</a>
-                </div>
-                <input type="hidden" name="removeProfileImage" id="removeProfileImage" value="0" />
-                <input type="file" name="image" id="fileUpload" style="opacity:0; height:0;width:0;" />
-              </div>
-            </div>
-          </div>
-          <div class="layout__content__main__personal__name">
-            <div class="layout__content__main__personal__column">
-              <div class="layout__content__main__personal__name__text">
-                <p>Full name</p>
-              </div>
-              <input type="text" name="name" value="{{ profile.name }}" />
-            </div>
-          </div>
-          <div class="layout__content__main__personal__username">
-            <div class="layout__content__main__personal__column">
-              <div class="layout__content__main__personal__username__text">
-                <p>Username</p>
-              </div>
-              <input type="text" name="handle" value="{{ profile.handle }}" />
-            </div>
-          </div>
-          <div class="layout__content__main__personal__tagline">
-            <div class="layout__content__main__personal__column">
-              <div class="layout__content__main__personal__tagline__text">
-                <p>Tagline</p>
-              </div>
-              <input type="text" name="tagline" value="{{ profile.tagline }}" />
-              <span>Max <i>140</i> characters</span>
-            </div>
-          </div>
-          <div class="layout__content__main__personal__locations">
-            <div class="layout__content__main__personal__column">
-              <div class="layout__content__main__personal__locations__text">
-                <p>Locations</p>
-              </div>
-              <div id="LocationSelect" data-name="locations[]" data-value="{{ locations }}" data-placeholder="Add a location" class="react-component"></div>
-            </div>
-          </div>
-          <div class="layout__content__main__personal__website">
-            <div class="layout__content__main__personal__column">
-              <div class="layout__content__main__personal__website__text">
-                <p>Website</p>
-              </div>
-              <input type="text" name="website" value="{{ profile.website }}" />
-            </div>
-          </div>
-          <div class="layout__content__main__personal__switch">
-            <div class="layout__content__main__personal__column">
-              <div class="layout__content__main__personal__switch__text">
-                <p>Show tokens on profile page</p>
-              </div>
-              <div class="layout__content__main__personal__row">
-                <div class="layout__content__main__personal__switch__buttons">
-                  <div class="layout__content__main__personal__switch__buttons layout__content__main__personal__switch__buttons--left active">
-                    Y
-                  </div>
-                  <div class="layout__content__main__personal__switch__buttons layout__content__main__personal__switch__buttons--right">
-                    N
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="layout__content__main__buttons">
-            <a href="/">Cancel</a>
-            <button type="submit">Save Changes</button>
-          </div>
+            </aside>
         </div>
-      </div>
-      <aside class="layout__content__aside">
-        <div class="layout__content__aside__box">
-          <a href="/settings/personal">
-            <div class="settings-box-selected">Personal</div>
-          </a>
-          <a href="/settings/account">
-            <div>Account</div>
-          </a>
-          <a href="/settings/notifications">
-            <div>Notifications</div>
-          </a>
-          <a href="/settings/connected">
-            <div>Connect Accounts</div>
-          </a>
-          <a href="/settings/wallet">
-            <div>Wallet</div>
-          </a>
-          <a href="/settings/invite">
-            <div>Invite</div>
-          </a>
-        </div>
-      </aside>
     </div>
-  </div>
 </form>
 
 <script type="text/javascript">
@@ -132,6 +134,8 @@
         //img.onload = fn;
       }
     });
+
+    window.initOnOffSwitches();
   });
 
   document.getElementById('profileImageReplace').onclick = function () {
