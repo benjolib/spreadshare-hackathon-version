@@ -58,7 +58,7 @@
 
   <div class="__page__sidebar">
    <ul>
-    <li><a href="faq">Company</a></li>
+    <li><a href="/faq">Company</a></li>
     <li class="active"><a href="/faq/product">Product</a></li>
     <li><a href="/faq/content">Content</a></li>
     <li><a href="/faq/token">Token</a></li>
