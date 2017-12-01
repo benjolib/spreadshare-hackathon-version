@@ -3,6 +3,7 @@
 namespace DS\Model\Events;
 
 use DS\Events\Table\TableCreated;
+use DS\Events\Table\TableUpdated;
 use DS\Model\Abstracts\AbstractTables;
 use DS\Model\DataSource\TableFlags;
 use DS\Model\Tables;
@@ -60,7 +61,6 @@ abstract class TablesEvents
             throw new \InvalidArgumentException('A table with the exact same title already exists. Please choose another title');
         }
         
-        
         if (!$this->getTypeId())
         {
             $this->setTypeId(null);
@@ -101,6 +101,19 @@ abstract class TablesEvents
         if ($this instanceof Tables)
         {
             TableCreated::after($this->getOwnerUserId(), $this);
+        }
+        
+        return true;
+    }
+    
+    /**
+     * @return bool
+     */
+    public function afterSave()
+    {
+        if ($this instanceof Tables)
+        {
+            TableUpdated::after($this->getOwnerUserId(), $this);
         }
         
         return true;

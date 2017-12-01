@@ -33,7 +33,7 @@ class IndexController
     /**
      * Home
      */
-    public function indexAction($order = 'newly-added', $date = 'today')
+    public function indexAction($order = 'newly-added', $date = 'last-30-days')
     {
         try
         {
@@ -84,9 +84,6 @@ class IndexController
                 case 'last-90-days':
                     $range = DateRange::initLastDays(90);
                     break;
-                case 'last-30-days':
-                    $range = DateRange::initLastDays(30);
-                    break;
                 case 'last-week':
                     $range = DateRange::initLastWeek();
                     break;
@@ -96,9 +93,12 @@ class IndexController
                 case 'yesterday':
                     $range = DateRange::initYesterday();
                     break;
-                default:
                 case 'today':
                     $range = DateRange::initToday();
+                    break;
+                default:
+                case 'last-30-days':
+                    $range = DateRange::initLastDays(30);
                     break;
             }
             $this->view->setVar('activeDateRangeString', str_replace('-', ' ', $date));
