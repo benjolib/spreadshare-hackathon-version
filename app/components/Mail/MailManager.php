@@ -29,15 +29,12 @@ class MailManager extends Manager
     protected $mailgun;
     
     /**
-     * Returns amount of mails that have been sent. Returns 0 if there is an error.
-     *
-     * Does not throw any Exceptions!!
-     *
      * @param Message $message
+     * @todo remove this and use the php api
      *
      * @return int
      */
-    public function send(Message $message)
+    public function sendViaGuzzle(Message $message)
     {
         $guzzle = new Client();
         $response = $guzzle->get(
@@ -52,9 +49,22 @@ class MailManager extends Manager
                 ],
             ]
         );
-        return $response->getStatusCode();
         
-        //return $message->send();
+        return $response->getStatusCode();
+    }
+    
+    /**
+     * Returns amount of mails that have been sent. Returns 0 if there is an error.
+     *
+     * Does not throw any Exceptions!!
+     *
+     * @param Message $message
+     *
+     * @return int
+     */
+    public function send(Message $message)
+    {
+        return $message->send();
     }
     
     /**

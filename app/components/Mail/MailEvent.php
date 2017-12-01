@@ -101,7 +101,7 @@ class MailEvent
         //@todo enable queuing maybe?
         //$this->queue->queue($this->message);
         
-        $this->mailManager->send($this->message);
+        $returnCode = $this->mailManager->sendViaGuzzle($this->message);
         
         return $this;
     }

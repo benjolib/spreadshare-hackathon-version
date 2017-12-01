@@ -41,10 +41,10 @@
         </div>
       </aside>
       <div class="signup__content__form__buttons">
-        <button class="button">CONTINUE</button>
+        <button class="button">Continue</button>
       </div>
     </form>
-    
+
   </div>
 </div>
 {% endblock %}
