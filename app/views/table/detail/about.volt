@@ -105,7 +105,7 @@
 
                 <p class="tableAbout__sidebars__title">Share</p>
                 <aside class="tableAbout__sidebar tableAbout__sidebar--share">
-                    <div class="tableAbout__sidebar__content socialshares" data-url="http://www.spreadshare.co/table/{{ table['id'] }}" data-title="{{ table['title'] }}"
+                    <div class="tableAbout__sidebar__content socialshares" data-url="http://beta.spreadshare.co/table/{{ table['id'] }}" data-title="{{ table['title'] }}"
                          data-description="Community curated tables!" data-size="small"
                          data-theme="brand" data-icononly>
                         <div class="tableAbout__sidebar__content__item tableAbout__sidebar__content__item--twitter">
