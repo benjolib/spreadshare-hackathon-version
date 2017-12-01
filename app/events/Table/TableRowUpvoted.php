@@ -31,9 +31,10 @@ class TableRowUpvoted extends AbstractEvent
     {
         $table = Tables::get($row->getTableId());
         
+        
+        // Row-votes shouldnt creat tokens!
         /**
          * Give a token to this user for this upvote
-         */
         $tableToken = new TableTokens();
         $tableToken->setUserId($table->getOwnerUserId())
             ->setTokensEarned(DefaultTokenDistribution::PerVote)
@@ -42,6 +43,7 @@ class TableRowUpvoted extends AbstractEvent
             ->setRowId($row->getId())
             ->setType(TokenDistributionType::Upvote)
             ->create();
+         *  */
     }
     
 }

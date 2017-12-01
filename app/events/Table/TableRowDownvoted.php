@@ -29,11 +29,12 @@ class TableRowDownvoted extends AbstractEvent
     {
         $table = Tables::get($row->getTableId());
         
+        // Row-votes shouldnt creat tokens!
         /**
          * Delete owners's token on downvote
-         */
         $tableToken = TableTokens::findByUserIdAndRow($table->getOwnerUserId(), $row->getId());
         $tableToken->delete();
+         * */
     }
     
 }
