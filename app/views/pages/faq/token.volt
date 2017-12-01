@@ -44,7 +44,42 @@ And there are other ways to earn tokens like inviting other users to SpreadShare
     </br>
     <h3>Where does the value come from? </h3>
     <p>At its root, SpreadShare is simply a points system. However, because this points system is blockchain-based, the points can be traded on markets as tokens. People buy and sell these tokens, and many hold in anticipation of increased purchasing power for various SpreadShare-related services. </li>
-    
+
+    </br>
+    <h3>Why are people getting vastly different rewards? </h3>
+    <p>The amount of tokens a creator or contributor receives are determined by the quality of their creations. The number of visitors and upvotes a table receives determines the token amount distributed.</p>
+
+    </br>
+    <h3>Where do the tokens come from?</h3>
+    <p>The SpreadShare platform continually creates digital tokens to reward content creators.</p>
+    </br>
+
+    <h3>How can I earn token?</h3>
+    <p>You can earn digital token on SpreadShare by enriching our community with valuable content, inviting new members and spreading the word.</p>
+
+    <ul>
+    <li>Creating a new table. Create a table and earn 2.5% of all tokens the table generates (for all time). As more users view and upvote the table as more tokens are generated every day.</li>
+    <li>Contributing to a table. By contributing to a table you own a certain stake of the content. The amount of tokens a contributor receives depends on the number of upvotes and views a tables receives during a day. The tokens are provided by the platform every day and distributed to the user based on their contribution share on the table</li>
+    <li>Inviting new members (10 token): You can invite new members by email or via a invite-link. Once they have signed up, you receive 10 tokens. There is no limit of how many members you can invite.</li>
+    <li>Importing contacts (5 token): Import your contacts from Google, Twitter or Facebook and earn 5 token for each import.</li>
+    <li>Spreading the word (5 token): Proof your social accounts and spread the word to verify your identity and spread the word. We support Facebook, Twitter, Product Hunt, Hackeer News, Medium, LinkedIn and Github.</li>
+    <li>An upvote to a table is equal to 1 token, 100 views are equal to 1 token</li>
+    <li>Platform Vault: 90% of tokens will be distributed towards our users, 10% will remain in the platform vault to iterate and improve our product and pay salaries.</li>
+    </ul>
+
+
+    <h3>What can I do with token?</h3>
+
+    <ul>
+    <li>Hold them as a stable-value token</li>
+    <li>Purchase items on our platform (coming soon)</li>
+    <li>Convert to SPRD via your wallet  (coming soon)</li>
+    <li>Exchange for SPRD in the internal market  (coming soon)</li>
+    <li>Withdraw to an exchange, and trade for BTC or other digital tokens  (coming soon)</li>
+    <li>Purchase items through third-party stores that accept SBD tokens  (coming soon)</li>
+    </ul>
+
+
     </div>
 
   </div>
