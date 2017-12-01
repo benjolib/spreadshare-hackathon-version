@@ -2,7 +2,14 @@
 
 {% block content %}
 
-  <div class="__page__top"><h1>Privacy Policy</h1></div>
+  <div class="__page__top">
+  <h1>Privacy Policy</h1>
+  <h2>Our privacy policy defines how we collect information you provide directly to us.</h2>
+
+  </div>
+
+
+  <div class="__page__container">
   <div class="__page__wrapper">
     <h2>Effective November 30, 2017</h2>
     <p>We want you to understand how and why SpreadShare (“SpreadShare”, “we” or “us”) collects, uses, and shares information about you when you access and use SpreadShare’s websites, mobile apps, widgets, and other online products and services (collectively, the "Services") or when you otherwise interact with us.</p>
@@ -101,6 +108,18 @@ SpreadShare complies with the U.S.-E.U. and U.S.-Swiss Safe Harbor Privacy Princ
     <br>
     <h3>Contact Us</h3>
     <p>If you have any questions about this Privacy Policy, please email hi@spreadshare.co.</p>
+
+  </div>
+
+  <div class="__page__sidebar">
+   <ul>
+    <li class="active"><a href="#">Privacy Policy</a></li>
+    <li><a href="/terms">Terms Of Use</a></li>
+    <li><a href="/jobs">Jobs</a></li>
+    <li><a href="/about">About</a></li>
+   </ul>
+  </div>
+
 
   </div>
 {% endblock %}
