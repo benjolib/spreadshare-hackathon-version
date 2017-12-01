@@ -1,17 +1,45 @@
 <script type="text/javascript">
+  window.initOnOffSwitches = function() {
+    var $NoSwitch = $('.NSwitch');
+    var $YesSwitch = $('.YSwitch');
+
+    $NoSwitch.click(function () {
+      var $this = $(this);
+
+      if (!$this.hasClass('active')) {
+        $this.toggleClass('active');
+        $this.toggleClass('animated bounceIn');
+        $this.prev().removeClass('active animated bounceIn');
+        $this.prop('disabled', true);
+        $this.prev().prop('disabled', false);
+        $('input[name="' + $this.attr('data-name') + '"]').prop('value', '0');
+      }
+    });
+
+    $YesSwitch.click(function () {
+      var $this = $(this);
+
+      if (!$this.hasClass('active')) {
+        $this.toggleClass('active');
+        $this.toggleClass('animated bounceIn');
+        $this.next().removeClass('active animated bounceIn');
+        $this.prop('disabled', true);
+        $this.next().prop('disabled', false);
+        $('input[name="' + $this.attr('data-name') + '"]').prop('value', '1');
+      }
+    });
+  }
+
   $(document).ready(function () {
+    $('.__page__sidebar').stickySidebar({
+      topSpacing: 60,
+      bottomSpacing: 60
+    });
 
-
-  $('.__page__sidebar').stickySidebar({
-    topSpacing: 60,
-    bottomSpacing: 60
-  });
-
-   $(".__page__sidebar ul li").click(function() {
-     $(".__page__sidebar ul li").removeClass('active');
-     $(this).addClass('active');
-   });
-
+    $(".__page__sidebar ul li").click(function () {
+      $(".__page__sidebar ul li").removeClass('active');
+      $(this).addClass('active');
+    });
 
     var timer;
     var delay = 600; // 0.6 seconds delay after last input
@@ -214,7 +242,7 @@
         $('button.review-change-request').api({
           method: 'POST',
           action: 'change-request',
-          beforeSend: function(settings) {
+          beforeSend: function (settings) {
             settings.data = {
               comment: $('.changelog-comment-' + $(this).data('id')).val(),
               type: $(this).data('type')
