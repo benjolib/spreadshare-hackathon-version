@@ -3,6 +3,19 @@
     width: 90% !important;
   }
 
+  &--multi {
+    .Select-control {
+      .Select-multi-value-wrapper {
+        .Select-input {
+          input[role="combobox"] {
+            font-size: 14px !important;
+            margin-top: 3px !important;
+          }
+        }
+      }
+    }
+  }
+
   &--single {
     .Select-menu-outer {
       width: 40% !important;
@@ -135,7 +148,7 @@
 .Select-input > input {
   padding: 0px 0 0px !important;
   margin-top: 0px !important;
-  height: 36px !important;  
+  height: 36px !important;
 }
 .Select--multi .Select-value-icon {
   font-weight: 500;
