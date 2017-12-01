@@ -30,7 +30,7 @@
           </div>
         </div>
         <div class="signup__content__form__buttons">
-          <button>Continue</button>
+          <button id="continueOnboard">Continue</button>
         </div>
       </div>
       <aside class="follow__content__aside">

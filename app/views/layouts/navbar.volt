@@ -52,10 +52,3 @@
     </span>
   {% endif %}
 </nav>
-
-<script type="text/javascript">
-  if (window.location.pathname.includes('signup')) {
-    var navControls = document.getElementsByClassName('navbar__controls')[0];
-    navControls.style.visibility = 'hidden';
-  }
-</script>

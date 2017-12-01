@@ -9,7 +9,7 @@
         <div class="tables__content">
             <div class="tables__content__wrapper">
                 <div class="signup__content__form__buttons">
-                    <button>Finish</button>
+                    <button id="continueOnboard">Finish</button>
                 </div>
                 <p class="tables__content__title">Here are some <span>tables</span> you might like</p>
                 <p class="tables__content__subtitle">Tell us which tables you’re most interested in. <span>Pick at least 3</span></p>
