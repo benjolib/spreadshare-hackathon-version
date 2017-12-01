@@ -40,6 +40,8 @@ class UserNotifications
                                  self::class . ".text",
                                  self::class . ".placeholders",
                                  self::class . ".createdAt",
+                                 self::class . ".userId as targetUserId",
+                                 self::class . ".sourceTableId",
                                  User::class . ".handle as userHandle",
                                  User::class . ".name as userName",
                                  User::class . ".image as userImage",

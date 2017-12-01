@@ -4,6 +4,7 @@ namespace DS\Controller;
 
 use DS\Exceptions\SecurityException;
 use DS\Model\DataSource\UserNotificationType;
+use DS\Model\Helper\UserNotificationLinkHelper;
 use DS\Model\UserNotifications;
 use Phalcon\Exception;
 
@@ -44,6 +45,7 @@ class FeedController
             }
             
             $userNotifications = new UserNotifications;
+            $this->view->setVar('linkHelper', new UserNotificationLinkHelper());
             $this->view->setVar('notifications', $userNotifications->findNotifications($userId, $typeId));
             $this->view->setVar('type', $type);
             

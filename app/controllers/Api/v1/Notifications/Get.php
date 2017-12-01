@@ -6,6 +6,7 @@ use DS\Component\UserComponent\StringFormat;
 use DS\Controller\Api\ActionHandler;
 use DS\Controller\Api\Meta\Record;
 use DS\Controller\Api\MethodInterface;
+use DS\Model\Helper\UserNotificationLinkHelper;
 use DS\Model\UserNotifications;
 
 /**
@@ -61,17 +62,19 @@ class Get extends ActionHandler implements MethodInterface
   </a>
 </div>
 <div class="tableFeed__item__info">
-  <div class="tableFeed__item__info__text">
-      <span class="tableFeed__item__info__text__author">
-        ' . $notification['userName'] . '
-      </span>
-    <span class="tableFeed__item__info__text__message">
-        ' . $notification['text'] . '
-      </span>
-  </div>
-  <div class="tableFeed__item__info__time">
-    <span>' . StringFormat::factory()->prettyDateTimestamp($notification['createdAt']) . '</span>
-  </div>
+  <a href="'. UserNotificationLinkHelper::getLink($notification) .'">
+      <div class="tableFeed__item__info__text">
+          <span class="tableFeed__item__info__text__author">
+            ' . $notification['userName'] . '
+          </span>
+        <span class="tableFeed__item__info__text__message">
+            ' . $notification['text'] . '
+          </span>
+      </div>
+      <div class="tableFeed__item__info__time">
+        <span>' . StringFormat::factory()->prettyDateTimestamp($notification['createdAt']) . '</span>
+      </div>
+  </a>
 </div>
 </div>';
                         }
