@@ -148,7 +148,7 @@
 				<ul class="filter open filter--topic {% if sidebarFilter.topic %}open{% endif %}">
 					<li>
 						<label {% if sidebarFilter.topic== "" %}class="selected"{% endif %}>
-						<input type="radio" name="topic" {% if sidebarFilter.topic== "" %}checked="checked"{% endif %} value="" /> All
+							<input type="radio" name="topic" {% if sidebarFilter.topic== "" %}checked="checked"{% endif %} value="" /> All
 						</label>
 					</li>
 					{% for topic in topics %}
@@ -222,7 +222,7 @@
 				}
 			});
 
-			$('#sidebarForm > div > ul > li > label').on('change', function (ev) {
+			$('#sidebarForm > ul > li > label').on('change', function (ev) {
 				document.getElementById('sidebarForm').submit();
 			});
 		});

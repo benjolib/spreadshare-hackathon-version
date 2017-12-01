@@ -62,7 +62,7 @@
 
       @include desktop {
         margin: 3px 0 20px 0;
-        @include rem(margin-top, 5);        
+        @include rem(margin-top, 5);
       }
 
       @include tablet {
@@ -80,12 +80,12 @@
       background: white;
       border-radius: 8px;
       width: 80%;
-      margin-top: 20px;            
+      margin-top: 20px;
       @include rem2(padding, 25, 35);
 
       p {
         // color: lighten($text-color, 10%);
-        color:#B1BBC7;                
+        color:#B1BBC7;
         font-weight: 300;
         text-transform: uppercase;
         @include rem(font-size, 14);
@@ -96,7 +96,7 @@
       span {
         font-weight: 300;
         // color: lighten($text-color, 10%);
-        color: #B3BDC9;                
+        color: #B3BDC9;
         @include rem(margin-top, 8);
         @include rem(font-size, 12);
       }
@@ -130,8 +130,8 @@
         @include desktop {
           margin-top: 0;
           border-bottom-left-radius: 6px;
-          border-bottom-right-radius: 6px;       
-             
+          border-bottom-right-radius: 6px;
+
         }
 
         a {
@@ -174,7 +174,7 @@
       @include rem(margin-right, 50);
 
       @include desktop {
-        width: 20%;
+        width: 26%;
         @include rem(margin-top, 130);
       }
 
@@ -335,7 +335,7 @@
 
 .display-flex {
   @include desktop {
-    width: 50%;    
+    width: 50%;
   }
   @include tablet{
     width: 100% !important;
@@ -347,8 +347,8 @@
 .flex-display{
   margin-bottom: 35px;
   @include desktop {
-    width: 100%;   
-    display: inherit; 
+    width: 100%;
+    display: inherit;
   }
 }
 .signup__content__form input {
@@ -367,12 +367,12 @@
   @include tablet {
     top: 0 !important;
     right: 35px !important;
-    margin-top: 5px;    
+    margin-top: 5px;
   }
   @include mobile {
     top: 0 !important;
     right: 30px !important;
-    margin-top: 4px;  
+    margin-top: 4px;
   }
 }
 
@@ -388,12 +388,12 @@
   @include tablet {
     top: 0 !important;
     right: 35px !important;
-    margin-top: 5px;    
+    margin-top: 5px;
   }
   @include mobile {
     top: 0 !important;
     right: 30px !important;
-    margin-top: 4px;  
+    margin-top: 4px;
   }
 }
 
@@ -409,12 +409,12 @@
   @include tablet {
     top: 0 !important;
     right: 35px !important;
-    margin-top: 5px;    
+    margin-top: 5px;
   }
   @include mobile {
     top: 0 !important;
     right: 30px !important;
-    margin-top: 4px;  
+    margin-top: 4px;
   }
 }
 
@@ -430,12 +430,12 @@
   @include tablet {
     top: 0 !important;
     right: 10px !important;
-    margin-top: 5px;    
+    margin-top: 5px;
   }
   @include mobile {
     top: 0 !important;
     right: 10px !important;
-    margin-top: 4px;  
+    margin-top: 4px;
   }
 }
 .tables__content .signup__content__form__buttons a {
