@@ -8,6 +8,7 @@ use DS\Model\DataSource\ChangeRequestStatus;
 use DS\Model\DataSource\UserNotificationType;
 use DS\Model\TableRows;
 use DS\Model\Tables;
+use DS\Model\TableStats;
 use DS\Model\User;
 use DS\Model\UserNotifications;
 
@@ -60,6 +61,10 @@ class TabelCellChangeReviewed extends AbstractEvent
                 ->setNotificationType(UserNotificationType::ChangeRequestedConfirmed)
                 ->setText(sprintf('confirmed your change request for table %s', $table->getTitle()))
                 ->create();
+            
+            // Increment contribution counter
+            (new TableStats)->increment($tableId, 'contribution');
+            
         }
         elseif ($changeRequest->getStatus() == ChangeRequestStatus::Rejected)
         {
