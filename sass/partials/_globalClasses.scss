@@ -94,17 +94,16 @@ body {
   }
 
   .socialshares-btn-icononly {
-    visibility: hidden;
+
   }
 
   .socialshares span {
     display: block;
-    width: 28px;
-    height: 28px;
     margin-right: 1rem;
     margin-bottom: 1rem;
     border-radius: 4px;
-    visibility: hidden;
+    width: 0px;
+    height: 3px;
   }
 
   .loading {
