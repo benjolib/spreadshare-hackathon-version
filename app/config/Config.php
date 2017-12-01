@@ -47,7 +47,7 @@ return [
         'port' => 6379,
     ],
     'crypt' => [
-        'key' => 'changeme',
+        'key' => 'iuh213iu78ads898213euwioadjbxhjy-jkldHJKDJ_ksahdKASGDS$AKDH32L4EJLDSACKÖÄASPOE24',
     ],
     'mail' => [
         'driver' => 'mailgun',
