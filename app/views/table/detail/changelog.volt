@@ -53,8 +53,8 @@
 
                 <div class="changelog__commentButtons">
                     {#<a href="#">View Change</a>#}
-                    <button class="review-change-request" data-id="{{ request['id'] }}" data-type="confirm">Confirm</button>
                     <button class="review-change-request" data-id="{{ request['id'] }}" data-type="reject">Reject</button>
+                    <button class="review-change-request" data-id="{{ request['id'] }}" data-type="confirm">Confirm</button>
                 </div>
                 {% elseif request['status'] == 2 %}
                 <div class="changelog__commentInput">
