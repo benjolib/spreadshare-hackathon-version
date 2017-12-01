@@ -18,7 +18,3 @@
   <p class="tableRelated__title tableRelated__title--addRelated">Add another related table</p>
   <div id="TableSelect" data-name="tableId" data-placeholder="Find a table" class="react-component"></div>
 </div>
-<div class="addTableEmpty__content__main__buttons">
-  <a href="/table/{{ table['id'] }}">Cancel</a>
-  <button type="submit">Add related table</button>
-</div>

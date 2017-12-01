@@ -31,11 +31,11 @@
         </div>
 
         <aside class="aside aside--tableDetails">
-            <a href="#">
-                <div class="aside__item item-selected"><p>Table Details</p></div>
+            <a href="/table/{{ table['id'] }}/settings/details">
+                <div class="aside__item {% if page == 'details' %}item-selected{% endif %}"><p>Table Details</p></div>
             </a>
-            <a href="#">
-                <div class="aside__item"><p>Related Table</p></div>
+            <a href="/table/{{ table['id'] }}/settings/related">
+                <div class="aside__item {% if page == 'related' %}item-selected{% endif %}"><p>Related Table</p></div>
             </a>
         </aside>
     </div>
