@@ -30,27 +30,44 @@ class MailManager extends Manager
     
     /**
      * @param Message $message
+     *
      * @todo remove this and use the php api
      *
      * @return int
      */
     public function sendViaGuzzle(Message $message)
     {
-        $guzzle = new Client();
-        $response = $guzzle->get(
-            'https://api.mailgun.net/v3/spreadshare.co/messages',
-            [
-                'auth' => ['api:key-611a7bf686cb890b8db38ad9ce1a5bbb', ''],
-                'form_params' => [
-                    'from' => $message->getFrom(),
-                    'to' => $message->getTo(),
-                    'subject' => $message->getSubject(),
-                    'text' => $message->getContent(),
-                ],
-            ]
-        );
+        if (count($message->getFrom()) && $message->getTo())
+        {
+            $from = [];
+            foreach ($message->getFrom() as $fromEmail => $fromName)
+            {
+                $from[] = $fromName . ' <' . $fromEmail . '>';
+            }
+            $to = [];
+            foreach ($message->getTo() as $fromEmail => $fromName)
+            {
+                $to[] = $fromName . ' <' . $fromEmail . '>';
+            }
+            
+            $guzzle   = new Client();
+            $response = $guzzle->post(
+                'https://api.mailgun.net/v3/spreadshare.co/messages',
+                [
+                    'auth' => ['api', 'key-611a7bf686cb890b8db38ad9ce1a5bbb'],
+                    'form_params' => [
+                        'from' => implode(', ', $from),
+                        'to' => implode(', ', $to),
+                        'subject' => $message->getSubject(),
+                        'html' => $message->getContent(),
+                    ],
+                ]
+            );
+            
+            return $response->getStatusCode();
+        }
         
-        return $response->getStatusCode();
+        return 0;
     }
     
     /**
