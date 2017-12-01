@@ -25,6 +25,7 @@
     <li><a href="terms">Terms Of Use</a></li>
     <li class="active"><a href="#jobs">Jobs</a></li>
     <li><a href="/about">About</a></li>
+    <li><a href="/token">Earn Token</a></li>
    </ul>
   </div>
   </div>

@@ -91,6 +91,7 @@
     <li class="active"><a href="#">Terms Of Use</a></li>
     <li><a href="/jobs">Jobs</a></li>
     <li><a href="/about">About</a></li>
+    <li><a href="/token">Earn Token</a></li>
    </ul>
   </div>
 
