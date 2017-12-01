@@ -117,6 +117,7 @@ SpreadShare complies with the U.S.-E.U. and U.S.-Swiss Safe Harbor Privacy Princ
     <li><a href="/terms">Terms Of Use</a></li>
     <li><a href="/jobs">Jobs</a></li>
     <li><a href="/about">About</a></li>
+    <li><a href="/token">Earn Token</a></li>
    </ul>
   </div>
 
