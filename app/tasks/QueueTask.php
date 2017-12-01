@@ -3,6 +3,7 @@
 namespace DS\Task;
 
 use DS\Listeners\ElasticSearch as ElasticSearchListener;
+use DS\Listeners\Wallet as WalletListener;
 use DS\Task\TaskHelpers\LoggerTrait;
 use DS\Modules\Bernard;
 
@@ -28,6 +29,7 @@ class QueueTask
     {
 
         Bernard::consume('newTable', new ElasticSearchListener);
+        Bernard::consume('newWallet', new WalletListener);
 
     }
 

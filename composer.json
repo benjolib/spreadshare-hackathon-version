@@ -20,7 +20,7 @@
     "phalcon/incubator": "^3.2",
     "khill/php-duration": "^1.0",
     "ruflin/elastica": "^5.0.0",
-    "guzzlehttp/guzzle": "^6.3",
+    "guzzlehttp/guzzle": "~6.0",
     "guzzlehttp/psr7": "^1.3",
     "aws/aws-sdk-php": "^3.36",
     "symfony/options-resolver": "v3.3.13",
