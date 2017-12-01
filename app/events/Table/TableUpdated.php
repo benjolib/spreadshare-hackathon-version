@@ -8,6 +8,7 @@ use DS\Model\DataSource\UserNotificationType;
 use DS\Model\TableLog;
 use DS\Model\Tables;
 use DS\Model\UserNotifications;
+use DS\Modules\Bernard;
 
 /**
  * Spreadshare
@@ -31,6 +32,19 @@ class TableUpdated extends AbstractEvent
      */
     public static function after(int $userId, Tables $table)
     {
+        if ($table->getId())
+        {
+            // DataSource
+            $datasource = [
+                'tableId' => $table->getId(),
+                'tableTitle' => $table->getTitle(),
+                'tableTagline' => $table->getTagline(),
+            ];
+            
+            // Send Table Creation Event To ES Queue
+            Bernard::produce('tableUpdated', $datasource);
+        }
+        
         $userNotification = new UserNotifications();
         $userNotification
             ->setUserId($table->getOwnerUserId())
