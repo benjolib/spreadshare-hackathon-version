@@ -34,12 +34,39 @@ body {
     display: none;
   }
 
+  a.button.found-a-bug {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    opacity: .5;
+    font-size: 11px;
+    padding: 4px;
+  }
+
   button.button,
   a.button {
     background: #6b7c93;
     border: 1px solid darken(#6b7c93, 10);
     color: #fff !important;
-    border-radius: 6px;
+    border-radius: 4px;
+  }
+
+  button.grey,
+  a.grey {
+    background: $upvote-background-color !important;
+    border: 1px solid darken($upvote-background-color, 10) !important;
+    color: $upvote-text-color !important;
+  }
+
+  button.green,
+  a.green {
+    font-weight: 500;
+    color: #fff;
+    background: $primary-color;
+    border: none;
+    border-radius: 4px;
+    font-size: .875rem;
+    padding: .5rem 1rem;
   }
 
   a.button {
