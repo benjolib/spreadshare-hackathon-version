@@ -23,12 +23,12 @@
                                 <div class="layout__content__main__notifications__column">
                                     <div class="layout__content__main__notifications__row">
                                         <div class="layout__content__main__notifications__switch__buttons">
-                                            <input type="hidden" name="followerDigest" value="{{ settings.followerDigest }}" />
-                                            <button class="layout__content__main__notifications__switch__buttons layout__content__main__notifications__switch__buttons--left YSwitch {% if settings.followerDigest %}active{% endif %}"
+                                            <input type="hidden" name="followerDigest" value="{{ settings.followDigest }}" />
+                                            <button type="button" class="layout__content__main__notifications__switch__buttons layout__content__main__notifications__switch__buttons--left YSwitch {% if settings.followDigest %}active{% endif %}"
                                                     data-name="followerDigest" value="1">
                                                 Y
                                             </button>
-                                            <button class="layout__content__main__notifications__switch__buttons layout__content__main__notifications__switch__buttons--right NSwitch  {% if !settings.followerDigest %}active{% endif %}"
+                                            <button type="button" class="layout__content__main__notifications__switch__buttons layout__content__main__notifications__switch__buttons--right NSwitch  {% if !settings.followDigest %}active{% endif %}"
                                                     data-name="followerDigest" value="0">
                                                 N
                                             </button>
@@ -45,11 +45,11 @@
                                     <div class="layout__content__main__notifications__row">
                                         <div class="layout__content__main__notifications__switch__buttons">
                                             <input type="hidden" name="topicDigest" value="{{ settings.topicDigest }}" />
-                                            <button class="layout__content__main__notifications__switch__buttons layout__content__main__notifications__switch__buttons--left YSwitch {% if settings.topicDigest %}active{% endif %}"
+                                            <button type="button" class="layout__content__main__notifications__switch__buttons layout__content__main__notifications__switch__buttons--left YSwitch {% if settings.topicDigest %}active{% endif %}"
                                                     data-name="topicDigest" value="1">
                                                 Y
                                             </button>
-                                            <button class="layout__content__main__notifications__switch__buttons layout__content__main__notifications__switch__buttons--right NSwitch {% if !settings.topicDigest %}active{% endif %}"
+                                            <button type="button" class="layout__content__main__notifications__switch__buttons layout__content__main__notifications__switch__buttons--right NSwitch {% if !settings.topicDigest %}active{% endif %}"
                                                     data-name="topicDigest" value="0">
                                                 N
                                             </button>
@@ -66,11 +66,11 @@
                                     <div class="layout__content__main__notifications__row">
                                         <div class="layout__content__main__notifications__switch__buttons">
                                             <input type="hidden" name="newProductAnnouncements" value="{{ settings.newProductAnnouncements }}" />
-                                            <button class="layout__content__main__notifications__switch__buttons layout__content__main__notifications__switch__buttons--left YSwitch  {% if settings.newProductAnnouncements %}active{% endif %}"
+                                            <button type="button" class="layout__content__main__notifications__switch__buttons layout__content__main__notifications__switch__buttons--left YSwitch  {% if settings.newProductAnnouncements %}active{% endif %}"
                                                     data-name="newProductAnnouncements" value="1">
                                                 Y
                                             </button>
-                                            <button class="layout__content__main__notifications__switch__buttons layout__content__main__notifications__switch__buttons--right NSwitch  {% if !settings.newProductAnnouncements %}active{% endif %}"
+                                            <button type="button" class="layout__content__main__notifications__switch__buttons layout__content__main__notifications__switch__buttons--right NSwitch  {% if !settings.newProductAnnouncements %}active{% endif %}"
                                                     data-name="newProductAnnouncements" value="0">
                                                 N
                                             </button>

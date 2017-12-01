@@ -108,11 +108,11 @@
 
     /* Profile Menu Popper */
     var referenceElement;
-    var onPopper = $('.profile-menu');
+    var popperProfileMenu = $('.profile-menu');
 
     /* Notifications Popper */
     var refElem;
-    var popper = $('.dropdown--notifications');
+    var popperNotifications = $('.dropdown--notifications');
 
     // initial state
     if (window.innerWidth < 1024) {
@@ -123,12 +123,12 @@
       refElem = $('.navbar__controls__add--notification');
     }
 
-    if (onPopper.length > 0 && popper.length > 0) {
+    if (popperProfileMenu.length > 0 && popperNotifications.length > 0) {
       // create poppers
-      new Popper(referenceElement, onPopper, {
+      new Popper(referenceElement, popperProfileMenu, {
         placement: 'bottom'
       });
-      new Popper(refElem, popper, {
+      new Popper(refElem, popperNotifications, {
         placement: 'bottom'
       });
 
@@ -137,31 +137,31 @@
         if (window.innerWidth < 1024) {
           referenceElement = $('.navbar__controls__add--menu');
           refElem = $('.navbar__controls__add--notification');
-          popper.removeClass('left160');
+          popperNotifications.removeClass('left160');
         } else {
           referenceElement = $('.navbar__controls__notification');
           refElem = $('.navbar__controls__add--notification');
         }
-        new Popper(referenceElement, onPopper, {
+        new Popper(referenceElement, popperProfileMenu, {
           placement: 'bottom'
         });
-        new Popper(refElem, popper, {
+        new Popper(refElem, popperNotifications, {
           placement: 'bottom'
         });
       });
 
       //toggle menu
       $('#profileImage').click(function () {
-        popper.removeClass('show');
-        $(onPopper).toggleClass('show');
+        popperNotifications.removeClass('show');
+        $(popperProfileMenu).toggleClass('show');
       });
       // toggle notifications
       $('#notificationButton').click(function () {
-        onPopper.removeClass('show');
-        $(popper).toggleClass('show');
+        popperProfileMenu.removeClass('show');
+        $(popperNotifications).toggleClass('show');
 
         $.get("/api/v1/notifications?p=" + 0, function (data) {
-          $(popper).html(data);
+          $(popperNotifications).html(data);
         });
       });
     }
@@ -175,7 +175,8 @@
       }
       //console.log("closestControl", closestControl.length);
       if (!closestControl.length) {
-        onPopper.removeClass('show');
+        popperProfileMenu.removeClass('show');
+        popperNotifications.removeClass('show');
       }
 
     });
