@@ -8,6 +8,7 @@
 
 {% if requests %}
 <div class="container container--changelog">
+    <div class="container__content container__content--column">
     {% for request in requests %}
     <form method="POST">
         <div class="container__content">
@@ -75,6 +76,7 @@
         </div>
     </form>
     {% endfor %}
+    </div>
 
     {% else %}
     <div class="center" style="background:white;-webkit-border-radius: 8px;-moz-border-radius: 8px;border-radius: 8px;padding:50px;">
