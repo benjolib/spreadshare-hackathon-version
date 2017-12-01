@@ -228,6 +228,17 @@
   }
 }
 
+.handsontable tr:nth-child(odd) {
+  background: white !important;;
+}
+.handsontable tr:nth-child(even) {
+  background: lighten($background-color, 2) !important;
+}
+
+.handsontable td {
+  background: transparent !important;
+}
+
 .dxTqwX {
   padding: 15px !important;
   border-radius: 7px;
