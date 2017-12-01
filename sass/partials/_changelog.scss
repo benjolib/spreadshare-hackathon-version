@@ -1,10 +1,17 @@
 .container.container--changelog {
   display: flex;
-  flex-direction: column;
 
   .container__content {
     position: relative;
-    width: 72.5%;
+    width: 100%;
+
+    &--column {
+      flex-direction: column;
+      background: transparent;
+      padding-top: 0;
+      padding-left: 0;
+      width: 72.5%;
+    }
 
     .addTable__content__main__options {
       padding-bottom: 0;

@@ -1,0 +1,62 @@
+{% extends 'layouts/main.volt' %}
+
+{% block content %}
+
+  <div class="__page__top">
+    <h1>Frequently Asked</h1>
+    <h2>Write us an email to hi@spreadshare.co if your question wasn’t answered. We get back to you asap.</h2>
+  </div>
+
+  <div class="__page__container">
+
+  <div class="__page__wrapper">
+
+    <div id="token">
+    <h3>What are SpreadShare tokens about?</h3>
+    <p>A way to reward creators - There is a very special aspect about our product. But let’s start with a little case study first. Wikipedia is serving the whole world with a free encyclopedia but has to beg for funding time and again. The non-profit organisation and one of the top-5 websites in the web is financed by user donations and struggles from time to time to raise the required funds. Can you imagine big VC’s or PE’s owning the site? What would that do to the community of contributors and the content?</p>
+    <p>No. Let’s imagine Wikipedia would be owned by the crowd, each user would own a share of the platform based on the amount of contributions added to it. 5,000 of the 32,000,000 contributors of Wikipedia account for 23% of the content. The most active contributor accounts for 1% of all contributions. It’s hard to value the market cap of non-profit’s but experts say estimates would be in the range of $5 billion to $10 billion. That would make the most active contributors share worth $50–100 million. Committing your life to a user-generated platform could make you really rich.</p>
+    <p>What we are trying to explain is that certain platforms need certain governance structures to unfold their true potential</p>
+    <p>We believe that the most recent developments in blockchain technologies allow us to create a platform owned by its creators. We will introduce tokens which can be earned by users for creating content. Content alone doesn’t make you earn a lot of tokens. The content’s traction is the weighting factor</p>
+    </br>
+
+    <h3>How do SpreadShare tokens work?</h3>
+    <p>We are committed to the idea of volunteering to share knowledge. But we believe that there should be a reward for good work. Tokens can be earned by participating in the network and contributing to the community. Not talking about low-priced incentives. 90% of the platform ownership will belong to the contributors. The data which is collaboratively created by the users will grow over time to become more valuable. The basic idea is to distribute tokens to all contributors of a table once a day. Token distribution is dependent on the traffic and upvotes a data table receives. This way the tokens will always represent the value of the platform and its data.</p>
+    </br>
+    <p>Our users can receive token by enriching our community with valuable content, inviting new members and spreading the word. </p>
+
+    <ul>
+    <li>Creating a new table. Create a table and earn 2.5% of all tokens the table generates (for all time). As more users view and upvote the table as more tokens are generated every day.</li>
+    <li>Contributing to a table. By contributing to a table you own a certain stake of the content. The amount of tokens a contributor receives depends on the number of upvotes and views a tables receives during a day. The tokens are provided by the platform every day and distributed to the user based on their contribution share on the table</li>
+    <li>Inviting new members (10 token): You can invite new members by email or via a invite-link. Once they have signed up, you receive 10 tokens. There is no limit of how many members you can invite.</li>
+    <li>Importing contacts (5 token): Import your contacts from Google, Twitter or Facebook and earn 5 token for each import.</li>
+    <li>Spreading the word (5 token): Proof your social accounts and spread the word to verify your identity and spread the word. We support Facebook, Twitter, Product Hunt, Hackeer News, Medium, LinkedIn and Github.</li>
+    <li>An upvote to a table is equal to 1 token, 100 views are equal to 1 token</li>
+    <li>Platform Vault: 90% of tokens will be distributed towards our users, 10% will remain in the platform vault to iterate and improve our product and pay salaries.</li>
+    </ul>
+
+
+    <p>The last editor of a cell is the owner of the token it generates. Example: a table receives 10 upvotes a day (10 tokens) and the table was viewed 100 times a day (factor 0,1). 1 token will be distributed to all contributors. If a user has contributed 5% of the tables content, that would make him earn 0,05 tokens a day.
+Adding content to an empty cell, editing content in an existing cell or deleting a cell’s content will make the contributor the new owner of the cell and therefore generate tokens for him. Whereas content will be added to empty cells immediately, editing/deleting content of a cell requires an admin / contributor to review and confirm. If a user changes content, there’s the option to also add a comment to it, as help for the admins reviewing.
+A user’s amount of tokens represent its reputation on the platform in the first place. Later on tokens can be bought and be used to purchase or request data on the platform.
+And there are other ways to earn tokens like inviting other users to SpreadShare and spreading the word for our platform.
+</p>
+
+    </br>
+    <h3>Where does the value come from? </h3>
+    <p>At its root, SpreadShare is simply a points system. However, because this points system is blockchain-based, the points can be traded on markets as tokens. People buy and sell these tokens, and many hold in anticipation of increased purchasing power for various SpreadShare-related services. </li>
+    
+    </div>
+
+  </div>
+
+  <div class="__page__sidebar">
+   <ul>
+    <li><a href="faq">Company</a></li>
+    <li><a href="/faq/product">Product</a></li>
+    <li><a href="/faq/content">Content</a></li>
+    <li class="active"><a href="/faq/token">Token</a></li>
+   </ul>
+  </div>
+  </div>
+
+{% endblock %}

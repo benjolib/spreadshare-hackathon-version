@@ -10,262 +10,258 @@
 {% block content %}
 {# hero #}
 <div class="main__hero">
-    <img src="/assets/icons/close-hero.svg" id="closeHero" />
-    <h1>Collective Research</h1>
-    <h2>Crowd-sourced data creation on the blockchain.</h2>
-    <p>
-        <a data-show="main__hero__tables" class="button" href="javascript:;">🔮 Learn more</a>
-    </p>
-    <div class="pages main__hero__tables hidden">
-        <div>
-            <h3>Tables</h3>
-            <h4>We believe in public tables as a format for collecting and distributing information</h4>
-            <p>
-                <a data-show="main__hero__collaboration" class="button blue" href="javascript:;">Next</a>
-            </p>
-            <p class="page">
-                1 | 7
-            </p>
-        </div>
-        <span class="circle"></span>
-    </div>
-    <div class="pages main__hero__collaboration hidden">
-        <div>
-            <h3>Collaboration</h3>
-            <h4>Collective research through crowd-sourced data creation</h4>
-            <p>
-                <a data-show="main__hero__open_data" class="button blue" href="javascript:;">Next</a>
-            </p>
-            <p class="page">
-                2 | 7
-            </p>
-        </div>
-        <span class="circle"></span>
-    </div>
-    <div class="pages main__hero__open_data hidden">
-        <div>
-            <h3>Open Data</h3>
-            <h4>Access to our data is and will always be free</h4>
-            <p>
-                <a data-show="main__hero__disciplines" class="button blue" href="javascript:;">Next</a>
-            </p>
-            <p class="page">
-                3 | 7
-            </p>
-        </div>
-        <span class="circle"></span>
-    </div>
-    <div class="pages main__hero__disciplines hidden">
-        <div>
-            <h3>Disciplines</h3>
-            <h4>All from Business over Code to Design and Finance</h4>
-            <p>
-                <a data-show="main__hero__ownership" class="button blue" href="javascript:;">Next</a>
-            </p>
-            <p class="page">
-                4 | 7
-            </p>
-        </div>
-        <span class="circle"></span>
-    </div>
-    <div class="pages main__hero__ownership hidden">
-        <div>
-            <h3>Ownership</h3>
-            <h4>We want SpreadShare to be owned by our contributors</h4>
-            <p>
-                <a data-show="main__hero__token" class="button blue" href="javascript:;">Next</a>
-            </p>
-            <p class="page">
-                5 | 7
-            </p>
-        </div>
-        <span class="circle"></span>
-    </div>
-    <div class="pages main__hero__token hidden">
-        <div>
-            <h3>Tokens</h3>
-            <h4>Tokens can be earned by creating content users appreciate</h4>
-            <p>
-                <a data-show="main__hero__autonomy" class="button blue" href="javascript:;">Next</a>
-            </p>
-            <p class="page">
-                6 | 7
-            </p>
-        </div>
-        <span class="circle"></span>
-    </div>
-    <div class="pages main__hero__autonomy hidden">
-        <div>
-            <h3>Autonomy</h3>
-            <h4>We are building a structure which allows our platform to work autonomously</h4>
-            <p>
-                <a data-show="" class="button blue" href="javascript:;">🙏</a>
-            </p>
-            <p class="page">
-                7 | 7
-            </p>
-        </div>
-        <span class="circle"></span>
-    </div>
+	<img src="/assets/icons/close-hero.svg" id="closeHero" />
+	<h1>Collective Research</h1>
+	<h2>Crowd-sourced data creation on the blockchain.</h2>
+	<p><a data-show="main__hero__tables" class="button" href="javascript:;">🔮 Learn more</a></p>
+	<div class="pages main__hero__tables hidden">
+		<div>
+			<h3>Tables</h3>
+			<h4>We believe in public tables as a format for collecting and distributing information</h4>
+			<p><a data-show="main__hero__collaboration" class="button blue" href="javascript:;">Next</a></p>
+			<p class="page">1 | 7</p>
+		</div>
+		<span class="circle"></span>
+	</div>
+	<div class="pages main__hero__collaboration hidden">
+		<div>
+			<h3>Collaboration</h3>
+			<h4>Collective research through crowd-sourced data creation</h4>
+			<p>
+				<a data-show="main__hero__open_data" class="button blue" href="javascript:;">Next</a>
+			</p>
+			<p class="page">2 | 7</p>
+		</div>
+		<span class="circle"></span>
+	</div>
+	<div class="pages main__hero__open_data hidden">
+		<div>
+			<h3>Open Data</h3>
+			<h4>Access to our data is and will always be free</h4>
+			<p>
+				<a data-show="main__hero__disciplines" class="button blue" href="javascript:;">Next</a>
+			</p>
+			<p class="page">3 | 7</p>
+		</div>
+		<span class="circle"></span>
+	</div>
+	<div class="pages main__hero__disciplines hidden">
+		<div>
+			<h3>Disciplines</h3>
+			<h4>All from Business over Code to Design and Finance</h4>
+			<p>
+				<a data-show="main__hero__ownership" class="button blue" href="javascript:;">Next</a>
+			</p>
+			<p class="page">4 | 7</p>
+		</div>
+		<span class="circle"></span>
+	</div>
+	<div class="pages main__hero__ownership hidden">
+		<div>
+			<h3>Ownership</h3>
+			<h4>We want SpreadShare to be owned by our contributors</h4>
+			<p>
+				<a data-show="main__hero__token" class="button blue" href="javascript:;">Next</a>
+			</p>
+			<p class="page">5 | 7</p>
+		</div>
+		<span class="circle"></span>
+	</div>
+	<div class="pages main__hero__token hidden">
+		<div>
+			<h3>Tokens</h3>
+			<h4>Tokens can be earned by creating content users appreciate</h4>
+			<p>
+				<a data-show="main__hero__autonomy" class="button blue" href="javascript:;">Next</a>
+			</p>
+			<p class="page">6 | 7</p>
+		</div>
+		<span class="circle"></span>
+	</div>
+	<div class="pages main__hero__autonomy hidden">
+		<div>
+			<h3>Autonomy</h3>
+			<h4>We are building a structure which allows our platform to work autonomously</h4>
+			<p><a data-show="" class="button blue" href="javascript:;">🙏</a></p>
+			<p class="page">7 | 7</p>
+		</div>
+		<span class="circle"></span>
+	</div>
 </div>
 {# content #}
-<div class="main__content white-bg">
+<div class="container container--home">
     {# tables content #}
-    <div class="main__content__tables">
-        {# filters #}
-        <div class="main__content__tables__filters">
-            <div class="main__content__tables__filters__left">
-                <li>{{ activeDateRangeString }}</li>
-                <img src="/assets/icons/chevron-down-dark.svg" />
-                <div class="dropdown dropdown--filters">
-                    <ul>
-                        <li class="{% if activeDateFilter == 'today' %}link-active{% endif %}"><a href="#">Today</a></li>
-                        <li class="{% if activeDateFilter == 'yesterday' %}link-active{% endif %}"><a href="/tables/{{ order }}/yesterday">Yesterday</a></li>
-                        <li class="{% if activeDateFilter == 'last-week' %}link-active{% endif %}"><a href="/tables/{{ order }}/last-week">Last week</a></li>
-                        <li class="{% if activeDateFilter == 'last-30-days' %}link-active{% endif %}"><a href="/tables/{{ order }}/last-30-days">Last 30 Days</a></li>
-                        <li class="{% if activeDateFilter == 'last-90-days' %}link-active{% endif %}"><a href="/tables/{{ order }}/last-90-days">Last 90 Days</a></li>
-                        <li class="{% if activeDateFilter == 'last-year' %}link-active{% endif %}"><a href="/tables/{{ order }}/last-year">Last Year</a></li>
-                        <li class="{% if activeDateFilter == 'all-time' %}link-active{% endif %}"><a href="/tables/{{ order }}/all-time">All Time</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="main__content__tables__filters__right">
-                <li class="{% if order is 'newest' %}link-active{% endif %}"><a href="/tables/newest/{{ activeDateFilter }}">Newest</a></li>
-                <li class="{% if order is 'most-upvoted' %}link-active{% endif %}"><a href="/tables/most-upvoted/{{ activeDateFilter }}">Upvotes</a></li>
-                <li class="{% if order is 'most-viewed' %}link-active{% endif %}"><a href="/tables/most-viewed/{{ activeDateFilter }}">Views</a></li>
-                <li class="{% if order is 'most-contributed' %}link-active{% endif %}"><a href="/tables/most-contributed/{{ activeDateFilter }}">Contributions</a></li>
-            </div>
-        </div>
+    <div class="container__content">
+			{# filters #}
+			<div class="main__content__tables__filters">
+				<div class="main__content__tables__filters__left">
+					<li>Today</li>
+					<img src="/assets/icons/chevron-down-dark.svg" />
+					<div class="dropdown dropdown--filters">
+						<ul>
+							<li class="link-active"><a href="#">Today</a></li>
+							<li><a href="#">Yesterday</a></li>
+							<li><a href="#">Last week</a></li>
+							<li><a href="#">Last 30 Days</a></li>
+							<li><a href="#">Last 90 Days</a></li>
+							<li><a href="#">Last Year</a></li>
+							<li><a href="#">All Time</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="main__content__tables__filters__right">
+					<li class="{% if order is 'newly-added' %}link-active{% endif %}"><a href="/tables/newly-added">Newest</a></li>
+					<li class="{% if order is 'most-upvoted' %}link-active{% endif %}"><a href="/tables/most-upvoted">Upvotes</a></li>
+					<li class="{% if order is 'most-viewed' %}link-active{% endif %}"><a href="/tables/most-viewed">Views</a></li>
+					<li class="{% if order is 'most-contributed' %}link-active{% endif %}"><a href="/tables/most-contributed">Contributions</a></li>
+				</div>
+			</div>
 
-        {# cards #}
-        <div class="tables__content__main__cards">
-            {% if tables %}
-            {% for table in tables %}
-            {{ partial('partials/table') }}
-            {% endfor %}
-            {% else %}
-            <div class="tables__content__main__cards__item center" style="padding:40px;">
-                <div>
-                    <img src="/assets/images/desktop.png" alt="" />
-                    <p>&nbsp;</p>
-                    <p>We couldn't find any tables matching your search.</p>
-                    <p>&nbsp;</p>
-                    <p><a class="button bold" href="/table/add">Create Table</a></p>
-                </div>
-            </div>
-            {% endif %}
-        </div>
-
+			{# cards #}
+			<div class="tables__content__main__cards">
+				{% if tables %}
+					{% for table in tables %}
+						{{ partial('partials/table') }}
+					{% endfor %}
+				{% else %}
+					<div class="tables__content__main__cards__item center" style="padding:40px;">
+						<div>
+							<img src="/assets/images/desktop.png" alt="" />
+							<p>&nbsp;</p>
+							<p>We couldn't find any tables matching your search.</p>
+							<p>&nbsp;</p>
+							<p><a class="button bold" href="/table/add">Create Table</a></p>
+						</div>
+					</div>
+				{% endif %}
+			</div>
     </div>
-    {# sidebar #}
-    <form method="GET" id="sidebarForm">
-        <div class="main__content__sidebar" id="filters">
-            <div class="main__content__sidebar__option" id="topicFilter">
-                <span>Filter by topic</span><img src="/assets/icons/chevron-down.svg" />
-            </div>
-            <ul class="filter filter--topic {% if sidebarFilter.topic %}open{% endif %}">
-                <li>
-                    <label {% if sidebarFilter.topic== "" %}class="selected"{% endif %}>
-                    <input type="radio" name="topic" {% if sidebarFilter.topic== "" %}checked="checked"{% endif %} value="" /> All
-                    </label>
-                </li>
-                {% for topic in topics %}
-                <li>
-                    <label {% if sidebarFilter.topic== topic.id %}class="selected" {% endif %} title="{{ topic.title|e }}">
-                        <input type="radio" name="topic" {% if sidebarFilter.topic== topic.id %}checked="checked" {% endif %} value="{{ topic.id }}" /> {{ topic.title|e }}
-                    </label>
-                </li>
-                {% endfor %}
-            </ul>
 
-            <div class="main__content__sidebar__option" id="typeFilter">
-                <span>Filter by Table Type</span><img src="/assets/icons/chevron-down.svg" />
-            </div>
-            <ul class="filter filter--type {% if sidebarFilter.type %}open{% endif %}">
-                <li>
-                    <label {% if sidebarFilter.type== "" %}class="selected"{% endif %}>
-                    <input type="radio" name="type" {% if sidebarFilter.type== "" %}checked="checked"{% endif %} value="" /> All
-                    </label>
-                </li>
-                {% for type in types %}
-                <li>
-                    <label {% if sidebarFilter.type== type.id %}class="selected" {% endif %} title="{{ type.title|e }}">
-                        <input type="radio" name="type" {% if sidebarFilter.type== type.id %}checked="checked" {% endif %} value="{{ type.id }}" /> {{ type.title|e }}
-                    </label>
-                </li>
-                {% endfor %}
-            </ul>
+	{# sidebar wrapper #}
+	<div class="aside__wrapper">
+		{# sidebar 1 #}
+		<aside class="aside aside--home" id="filterByTopic">
+			<div class="main__content__sidebar__option" id="topicFilter">
+				<span>Filter by Topic</span>
+			</div>
+			<form method="GET" id="sidebarForm">
+				<ul class="filter open filter--topic {% if sidebarFilter.topic %}open{% endif %}">
+					<li>
+						<label {% if sidebarFilter.topic== "" %}class="selected"{% endif %}>
+							<input type="radio" name="topic" {% if sidebarFilter.topic== "" %}checked="checked"{% endif %} value="" /> All
+						</label>
+					</li>
+					{% for topic in topics %}
+						<li>
+							<label {% if sidebarFilter.topic== topic.id %}class="selected" {% endif %} title="{{ topic.title|e }}">
+								<input type="radio" name="topic" {% if sidebarFilter.topic== topic.id %}checked="checked" {% endif %} value="{{ topic.id }}" /> {{ topic.title|e }}
+							</label>
+						</li>
+					{% endfor %}
+				</ul>
+			</form>
+		</aside>
 
-            <div class="main__content__sidebar__option" id="tagFilter">
-                <span>Filter by Tags</span><img src="/assets/icons/chevron-down.svg" />
-            </div>
-            <div id="TagsSelect" data-name="tags[]" data-value="{{ reactArray(filteredTags) }}" data-submit-form-on-change="sidebarForm" data-placeholder="" class="react-component"></div>
+		{# sidebar 2 #}
+		<aside class="aside aside--home" id="filterByType">
+			<div class="main__content__sidebar__option" id="typeFilter">
+				<span>Filter by Table Type</span>
+			</div>
+			<form method="GET" id="sidebarForm">
+				<ul class="filter open filter--type {% if sidebarFilter.type %}open{% endif %}">
+					<li>
+						<label {% if sidebarFilter.type== "" %}class="selected"{% endif %}>
+						<input type="radio" name="type" {% if sidebarFilter.type== "" %}checked="checked"{% endif %} value="" />All</label>
+					</li>
+					{% for type in types %}
+						<li>
+							<label {% if sidebarFilter.type== type.id %}class="selected" {% endif %} title="{{ type.title|e }}">
+								<input type="radio" name="type" {% if sidebarFilter.type== type.id %}checked="checked" {% endif %} value="{{ type.id }}" /> {{ type.title|e }}
+							</label>
+						</li>
+					{% endfor %}
+				</ul>
+			</form>
+		</aside>
 
-            <div class="main__content__sidebar__option" id="locationFilter">
-                <span>Filter by location</span><img src="/assets/icons/chevron-down.svg" />
-            </div>
-            <div id="LocationSelect" data-name="locations[]" data-value="{{ reactArray(filteredLocations) }}" data-submit-form-on-change="sidebarForm" data-placeholder=""
-                 class="react-component"></div>
-        </div>
-    </form>
+		{# sidebar 3 #}
+		<aside class="aside aside--home" id="filterByTags">
+			<div class="main__content__sidebar__option" id="tagFilter">
+				<span>Filter by Tags</span>
+			</div>
+			<form>
+				<div id="TagsSelect" data-name="tags[]" data-value="{{ reactArray(filteredTags) }}" data-submit-form-on-change="sidebarForm" data-placeholder="" class="react-component"></div>
+			</form>
+		</aside>
+
+		{# sidebar 4 #}
+		<aside class="aside aside--home" id="filterByLocation">
+			<div class="main__content__sidebar__option" id="locationFilter">
+				<span>Filter by location</span>
+			</div>
+			<form>
+				<div id="LocationSelect" data-name="locations[]" data-value="{{ reactArray(filteredLocations) }}" data-submit-form-on-change="sidebarForm" data-placeholder="" class="react-component"></div>
+			</form>
+		</aside>
+	</div>
 </div>
 {% endblock %}
 
 {% block scripts %}
-<script type="text/javascript">
-  $(document).ready(function () {
-    $('.main__hero a.button').click(function (ev) {
-      var show = ev.target.getAttribute('data-show');
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('.main__hero a.button').click(function (ev) {
+				var show = ev.target.getAttribute('data-show');
 
-      $('.pages').addClass('hidden');
-      if (show) {
-        $('.white-overlay').show();
-        $('.' + show).removeClass('hidden');
-      } else {
-        $('.white-overlay').hide();
-      }
-    });
+				$('.pages').addClass('hidden');
+				if (show) {
+					$('.white-overlay').show();
+					$('.' + show).removeClass('hidden');
+				} else {
+					$('.white-overlay').hide();
+				}
+			});
 
-    $('#sidebarForm > div > ul > li > label').on('change', function (ev) {
-      document.getElementById('sidebarForm').submit();
-    });
-  });
+			$('#sidebarForm > ul > li > label').on('change', function (ev) {
+				document.getElementById('sidebarForm').submit();
+			});
+		});
 
-  $('.navbar__search__filter').on('click', function () {
-    $('.filter').toggleClass('open');
-    window.location.hash = "#filters";
-  });
+		// $('.navbar__search__filter').on('click', function () {
+		// 	$('.filter').toggleClass('open');
+		// 	window.location.hash = "#filters";
+		// });
 
-  $('#topicFilter').on('click', function () {
-    $('.filter--topic').toggleClass('open');
-  });
+		// $('#topicFilter').on('click', function () {
+		// 	$('.filter--topic').toggleClass('open');
+		// });
 
-  $('#typeFilter').on('click', function () {
-    $('.filter--type').toggleClass('open');
-  });
+		// $('#typeFilter').on('click', function () {
+		// 	$('.filter--type').toggleClass('open');
+		// });
 
-  $('#closeHero').on('click', function () {
-    $('.main__hero').css('display', 'none');
-    createPopper();
-    createPopper($('.navbar__search__filter'), $('.dropdown--notifications'));
-  });
+		$('#closeHero').on('click', function () {
+			$('.main__hero').css('display', 'none');
+			createPopper();
+			createPopper($('.navbar__search__filter'), $('.dropdown--notifications'));
+		});
 
-  /* Popper */
-  var $referenceElement = $('.main__content__tables__filters__left');
-  var $onPopper = $('.dropdown--filters');
+		/* Popper */
+		var $referenceElement = $('.main__content__tables__filters__left');
+		var $onPopper = $('.dropdown--filters');
 
-  var createPopper = function (ref = $referenceElement, pop = $onPopper, place = 'bottom') {
-    new Popper(ref, pop, {
-      placement: place,
-    });
-  };
+		var createPopper = function (ref = $referenceElement, pop = $onPopper, place = 'bottom') {
+			new Popper(ref, pop, {
+				placement: place,
+			});
+		};
 
-  new Popper($referenceElement, $onPopper, {
-    placement: 'bottom',
-  });
+		new Popper($referenceElement, $onPopper, {
+			placement: 'bottom',
+		});
 
-  $referenceElement.click(function () {
-    $onPopper.toggleClass('show');
-  });
-</script>
+		$referenceElement.click(function () {
+			$onPopper.toggleClass('show');
+		});
+	</script>
 {% endblock %}
