@@ -2,8 +2,10 @@
 
 namespace DS\Component\Mail;
 
+use DS\Application;
 use DS\Component\Mail\ViewParams\DefaultParams;
 use DS\Component\Queue\QueueInterface;
+use DS\Component\View\Volt\VoltAdapter;
 use DS\Constants\Services;
 use DS\Model\Abstracts\AbstractUser;
 use DS\Traits\DiInjection;
@@ -101,7 +103,7 @@ class MailEvent
         //@todo enable queuing maybe?
         //$this->queue->queue($this->message);
         
-        $returnCode = $this->mailManager->sendViaGuzzle($this->message);
+        $this->mailManager->sendViaGuzzle($this->message);
         
         return $this;
     }
@@ -127,12 +129,16 @@ class MailEvent
         
         $view = new \Phalcon\Mvc\View();
         $view->setViewsDir(ROOT_PATH . '/app/views/');
-        $volt = new \Phalcon\Mvc\View\Engine\Volt($view);
+        $volt = new VoltAdapter($view, $this->getDI(), Application::instance());
         
+        ob_start();
         $this->message =
             $message->content($volt->render(ROOT_PATH . '/app/views/' . $this->viewPath, $viewParams->toArray()), $message::CONTENT_TYPE_HTML)
                     ->to($userModel->getEmail(), $userModel->getName())
                     ->subject($this->subject);
+        $mailContent = ob_get_contents();
+        ob_end_clean();
+        $this->message->content($mailContent);
     }
     
     /**
