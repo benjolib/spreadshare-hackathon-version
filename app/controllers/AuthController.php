@@ -40,7 +40,8 @@ class AuthController
             if ($auth->loggedIn())
             {
                 // Calling redirect only sets the 302 response status.
-                $this->response->redirect('/');
+                //$this->response->redirect('/');
+                header('Location: /');
                 
                 return;
             }

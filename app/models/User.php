@@ -4,6 +4,7 @@ namespace DS\Model;
 
 use DS\Component\Mail\Events\SignupMail;
 use DS\Constants\Paging;
+use DS\Model\DataSource\UserStatus;
 use DS\Model\Events\UserEvents;
 use DS\Model\Helper\RandomUserImage;
 
@@ -208,6 +209,7 @@ class User
                  ->setLocation($city)
                  ->setDescription($description)
                  ->setTagline($tagline)
+                 ->setStatus(UserStatus::OnboardingIncomplete)
                  ->setLastLogin(time());
             
             if ($website && preg_match($urlPattern, $website))

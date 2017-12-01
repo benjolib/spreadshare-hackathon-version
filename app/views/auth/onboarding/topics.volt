@@ -41,7 +41,7 @@
         </div>
       </aside>
       <div class="signup__content__form__buttons">
-        <button class="button">Continue</button>
+        <button>Continue</button>
       </div>
     </form>
 

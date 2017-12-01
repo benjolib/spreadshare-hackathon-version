@@ -35,8 +35,12 @@ abstract class UserEvents
     {
         $this->emailConfirmationToken = preg_replace('/[^a-zA-Z0-9]/', '', base64_encode(openssl_random_pseudo_bytes(24)));
         
-        $this->setConfirmed(0)
-             ->setStatus(UserStatus::Unconfirmed);
+        $this->setConfirmed(0);
+        
+        if (!$this->getStatus())
+        {
+            $this->setStatus(UserStatus::Unconfirmed);
+        }
     }
     
     /**
