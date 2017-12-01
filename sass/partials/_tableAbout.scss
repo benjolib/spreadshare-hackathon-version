@@ -291,9 +291,11 @@
             }
             h5 {
               font-weight: 500;
+              @include rem(font-size, 15);
             }
             p {
               font-weight: 400;
+              @include rem(font-size, 12);
             }
           }
         }
