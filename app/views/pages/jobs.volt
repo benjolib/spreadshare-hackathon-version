@@ -12,7 +12,6 @@
   <div class="__page__wrapper">
 
     <div id="jobs">
-    <h3>Jobs</h3>
     <p>There are no job openings, yet.</p>
     <br>
     </div>
