@@ -169,15 +169,15 @@
 
             span {
               color: $upvote-text-color;
-              font-weight: 400;
-              text-transform: uppercase;
+              font-weight: 500;
+              text-transform: capitalize;
               @include rem(font-size, 10);
 
               @include tablet {
                 @include rem(font-size, 14);
               }
               @include desktop {
-                font-weight: 300;
+                font-weight: 500;
                 @include rem(font-size, 16);
               }
             }
