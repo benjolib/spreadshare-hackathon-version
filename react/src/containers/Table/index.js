@@ -612,7 +612,7 @@ class Table extends Component<Props, State> {
                 ...(this.props.permission === "2"
                   ? {
                       my_edit_col: {
-                        name: "Edit Column"
+                        name: "Edit Column Header"
                       }
                     }
                   : {})
