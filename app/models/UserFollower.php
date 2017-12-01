@@ -79,6 +79,35 @@ class UserFollower
     
     /**
      * @param int $userId
+     * @param int $limit
+     * @param int $page
+     *
+     * @return array
+     */
+    public static function findAllFollowing(int $userId, $limit = Paging::endlessScrollPortions, $page = 0)
+    {
+        $query = self::query()
+                     ->columns(
+                         [
+                             User::class . ".id",
+                             User::class . ".image",
+                             User::class . ".name",
+                             User::class . ".handle",
+                             User::class . ".tagline",
+                             User::class . ".location",
+                             self::followingSubSelect(),
+                         ]
+                     )
+                     ->innerJoin(User::class, self::class . '.userId = ' . User::class . '.id')
+                     ->limit((int) $limit, $limit * $page)
+                     ->where(self::class . '.followedByUserId = ?0', [$userId])
+                     ->orderBy(self::class . '.id DESC');
+        
+        return $query->execute()->toArray() ?: [];
+    }
+    
+    /**
+     * @param int $userId
      * @param int $followerId
      *
      * @return UserFollower
