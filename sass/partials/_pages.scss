@@ -29,16 +29,21 @@
     ul {
        list-style-type: none;
        width: 225px;
-       padding: 10px;
+       //padding: 10px;
+       padding: .9375rem 1.25rem;
        background-color: #FFF;
        border-radius: 8px;
 
      li {
          font-family: $primary-font;
-         padding: 5px;
+         //padding: 5px;
          margin: 10px;
          color: #9BAABF;
-
+         text-transform: uppercase;
+         font-weight: 300;
+         border-radius: 4px;
+         padding: .625rem .9375rem;
+         margin-bottom: 0;
 
          a {
            font-size: 16px;
