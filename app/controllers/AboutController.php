@@ -28,7 +28,7 @@ class AboutController
     {
         try
         {
-            $this->view->setMainView('pages/about');
+            $this->view->setMainView('pages/about/vision');
         }
         catch (Exception $e)
         {
@@ -36,4 +36,80 @@ class AboutController
         }
     }
 
+    /**
+     * About How it works
+     */
+    public function howitworksAction($params = [])
+    {
+        try
+        {
+            $this->view->setMainView('pages/about/howitworks');
+        }
+        catch (Exception $e)
+        {
+            Application::instance()->log($e->getMessage(), Logger::CRITICAL);
+        }
+    }
+
+    /**
+     * About Problem
+     */
+    public function problemAction($params = [])
+    {
+        try
+        {
+            $this->view->setMainView('pages/about/problem');
+        }
+        catch (Exception $e)
+        {
+            Application::instance()->log($e->getMessage(), Logger::CRITICAL);
+        }
+    }
+
+    /**
+     * About Solution
+     */
+    public function solutionAction($params = [])
+    {
+        try
+        {
+            $this->view->setMainView('pages/about/solution');
+        }
+        catch (Exception $e)
+        {
+            Application::instance()->log($e->getMessage(), Logger::CRITICAL);
+        }
+    }
+
+
+    /**
+     * About Blockchain
+     */
+    public function blockchainAction($params = [])
+    {
+        try
+        {
+            $this->view->setMainView('pages/about/blockchain');
+        }
+        catch (Exception $e)
+        {
+            Application::instance()->log($e->getMessage(), Logger::CRITICAL);
+        }
+    }
+
+
+    /**
+     * About roadmap
+     */
+    public function roadmapAction($params = [])
+    {
+        try
+        {
+            $this->view->setMainView('pages/about/roadmap');
+        }
+        catch (Exception $e)
+        {
+            Application::instance()->log($e->getMessage(), Logger::CRITICAL);
+        }
+    }
 }
