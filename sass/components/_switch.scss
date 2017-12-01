@@ -1,0 +1,45 @@
+.switch {
+  display: flex;
+  align-items: center;
+  align-self: flex-start;
+  color: white;
+  background: #DEE0E7;
+  font-weight: 800;
+  border-radius: 5px;
+  @include rem(font-size, 12);
+
+  &--left {
+    align-self: center;
+    border: none;
+    outline: none;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    @include rem2(margin, 5, 5);
+    @include rem2(padding, 5, 18);
+    @include rem(margin-right, 2.5);
+
+    &:hover {
+      cursor: pointer;
+      background: darken($background-color, 8%);
+    }
+  }
+  &--right {
+    align-self: center;
+    border: none;
+    outline: none;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    @include rem2(margin, 0, 5);
+    @include rem2(padding, 5, 18);
+    @include rem(margin-left, 2.5);
+
+    &:hover {
+      cursor: pointer;
+      background: darken($background-color, 8%);
+    }
+  }
+
+  .active {
+    background: $logo-color;
+  }
+}
