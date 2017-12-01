@@ -9,7 +9,7 @@
             <div class="tableCard__info__upvote upvote {% if table['userHasVoted'] %}selected{% endif %}" data-action="upvote" data-id="{{ table['id'] }}"
                  onclick="var event = arguments[0] || window.event; event.stopPropagation();">
                 <div class="chevronUp">
-                    {{ partial('partials/icons/chevron-up') }}
+                    {{ partial('partials/icons/upvote') }}
                 </div>
                 <span>{{ table['votesCount'] +0 }}</span>
             </div>
