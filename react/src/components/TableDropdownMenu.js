@@ -85,7 +85,7 @@ class TableDropdownMenu extends React.Component<Props, State> {
   render() {
     return (
       <StyledDiv hide={this.props.hide}>
-        {this.props.permission === "2" && (
+        {this.props.permission !== "0" && (
           <a onClick={this.props.showAdd}>Add new row</a>
         )}
         {this.props.permission === "2" && (

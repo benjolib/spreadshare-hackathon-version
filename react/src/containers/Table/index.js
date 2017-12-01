@@ -491,7 +491,7 @@ class Table extends Component<Props, State> {
           )}
           <TableButton icon="sort" onClick={this.toggleSortings} />
           {/* <TableButton icon="filter" onClick={this.toggleFilters} /> */}
-          {this.props.permission === "2" && (
+          {this.props.permission !== "0" && (
             <TableButton icon="add" onClick={this.showAdd} />
           )}
           <TableSearch onChange={this.updateSearchValue} />
