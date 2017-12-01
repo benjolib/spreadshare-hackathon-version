@@ -10,6 +10,7 @@
   <div class="__page__container">
 
   <div class="__page__wrapper">
+    <!-- Vision Section !-->
     <div id="vision">
     <h3>Vision</h3>
     <p>We are heading towards a new age. Data has become the most-valuable resource of our planet. Following the footsteps of British statesman Winston Churchill and Canadian philosopher Marshal McLuhan, today we could say: We shape our data and therefore our data shape us.Information is the ultimate value. Knowledge has the power to educate people and fundamentally change their lives. Access is the problem, there’s no free lunch, they say. But Wikipedia (among other sites) proofed that voluntary crowd-sourcing information is a way to democratise information and grant free access for everybody. We believe that most of the worlds knowledge can be put into the table format through the power of the crowd.With SpreadShare we make the guarantee that information is and always will be freely accessible for everybody. We have a philosophy of openness and collaboration and want SpreadShare to be owned by our contributors.
