@@ -56,13 +56,13 @@
       margin: 0;
       font-weight: 300;
       font-family: $primary-font;
-      text-align: left;      
+      text-align: left;
       @include rem(margin-top, 5);
       @include rem(margin-bottom, 21 * 2);
       @include rem(font-size, 16);
 
       @include desktop {
-        margin: 3px 0 42px 0;        
+        margin: 3px 0 42px 0;
       }
 
       @include tablet {
@@ -70,7 +70,7 @@
       }
       @include mobile {
         text-align: center;
-        margin: 8px 0 42px 0;        
+        margin: 8px 0 42px 0;
       }
     }
 
@@ -84,7 +84,7 @@
 
       p {
         // color: lighten($text-color, 10%);
-        color:#B1BBC7;        
+        color:#B1BBC7;
         font-weight: 300;
         text-transform: uppercase;
         @include rem(font-size, 14);
@@ -99,8 +99,8 @@
           color: $text-color;
           text-transform: none;
           text-decoration: underline;
-          color:#B1BBC7;          
-          
+          color:#B1BBC7;
+
           &:hover {
             cursor: pointer;
             text-decoration: underline;
@@ -119,7 +119,7 @@
       span {
         font-weight: 300;
         // color: lighten($text-color, 10%);
-        color: #DEE0E7;        
+        color: #DEE0E7;
         @include rem(margin-top, 8);
         @include rem(font-size, 12);
       }
@@ -199,7 +199,8 @@
         flex-direction: column;
         background: white;
         border-radius: 8px;
-        @include rem2(padding, 15, 20);
+        //@include rem2(padding, 15, 20);
+        padding: 1.5rem;
 
         a {
           text-decoration: none;
@@ -211,18 +212,31 @@
           }
 
           .sign-box-selected {
-            color: #6A7C94; 
+            color: #6A7C94;
             margin-top: 15px;
           }
 
           div {
+            //text-transform: uppercase;
+            //font-weight: 300;
+            //border-radius: 4px;
+            //@include rem2(padding, 10, 15);
+            //color: #9BAABF;
+            //margin-bottom: 0;
+            font-family: $primary-font;
+            cursor: pointer;
+            white-space: nowrap;
+            border-radius: 6px;
+            padding: 8px 12px;
+            border: none;
+            user-select: none;
             text-transform: uppercase;
-            font-weight: 300;
-            border-radius: 4px;
-            @include rem2(padding, 10, 15);
-            color: #9BAABF;
-            margin-bottom: 0;
-
+            color: #9baabe;
+            display: block;
+            text-overflow: ellipsis;
+            width: 100%;
+            font-weight: 600;
+            
             &:hover {
               cursor: pointer;
             }
@@ -293,7 +307,7 @@
           font-weight: 500;
           border-radius: 4px;
           background: $twitter-color;
-          @include rem(margin-bottom, 16);          
+          @include rem(margin-bottom, 16);
           @include rem2(padding, 10, 15);
           text-transform: initial;
 
