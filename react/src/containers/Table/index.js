@@ -567,7 +567,12 @@ class Table extends Component<Props, State> {
                 return 400;
               }
             }}
-            fixedColumnsLeft={1}
+            fixedRowsTop={Number(this.props.data.table.fixedRowsTop)}
+            fixedColumnsLeft={
+              this.props.data.table.fixedColumnsLeft
+                ? Number(this.props.data.table.fixedColumnsLeft) + 1
+                : 1
+            }
             stretchH="all"
             disableVisualSelection={this.state.showAdd}
             afterSelection={(row, col) => {
