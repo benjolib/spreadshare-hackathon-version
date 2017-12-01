@@ -216,7 +216,7 @@
 
           div {
             text-transform: uppercase;
-            font-weight: 300;
+            font-weight: 500;
             border-radius: 4px;
             @include rem2(padding, 10, 15);
 
@@ -351,9 +351,9 @@
 
           @include mobile {
             width: 268px;
-            padding: 45px 0px;   
+            padding: 45px 0px;
             display: block;
-            text-align: center;            
+            text-align: center;
           }
 
           @include desktop {
@@ -378,7 +378,7 @@
             text-transform: uppercase;
             font-weight: 300;
             color: white;
-            text-align: center;          
+            text-align: center;
           }
         }
       }
@@ -392,8 +392,9 @@
       @include rem(margin-right, 50);
 
       @include desktop {
+        align-self: center;
         width: 20%;
-        @include rem(margin-top, 130);
+        @include rem(margin-top, 32);
       }
 
       &__box {
@@ -414,7 +415,7 @@
 
           div {
             text-transform: uppercase;
-            font-weight: 300;
+            font-weight: 500;
             border-radius: 4px;
             @include rem2(padding, 10, 15);
 
@@ -707,7 +708,7 @@
 
           div {
             text-transform: uppercase;
-            font-weight: 300;
+            font-weight: 500;
             border-radius: 4px;
             @include rem2(padding, 10, 15);
 
@@ -975,7 +976,7 @@
 
           div {
             text-transform: uppercase;
-            font-weight: 300;
+            font-weight: 500;
             border-radius: 4px;
             @include rem2(padding, 10, 15);
 
@@ -1003,8 +1004,8 @@
   }
 }
 
-@media (min-width: 1230px) and (max-width: 1320px) { 
-  
+@media (min-width: 1230px) and (max-width: 1320px) {
+
   #sidebarForm {
     font-size: 12px;
   }
@@ -1013,13 +1014,11 @@
   }
 }
 
-@media (min-width: 1024px) and (max-width: 1231px) { 
+@media (min-width: 1024px) and (max-width: 1231px) {
   .tableCard__stats__item {
     font-size: 7px;
   }
   #sidebarForm {
     font-size: 10px;
   }
-}  
-
-
+}

@@ -8,7 +8,7 @@
  * @package   DS\Config
  */
 return [
-    'domain' => 'staging.spreadshare.co',
+    'domain' => 'dev.spreadshare.co:81',
     'elasticsearch' => [
         'host' => 'elasticsearch',
         'port' => '9200',
@@ -104,7 +104,7 @@ return [
         "debug_file" => ROOT_PATH . "/system/log/hybridauth",
 
         //Location where to redirect users once they authenticate with a provider
-        'callback' => 'http://staging.spreadshare.co/login',
+        'callback' => 'http://dev.spreadshare.co:81/login',
 
         //Providers specifics
         'providers' => [
