@@ -67,7 +67,7 @@ And there are other ways to earn tokens like inviting other users to SpreadShare
     <li>Platform Vault: 90% of tokens will be distributed towards our users, 10% will remain in the platform vault to iterate and improve our product and pay salaries.</li>
     </ul>
 
-
+    </br>
     <h3>What can I do with token?</h3>
 
     <ul>
@@ -80,13 +80,25 @@ And there are other ways to earn tokens like inviting other users to SpreadShare
     </ul>
 
 
+    </br>
+
+    <h3>What is SPRD?</h3>
+    <p>SPRD is the name for the system’s value token (coming soon).</p>
+
+    </br>
+
+    <h3>Where do the new SPRD tokens come from?</h3>
+    <p>
+
+
+
     </div>
 
   </div>
 
   <div class="__page__sidebar">
    <ul>
-    <li><a href="faq">Company</a></li>
+    <li><a href="/faq">Company</a></li>
     <li><a href="/faq/product">Product</a></li>
     <li><a href="/faq/content">Content</a></li>
     <li class="active"><a href="/faq/token">Token</a></li>
