@@ -22,17 +22,34 @@ class TokenController
     extends BaseController
 {
     /**
-     * Spreadshare
+     * motivation
      */
     public function indexAction($params = [])
     {
         try
         {
-            $this->view->setMainView('pages/token');
+            $this->view->setMainView('pages/token/motivation');
         }
         catch (Exception $e)
         {
             Application::instance()->log($e->getMessage(), Logger::CRITICAL);
         }
     }
+
+
+    /**
+     * howitworks
+     */
+    public function howitworksAction($params = [])
+    {
+        try
+        {
+            $this->view->setMainView('pages/token/howitworks');
+        }
+        catch (Exception $e)
+        {
+            Application::instance()->log($e->getMessage(), Logger::CRITICAL);
+        }
+    }
+
 }
