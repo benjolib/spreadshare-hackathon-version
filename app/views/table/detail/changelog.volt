@@ -79,14 +79,17 @@
     </div>
 
     {% else %}
-    <div class="center" style="background:white;-webkit-border-radius: 8px;-moz-border-radius: 8px;border-radius: 8px;padding:50px;">
-        <img src="/assets/images/desktop.png" alt="" />
-        <p>&nbsp;</p>
-        <p>There are no change requests yet or no one is matching your filter "{{ page }}".</p>
+    <div class="container container--changelog">
+        <div class="container__content container__content--row">
+        <div class="center" style="background:white;-webkit-border-radius: 8px;-moz-border-radius: 8px;border-radius: 8px;padding:50px;">
+            <img src="/assets/images/desktop.png" alt="" />
+            <p>&nbsp;</p>
+            <p>There are no change requests yet or no one is matching your filter "{{ page }}".</p>
 
-        {% if auth().getUserId() != table['ownerUserId'] %}
-        <p><a href="/table/{{ table['id'] }}">Go</a> and make your first contribution to this table.</p>
-        {% endif %}
+            {% if auth().getUserId() != table['ownerUserId'] %}
+                <p><a href="/table/{{ table['id'] }}">Go</a> and make your first contribution to this table.</p>
+            {% endif %}
+        </div>
     </div>
     {% endif %}
     <aside class="aside aside--changelog">
