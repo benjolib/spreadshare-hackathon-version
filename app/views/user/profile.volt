@@ -14,7 +14,7 @@
         <img src="{{ profile.image }}" />
       </div>
       <div class="profile__hero__info">
-        <div class="profile__hero__info__name"><h3>{{ profile.name }}</h3></div>
+        <div class="profile__hero__info__name"><h3>{{ profile.name }}{% if settings.showTokensOnProfilePage %} <span class="profile__hero__info__tokens">{{ wallet.getTokens() }} Tokens</span>{% endif %}</h3></div>
         <div class="profile__hero__info__tagline">
           <p>{{ profile.tagline }}</p>
         </div>
@@ -88,7 +88,7 @@
         </div>
       </div>
     {% endif %}
-    {{ partial('partials/profileAside') }}
+    {{ partial('user/profileAside') }}
   </div>
 </div>
 {% endblock %}

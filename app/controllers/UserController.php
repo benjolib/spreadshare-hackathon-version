@@ -5,6 +5,9 @@ namespace DS\Controller;
 use DS\Model\User;
 use DS\Model\UserConnections;
 use DS\Model\UserFollower;
+use DS\Model\UserSettings;
+use DS\Model\UserStats;
+use DS\Model\Wallet;
 
 /**
  * Spreadshare
@@ -69,6 +72,8 @@ class UserController
             $this->view->setVar('following', UserFollower::findFollower($user->getId(), $this->serviceManager->getAuth()->getUserId()));
             $this->view->setVar('currentPage', $page);
             $this->view->setVar('profile', $user);
+            $this->view->setVar('settings', UserSettings::get($user->getId(), 'userId'));
+            $this->view->setVar('wallet', Wallet::get($user->getId(), 'userId'));
             $this->view->setMainView('user/profile');
             
             $subClass = "DS\\Controller\\User\\" . ucfirst($page);
