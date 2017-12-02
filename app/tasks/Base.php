@@ -24,41 +24,41 @@ use Phalcon\Cli\Task;
 abstract class Base
     extends Task
 {
-    
+
     /**
      * The command name
      *
      * @var string
      */
     protected $name;
-    
+
     /**
      * The command description
      *
      * @var string
      */
     protected $description;
-    
+
     /**
      * @var Output
      */
     protected $output;
-    
+
     /**
      * @var Input
      */
     protected $input;
-    
+
     /**
      * @var CliApplication
      */
     protected $app;
-    
+
     /**
      * @var ServiceManager
      */
     protected $service;
-    
+
     /**
      * @param string $text
      * @param bool   $newline
@@ -82,10 +82,10 @@ abstract class Base
         {
             $this->logger->debug($text);
         }
-        
+
         return $this;
     }
-    
+
     /**
      * Returns the output instance
      *
@@ -95,7 +95,7 @@ abstract class Base
     {
         return $this->output;
     }
-    
+
     /**
      * Returns the input instance
      *
@@ -105,7 +105,7 @@ abstract class Base
     {
         return $this->input;
     }
-    
+
     /**
      * Initialize task
      */
@@ -114,7 +114,7 @@ abstract class Base
         $this->logger = $this->getDI()->get('logger');
         $this->input  = new Input();
         $this->output = new Output();
-        
+
         $this->app     = CliApplication::instance();
         $this->service = $this->app->getServiceManager();
     }

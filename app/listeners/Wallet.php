@@ -4,7 +4,7 @@ namespace DS\Listeners;
 
 use DS\Application;
 use GuzzleHttp\Client;
-use DS\Model\Wallet;
+use DS\Model\Wallet as WalletModel;
 use Bernard\Message\PlainMessage;
 use DS\Component\ServiceManager;
 
@@ -18,25 +18,23 @@ class Wallet
 
       try {
 
+        // getClient
+        $client = ServiceManager::instance()->getDI()->get('wallet');
+
         // Create a data
         $data = [
           'userId' => $message->get('userId'),
           'email' => $message->get('email')
         ];
 
-        $client = new Client([
-            'headers' => [ 'Content-Type' => 'application/json' ]
-        ]);
+        /**
+         * Post to create a new wallet
+         */
+        $response = $client->post('/address',['body' => json_encode($data)] );
 
-        $response = $client->post('http://ec2-18-217-109-204.us-east-2.compute.amazonaws.com/address',
-            ['body' => json_encode($data)]
-        );
+        $responseObject = json_decode($response->getBody()->getContents());
 
-
-        $object = json_decode($response->getBody()->getContents());
-
-        Wallet::findByFieldValue($data['userId'], 'userId')->setUserId($data['userId'])->setContractAddress($object->address)->save();
-
+        WalletModel::findByFieldValue('userId', $data['userId'])->setContractAddress($responseObject->address)->save();
 
 
       } catch (Exception $e) {

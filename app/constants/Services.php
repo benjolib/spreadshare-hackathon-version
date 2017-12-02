@@ -131,6 +131,15 @@ class Services
     const ELASTICSEARCH = 'elasticSearch';
 
     /**
+     * Wallet service
+     *
+     * @definition bootstrap/Services/Wallet.php
+     */
+    const WALLET = 'wallet';
+
+
+
+    /**
      * Raven Client service (sentry.io bug tracker)
      *
      * @definition bootstrap/Services/RavenClient.php

@@ -23,7 +23,7 @@ use DS\Modules\Bernard;
  */
 class TableUpdated extends AbstractEvent
 {
-    
+
     /**
      * Issued after a table has been modified
      *
@@ -36,15 +36,16 @@ class TableUpdated extends AbstractEvent
         {
             // DataSource
             $datasource = [
+                'isUpdated' => true,
                 'tableId' => $table->getId(),
                 'tableTitle' => $table->getTitle(),
                 'tableTagline' => $table->getTagline(),
             ];
-            
+
             // Send Table Creation Event To ES Queue
-            Bernard::produce('tableUpdated', $datasource);
+            Bernard::produce('touchTable', $datasource);
         }
-        
+
         $userNotification = new UserNotifications();
         $userNotification
             ->setUserId($table->getOwnerUserId())
@@ -60,7 +61,7 @@ class TableUpdated extends AbstractEvent
                 )
             )
             ->create();
-        
+
         $tableLog = new TableLog();
         $tableLog
             ->setUserId($userId)
@@ -76,5 +77,5 @@ class TableUpdated extends AbstractEvent
             )
             ->create();
     }
-    
+
 }

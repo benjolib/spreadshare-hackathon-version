@@ -14,11 +14,18 @@ use DS\Component\ServiceManager;
 class ElasticSearch
 {
 
-
-    public function newTable(PlainMessage $message)
+    /**
+     * Touched a table updated content or added a new record
+     * @param  PlainMessage $message
+     * @return void or error
+     */
+    public function touchTable(PlainMessage $message)
     {
 
       try {
+
+        // New record or update
+        $isUpdate = $message->get('isUpdated');
 
         // Create a table
         $tableData = [
@@ -29,26 +36,21 @@ class ElasticSearch
 
         // getClient
         $elasticaClient = self::getClient();
-        // Load index
-        $elasticaIndex = $elasticaClient->getIndex('tables');
-
-        if (!$elasticaIndex->exists()) {
-          # Create index
-          $elasticaIndex->create();
-        }
-
-        // Get type
-        $elasticaType = $elasticaIndex->getType('table');
 
         // Document addition
         $tableDocument = new \Elastica\Document($message->get('tableId'), $tableData);
 
-        // Add table to type
-        $elasticaType->addDocument($tableDocument);
-
+        // Add new or update Table
+        if ($isUpdate) {
+          $elasticaClient->updateDocument($tableDocument);
+        } else {
+          $elasticaClient->addDocument($tableDocument);
+        }
 
 
       } catch (ResponseException $e) {
+
+        echo "error";
 
         $error = $e->getResponse()->getFullError();
 
@@ -58,10 +60,23 @@ class ElasticSearch
 
     }
 
-
     // Get the ElasticSearch Service
     public static function getClient(){
-      return ServiceManager::instance()->getDI()->get('elasticSearch');
+
+      // getClient
+      $elasticaClient = ServiceManager::instance()->getDI()->get('elasticSearch');
+
+      // Load index
+      $elasticaIndex = $elasticaClient->getIndex('tables');
+
+      if (!$elasticaIndex->exists()) {
+        # Create index
+        $elasticaIndex->create();
+      }
+
+      // Get type
+      return $elasticaIndex->getType('table');
+
     }
 
 }

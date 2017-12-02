@@ -57,10 +57,12 @@ class Bernard
 
   }
 
+
+
   /**
    * Add  job to producer
    * @param  [String] $name
-   * @param  [Array] $data
+   * @param  [Class] $instance
    * @return [void]
    */
   public static function consume($name,$instance){
@@ -74,7 +76,7 @@ class Bernard
 
     $router = new SimpleRouter();
 
-    $router->add($name,$instance);
+    $router->add($name, $instance);
 
     $consumer = new Consumer($router, new EventDispatcher());
 
