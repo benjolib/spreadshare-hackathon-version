@@ -33,6 +33,14 @@ class User
     }
     
     /**
+     * @return UserStats
+     */
+    public function getStats()
+    {
+        return UserStats::get($this->id, 'userId');
+    }
+    
+    /**
      * @param int  $tableId
      * @param bool $upvoters
      * @param bool $subscribers

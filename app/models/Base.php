@@ -86,7 +86,7 @@ abstract class Base
     public static function get($id, $column = 'id')
     {
         /**
-         * @todo Use memcache or redis for this with a lower lifetime of e.g. 5 minutes
+         * @todo Use memory cache for this
          */
         //if (!isset(static::$getCache[static::class][$id]))
         {

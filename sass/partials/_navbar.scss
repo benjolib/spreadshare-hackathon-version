@@ -74,7 +74,7 @@
     &__icon {
       display: flex;
       justify-content: center;
-      background: #F2F2F8;
+      background: #f2f2f8;
       border-top-left-radius: 3px;
       border-bottom-left-radius: 3px;
       @include rem(width, 38);
@@ -88,8 +88,8 @@
     &__field {
       font-family: $primary-font;
       font-weight: 400;
-      color: #6A7C94;
-      background: #F2F2F8;
+      color: #6a7c94;
+      background: #f2f2f8;
       border: none;
       outline: none;
       border-top-right-radius: 3px;
@@ -99,19 +99,19 @@
       @include rem(height, 40);
 
       &::-webkit-input-placeholder {
-        color: #B1BBC7;
+        color: #b1bbc7;
         font-weight: 300;
       }
       &::-moz-placeholder {
-        color: #B1BBC7;
+        color: #b1bbc7;
         font-weight: 300;
       }
       &:-ms-input-placeholder {
-        color: #B1BBC7;
+        color: #b1bbc7;
         font-weight: 300;
       }
       &:-moz-placeholder {
-        color: #B1BBC7;
+        color: #b1bbc7;
         font-weight: 300;
       }
       @include mobile {
@@ -139,6 +139,23 @@
 
     a#notificationButton {
       @include rem(margin-left, 30);
+      position: relative;
+
+      span {
+        font-size: 8px;
+        line-height: 10px;
+        padding: 2px;
+        text-align: center;
+        vertical-align: center;
+        border-radius: 10px;
+        width: 15px;
+        height: 15px;
+        background: #2ead6b;
+        color: white;
+        position: absolute;
+        top: -5px;
+        right: -5px;
+      }
     }
     a#profileImage {
       @include rem(margin-left, 30);
@@ -200,43 +217,43 @@
       visibility: hidden;
       position: absolute;
       margin-top: 20px;
-      background: #FFFFFF;
-      box-shadow: 0 4px 14px 0 rgba(0,0,0,0.26);
+      background: #fff;
+      box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.26);
       border-radius: 6px;
       z-index: 1;
 
       ul {
-         list-style-type: none;
-         width: 224px;
-         padding-left: 15px;
-         padding-bottom: 15px;
+        list-style-type: none;
+        width: 224px;
+        padding-left: 15px;
+        padding-bottom: 15px;
 
-       li {
-           /* width: 6em; */
-           margin: 5px 0px 0px 15px;
+        li {
+          /* width: 6em; */
+          margin: 5px 0px 0px 15px;
 
-           a {
-             font-size: 16px;
-             color: #6A7C94;
-             letter-spacing: -0.43px;
-             line-height: 32px;
-           }
-         }
+          a {
+            font-size: 16px;
+            color: #6a7c94;
+            letter-spacing: -0.43px;
+            line-height: 32px;
+          }
+        }
 
-       li:first-child{
+        li:first-child {
           margin-top: 14px;
           margin-bottom: 14px;
           a {
-            color: #24AE69;
+            color: #24ae69;
             letter-spacing: -0.43px;
           }
-       }
+        }
 
-       li:last-child{
+        li:last-child {
           margin-top: 14px;
           margin-bottom: 14px;
           a {
-            color: #B1BBC7;
+            color: #b1bbc7;
             letter-spacing: -0.43px;
           }
         }

@@ -22,14 +22,15 @@
         </div>
     </div>
 
-    <!-- End Search Auto Complete Component !-->
-
   </div>
   {% if auth.loggedIn() %}
     <div class="navbar__controls">
       <img src="/assets/icons/add.svg" class="navbar__controls__add navbar__controls__add--notification" />
       <img src="/assets/icons/add.svg" class="navbar__controls__add navbar__controls__add--menu" />
-      <a id="notificationButton" href="javascript:;"><img src="/assets/icons/bell.svg" class="navbar__controls__notification" /></a>
+      <a id="notificationButton" href="javascript:;">
+          {% if auth.getUser().getStats().getUnreadNotificationsCount() >0 %}<span>{{ auth.getUser().getStats().getUnreadNotificationsCount() }}</span>{% endif %}
+          <img src="/assets/icons/bell.svg" class="navbar__controls__notification" />
+      </a>
       <div class="dropdown dropdown--notifications"><br/><div class="loading"></div><br/></div>
       <a id="profileImage" href="javascript:;"><img src="{{ auth.getUser().getImage() }}" class="navbar__controls__profile" /></a>
       <div class="profile-menu navbar__controls__dropdown">

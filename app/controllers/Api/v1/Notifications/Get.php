@@ -8,6 +8,7 @@ use DS\Controller\Api\Meta\Record;
 use DS\Controller\Api\MethodInterface;
 use DS\Model\Helper\UserNotificationLinkHelper;
 use DS\Model\UserNotifications;
+use DS\Model\UserStats;
 
 /**
  *
@@ -50,6 +51,8 @@ class Get extends ActionHandler implements MethodInterface
                 
                 if (count($notificationsArray))
                 {
+                    UserStats::decrement($userId, 'unreadNotifications', count($notificationsArray));
+                    
                     $output = '';
                     foreach ($notificationsArray as $notification)
                     {

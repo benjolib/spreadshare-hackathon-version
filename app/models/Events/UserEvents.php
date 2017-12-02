@@ -6,6 +6,7 @@ use DS\Exceptions\UserValidationException;
 use DS\Model\Abstracts\AbstractUser;
 use DS\Model\DataSource\UserStatus;
 use DS\Model\User;
+use DS\Model\UserStats;
 use DS\Model\Wallet;
 use Phalcon\Mvc\Model;
 
@@ -54,6 +55,9 @@ abstract class UserEvents
                       ->setContractAddress('')
                       ->setData('')
                       ->create();
+        
+        (new UserStats())->setUserId($this->getId())
+                         ->create();
     }
     
     /**
