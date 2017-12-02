@@ -38,7 +38,9 @@ export type Rows = Array<Row>;
 export type Table = {
   votes: Votes,
   columns: Columns,
-  rows: Rows
+  rows: Rows,
+  fixedColumnsLeft: number,
+  fixedRowsTop: number
 };
 
 export type TableDataWrapper = {
