@@ -24,9 +24,9 @@
     {% if auth.loggedIn() %}
     <div class="tableAbout__comments__content__send">
       <form method="POST" action="/table/{{ table['id'] }}/about">
-        <input type="hidden" name="parentId" id="commentParentId" value="" />
-        <input name="comment" id="commentTextArea" placeholder="Add a comment" minlength="3" />
-        <button>Send</button>
+          <input type="hidden" name="parentId" id="commentParentId" value="" />
+          <textarea name="comment" id="commentTextArea" placeholder="Add a comment" minlength="3" maxlength="300"></textarea>
+          <button>Send</button>
       </form>
     </div>
     {% endif %}
