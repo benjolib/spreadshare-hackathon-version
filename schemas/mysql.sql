@@ -656,6 +656,11 @@ CREATE TABLE `userStats` (
   `userId` int(11) unsigned DEFAULT NULL,
   `tablesOwnerCount` int(10) DEFAULT NULL COMMENT 'tables count (cache)',
   `rowsOwnerCount` int(10) DEFAULT NULL COMMENT 'rows count (cache)',
+  `unreadNotifications` int(10) unsigned DEFAULT NULL,
+  `contributions` int(10) unsigned DEFAULT NULL,
+  `tablesCreated` int(10) unsigned DEFAULT NULL,
+  `rejectedChangeRequests` int(10) unsigned DEFAULT NULL,
+  `approvedChangeRequests` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `userStatsUserId` (`userId`),
   CONSTRAINT `userStatsUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
