@@ -3,6 +3,7 @@
 namespace DS\Model;
 
 use DS\Model\Events\UserStatsEvents;
+use DS\Traits\Model\UserStatsTrait;
 
 /**
  * UserStats
@@ -20,33 +21,5 @@ use DS\Model\Events\UserStatsEvents;
 class UserStats
     extends UserStatsEvents
 {
-    /**
-     * @param array $param
-     * @param int   $page
-     * @param int   $limit
-     *
-     * @return array
-     */
-    /*
-    public function findCustom($param = [], $page = 0, $limit = Paging::endlessScrollPortions)
-    {
-        if (count($param))
-        {
-            return self::query()
-                       ->columns(
-                           [
-                               UserStats::class . ".id",
-                           ]
-                       )
-                //->leftJoin(UserStats::class, UserStats::class . '.profileId = ' . Profile::class . '.id')
-                //->inWhere(Profile::class . '.id', $param)
-                       ->limit((int) $limit, (int) Paging::endlessScrollPortions * $page)
-                //->orderBy(sprintf('FIELD (id,%s)', implode(',', $param)))
-                       ->execute()
-                       ->toArray() ?: [];
-        }
-        
-        return [];
-    }
-    */
+    use UserStatsTrait;
 }

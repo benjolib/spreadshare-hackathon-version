@@ -3,11 +3,12 @@
 namespace DS\Model\Events;
 
 use DS\Model\Abstracts\AbstractUserNotifications;
+use DS\Model\UserStats;
 
 /**
  * Events for model UserNotifications
  *
- * @see https://docs.phalconphp.com/ar/3.2/db-models-events
+ * @see       https://docs.phalconphp.com/ar/3.2/db-models-events
  *
  * @author    Dennis Stücken
  * @license   proprietary
@@ -39,5 +40,13 @@ abstract class UserNotificationsEvents
         parent::beforeValidationOnUpdate();
         
         return true;
+    }
+    
+    /**
+     * After create a user notification
+     */
+    public function afterCreate()
+    {
+        UserStats::increment($this->getUserId(), 'unreadNotifications');
     }
 }

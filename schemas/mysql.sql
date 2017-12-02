@@ -656,11 +656,15 @@ CREATE TABLE `userStats` (
   `userId` int(11) unsigned DEFAULT NULL,
   `tablesOwnerCount` int(10) DEFAULT NULL COMMENT 'tables count (cache)',
   `rowsOwnerCount` int(10) DEFAULT NULL COMMENT 'rows count (cache)',
+  `unreadNotificationsCount` int(10) unsigned DEFAULT NULL,
+  `contributionsCount` int(10) unsigned DEFAULT NULL,
+  `tablesCreatedCount` int(10) unsigned DEFAULT NULL,
+  `rejectedChangeRequestsCount` int(10) unsigned DEFAULT NULL,
+  `approvedChangeRequestsCount` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `userStatsUserId` (`userId`),
   CONSTRAINT `userStatsUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 
 # Export von Tabelle wallet

@@ -156,12 +156,13 @@
         $(popperProfileMenu).toggleClass('show');
       });
       // toggle notifications
-      $('#notificationButton').click(function () {
+      $('#notificationButton').click(function (ev) {
         popperProfileMenu.removeClass('show');
         $(popperNotifications).toggleClass('show');
 
         $.get("/api/v1/notifications?p=" + 0, function (data) {
           $(popperNotifications).html(data);
+          $('#notificationButton').find('span').remove()
         });
       });
     }

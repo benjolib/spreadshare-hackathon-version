@@ -37,6 +37,13 @@ class Auth
     public $userId;
     
     /**
+     * User Model
+     *
+     * @var User
+     */
+    protected $user;
+    
+    /**
      * Remember authenticated session for 15 days
      *
      * @var int
