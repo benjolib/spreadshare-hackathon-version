@@ -77,7 +77,9 @@ abstract class ChangeRequestsEvents
         if ($this->getStatus() == ChangeRequestStatus::Confirmed && $this->getCellId())
         {
             $cell = TableCells::get($this->getCellId());
-            $cell->setContent($this->getTo())->save();
+            $cell->setContent($this->getTo()) // Change content
+                 ->setUserId($this->getUserId()) // Change cell ownership
+                 ->save();
         }
         
         if ($this->getStatus() != ChangeRequestStatus::AwaitingApproval)

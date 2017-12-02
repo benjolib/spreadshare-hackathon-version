@@ -88,7 +88,7 @@
         </div>
       </div>
     {% endif %}
-    {{ partial('partials/profileAside') }}
+    {{ partial('user/profileAside') }}
   </div>
 </div>
 {% endblock %}
