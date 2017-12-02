@@ -209,6 +209,13 @@
             cursor: pointer;
           }
 
+          &__searchTitle {
+            color: #b1bbc7;
+            text-transform: uppercase;
+            font-size: 13px;
+            font-weight: 400;
+          }
+
           @include desktop {
             order: 1;
             width: auto;

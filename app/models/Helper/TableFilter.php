@@ -21,32 +21,32 @@ class TableFilter
      * @var string
      */
     public $topic = '';
-    
+
     /**
      * @var string
      */
     public $type = '';
-    
+
     /**
      * @var array
      */
     public $tags = [];
-    
+
     /**
      * @var array
      */
     public $locations = [];
-    
+
     /**
      * @var array
      */
     public $tableIds = [];
-    
+
     /**
      * @var DateRange
      */
     public $dateRange = null;
-    
+
     /**
      * @return DateRange|null
      */
@@ -54,7 +54,7 @@ class TableFilter
     {
         return $this->dateRange;
     }
-    
+
     /**
      * @param DateRange $dateRange
      *
@@ -63,10 +63,10 @@ class TableFilter
     public function setDateRange($dateRange)
     {
         $this->dateRange = $dateRange;
-        
+
         return $this;
     }
-    
+
     /**
      * @param int $tableId
      *
@@ -75,10 +75,10 @@ class TableFilter
     public function addTableId(int $tableId): TableFilter
     {
         $this->tableIds[] = $tableId;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string
      */
@@ -86,7 +86,7 @@ class TableFilter
     {
         return $this->topic;
     }
-    
+
     /**
      * @param string $topic
      *
@@ -95,10 +95,10 @@ class TableFilter
     public function setTopic($topic)
     {
         $this->topic = $topic;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string
      */
@@ -106,7 +106,7 @@ class TableFilter
     {
         return $this->type;
     }
-    
+
     /**
      * @param string $type
      *
@@ -115,10 +115,10 @@ class TableFilter
     public function setType($type)
     {
         $this->type = $type;
-        
+
         return $this;
     }
-    
+
     /**
      * @return array
      */
@@ -126,7 +126,7 @@ class TableFilter
     {
         return $this->tags;
     }
-    
+
     /**
      * @param array $tags
      *
@@ -135,10 +135,10 @@ class TableFilter
     public function setTags($tags)
     {
         $this->tags = $tags;
-        
+
         return $this;
     }
-    
+
     /**
      * @return array
      */
@@ -146,7 +146,7 @@ class TableFilter
     {
         return $this->locations;
     }
-    
+
     /**
      * @param array $locations
      *
@@ -155,10 +155,10 @@ class TableFilter
     public function setLocations($locations)
     {
         $this->locations = $locations;
-        
+
         return $this;
     }
-    
+
     /**
      * @return array
      */
@@ -166,7 +166,7 @@ class TableFilter
     {
         return $this->tableIds;
     }
-    
+
     /**
      * @param array $tableIds
      *
@@ -175,7 +175,7 @@ class TableFilter
     public function setTableIds($tableIds)
     {
         $this->tableIds = $tableIds;
-        
+
         return $this;
     }
 }

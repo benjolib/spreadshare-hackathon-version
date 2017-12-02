@@ -7,7 +7,13 @@
     <div class="navbar__search__icon">
       <img src="/assets/icons/search.svg" />
     </div>
+
+    {% if query is defined %}
+    <input type="text" class="navbar__search__field" placeholder="Search" value="{{ query }}" />
+    {% else %}
     <input type="text" class="navbar__search__field" placeholder="Search" />
+    {% endif %}
+
     <!-- Begin Search Auto Complete Component !-->
     <div class="search-autocomplete search__dropdown">
         <div class="title-block">
