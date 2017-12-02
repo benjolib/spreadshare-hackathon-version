@@ -60,9 +60,9 @@
         @include rem(width, 100);
         @include rem(height, 100);
         @include rem(margin-top, 24);
-        -webkit-box-shadow: 2px 4px 35px 1px rgba(0,0,0,0.75);
-        -moz-box-shadow: 2px 4px 35px 1px rgba(0,0,0,0.75);
-        box-shadow: 2px 5px 35px 1px rgba(0,0,0,0.75);
+        -webkit-box-shadow: 2px 4px 35px 1px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 2px 4px 35px 1px rgba(0, 0, 0, 0.75);
+        box-shadow: 2px 5px 35px 1px rgba(0, 0, 0, 0.75);
 
         @include desktop {
           margin-top: 0;
@@ -171,6 +171,15 @@
           }
         }
       }
+      &__tokens {
+        @include rem(font-size, 12);
+        background: white;
+        color: $text-color-alternate;
+        border-radius: 3px;
+        padding: 3px 6px;
+        vertical-align: middle;
+        margin-left: 10px;
+      }
       &__tagline {
         @include rem(margin-bottom, 10);
 
@@ -247,7 +256,7 @@
         }
 
         button {
-          color: #B4BDC8;
+          color: #b4bdc8;
           background: white;
           outline: none;
           border: none;
@@ -406,12 +415,12 @@
 
             @include tablet {
               display: flex;
-              border-top: 2px solid #F7F7FB;
+              border-top: 2px solid #f7f7fb;
               @include rem(font-size, 12);
             }
             @include desktop {
               display: flex;
-              border-top: 2px solid #F7F7FB;
+              border-top: 2px solid #f7f7fb;
               @include rem(font-size, 14);
             }
 
@@ -484,7 +493,7 @@
         a {
           text-decoration: none;
           // color: $text-color;
-          color: #B1BBC7 !important;
+          color: #b1bbc7 !important;
 
           &:hover {
             color: $text-color;
@@ -518,5 +527,5 @@
 }
 
 .sign-box-selected {
-  color: #6B7D94;
+  color: #6b7d94;
 }

@@ -446,6 +446,7 @@
           border-bottom-left-radius: 6px;
           border-bottom-right-radius: 6px;
 
+          textarea[name="comment"],
           input[name="comment"] {
             width: 90%;
             border: none;
@@ -453,6 +454,8 @@
             color: $text-color;
             font-weight: 400;
             outline: none;
+            min-height:45px;
+            height:45px;
             @include rem(font-size, 14);
             @include rem(padding, 10);
             @include rem2(margin, 12, 0);

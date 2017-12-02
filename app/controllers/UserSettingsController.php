@@ -115,6 +115,9 @@ class UserSettingsController
     {
         $userId = $this->serviceManager->getAuth()->getUserId();
         
+        $userSettingsModel = \DS\Model\UserSettings::get($userId, 'userId');
+        $this->view->setVar('settings', $userSettingsModel);
+        
         if ($this->request->isPost())
         {
             $locations = Locations::getByIds($this->request->getPost('locations', null, []));
@@ -150,8 +153,9 @@ class UserSettingsController
                         true
                     );
                     
-                    $userSettingsModel = \DS\Model\UserSettings::get($userId, 'userId')->setUserId($userId);
-                    $userSettingsModel->setShowTokensOnProfilePage($this->request->getPost('showTokensOnProfilePage'))->save();
+                    $userSettingsModel->setUserId($userId)
+                                      ->setShowTokensOnProfilePage($this->request->getPost('showTokensOnProfilePage'))
+                                      ->save();
                     $this->view->setVar('settings', $userSettingsModel);
                     
                     // Reload user data

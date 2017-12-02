@@ -33,7 +33,7 @@ class IndexController
     /**
      * Home
      */
-    public function indexAction($order = 'newly-added', $date = 'last-30-days')
+    public function indexAction($order = 'most-upvoted', $date = 'last-30-days')
     {
         try
         {
@@ -62,8 +62,8 @@ class IndexController
             // Prepare ordering
             switch ($order)
             {
-                case 'most-upvoted':
-                    $orderBy = TableStats::class . ".votesCount DESC";
+                case 'newest':
+                    $orderBy = Tables::class . '.createdAt DESC';
                     break;
                 case 'most-viewed':
                     $orderBy = TableStats::class . ".viewsCount DESC";
@@ -72,8 +72,8 @@ class IndexController
                     $orderBy = TableStats::class . ".contributionCount DESC";
                     break;
                 default:
-                case 'newest':
-                    $orderBy = Tables::class . '.createdAt DESC';
+                case 'most-upvoted':
+                    $orderBy = TableStats::class . ".votesCount DESC";
                     break;
             }
             
