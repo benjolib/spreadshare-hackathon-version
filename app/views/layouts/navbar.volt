@@ -4,15 +4,21 @@
     <h2>Community curated Tables</h2>
   </div>
   <div class="navbar__search">
+
+
+  {% if searchDisabled is empty  %}
+
     <div class="navbar__search__icon">
       <img src="/assets/icons/search.svg" />
     </div>
 
-    {% if query is defined %}
+    {% if query is defined  %}
     <input type="text" class="navbar__search__field" placeholder="Search" value="{{ query }}" />
     {% else %}
     <input type="text" class="navbar__search__field" placeholder="Search" />
     {% endif %}
+
+ {% endif %}
 
     <!-- Begin Search Auto Complete Component !-->
     <div class="search-autocomplete search__dropdown">
