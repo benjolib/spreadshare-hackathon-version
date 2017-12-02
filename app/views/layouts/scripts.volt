@@ -72,10 +72,13 @@
 
     $(searchFieldEl).on("change paste keyup", function () {
 
+
       /* Popper */
       var searchReferenceElement = $(this);
 
       var searchEl = $(this).val();
+      // append href link
+      $(".all-results").wrap("<a href='/search?query=" + searchEl + "'/>")
       // When the search query is greater than 3
       if (searchEl.length > 3) {
 
