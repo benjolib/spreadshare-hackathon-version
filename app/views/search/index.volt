@@ -17,6 +17,15 @@
     {# tables content #}
     <div class="container__content">
 
+    {# filters #}
+    <div class="main__content__tables__filters">
+        <div class="main__content__tables__filters__left">
+            <span class="main__content__tables__filters__left__searchTitle"> LATEST UPDATES </span>
+        </div>
+
+    </div>
+
+
 			{# cards #}
 			<div class="tables__content__main__cards">
 				{% if tables %}
