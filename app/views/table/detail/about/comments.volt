@@ -25,7 +25,7 @@
     <div class="tableAbout__comments__content__send">
       <form method="POST" action="/table/{{ table['id'] }}/about">
         <input type="hidden" name="parentId" id="commentParentId" value="" />
-        <input name="comment" id="commentTextArea" placeholder="Add a comment" />
+        <input name="comment" id="commentTextArea" placeholder="Add a comment" minlength="3" />
         <button>Send</button>
       </form>
     </div>

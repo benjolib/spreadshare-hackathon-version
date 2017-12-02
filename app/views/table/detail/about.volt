@@ -141,6 +141,24 @@
 
 {% block scripts %}
 <script type="text/javascript">
+  function linkify(inputText) {
+    var replacedText, replacePattern1, replacePattern2, replacePattern3;
+
+    //URLs starting with http://, https://
+    replacePattern1 = /(\b(https?):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
+    replacedText = inputText.replace(replacePattern1, '<a href="$1" target="_blank">$1</a>');
+
+    //URLs starting with "www." (without // before it, or it'd re-link the ones done above).
+    replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
+    replacedText = replacedText.replace(replacePattern2, '$1<a href="http://$2" target="_blank">$2</a>');
+
+    //Change email addresses to mailto:: links.
+    replacePattern3 = /(([a-zA-Z0-9\-\_\.])+@[a-zA-Z\_]+?(\.[a-zA-Z]{2,6})+)/gim;
+    replacedText = replacedText.replace(replacePattern3, '<a href="mailto:$1">$1</a>');
+
+    return replacedText;
+  }
+
   $(document).ready(function () {
     $('.tableAbout__comments__container').on('click', '.reply', function (ev) {
       var target = $(ev.currentTarget);
@@ -150,6 +168,10 @@
 
       document.getElementById('commentTextArea').focus();
     });
+
+    $('div.tableAbout__comments__container__content p').each(function (idx, el) {
+      $(el).html(linkify(el.innerHTML));
+    })
   });
 </script>
 <script src="https://unpkg.com/socialshares@2/dist/socialshares.min.js" defer></script>
