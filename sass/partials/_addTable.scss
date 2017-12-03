@@ -154,21 +154,23 @@
 
         a {
           text-decoration: none;
-          color: $text-color;
+          color: #B1BBC7;
 
           &:hover {
-            color: $text-color;
+            cursor: default;
+            color: #B1BBC7;
             text-decoration: none;
           }
 
           div {
             text-transform: uppercase;
-            font-weight: 300;
+            font-weight: 500;
             border-radius: 4px;
+            @include rem(font-size, 15);
             @include rem2(padding, 10, 15);
 
             &:hover {
-              cursor: pointer;
+              cursor: default;
             }
 
             &:first-child {

@@ -19,18 +19,18 @@
     </div>
     <aside class="addTable__content__aside">
       <div class="addTable__content__aside__box">
-        <a href="/table/add">
+        <a>
           <div {% if tab == 'choose-method' %}class="sign-box-selected"{% endif %}>Choose Method</div>
         </a>
-        <a href="#">
+        <a>
           <div {% if tab == 'description' %}class="sign-box-selected"{% endif %}>Description</div>
         </a>
         {% if !hideChooseTable %}
-        <a href="#">
+        <a>
           <div {% if tab == 'choose-table' %}class="sign-box-selected"{% endif %}>Choose table</div>
         </a>
         {% endif %}
-        <a href="#">
+        <a>
           <div {% if tab == 'confirm' %}class="sign-box-selected"{% endif %}>Confirm</div>
         </a>
       </div>
