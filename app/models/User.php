@@ -195,6 +195,11 @@ class User
             ]
         );
         
+        if ($user && $user->getAuthProvider() != $provider)
+        {
+            throw new \InvalidArgumentException('You already registered with this email address.');
+        }
+        
         $urlPattern = "/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i";
         
         if (!$user)
