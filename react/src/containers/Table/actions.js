@@ -65,7 +65,8 @@ export const editCellRequest = (
   rowId: string,
   cellId: string,
   cell: Cell,
-  permission: string
+  permission: string,
+  currentValue: string
 ): Action => ({
   type: "EDIT_CELL_REQUEST",
   payload: {
@@ -73,7 +74,8 @@ export const editCellRequest = (
     rowId,
     cellId,
     cell,
-    permission
+    permission,
+    currentValue
   }
 });
 
@@ -82,7 +84,8 @@ export const editCellSuccess = (
   rowId: string,
   cellId: string,
   cell: Cell,
-  permission: string
+  permission: string,
+  currentValue: string
 ): Action => ({
   type: "EDIT_CELL_SUCCESS",
   payload: {
@@ -90,7 +93,8 @@ export const editCellSuccess = (
     rowId,
     cellId,
     cell,
-    permission
+    permission,
+    currentValue
   }
 });
 
@@ -100,6 +104,7 @@ export const editCellError = (
   cellId: string,
   cell: Cell,
   permission: string,
+  currentValue: string,
   error: Error
 ): Action => ({
   type: "EDIT_CELL_ERROR",
@@ -109,6 +114,7 @@ export const editCellError = (
     cellId,
     cell,
     permission,
+    currentValue,
     error
   }
 });
@@ -120,10 +126,13 @@ export const editCell = (
   rowId: string,
   cellId: string,
   cell: Cell,
-  permission: string
+  permission: string,
+  currentValue: string
 ): ThunkAction => (dispatch: Dispatch) =>
   new Promise((resolve, reject) => {
-    dispatch(editCellRequest(tableId, rowId, cellId, cell, permission));
+    dispatch(
+      editCellRequest(tableId, rowId, cellId, cell, currentValue, permission)
+    );
     if (process.env.NODE_ENV === "production") {
       saveDataApi(`edit-cell/${tableId}`, {
         rowId,
@@ -138,6 +147,7 @@ export const editCell = (
               cellId,
               cell,
               permission,
+              currentValue,
               new Error(error)
             )
           );
@@ -145,12 +155,30 @@ export const editCell = (
           return;
         }
 
-        dispatch(editCellSuccess(tableId, rowId, cellId, cell, permission));
+        dispatch(
+          editCellSuccess(
+            tableId,
+            rowId,
+            cellId,
+            cell,
+            currentValue,
+            permission
+          )
+        );
         resolve();
       });
     } else {
       setTimeout(() => {
-        dispatch(editCellSuccess(tableId, rowId, cellId, cell, permission));
+        dispatch(
+          editCellSuccess(
+            tableId,
+            rowId,
+            cellId,
+            cell,
+            currentValue,
+            permission
+          )
+        );
         resolve();
       }, 500);
     }

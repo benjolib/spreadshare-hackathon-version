@@ -308,7 +308,8 @@ class Table extends Component<Props, State> {
                 ...cell,
                 content: newValue
               },
-              this.props.permission
+              this.props.permission,
+              cell.content
             );
           }
         })
@@ -316,13 +317,13 @@ class Table extends Component<Props, State> {
             if (!result.value) {
               return;
             }
-            if (this.props.permission === "1") {
+            if (this.props.permission === "1" && cell.content) {
               swal(
                 "Success!",
                 "The request to edit this cell is awaiting approval.",
                 "success"
               );
-            } else if (this.props.permission === "2") {
+            } else {
               swal("Success!", "The cell has been edited.", "success");
             }
           })

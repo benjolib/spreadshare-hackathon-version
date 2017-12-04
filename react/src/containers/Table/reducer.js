@@ -48,7 +48,7 @@ export const tablesReducer = (
     }
 
     case "EDIT_CELL_SUCCESS": {
-      if (action.payload.permission === "2") {
+      if (action.payload.permission === "2" || !action.payload.currentValue) {
         return {
           ...state,
           [action.payload.tableId]: {
