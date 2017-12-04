@@ -119,6 +119,7 @@
         </div>
       </div>
 
+<<<<<<< HEAD
       {# cards #}
       <div class="tables__content__main__cards">
         {% if tables %}
@@ -134,6 +135,12 @@
             <p>&nbsp;</p>
             <p><a class="button bold" href="/table/add">Create Table</a></p>
           </div>
+=======
+            {# tables cards #}
+            <div class="tables__content__main__cards">
+                {{ partial('homepage/tables') }}
+            </div>
+>>>>>>> controller for accepting ?page=:int to page the tables
         </div>
         {% endif %}
       </div>
