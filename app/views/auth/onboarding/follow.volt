@@ -33,21 +33,19 @@
           <button id="continueOnboard">Continue</button>
         </div>
       </div>
-      <aside class="follow__content__aside">
-        <div class="follow__content__aside__box">
-          <a href="/signup/topics">
-            <div>Topics</div>
-          </a>
-          <a href="/signup/follow">
-            <div class="sign-box-selected">People</div>
-          </a>
-          <a href="/signup/location">
-            <div>Regions</div>
-          </a>
-          <a href="/signup/tables">
-            <div>Tables</div>
-          </a>
-        </div>
+      <aside class="aside aside--onboarding">
+        <a href="/signup/topics">
+          <div class="aside__item"><p>Topics</p></div>
+        </a>
+        <a href="/signup/follow">
+          <div class="aside__item item-selected"><p>People</p></div>
+        </a>
+        <a href="/signup/location">
+          <div class="aside__item"><p>Regions</p></div>
+        </a>
+        <a href="/signup/tables">
+          <div class="aside__item"><p>Tables</p></div>
+        </a>
       </aside>
     </div>
   </div>

@@ -185,7 +185,7 @@
         border-radius: 8px;
         //@include rem2(padding, 15, 20);
         padding: 1.5rem;
-        
+
         a {
           text-decoration: none;
           color: $text-color;
@@ -217,7 +217,12 @@
             display: block;
             text-overflow: ellipsis;
             width: 100%;
-            font-weight: 600;
+            font-weight: 500;
+            @include rem(font-size, 12);
+
+            @include desktop {
+              @include rem(font-size, 15);
+            }
 
             &:hover {
               cursor: pointer;
@@ -470,6 +475,24 @@
   }
 }
 
+.tables__content {
+  width: 100% !important;
+
+  &__wrapper {
+    width: 80% !important;
+
+    @include desktop {
+      width: 78% !important;
+    }
+  }
+}
+
+// onboard titles
+.topics__content__wrapper, .locations__content__wrapper {
+  .topics__content__title, .locations__content__title {
+    @include rem(font-size, 36);
+  }
+}
 
 // .navbar__controls {
 //   display: none;

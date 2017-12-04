@@ -17,23 +17,21 @@
         </div>
       </div>
     </div>
-    <aside class="addTable__content__aside">
-      <div class="addTable__content__aside__box">
-        <a>
-          <div {% if tab == 'choose-method' %}class="sign-box-selected"{% endif %}>Choose Method</div>
-        </a>
-        <a>
-          <div {% if tab == 'description' %}class="sign-box-selected"{% endif %}>Description</div>
-        </a>
-        {% if !hideChooseTable %}
-        <a>
-          <div {% if tab == 'choose-table' %}class="sign-box-selected"{% endif %}>Choose table</div>
-        </a>
-        {% endif %}
-        <a>
-          <div {% if tab == 'confirm' %}class="sign-box-selected"{% endif %}>Confirm</div>
-        </a>
-      </div>
+    <aside class="aside aside--addTable">
+      <a>
+        <div class="aside__item {% if tab == 'choose-method' %}item-selected{% endif %}"><p>Choose Method</p></div>
+      </a>
+      <a>
+        <div class="aside__item {% if tab == 'description' %}item-selected{% endif %}"><p>Description</p></div>
+      </a>
+      {% if !hideChooseTable %}
+      <a>
+        <div class="aside__item {% if tab == 'choose-table' %}item-selected{% endif %}"><p>Choose table</p></div>
+      </a>
+      {% endif %}
+      <a>
+        <div class="aside__item {% if tab == 'choose-confirm' %}item-selected{% endif %}"><p>Confirm</p></div>
+      </a>
     </aside>
   </div>
 </div>

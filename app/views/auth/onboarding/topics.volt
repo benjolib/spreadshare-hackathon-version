@@ -24,27 +24,24 @@
           </div>
         </div>
       </div>
-      <aside class="topics__content__aside">
-        <div class="topics__content__aside__box">
-          <a href="/signup/topics">
-            <div class="sign-box-selected">Topics</div>
-          </a>
-          <a href="/signup/follow">
-            <div>People</div>
-          </a>
-          <a href="/signup/location">
-            <div>Regions</div>
-          </a>
-          <a href="/signup/tables">
-            <div>Tables</div>
-          </a>
-        </div>
+      <aside class="aside aside--onboarding">
+        <a href="/signup/topics">
+          <div class="aside__item item-selected"><p>Topics</p></div>
+        </a>
+        <a href="/signup/follow">
+          <div class="aside__item"><p>People</p></div>
+        </a>
+        <a href="/signup/location">
+          <div class="aside__item"><p>Regions</p></div>
+        </a>
+        <a href="/signup/tables">
+          <div class="aside__item"><p>Tables</p></div>
+        </a>
       </aside>
       <div class="signup__content__form__buttons">
         <button id="continueOnboard">Continue</button>
       </div>
     </form>
-
   </div>
 </div>
 {% endblock %}

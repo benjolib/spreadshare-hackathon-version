@@ -11,6 +11,30 @@
     @include rem(padding, 24);
   }
 
+  // modifiers
+  &--settings, &--addTable {
+    @include rem(margin-top, 66);
+
+    @include desktop {
+      @include rem(margin-top, 131);
+    }
+  }
+  &--onboarding {
+    @include rem(margin-top, 66);
+
+    @include desktop {
+      width: 22.5% !important;
+      @include rem(margin-top, 131);
+    }
+  }
+  &--profile {
+    width: 100% !important;
+
+    &:last-child {
+      @include rem(margin-top, 16);
+    }
+  }
+
   a {
     @include rem(margin-bottom, 5);
 
@@ -43,4 +67,10 @@
       }
     }
   }
+}
+
+.asides {
+  width: 22.5%;
+  display: flex;
+  flex-direction: column;
 }

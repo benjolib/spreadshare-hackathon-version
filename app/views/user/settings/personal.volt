@@ -99,27 +99,25 @@
           </div>
         </div>
       </div>
-      <aside class="layout__content__aside">
-        <div class="layout__content__aside__box">
+      <aside class="aside aside--settings">
           <a href="/settings/personal">
-            <div class="settings-box-selected">Personal</div>
+            <div class="aside__item item-selected"><p>Personal</p></div>
           </a>
           <a href="/settings/account">
-            <div>Account</div>
+            <div class="aside__item"><p>Account</p></div>
           </a>
           <a href="/settings/notifications">
-            <div>Notifications</div>
+            <div class="aside__item"><p>Notifications</p></div>
           </a>
           <a href="/settings/connected">
-            <div>Connect Accounts</div>
+            <div class="aside__item"><p>Connect Accounts</p></div>
           </a>
           <a href="/settings/wallet">
-            <div>Wallet</div>
+            <div class="aside__item"><p>Wallet</p></div>
           </a>
           <a href="/settings/invite">
-            <div>Invite</div>
+            <div class="aside__item"><p>Invite</p></div>
           </a>
-        </div>
       </aside>
     </div>
   </div>
