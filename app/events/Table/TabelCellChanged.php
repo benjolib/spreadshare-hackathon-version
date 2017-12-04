@@ -8,6 +8,7 @@ use DS\Model\Events\TableCellsEvents;
 use DS\Model\TableCells;
 use DS\Model\TableLog;
 use DS\Model\TableRows;
+use DS\Model\Tables;
 use DS\Model\User;
 
 /**
@@ -64,25 +65,29 @@ class TabelCellChanged extends AbstractEvent
         }
         
         /**
-         * Add table log entry
+         * Add table log entry (only if user is not the owner)
          *
          * @todo could be moved to queue as well..
          */
-        $tableLog = new TableLog();
-        $tableLog
-            ->setUserId($userId)
-            ->setTableId($row->getTableId())
-            ->setLogType(TableLogType::ContributionCellChanged)
-            ->setText('contributed to table (cell content edited).')
-            ->setPlaceholders(
-                json_encode(
-                    [
-                        $userId,
-                        $cell->getContent(),
-                    ]
+        $table = Tables::get($row->getTableId());
+        if ($table->getOwnerUserId() != $userId)
+        {
+            $tableLog = new TableLog();
+            $tableLog
+                ->setUserId($userId)
+                ->setTableId($row->getTableId())
+                ->setLogType(TableLogType::ContributionCellChanged)
+                ->setText('contributed to table (cell content edited).')
+                ->setPlaceholders(
+                    json_encode(
+                        [
+                            $userId,
+                            $cell->getContent(),
+                        ]
+                    )
                 )
-            )
-            ->create();
+                ->create();
+        }
     }
     
 }
