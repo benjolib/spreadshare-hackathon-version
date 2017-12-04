@@ -1015,8 +1015,14 @@
   }
 }
 #onboardingForm {
+  @include rem(margin-top, 180);
+
+  @include tablet {
+    @include rem(margin-top, 160);
+  }
   @include desktop {
     display: flex;
+    @include rem(margin-top, 100);
   }
 }
 

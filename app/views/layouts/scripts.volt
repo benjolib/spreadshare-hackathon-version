@@ -267,5 +267,9 @@
     var onboardButton = document.getElementById('continueOnboard');
     onboardButton.style.position = 'fixed';
     onboardButton.style.top = '36px';
+    onboardButton.style.zIndex = '3';
+    var navbar = document.getElementsByClassName('navbar')[0];
+    navbar.style.position = 'fixed';
+    navbar.style.zIndex = '2';
   };
 </script>
