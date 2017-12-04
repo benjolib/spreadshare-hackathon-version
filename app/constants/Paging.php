@@ -14,5 +14,5 @@ class Paging
      *
      * @var int
      */
-    const endlessScrollPortions = 1;
+    const endlessScrollPortions = 100;
 }
