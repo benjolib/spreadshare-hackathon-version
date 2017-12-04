@@ -74,6 +74,7 @@ aside.aside {
       width: 100%;
       flex-direction: column;
       border-bottom: 1.6px solid whitesmoke;
+      word-break: break-all;
 
       &__text {
         @include rem(font-size, 12);
