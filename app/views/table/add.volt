@@ -24,7 +24,7 @@
       <a>
         <div class="aside__item {% if tab == 'description' %}item-selected{% endif %}"><p>Description</p></div>
       </a>
-      {% if !hideChooseTable %}
+      {% if hideChooseTable is defined && !hideChooseTable %}
       <a>
         <div class="aside__item {% if tab == 'choose-table' %}item-selected{% endif %}"><p>Choose table</p></div>
       </a>
