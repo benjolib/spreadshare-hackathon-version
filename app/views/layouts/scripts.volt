@@ -226,6 +226,7 @@
               span.text(parseInt(parseInt(span.text()) + 1));
             } else {
               button.removeClass('selected');
+              button.find('.chevronUp').find('svg').find('.fillColor').removeClass('white');
               span.text(parseInt(parseInt(span.text()) - 1));
             }
           },
