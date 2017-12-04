@@ -10,8 +10,8 @@
         $this.toggleClass('active');
         $this.toggleClass('animated bounceIn');
         $this.prev().removeClass('active animated bounceIn');
-        $this.prop('disabled', true);
-        $this.prev().prop('disabled', false);
+        //$this.prop('disabled', true);
+        //$this.prev().prop('disabled', false);
         $('input[name="' + $this.attr('data-name') + '"]').prop('value', '0');
       }
     });
@@ -23,8 +23,8 @@
         $this.toggleClass('active');
         $this.toggleClass('animated bounceIn');
         $this.next().removeClass('active animated bounceIn');
-        $this.prop('disabled', true);
-        $this.next().prop('disabled', false);
+        //$this.prop('disabled', true);
+        //$this.next().prop('disabled', false);
         $('input[name="' + $this.attr('data-name') + '"]').prop('value', '1');
       }
     });

@@ -63,12 +63,16 @@ class CsvImport
                         $csvText = file_get_contents($file->getTempName());
                     }
                     
-                    if ($csvText)
+                    if (!$csvText)
+                    {
+                        throw new \InvalidArgumentException('The csv file you selected is empty.');
+                    }
+                    else
                     {
                         $tableId = $this->request->getPost('tableId');
                         
                         $tableContentApi = new TableContent();
-                        $tableContentApi->addfromCsvText($tableId, $csvText);
+                        $tableContentApi->addfromCsvText($tableId, $csvText, ',', !!$this->request->getPost('csvFileHasHeaders'));
                         
                         // Fire event
                         TableDataImported::after($userId, $table);
@@ -79,8 +83,8 @@ class CsvImport
             }
             catch (\Exception $e)
             {
+                $this->flash->error($e->getMessage());
                 $this->view->setVar('nextstep', 1);
-                throw $e;
             }
         }
         catch (\Exception $e)

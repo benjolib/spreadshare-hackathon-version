@@ -11,7 +11,7 @@
           <form id="addTableForm" method="post" action="{{ action }}" enctype="multipart/form-data">
             {{ flash.output() }}
 
-            <input type="hidden" name="tableId" value="{{ tableId }}" />
+            <input type="hidden" name="tableId" value="{% if tableId is defined %}{{ tableId }}{% endif %}" />
             {% include content %}
           </form>
         </div>
@@ -24,7 +24,7 @@
       <a>
         <div class="aside__item {% if tab == 'description' %}item-selected{% endif %}"><p>Description</p></div>
       </a>
-      {% if hideChooseTable is defined && !hideChooseTable %}
+      {% if hideChooseTable is defined AND !hideChooseTable %}
       <a>
         <div class="aside__item {% if tab == 'choose-table' %}item-selected{% endif %}"><p>Choose table</p></div>
       </a>
