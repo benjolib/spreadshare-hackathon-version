@@ -127,7 +127,7 @@
             <div class="page-load-status">
              <div class="loading"></div>
             </div>
-            
+
         </div>
 
 
@@ -207,7 +207,7 @@
         $('.white-overlay').show();
         $('.' + show).removeClass('hidden');
       } else {
-        ('.white-overlay').hide();
+        $('.white-overlay').hide();
       }
     });
 
