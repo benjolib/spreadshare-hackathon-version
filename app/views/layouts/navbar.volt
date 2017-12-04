@@ -4,8 +4,6 @@
         <h2>Community curated Tables</h2>
     </div>
     <div class="navbar__search">
-
-
         {% if searchDisabled is empty %}
 
         <div class="navbar__search__icon">
@@ -33,12 +31,14 @@
                 <div class="all-results">All Results</div>
             </div>
         </div>
-
     </div>
     {% if auth.loggedIn() %}
     <div class="navbar__controls">
         <span class="navbar__controls__add navbar__controls__add--notification"></span>
-        <a href="/table/add"><img src="/assets/icons/add.svg" class="navbar__controls__add" title="Create a New Table" /></a>
+        <a class="navbar__controls__add__create" href="/table/add" style="font-weight: 600;color: #979797;font-size: 15px;color: #36ac6d;line-height: 15px;">
+            <img style="vertical-align: middle;margin-top: -2px;" src="/assets/icons/add-green.svg" class="navbar__controls__add" title="Create a New Table" />
+            <span>Create a Table</span>
+        </a>
         <a id="notificationButton" href="javascript:;">
             {% if auth.getUser().getStats().getUnreadNotificationsCount() >0 %}<span>{{ auth.getUser().getStats().getUnreadNotificationsCount() }}</span>{% endif %}
             <img src="/assets/icons/bell.svg" class="navbar__controls__notification" />

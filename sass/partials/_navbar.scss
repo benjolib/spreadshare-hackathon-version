@@ -138,7 +138,7 @@
     }
 
     a#notificationButton {
-      @include rem(margin-left, 30);
+      @include rem(margin-left, 25);
       position: relative;
 
       span {
@@ -265,12 +265,24 @@
       @include rem(height, 15);
 
       @include desktop {
-        @include rem(width, 20);
-        @include rem(height, 20);
+        @include rem(width, 18);
+        @include rem(height, 18);
       }
 
+      &__create {
+        padding: 5px 8px;
+        border: 1px solid transparent;
+      }
+
+      /*
+      &__create:hover {
+        border-radius: 4px;
+        border: 1px solid #f2f2f8;
+      }
+      */
+
       &--notification {
-        @include rem(margin-right, 80);
+        @include rem(margin-right, 0);
       }
       &--menu {}
     }
