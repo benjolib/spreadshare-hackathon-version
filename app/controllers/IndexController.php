@@ -78,7 +78,8 @@ class IndexController
             }
             
             // Prepare date range filtering
-            switch ($date) {
+            switch ($date)
+            {
                 case 'all-time':
                     break;
                 case 'last-90-days':
@@ -137,12 +138,20 @@ class IndexController
                         $this->serviceManager->getAuth()->getUserId(),
                         $tableFilter,
                         TableFlags::Published,
-                        0,
+                        $this->request->get('page', null, 0),
                         $orderBy
                     )
             );
             
-            $this->view->setMainView('homepage/index');
+            // Paging instead of returning the whole page
+            if ($this->request->isAjax() && $this->request->has('page'))
+            {
+                $this->view->setMainView('homepage/tables');
+            }
+            else
+            {
+                $this->view->setMainView('homepage/index');
+            }
         }
         catch (Exception $e)
         {
