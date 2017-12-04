@@ -123,6 +123,11 @@
             <div class="tables__content__main__cards">
                 {{ partial('homepage/tables') }}
             </div>
+
+            <div class="page-load-status">
+             <div class="loading"></div>
+            </div>
+            
         </div>
 
 
@@ -263,7 +268,10 @@
     },
     responseType: 'document',
     append: '.tableCard',
+    status: '.page-load-status',
+    request: '.loading',
     history: false,
+    debug: true,
     scrollThreshold: 400
   });
 
