@@ -10,7 +10,7 @@
     <form id="onboardingForm" method="post" action="/signup/follow">
       <div class="topics__content__wrapper">
         <p class="topics__content__title">Choose the <span>topics</span> you're interested in</p>
-        <p class="topics__content__subtitle">Tell us which categories you’re most interested in. <span>Pick at least 3</span></p>
+        <p class="topics__content__subtitle">Tell us which categories you’re most interested in. <span>Pick at least 3</span> or <span id="selectAll">Select all</span></p>
         <div class="topics__content__main">
           <div class="topics__content__main__cards">
             {% for topic in topics %}
@@ -59,6 +59,24 @@
       } else {
         input.checked = true;
         target.addClass('selected');
+      }
+    });
+
+    // select all
+    var $topicsCards = $('.topics__content__main__cards__item');
+    $('#selectAll').on('click', function() {
+      if ($(this).text() === 'Select all') {
+        for (var i = 0; i < $topicsCards.length; i++) {
+          $($topicsCards[i]).addClass('selected');
+          $($topicsCards[i]).find('p').find('input').prop('checked', true);
+        }
+        $(this).text('Unselect all');
+      } else {
+        for (var i = 0; i < $topicsCards.length; i++) {
+          $($topicsCards[i]).removeClass('selected');
+          $($topicsCards[i]).find('p').find('input').prop('checked', false);
+        }
+        $(this).text('Select all');
       }
     });
   });

@@ -64,6 +64,14 @@
 
       span {
         color: $logo-color;
+
+        &:last-child {
+          font-weight: 500;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
       }
     }
 
@@ -305,6 +313,14 @@
 
       span {
         color: $logo-color;
+
+        &:last-child {
+          font-weight: 500;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
       }
     }
 

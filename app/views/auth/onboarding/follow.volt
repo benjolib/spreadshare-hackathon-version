@@ -9,24 +9,22 @@
     <div class="follow__content">
       <div class="follow__content__wrapper">
         <p class="follow__content__title">Awesome <span>people</span> you should follow</p>
-        <p class="follow__content__subtitle">We’ll add tables created or collaborated on by people you follow. <span>Pick at least 3</span></p>
+        <p class="follow__content__subtitle">We’ll add tables created or collaborated on by people you follow. <span>Pick at least 3</span> or <span id="selectAll">Select all</span></p>
         <div class="follow__content__main">
           <div class="follow__content__main__cards">
-
             {% for user in users %}
-            <div class="follow__content__main__cards__item">
-              <img src="{{ user.getImage() }}" />
-              <div class="follow__content__main__cards__item__text">
-                <p>{{ user.getName() }}</p>
-                <p>{{ user.getTagline() }}</p>
+              <div class="follow__content__main__cards__item">
+                <img src="{{ user.getImage() }}" />
+                <div class="follow__content__main__cards__item__text">
+                  <p>{{ user.getName() }}</p>
+                  <p>{{ user.getTagline() }}</p>
+                </div>
+                <div class="follow__content__main__cards__item__button">
+                  <span>Follow</span>
+                  <input type="checkbox" name="user[{{ user.getId() }}]" value="{{ user.getId() }}" style="width:0; opacity:0;" />
+                </div>
               </div>
-              <div class="follow__content__main__cards__item__button">
-                <span>Follow</span>
-                <input type="checkbox" name="user[{{ user.getId() }}]" value="{{ user.getId() }}" style="width:0; opacity:0;" />
-              </div>
-            </div>
             {% endfor %}
-
           </div>
         </div>
         <div class="signup__content__form__buttons">
@@ -65,6 +63,24 @@
       } else {
         input.checked = true;
         target.addClass('selected');
+      }
+    });
+
+    // select all
+    var $followButtons = $('.follow__content__main__cards__item__button');
+    $('#selectAll').on('click', function() {
+      if ($(this).text() === 'Select all') {
+        for (var i = 0; i < $followButtons.length; i++) {
+          $($followButtons[i]).addClass('selected');
+          $($followButtons[i]).find('input').prop('checked', true);
+        }
+        $(this).text('Unselect all');
+      } else {
+        for (var i = 0; i < $followButtons.length; i++) {
+          $($followButtons[i]).removeClass('selected');
+          $($followButtons[i]).find('input').prop('checked', false);
+        }
+        $(this).text('Select all');
       }
     });
   });
