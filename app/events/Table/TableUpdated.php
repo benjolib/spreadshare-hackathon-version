@@ -23,7 +23,7 @@ use DS\Modules\Bernard;
  */
 class TableUpdated extends AbstractEvent
 {
-
+    
     /**
      * Issued after a table has been modified
      *
@@ -41,27 +41,31 @@ class TableUpdated extends AbstractEvent
                 'tableTitle' => $table->getTitle(),
                 'tableTagline' => $table->getTagline(),
             ];
-
+            
             // Send Table Creation Event To ES Queue
             Bernard::produce('touchTable', $datasource);
         }
-
-        $userNotification = new UserNotifications();
-        $userNotification
-            ->setUserId($table->getOwnerUserId())
-            ->setSourceUserId($userId)
-            ->setSourceTableId($table->getId())
-            ->setNotificationType(UserNotificationType::Changed)
-            ->setText(sprintf('updated your table %s', $table->getTitle()))
-            ->setPlaceholders(
-                json_encode(
-                    [
-                        $table->getTitle(),
-                    ]
+        
+        // Show notification for this change if this change was not initiated by the owner
+        if ($table->getOwnerUserId() != $userId)
+        {
+            $userNotification = new UserNotifications();
+            $userNotification
+                ->setUserId($table->getOwnerUserId())
+                ->setSourceUserId($userId)
+                ->setSourceTableId($table->getId())
+                ->setNotificationType(UserNotificationType::Changed)
+                ->setText(sprintf('updated your table %s', $table->getTitle()))
+                ->setPlaceholders(
+                    json_encode(
+                        [
+                            $table->getTitle(),
+                        ]
+                    )
                 )
-            )
-            ->create();
-
+                ->create();
+        }
+        
         $tableLog = new TableLog();
         $tableLog
             ->setUserId($userId)
@@ -71,11 +75,11 @@ class TableUpdated extends AbstractEvent
             ->setPlaceholders(
                 json_encode(
                     [
-                        $userId,
+                        $table->getTitle(),
                     ]
                 )
             )
             ->create();
     }
-
+    
 }
