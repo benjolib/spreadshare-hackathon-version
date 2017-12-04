@@ -259,30 +259,28 @@
     $onPopper.toggleClass('show');
   });
 
-
   // Load cards for infinite scrolls
   var $container = $('.tables__content__main__cards').infiniteScroll({
-    path: function() {
-     var pageNumber = (this.loadCount + 1);
-     return window.location.href + '?page=' + pageNumber;
+    path: function () {
+      var pageNumber = (this.loadCount + 1);
+      return window.location.href + '?page=' + pageNumber;
     },
     responseType: 'document',
     append: '.tableCard',
     status: '.page-load-status',
     request: '.loading',
     history: false,
-    debug: true,
-    scrollThreshold: 400
+    debug: false,
+    scrollThreshold: 300
   });
 
- // stop load on scroll if no results are found
- $container.on( 'load.infiniteScroll', function( event, response ) {
-   //disable loadOnScroll
-   if(response.getElementById("no-results")){
-    $container.infiniteScroll('option',{loadOnScroll: false})
-   }
- });
-
+  // stop load on scroll if no results are found
+  $container.on('load.infiniteScroll', function (event, response) {
+    //disable loadOnScroll
+    if (response.getElementById("no-results")) {
+      $container.infiniteScroll('option', { loadOnScroll: false })
+    }
+  });
 
 </script>
 {% endblock %}
