@@ -33,6 +33,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
 <script type="text/javascript" src="/js/api.js"></script>
 <script type="text/javascript" src="/js/jquery.sticky-sidebar.min.js"></script>
+<script type="text/javascript" src="/js/infinite-scroll.min.js"></script>
 
 {{ partial('layouts/scripts') }}
 

@@ -3,7 +3,7 @@
  {{ partial('partials/table') }}
 {% endfor %}
 {% else %}
-<div class="tables__content__main__cards__item center" style="padding:40px;">
+<div class="tables__content__main__cards__item center" id="no-results" style="padding:40px;">
     <div>
         <img src="/assets/images/desktop.png" alt="" />
         <p>&nbsp;</p>

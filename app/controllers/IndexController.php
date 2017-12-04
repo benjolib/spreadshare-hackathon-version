@@ -42,7 +42,7 @@ class IndexController
                 // do the onboarding
                 header('Location: /signup/topics');
             }
-            
+
             // Message hack
             // @todo implement a better way for this
             if ($this->request->get('msg'))
@@ -56,9 +56,9 @@ class IndexController
                         $this->flash->success('Authorization request has been denied.');
                         break;
                 }
-                
+
             }
-            
+
             // Prepare ordering
             switch ($order)
             {
@@ -76,7 +76,7 @@ class IndexController
                     $orderBy = TableStats::class . ".votesCount DESC";
                     break;
             }
-            
+
             // Prepare date range filtering
             switch ($date)
             {
@@ -104,32 +104,32 @@ class IndexController
             }
             $this->view->setVar('activeDateRangeString', str_replace('-', ' ', $date));
             $this->view->setVar('activeDateFilter', $date);
-            
+
             // Assign all topics and types for the sidebar
             $this->view->setVar('topics', Topics::find());
             $this->view->setVar('types', Types::find());
-            
+
             // Prepare the table filter
             $tableFilter            = new TableFilter();
             $tableFilter->topic     = $this->request->get('topic', null, '');
             $tableFilter->type      = $this->request->get('type', null, '');
             $tableFilter->locations = $this->request->get('locations', null, []);
             $tableFilter->tags      = $this->request->get('tags', null, []);
-            
+
             if (isset($range))
             {
                 $tableFilter->setDateRange($range);
             }
-            
+
             // Assign locations and tags with title and id mapping so that react-select has got a valid pre-selection
             $locations = new Locations;
             $this->view->setVar('filteredLocations', $locations->getByIds($tableFilter->getLocations()));
             $tags = new Tags;
             $this->view->setVar('filteredTags', $tags->getByIds($tableFilter->getTags()));
-            
+
             $this->view->setVar('sidebarFilter', $tableFilter);
             $this->view->setVar('order', $order);
-            
+
             // Filter tables by tableFilter
             $this->view->setVar(
                 'tables',
@@ -142,7 +142,7 @@ class IndexController
                         $orderBy
                     )
             );
-            
+
             // Paging instead of returning the whole page
             if ($this->request->isAjax() && $this->request->has('page'))
             {
@@ -158,5 +158,5 @@ class IndexController
             Application::instance()->log($e->getMessage(), Logger::CRITICAL);
         }
     }
-    
+
 }
