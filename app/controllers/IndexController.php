@@ -138,7 +138,7 @@ class IndexController
                         $this->serviceManager->getAuth()->getUserId(),
                         $tableFilter,
                         TableFlags::Published,
-                        $this->request->get('page', null, 0),
+                        (int) $this->request->get('page', null, 0),
                         $orderBy
                     )
             );
