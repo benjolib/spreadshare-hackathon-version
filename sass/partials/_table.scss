@@ -304,14 +304,6 @@
   padding: 5px 10px;
   width: 25%;
 }
-#sidebarForm {
-  @include mobile {
-    display: none;
-  }
-  @include tablet {
-    display: none;
-  }
-}
 .sc-dnqmqq table {
   margin: 10px;
   color: #B1BBC7;

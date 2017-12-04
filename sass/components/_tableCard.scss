@@ -34,7 +34,14 @@
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
-        @include rem(font-size, 20);
+        @include rem(font-size, 16);
+
+        @include tablet {
+          @include rem(font-size, 18);
+        }
+        @include desktop {
+          @include rem(font-size, 20);
+        }
 
         &:hover {
           cursor: pointer;
@@ -42,133 +49,108 @@
         }
       }
 
-      // @include mobile {
-      //   h3 {
-      //     font-size: 14px;
-      //   }
-      //   p {
-      //     font-size: 12px !important;
-      //   }
-      // }
-
       p {
-        @include rem(font-size, 16);
         padding-bottom: 10px;
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
+        @include rem(font-size, 12);
+
+        @include tablet {
+          @include rem(font-size, 14);
+        }
+        @include desktop {
+          @include rem(font-size, 16);
+        }
       }
     }
 
     &__upvote {
       position: absolute;
+      align-items: center;
       top: 20px;
       right: 20px;
+      display: flex;
+      align-self: flex-start;
+      background: $upvote-background-color;
+      color: $upvote-text-color;
+      font-weight: 300;
+      border-radius: 3px;
+      @include rem2(padding, 2, 10);
+
+      &:hover {
+        cursor: pointer;
+        background: darken($upvote-background-color, 4%);
+      }
+
+      span {
+        color: $text-color;
+        font-weight: 500;
+        @include rem(font-size, 12);
+      }
+
+      .chevronUp {
+        @include rem(margin-right, 12);
+
+        svg {
+          @include rem(width, 10);
+          @include rem(height, 10);
+
+          .fillColor.white {
+            fill: white;
+          }
+        }
+      }
+
+      @include tablet {
+        @include rem2(padding, 3, 18);
+
+        span {
+          color: $text-color;
+          font-weight: 500;
+          @include rem(font-size, 14);
+        }
+
+        .chevronUp {
+          svg {
+            @include rem(width, 14);
+            @include rem(height, 14);
+          }
+        }
+      }
 
       @include desktop {
-        display: flex;
-        align-self: flex-start;
-        background: $upvote-background-color;
-        color: $upvote-text-color;
-        font-weight: 300;
-        border-radius: 3px;
         @include rem2(padding, 5, 20);
 
-        &:hover {
-          cursor: pointer;
-          background: darken($upvote-background-color, 4%);
-        }
-
-        .chevronUp {
-          @include rem(margin-right, 12);
-
-          svg {
-            width: 1rem;
-            height: 1rem;
-
-            .fillColor.white {
-              fill: white;
-            }
-          }
-        }
-
         span {
           color: $text-color;
           font-weight: 500;
-        }
-      }
-      @include tablet {
-        display: flex;
-        align-self: flex-start;
-        background: $upvote-background-color;
-        color: $upvote-text-color;
-        font-weight: 300;
-        border-radius: 3px;
-        @include rem2(padding, 10, 20);
-
-        &:hover {
-          cursor: pointer;
-          background: darken($upvote-background-color, 4%);
+          @include rem(font-size, 16);
         }
 
         .chevronUp {
-          @include rem(margin-right, 12);
-
           svg {
-            .fillColor.white {
-              fill: white;
-            }
+            @include rem(width, 16);
+            @include rem(height, 16);
           }
-        }
-
-        span {
-          color: $text-color;
-          font-weight: 500;
-        }
-      }
-      @include mobile {
-        display: flex;
-        align-self: flex-start;
-        background: $upvote-background-color;
-        color: $upvote-text-color;
-        font-weight: 300;
-        border-radius: 3px;
-        @include rem2(padding, 10, 20);
-
-        &:hover {
-          cursor: pointer;
-          background: darken($upvote-background-color, 4%);
-        }
-
-        .chevronUp {
-          @include rem(margin-right, 12);
-
-          svg {
-            .fillColor.white {
-              fill: white;
-            }
-          }
-        }
-
-        span {
-          color: $text-color;
-          font-weight: 500;
         }
       }
     }
   }
 
   &__stats {
+    display: flex;
+    justify-content: center;
 
     @include tablet {
+      justify-content: flex-start;
       width: 100%;
-      display: flex;
       border-top: 2px solid #f7f7fb;
       @include rem(font-size, 12);
     }
     @include desktop {
+      justify-content: flex-start;
       width: 90%;
-      display: flex;
       border-top: 2px solid #f7f7fb;
       @include rem(font-size, 14);
     }
@@ -179,10 +161,17 @@
       font-weight: 500;
 
       &--type {
+        align-self: center;
         background: $logo-color;
         border-radius: 3px;
         color: white;
-        @include rem2(padding, 2, 8);
+        @include rem(font-size, 10);
+        @include rem2(padding, 2, 4);
+
+        @include desktop {
+          @include rem(font-size, 16);
+          @include rem2(padding, 2, 8);
+        }
 
         &:hover {
           background: lighten($logo-color, 4%);
@@ -193,10 +182,17 @@
         }
       }
       &--token {
+        align-self: center;
         background: $card-tokens-background-color;
         border-radius: 3px;
         color: white;
-        @include rem2(padding, 2, 8);
+        @include rem(font-size, 10);
+        @include rem2(padding, 2, 4);
+
+        @include desktop {
+          @include rem(font-size, 16);
+          @include rem2(padding, 2, 8);
+        }
 
         &:hover {
           background: lighten($card-tokens-background-color, 4%);
@@ -207,8 +203,8 @@
         }
       }
       &--views, &--comments, &--contributions {
-        display: flex;
-        align-items: center;
+        display: none;
+        @include rem(font-size, 10);
 
         span {
           color: $text-color;
@@ -223,8 +219,42 @@
           }
         }
       }
+      &--views {
+        @include tablet {
+          display: flex;
+          align-items: center;
+          @include rem(font-size, 12);
+        }
+        @include desktop {
+          display: flex;
+          align-items: center;
+          @include rem(font-size, 16);
+        }
+      }
+      &--comments {
+        @include mobile {
+          display: flex;
+          align-items: center;
+        }
+        @include tablet {
+          display: flex;
+          align-items: center;
+          @include rem(font-size, 12);
+        }
+        @include desktop {
+          display: flex;
+          align-items: center;
+          @include rem(font-size, 16);
+        }
+      }
       &--contributions {
         margin-right: 0;
+
+        @include desktop {
+          display: flex;
+          align-items: center;
+          @include rem(font-size, 16);
+        }
       }
     }
   }
