@@ -49,15 +49,15 @@
   </div>
   <div class="table__header__menu">
     <a href="/table/{{table['id']}}" class="table__header__menu__item {% if selectedPage == 'table' %} selected{% endif %}">
-      <div class="table-icon"></div>
+      {{ partial('partials/icons/table') }}
       Table
     </a>
     <a href="/table/{{table['id']}}/about" class="table__header__menu__item{% if selectedPage == 'about' %} selected{% endif %}">
-      <div class="info-icon"></div>
+      {{ partial('partials/icons/info') }}
       About
     </a>
     <a href="/table/{{table['id']}}/feed" class="table__header__menu__item{% if selectedPage == 'feed' %} selected{% endif %}">
-      <div class="feed-icon"></div>
+      {{ partial('partials/icons/feed') }}
       Feed
     </a>
 
@@ -70,17 +70,17 @@
     </a>
     -->
     <a href="/table/{{table['id']}}/changelog/new" class="table__header__menu__item{% if selectedPage == 'changelog' %} selected{% endif %}">
-      <div class="changelog-icon"></div>
+      {{ partial('partials/icons/changelog') }}
       changelog
     </a>
     {%endif%}
     <a href="/table/{{table['id']}}/users/subscribers" class="table__header__menu__item{% if selectedPage == 'users' %} selected{% endif %}">
-      <div class="people-icon"></div>
+      {{ partial('partials/icons/people') }}
       Users
     </a>
     {% if auth.getUserId() == table['ownerUserId'] %}
     <a href="/table/{{table['id']}}/settings/details" class="table__header__menu__item{% if selectedPage == 'settings' %} selected{% endif %}">
-      <div class="settings-icon"></div>
+      {{ partial('partials/icons/settings') }}
       Settings
     </a>
     {%endif%}

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <g fill="none" fill-rule="evenodd">
+    <rect class="strokeColor" width="37.367" height="1" x="13.317" y="32.025" stroke="#CBD0DB" stroke-width="5.3" rx=".5"/>
+    <rect class="strokeColor" width="37.367" height="1" x="13.317" y="40.9" stroke="#CBD0DB" stroke-width="5.3" rx=".5"/>
+    <rect class="strokeColor" width="58.7" height="36.7" x="2.65" y="13.65" stroke="#CBD0DB" stroke-width="5.3" rx="10.6"/>
+    <rect class="fillColor" width="42.667" height="5.25" x="10.667" y="20.5" fill="#CBD0DB" rx="2.625"/>
+    <rect class="fillColor" width="42.667" height="5.25" x="10.667" y="29.375" fill="#CBD0DB" rx="2.625"/>
+    <rect class="strokeColor" width="58.7" height="36.7" x="2.65" y="13.65" stroke="#CBD0DB" stroke-width="5.3" rx="10"/>
+  </g>
+</svg>

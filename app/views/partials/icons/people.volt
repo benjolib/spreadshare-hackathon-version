@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <g fill="none" fill-rule="evenodd">
+    <rect class="strokeColor" width="21.367" height="20.95" x="2.65" y="31.4" stroke="#CBD0DB" stroke-width="5.3" rx="5.3"/>
+    <rect class="strokeColor" width="10.7" height="10.45" x="7.983" y="13.65" stroke="#CBD0DB" stroke-width="5.3" transform="rotate(90 13.333 18.875)" rx="5.225"/>
+    <rect class="strokeColor" width="21.367" height="20.95" x="39.983" y="31.4" stroke="#CBD0DB" stroke-width="5.3" rx="5.3"/>
+    <rect class="strokeColor" width="10.7" height="10.45" x="45.317" y="13.65" stroke="#CBD0DB" stroke-width="5.3" transform="rotate(90 50.667 18.875)" rx="5.225"/>
+    <rect class="strokeColor" width="5.367" height="5.2" x="29.317" y="14.65" stroke="#CBD0DB" stroke-width="5.3" transform="rotate(90 32 17.25)" rx="2.6"/>
+    <rect class="strokeColor" width="21.367" height="20.95" x="2.65" y="31.4" stroke="#CBD0DB" stroke-width="5.3" rx="5.3"/>
+    <rect class="strokeColor" width="21.367" height="20.95" x="39.983" y="31.4" stroke="#CBD0DB" stroke-width="5.3" rx="5.3"/>
+    <rect class="fillColor" width="3.733" height="3.675" x="30.133" y="15.675" fill="#CBD0DB" transform="rotate(90 32 17.512)" rx="1.837"/>
+    <rect class="strokeColor" width="17.29" height="16.946" x="23.355" y="26.543" stroke="#CBD0DB" stroke-width="4.71" rx="5.3"/>
+  </g>
+</svg>

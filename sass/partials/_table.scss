@@ -195,10 +195,38 @@
       a.selected, a:hover {
         color: $text-color !important;
         background: transparent !important;
+
+        svg {
+          .strokeColor {
+            stroke: $text-color;
+          }
+          .fillColor {
+            fill: $text-color;
+          }
+        }
       }
 
       a {
         color: #cbd0db !important;
+
+        svg {
+          width: 16px;
+          height: 16px;
+          align-self: center;
+          @include rem(margin-right, 3);
+          @include rem(margin-bottom, 1);
+        }
+
+        &:hover {
+          svg {
+            .strokeColor {
+              stroke: $text-color;
+            }
+            .fillColor {
+              fill: $text-color;
+            }
+          }
+        }
 
         &:last-child {
           span.table__header__menu__item {
@@ -221,8 +249,7 @@
           @include rem(margin-right, 4);
         }
 
-        @include desktop {
-        }
+        @include desktop {}
       }
     }
   }
