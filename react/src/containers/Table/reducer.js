@@ -162,37 +162,30 @@ export const tablesReducer = (
     }
 
     case "ADD_ROW_SUCCESS": {
-      if (action.payload.permission === "2") {
-        console.log(state);
-        console.log(action);
-        const blah = {
-          ...state,
-          [action.payload.tableId]: {
-            ...state[action.payload.tableId],
-            table: {
-              ...state[action.payload.tableId].table,
-              votes: [
-                ...state[action.payload.tableId].table.votes,
-                {
-                  votes: "0",
-                  upvoted: false,
-                  rowId: action.payload.response.id
-                }
-              ],
-              rows: [
-                ...state[action.payload.tableId].table.rows,
-                {
-                  id: action.payload.response.id,
-                  content: action.payload.response.cells
-                }
-              ]
-            }
+      return {
+        ...state,
+        [action.payload.tableId]: {
+          ...state[action.payload.tableId],
+          table: {
+            ...state[action.payload.tableId].table,
+            votes: [
+              ...state[action.payload.tableId].table.votes,
+              {
+                votes: "0",
+                upvoted: false,
+                rowId: action.payload.response.id
+              }
+            ],
+            rows: [
+              ...state[action.payload.tableId].table.rows,
+              {
+                id: action.payload.response.id,
+                content: action.payload.response.cells
+              }
+            ]
           }
-        };
-        console.log(blah);
-        return blah;
-      }
-      return state;
+        }
+      };
     }
 
     case "ADD_ROW_ERROR": {

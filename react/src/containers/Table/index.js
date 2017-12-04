@@ -171,7 +171,6 @@ class Table extends Component<Props, State> {
   };
 
   addRow = () => {
-    console.log(this.state.addRowDataGetters.map(x => x()));
     this.props
       .addRow(
         this.props.id,
@@ -180,15 +179,7 @@ class Table extends Component<Props, State> {
       )
       .then(() => {
         this.hideAdd();
-        if (this.props.permission === "1") {
-          swal(
-            "Success!",
-            "The request to add this row is awaiting approval.",
-            "success"
-          );
-        } else if (this.props.permission === "2") {
-          swal("Success!", "The row has been added.", "success");
-        }
+        swal("Success!", "The row has been added.", "success");
       });
   };
 
