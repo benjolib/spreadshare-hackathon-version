@@ -11,11 +11,18 @@
     <div class="container container--changelog">
         <div class="container__content container__content--column">
             <div class="container__content">
-                <div class="changelog__row changelog__row--addComment">
+                <div class="changelog__row changelog__row--addComment" style="background: white;">
                     <div class="changelog__commentInput" style="padding-top:8px;">
-                        <p>Did you know you can bulk change submitted change requests?</p>
+                        <p>Save time with bulk actions</p>
                     </div>
 
+                    <div style="margin-top: 7px;">
+                        <label class="checkbox">
+                            <input type="checkbox" class="selectAll" name="selectAll" value="" />
+                            <span class="label">Select all</span>
+                            <span class="checkbox"></span>
+                        </label>
+                    </div>
                     <div class="changelog__commentButtons">
                         <button name="type" value="reject" data-type="reject">Reject selected</button>
                         <button name="type" value="confirm" data-type="confirm">Confirm selected</button>
@@ -23,14 +30,22 @@
                 </div>
             </div>
 
+            <script type="text/javascript">
+              window.addEventListener('load', function () {
+                $('.selectAll').on('change', function () {
+                  $('input.changeCheckbox').not(this).prop('checked', this.checked);
+                });
+              });
+            </script>
+
             {% for request in requests %}
             <div class="container__content">
 
                 {% if request['status'] == 0%}
                 <div style="position:absolute; top: 12px; right: 33px; z-index:999">
                     <label class="checkbox">
-                        <input type="checkbox" name="change[]" value="{{ request['id'] }}" checked="checked" />
-                        <span></span>
+                        <input type="checkbox" class="changeCheckbox" name="change[]" value="{{ request['id'] }}" />
+                        <span class="checkbox"></span>
                     </label>
                 </div>
                 {% endif %}

@@ -91,6 +91,12 @@
         border-bottom-left-radius: 8px;
         border-bottom-right-radius: 8px;
 
+        span.label {
+          font-size: 14px;
+          white-space: nowrap;
+          margin-right: 10px;
+        }
+
         .changelog__commentInput {
           width: 50%;
 
@@ -125,6 +131,8 @@
         }
 
         .changelog__commentButtons {
+          white-space: nowrap;
+
           a {
             color: $card-tokens-background-color;
             font-size: 14px;
@@ -141,20 +149,20 @@
             font-weight: 200;
           }
           button {
-            font-size: 15px;
+            font-size: 13px;
             font-weight: 500;
-            margin-right: 14px;
+            margin-right: 12px;
             outline: none;
             border: none;
-            padding: 8px 20px;
+            padding: 8px 15px;
 
             &:hover {
               cursor: pointer;
             }
 
-            &:nth-child(2) {
-              background: #dee0e7;
-              color: $text-color;
+            &:nth-child(1) {
+              background: #9baabe;
+              color: white;
 
               &:hover {
                 background: darken(#dee0e7, 8%);
