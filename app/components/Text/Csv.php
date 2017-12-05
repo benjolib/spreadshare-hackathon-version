@@ -2,8 +2,6 @@
 
 namespace DS\Component\Text;
 
-use League\Csv\Reader;
-
 /**
  * Spreadshare
  *
@@ -43,7 +41,7 @@ class Csv
         $enc   = preg_replace_callback(
             '/"(.*?)"/s',
             function ($field) {
-                return urlencode(utf8_encode($field[1]));
+                return urlencode($field[1]);
             },
             $enc
         );
@@ -55,7 +53,7 @@ class Csv
                 
                 return array_map(
                     function ($field) {
-                        return str_replace('!!Q!!', '"', utf8_decode(urldecode($field)));
+                        return str_replace('!!Q!!', '"', urldecode($field));
                     },
                     $fields
                 );
