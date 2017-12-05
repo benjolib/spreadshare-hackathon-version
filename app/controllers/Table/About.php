@@ -7,6 +7,7 @@ use DS\Interfaces\TableSubcontrollerInterface;
 use DS\Model\TableComments;
 use DS\Model\TableRelations;
 use DS\Model\Tables;
+use DS\Component\Text\Emoji;
 
 /**
  * Spreadshare

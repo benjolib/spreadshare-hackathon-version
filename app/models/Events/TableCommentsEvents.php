@@ -2,6 +2,7 @@
 
 namespace DS\Model\Events;
 
+use DS\Component\Text\Emoji;
 use DS\Model\Abstracts\AbstractTableComments;
 use DS\Model\TableStats;
 
@@ -29,6 +30,10 @@ abstract class TableCommentsEvents
     {
         parent::beforeValidationOnCreate();
         
+        // Convert Emojis to their UTF-8 hex notation
+        $emoji = new Emoji();
+        $this->setComment($emoji->convert($this->getComment()));
+        
         return true;
     }
     
@@ -39,7 +44,7 @@ abstract class TableCommentsEvents
     {
         parent::beforeValidationOnUpdate();
         
-        return true;
+        return $this->beforeValidationOnCreate();
     }
     
     /**
