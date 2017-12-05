@@ -15,12 +15,20 @@
     flex-direction: row;
     justify-content: space-between;
     box-sizing: border-box;
-    @include rem2(padding, 25, 50);
+    @include rem2(padding, 40, 50);
+  }
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+
+    &--left {}
   }
 
   &__logo {
     order: 2;
-    @include rem(margin-bottom, 15);
+    @include rem(margin-bottom, 16);
+    @include rem(margin-right, 16);
 
     @include desktop {
       order: 1;
@@ -42,24 +50,10 @@
       }
     }
 
-    h1 {
-      margin: 0;
-      text-align: left;
-      font-weight: 700;
-      color: $logo-color;
-      @include rem(font-size, 28);
-
-      @include mobile {
-        text-align: center;
-      }
-      @include tablet {
-        text-align: center;
-      }
-    }
-    h2 {
-      font-weight: 500;
-      color: $text-color;
-      @include rem(font-size, 16);
+    img {
+      border-radius: 4px;
+      @include rem(width, 32);
+      @include rem(height, 32);
     }
   }
 
@@ -96,23 +90,23 @@
       border-bottom-right-radius: 3px;
       @include rem(padding-left, 5);
       @include rem(min-width, 264);
-      @include rem(height, 40);
+      @include rem(height, 32);
 
       &::-webkit-input-placeholder {
-        color: #b1bbc7;
-        font-weight: 300;
+        color: $text-color;
+        font-weight: 400;
       }
       &::-moz-placeholder {
-        color: #b1bbc7;
-        font-weight: 300;
+        color: $text-color;
+        font-weight: 400;
       }
       &:-ms-input-placeholder {
-        color: #b1bbc7;
-        font-weight: 300;
+        color: $text-color;
+        font-weight: 400;
       }
       &:-moz-placeholder {
-        color: #b1bbc7;
-        font-weight: 300;
+        color: $text-color;
+        font-weight: 400;
       }
       @include mobile {
         min-width: 15.625rem;
@@ -271,7 +265,17 @@
 
       &__create {
         padding: 5px 8px;
+        padding-right: 0;
         border: 1px solid transparent;
+        font-weight: 600;
+        color: #979797;
+        @include rem(font-size, 14);
+
+        img {
+          vertical-align: middle;
+          margin-top: -2px;
+          margin-right: 3px;
+        }
       }
 
       /*
