@@ -559,7 +559,7 @@ class Table extends Component<Props, State> {
                 return 400;
               }
             }}
-            fixedRowsTop={Number(this.props.data.table.fixedRowsTop)}
+            fixedRowsTop={Number(this.props.data.table.fixedRowsTop) || false}
             fixedColumnsLeft={
               this.props.data.table.fixedColumnsLeft
                 ? Number(this.props.data.table.fixedColumnsLeft) + 1
