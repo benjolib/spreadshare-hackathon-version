@@ -101,7 +101,7 @@
           <img src="/assets/icons/chevron-down-dark.svg" />
           <div class="dropdown dropdown--filters">
             <ul>
-              <li class="{% if activeDateFilter == 'today' %}link-active{% endif %}"><a href="/tables/{{ order }}/">Today</a></li>
+              <li class="{% if activeDateFilter == 'today' %}link-active{% endif %}"><a href="/tables/{{ order }}/today">Today</a></li>
               <li class="{% if activeDateFilter == 'yesterday' %}link-active{% endif %}"><a href="/tables/{{ order }}/yesterday">Yesterday</a></li>
               <li class="{% if activeDateFilter == 'last-week' %}link-active{% endif %}"><a href="/tables/{{ order }}/last-week">Last week</a></li>
               <li class="{% if activeDateFilter == 'last-30-days' %}link-active{% endif %}"><a href="/tables/{{ order }}/last-30-days">Last 30 Days</a></li>
