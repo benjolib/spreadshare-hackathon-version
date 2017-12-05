@@ -257,7 +257,7 @@ class TableContent
             {
                 $columnModel = new TableColumns();
                 $columnModel->setTableId($tableId)
-                            ->setPosition($i)
+                            ->setPosition($i++)
                             ->setUserId($userId)
                             ->setWidth(100)
                             ->setTitle($hasHeaders ? $headerField : 'Column ' . $i++)
