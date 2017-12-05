@@ -2,6 +2,7 @@
 
 namespace DS\Events\User;
 
+use DS\Component\Mail\Events\NewUserMail;
 use DS\Events\AbstractEvent;
 use DS\Model\User;
 use DS\Modules\Bernard;
@@ -39,6 +40,9 @@ class UserCreated extends AbstractEvent
 
             // Send Table Creation Event To ES Queue
             Bernard::produce('newWallet', $datasource);
+            
+            // Send new user notification
+            NewUserMail::factory(serviceManager()->getDI())->prepare($user)->send();
         }
 
 
