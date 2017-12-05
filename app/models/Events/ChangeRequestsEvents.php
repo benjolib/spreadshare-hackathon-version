@@ -77,8 +77,18 @@ abstract class ChangeRequestsEvents
         if ($this->getStatus() == ChangeRequestStatus::Confirmed && $this->getCellId())
         {
             $cell = TableCells::get($this->getCellId());
-            $cell->setContent($this->getTo()) // Change content
-                 ->setUserId($this->getUserId()) // Change cell ownership
+            
+            // @todo change this to a proper handling with a content type Link or Text.
+            if (strpos($this->getTo(), '> Link: ') === 0)
+            {
+                $cell->setLink(str_replace('> Link: ', '', $this->getTo()));
+            }
+            else
+            {
+                $cell->setContent($this->getTo()); // Change content
+            }
+            
+            $cell->setUserId($this->getUserId())// Change cell ownership
                  ->save();
         }
         

@@ -84,7 +84,7 @@ class ChangeRequests
         }
         
         $query = $this->readQuery(
-            "SELECT `changeRequests`.`id` AS `id`, `changeRequests`.`to` AS `to`, `changeRequests`.`from` AS `from`, `changeRequests`.`comment` AS `comment`, `changeRequests`.`createdAt` AS `createdAt`, `changeRequests`.`status` AS `status`, `user`.`handle` AS `userHandle`, `user`.`image` AS `userImage`, `user`.`name` AS `user` " .
+            "SELECT (SELECT `tableRows`.`content` FROM `tableRows` WHERE `tableRows`.`tableId` = :tableId AND `tableRows`.`lineNumber` = 1 LIMIT 1) as `row`, (SELECT `tableColumns`.`title` FROM `tableColumns` WHERE `tableColumns`.`id` = `tableCells`.`columnId` LIMIT 1) as `column`, `changeRequests`.`id` AS `id`, `changeRequests`.`to` AS `to`, `changeRequests`.`from` AS `from`, `changeRequests`.`comment` AS `comment`, `changeRequests`.`createdAt` AS `createdAt`, `changeRequests`.`status` AS `status`, `user`.`handle` AS `userHandle`, `user`.`image` AS `userImage`, `user`.`name` AS `user` " .
             "FROM `spreadshare`.`changeRequests`  INNER JOIN `spreadshare`.`user` ON `changeRequests`.`userId` = `user`.`id` INNER JOIN `spreadshare`.`tableCells` ON `changeRequests`.`cellId` = `tableCells`.`id` INNER JOIN `spreadshare`.`tableRows` ON `tableCells`.`rowId` = `tableRows`.`id` " .
             "WHERE `tableRows`.`tableId` = :tableId $statusCheck $showOnlyFilter ORDER BY `changeRequests`.`id` DESC LIMIT :limit OFFSET :offset",
             $params,

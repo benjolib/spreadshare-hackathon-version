@@ -107,7 +107,7 @@ class Post extends ActionHandler implements MethodInterface
                                   ->setUserId($userId)
                                   ->setTableId($tableId)
                                   ->setFrom($tableCell->getContent())
-                                  ->setTo($content)
+                                  ->setTo($link ? '> Link: ' . $link : $content)
                                   ->setStatus(ChangeRequestStatus::AwaitingApproval)
                                   ->setComment('')// not implemented, yet
                                   ->create();

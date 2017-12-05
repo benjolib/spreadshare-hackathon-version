@@ -63,10 +63,23 @@ class Post extends ActionHandler implements MethodInterface
      */
     public function process()
     {
-        $changeRequestId = filter_var($this->action, FILTER_SANITIZE_NUMBER_INT);
+        $changeRequestId = (int) filter_var($this->action, FILTER_SANITIZE_NUMBER_INT);
         $comment         = filter_var($this->request->getPost('comment', null, ''), FILTER_SANITIZE_STRING);
         $typeString      = filter_var($this->request->getPost('type', null, 'reject'), FILTER_SANITIZE_STRING);
         
+        return new Record($this->change($typeString, $changeRequestId, $comment));
+    }
+    
+    /**
+     * @param string $typeString
+     * @param int    $changeRequestId
+     * @param string $comment
+     *
+     * @return bool
+     * @throws SecurityException
+     */
+    public function change(string $typeString, int $changeRequestId, string $comment = ''): bool
+    {
         switch ($typeString)
         {
             case 'confirm':
@@ -107,10 +120,10 @@ class Post extends ActionHandler implements MethodInterface
                           ->setTableId($table->getId())
                           ->save();
             
-            return new Record(true);
+            return true;
         }
         
-        return new Record(false);
+        return false;
     }
     
 }

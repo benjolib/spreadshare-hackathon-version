@@ -47,6 +47,7 @@ class VoltAdapter extends Volt
         'base_uri',
         */
         # php
+        'json_decode',
         'strtotime',
         'explode',
         'implode',

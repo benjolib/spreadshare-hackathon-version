@@ -2,6 +2,7 @@
 
 namespace DS\Controller\Table;
 
+use DS\Controller\Api\v1\ChangeRequest\Post as ChangeRequestApiController;
 use DS\Controller\BaseController;
 use DS\Exceptions\SecurityException;
 use DS\Interfaces\TableSubcontrollerInterface;
@@ -38,6 +39,18 @@ class Changelog
     {
         try
         {
+            if ($this->request->isPost())
+            {
+                if ($this->request->getPost('type') && $this->request->getPost('change') && is_array($this->request->getPost('change')))
+                {
+                    $changeRequestController = new ChangeRequestApiController();
+                    foreach ($this->request->getPost('change') as $change)
+                    {
+                        $changeRequestController->change($this->request->getPost('type', null, 'confirm'), (int) $change, $this->request->getPost('comment', null, ''));
+                    }
+                }
+            }
+            
             if ($table->getOwnerUserId() != $userId)
             {
                 throw new SecurityException('You are not allowed to view this section.');
