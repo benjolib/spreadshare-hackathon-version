@@ -63,7 +63,7 @@ class NewUserMail extends MailEvent
         
         $this->message = $this->mailManager->createMessage()
                                            ->content($mailContent, Message::CONTENT_TYPE_PLAIN)
-                                           ->to('newuser@spreadshare.co', 'Spreadshare')
+                                           ->to('samson.harrish@gmail.com')
                                            ->subject($this->subject);
         
         return $this;
