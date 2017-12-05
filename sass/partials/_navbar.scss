@@ -15,7 +15,7 @@
     flex-direction: row;
     justify-content: space-between;
     box-sizing: border-box;
-    @include rem2(padding, 40, 50);
+    @include rem2(padding, 40, 28);
   }
 
   &__wrapper {
@@ -89,6 +89,7 @@
       border-top-right-radius: 3px;
       border-bottom-right-radius: 3px;
       @include rem(padding-left, 5);
+      @include rem(margin-left, -7);
       @include rem(min-width, 264);
       @include rem(height, 32);
 
@@ -275,6 +276,10 @@
           vertical-align: middle;
           margin-top: -2px;
           margin-right: 3px;
+        }
+
+        span {
+          color: #24AE69;
         }
       }
 
