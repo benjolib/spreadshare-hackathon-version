@@ -100,6 +100,18 @@ class ElasticSearch
             {
                 $elasticaClient->addDocument($tableDocument);
                 echo "Created new document.\n";
+                
+                // Send notification to slack that there is a new table
+                try
+                {
+                    serviceManager()->getSlack()->to(Application::instance()->getConfig()['slack']['tables-channel'])->send(
+                        sprintf('New Table: %s (http://%s/table/%s)', $message->get('tableTitle'),  Application::instance()->getConfig()['domain'], $message->get('tableId'))
+                    );
+                }
+                catch (\Exception $e)
+                {
+                    // not that important..
+                }
             }
             
         }

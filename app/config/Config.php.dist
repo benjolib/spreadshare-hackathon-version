@@ -64,6 +64,11 @@ return [
     'sentry' => [
         'key' => 'https://fcdde304c3344126b70b8f8365df7650:1ef8823d9153412a9f77250fa9d45235@sentry.io/240812',
     ],
+    'slack' => [
+        'webhook-url' => 'https://hooks.slack.com/services/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',
+        'tables-channel' => '#tables',
+        'users-channel' => '#users',
+    ],
     'files' => [
         'service' => 'local',
         'local' => [

@@ -50,6 +50,7 @@ use Phalcon\Security;
  * @method \League\Flysystem\Filesystem getFiles();
  * @method Security getSecurity();
  * @method Cookies getCookies();
+ * @method \Maknz\Slack\Client getSlack();
  */
 class ServiceManager
 {
