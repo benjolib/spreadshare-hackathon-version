@@ -114,23 +114,10 @@ class Post extends ActionHandler implements MethodInterface
             // User contribution has to be confirmed first.
             else
             {
-                /**
-                 * @todo not implemented yet!
-                 */
-                $newRow = new TableRows();
-                /*
-                $cellId = null;
-                $changeRequest = new ChangeRequests();
-                $changeRequest->setTableId($tableId)
-                              ->setUserId($userId)
-                              ->setFrom('')
-                              ->setTo('')
-                              ->setStatus(ChangeRequestStatus::Unconfirmed)
-                              ->setComment('')
-                              ->setCellId($cellId);
-                */
+                $tableContent = new TableContent();
+                $newRow       = $tableContent->addRow($tableId, $rowData, $insertAfterId);
         
-                $action = 'changeRequested';
+                $action = 'updated';
             }
     
             return new Record(
