@@ -292,12 +292,28 @@ class TableContent
                         $cellData = [];
                         foreach ($columnIds as $key => $colId)
                         {
+                            $cellContent = isset($row[$key]) && $row[$key] !== null ? $row[$key] : '';
+                            
+                            // Check for links in cells
+                            if (strpos($cellContent, 'www.') === 0)
+                            {
+                                $cellLink = 'http://' . $cellContent;
+                            }
+                            elseif (strpos($cellContent, 'http://') === 0 || strpos($cellContent, 'https://') === 0)
+                            {
+                                $cellLink = $cellContent;
+                            }
+                            else
+                            {
+                                $cellLink = '';
+                            }
+                            
                             $cellData[] = $this->addCell(
                                 $rowModel,
                                 $userId,
                                 $colId,
-                                isset($row[$key]) && $row[$key] !== null ? $row[$key] : '',
-                                ''
+                                $cellContent,
+                                $cellLink
                             );
                             
                             $rowModel->setContent(json_encode($cellData))
