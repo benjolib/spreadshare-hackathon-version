@@ -1,8 +1,8 @@
 <footer class="footer">
   <div class="footer__top">
     <div class="footer__top__left">
-      <h2>SpreadShare</h2>
-      <h3>Community curated Tables</h3>
+      <h1>SpreadShare</h1>
+      <h2>Community curated Tables</h2>
       <p>Explore community-curated tables for startups and professionals</p>
     </div>
     <div class="footer__top__right">

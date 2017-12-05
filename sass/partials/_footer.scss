@@ -51,20 +51,20 @@
         text-align: center;
       }
 
-      h2 {
+      h1 {
+        text-align: left;
         margin: 0;
         color: $logo-color;
         @include rem(font-size, 28);
         font-weight: 700;
       }
-      h3 {
+      h2 {
         margin: 0;
         line-height: 2rem;
         // color: $text-color-alternate;
         color: #6A7C94;
         font-weight: 400;
         line-height: 32px;
-        margin-top: 15px;
 
         @include rem(font-size, 14);
       }
