@@ -588,7 +588,16 @@ class Table extends Component<Props, State> {
               }
             }}
             outsideClickDeselects={false}
-            // contextMenuCopyPaste
+            contextMenuCopyPaste
+            beforeCopy={data => {
+              data.forEach((data2, i) => {
+                data2.forEach((cellValue, i2) => {
+                  // we gotta mutate here
+                  // eslint-disable-next-line no-param-reassign
+                  data[i][i2] = cellValue.content;
+                });
+              });
+            }}
             contextMenu={{
               callback: this.contextMenuCallback,
               items: {
@@ -612,7 +621,10 @@ class Table extends Component<Props, State> {
                         name: "Edit Column Header"
                       }
                     }
-                  : {})
+                  : {}),
+                copy: {
+                  name: "Copy"
+                }
               }
             }}
           />
