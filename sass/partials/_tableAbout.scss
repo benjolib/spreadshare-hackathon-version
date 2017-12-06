@@ -254,6 +254,8 @@
       color: $text-color-alternate;
       border-radius: 6px;
       width: 100%;
+      display: flex;
+      justify-content: space-between;
 
       &:last-child {
         @include rem(margin-bottom, 16 * 2);
@@ -308,8 +310,10 @@
             background: $upvote-background-color;
             color: $text-color;
             border-radius: 4px;
+            float: right;
             @include rem(font-size, 14);
-            @include rem(margin-right, 8);
+            @include rem(margin-left, 8);
+            @include rem(margin-top, 8);
             @include rem2(padding, 2, 8);
 
             &:last-child {
@@ -518,7 +522,7 @@
       }
       &:nth-child {
         border: 0;
-        margin-bottom: 0;        
+        margin-bottom: 0;
       }
 
       &__avatar {
