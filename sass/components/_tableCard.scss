@@ -29,11 +29,11 @@
         width: 100%;
         align-self: flex-start;
         margin: 0;
-        color: black;
         font-weight: 600;
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
+        margin-bottom: 5px;
         @include rem(font-size, 16);
 
         @include tablet {
@@ -54,6 +54,8 @@
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
+        color: #b9c4d2;
+        font-weight: 500;
         @include rem(font-size, 12);
 
         @include tablet {
@@ -85,12 +87,12 @@
 
       span {
         color: $text-color;
-        font-weight: 500;
+        font-weight: 600;
         @include rem(font-size, 12);
       }
 
       .chevronUp {
-        @include rem(margin-right, 12);
+        @include rem(margin-right, 14);
 
         svg {
           @include rem(width, 10);
@@ -107,7 +109,7 @@
 
         span {
           color: $text-color;
-          font-weight: 500;
+          font-weight: 600;
           @include rem(font-size, 14);
         }
 
@@ -120,11 +122,11 @@
       }
 
       @include desktop {
-        @include rem2(padding, 5, 20);
+        @include rem2(padding, 10, 20);
 
         span {
           color: $text-color;
-          font-weight: 500;
+          font-weight: 600;
           @include rem(font-size, 16);
         }
 
