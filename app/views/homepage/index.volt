@@ -214,89 +214,89 @@
     $('#sidebarForm ul.filter > li > label').on('change', function (ev) {
       document.getElementById('sidebarForm').submit();
     });
-  });
 
-  // $('.navbar__search__filter').on('click', function () {
-  // 	$('.filter').toggleClass('open');
-  // 	window.location.hash = "#filters";
-  // });
+    // $('.navbar__search__filter').on('click', function () {
+    // 	$('.filter').toggleClass('open');
+    // 	window.location.hash = "#filters";
+    // });
 
-  // $('#topicFilter').on('click', function () {
-  // 	$('.filter--topic').toggleClass('open');
-  // });
+    // $('#topicFilter').on('click', function () {
+    // 	$('.filter--topic').toggleClass('open');
+    // });
 
-  // $('#typeFilter').on('click', function () {
-  // 	$('.filter--type').toggleClass('open');
-  // });
+    // $('#typeFilter').on('click', function () {
+    // 	$('.filter--type').toggleClass('open');
+    // });
 
-  $('#closeHero').on('click', function () {
-  $('.main__hero').css('display', 'none');
-  createPopper();
-  createPopper($('.navbar__search__filter'), $('.dropdown--notifications'));
-  });
+    $('#closeHero').on('click', function () {
+      $('.main__hero').css('display', 'none');
+      createPopper();
+      createPopper($('.navbar__search__filter'), $('.dropdown--notifications'));
+    });
 
-  /* Popper */
-  var $referenceElement = $('.main__content__tables__filters__left');
-  var $onPopper = $('.dropdown--filters');
+    /* Popper */
+    var $referenceElement = $('.main__content__tables__filters__left');
+    var $onPopper = $('.dropdown--filters');
 
-  var createPopper = function (ref = $referenceElement, pop = $onPopper, place = 'bottom') {
-  new Popper(ref, pop, {
-    placement: place,
-  });
-  };
-
-  new Popper($referenceElement, $onPopper, {
-  placement: 'bottom',
-  });
-
-  $referenceElement.click(function () {
-  $onPopper.toggleClass('show');
-  });
-
-  // Load cards for infinite scrolls
-  var $container = $('.tables__content__main__cards').infiniteScroll({
-    path: function() {
-      var pageNumber = (this.loadCount + 1);
-
-      $('.upvote').on('click', function () {
-        $svg = $(this).find('.chevronUp').find('svg').find('path');
-        $svg.attr('fill', '#B1BBC7');
-        $svg.toggleClass('white');
+    var createPopper = function (ref = $referenceElement, pop = $onPopper, place = 'bottom') {
+      new Popper(ref, pop, {
+        placement: place,
       });
+    };
 
-      $('div.upvote, button.upvote').api({
-        method: 'POST',
-        onSuccess: function (response, button) {
-          var span = button.find('span');
-          if (response.data.voted) {
-            button.addClass('selected');
-            button.find('.chevronUp').find('svg').find('.fillColor').addClass('white');
-            span.text(parseInt(parseInt(span.text()) + 1));
-          } else {
-            button.removeClass('selected');
-            button.find('.chevronUp').find('svg').find('.fillColor').removeClass('white');
-            span.text(parseInt(parseInt(span.text()) - 1));
-          }
-        },
-      });
+    new Popper($referenceElement, $onPopper, {
+      placement: 'bottom',
+    });
 
-      return window.location.href + '?page=' + pageNumber;
-    },
-    responseType: 'document',
-    append: '.tableCard',
-    status: '.page-load-status',
-    request: '.loading',
-    history: false,
-    debug: false,
-    scrollThreshold: 300
+    $referenceElement.click(function () {
+      $onPopper.toggleClass('show');
+    });
+
+    // Load cards for infinite scrolls
+    var $container = $('.tables__content__main__cards').infiniteScroll({
+      path: function () {
+        var pageNumber = (this.loadCount + 1);
+
+        $('.upvote').on('click', function () {
+          $svg = $(this).find('.chevronUp').find('svg').find('path');
+          $svg.attr('fill', '#B1BBC7');
+          $svg.toggleClass('white');
+        });
+
+        $('div.upvote, button.upvote').api({
+          method: 'POST',
+          onSuccess: function (response, button) {
+            var span = button.find('span');
+            if (response.data.voted) {
+              button.addClass('selected');
+              button.find('.chevronUp').find('svg').find('.fillColor').addClass('white');
+              span.text(parseInt(parseInt(span.text()) + 1));
+            } else {
+              button.removeClass('selected');
+              button.find('.chevronUp').find('svg').find('.fillColor').removeClass('white');
+              span.text(parseInt(parseInt(span.text()) - 1));
+            }
+          },
+        });
+
+        return '/?page=' + pageNumber;
+      },
+      responseType: 'document',
+      append: '.tableCard',
+      status: '.page-load-status',
+      request: '.loading',
+      history: false,
+      debug: false,
+      scrollThreshold: 300
+    });
+
+    // stop load on scroll if no results are found
+    $container.on('load.infiniteScroll', function (event, response) {
+      //disable loadOnScroll
+      if (response.getElementById("no-results")) {
+        $container.infiniteScroll('option', { loadOnScroll: false })
+      }
+    });
   });
-
- // stop load on scroll if no results are found
- $container.on( 'load.infiniteScroll', function( event, response ) {
-   //disable loadOnScroll
-   if (response.getElementById("no-results")) {
-    $container.infiniteScroll('option', { loadOnScroll: false })
-   }
- });
 </script>
 {% endblock %}
