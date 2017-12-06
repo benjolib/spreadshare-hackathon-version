@@ -9,6 +9,7 @@ use DS\Model\DataSource\TableFlags;
 use DS\Model\Helper\TableFilter;
 use DS\Model\Locations;
 use DS\Model\TableLocations;
+use DS\Model\TableProperties;
 use DS\Model\TableRelations;
 use DS\Model\Tables;
 use DS\Model\TableTags;
@@ -82,6 +83,8 @@ class Settings
                 
                 default:
                 case 'details':
+                    $tableProps = (new TableProperties())->get($table->getId(), 'tableId');
+                    
                     if ($this->request->isPost())
                     {
                         try
@@ -95,13 +98,18 @@ class Settings
                             else
                             {
                                 $this->prepareModelFromPost($table, $userId)->save();
-    
+                                
                                 $tableApi = new \DS\Api\Table();
                                 $tableApi->handleTagAndLocationAssignment(
                                     $table,
                                     $this->request->getPost('tags', null, []),
                                     $this->request->getPost('location', null, [])
                                 );
+                                
+                                $tableProps->setTableId($table->getId())
+                                           ->setFixedColumnsLeft($this->request->getPost('fixedColumnsLeft', null, ''))
+                                           ->setFixedRowsTop($this->request->getPost('fixedRowsTop', null, ''))
+                                           ->save();
                             }
                         }
                         catch (\Exception $e)
@@ -153,6 +161,7 @@ class Settings
                     }
                     
                     $this->view->setVar('topics', $topics);
+                    $this->view->setVar('tableProps', $tableProps);
                     break;
             }
             

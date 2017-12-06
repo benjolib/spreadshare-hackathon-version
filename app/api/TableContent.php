@@ -63,7 +63,9 @@ class TableContent
         }
         
         return [
-            'table' => Tables::get($tableId)->toArray(['title']),
+            'fixedRowsTop' => 2,
+            'fixedColumnsLeft' => 2,
+            'table' => Tables::get($tableId)->toArray(['title', 'fixedRowsTop', 'fixedColumnsLeft']),
             'votes' => $votesData,
             'columns' => $columnData,
             'rows' => $rowData,

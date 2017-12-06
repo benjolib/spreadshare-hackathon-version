@@ -85,12 +85,9 @@ abstract class Base
      */
     public static function get($id, $column = 'id')
     {
-        /**
-         * @todo Use memory cache for this
-         */
-        //if (!isset(static::$getCache[static::class][$id]))
+        if (property_exists(static::class, $column))
         {
-            static::$getCache[static::class][$id] = static::findFirst(
+            return static::findFirst(
                 [
                     "conditions" => sprintf("%s = ?0", $column),
                     "bind" => [$id],
@@ -98,7 +95,7 @@ abstract class Base
             ) ?: new static();
         }
         
-        return static::$getCache[static::class][$id];
+        throw new \InvalidArgumentException('Invalid field name provided. This field is not available in this model.');
     }
     
     /**
