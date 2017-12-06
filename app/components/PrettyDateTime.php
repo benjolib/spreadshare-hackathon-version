@@ -208,18 +208,18 @@ class PrettyDateTime
         }
         else if ($absDiff / self::DAY <= 7)
         {
-            return self::prettyFormat($difference / self::DAY, 'd');
+            return self::prettyFormat($difference / self::DAY, 'day');
         }
         else if ($absDiff / self::WEEK <= 5)
         {
-            return self::prettyFormat($difference / self::WEEK, 'w');
+            return self::prettyFormat($difference / self::WEEK, 'week');
         }
         else if ($absDiff / self::MONTH < 12)
         {
-            return self::prettyFormat($difference / self::MONTH, 'mnth');
+            return self::prettyFormat($difference / self::MONTH, 'month');
         }
 
         // Over a year ago
-        return self::prettyFormat($difference / self::YEAR, 'y');
+        return self::prettyFormat($difference / self::YEAR, 'year');
     }
 }
