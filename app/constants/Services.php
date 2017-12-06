@@ -135,9 +135,7 @@ class Services
      *
      * @definition bootstrap/Services/Wallet.php
      */
-    const WALLET = 'wallet';
-
-
+    const WALLETAPI = 'walletApi';
 
     /**
      * Raven Client service (sentry.io bug tracker)

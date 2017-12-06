@@ -10,6 +10,17 @@ use Elastica\Exception\NotFoundException;
 use Elastica\Exception\ResponseException;
 use Phalcon\Logger;
 
+/**
+ * Spreadshare
+ *
+ * @author    Dennis Stücken
+ * @license   proprietary
+ * @copyright Spreadshare
+ * @link      https://www.spreadshare.co
+ *
+ * @version   $Version$
+ * @package   DS\Component
+ */
 class ElasticSearch
 {
     
@@ -105,7 +116,7 @@ class ElasticSearch
                 try
                 {
                     serviceManager()->getSlack()->to(Application::instance()->getConfig()['slack']['tables-channel'])->send(
-                        sprintf('New Table: %s (http://%s/table/%s)', $message->get('tableTitle'),  Application::instance()->getConfig()['domain'], $message->get('tableId'))
+                        sprintf('New Table: %s (http://%s/table/%s)', $message->get('tableTitle'), Application::instance()->getConfig()['domain'], $message->get('tableId'))
                     );
                 }
                 catch (\Exception $e)

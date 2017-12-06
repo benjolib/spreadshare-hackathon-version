@@ -51,6 +51,7 @@ use Phalcon\Security;
  * @method Security getSecurity();
  * @method Cookies getCookies();
  * @method \Maknz\Slack\Client getSlack();
+ * @method \DS\Component\Wallet\WalletApi getWalletApi();
  */
 class ServiceManager
 {

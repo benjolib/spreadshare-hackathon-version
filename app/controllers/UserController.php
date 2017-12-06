@@ -73,7 +73,7 @@ class UserController
             $this->view->setVar('currentPage', $page);
             $this->view->setVar('profile', $user);
             $this->view->setVar('settings', UserSettings::get($user->getId(), 'userId'));
-            $this->view->setVar('wallet', Wallet::get($user->getId(), 'userId'));
+            $this->view->setVar('userWallet', Wallet::get($user->getId(), 'userId'));
             $this->view->setMainView('user/profile');
             
             $subClass = "DS\\Controller\\User\\" . ucfirst($page);

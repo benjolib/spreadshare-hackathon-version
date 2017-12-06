@@ -1,11 +1,10 @@
 <?php
-
 namespace DS\Task;
 
 use DS\Listeners\ElasticSearch as ElasticSearchListener;
 use DS\Listeners\Wallet as WalletListener;
-use DS\Task\TaskHelpers\LoggerTrait;
 use DS\Modules\Bernard;
+use DS\Task\TaskHelpers\LoggerTrait;
 
 /**
  * Spreadshare
@@ -23,52 +22,51 @@ use DS\Modules\Bernard;
 class NewQueueTask extends Base
 {
     use LoggerTrait;
-
-
+    
     public function mainAction()
     {
         echo "This is the default queue task and the default action";
-
     }
-
-
+    
     /**
      * table queue
-     * @param string $input['name'] ['touchTable']
+     *
+     * @param array $input ['name'] ['touchTable']
      */
     public function tableAction($input)
     {
-
-      $name = $input['name'];
-
-      if (!$name) {
-         echo "Command line argument event name is required example --name=touchTable \r\n";
-         return;
-      }
-
-      Bernard::consume($name, new ElasticSearchListener);
+        
+        $name = $input['name'];
+        
+        if (!$name)
+        {
+            echo "Command line argument event name is required example --name=touchTable \r\n";
+            
+            return;
+        }
+        
+        Bernard::consume($name, new ElasticSearchListener);
     }
-
-
+    
     /**
      * wallet task
-     * @param string $input ['newWallet']
+     *
+     * @param array $input ['newWallet']
      */
     public function walletAction($input)
     {
-
-      $name = $input['name'];
-
-      if (!$name) {
-        echo "Command line argument event name is required example --name=newWallet \r\n";
-        return;
-      }
-
-      Bernard::consume($name, new WalletListener);
+        $name = $input['name'];
+        
+        if (!$name)
+        {
+            echo "Command line argument event name is required example --name=newWallet \r\n";
+            
+            return;
+        }
+        
+        Bernard::consume($name, new WalletListener);
     }
-
-
-
+    
     /**
      * MainTask initialization.
      */
