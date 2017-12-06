@@ -703,7 +703,6 @@ CREATE TABLE `tableFlags` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 
-
 DROP TABLE IF EXISTS `tableContributors`;
 CREATE TABLE `tableContributors` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -715,6 +714,15 @@ CREATE TABLE `tableContributors` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+DROP TABLE IF EXISTS `tableProperties`;
+CREATE TABLE `tableProperties` (
+  `tableId` int(11) unsigned NOT NULL,
+  `fixedRowsTop` mediumint(9) DEFAULT NULL,
+  `fixedColumnsLeft` mediumint(9) DEFAULT NULL,
+  PRIMARY KEY (`tableId`),
+  CONSTRAINT `tablePropertiesTableId` FOREIGN KEY (`tableId`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
