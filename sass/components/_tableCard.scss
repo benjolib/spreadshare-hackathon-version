@@ -74,6 +74,7 @@
       right: 20px;
       display: flex;
       align-self: flex-start;
+      border: 0;
       background: $upvote-background-color;
       color: $upvote-text-color;
       font-weight: 300;
@@ -83,6 +84,7 @@
       &:hover {
         cursor: pointer;
         background: darken($upvote-background-color, 4%);
+        color: $upvote-text-color;
       }
 
       span {
@@ -135,6 +137,61 @@
             @include rem(width, 16);
             @include rem(height, 16);
           }
+        }
+      }
+    }
+
+    &__subscribe.subscribed {
+      background-color: $primary-color;
+
+      span {
+        color: white;
+      }
+    }
+
+    &__subscribe {
+      position: absolute;
+      align-items: center;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      align-self: flex-start;
+      border: 0;
+      background: $upvote-background-color;
+      color: $upvote-text-color;
+      font-weight: 300;
+      border-radius: 3px;
+      @include rem2(padding, 2, 10);
+
+      &:hover {
+        cursor: pointer;
+        background: darken($upvote-background-color, 4%);
+        color: $upvote-text-color;
+      }
+
+      span {
+        color: $text-color;
+        font-weight: 600;
+        @include rem(font-size, 12);
+      }
+
+      @include tablet {
+        @include rem2(padding, 3, 18);
+
+        span {
+          color: $text-color;
+          font-weight: 600;
+          @include rem(font-size, 14);
+        }
+      }
+
+      @include desktop {
+        @include rem2(padding, 10, 20);
+
+        span {
+          color: $text-color;
+          font-weight: 600;
+          @include rem(font-size, 16);
         }
       }
     }
@@ -260,4 +317,5 @@
       }
     }
   }
+
 }

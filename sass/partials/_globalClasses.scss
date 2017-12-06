@@ -107,16 +107,14 @@ body {
   }
 
   .loading {
-    position: relative;
+    //position: relative;
     cursor: default;
     text-shadow: none !important;
     color: transparent !important;
     opacity: 1;
-    width: 100%;
     pointer-events: auto;
     -webkit-transition: all 0s linear, opacity 0.1s ease;
     transition: all 0s linear, opacity 0.1s ease;
-    background: none !important;
   }
 
   .loading:before {

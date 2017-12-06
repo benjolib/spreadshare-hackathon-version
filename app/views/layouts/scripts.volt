@@ -233,6 +233,7 @@
         });
         $('button.subscribe').api({
           method: 'POST',
+          action: 'subscribe',
           onSuccess: function (response, button) {
             button.toggleClass('subscribed');
           },
