@@ -1,31 +1,51 @@
 // @flow
 /* eslint-disable no-unused-expressions */
-import { injectGlobal } from "styled-components";
+import {injectGlobal} from "styled-components";
 
 // declare only some simple css which is hard to declare at component level
 injectGlobal`
   html {
     font-size: 100%;
   }
-
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
-      sans-serif;
-    font-size: 1rem;
-    line-height: 1.5;
-    background: #f2f2f8;
-    overflow-x: hidden;
+  
+  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #b1bbc7;
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    color: #b1bbc7;
+  }
+  :-ms-input-placeholder { /* IE 10+ */
+    color: #b1bbc7;
+  }
+  :-moz-placeholder { /* Firefox 18- */
+    color: #b1bbc7;
   }
 
-  button, input, select {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
-      sans-serif;
+  
+  div.table-header {
+    display: flex;
+    background: #ffffff;
+    padding: 20px 16px;
+    font-size: 14px;
   }
-
-  button:disabled {
-    opacity: 0.5;
+  
+  div.table-header button.table-button {
+    color: white;
+    padding: 0 15px;
+  }
+  
+  div.table-header button.table-button img {
+    margin-right: 5px;
+    height: 16px;
+    width: 16px;
+  }
+  
+  div.table-header button.table-button.add-row {
+    background: #b1bbc7
+  }
+  
+  div.table-header button.table-button.sort {
+    background: #dee0e7
   }
 
   .htContextMenu table.htCore {

@@ -36,7 +36,6 @@ class AddInputCell extends React.Component<Props> {
   };
 
   componentDidMount() {
-    console.log(this.props.value);
     this.props.setupDataGetter(this.props.colIndex, () => {
       const val = this.state.value;
       this.setState({ value: "" });

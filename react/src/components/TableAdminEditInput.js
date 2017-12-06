@@ -13,7 +13,7 @@ const StyledDiv = styled.div`
     border: 0;
     padding: 0;
     border-radius: 3px;
-    width: 40px;
+    width: 45px;
     height: 40px;
     flex-shrink: 0;
     background: #f2f2f8;
@@ -21,11 +21,10 @@ const StyledDiv = styled.div`
   & > input {
     border: 0;
     padding: 0;
-    padding-top: 4px;
+    padding-top: 1px;
     flex-grow: 1;
     border-radius: 3px;
     height: 40px;
-    font-size: 16px;
     width: 100%;
     outline: none;
   }

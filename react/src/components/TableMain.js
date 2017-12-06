@@ -17,7 +17,6 @@ const StyledDiv = styled.div`
     height: 55px;
     line-height: 55px;
     font-weight: 700;
-    font-size: 16px;
     text-align: left;
     border-color: transparent !important;
   }

@@ -34,8 +34,6 @@ import TableDropdownMenu from "../../components/TableDropdownMenu";
 import TableAdminEditInput from "../../components/TableAdminEditInput";
 
 const TableStyles = styled.div`
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
-    sans-serif;
 `;
 
 type Props = {
@@ -481,13 +479,13 @@ class Table extends Component<Props, State> {
               editCell={this.props.editCell}
             />
           )}
-          <TableButton icon="sort" onClick={this.toggleSortings} />
+          <TableButton icon="sort-white" className="table-button sort" onClick={this.toggleSortings}>Sort Table</TableButton>
           {/* <TableButton icon="filter" onClick={this.toggleFilters} /> */}
           {this.props.permission !== "0" && (
-            <TableButton icon="add" onClick={this.showAdd} />
+            <TableButton icon="add-white" className="table-button add-row" onClick={this.showAdd}>Add a Row</TableButton>
           )}
           <TableSearch onChange={this.updateSearchValue} />
-          <TableButton icon="dots" onClick={this.toggleDropdown} />
+          <TableButton icon="dots" className="" onClick={this.toggleDropdown} />
         </TableHeader>
         <div style={{ position: "relative" }}>
           <TableSortingMenu
