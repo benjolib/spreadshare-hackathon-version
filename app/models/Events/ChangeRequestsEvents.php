@@ -8,6 +8,7 @@ use DS\Exceptions\ModelFieldNotNullException;
 use DS\Model\Abstracts\AbstractChangeRequests;
 use DS\Model\DataSource\ChangeRequestStatus;
 use DS\Model\TableCells;
+use DS\Model\TableStats;
 
 /**
  * Events for model ChangeRequests
@@ -95,6 +96,7 @@ abstract class ChangeRequestsEvents
         if ($this->getStatus() != ChangeRequestStatus::AwaitingApproval)
         {
             TabelCellChangeReviewed::after($this, $this->tableId);
+            (new TableStats)->decrement($this->tableId, 'unconfirmedChanges');
         }
     }
     
@@ -103,6 +105,8 @@ abstract class ChangeRequestsEvents
      */
     public function afterCreate()
     {
+        (new TableStats)->increment($this->tableId, 'unconfirmedChanges');
+        
         TabelCellChangeRequested::after(
             $this->getUserId(),
             $this->getCellId(),

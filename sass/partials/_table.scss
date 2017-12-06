@@ -117,6 +117,8 @@
           align-self: center;
           cursor: pointer;
           outline: none;
+          min-height: 25px;
+          min-width: 25px;
           @include rem(font-size, 16);
           @include rem2(padding, 6, 14);
 
@@ -238,6 +240,7 @@
       &__item {
         display: flex;
         align-items: center;
+        position: relative;
         @include rem(margin-right, 18);
 
         @include desktop {
@@ -249,6 +252,22 @@
           @include rem(margin-right, 4);
         }
 
+        span {
+          font-size: 8px;
+          line-height: 10px;
+          padding: 2px;
+          text-align: center;
+          vertical-align: center;
+          border-radius: 10px;
+          width: 15px;
+          height: 15px;
+          background: $primary-color;
+          color: #fff;
+          position: absolute;
+          top: -5px;
+          right: -14px;
+        }
+
         @include desktop {}
       }
     }
@@ -258,6 +277,7 @@
 .handsontable tr:nth-child(odd) {
   background: white !important;;
 }
+
 .handsontable tr:nth-child(even) {
   background: lighten($background-color, 2) !important;
 }
@@ -270,59 +290,68 @@
   padding: 15px !important;
   border-radius: 7px;
 }
+
 .dxTqwX a {
   margin-bottom: 8px;
-  color: #B1BBC7;
+  color: #b1bbc7;
 }
+
 .bAvots {
   padding: 0 !important;
   border-radius: 7px;
   height: auto !important;
 }
+
 .bAvots div {
-  background: #F8F8FB;
+  background: #f8f8fb;
   padding: 10px;
   border-radius: 7px;
 }
+
 .bAvots div button {
   border: none;
   width: 25%;
-  color: #B1BBC7;
+  color: #b1bbc7;
   cursor: pointer;
 }
+
 .bAvots div button:first-child {
   width: 50%;
   text-align: left;
-  color: #6A7C94;
+  color: #6a7c94;
 }
 
 .bAvots div button:last-child {
   border: none;
-  background: #6A7C94;
+  background: #6a7c94;
   color: white;
   border-radius: 4px;
   padding: 5px 10px;
   width: 25%;
 }
+
 .sc-dnqmqq table {
   margin: 10px;
-  color: #B1BBC7;
+  color: #b1bbc7;
 }
+
 .sc-dnqmqq select {
   margin: 0 15px;
   border: none;
   background: transparent;
   text-align: center;
 }
+
 .sc-dnqmqq option {
   margin: 0 15px;
   border: none;
   background: transparent;
 }
+
 .sc-dnqmqq table button {
   border-radius: 50%;
   border: none;
-  background: #6A7C94;
+  background: #6a7c94;
   font-weight: 500;
   color: #fff;
   padding: 2px 6px;

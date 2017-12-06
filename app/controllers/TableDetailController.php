@@ -5,6 +5,7 @@ namespace DS\Controller;
 use DS\Model\DataSource\TableFlags;
 use DS\Model\Helper\TableFilter;
 use DS\Model\Tables;
+use DS\Model\TableStats;
 use Phalcon\Exception;
 
 /**
@@ -46,6 +47,9 @@ class TableDetailController
         {
             throw new Exception('This table has been archived! It was maybe flagged as inappropriate content.');
         }
+        
+        // Assign tablestats (e.g. for changelog notification badge)
+        $this->view->setVar('tableStats', (new TableStats)->get($tableId, 'tableId'));
         
         $subClass = "DS\\Controller\\Table\\" . ucfirst($tab);
         if (class_exists($subClass))
