@@ -5,6 +5,7 @@ namespace DS\Api;
 use DS\Component\Text\Csv;
 use DS\Model\TableCells;
 use DS\Model\TableColumns;
+use DS\Model\TableProperties;
 use DS\Model\TableRows;
 use DS\Model\Tables;
 use Phalcon\Exception;
@@ -62,10 +63,12 @@ class TableContent
             ];
         }
         
+        $tableProps = (new TableProperties())->get($tableId, 'tableId');
+        
         return [
-            'fixedRowsTop' => 2,
-            'fixedColumnsLeft' => 2,
-            'table' => Tables::get($tableId)->toArray(['title', 'fixedRowsTop', 'fixedColumnsLeft']),
+            'fixedRowsTop' => $tableProps->getFixedRowsTop(),
+            'fixedColumnsLeft' => $tableProps->getFixedColumnsLeft(),
+            'table' => Tables::get($tableId)->toArray(['title']),
             'votes' => $votesData,
             'columns' => $columnData,
             'rows' => $rowData,

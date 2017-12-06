@@ -177,7 +177,7 @@ class Table extends Component<Props, State> {
       )
       .then(() => {
         this.hideAdd();
-        swal("Success!", "The row has been added.", "success");
+        // swal("Success!", "The row has been added.", "success");
       });
   };
 
