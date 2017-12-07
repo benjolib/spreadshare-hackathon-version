@@ -223,10 +223,10 @@ class ElasticSearch
         {
             $this->updateOrAddToIndex(
                 [
-                    'id' => $allTables['id'],
-                    'title' => $allTables['title'],
-                    'tagline' => $allTables['tagline'],
-                    'content' => $this->prepareTableContent($allTables['id']),
+                    'id' => $table['id'],
+                    'title' => $table['title'],
+                    'tagline' => $table['tagline'],
+                    'content' => $this->prepareTableContent($table['id']),
                 ],
                 false
             );
