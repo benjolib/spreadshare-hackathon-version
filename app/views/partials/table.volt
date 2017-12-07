@@ -17,7 +17,7 @@
         {% else %}
         <div class="tableCard__info__upvote upvote" onclick="document.location.href='/login';">
             <div class="chevronUp">
-                {{ partial('partials/icons/chevron-up') }}
+                {{ partial('partials/icons/upvote') }}
             </div>
             <span>{{ table['votesCount'] +0 }}</span>
         </div>
