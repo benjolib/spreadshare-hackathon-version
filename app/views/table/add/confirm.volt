@@ -1,8 +1,8 @@
 <div class="preview">
     {{ flash.output() }}
 
-    <input type="hidden" name="tableId" value="{{ tableId }}" />
-    <input type="hidden" name="redirectToTable" value="{{ redirectToTable }}" />
+    <input type="hidden" name="tableId" value="{% if tableId is defined %}{{ tableId }}{% endif %}" />
+    <input type="hidden" name="redirectToTable" value="{% if tableId is defined %}{{ redirectToTable }}{% endif %}" />
 
     <h4>Last step</h4>
     <p>This is how your table will look like. Go back if you want to change something.</p>
