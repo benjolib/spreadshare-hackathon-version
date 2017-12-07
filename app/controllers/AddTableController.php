@@ -5,6 +5,7 @@ namespace DS\Controller;
 use DS\Api\Table;
 use DS\Api\TableContent;
 use DS\Interfaces\LoginAwareController;
+use DS\Model\TableProperties;
 use DS\Model\Tables;
 use DS\Model\UserStats;
 use Phalcon\Exception;
@@ -157,6 +158,7 @@ class AddTableController
                 $tableContent = new TableContent();
                 $tableData    = $tableContent->getTableData($tableId, $userId);
                 $this->view->setVar('tableData', $tableData);
+                $this->view->setVar('tableProps', $tableProps = (new TableProperties())->get($tableId, 'tableId'));
                 
                 $tableModel = Tables::get($tableId);
                 if ($tableModel->getOwnerUserId() == $userId)
