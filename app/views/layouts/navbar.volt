@@ -1,9 +1,9 @@
 <nav class="navbar">
-  <div class="navbar__wrapper navbar__wrapper--left desktop-only desktop-only--flex">
-    <div class="navbar__logo">
+  <div class="navbar__wrapper navbar__wrapper--left">
+    <div class="navbar__logo desktop-only desktop-only--flex">
       <a href="/"><img src="/assets/images/icon_1024.png" /></a>
     </div>
-    <div class="navbar__search">
+    <div class="navbar__search desktop-only desktop-only--flex">
       {% if searchDisabled is empty %}
         <div class="navbar__search__icon">
           <img src="/assets/icons/search-green.svg" />
@@ -151,8 +151,36 @@
     </div>
   </div>
   {% else %}
+  <div class="navbar__logo mobile-and-tablet mobile-and-tablet--flex">
+    <a href="/"><img src="/assets/images/icon_1024.png" /></a>
+  </div>
+  <div class="navbar__search mobile-and-tablet mobile-and-tablet--flex">
+    {% if searchDisabled is empty %}
+      <div class="navbar__search__icon">
+        <img src="/assets/icons/search-green.svg" />
+      </div>
+      {% if query is defined %}
+        <input type="text" class="navbar__search__field" placeholder="Search" value="{{ query }}" />
+      {% else %}
+        <input type="text" class="navbar__search__field" placeholder="Search" />
+      {% endif %}
+    {% endif %}
+    <!-- Begin Search Auto Complete Component !-->
+    <div class="search-autocomplete search__dropdown">
+      <div class="title-block">
+        <div class="description">
+          TABLE TITLE
+        </div>
+        <div class="result-count">
+        </div>
+        <div id="search-items"></div>
+        <hr class="divider">
+        <div class="all-results">All Results</div>
+      </div>
+    </div>
+  </div>
   <span class="navbar__login">
-    <a href="/login" class="navbar__login__login">Login</a>
+    <a href="/login" class="navbar__login__login"></a>
     <span>or</span>
     <a href="/signup" class="navbar__login__signup">Sign up</a>
   </span>

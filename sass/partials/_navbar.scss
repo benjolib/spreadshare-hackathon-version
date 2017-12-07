@@ -1,6 +1,6 @@
 .navbar {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
   width: 100%;
@@ -8,12 +8,10 @@
   background: white;
   color: black;
   position: relative;
+  box-sizing: border-box;
   @include rem(padding-top, 25);
 
   @include desktop {
-    flex-direction: row;
-    justify-content: space-between;
-    box-sizing: border-box;
     @include rem2(padding, 40, 28);
   }
 
@@ -40,8 +38,16 @@
   }
 
   &__logo {
-    @include rem(margin-right, 20);
+    @include rem(margin-right, 10);
     width: auto;
+
+    @include desktop {
+      @include rem(margin-right, 20);
+    }
+
+    &.mobile-and-tablet {
+      @include rem(padding-bottom, 25);
+    }
 
     a {
       text-decoration: none;
@@ -69,6 +75,10 @@
     display: flex;
     border-radius: 3px;
     width: 80%;
+
+    &.mobile-and-tablet {
+      @include rem(padding-bottom, 25);
+    }
 
     @include desktop {
       width: auto;
@@ -132,7 +142,6 @@
   }
 
   &__controls {
-    order: 2;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -360,22 +369,30 @@
   }
 
   &__login {
-    display: none;
+    @include rem(font-size, 12);
+    @include rem2(padding, 10, 16);
+    display: flex;
+    background: $logo-color;
+    color: white;
+    text-align: center;
+    text-transform: capitalize;
+    text-decoration: none;
+    font-weight: 300;
+    border-radius: 3px;
+    @include rem(margin-bottom, 25);
+    @include rem(margin-left, 10);
 
     @include desktop {
-      order: 3;
-      display: flex;
-      background: $logo-color;
-      color: white;
-      text-align: center;
-      text-transform: capitalize;
-      text-decoration: none;
-      font-weight: 300;
-      border-radius: 3px;
+      margin-bottom: 0;
       @include rem(font-size, 14);
       @include rem2(padding, 13, 22);
+    }
 
-      span {
+    span {
+      display: none;
+
+      @include desktop {
+        display: block;
         text-transform: lowercase;
         color: white;
         opacity: 0.5;
@@ -388,17 +405,31 @@
       text-decoration: none;
       font-weight: 600;
 
+      &::after {
+        content: 'Join';
+      }
+
+      @include desktop {
+        &::after {
+          content: 'Login';
+        }
+      }
+
       &:hover {
         cursor: pointer;
       }
     }
     &__signup {
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
+      display: none;
 
-      &:hover {
-        cursor: pointer;
+      @include desktop {
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+
+        &:hover {
+          cursor: pointer;
+        }
       }
     }
 
