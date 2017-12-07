@@ -176,8 +176,8 @@ class AddTableController
                             
                             $tableApi->fixRowsAndColumns(
                                 $tableId,
-                                $this->request->getPost('fixedRowsTop', null, ''),
-                                $this->request->getPost('fixedColumnsLeft', null, '')
+                                (int) $this->request->getPost('fixedRowsTop', null, 0),
+                                (int) $this->request->getPost('fixedColumnsLeft', null, 0)
                             );
                             
                             // Now always redirecting to table

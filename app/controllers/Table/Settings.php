@@ -108,8 +108,8 @@ class Settings
                                 
                                 $tableApi->fixRowsAndColumns(
                                     $table->getId(),
-                                    $this->request->getPost('fixedRowsTop', null, ''),
-                                    $this->request->getPost('fixedColumnsLeft', null, '')
+                                    (int) $this->request->getPost('fixedRowsTop', null, 0),
+                                    (int) $this->request->getPost('fixedColumnsLeft', null, 0)
                                 );
                             }
                         }
