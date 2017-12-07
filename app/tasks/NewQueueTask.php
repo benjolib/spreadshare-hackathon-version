@@ -1,4 +1,5 @@
 <?php
+
 namespace DS\Task;
 
 use DS\Listeners\ElasticSearch as ElasticSearchListener;
@@ -25,7 +26,8 @@ class NewQueueTask extends Base
     
     public function mainAction()
     {
-        echo "This is the default queue task and the default action";
+        echo "This is the default queue task and the default action" . PHP_EOL;
+        echo "Please use NewQueue table or NewQueue wallet." . PHP_EOL;
     }
     
     /**
@@ -40,12 +42,18 @@ class NewQueueTask extends Base
         
         if (!$name)
         {
-            echo "Command line argument event name is required example --name=touchTable \r\n";
+            echo "Command line argument event name is required example --name=touchTable" . PHP_EOL;
             
             return;
         }
         
-        Bernard::consume($name, new ElasticSearchListener);
+        $listener = new ElasticSearchListener('tables', 'table');
+        
+        echo "Reindexing.." . PHP_EOL;
+        echo "Reindexed {$listener->reindex()} documents." . PHP_EOL;
+        
+        echo "Running while loop..." . PHP_EOL;
+        Bernard::consume($name, $listener);
     }
     
     /**
@@ -59,7 +67,7 @@ class NewQueueTask extends Base
         
         if (!$name)
         {
-            echo "Command line argument event name is required example --name=newWallet \r\n";
+            echo "Command line argument event name is required example --name=newWallet" . PHP_EOL;
             
             return;
         }

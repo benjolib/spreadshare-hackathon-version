@@ -3,9 +3,8 @@
 namespace DS\Controller;
 
 use DS\Application;
+use DS\Controller\Api\v1\Search\Get;
 use DS\Model\DataSource\TableFlags;
-use DS\Model\DataSource\UserStatus;
-use DS\Model\Helper\DateRange;
 use DS\Model\Helper\TableFilter;
 use DS\Model\Locations;
 use DS\Model\Tables;
@@ -13,8 +12,6 @@ use DS\Model\TableStats;
 use DS\Model\Tags;
 use DS\Model\Topics;
 use DS\Model\Types;
-use DS\Component\ServiceManager;
-use Elastica\Query\QueryString;
 use Phalcon\Exception;
 use Phalcon\Logger;
 
@@ -39,23 +36,11 @@ class SearchController
     {
         try
         {
-
-            // Query String
-            $query = $this->request->get('query');
-            // getClient
-            $elasticaClient = ServiceManager::instance()->getDI()->get('elasticSearch');
-            // Load index
-            $elasticaIndex = $elasticaClient->getIndex('tables');
-            // Get type
-            $elasticaType = $elasticaIndex->getType('table');
-
-            $queryString = new QueryString($query);
-
-            $resultSet = $elasticaType->search($queryString);
-
-            $tables = $resultSet->getResponse()->getData();
-
-
+            $searchController = new Get();
+            $searchController->setDI($this->getDI());
+            $results = $searchController->process();
+            $tables  = $results->getData();
+            
             // Prepare ordering
             switch ($order)
             {
@@ -72,52 +57,52 @@ class SearchController
                     $orderBy = Tables::class . '.createdAt DESC';
                     break;
             }
-
-
-            $this->view->setVar('query', $query);
+            
+            $this->view->setVar('totalCount', $tables['hits']['total']);
+            $this->view->setVar('query', $this->request->get('query'));
             // Assign all topics and types for the sidebar
             $this->view->setVar('topics', Topics::find());
             $this->view->setVar('types', Types::find());
             $this->view->setVar('entity', [[]]);
-
-
+            
             // Prepare the table filter
             $tableFilter            = new TableFilter();
             $tableFilter->topic     = $this->request->get('topic', null, '');
             $tableFilter->type      = $this->request->get('type', null, '');
             $tableFilter->locations = $this->request->get('locations', null, []);
             $tableFilter->tags      = $this->request->get('tags', null, []);
+            
             // If total hits greater than zero
-            if ($tables['hits']['total'] > 0) {
-            $tableFilter->tableIds  = array_column($tables['hits']['hits'], '_id');
-            }else{
-            $tableFilter->tableIds  = [0];
+            if ($tables['hits']['total'] > 0)
+            {
+                $tableFilter->tableIds = array_column($tables['hits']['hits'], '_id');
             }
-
-
-
+            else
+            {
+                $tableFilter->tableIds = [0];
+            }
+            
             // Assign locations and tags with title and id mapping so that react-select has got a valid pre-selection
             $locations = new Locations;
             $this->view->setVar('filteredLocations', $locations->getByIds($tableFilter->getLocations()));
             $tags = new Tags;
             $this->view->setVar('filteredTags', $tags->getByIds($tableFilter->getTags()));
-
+            
             $this->view->setVar('sidebarFilter', $tableFilter);
             $this->view->setVar('order', $order);
-
+            
+            $tableResult = (new Tables())
+                ->findTablesAsArray(
+                    $this->serviceManager->getAuth()->getUserId(),
+                    $tableFilter,
+                    TableFlags::Published,
+                    0,
+                    $orderBy
+                );
+            
             // Filter tables by tableFilter
-            $this->view->setVar(
-                'tables',
-                (new Tables())
-                    ->findTablesAsArray(
-                        $this->serviceManager->getAuth()->getUserId(),
-                        $tableFilter,
-                        TableFlags::Published,
-                        0,
-                        $orderBy
-                    )
-            );
-
+            $this->view->setVar('tables', $tableResult);
+            $this->view->setVar('tablesCount', count($tableResult));
             $this->view->setMainView('search/index');
         }
         catch (Exception $e)
@@ -125,5 +110,5 @@ class SearchController
             Application::instance()->log($e->getMessage(), Logger::CRITICAL);
         }
     }
-
+    
 }

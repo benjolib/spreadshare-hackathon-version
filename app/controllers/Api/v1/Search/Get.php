@@ -6,7 +6,7 @@ use DS\Component\ServiceManager;
 use DS\Controller\Api\ActionHandler;
 use DS\Controller\Api\Meta\Record;
 use DS\Controller\Api\MethodInterface;
-use Elastica\Query\QueryString;
+use Elastica\Query;
 
 /**
  *
@@ -33,31 +33,37 @@ class Get extends ActionHandler implements MethodInterface
     /**
      * Process Get Method
      *
-     * @return mixed
+     * @return Record
      */
     public function process()
     {
         // Query String
-        $query = $this->request->get('query');
+        $filter = trim($this->request->get('query'));
         
-        if (!$query)
+        if (!$filter)
         {
             return new Record('Query string is required');
         }
         
         // getClient
         $elasticaClient = ServiceManager::instance()->getElasticSearch();
+        
         // Load index
         $elasticaIndex = $elasticaClient->getIndex('tables');
+        
         // Get type
         $elasticaType = $elasticaIndex->getType('table');
         
-        $queryString = new QueryString($query);
+        $queryString = new Query\QueryString($filter);
+        $query       = new Query($queryString);
+        $query->setFrom(0)
+              ->setSize(10)
+              ->setSource(['title', 'tagline', 'id'])
+              ->setMinScore(1);
         
-        $resultSet = $elasticaType->search($queryString);
+        $resultSet = $elasticaType->search($query);
         
         return new Record($resultSet->getResponse()->getData());
-        
     }
     
 }

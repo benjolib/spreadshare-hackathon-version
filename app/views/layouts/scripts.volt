@@ -49,17 +49,16 @@
       // search item list selector
       var searchItems = $('#search-items');
       // hits object
-      var hits = response.data.hits.hits;
       // Insert total results value
-      $('.result-count').html(hits.length + " RESULTS");
+      $('.result-count').html(response.data.hits.total + " RESULTS");
       // create item array
       var items = [];
       // empty the existing list
       $(searchItems).empty();
       // foreach array
-      $.each(hits, function (key, val) {
+      $.each(response.data.hits.hits, function (key, val) {
         // item
-        items.push("<a href='/table/" + val._source.id + "'><div class='item'><div class='title'>" + val._source.title + "</div><div class='tagline'>" + val._source.tagline + "</div></div></a>");
+        items.push("<a href='/table/" + val._id + "'><div class='item'><div class='title'>" + val._source.title + "</div><div class='tagline'>" + val._source.tagline + "</div></div></a>");
       });
       // append list to array
       $(searchItems).append(items.join(''));
@@ -90,7 +89,7 @@
             method: "GET",
             crossDomain: true,
             dataType: "JSON",
-            data: { "query": (searchEl + '*') },
+            data: { "query": searchEl.trim() },
             success: function (response) {
               autoCompleteHandler(response)
             }
@@ -104,7 +103,6 @@
           placement: 'bottom',
         });
       }
-
     });
 
     //$('.navbar__search').focusout(function() { // if(!flag) onSearchPopper.removeClass('show') });
