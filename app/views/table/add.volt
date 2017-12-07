@@ -2,18 +2,43 @@
 
 {% block content %}
 <div class="addTable">
+<div class="ghost-overlay" style="display: block;"></div>
   <div class="addTable__content">
     <div class="addTable__content__wrapper">
       <p class="addTable__content__title">Add a Table</p>
       <p class="addTable__content__subtitle">As a table owner you receive 2.5% of all tokens a table generates</p>
       <div class="addTable__content__main">
-        <div class="addTable__content__main__options" style="width: 100%;">
+        <div id="addTableOpts" class="addTable__content__main__options" style="width: 100%;">
           <form id="addTableForm" method="post" action="{{ action }}" enctype="multipart/form-data">
             {{ flash.output() }}
 
             <input type="hidden" name="tableId" value="{% if tableId is defined %}{{ tableId }}{% endif %}" />
             {% include content %}
           </form>
+        </div>
+        <div id="addTableMsg" class="addTable__content__main__options" style="width: 100%;">
+          <div class="addTableEmpty__content__main__options__item">
+            <div class="addTableEmpty__content__main__options__item__column">
+              <p>Who is the admin of the table?</p>
+              <p>You. Soon, you'll be able to assign more admins to work as a team.</p>
+            </div>
+          </div>
+          <div class="addTableEmpty__content__main__options__item">
+            <div class="addTableEmpty__content__main__options__item__column">
+              <p>Who can collaborate?</p>
+              <p>Every member of our community. Members ca add, change and remove content to a tables cell.</p>
+            </div>
+          </div>
+          <div class="addTableEmpty__content__main__options__item">
+            <div class="addTableEmpty__content__main__options__item__column">
+              <p>Collaborate on what?</p>
+              <p>The table's cell. Adding to empty table cells are live immeadiately. Changes or removes have to be confirmed by the admins.</p>
+            </div>
+          </div>
+          <div id="addTableButtons">
+            <p>✌ That's what I am looking for. <span>Try now</span></p>
+            <button>Create 1st Table</button>
+          </div>
         </div>
       </div>
     </div>
@@ -43,4 +68,15 @@
           {% include content_js %}
     </script>
   {% endif %}
+  <script>
+    var $modal = $('#addTableMsg')
+    var $options = $('#addTableOpts')
+    var $button = $('#addTableButtons')
+    var $overlay = $('.ghost-overlay');
+    $button.on('click', function() {
+      $modal.hide()
+      $options.show()
+      $overlay.hide()
+    })
+  </script>
 {% endblock %}
