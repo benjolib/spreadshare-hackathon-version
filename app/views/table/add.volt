@@ -5,7 +5,7 @@
   <div class="addTable__content">
     <div class="addTable__content__wrapper">
       <p class="addTable__content__title">Add a Table</p>
-      <p class="addTable__content__subtitle">As a table owner you receive 2.5% of all tokens a table generates</p>
+      <p class="addTable__content__subtitle">As a table owner you are responsible for managing the community and content around it and therefore your receive 2.5% of all tokens a table generates.</p>
       <div class="addTable__content__main">
         <div id="addTableOpts" class="addTable__content__main__options" style="width: 100%;{% if visitedAddTablePage is defined AND !visitedAddTablePage %}display:none;{% endif %}">
           <form id="addTableForm" method="post" action="{{ action }}" enctype="multipart/form-data">
