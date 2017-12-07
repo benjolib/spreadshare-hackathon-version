@@ -191,6 +191,15 @@
       }, 7000);
     }
 
+    // search bar shadow
+    var $searchBar = $('.navbar__search');
+    $searchBar.on('focusin', function() {
+      $(this).addClass('navbar__search--active');
+    });
+    $searchBar.on('focusout', function() {
+      $(this).removeClass('navbar__search--active');
+    });
+
     {% if auth.loggedIn() %}
         /* Define API endpoints once and globally */
         $.fn.api.settings.api = {
