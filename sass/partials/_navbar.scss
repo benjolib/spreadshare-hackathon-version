@@ -9,7 +9,6 @@
   color: black;
   position: relative;
   @include rem(padding-top, 25);
-  @include rem(padding-bottom, 35);
 
   @include desktop {
     flex-direction: row;
@@ -22,18 +21,27 @@
     display: flex;
     align-items: center;
 
-    &--left {
-      order: 2;
+    &--right {
+      justify-content: flex-end;
+    }
+    &__mobile {
+      display: flex;
+      align-items: center;
+      width: 100%;
+
+      &--left {
+        width: 65%;
+      }
+      &--right {
+        width: auto;
+        justify-content: flex-end;
+      }
     }
   }
 
   &__logo {
-    order: 2;
     @include rem(margin-right, 20);
-
-    @include desktop {
-      order: 1;
-    }
+    width: auto;
 
     a {
       text-decoration: none;
@@ -58,18 +66,18 @@
   }
 
   &__search {
-    order: 3;
     display: flex;
     border-radius: 3px;
+    width: 80%;
+
+    @include desktop {
+      width: auto;
+    }
 
     &--active {
       -webkit-box-shadow: 0px 0.8px 5px 1px rgba(0,0,0,0.33);
       -moz-box-shadow: 0px 0.8px 5px 1px rgba(0,0,0,0.33);
       box-shadow: 0px 0.8px 5px 1px rgba(0,0,0,0.33);
-    }
-
-    @include desktop {
-      order: 2;
     }
 
     &__icon {
@@ -96,10 +104,13 @@
       outline: none;
       border-top-right-radius: 3px;
       border-bottom-right-radius: 3px;
+      width: 100%;
       @include rem(padding-left, 5);
-      @include rem(margin-left, -7);
-      @include rem(min-width, 264);
       @include rem(height, 38);
+
+      @include desktop {
+        width: auto;
+      }
 
       &::-webkit-input-placeholder {
         color: $text-color;
@@ -117,25 +128,23 @@
         color: $text-color;
         font-weight: 400;
       }
-      @include mobile {
-        min-width: 15.625rem;
-      }
     }
   }
 
   &__controls {
-    order: 1;
+    order: 2;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
     width: 100%;
-    @include rem(margin-right, 35);
     @include rem(margin-bottom, 25);
+    @include rem(padding-right, 28);
+    @include rem(padding-left, 28);
 
     @include desktop {
-      order: 3;
       margin-right: 0;
       margin-bottom: 0;
+      padding-right: 0;
       width: auto;
       justify-content: flex-start;
     }
@@ -143,6 +152,17 @@
     a#notificationButton {
       @include rem(margin-left, 25);
       position: relative;
+
+
+      img {
+        width: 18px;
+        height: 18px;
+
+        @include desktop {
+          width: 17px;
+          height: 17px;
+        }
+      }
 
       span {
         font-size: 8px;
@@ -161,7 +181,15 @@
       }
     }
     a#profileImage {
-      @include rem(margin-left, 30);
+      @include rem(margin-left, 16);
+
+      @include tablet {
+        @include rem(margin-left, 24);
+      }
+
+      @include desktop {
+        @include rem(margin-left, 30);
+      }
     }
 
     img {

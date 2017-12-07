@@ -69,3 +69,94 @@
 .left160 {
   left: 160px !important;
 }
+
+// viewport modifiers
+.mobile-only {
+  @include mobile {
+    display: block;
+  }
+  @include tablet {
+    display: none;
+  }
+  @include desktop {
+    display: none;
+  }
+  &--flex {
+    @include mobile {
+    display: flex;
+    }
+    @include tablet {
+      display: none;
+    }
+    @include desktop {
+      display: none;
+    }
+  }
+}
+.tablet-only {
+  @include mobile {
+    display: none;
+  }
+  @include tablet {
+    display: block;
+  }
+  @include desktop {
+    display: none;
+  }
+  &--flex {
+    @include mobile {
+    display: none;
+    }
+    @include tablet {
+      display: flex;
+    }
+    @include desktop {
+      display: none;
+    }
+  }
+}
+.desktop-only {
+  @include mobile {
+    display: none;
+  }
+  @include tablet {
+    display: none;
+  }
+  @include desktop {
+    display: block;
+  }
+  &--flex {
+    @include mobile {
+    display: none;
+    }
+    @include tablet {
+      display: none;
+    }
+    @include desktop {
+      display: flex;
+    }
+  }
+}
+
+.mobile-and-tablet {
+  @include mobile {
+    display: block;
+  }
+  @include tablet {
+    display: block;
+  }
+  @include desktop {
+    display: none;
+  }
+  &--flex {
+    @include mobile {
+      display: flex;
+    }
+    @include tablet {
+      display: flex;
+    }
+    @include desktop {
+      display: none;
+    }
+  }
+}
