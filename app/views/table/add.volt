@@ -2,13 +2,12 @@
 
 {% block content %}
 <div class="addTable">
-<div class="ghost-overlay" style="display: block;"></div>
   <div class="addTable__content">
     <div class="addTable__content__wrapper">
       <p class="addTable__content__title">Add a Table</p>
       <p class="addTable__content__subtitle">As a table owner you receive 2.5% of all tokens a table generates</p>
       <div class="addTable__content__main">
-        <div id="addTableOpts" class="addTable__content__main__options" style="width: 100%;">
+        <div id="addTableOpts" class="addTable__content__main__options" style="width: 100%;{% if visitedAddTablePage is defined AND !visitedAddTablePage %}display:none;{% endif %}">
           <form id="addTableForm" method="post" action="{{ action }}" enctype="multipart/form-data">
             {{ flash.output() }}
 
@@ -16,6 +15,7 @@
             {% include content %}
           </form>
         </div>
+        {% if visitedAddTablePage is defined AND !visitedAddTablePage %}
         <div id="addTableMsg" class="addTable__content__main__options" style="width: 100%;">
           <div class="addTableEmpty__content__main__options__item">
             <div class="addTableEmpty__content__main__options__item__column">
@@ -40,6 +40,7 @@
             <button>Create 1st Table</button>
           </div>
         </div>
+        {% endif %}
       </div>
     </div>
     <aside class="aside aside--addTable">
@@ -63,20 +64,26 @@
 {% endblock %}
 
 {% block scripts %}
-  {% if content_js %}
-    <script>
-          {% include content_js %}
-    </script>
+    {% if content_js %}
+        <script type="text/javascript">
+              {% include content_js %}
+        </script>
+    {% endif %}
+
+    {% if visitedAddTablePage is defined AND !visitedAddTablePage %}
+      <script type="text/javascript">
+          window.addEventListener('load', function () {
+            var $buttons = $('#addTableButtons');
+            var $modal = $('#addTableMsg');
+            var $options = $('#addTableOpts');
+            var $overlay = $('.white-overlay');
+            $buttons.on('click', function () {
+              $modal.hide();
+              $options.show();
+              $overlay.hide();
+            });
+          });
+          $('.white-overlay').show();
+      </script>
   {% endif %}
-  <script>
-    var $modal = $('#addTableMsg')
-    var $options = $('#addTableOpts')
-    var $button = $('#addTableButtons')
-    var $overlay = $('.ghost-overlay');
-    $button.on('click', function() {
-      $modal.hide()
-      $options.show()
-      $overlay.hide()
-    })
-  </script>
 {% endblock %}

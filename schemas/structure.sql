@@ -656,17 +656,18 @@ DROP TABLE IF EXISTS `userStats`;
 CREATE TABLE `userStats` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `userId` int(11) unsigned DEFAULT NULL,
-  `tablesOwnerCount` int(10) DEFAULT NULL COMMENT 'tables count (cache)',
-  `rowsOwnerCount` int(10) DEFAULT NULL COMMENT 'rows count (cache)',
-  `unreadNotificationsCount` int(10) unsigned DEFAULT NULL,
-  `contributionsCount` int(10) unsigned DEFAULT NULL,
-  `tablesCreatedCount` int(10) unsigned DEFAULT NULL,
-  `rejectedChangeRequestsCount` int(10) unsigned DEFAULT NULL,
-  `approvedChangeRequestsCount` int(10) unsigned DEFAULT NULL,
+  `tablesOwnerCount` int(10) DEFAULT '0' COMMENT 'tables count (cache)',
+  `rowsOwnerCount` int(10) DEFAULT '0' COMMENT 'rows count (cache)',
+  `unreadNotificationsCount` int(10) unsigned DEFAULT '0',
+  `contributionsCount` int(10) unsigned DEFAULT '0',
+  `tablesCreatedCount` int(10) unsigned DEFAULT '0',
+  `rejectedChangeRequestsCount` int(10) unsigned DEFAULT '0',
+  `approvedChangeRequestsCount` int(10) unsigned DEFAULT '0',
+  `visitedAddTablePage` tinyint(1) unsigned DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `userStatsUserId` (`userId`),
   CONSTRAINT `userStatsUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
 
 
 # Export von Tabelle wallet

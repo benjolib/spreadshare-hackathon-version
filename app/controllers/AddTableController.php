@@ -5,6 +5,7 @@ namespace DS\Controller;
 use DS\Api\Table;
 use DS\Interfaces\LoginAwareController;
 use DS\Model\Tables;
+use DS\Model\UserStats;
 use Phalcon\Exception;
 
 /**
@@ -37,6 +38,15 @@ class AddTableController
         $this->view->setVar('content', 'table/add/choose-method');
         $this->view->setVar('action', '/table/add/description');
         $this->view->setVar('hideChooseTable', false);
+        
+        // Remember that user visited table add page for first time
+        $tableStats = (new UserStats())->get($this->serviceManager->getAuth()->getUserId(), 'userId');
+        $this->view->setVar('visitedAddTablePage', $tableStats->getVisitedAddTablePage());
+        
+        if (!$tableStats->getVisitedAddTablePage())
+        {
+            $tableStats->setUserId($this->serviceManager->getAuth()->getUserId())->setVisitedAddTablePage(1)->save();
+        }
     }
     
     /**
@@ -159,7 +169,7 @@ class AddTableController
                             // Now always redirecting to table
                             //if ($this->request->getPost('redirectToTable'))
                             //{
-                                header('Location: /table/' . $tableId);
+                            header('Location: /table/' . $tableId);
                             //}
                             //else
                             //{
