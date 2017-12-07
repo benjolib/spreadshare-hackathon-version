@@ -423,6 +423,7 @@
       display: none;
 
       @include desktop {
+        display: block;
         color: white;
         text-decoration: none;
         font-weight: 600;
