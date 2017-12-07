@@ -147,7 +147,7 @@ class AddTableController
             $this->view->setMainView('table/add');
             $userId = $this->serviceManager->getAuth()->getUserId();
             
-            $tableId = $this->request->get('tableId');
+            $tableId = (int) $this->request->get('tableId');
             $this->view->setVar('action', '/table/add/confirm');
             $this->view->setVar('content', 'table/add/confirm');
             $this->view->setVar('tab', 'confirm');
