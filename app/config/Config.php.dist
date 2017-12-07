@@ -8,7 +8,8 @@
  * @package   DS\Config
  */
 return [
-    'domain' => 'www.spreadshare.co',
+    'domain' => '_HOST_',
+    'wallet' => '_WALLET_',
     'elasticsearch' => [
         'host' => 'elasticsearch',
         'port' => '9200',
@@ -47,7 +48,7 @@ return [
         'port' => 6379,
     ],
     'crypt' => [
-        'key' => 'changeme',
+        'key' => '_CRYPT_KEY_',
     ],
     'mail' => [
         'driver' => 'mailgun',
@@ -57,20 +58,20 @@ return [
         ],
         'mailgun' => [
             'domain' => 'spreadshare.co',
-            'apikey' => 'key-611a7bf686cb890b8db38ad9ce1a5bbb',
+            'apikey' => '_MAILGUN_KEY_',
             'url' => 'api.mailgun.net/v3/spreadshare.co',
         ],
     ],
     'sentry' => [
-        'key' => 'https://fcdde304c3344126b70b8f8365df7650:1ef8823d9153412a9f77250fa9d45235@sentry.io/240812',
+        'key' => '_SENTRY_KEY_',
     ],
     'slack' => [
-        'webhook-url' => 'https://hooks.slack.com/services/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',
+        'webhook-url' => '_SLACK_WEBHOOK_',
         'tables-channel' => '#tables',
         'users-channel' => '#users',
     ],
     'files' => [
-        'service' => 'local',
+        'service' => '_FILES_SERVICE_',
         'local' => [
             'path' => ROOT_PATH . '/system/uploads/',
         ],
@@ -101,30 +102,30 @@ return [
         'DS\Events' => ROOT_PATH . '/app/events/',
         'DS\Exceptions' => ROOT_PATH . '/app/exceptions/',
     ],
-    'mode' => 'development',
+    'mode' => '_ENVIRONMENT_',
     
     'hybridauth' => [
-        "debug_mode" => true,
+        "debug_mode" => '_AUTH_DEBUG_',
         "debug_file" => ROOT_PATH . "/system/log/hybridauth",
         
         //Location where to redirect users once they authenticate with a provider
-        'callback' => 'http://www.spreadshare.co/login',
+        'callback' => '_AUTH_CALLBACK_',
         
         //Providers specifics
         'providers' => [
             'Twitter' => [
                 'enabled' => true,     //Optional: indicates whether to enable or disable Twitter adapter. Defaults to false
                 'keys' => [
-                    'id' => '764738293347024896',
-                    'key' => 'G6PfK0VGgF1GFYROic4hSAcAr',
-                    'secret' => 'imPH3BmKlk3XWzKY2DrcAXbll329NNwASRxgLK1Fw52pns2oGP',
+                    'id' => '_TWITTER_ID_',
+                    'key' => '_TWITTER_KEY_',
+                    'secret' => '_TWITTER_SECRET_',
                 ],
             ],
             "Google" => [
                 "enabled" => true,
                 "keys" => [
-                    "id" => "1069128037243-4cua499nu3jf64l2q4irms93pmh7trsk.apps.googleusercontent.com",
-                    "secret" => "d59PePUgDSCGgB_JuxGerScB",
+                    "id" => "_GOOGLE_ID_",
+                    "secret" => "_GOOGLE_SECRET_",
                 ],
                 "scope" => "https://www.googleapis.com/auth/plus.login ",
                 "approval_prompt" => "force",
@@ -132,8 +133,8 @@ return [
             'Facebook' => [
                 'enabled' => true,
                 'keys' => [
-                    'id' => '153117502101937',
-                    'secret' => 'f1c03b95bfc5c671085147b31b0474ef',
+                    'id' => '_FACEBOOK_ID_',
+                    'secret' => '_FACEBOOK_SECRET_',
                 ],
                 "scope" => "email",
             ],
