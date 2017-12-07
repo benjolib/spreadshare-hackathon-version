@@ -21,6 +21,16 @@ class TableColumns
     extends TableColumnsEvents
 {
     /**
+     * @param int $tableId
+     *
+     * @return bool
+     */
+    public function clear(int $tableId): bool
+    {
+        return $this->deleteByFieldValue('tableId', $tableId);
+    }
+    
+    /**
      * @param int    $userId
      * @param int    $tableId
      * @param string $title

@@ -3,6 +3,7 @@
 namespace DS\Controller;
 
 use DS\Api\Table;
+use DS\Api\TableContent;
 use DS\Interfaces\LoginAwareController;
 use DS\Model\Tables;
 use DS\Model\UserStats;
@@ -152,6 +153,11 @@ class AddTableController
             
             if ($tableId)
             {
+                
+                $tableContent = new TableContent();
+                $tableData    = $tableContent->getTableData($tableId, $userId);
+                $this->view->setVar('tableData', $tableData);
+                
                 $tableModel = Tables::get($tableId);
                 if ($tableModel->getOwnerUserId() == $userId)
                 {
@@ -165,6 +171,12 @@ class AddTableController
                         {
                             $tableApi = new Table();
                             $tableApi->publish($tableId);
+                            
+                            $tableApi->fixRowsAndColumns(
+                                $tableId,
+                                $this->request->getPost('fixedRowsTop', null, ''),
+                                $this->request->getPost('fixedColumnsLeft', null, '')
+                            );
                             
                             // Now always redirecting to table
                             //if ($this->request->getPost('redirectToTable'))

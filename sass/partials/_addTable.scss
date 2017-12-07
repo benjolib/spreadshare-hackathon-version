@@ -4,20 +4,96 @@
   flex-direction: column;
   color: $text-color;
 
+  .table-preview {
+    border: 5px solid #6a7c93;
+    border-radius: 5px;
+    background: #f3f2f8;
+
+    .header {
+      position: relative;
+      background: #6a7c93;
+      text-align: center;
+      padding: 10px 12px 12px 12px;
+
+      strong {
+        color: #9baabe;
+        text-transform: uppercase;
+        margin-right: 8px;
+        font-weight: 400;
+      }
+
+      span {
+        color: white;
+        font-weight: 300;
+      }
+
+      a.button {
+        position: absolute;
+        right: 10px;
+        top: 7px;
+        font-weight: 500;
+        padding: 3px 8px;
+      }
+    }
+
+    table {
+      width: 100%;
+    }
+
+    table th,
+    table td {
+      font-size: 14px;
+    }
+  }
+
+  .preview {
+    h4 {
+      color: #b1bbc7;
+      font-weight: 300;
+      text-transform: uppercase;
+      margin: 0 0 .3125rem;
+      font-size: .875rem;
+    }
+    p {
+      font-weight: 300;
+      margin-top: 10px;
+    }
+    ul {
+      margin-top: 20px;
+      margin-bottom: 20px;
+      padding: 0;
+    }
+    ul li {
+      color: #a7b5c7;
+      font-weight: 300;
+      list-style: none;
+      background-image: url(/assets/icons/bulp.svg);
+      background-repeat: no-repeat;
+      background-position: left center;
+      background-size: 20px;
+      padding: 0 0 0 30px;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+    ul li strong {
+      font-weight: 500;
+    }
+  }
+
   &__content {
     display: flex;
     flex-direction: column;
     width: 100%;
     @include rem2(margin, 50, 0);
-    @include rem(margin-bottom, 100);
+    @include rem(margin-bottom, 80);
 
     @include tablet {
-      @include rem(margin-bottom, 200);
+      @include rem(margin-bottom, 90);
     }
 
     @include desktop {
       flex-direction: row;
-      @include rem(margin-bottom, 300);
+      @include rem(margin-bottom, 100);
     }
 
     &__wrapper {
@@ -97,7 +173,7 @@
         display: flex;
         justify-content: space-between;
         padding: 1rem 1.5rem;
-        background: #F8F8FB;
+        background: #f8f8fb;
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
 
@@ -211,11 +287,11 @@
 
         a {
           text-decoration: none;
-          color: #B1BBC7;
+          color: #b1bbc7;
 
           &:hover {
             cursor: default;
-            color: #B1BBC7;
+            color: #b1bbc7;
             text-decoration: none;
           }
 
@@ -257,8 +333,6 @@
     text-align: center;
     margin-left: -31px;
     margin-right: 0;
-
   }
-
 
 }

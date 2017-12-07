@@ -70,10 +70,12 @@ abstract class Base
     /**
      * @param string $column
      * @param string $id
+     *
+     * @return bool
      */
-    public function deleteByFieldValue(string $column = 'id', string $id)
+    public function deleteByFieldValue(string $column = 'id', string $id): bool
     {
-        $this->getWriteConnection()->delete($this->getSource(), sprintf("%s = ?", $column), [$id]);
+        return $this->getWriteConnection()->delete($this->getSource(), sprintf("%s = ?", $column), [$id]);
     }
     
     /**

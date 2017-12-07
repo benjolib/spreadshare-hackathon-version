@@ -239,7 +239,7 @@ class Table extends Component<Props, State> {
                 "success"
               );
             } else if (this.props.permission === "2") {
-              swal("Success!", "The cell has been linked.", "success");
+              //swal("Success!", "The cell has been linked.", "success");
             }
           })
           .catch(() => {
@@ -279,7 +279,7 @@ class Table extends Component<Props, State> {
                 "success"
               );
             } else if (this.props.permission === "2") {
-              swal("Success!", "The column has been edited.", "success");
+              //swal("Success!", "The column has been edited.", "success");
             }
           })
           .catch(() => {
@@ -322,7 +322,7 @@ class Table extends Component<Props, State> {
                 "success"
               );
             } else {
-              swal("Success!", "The cell has been edited.", "success");
+              // swal("Success!", "The cell has been edited.", "success");
             }
           })
           .catch(() => {
@@ -364,7 +364,7 @@ class Table extends Component<Props, State> {
                 "success"
               );
             } else if (this.props.permission === "2") {
-              swal("Success!", "The cell has been deleted.", "success");
+              //swal("Success!", "The cell has been deleted.", "success");
             }
           })
           .catch(() => {

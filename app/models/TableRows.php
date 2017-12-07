@@ -21,6 +21,15 @@ use Phalcon\Mvc\Model\Resultset\Simple;
 class TableRows
     extends TableRowsEvents
 {
+    /**
+     * @param int $tableId
+     *
+     * @return bool
+     */
+    public function clear(int $tableId): bool
+    {
+        return $this->deleteByFieldValue('tableId', $tableId);
+    }
     
     /**
      * @param int $tableId

@@ -106,10 +106,11 @@ class Settings
                                     $this->request->getPost('location', null, [])
                                 );
                                 
-                                $tableProps->setTableId($table->getId())
-                                           ->setFixedColumnsLeft($this->request->getPost('fixedColumnsLeft', null, ''))
-                                           ->setFixedRowsTop($this->request->getPost('fixedRowsTop', null, ''))
-                                           ->save();
+                                $tableApi->fixRowsAndColumns(
+                                    $table->getId(),
+                                    $this->request->getPost('fixedRowsTop', null, ''),
+                                    $this->request->getPost('fixedColumnsLeft', null, '')
+                                );
                             }
                         }
                         catch (\Exception $e)

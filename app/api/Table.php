@@ -4,6 +4,7 @@ namespace DS\Api;
 
 use DS\Model\DataSource\TableFlags;
 use DS\Model\TableLocations;
+use DS\Model\TableProperties;
 use DS\Model\Tables;
 use DS\Model\TableTags;
 use Phalcon\Exception;
@@ -38,6 +39,25 @@ class Table
         $tableModel->setFlags(TableFlags::Published)->save();
         
         return $tableModel;
+    }
+    
+    /**
+     * @param int $tableId
+     * @param int $fixedRowsTop
+     * @param int $fixedColumnsLeft
+     *
+     * @return TableProperties
+     */
+    public function fixRowsAndColumns(int $tableId, int $fixedRowsTop, int $fixedColumnsLeft): TableProperties
+    {
+        $tableProps = (new TableProperties())->get($tableId, 'tableId');
+        
+        $tableProps->setTableId($tableId)
+                   ->setFixedRowsTop($fixedRowsTop)
+                   ->setFixedColumnsLeft($fixedColumnsLeft)
+                   ->save();
+        
+        return $tableProps;
     }
     
     /**

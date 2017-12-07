@@ -93,6 +93,12 @@ class Post extends ActionHandler implements MethodInterface
                 
                 $userId = $this->getServiceManager()->getAuth()->getUserId();
                 
+                // Sanitize link
+                if ($link && strpos($link, 'http') !== 0)
+                {
+                    $link = 'http://' . $link;
+                }
+                
                 // If cell is empty or user is Owner it will be directly edited.
                 if ($tableCell->getContent() === "" || $tableModel->getOwnerUserId() == $userId)
                 {

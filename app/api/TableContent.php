@@ -224,6 +224,15 @@ class TableContent
     }
     
     /**
+     * @param int $tableId
+     */
+    public function clearTableContent(int $tableId)
+    {
+        (new TableColumns())->clear($tableId);
+        (new TableRows())->clear($tableId);
+    }
+    
+    /**
      * @param int    $tableId
      * @param string $csvData
      * @param string $separator
@@ -256,6 +265,9 @@ class TableContent
         
         try
         {
+            // Clear first if there is data already imported
+            $this->clearTableContent($tableId);
+            
             $columnIds = [];
             $i         = 1;
             foreach ($rows[0] as $key => $headerField)
@@ -278,8 +290,6 @@ class TableContent
             
             if (count($columnIds))
             {
-                // Clear first if there is data already imported
-                (new TableRows())->deleteByFieldValue('tableId', $tableId);
                 
                 $line = 1;
                 foreach ($rows as $row)

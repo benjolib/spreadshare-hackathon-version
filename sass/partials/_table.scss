@@ -274,16 +274,28 @@
   }
 }
 
-.handsontable tr:nth-child(odd) {
+.table caption + thead tr:first-child th, .table caption + thead tr:first-child td, .table colgroup + thead tr:first-child th, .table colgroup + thead tr:first-child td, .table thead:first-child tr:first-child th, .table thead:first-child tr:first-child td {
+  border: 0;
+}
+
+.table tr:nth-child(odd) td {
   background: white !important;;
 }
 
-.handsontable tr:nth-child(even) {
+.table tr:nth-child(even) td {
   background: lighten($background-color, 2) !important;
 }
 
-.handsontable td {
+.table td {
   background: transparent !important;
+  padding: 10px;
+}
+
+.table th {
+  padding: 15px 10px;
+  background: transparent;
+  font-weight: 700;
+  text-align: left;
 }
 
 .dxTqwX {
