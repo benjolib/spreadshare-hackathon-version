@@ -101,7 +101,7 @@
 {% endblock %}
 
 {% block scripts %}
-    {% if content_js %}
+    {% if content_js is defined AND content_js %}
         <script type="text/javascript">
               {% include content_js %}
         </script>
