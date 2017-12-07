@@ -93,8 +93,8 @@ class Post extends ActionHandler implements MethodInterface
                 
                 $userId = $this->getServiceManager()->getAuth()->getUserId();
                 
-                // User is Owner and can directly edit!
-                if ($tableModel->getOwnerUserId() == $userId)
+                // If cell is empty or user is Owner it will be directly edited.
+                if ($tableCell->getContent() === "" || $tableModel->getOwnerUserId() == $userId)
                 {
                     $tableContent = new TableContent();
                     $tableContent->editCell($cellId, $content ? $content : '', $link ? $link : '');
