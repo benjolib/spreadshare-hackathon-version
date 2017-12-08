@@ -54,6 +54,40 @@
 
     </div>
 
+    <h3>How can I create a table</h3>
+    <p>You have to be logged in to create a table. There should be a button “Create Table” in your header (right side).</p>
+    </br>
+
+    <h3>What are locations</h3>
+    <p>Tables can be set to specific locations. Tables are a great way to collect local information like venues, places, people or meetup’s in a city. Filtering by location let’s you explore local content.</p>
+    </br>
+
+
+    <h3>How do I change content of a cell</h3>
+    <p>Right-click on your mouse and click “Edit Cell” (or) Just click on the cell and add your content.</p>
+    </br>
+
+
+    <h3>How do I become an admin</h3>
+    <p>We’ll soon release a Team feature which allows an admin to assign other admins to a table.</p>
+    </br>
+
+
+    <h3>Can I delete a table</h3>
+    <p>Yes, you can delete a table if you are the creator. If you are not but find a table which seems to be spam or other undesired content, please flag the table. Our community support will review the table and remove it if reasonable.</p>
+    </br>
+
+
+    <h3>How do I delete a table?</h3>
+    <p>If you are the admin of the table go to table settings and click “Delete table”.</p>
+    </br>
+
+    <h3>Can I delete content I have added to a table</h3>
+    <p>Yes, use the right-click menu.</p>
+    </br>
+
+
+
   </div>
 
   <div class="__page__sidebar">

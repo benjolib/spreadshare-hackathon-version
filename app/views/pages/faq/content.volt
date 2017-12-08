@@ -63,6 +63,34 @@
 
     </div>
 
+    </br>
+
+    <h3>Can I import a table which I found on the web but didn’t create myself?</h3>
+    <p>Yes, if the content is not violating copyright laws, that’s no problem.</p>
+
+    </br>
+
+    <h3>How do I get updated about new tables on the platform</h3>
+    <p>If you wish, we send you an email once a week with the latest updates on the tables you subscribed</p>
+
+    </br>
+
+    <h3>What are topics</h3>
+    <p>Topics are like categories for the content. Our topics are</p>
+    <ul>
+    <li>Engineering & Tech</li>
+    <li>Design & Product</li>
+    <li>Growth & Marketing</li>
+    <li>Content & Media</li>
+    <li>Data & AI</li>
+    <li>Business & Operations</li>
+    <li>People & Culture</li>
+    <li>Fundraising & Finance</li>
+    <li>Everything Else</li>
+    </ul>
+
+
+
   </div>
 
   <div class="__page__sidebar">
