@@ -13,12 +13,12 @@
           <div class="display-flex">
             <p>Your name</p>
             <input name="name" value="" autofocus="" type="text"></br>
-            <span>We’re big on real names around here, so people know who’s who</span>
+            <p>We’re big on real names around here, so people know who’s who</p>
           </div>
           <div class="display-flex">
             <p>Username</p>
             <input name="handle" value="" type="text"></br>
-            <span>Your Spreadshare URL: <span style="color:#444;">spreadshare.co/USERNAME</span></span>
+            <p>Your Spreadshare URL: <span>spreadshare.co/USERNAME</span></p>
           </div>
         </div>
 

@@ -370,6 +370,26 @@
     display: inherit;
   }
 }
+.signup__content__form {
+  .flex-display {
+    .display-flex {
+      p:last-child {
+        margin: 0;
+        margin-top: 10px;
+        font-size: 12px;
+        color: #B1BBC7;
+        text-transform: unset;
+        padding-right: 10px;
+        line-height: 16px;
+
+        span {
+          color: darken(#B3BDC9, 12%);
+          font-weight: 400;
+        }
+      }
+    }
+  }
+}
 .signup__content__form input {
   width: 95%;
 }
