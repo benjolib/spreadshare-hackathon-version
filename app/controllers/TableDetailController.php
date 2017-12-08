@@ -47,7 +47,7 @@ class TableDetailController
         {
             throw new Exception('This table has been archived! It was maybe flagged as inappropriate content.');
         }
-        var_dump($tab);
+        
         // Assign tablestats (e.g. for changelog notification badge)
         $this->view->setVar('tableStats', (new TableStats)->get($tableId, 'tableId'));
         
