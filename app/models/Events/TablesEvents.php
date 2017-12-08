@@ -83,7 +83,7 @@ abstract class TablesEvents
 
         if (!$this->getFlags())
         {
-            $this->setFlags(TableFlags::Normal);
+            $this->setFlags(TableFlags::Unpublished);
         }
 
         return true;

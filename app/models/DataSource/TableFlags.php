@@ -19,9 +19,9 @@ class TableFlags
     const All = 0;
     
     /**
-     * Normal state for a dataset
+     * Unpublished state for a dataset
      */
-    const Normal = 1;
+    const Unpublished = 1;
     
     /**
      * Normal state for a dataset

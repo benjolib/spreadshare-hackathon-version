@@ -48,6 +48,18 @@ class TableDetailController
             throw new Exception('This table has been archived! It was maybe flagged as inappropriate content.');
         }
         
+        if ($tableModel->getFlags() == TableFlags::Unpublished)
+        {
+            if ($tableModel->getOwnerUserId() != $this->serviceManager->getAuth()->getUserId())
+            {
+                header(sprintf('Location: /table/add/confirm?tableId=%s&redirectToTable', $tableModel->getId()));
+            }
+            else
+            {
+                throw new Exception('You are not allowed to view this table.');
+            }
+        }
+        
         // Assign tablestats (e.g. for changelog notification badge)
         $this->view->setVar('tableStats', (new TableStats)->get($tableId, 'tableId'));
         

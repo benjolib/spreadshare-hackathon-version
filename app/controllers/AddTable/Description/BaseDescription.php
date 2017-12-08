@@ -49,7 +49,7 @@ abstract class BaseDescription
                    ->setTypeId((int) $this->request->getPost('type'))
                    ->setImage((string) $this->request->getPost('image', '', ''))
                    ->setTagline((string) $this->request->getPost('tagline', null, ''))
-                   ->setFlags(TableFlags::Normal)
+                   ->setFlags(TableFlags::Unpublished)
                    ->setOwnerUserId($userId);
         
         return $tableModel;

@@ -94,7 +94,7 @@ class Table
         int $topic2Id = null,
         array $tags = [],
         array $locations = [],
-        int $flags = TableFlags::Normal
+        int $flags = TableFlags::Unpublished
     ) {
     
     }
