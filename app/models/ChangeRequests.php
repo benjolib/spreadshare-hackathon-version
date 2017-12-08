@@ -69,7 +69,8 @@ class ChangeRequests
             $statusCheck      = 'AND `changeRequests`.`status` = :status';
             $params['status'] = $status;
         }
-        
+
+        $showOnlyFilter = '';
         if ($filter->getShowOnly() === ChangeRequestsFilter::ONLY_EDITS)
         {
             $showOnlyFilter = 'AND `changeRequests`.`to` != ""';
