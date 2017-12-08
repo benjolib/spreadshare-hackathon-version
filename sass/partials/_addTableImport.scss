@@ -77,6 +77,42 @@
           justify-content: space-between;
           @include rem(margin-bottom, 35);
 
+          p {
+            color: $text-color-alternate;
+            font-weight: 300;
+            text-transform: uppercase;
+            margin: 0;
+            @include rem(font-size, 14);
+            @include rem(margin-bottom, 12);
+          }
+
+          &__tip {
+            display: flex;
+            align-items: center;
+
+            p {
+              font-weight: 400;
+              text-transform: unset;
+              color: $text-color-alternate;
+              @include rem(font-size, 14);
+
+              img {
+                width: 1.1rem;
+                height: 1.1rem;
+                @include rem(margin-right, 7);
+              }
+
+              span {
+                font-weight: 400;
+                color: $text-color;
+              }
+            }
+          }
+
+          &__switch {
+            @include rem(margin-top, 50);
+          }
+
           &__column {
             display: flex;
             flex-direction: column;
@@ -86,15 +122,6 @@
           &__row {
             display: flex;
             width: 100%;
-          }
-
-          p {
-            color: $text-color-alternate;
-            font-weight: 300;
-            text-transform: uppercase;
-            margin: 0;
-            @include rem(font-size, 14);
-            @include rem(margin-bottom, 12);
           }
 
           input {
@@ -180,6 +207,9 @@
       }
 
       &__buttons {
+        position: absolute;
+        left: 0;
+        right: 0;
         display: flex;
         justify-content: flex-end;
         align-items: center;
