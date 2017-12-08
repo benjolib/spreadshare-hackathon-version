@@ -125,7 +125,15 @@
     h1 {
       margin-top: 60px;
       margin-bottom: 20px;
-      @include rem(font-size, 38);
+      @include rem(font-size, 28);
+
+      @include tablet {
+        @include rem(font-size, 32);
+      }
+
+      @include desktop {
+        @include rem(font-size, 38);
+      }
     }
     h2 {
       margin: 0;
