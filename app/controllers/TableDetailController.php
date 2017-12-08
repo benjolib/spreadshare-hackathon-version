@@ -50,7 +50,7 @@ class TableDetailController
         
         if ($tableModel->getFlags() == TableFlags::Unpublished)
         {
-            if ($tableModel->getOwnerUserId() != $this->serviceManager->getAuth()->getUserId())
+            if ($tableModel->getOwnerUserId() == $this->serviceManager->getAuth()->getUserId())
             {
                 header(sprintf('Location: /table/add/confirm?tableId=%s&redirectToTable', $tableModel->getId()));
             }
