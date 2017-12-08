@@ -486,7 +486,6 @@ CREATE TABLE `user` (
   `lastLogin` int(10) DEFAULT NULL COMMENT 'timestamp',
   `confirmed` int(1) DEFAULT NULL COMMENT 'confirmed = 1, unconfirmed = 0',
   `status` tinyint(1) DEFAULT NULL COMMENT 'deleted = 0, active = 1',
-  `staff` tinyint(1) DEFAULT NULL COMMENT '1 = staff picker, 2 = community manager, 3 = reviewer, 10 = admin',
   `createdAt` int(10) DEFAULT NULL COMMENT 'timestamp',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
