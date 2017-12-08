@@ -35,7 +35,7 @@
             </div>
           </div>
         </div>
-        <p style="color:darkred;">{{ errorMessage }}</p>
+        {% if errorMessage is defined %}<p style="color:darkred;">{{ errorMessage }}</p>{% endif %}
         <div class="signup__content__form__buttons">
           <a href="/login">Login</a>
           <button type="submit">Sign up</button>
