@@ -113,11 +113,7 @@ SpreadShare complies with the U.S.-E.U. and U.S.-Swiss Safe Harbor Privacy Princ
 
   <div class="__page__sidebar">
    <ul>
-    <li class="active"><a href="#">Privacy Policy</a></li>
-    <li><a href="/terms">Terms Of Use</a></li>
-    <li><a href="/jobs">Jobs</a></li>
-    <li><a href="/about">About</a></li>
-    <li><a href="/token">Earn Token</a></li>
+    <li class="active"><a href="/privacy">Privacy Policy</a></li>
    </ul>
   </div>
 

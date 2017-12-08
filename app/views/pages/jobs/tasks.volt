@@ -12,7 +12,7 @@
   <div class="__page__wrapper">
 
     <div id="jobs">
-    <p>There are no job openings, yet.</p>
+    <p>There are no tasks, yet.</p>
     <br>
     </div>
 
@@ -20,11 +20,8 @@
 
   <div class="__page__sidebar">
    <ul>
-    <li><a href="privacy">Privacy Policy</a></li>
-    <li><a href="terms">Terms Of Use</a></li>
-    <li class="active"><a href="#jobs">Jobs</a></li>
-    <li><a href="/about">About</a></li>
-    <li><a href="/token">Earn Token</a></li>
+    <li><a href="/jobs">Openings</a></li>
+    <li class="active"><a href="/jobs/tasks">Tasks</a></li>
    </ul>
   </div>
   </div>

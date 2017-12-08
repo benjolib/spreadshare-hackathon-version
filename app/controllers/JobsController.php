@@ -28,11 +28,27 @@ class JobsController
     {
         try
         {
-            $this->view->setMainView('pages/jobs');
+            $this->view->setMainView('pages/jobs/openings');
         }
         catch (Exception $e)
         {
             Application::instance()->log($e->getMessage(), Logger::CRITICAL);
         }
     }
+
+
+
+    public function tasksAction($params = [])
+    {
+        try
+        {
+            $this->view->setMainView('pages/jobs/tasks');
+        }
+        catch (Exception $e)
+        {
+            Application::instance()->log($e->getMessage(), Logger::CRITICAL);
+        }
+    }
+
+
 }

@@ -87,11 +87,7 @@
 
   <div class="__page__sidebar">
    <ul>
-    <li><a href="privacy">Privacy Policy</a></li>
-    <li class="active"><a href="#">Terms Of Use</a></li>
-    <li><a href="/jobs">Jobs</a></li>
-    <li><a href="/about">About</a></li>
-    <li><a href="/token">Earn Token</a></li>
+    <li class="active"><a href="/terms">Terms Of Use</a></li>
    </ul>
   </div>
 
