@@ -1,4 +1,4 @@
-{% if users %}
+{% if users is defined %}
 <div class="container__content container__content--users">
     <div class="tableUsers">
         {% for user in users %}
