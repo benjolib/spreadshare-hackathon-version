@@ -140,3 +140,5 @@ public/js/webtools.js
 system/uploads/userimages
 .idea/codeStyles/codeStyleConfig.xml
 .idea/codeStyles/Project.xml
+system/log/queue-table
+system/log/queue-wallet
