@@ -21,7 +21,9 @@
           {% endif %}
 
           <button class="upvote {% if table['userHasVoted'] %}selected{% endif %}" data-action="upvote" data-id="{{ table['id'] }}" onclick="var event = arguments[0] || window.event; event.stopPropagation();">
-            <div class="upvote-icon small"></div>
+            <div class="chevronUp">
+              {{ partial('partials/icons/upvote') }}
+            </div>
             <span>{{ table['votesCount'] +0 }}</span>
           </button>
           <button class="flag">
@@ -41,7 +43,9 @@
       {% else %}
         <button class="subscribe" type="button" onclick="document.location.href='/login';"></button>
         <button class="upvote" type="button" onclick="document.location.href='/login';">
-          <div class="upvote-icon small"></div>
+          <div class="chevronUp">
+            {{ partial('partials/icons/upvote') }}
+          </div>
           <span>{{ table['votesCount'] +0 }}</span>
         </button>
       {% endif %}
