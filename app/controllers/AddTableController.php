@@ -33,7 +33,7 @@ class AddTableController
     {
         return true;
     }
-    
+
     public function addAction()
     {
         $this->view->setMainView('table/add');
@@ -41,17 +41,17 @@ class AddTableController
         $this->view->setVar('content', 'table/add/choose-method');
         $this->view->setVar('action', '/table/add/description');
         $this->view->setVar('hideChooseTable', false);
-        
+
         // Remember that user visited table add page for first time
         $tableStats = (new UserStats())->get($this->serviceManager->getAuth()->getUserId(), 'userId');
         $this->view->setVar('visitedAddTablePage', $tableStats->getVisitedAddTablePage());
-        
+
         if (!$tableStats->getVisitedAddTablePage())
         {
             $tableStats->setUserId($this->serviceManager->getAuth()->getUserId())->setVisitedAddTablePage(1)->save();
         }
     }
-    
+
     /**
      * Table
      */
@@ -59,13 +59,16 @@ class AddTableController
     {
         $this->view->setMainView('table/add');
         $this->view->setVar('hideChooseTable', false);
-        
+
         try
         {
-            $this->view->setVar('post', $this->request->getPost());
-            
+            if ($this->request->isPost())
+            {
+                $this->view->setVar('post', $this->request->getPost());
+            }
+
             $userId = $this->serviceManager->getAuth()->getUserId();
-            
+
             if ($selection)
             {
                 // Choose Table Step (onyl applies to copy-poast, csv-import and sheet-import)
@@ -94,7 +97,7 @@ class AddTableController
             $this->flash->error($e->getMessage());
         }
     }
-    
+
     /**
      * @param string $selectionaa
      */
@@ -105,17 +108,17 @@ class AddTableController
             $this->view->setMainView('table/add');
             $this->view->setVar('hideChooseTable', false);
             $userId = $this->serviceManager->getAuth()->getUserId();
-            
+
             if ($selection)
             {
                 $tableId    = $this->request->get('tableId');
                 $tableModel = Tables::getInstance($tableId);
-                
+
                 if (!$tableModel->getId())
                 {
                     throw new Exception('Table does not exist!');
                 }
-                
+
                 // Choose Table Step (onyl applies to copy-poast, csv-import and sheet-import)
                 $subClass = "DS\\Controller\\AddTable\\ChooseTable\\" . str_replace(' ', '', ucwords(str_replace('-', ' ', $selection)));
                 if (class_exists($subClass))
@@ -138,7 +141,7 @@ class AddTableController
             header('Location: /table/add');
         }
     }
-    
+
     /**
      * Handle confirm GET and POST
      */
@@ -148,15 +151,15 @@ class AddTableController
         {
             $this->view->setMainView('table/add');
             $userId = $this->serviceManager->getAuth()->getUserId();
-            
+
             $tableId = (int) $this->request->get('tableId');
             $this->view->setVar('action', '/table/add/confirm');
             $this->view->setVar('content', 'table/add/confirm');
             $this->view->setVar('tab', 'confirm');
-            
+
             if ($tableId)
             {
-                
+
                 $tableModel = Tables::get($tableId);
                 if ($tableModel->getOwnerUserId() == $userId)
                 {
@@ -164,10 +167,10 @@ class AddTableController
                     $tableData    = $tableContent->getTableData($tableId, $userId);
                     $this->view->setVar('tableData', $tableData);
                     $this->view->setVar('tableProps', $tableProps = (new TableProperties())->get($tableId, 'tableId'));
-                    
+
                     $this->view->setVar('tableId', $this->request->get('tableId'));
                     $this->view->setVar('redirectToTable', $this->request->get('redirectToTable') === null ? 0 : 1);
-                    
+
                     if ($this->request->isPost())
                     {
                         $tableId = $this->request->getPost('tableId');
@@ -175,13 +178,13 @@ class AddTableController
                         {
                             $tableApi = new Table();
                             $tableApi->publish($tableId);
-                            
+
                             $tableApi->fixRowsAndColumns(
                                 $tableId,
                                 (int) $this->request->getPost('fixedRowsTop', null, 0),
                                 (int) $this->request->getPost('fixedColumnsLeft', null, 0)
                             );
-                            
+
                             // Now always redirecting to table
                             //if ($this->request->getPost('redirectToTable'))
                             //{
