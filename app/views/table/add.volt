@@ -8,40 +8,44 @@
       <p class="addTable__content__title">Add a Table</p>
       <p class="addTable__content__subtitle">As a table owner you are responsible for managing the community and content around it and therefore your receive 2.5% of all tokens a table generates.</p>
       <div class="addTable__content__main">
-      <div id="addTableOpts" class="addTable__content__main__options" style="{% if visitedAddTablePage is defined AND !visitedAddTablePage %}display:none;{% endif %}">
-        <form id="addTableForm" method="post" action="{{ action }}" enctype="multipart/form-data">
-        {{ flash.output() }}
+        <div id="addTableOpts" class="addTable__content__main__options" style="{% if visitedAddTablePage is defined AND !visitedAddTablePage %}display:none;{% endif %}">
+          <form id="addTableForm" method="post" action="{{ action }}" enctype="multipart/form-data">
+          {{ flash.output() }}
 
-        <input type="hidden" name="tableId" value="{% if tableId is defined %}{{ tableId }}{% endif %}" />
-        {% include content %}
-        </form>
-      </div>
-      {% if visitedAddTablePage is defined AND !visitedAddTablePage %}
-        <div id="addTableMsg" class="addTable__content__main__options">
-          <div class="addTableEmpty__content__main__options__item">
-          <div class="addTableEmpty__content__main__options__item__column">
-            <p>Who is the admin of the table?</p>
-            <p><img src ="/assets/icons/tip.svg"/> <span>You.</span> Soon, you'll be able to assign more admins to work as a team.</p>
-          </div>
-          </div>
-          <div class="addTableEmpty__content__main__options__item">
-          <div class="addTableEmpty__content__main__options__item__column">
-            <p>Who can collaborate?</p>
-            <p><img src ="/assets/icons/tip.svg"/> Every member of our community. <span>Members ca add, change and remove content to a tables cell.</span></p>
-          </div>
-          </div>
-          <div class="addTableEmpty__content__main__options__item">
-          <div class="addTableEmpty__content__main__options__item__column">
-            <p>Collaborate on what?</p>
-            <p><img src ="/assets/icons/tip.svg"/> The table's cell. Adding to empty table cells are live immeadiately. Changes or removes have to be confirmed by the admins.</p>
-          </div>
-          </div>
-          <div id="addTableButtons">
-          <p>✌ That's what I am looking for. <span>Try now</span></p>
-          <button>Create 1st Table</button>
-          </div>
+          <input type="hidden" name="tableId" value="{% if tableId is defined %}{{ tableId }}{% endif %}" />
+          {% include content %}
+          </form>
         </div>
-      {% endif %}
+        {% if visitedAddTablePage is defined AND !visitedAddTablePage %}
+          <div id="addTableMsg" class="addTable__content__main__options">
+            <div class="addTableEmpty__content__main__options__item">
+            <div class="addTableEmpty__content__main__options__item__column">
+              <p>Who is the admin of the table?</p>
+              <p><img src ="/assets/icons/tip.svg"/> <span>You.</span> Soon, you'll be able to assign more admins to work as a team.</p>
+            </div>
+            </div>
+            <div class="addTableEmpty__content__main__options__item">
+            <div class="addTableEmpty__content__main__options__item__column">
+              <p>Who can collaborate?</p>
+              <p><img src ="/assets/icons/tip.svg"/> Every member of our community. <span>Members ca add, change and remove content to a tables cell.</span></p>
+            </div>
+            </div>
+            <div class="addTableEmpty__content__main__options__item">
+            <div class="addTableEmpty__content__main__options__item__column">
+              <p>Collaborate on what?</p>
+              <p><img src ="/assets/icons/tip.svg"/> The table's cell. Adding to empty table cells are live immeadiately. Changes or removes have to be confirmed by the admins.</p>
+            </div>
+            </div>
+            <div id="addTableButtons">
+            <p>✌ That's what I am looking for. <span>Try now</span></p>
+            <button>Create 1st Table</button>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+      <div class="addTable__content__banner">
+        <p>Need some inspiration? Here are some table topics our community is looking for</p>
+        <button>Get Inspired</button>
       </div>
     </div>
     <aside class="aside aside--addTable">

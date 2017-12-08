@@ -134,6 +134,44 @@
       @include rem(font-size, 16);
     }
 
+    &__banner {
+      // display: flex;
+      display: none;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      background: #DEE0E7;
+      color: $text-color;
+      border-radius: 8px;
+      @include rem(padding, 26);
+      @include rem(margin-top, 34);
+
+      @include desktop {
+        width: 80%;
+      }
+
+      p {
+        font-weight: 500;
+        @include rem(font-size, 14);
+      }
+
+      button {
+        background: $logo-color;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        outline: none;
+        padding: 12px 18px;
+        font-size: 12px;
+        font-weight: 500;
+
+        &:hover {
+          cursor: pointer;
+          background: lighten($logo-color, 4%);
+        }
+      }
+    }
+
     &__main {
       display: flex;
       background: white;
@@ -228,9 +266,25 @@
                 @include rem(font-size, 14);
                 @include rem(margin-bottom, 5);
               }
-              &:last-child {
+              &:nth-child(2) {
                 margin: 0;
                 color: $text-color;
+              }
+              &:nth-child(3){
+                display: flex;
+                align-items: center;
+                margin: 0;
+                color: $text-color-alternate;
+                @include rem(font-size, 12);
+                @include rem(margin-top, 10);
+
+                span {
+                  color: $text-color;
+                }
+                img {
+                  width: 1rem;
+                  height: 1rem;
+                }
               }
             }
           }
