@@ -27,7 +27,7 @@ interface TableSubcontrollerInterface
      *
      * @return mixed
      */
-    public function handle(Tables $table, int $userId, string $param);
+    public function handle(Tables $table, int $userId, string $tab, string $param);
     
     /**
      * Initialize controller

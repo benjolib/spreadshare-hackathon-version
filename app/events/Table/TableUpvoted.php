@@ -60,7 +60,7 @@ class TableUpvoted extends AbstractEvent
         $tableLog
             ->setUserId($userId)
             ->setTableId($tableId)
-            ->setLogType(TableLogType::Subscribed)
+            ->setLogType(TableLogType::Upvoted)
             ->setText('upvoted this table.')
             ->setPlaceholders(
                 json_encode(

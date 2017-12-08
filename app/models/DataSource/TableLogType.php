@@ -42,4 +42,29 @@ class TableLogType
     const Upvoted = 12;
     
     const Downvoted = 13;
+    
+    const Commented = 14;
+    
+    /**
+     * Map string to constants
+     *
+     * @var array
+     */
+    public static $map = [
+        'edits' => [
+            self::ContributionCellDeleted,
+            self::ContributionCellChanged,
+            self::Deleted,
+            self::Updated,
+        ],
+        'upvotes' => [
+            self::Upvoted,
+        ],
+        'subscriptions' => [
+            self::Subscribed,
+        ],
+        'comments' => [
+            self::Commented,
+        ],
+    ];
 }

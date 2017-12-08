@@ -4,6 +4,7 @@ namespace DS\Controller\Table;
 
 use DS\Controller\BaseController;
 use DS\Interfaces\TableSubcontrollerInterface;
+use DS\Model\DataSource\TableLogType;
 use DS\Model\TableLog;
 use DS\Model\Tables;
 
@@ -30,14 +31,21 @@ class Feed
      *
      * @return $this
      */
-    public function handle(Tables $table, int $userId, string $param)
+    public function handle(Tables $table, int $userId, string $tab, string $param)
     {
         try
         {
-            $tableLog = new TableLog();
-            $this->view->setVar('logs', $tableLog->getLogs($table->getId()));
             
+            $typeIds = [];
+            if (isset(TableLogType::$map[$param]))
+            {
+                $typeIds = TableLogType::$map[$param];
+            }
+            
+            $tableLog = new TableLog();
+            $this->view->setVar('logs', $tableLog->getLogs($table->getId(), 0, $typeIds));
             $this->view->setMainView('table/detail/feed');
+            $this->view->setVar('selectedTab', $param);
             $this->view->setVar('selectedPage', 'feed');
         }
         catch (\Exception $e)

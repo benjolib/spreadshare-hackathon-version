@@ -81,6 +81,7 @@ class AddTableController
                         $subController->handle(/* pass dummy table model */
                             new Tables(),
                             $userId,
+                            $selection,
                             ''
                         );
                     }
@@ -125,7 +126,7 @@ class AddTableController
                     if (is_a($subController, 'DS\Interfaces\TableSubcontrollerInterface'))
                     {
                         $subController->initialize();
-                        $subController->handle(isset($tableModel) ? $tableModel : new Tables(), $userId, '');
+                        $subController->handle(isset($tableModel) ? $tableModel : new Tables(), $selection, $userId, '');
                     }
                 }
             }

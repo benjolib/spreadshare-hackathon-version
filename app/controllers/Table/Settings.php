@@ -39,7 +39,7 @@ class Settings
      *
      * @return $this
      */
-    public function handle(Tables $table, int $userId, string $param)
+    public function handle(Tables $table, int $userId, string $tab, string $param)
     {
         try
         {

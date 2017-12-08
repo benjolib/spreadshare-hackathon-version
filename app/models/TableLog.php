@@ -22,37 +22,44 @@ class TableLog
     extends TableLogEvents
 {
     /**
-     * @param int $tableId
-     * @param int $page
-     * @param int $limit
+     * @param int   $tableId
+     * @param int   $page
+     * @param array $type
+     * @param int   $limit
      *
      * @return array
      */
-    public function getLogs(int $tableId, $page = 0, $limit = Paging::endlessScrollPortions)
+    public function getLogs(int $tableId, $page = 0, array $type = [], $limit = Paging::endlessScrollPortions)
     {
         if (!$tableId)
         {
             throw new \InvalidArgumentException('Invalid table id.');
         }
         
-        return self::query()
-                   ->columns(
-                       [
-                           TableLog::class . ".id",
-                           TableLog::class . ".logType",
-                           TableLog::class . ".text",
-                           TableLog::class . ".placeholders",
-                           TableLog::class . ".createdAt",
-                           User::class . ".handle as userHandle",
-                           User::class . ".name as userName",
-                           User::class . ".image as userImage",
-                       ]
-                   )
-                   ->innerJoin(User::class, TableLog::class . '.userId = ' . User::class . '.id')
-                   ->where(TableLog::class . '.tableId = :tableId:', ['tableId' => $tableId])
-                   ->limit((int) $limit, (int) Paging::endlessScrollPortions * $page)
-                   ->orderBy(TableLog::class . '.id DESC')
-                   ->execute()
-                   ->toArray() ?: [];
+        $query = self::query()
+                     ->columns(
+                         [
+                             TableLog::class . ".id",
+                             TableLog::class . ".logType",
+                             TableLog::class . ".text",
+                             TableLog::class . ".placeholders",
+                             TableLog::class . ".createdAt",
+                             User::class . ".handle as userHandle",
+                             User::class . ".name as userName",
+                             User::class . ".image as userImage",
+                         ]
+                     )
+                     ->innerJoin(User::class, TableLog::class . '.userId = ' . User::class . '.id')
+                     ->where(TableLog::class . '.tableId = :tableId:', ['tableId' => $tableId])
+                     ->limit((int) $limit, (int) Paging::endlessScrollPortions * $page)
+                     ->orderBy(TableLog::class . '.id DESC');
+        
+        if (count($type))
+        {
+            $query->inWhere(self::class . '.logType', $type);
+        }
+        
+        return $query->execute()
+                     ->toArray() ?: [];
     }
 }

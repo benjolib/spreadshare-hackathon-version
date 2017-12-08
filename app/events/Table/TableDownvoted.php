@@ -41,7 +41,7 @@ class TableDownvoted extends AbstractEvent
             ->setUserId($table->getOwnerUserId())
             ->setSourceUserId($userId)
             ->setSourceTableId($tableId)
-            ->setNotificationType(UserNotificationType::TableUpvoted)
+            ->setNotificationType(UserNotificationType::TableDownvoted)
             ->setText(sprintf('revoked his vote for your table %s', $table->getTitle()))
             ->setPlaceholders(
                 json_encode(
@@ -57,7 +57,7 @@ class TableDownvoted extends AbstractEvent
         $tableLog
             ->setUserId($userId)
             ->setTableId($tableId)
-            ->setLogType(TableLogType::Subscribed)
+            ->setLogType(TableLogType::Downvoted)
             ->setText('downvoted this table.')
             ->setPlaceholders(
                 json_encode(

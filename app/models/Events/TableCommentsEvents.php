@@ -3,7 +3,9 @@
 namespace DS\Model\Events;
 
 use DS\Component\Text\Emoji;
+use DS\Events\Table\TableCommented;
 use DS\Model\Abstracts\AbstractTableComments;
+use DS\Model\Tables;
 use DS\Model\TableStats;
 
 /**
@@ -53,6 +55,8 @@ abstract class TableCommentsEvents
     public function afterSave()
     {
         (new TableStats())->increment($this->getTableId(), 'comments');
+        
+        TableCommented::after($this->userId, Tables::get($this->getTableId()));
         
         return true;
     }

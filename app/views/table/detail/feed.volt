@@ -32,33 +32,28 @@
         {% endfor %}
     </div>
     <aside class="aside">
-        <a href="#">
-            <div class="aside__item item-selected">
+        <a href="/table/{{ table['id'] }}/feed">
+            <div class="aside__item {% if selectedTab == '' %}item-selected{% endif %}">
                 <p>All</p>
             </div>
         </a>
-        <a href="#">
-            <div class="aside__item">
-                <p>New adds</p>
-            </div>
-        </a>
-        <a href="#">
-            <div class="aside__item">
+        <a href="/table/{{ table['id'] }}/feed/edits">
+            <div class="aside__item {% if selectedTab == 'edits' %}item-selected{% endif %}">
                 <p>Edits & Deletes</p>
             </div>
         </a>
-        <a href="#">
-            <div class="aside__item">
+        <a href="/table/{{ table['id'] }}/feed/upvotes">
+            <div class="aside__item {% if selectedTab == 'upvotes' %}item-selected{% endif %}">
                 <p>Upvotes</p>
             </div>
         </a>
-        <a href="#">
-            <div class="aside__item">
+        <a href="/table/{{ table['id'] }}/feed/subscriptions">
+            <div class="aside__item {% if selectedTab == 'subscriptions' %}item-selected{% endif %}">
                 <p>Subscribers</p>
             </div>
         </a>
-        <a href="#">
-            <div class="aside__item">
+        <a href="/table/{{ table['id'] }}/feed/comments">
+            <div class="aside__item {% if selectedTab == 'comments' %}item-selected{% endif %}">
                 <p>Comments</p>
             </div>
         </a>
