@@ -33,8 +33,7 @@ import type { Filters } from "../../components/TableFilterMenu";
 import TableDropdownMenu from "../../components/TableDropdownMenu";
 import TableAdminEditInput from "../../components/TableAdminEditInput";
 
-const TableStyles = styled.div`
-`;
+const TableStyles = styled.div``;
 
 type Props = {
   id: string, // from server markup
@@ -177,7 +176,12 @@ class Table extends Component<Props, State> {
       )
       .then(() => {
         this.hideAdd();
-        // swal("Success!", "The row has been added.", "success");
+        swal({
+          title: "Success!",
+          type: "success",
+          timer: 650,
+          showConfirmButton: false
+        });
       });
   };
 
@@ -239,7 +243,12 @@ class Table extends Component<Props, State> {
                 "success"
               );
             } else if (this.props.permission === "2") {
-              //swal("Success!", "The cell has been linked.", "success");
+              swal({
+                title: "Success!",
+                type: "success",
+                timer: 650,
+                showConfirmButton: false
+              });
             }
           })
           .catch(() => {
@@ -279,7 +288,12 @@ class Table extends Component<Props, State> {
                 "success"
               );
             } else if (this.props.permission === "2") {
-              //swal("Success!", "The column has been edited.", "success");
+              swal({
+                title: "Success!",
+                type: "success",
+                timer: 650,
+                showConfirmButton: false
+              });
             }
           })
           .catch(() => {
@@ -322,7 +336,12 @@ class Table extends Component<Props, State> {
                 "success"
               );
             } else {
-              // swal("Success!", "The cell has been edited.", "success");
+              swal({
+                title: "Success!",
+                type: "success",
+                timer: 650,
+                showConfirmButton: false
+              });
             }
           })
           .catch(() => {
@@ -364,7 +383,12 @@ class Table extends Component<Props, State> {
                 "success"
               );
             } else if (this.props.permission === "2") {
-              //swal("Success!", "The cell has been deleted.", "success");
+              swal({
+                title: "Success!",
+                type: "success",
+                timer: 650,
+                showConfirmButton: false
+              });
             }
           })
           .catch(() => {
@@ -479,10 +503,22 @@ class Table extends Component<Props, State> {
               editCell={this.props.editCell}
             />
           )}
-          <TableButton icon="sort-white" className="table-button sort" onClick={this.toggleSortings}>Sort Table</TableButton>
+          <TableButton
+            icon="sort-white"
+            className="table-button sort"
+            onClick={this.toggleSortings}
+          >
+            Sort Table
+          </TableButton>
           {/* <TableButton icon="filter" onClick={this.toggleFilters} /> */}
           {this.props.permission !== "0" && (
-            <TableButton icon="add-white" className="table-button add-row" onClick={this.showAdd}>Add a Row</TableButton>
+            <TableButton
+              icon="add-white"
+              className="table-button add-row"
+              onClick={this.showAdd}
+            >
+              Add a Row
+            </TableButton>
           )}
           <TableSearch onChange={this.updateSearchValue} />
           <TableButton icon="dots" className="" onClick={this.toggleDropdown} />

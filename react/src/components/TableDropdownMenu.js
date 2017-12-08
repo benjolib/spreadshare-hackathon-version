@@ -74,7 +74,12 @@ class TableDropdownMenu extends React.Component<Props, State> {
             "success"
           );
         } else if (this.props.permission === "2") {
-          swal("Success!", "The column has been added.", "success");
+          swal({
+            title: "Success!",
+            type: "success",
+            timer: 650,
+            showConfirmButton: false
+          });
         }
       })
       .catch(() => {
