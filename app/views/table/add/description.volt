@@ -2,6 +2,11 @@
 
 {# title #}
 <div class="addTableEmpty__content__main__options__item">
+  <p class="addTableEmpty__content__main__options__item__tip">
+    <img src="/assets/icons/tip.svg" /> You can change these information anytime in your&nbsp;<span>Table Settings</span>
+  </p>
+</div>
+<div class="addTableEmpty__content__main__options__item">
   <div class="addTableEmpty__content__main__options__item__column">
     <p>Title</p>
     <input type="text" placeholder="Bay Area Seed-stage Business Angels" autofocus name="title" value="{% if post is defined %}{{ post['title'] }}{% endif %}" />
