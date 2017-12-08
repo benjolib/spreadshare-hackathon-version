@@ -4,6 +4,7 @@ namespace DS\Controller;
 
 use DS\Api\Table;
 use DS\Api\TableContent;
+use DS\Exceptions\SecurityException;
 use DS\Interfaces\LoginAwareController;
 use DS\Model\TableProperties;
 use DS\Model\Tables;
@@ -156,14 +157,14 @@ class AddTableController
             if ($tableId)
             {
                 
-                $tableContent = new TableContent();
-                $tableData    = $tableContent->getTableData($tableId, $userId);
-                $this->view->setVar('tableData', $tableData);
-                $this->view->setVar('tableProps', $tableProps = (new TableProperties())->get($tableId, 'tableId'));
-                
                 $tableModel = Tables::get($tableId);
                 if ($tableModel->getOwnerUserId() == $userId)
                 {
+                    $tableContent = new TableContent();
+                    $tableData    = $tableContent->getTableData($tableId, $userId);
+                    $this->view->setVar('tableData', $tableData);
+                    $this->view->setVar('tableProps', $tableProps = (new TableProperties())->get($tableId, 'tableId'));
+                    
                     $this->view->setVar('tableId', $this->request->get('tableId'));
                     $this->view->setVar('redirectToTable', $this->request->get('redirectToTable') === null ? 0 : 1);
                     
@@ -193,7 +194,15 @@ class AddTableController
                         }
                     }
                 }
+                else
+                {
+                    throw new SecurityException('You are not allowed to publish this table.');
+                }
             }
+        }
+        catch (SecurityException $e)
+        {
+            throw $e;
         }
         catch (\Exception $e)
         {
