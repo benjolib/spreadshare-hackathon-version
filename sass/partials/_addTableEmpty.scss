@@ -89,6 +89,16 @@
               margin: 0;
               @include rem(font-size, 14);
               @include rem(margin-bottom, 5);
+
+              img {
+                width: 1.1rem;
+                height: 1.1rem;
+              }
+
+              span {
+                color: $text-color;
+                font-weight: 400;
+              }
             }
 
             input {
