@@ -12,12 +12,12 @@
         <div class="flex-display">
           <div class="display-flex">
             <p>Your name</p>
-            <input name="name" value="" autofocus="" type="text"></br>
+            <input name="name" value="{{ post['name'] }}" autofocus="" type="text"></br>
             <p>We’re big on real names around here, so people know who’s who</p>
           </div>
           <div class="display-flex">
             <p>Username</p>
-            <input name="handle" value="" type="text"></br>
+            <input name="handle" value="{{ post['handle'] }}" type="text"></br>
             <p>Your Spreadshare URL: <span>spreadshare.co/USERNAME</span></p>
           </div>
         </div>

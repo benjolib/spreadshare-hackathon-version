@@ -1,223 +1,370 @@
 <!doctype html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta name="viewport" content="width=device-width">
+    <title></title>
+    <!--[if !mso]><!-- -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--<![endif]-->
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Spreadshare</title>
-    <style media="all" type="text/css">
-        @media all {
-            .btn-primary table td:hover {
-                background-color: #34495e !important;
-            }
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style type="text/css">
+        #outlook a { padding: 0; }
 
-            .btn-primary a:hover {
-                background-color: #34495e !important;
-                border-color: #34495e !important;
-            }
-        }
+        .ReadMsgBody { width: 100%; }
 
-        @media all {
-            .btn-secondary a:hover {
-                border-color: #34495e !important;
-                color: #34495e !important;
-            }
-        }
+        .ExternalClass { width: 100%; }
 
-        @media only screen and (max-width: 620px) {
-            table[class=body] h1 {
-                font-size: 28px !important;
-                margin-bottom: 10px !important;
-            }
+        .ExternalClass * { line-height: 100%; }
 
-            table[class=body] h2 {
-                font-size: 22px !important;
-                margin-bottom: 10px !important;
-            }
+        body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
 
-            table[class=body] h3 {
-                font-size: 16px !important;
-                margin-bottom: 10px !important;
-            }
+        table, td { border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
 
-            table[class=body] p,
-            table[class=body] ul,
-            table[class=body] ol,
-            table[class=body] td,
-            table[class=body] span,
-            table[class=body] a {
-                font-size: 16px !important;
-            }
+        img { border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; }
 
-            table[class=body] .wrapper,
-            table[class=body] .article {
-                padding: 10px !important;
+        p { display: block; margin: 13px 0; }
+    </style>
+    <!--[if !mso]><!-->
+    <style type="text/css">
+        @media only screen and (max-width: 480px) {
+            @-ms-viewport {
+                width: 320px;
             }
-
-            table[class=body] .content {
-                padding: 0 !important;
-            }
-
-            table[class=body] .container {
-                padding: 0 !important;
-                width: 100% !important;
-            }
-
-            table[class=body] .header {
-                margin-bottom: 10px !important;
-            }
-
-            table[class=body] .main {
-                border-left-width: 0 !important;
-                border-radius: 0 !important;
-                border-right-width: 0 !important;
-            }
-
-            table[class=body] .btn table {
-                width: 100% !important;
-            }
-
-            table[class=body] .btn a {
-                width: 100% !important;
-            }
-
-            table[class=body] .img-responsive {
-                height: auto !important;
-                max-width: 100% !important;
-                width: auto !important;
-            }
-
-            table[class=body] .alert td {
-                border-radius: 0 !important;
-                padding: 10px !important;
-            }
-
-            table[class=body] .span-2,
-            table[class=body] .span-3 {
-                max-width: none !important;
-                width: 100% !important;
-            }
-
-            table[class=body] .receipt {
-                width: 100% !important;
-            }
-        }
-
-        @media all {
-            .ExternalClass {
-                width: 100%;
-            }
-
-            .ExternalClass,
-            .ExternalClass p,
-            .ExternalClass span,
-            .ExternalClass font,
-            .ExternalClass td,
-            .ExternalClass div {
-                line-height: 100%;
-            }
-
-            .apple-link a {
-                color: inherit !important;
-                font-family: inherit !important;
-                font-size: inherit !important;
-                font-weight: inherit !important;
-                line-height: inherit !important;
-                text-decoration: none !important;
+            @viewport {
+                width: 320px;
             }
         }
     </style>
+    <!--<![endif]-->
+    <!--[if mso]>
+    <xml>
+        <o:OfficeDocumentSettings>
+            <o:AllowPNG />
+            <o:PixelsPerInch>96</o:PixelsPerInch>
+        </o:OfficeDocumentSettings>
+    </xml>
+    <![endif]-->
+    <!--[if lte mso 11]>
+    <style type="text/css">
+        .outlook-group-fix {
+            width: 100% !important;
+        }
+    </style>
+    <![endif]-->
+
+    <!--[if !mso]><!-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <style type="text/css">
+        @import url(https://fonts.googleapis.com/css?family=Montserrat);
+    </style>
+    <!--<![endif]-->
+    <style type="text/css">
+        @media only screen and (min-width: 480px) {
+            .mj-column-per-20 { width: 20% !important; }
+
+            .mj-column-per-80 { width: 80% !important; }
+
+            .mj-column-per-100 { width: 100% !important; }
+
+            .mj-column-per-50 { width: 50% !important; }
+        }
+    </style>
 </head>
-<body class=""
-      style="font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; background-color: #f6f6f6; margin: 0; padding: 0;">
-<table border="0" cellpadding="0" cellspacing="0" class="body" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background-color: #f6f6f6;" width="100%"
-       bgcolor="#f6f6f6">
-    <tr>
-        <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;" valign="top">&nbsp;</td>
-        <td class="container" style="font-family: sans-serif; font-size: 14px; vertical-align: top; display: block; Margin: 0 auto !important; max-width: 580px; padding: 10px; width: 580px;"
-            width="580" valign="top">
-            <div class="content" style="box-sizing: border-box; display: block; Margin: 0 auto; max-width: 580px; padding: 10px;">
+<body style="background: #f2f2f8;">
 
-                <!-- START CENTERED WHITE CONTAINER -->
-                <span class="preheader" style="color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;">
-                    {{ headerMessage }}
-                </span>
-                <table class="main" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background: #fff; border-radius: 3px;" width="100%">
+<div class="mj-container" style="background-color:#f2f2f8;"><!--[if mso | IE]>
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" align="center" style="width:600px;">
+        <tr>
+            <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
+    <![endif]-->
+    <div style="margin:0px auto;max-width:600px;">
+        <table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;" align="center" border="0">
+            <tbody>
+            <tr>
+                <td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:20px 0px;"><!--[if mso | IE]>
+                    <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td style="vertical-align:top;width:120px;">
+                    <![endif]-->
+                    <div class="mj-column-per-20 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;">
+                        <table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
+                            <tbody>
+                            <tr>
+                                <td style="word-wrap:break-word;font-size:0px;padding:10px 25px;" align="center">
+                                    <table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-spacing:0px;" align="center" border="0">
+                                        <tbody>
+                                        <tr>
+                                            <td style="width:70px;">
+                                                <img alt="" title="" height="auto" src="http://beta.spreadshare.co/assets/images/icon_1024.png"
+                                                     style="border:none;border-radius:4px;display:block;font-size:13px;outline:none;text-decoration:none;width:100%;height:auto;"
+                                                     width="70">
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--[if mso | IE]>
+                    </td>
+                    <td style="vertical-align:top;width:480px;">
+                    <![endif]-->
+                    <div class="mj-column-per-80 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;">
+                        <table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
+                            <tbody>
+                            <tr>
+                                <td style="word-wrap:break-word;font-size:0px;padding:10px 25px;padding-top:34px;padding-left:0px;" align="left">
+                                    <div style="cursor:auto;color:#576882;font-family:Montserrat;font-size:26px;line-height:22px;text-align:left;">{{ headerMessage }}</div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--[if mso | IE]>
+                    </td></tr></table>
+                    <![endif]--></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!--[if mso | IE]>
+    </td></tr></table>
+    <![endif]-->
+    <!--[if mso | IE]>
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" align="center" style="width:600px;">
+        <tr>
+            <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
+    <![endif]-->
+    <div style="margin:0px auto;border-radius:6px;max-width:600px;background:white;">
+        <table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;border-radius:6px;background:white;" align="center" border="0">
+            <tbody>
+            <tr>
+                <td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:20px 0px;"><!--[if mso | IE]>
+                    <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td style="vertical-align:top;width:480px;">
+                    <![endif]-->
+                    <div class="mj-column-per-80 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;">
+                        <table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
+                            <tbody>
+                            <tr>
+                                <td style="word-wrap:break-word;font-size:0px;padding:10px 25px;padding-bottom:10px;" align="center">
+                                    <div style="cursor:auto;color:#8999b2;font-family:Montserrat;font-size:13px;line-height:22px;text-align:center;">
+                                        {{ topMessage }}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="word-wrap:break-word;font-size:0px;padding:10px 25px;" align="center">
+                                    <table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse:separate;" align="center" border="0">
+                                        <tbody>
+                                        <tr>
+                                            <td style="border:none;border-radius:3px;color:white;cursor:auto;padding:10px 25px;" align="center" valign="middle" bgcolor="#24AE69">
+                                                {% if buttonLink %}
+                                                <a href="{{ buttonLink }}"
+                                                   style="text-decoration:none;background:#24ae69;color:white;font-family:Montserrat;font-size:13px;font-weight:500;line-height:120%;text-transform:none;margin:0px;"
+                                                   target="_blank">
+                                                    {{ buttonText }}
+                                                </a>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--[if mso | IE]>
+                    </td></tr></table>
+                    <![endif]--></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!--[if mso | IE]>
+    </td></tr></table>
+    <![endif]-->
+    <!--[if mso | IE]>
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" align="center" style="width:600px;">
+        <tr>
+            <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
+    <![endif]-->
+    <div style="margin:0px auto;max-width:600px;">
+        <table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;" align="center" border="0">
+            <tbody>
+            <tr>
+                <td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:20px 0px;"><!--[if mso | IE]>
+                    <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td style="vertical-align:top;width:600px;">
+                    <![endif]-->
+                    <div class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;">
+                        <table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
+                            <tbody>
+                            <tr>
+                                <td style="word-wrap:break-word;font-size:0px;padding:10px 25px;" align="center">
+                                    <div style="cursor:auto;color:#8999b2;font-family:Montserrat;font-size:13px;line-height:22px;text-align:center;">
+                                        <b>Need help?</b> Contact our <a href="mailto:hi@spreadshare.co"
+                                                                         class="link"
+                                                                         style="color: #1ca354; text-decoration: none;">
+                                        support team
+                                    </a> or hit us up on Twitter <a href="https://twitter.com/spreadshareco" class="link" style="color: #1ca354; text-decoration: none;">@spreadshareco</a>.
+                                        Want to give us feedback?
+                                        Let us
+                                        know what you think on our feedback site.
+                                        <br />
 
-                    <!-- START MAIN CONTENT AREA -->
-                    <tr>
-                        <td class="wrapper" style="font-family: sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 20px;" valign="top">
-                            <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;" width="100%">
-                                <tr>
-                                    <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;" valign="top">
-                                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">
-                                            {{ topMessage }}
-                                        </p>
-                                        {% if buttonLink %}
-                                        <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary"
-                                               style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; box-sizing: border-box;" width="100%">
-                                            <tbody>
-                                            <tr>
-                                                <td align="left" style="font-family: sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 15px;" valign="top">
-                                                    <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: auto;">
-                                                        <tbody>
-                                                        <tr>
-                                                            <td style="font-family: sans-serif; font-size: 14px; vertical-align: top; background-color: #3498db; border-radius: 5px; text-align: center;"
-                                                                valign="top" bgcolor="#3498db" align="center">
-                                                                <a href="{{ buttonLink }}" target="_blank"
-                                                                   style="display: inline-block; color: #ffffff; background-color: #3498db; border: solid 1px #3498db; border-radius: 5px; box-sizing: border-box; cursor: pointer; text-decoration: none; font-size: 14px; font-weight: bold; margin: 0; padding: 12px 25px; text-transform: capitalize; border-color: #3498db;">
-                                                                    {{ buttonText }}</a></td>
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                        {% endif %}
                                         {% if bottomMessage %}
-                                        <p style="font-family: sans-serif; font-size: 12px; color: #999999; border-top: 1px solid #cccccc; padding-top: 10px; font-weight: normal; margin: 0; Margin-bottom: 15px;">
-                                            {{ bottomMessage }}
-                                        </p>
+                                            <p>
+                                                {{ bottomMessage }}
+                                            </p>
                                         {% endif %}
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-
-                    <!-- END MAIN CONTENT AREA -->
-                </table>
-
-                <!-- START FOOTER -->
-                <div class="footer" style="clear: both; padding-top: 10px; text-align: center; width: 100%;">
-                    <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;" width="100%">
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--[if mso | IE]>
+                    </td></tr></table>
+                    <![endif]--></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!--[if mso | IE]>
+    </td></tr></table>
+    <![endif]-->
+    <!--[if mso | IE]>
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" align="center" style="width:600px;">
+        <tr>
+            <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
+    <![endif]-->
+    <div style="margin:0px auto;max-width:600px;">
+        <table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;" align="center" border="0">
+            <tbody>
+            <tr>
+                <td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:20px 0px;"><!--[if mso | IE]>
+                    <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                         <tr>
-                            <td class="content-block"
-                                style="font-family: sans-serif; vertical-align: top; padding-top: 10px; padding-bottom: 10px; font-size: 12px; color: #999999; text-align: center;" valign="top"
-                                align="center">
-                                <span class="apple-link" style="color: #999999; font-size: 12px; text-align: center;">{{ companyAddress }}</span>
-                                {% if showUnsubscribeLink %}
-                                <br />
-                                Don't like these emails? <a href="" style="text-decoration: underline; color: #999999; font-size: 12px; text-align: center;">Unsubscribe</a>.
-                                {% endif %}
-                            </td>
-                        </tr>
+                            <td style="vertical-align:top;width:600px;">
+                    <![endif]-->
+                    <div class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;">
+                        <table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
+                            <tbody>
+                            <tr>
+                                <td style="word-wrap:break-word;font-size:0px;padding:10px 25px;" align="center">
+                                    <table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-spacing:0px;" align="center" border="0">
+                                        <tbody>
+                                        <tr>
+                                            <td style="width:50px;">
+                                                <img alt="" title="" height="auto" src="{{ url }}assets/images/icon_1024.png"
+                                                     style="border:none;border-radius:4px;display:block;font-size:13px;outline:none;text-decoration:none;width:100%;height:auto;"
+                                                     width="50">
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="word-wrap:break-word;font-size:0px;padding:10px 25px;" align="center">
+                                    <div style="cursor:auto;color:#576882;font-family:Montserrat;font-size:14px;font-weight:300;line-height:22px;text-align:center;">
+                                        Community-curated Tables
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="word-wrap:break-word;font-size:0px;padding:10px 25px;padding-bottom:5px;" align="center">
+                                    <div style="cursor:auto;color:#a2adbb;font-family:Montserrat;font-size:12px;font-weight:300;line-height:22px;text-align:center;">
+                                        Made by <a href="{{ url }}" class="logo-link" style="color: #8999b2; text-decoration: none; font-weight: 400;">SpreadShare.co</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="word-wrap:break-word;font-size:0px;padding:10px 25px;padding-top:0px;" align="center">
+                                    <div style="cursor:auto;color:#a2adbb;font-family:Montserrat;font-size:12px;font-weight:300;line-height:22px;text-align:center;">
+                                        {{ companyAddress }}
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--[if mso | IE]>
+                    </td></tr></table>
+                    <![endif]--></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!--[if mso | IE]>
+    </td></tr></table>
+    <![endif]-->
+    <!--[if mso | IE]>
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" align="center" style="width:600px;">
+        <tr>
+            <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
+    <![endif]-->
+    <div style="margin:0px auto;max-width:600px;">
+        <table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;" align="center" border="0">
+            <tbody>
+            <tr>
+                <td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:20px 0px;"><!--[if mso | IE]>
+                    <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                         <tr>
-                            <td class="content-block powered-by"
-                                style="font-family: sans-serif; vertical-align: top; padding-top: 10px; padding-bottom: 10px; font-size: 12px; color: #999999; text-align: center;" valign="top"
-                                align="center">
-                                <a href="https://www.spreadshare.co" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">Spreadshare</a>.
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-
-                <!-- END FOOTER -->
-
-                <!-- END CENTERED WHITE CONTAINER --></div>
-        </td>
-        <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;" valign="top">&nbsp;</td>
-    </tr>
-</table>
+                            <td style="vertical-align:top;width:300px;">
+                    <![endif]-->
+                    <div class="mj-column-per-50 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;">
+                        <table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
+                            <tbody>
+                            <tr>
+                                <td style="word-wrap:break-word;font-size:0px;padding:10px 25px;" align="right">
+                                    <div style="cursor:auto;color:#000;font-family:Montserrat;font-size:12px;line-height:22px;text-align:right;">
+                                        <a href="https://medium.com/spreadshare" class="footer-link"
+                                           style="color: #8a99b1; font-weight: 300;">
+                                            Our blog
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--[if mso | IE]>
+                    </td>
+                    <td style="vertical-align:top;width:300px;">
+                    <![endif]-->
+                    <div class="mj-column-per-50 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;">
+                        <table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
+                            <tbody>
+                            <tr>
+                                <td style="word-wrap:break-word;font-size:0px;padding:10px 25px;" align="left">
+                                    <div style="cursor:auto;color:#000;font-family:Montserrat;font-size:12px;line-height:22px;text-align:left;">
+                                        {% if showUnsubscribeLink %}
+                                            <a href="%unsubscribe_url%" class="footer-link" style="color: #8a99b1; font-weight: 300;">Unsubscribe</a>
+                                        {% else %}
+                                            <a href="{{ url }}" class="footer-link" style="color: #8a99b1; font-weight: 300;">spreadshare.co</a>
+                                        {% endif %}
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--[if mso | IE]>
+                    </td></tr></table>
+                    <![endif]--></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!--[if mso | IE]>
+    </td></tr></table>
+    <![endif]--></div>
 </body>
 </html>

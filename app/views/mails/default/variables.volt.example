@@ -1,0 +1,9 @@
+{{ headerMessage }}
+{{ topMessage }}
+{{ bottomMessage }}
+
+{{ buttonText }}
+{{ buttonLink }}
+
+{{ companyAddress }}
+

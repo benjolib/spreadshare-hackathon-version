@@ -29,6 +29,7 @@ use Phalcon\Security;
  * @method \Phalcon\Queue\Beanstalk\Extended getBeanstalk()
  * @method \DS\Component\Cache\Memcache getMemcache()
  * @method \DS\Component\Cache\Redis getRedis()
+ * @method \Phalcon\Http\Request getRequest()
  * @method \Phalcon\Mvc\Model\MetaData\Redis getModelsMetaData()
  * @method \DS\Model\Manager\CachedReusableModelsManager getModelsManager()
  * @method \Phalcon\Crypt getCrypt()

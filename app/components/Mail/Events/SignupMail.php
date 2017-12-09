@@ -36,18 +36,20 @@ class SignupMail extends MailEvent
     public function prepare(UserEvents $userModel)
     {
         $viewParams                      = new DefaultParams();
-        $viewParams->showUnsubscribeLink = false;
-        $viewParams->buttonText          = sprintf('Verify');
+        $viewParams->showUnsubscribeLink = true;
+        $viewParams->buttonText          = sprintf('Confirm Email Address');
         $viewParams->buttonLink          = sprintf(request()->getScheme() . '://%s/login?token=%s', $this->getDI()->get('config')->get('domain'), $userModel->getEmailConfirmationToken());
+        $viewParams->headerMessage       = "Confirm your Email Address";
         $viewParams->topMessage          = nl2br(
             sprintf(
-                'Hi <strong>%s</strong>,
+                'Hello <strong>%s</strong>,
 
 Welcome to Spreadshare!
 
-To make sure we have your correct email address, please confirm it by clicking the link below.
+We just need to verify that <strong>%s</strong> is your email address, and then we\'ll let you explore and create great tables.
 ',
-                $userModel->getName()
+                $userModel->getName(),
+                $userModel->getEmail()
             ),
             true
         );
