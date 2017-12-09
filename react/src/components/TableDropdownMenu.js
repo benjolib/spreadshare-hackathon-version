@@ -52,7 +52,7 @@ class TableDropdownMenu extends React.Component<Props, State> {
       showCancelButton: true,
       showLoaderOnConfirm: true,
       preConfirm: newValue => {
-        if (!typeof newValue === "string") {
+        if (typeof newValue !== "string") {
           return;
         }
 

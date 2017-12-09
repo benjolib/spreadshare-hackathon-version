@@ -320,13 +320,17 @@ export const addRow = (
 export const addColRequest = (
   tableId: string,
   title: string,
-  permission: string
+  permission: string,
+  insertBeforeId?: string,
+  insertAfterId?: string
 ): Action => ({
   type: "ADD_COL_REQUEST",
   payload: {
     tableId,
     title,
-    permission
+    permission,
+    insertBeforeId,
+    insertAfterId
   }
 });
 
@@ -334,6 +338,8 @@ export const addColSuccess = (
   tableId: string,
   title: string,
   permission: string,
+  insertBeforeId?: string,
+  insertAfterId?: string,
   response: Object
 ): Action => ({
   type: "ADD_COL_SUCCESS",
@@ -341,6 +347,8 @@ export const addColSuccess = (
     tableId,
     title,
     permission,
+    insertBeforeId,
+    insertAfterId,
     response
   }
 });
@@ -349,6 +357,8 @@ export const addColError = (
   tableId: string,
   title: string,
   permission: string,
+  insertBeforeId?: string,
+  insertAfterId?: string,
   error: Error
 ): Action => ({
   type: "ADD_COL_ERROR",
@@ -356,6 +366,8 @@ export const addColError = (
     tableId,
     title,
     permission,
+    insertBeforeId,
+    insertAfterId,
     error
   }
 });
@@ -365,27 +377,57 @@ export const addColError = (
 export const addCol = (
   tableId: string,
   title: string,
-  permission: string
+  permission: string,
+  insertBeforeId?: string,
+  insertAfterId?: string
 ): ThunkAction => (dispatch: Dispatch) =>
   new Promise((resolve, reject) => {
     dispatch(addColRequest(tableId, title, permission));
     if (process.env.NODE_ENV === "production") {
       saveDataApi(`add-col/${tableId}`, {
         title,
-        insertAfterId: "0" // TODO: for now we just add row like this
+        insertBeforeId,
+        insertAfterId
       }).then(({ error, data }: { error: Error }) => {
         if (error) {
-          dispatch(addColError(tableId, title, permission, new Error(error)));
+          dispatch(
+            addColError(
+              tableId,
+              title,
+              permission,
+              insertBeforeId,
+              insertAfterId,
+              new Error(error)
+            )
+          );
           reject();
           return;
         }
 
-        dispatch(addColSuccess(tableId, title, permission, data));
+        dispatch(
+          addColSuccess(
+            tableId,
+            title,
+            permission,
+            insertBeforeId,
+            insertAfterId,
+            data
+          )
+        );
         resolve();
       });
     } else {
       setTimeout(() => {
-        dispatch(addColSuccess(tableId, title, permission, {}));
+        dispatch(
+          addColSuccess(
+            tableId,
+            title,
+            permission,
+            insertBeforeId,
+            insertAfterId,
+            {}
+          )
+        );
         resolve();
       }, 500);
     }

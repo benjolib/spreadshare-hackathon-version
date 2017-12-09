@@ -48,7 +48,7 @@ export const tablesReducer = (
     }
 
     case "EDIT_CELL_SUCCESS": {
-      //if (action.payload.permission === "2" || !action.payload.currentValue) {
+      // if (action.payload.permission === "2" || !action.payload.currentValue) {
       if (action.payload.cellId && parseInt(action.payload.cellId, 0) > 0) {
         return {
           ...state,
@@ -203,6 +203,71 @@ export const tablesReducer = (
       // no approval needed since this is an admin action
       // TODO: we need a column id back or something and cell ids
       if (action.payload.permission === "2") {
+        if (action.payload.insertBeforeId || action.payload.insertAfterId) {
+          return {
+            ...state,
+            [action.payload.tableId]: {
+              ...state[action.payload.tableId],
+              table: {
+                ...state[action.payload.tableId].table,
+                columns: state[
+                  action.payload.tableId
+                ].table.columns.reduce((acc, col) => {
+                  const newArr = [...acc];
+
+                  if (action.payload.insertBeforeId === col.id) {
+                    newArr.push({
+                      id: action.payload.response.id,
+                      title: action.payload.title
+                    });
+                  }
+
+                  newArr.push(col);
+
+                  if (action.payload.insertAfterId === col.id) {
+                    newArr.push({
+                      id: action.payload.response.id,
+                      title: action.payload.title
+                    });
+                  }
+
+                  return newArr;
+                }, []),
+                rows: state[action.payload.tableId].table.rows.map(row => ({
+                  ...row,
+                  content: row.content.reduce((acc, item) => {
+                    const newArr = [...acc];
+
+                    if (action.payload.insertBeforeId === item.colId) {
+                      newArr.push({
+                        id: action.payload.response.id,
+                        title: action.payload.title
+                      });
+                    }
+
+                    newArr.push({
+                      id: action.payload.response.cells.find(
+                        cell => cell.rowId === row.id
+                      ).id,
+                      content: "",
+                      link: null
+                    });
+
+                    if (action.payload.insertAfterId === item.colId) {
+                      newArr.push({
+                        id: action.payload.response.id,
+                        title: action.payload.title
+                      });
+                    }
+
+                    return newArr;
+                  }, [])
+                }))
+              }
+            }
+          };
+        }
+
         return {
           ...state,
           [action.payload.tableId]: {

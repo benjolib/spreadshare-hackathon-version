@@ -43,7 +43,8 @@ type Props = {
   editCell: typeof editCell,
   voteRow: typeof voteRow,
   addRow: typeof addRow,
-  editCol: typeof editCol
+  editCol: typeof editCol,
+  addCol: typeof addCol
 };
 
 type State = {
@@ -207,7 +208,57 @@ class Table extends Component<Props, State> {
       //   return;
       // }
 
-      if (key === "my_add_url") {
+      if (key === "my_insert_col_left" || key === "my_insert_col_right") {
+        let insertBeforeId;
+        let insertAfterId;
+        if (key === "my_insert_col_left") {
+          insertBeforeId = cell.colId;
+        } else if (key === "my_insert_col_right") {
+          insertAfterId = cell.colId;
+        }
+        swal({
+          title: "What is the title of the new column?",
+          input: "text",
+          text: "Please type the new column title.",
+          showCancelButton: true,
+          showLoaderOnConfirm: true,
+          preConfirm: newValue => {
+            if (typeof newValue !== "string") {
+              return;
+            }
+
+            return this.props.addCol(
+              this.props.id,
+              newValue,
+              this.props.permission,
+              insertBeforeId,
+              insertAfterId
+            );
+          }
+        })
+          .then(result => {
+            if (!result.value) {
+              return;
+            }
+            if (this.props.permission === "1") {
+              swal(
+                "Success!",
+                "The request to add this column is awaiting approval.",
+                "success"
+              );
+            } else if (this.props.permission === "2") {
+              swal({
+                title: "Success!",
+                type: "success",
+                timer: 650,
+                showConfirmButton: false
+              });
+            }
+          })
+          .catch(() => {
+            swal("Oops", "Something has gone wrong!", "error");
+          });
+      } else if (key === "my_add_url") {
         swal({
           title: "Adding URL",
           input: "text",
@@ -653,6 +704,12 @@ class Table extends Component<Props, State> {
                   ? {
                       my_edit_col: {
                         name: "Edit Column Header"
+                      },
+                      my_insert_col_left: {
+                        name: "Insert Column Left"
+                      },
+                      my_insert_col_right: {
+                        name: "Insert Column Right"
                       }
                     }
                   : {}),
