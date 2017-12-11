@@ -19,7 +19,7 @@ class TopicsSelect extends Component {
 
     let values = [];
     if (props.values && typeof props.values === 'string') {
-      values = JSON.parse(props.value);
+      values = JSON.parse(props.values);
       if (!values) {
         values = [];
       }

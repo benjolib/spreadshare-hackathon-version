@@ -103,7 +103,7 @@ class VoltAdapter extends Volt
         $compiler->addFunction(
             'reactArray',
             function ($key) {
-                return "htmlentities(json_encode({$key}))";
+                return "htmlentities(json_encode({$key}, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP))";
             }
         );
     }
