@@ -1,4 +1,4 @@
-{% if users is defined %}
+{% if users %}
 <div class="container__content container__content--users">
     <div class="tableUsers">
         {% for user in users %}
@@ -26,7 +26,7 @@
             <div class="tableUsers__item__follow">
                 <button class="follow-user {% if user['following'] %}following-user selected {% else %}not-following-user {% endif %}" data-id="{{ user['id'] }}" type="button"></button>
             </div>
-            {% else %}
+            {% elseif auth.loggedIn() and auth.getUserId() == user['id'] %}
             <div class="tableUsers__item__follow">
                 <button disabled="disabled" class="follow-user" type="button">It's you</button>
             </div>
