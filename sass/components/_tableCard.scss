@@ -144,8 +144,18 @@
     &__subscribe.subscribed {
       background-color: $primary-color;
 
+      &:hover {
+        cursor: pointer;
+        background: darken($primary-color, 4%);
+        color: $upvote-text-color;
+      }
+
       span {
         color: white;
+
+        &:after {
+          content: 'Subscribed';
+        }
       }
     }
 
@@ -161,6 +171,7 @@
       color: $upvote-text-color;
       font-weight: 300;
       border-radius: 3px;
+      outline: none;
       @include rem2(padding, 2, 10);
 
       &:hover {
@@ -173,6 +184,10 @@
         color: $text-color;
         font-weight: 600;
         @include rem(font-size, 12);
+
+        &:after {
+          content: 'Subscribe';
+        }
       }
 
       @include tablet {

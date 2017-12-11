@@ -9,7 +9,7 @@
     <div class="follow__content">
       <div class="follow__content__wrapper">
         <p class="follow__content__title">Awesome <span>people</span> you should follow</p>
-        <p class="follow__content__subtitle">We’ll add tables created or collaborated on by people you follow. <span>Pick at least 3</span> or <span id="selectAll">Select all</span></p>
+        <p class="follow__content__subtitle">We’ll add tables created or collaborated on by people you follow. <span>Pick at least 3</span> or <span id="selectAll">Follow all</span></p>
         <div class="follow__content__main">
           <div class="follow__content__main__cards">
             {% for user in users %}
@@ -69,18 +69,18 @@
     // select all
     var $followButtons = $('.follow__content__main__cards__item__button');
     $('#selectAll').on('click', function() {
-      if ($(this).text() === 'Select all') {
+      if ($(this).text() === 'Follow all') {
         for (var i = 0; i < $followButtons.length; i++) {
           $($followButtons[i]).addClass('selected');
           $($followButtons[i]).find('input').prop('checked', true);
         }
-        $(this).text('Unselect all');
+        $(this).text('Unfollow all');
       } else {
         for (var i = 0; i < $followButtons.length; i++) {
           $($followButtons[i]).removeClass('selected');
           $($followButtons[i]).find('input').prop('checked', false);
         }
-        $(this).text('Select all');
+        $(this).text('Follow all');
       }
     });
   });

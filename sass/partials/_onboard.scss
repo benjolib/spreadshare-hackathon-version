@@ -813,6 +813,11 @@
 
       span {
         color: $logo-color;
+
+        &:last-child {
+          font-weight: 500;
+          cursor: pointer;
+        }
       }
     }
 
