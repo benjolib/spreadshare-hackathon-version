@@ -51,6 +51,8 @@ class SignupController
         {
             if ($this->request->isPost())
             {
+                $this->view->setVar('post', $this->request->getPost());
+                
                 // Create new user
                 $userModel = (new User())
                     ->addUserFromSignup(
@@ -70,12 +72,24 @@ class SignupController
                 // Disable further rendering
                 $this->view->disable();
             }
+            else
+            {
+                // Defaults
+                $this->view->setVar(
+                    'post',
+                    [
+                        'name' => '',
+                        'handle' => '',
+                        'email' => '',
+                        'password' => '',
+                    ]
+                );
+            }
         }
-        catch (Exception $e)
+        catch (\Exception $e)
         {
             $this->view->setVar('signupSuccessfull', false);
             $this->view->setVar('errorMessage', $e->getMessage());
-            $this->view->setVar('post', $this->request->getPost());
         }
         
         $this->view->setMainView('auth/signup');
