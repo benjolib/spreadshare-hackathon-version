@@ -42,51 +42,54 @@ class UserController
             
             if (!$user)
             {
-                $this->response->redirect('/');
+                header('Location: /');
             }
-            
-            $connectionList = [];
-            $connections    = UserConnections::findByFieldValue('userId', $user->getId());
-            if ($connections)
+            else
             {
-                foreach ($connections->getConnectionList() as $connection)
+    
+                $connectionList = [];
+                $connections    = UserConnections::findByFieldValue('userId', $user->getId());
+                if ($connections)
                 {
-                    $connectionLink = call_user_func([$connections, 'get' . ucfirst($connection)]);
-                    
-                    if ($connectionLink)
+                    foreach ($connections->getConnectionList() as $connection)
                     {
-                        if ($connection == 'fivehundretpx')
+                        $connectionLink = call_user_func([$connections, 'get' . ucfirst($connection)]);
+            
+                        if ($connectionLink)
                         {
-                            $connection = '500px';
+                            if ($connection == 'fivehundretpx')
+                            {
+                                $connection = '500px';
+                            }
+                
+                            $connectionList[] = [
+                                'name' => $connection,
+                                'link' => $connectionLink,
+                            ];
                         }
-                        
-                        $connectionList[] = [
-                            'name' => $connection,
-                            'link' => $connectionLink,
-                        ];
                     }
                 }
-            }
-            $this->view->setVar('connections', $connectionList);
-            
-            $this->view->setVar('following', UserFollower::findFollower($user->getId(), $this->serviceManager->getAuth()->getUserId()));
-            $this->view->setVar('currentPage', $page);
-            $this->view->setVar('profile', $user);
-            $this->view->setVar('settings', UserSettings::get($user->getId(), 'userId'));
-            $this->view->setVar('userWallet', Wallet::get($user->getId(), 'userId'));
-            $this->view->setMainView('user/profile');
-            
-            $subClass = "DS\\Controller\\User\\" . ucfirst($page);
-            if (class_exists($subClass))
-            {
-                /**
-                 * @var \DS\Interfaces\UserSubcontrollerInterface $subController
-                 */
-                $subController = new $subClass();
-                if (is_a($subController, 'DS\Interfaces\UserSubcontrollerInterface'))
+                $this->view->setVar('connections', $connectionList);
+    
+                $this->view->setVar('following', UserFollower::findFollower($user->getId(), $this->serviceManager->getAuth()->getUserId()));
+                $this->view->setVar('currentPage', $page);
+                $this->view->setVar('profile', $user);
+                $this->view->setVar('settings', UserSettings::get($user->getId(), 'userId'));
+                $this->view->setVar('userWallet', Wallet::get($user->getId(), 'userId'));
+                $this->view->setMainView('user/profile');
+    
+                $subClass = "DS\\Controller\\User\\" . ucfirst($page);
+                if (class_exists($subClass))
                 {
-                    $subController->initialize();
-                    $subController->handle($user);
+                    /**
+                     * @var \DS\Interfaces\UserSubcontrollerInterface $subController
+                     */
+                    $subController = new $subClass();
+                    if (is_a($subController, 'DS\Interfaces\UserSubcontrollerInterface'))
+                    {
+                        $subController->initialize();
+                        $subController->handle($user);
+                    }
                 }
             }
         }
