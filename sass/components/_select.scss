@@ -6,6 +6,9 @@
   &--multi {
     .Select-control {
       .Select-multi-value-wrapper {
+        flex-wrap: wrap;
+        height: auto !important;
+
         .Select-input {
           input[role="combobox"] {
             font-size: 14px !important;
@@ -66,7 +69,6 @@
     padding: 0 !important;
     display: flex !important;
     align-items: center !important;
-    height: 40px !important;
     margin-top: 0 !important;
 
     .Select-placeholder {
@@ -88,17 +90,11 @@
     margin: 0 !important;
     border: none !important;
     border-radius: 6px !important;
+    margin-left: 8px !important;
     margin-right: 8px !important;
 
     &-label {
       color: white;
-    }
-
-    &:first-child {
-      margin-left: 8px !important;
-    }
-    &:last-child {
-      margin-right: 8px !important;
     }
 
     &-icon {
@@ -191,4 +187,3 @@
 //   position: absolute;
 //   top: 50px;
 // }
-
