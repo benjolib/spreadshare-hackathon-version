@@ -170,12 +170,11 @@
       display: flex;
       flex-direction: column;
       width: 100%;
-      @include rem(margin-top, 110 / 2);
+      @include rem(margin-top, 110);
       @include rem(margin-right, 50);
 
       @include desktop {
         width: 26%;
-        @include rem(margin-top, 130);
       }
 
       &__box {
