@@ -16,8 +16,8 @@
               <div class="follow__content__main__cards__item">
                 <img src="{{ user.getImage() }}" />
                 <div class="follow__content__main__cards__item__text">
-                  <p>{{ user.getName() }}</p>
-                  <p>{{ user.getTagline() }}</p>
+                  <p>{{ user.getName()|escape }}</p>
+                  <p>{{ user.getTagline()|escape }}</p>
                 </div>
                 <div class="follow__content__main__cards__item__button">
                   <span>Follow</span>
