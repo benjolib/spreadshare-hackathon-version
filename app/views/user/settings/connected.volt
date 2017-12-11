@@ -104,10 +104,11 @@
             </div>
             <div class="connected__item">
               <!-- UNKNWON - FIX -->
-              <div class="connected__item__logo" data-social="unknown">
-                <img src="/assets/icons/social/unknown.svg" />
-                <span>Unknown</span>
+              <div class="connected__item__logo" data-social="deviantart">
+                <img src="/assets/icons/social/deviantart.svg" />
+                <span>DeviantArt</span>
               </div>
+              <input type="text" name="link[deviantart]" value="{{ connections.deviantart }}" />
             </div>
             <div class="connected__item">
               <div class="connected__item__logo" data-social="bitbucket">
@@ -159,12 +160,11 @@
               <input type="text" name="link[googleplus]" value="{{ connections.googleplus }}" />
             </div>
             <div class="connected__item">
-              <!-- UNKNOWN - FIX -->
-              <div class="connected__item__logo" data-social="unknown2">
-                <img src="/assets/icons/social/unknown2.svg" />
-                <span>Unknown 2</span>
+              <div class="connected__item__logo" data-social="bloglovin">
+                <img src="/assets/icons/social/bloglovin.svg" />
+                <span>Bloglovin</span>
               </div>
-
+              <input type="text" name="link[bloglovin]" value="{{ connections.bloglovin }}" />
             </div>
             <div class="connected__item">
               <div class="connected__item__logo" data-social="stackoverflow">
@@ -216,11 +216,11 @@
               <input type="text" name="link[reddit]" value="{{ connections.reddit }}" />
             </div>
             <div class="connected__item">
-              <!-- UNKNOWN - FIX -->
-              <div class="connected__item__logo" data-social="unknown3">
-                <img src="/assets/icons/social/unknown3.svg" />
-                <span>Unknown 3</span>
+              <div class="connected__item__logo" data-social="bandcamp">
+                <img src="/assets/icons/social/bandcamp.svg" />
+                <span>Bandcamp</span>
               </div>
+              <input type="text" name="link[bandcamp]" value="{{ connections.bandcamp }}" />
             </div>
             <div class="connected__item">
               <div class="connected__item__logo" data-social="ycombinator">

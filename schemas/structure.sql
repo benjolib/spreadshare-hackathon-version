@@ -670,6 +670,11 @@ CREATE TABLE `userStats` (
 ) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
 
 
+ALTER TABLE `userConnections` ADD `deviantart` VARCHAR(200)  NULL  DEFAULT NULL  AFTER `youtube`;
+ALTER TABLE `userConnections` ADD `bloglovin` VARCHAR(200)  NULL  DEFAULT NULL  AFTER `deviantart`;
+ALTER TABLE `userConnections` ADD `bandcamp` VARCHAR(200)  NULL  DEFAULT NULL  AFTER `bloglovin`;
+
+
 # Export von Tabelle wallet
 # ------------------------------------------------------------
 
