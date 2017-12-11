@@ -74,9 +74,9 @@
     </div>
   </div>
   <div class="container container--usersAndTables">
-    {% if tables %}
+    {% if tables is defined && tables %}
       {{ partial('user/profile/tables') }}
-    {% elseif users is defined %}
+    {% elseif users is defined && users %}
       {{ partial('user/profile/users') }}
     {% else %}
       <div class="container__content" style="margin-right:40px;">
