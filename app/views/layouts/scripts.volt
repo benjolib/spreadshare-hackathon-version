@@ -280,5 +280,7 @@
     var navbar = document.getElementsByClassName('navbar')[0];
     navbar.style.position = 'fixed';
     navbar.style.zIndex = '2';
+    var foundABug = document.getElementsByClassName('found-a-bug')[0];
+    foundABug.style.display = 'none';
   };
 </script>
