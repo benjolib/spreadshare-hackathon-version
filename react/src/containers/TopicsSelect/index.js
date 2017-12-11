@@ -17,8 +17,16 @@ class TopicsSelect extends Component {
   constructor(props) {
     super(props);
 
+    let values = [];
+    if (props.values && typeof props.values === 'string') {
+      values = JSON.parse(props.value);
+      if (!values) {
+        values = [];
+      }
+    }
+
     this.state = {
-      values: typeof props.values === "string" ? JSON.parse(props.values) : []
+      values
     };
   }
 
