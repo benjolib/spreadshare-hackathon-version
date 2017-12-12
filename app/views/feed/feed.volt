@@ -1,7 +1,7 @@
 {% extends 'layouts/main.volt' %}
 
 {# page title #}
-{% block title %}SpreadShare - Feed - Community curated Tables{% endblock %}
+{% block title %}SpreadShare - Feed - Data that matters.{% endblock %}
 
 {% block content %}
 
