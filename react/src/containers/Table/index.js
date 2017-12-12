@@ -32,6 +32,7 @@ import type { Sortings } from "../../components/TableSortingMenu";
 import type { Filters } from "../../components/TableFilterMenu";
 import TableDropdownMenu from "../../components/TableDropdownMenu";
 import TableAdminEditInput from "../../components/TableAdminEditInput";
+import $ from 'jquery';
 
 const TableStyles = styled.div``;
 
@@ -74,6 +75,7 @@ class Table extends Component<Props, State> {
 
   componentDidMount() {
     this.props.fetchTable(this.props.id);
+    $(document).click(() => this.setState({ showSortings: false }));
   }
 
   props: Props;
@@ -110,7 +112,11 @@ class Table extends Component<Props, State> {
     });
   };
 
-  toggleSortings = () => {
+  toggleSortings = ev => {
+    ev.preventDefault();
+    ev.stopPropagation();
+    ev.nativeEvent.stopImmediatePropagation();
+
     this.setState({
       showSortings: !this.state.showSortings
     });
@@ -557,7 +563,7 @@ class Table extends Component<Props, State> {
           <TableButton
             icon="sort-white"
             className="table-button sort"
-            onClick={this.toggleSortings}
+            onClick={ev => this.toggleSortings(ev)}
           >
             Sort Table
           </TableButton>

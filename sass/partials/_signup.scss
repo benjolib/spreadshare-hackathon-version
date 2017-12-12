@@ -170,12 +170,11 @@
       display: flex;
       flex-direction: column;
       width: 100%;
-      @include rem(margin-top, 110 / 2);
+      @include rem(margin-top, 110);
       @include rem(margin-right, 50);
 
       @include desktop {
         width: 26%;
-        @include rem(margin-top, 130);
       }
 
       &__box {
@@ -373,7 +372,7 @@
 .signup__content__form {
   .flex-display {
     .display-flex {
-      p:last-child {
+      p.signup-field-msg {
         margin: 0;
         margin-top: 10px;
         font-size: 12px;
@@ -386,6 +385,14 @@
           color: darken(#B3BDC9, 12%);
           font-weight: 400;
         }
+      }
+      p.signup-field-error {
+        color: darkred;
+        font-weight: 400;
+        text-transform: unset;
+        margin-bottom: 0;
+        @include rem(margin-top, 12);
+        @include rem(font-size, 12);
       }
     }
   }

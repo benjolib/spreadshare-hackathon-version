@@ -21,4 +21,24 @@
 
 {% block scripts %}
 {{ partial('table/detail/flag') }}
+
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Table",
+  "about": "{{ table['title'] }}"
+  "description": "{{ table['tagline'] }}",
+  "keywords": "{{ table['tags'] }}",
+  "dateCreated": " {{ table['createdAt'] }}",
+  "author": {
+    "@type": "Person",
+    "image": "{{ table['creatorImage'] }}",
+    "name": "{{ table['creator'] }}",
+    "sameAs": "/user/{{ table['creatorHandle'] }}"
+  }
+}
+</script>
+
+
 {% endblock %}

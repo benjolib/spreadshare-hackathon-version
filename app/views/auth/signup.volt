@@ -13,12 +13,14 @@
           <div class="display-flex">
             <p>Your name</p>
             <input name="name" value="{{ post['name'] }}" autofocus="" type="text"></br>
-            <p>We’re big on real names around here, so people know who’s who</p>
+            <p class="signup-field-msg">We’re big on real names around here, so people know who’s who</p>
+            {% if errorMessage is defined %}<p class="signup-field-error">{{ errorMessage }}</p>{% endif %}
           </div>
           <div class="display-flex">
             <p>Username</p>
             <input name="handle" value="{{ post['handle'] }}" type="text"></br>
-            <p>Your Spreadshare URL: <span>spreadshare.co/USERNAME</span></p>
+            <p class="signup-field-msg">Your Spreadshare URL: <span>spreadshare.co/USERNAME</span></p>
+            {% if errorMessage is defined %}<p class="signup-field-error">{{ errorMessage }}</p>{% endif %}
           </div>
         </div>
 
@@ -26,6 +28,7 @@
           <div class="display-flex">
             <p>Email</p>
             <input type="email" name="email" value="{{ post['email'] }}" />
+            {% if errorMessage is defined %}<p class="signup-field-error">{{ errorMessage }}</p>{% endif %}
           </div>
           <div class="display-flex">
             <p>Password</p>
@@ -33,9 +36,9 @@
             <div id="showPassword">
               <img src="/assets/icons/eye.svg" /><span id="showPasswordSpan" onclick="togglePassword('password');">Show Password</span>
             </div>
+            {% if errorMessage is defined %}<p class="signup-field-error">{{ errorMessage }}</p>{% endif %}
           </div>
         </div>
-        {% if errorMessage is defined %}<p style="color:darkred;">{{ errorMessage }}</p>{% endif %}
         <div class="signup__content__form__buttons">
           <a href="/login">Login</a>
           <button type="submit">Sign up</button>
@@ -55,15 +58,15 @@
       <div class="signup__content__aside__social">
         <div class="signup__content__aside__social__facebook">
           <img src="/assets/icons/facebook.svg" />
-          <a href="/login/facebook">connect via Facebook</a>
+          <a href="/login/facebook">Connect via Facebook</a>
         </div>
         <div class="signup__content__aside__social__twitter">
           <img src="/assets/icons/twitter.svg" />
-          <a href="/login/twitter">connect via Twitter</a>
+          <a href="/login/twitter">Connect via Twitter</a>
         </div>
         <div class="signup__content__aside__social__google">
           <img src="/assets/icons/google.svg" />
-          <a href="/login/google">connect via Google</a>
+          <a href="/login/google">Connect via Google</a>
         </div>
       </div>
     </aside>

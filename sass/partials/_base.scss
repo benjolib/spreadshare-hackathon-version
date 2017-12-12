@@ -2,6 +2,7 @@
   margin: 0;
 }
 
+
 body {
   background: $base-color;
   color: $text-color;
@@ -59,5 +60,18 @@ body {
   }
   a:hover {
     color: $primary-color;
+  }
+
+  .img-rounded {
+    border-radius: 5px;
+    width: 100%;
+    height: 50%;
+  }
+
+  a.read-more {
+    background: #2ead6b;
+    color: #ffffff !important;
+    padding: .5rem;
+    border-radius: 5px;
   }
 }
