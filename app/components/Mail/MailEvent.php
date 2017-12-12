@@ -109,6 +109,16 @@ class MailEvent
     }
     
     /**
+     * @param string $path
+     *
+     * @return string
+     */
+    protected function prepareUrl(string $path = '/'): string
+    {
+        return sprintf(request()->getScheme() . '://%s%s', $this->getDI()->get('config')->get('domain'), $path);
+    }
+    
+    /**
      * Prepare a message that is going to be send to a user
      *
      * @param DefaultParams $viewParams
@@ -136,7 +146,7 @@ class MailEvent
             $message->content($volt->render(ROOT_PATH . '/app/views/' . $this->viewPath, $viewParams->toArray()), $message::CONTENT_TYPE_HTML)
                     ->to($userModel->getEmail(), $userModel->getName())
                     ->subject($this->subject);
-        $mailContent = ob_get_contents();
+        $mailContent   = ob_get_contents();
         ob_end_clean();
         $this->message->content($mailContent);
     }

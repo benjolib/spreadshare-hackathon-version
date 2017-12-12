@@ -1,20 +1,21 @@
 <?php
+
 namespace DS\Component\Mail\Events;
 
 use DS\Component\Mail\MailEvent;
 use DS\Component\Mail\ViewParams\DefaultParams;
-use DS\Model\UserResetPassword;
+use DS\Model\Events\UserResetPasswordEvents;
+use DS\Model\User;
 
 /**
  * Spreadshare
  *
  * Mailing
  *
- * @author Dennis Stücken
- * @license proprietary
-
+ * @author    Dennis Stücken
+ * @license   proprietary
  * @copyright Spreadshare
- * @link https://www.spreadshare.co
+ * @link      https://www.spreadshare.co
  *
  * @version   $Version$
  * @package   DS\Component\Mail
@@ -24,42 +25,34 @@ class PasswordResetMail extends MailEvent
     /**
      * @var string
      */
-    protected $subject = 'Spreadshare | Password Reset';
-
+    protected $subject = 'Reset Your SpreadShare Password';
+    
     /**
-     * @param string            $mailAddress
-     * @param string            $name
-     * @param UserResetPassword $resetModel
+     * @param User                    $userModel
+     * @param UserResetPasswordEvents $resetModel
      *
      * @return $this
      */
-    public function prepare($mailAddress, $name, UserResetPassword $resetModel)
+    public function prepare(User $userModel, UserResetPasswordEvents $resetModel)
     {
-        $viewParams                      = new DefaultParams();
-        $viewParams->buttonText          = sprintf('Verify & Reset');
-        $viewParams->buttonLink          = sprintf('https://%s/password/reset?code=%s', $this->getDI()->get('config')->get('domain'), $resetModel->getCode());
+        $viewParams             = new DefaultParams();
+        $viewParams->buttonText = sprintf('Reset Password');
+        $viewParams->buttonLink = $this->prepareUrl(sprintf('/login/forgot/%s', $resetModel->getCode()));;
+        
         $viewParams->showUnsubscribeLink = false;
         $viewParams->topMessage          = nl2br(
             sprintf(
-                'Hi <strong>%s</strong>,
-
-You\'ve recently asked to reset the password for this account:
-%s
-
-To update your password, click the button below:',
-                $name,
-                $mailAddress
+                '%s, you have requested to reset your password.
+Click the following link and choose a new password.',
+                $userModel->getName()
             ),
             true
         );
-
+        
         $viewParams->bottomMessage = sprintf('Button not working? Paste the following link into your browser: %s', $viewParams->buttonLink);
         
-        $this->message =
-            $this->mailManager->createMessageFromView($this->viewPath, $viewParams->toArray())
-                              ->to($mailAddress, $name)
-                              ->subject($this->subject);
-
+        $this->prepareUserMessage($viewParams, $userModel);
+        
         return $this;
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace DS\Component\Mail\Events;
 
 use DS\Component\Mail\MailEvent;
@@ -10,11 +11,10 @@ use DS\Model\User;
  *
  * Mailing
  *
- * @author Dennis Stücken
- * @license proprietary
-
+ * @author    Dennis Stücken
+ * @license   proprietary
  * @copyright Spreadshare
- * @link https://www.spreadshare.co
+ * @link      https://www.spreadshare.co
  *
  * @version   $Version$
  * @package   DS\Component\Mail
@@ -24,8 +24,8 @@ class PasswordChangedMail extends MailEvent
     /**
      * @var string
      */
-    protected $subject = 'Spreadshare | Password Change';
-
+    protected $subject = 'Your Password Has Been Changed';
+    
     /**
      * Prepare mail parameters for this signup email
      *
@@ -39,19 +39,15 @@ class PasswordChangedMail extends MailEvent
         $viewParams->showUnsubscribeLink = false;
         $viewParams->topMessage          = nl2br(
             sprintf(
-                'Hi <strong>%s</strong>,
-
-Your password has been changed successfully.
-
-Please contact us if you did not authorize this transaction.
-',
-                $userModel->getGivenName()
+                '%s, your SpreadShare password has been changed.
+If you did not request this change, please contact our support team',
+                $userModel->getName()
             ),
             true
         );
-
+        
         $this->prepareUserMessage($viewParams, $userModel);
-
+        
         return $this;
     }
 }

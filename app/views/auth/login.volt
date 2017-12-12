@@ -8,7 +8,7 @@
     <div class="login__content__wrapper">
       <p class="login__content__title">Join now</p>
       <p class="login__content__subtitle">Discover and contribute to the community of data lovers.</p>
-      <form class="login__content__form" method="post">
+      <form class="login__content__form" action="/login" method="post">
         <p>Username <span>or</span> Email</p>
         <input type="text" name="username" tabindex="1" autofocus />
         <span>We’re big on real names around here, so people know who’s who</span>

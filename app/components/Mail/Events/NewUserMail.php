@@ -50,11 +50,12 @@ class NewUserMail extends MailEvent
 
 <strong>%s</strong>,
 <strong>%s</strong>,
-<a href="http://beta.spreadshare.co/user/%s">%s</a>,
+<a href="%s/user/%s">%s</a>,
 ',
                     $userModel->getAuthProvider() ?: 'Spreadshare',
                     $userModel->getName(),
                     $userModel->getEmail(),
+                    $this->prepareUrl(),
                     $userModel->getHandle(),
                     $userModel->getHandle()
                 ),

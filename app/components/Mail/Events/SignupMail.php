@@ -38,7 +38,7 @@ class SignupMail extends MailEvent
         $viewParams                      = new DefaultParams();
         $viewParams->showUnsubscribeLink = true;
         $viewParams->buttonText          = sprintf('Confirm Email Address');
-        $viewParams->buttonLink          = sprintf(request()->getScheme() . '://%s/login?token=%s', $this->getDI()->get('config')->get('domain'), $userModel->getEmailConfirmationToken());
+        $viewParams->buttonLink          = $this->prepareUrl(sprintf('/login?token=%s', $userModel->getEmailConfirmationToken()));
         $viewParams->headerMessage       = "Confirm your Email Address";
         $viewParams->topMessage          = nl2br(
             sprintf(

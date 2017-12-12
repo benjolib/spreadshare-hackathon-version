@@ -6,14 +6,17 @@
 <div class="login">
     <div class="login__content">
         <div class="login__content__wrapper">
-            <p class="login__content__title">Join now</p>
-            <p class="login__content__subtitle">Discover and contribute to the community of data lovers.</p>
+            <p class="login__content__title">Change password</p>
+            <p class="login__content__subtitle">Please enter a new password for your account.</p>
             <form class="login__content__form" method="post">
-                <p>Username <span>or</span> Email</p>
-                <input type="text" name="username" tabindex="1" autofocus />
+                <input type="hidden" name="userId" value="{{ userId }}" />
+                <p>Password</p>
+                <input type="password" name="password" tabindex="1" autofocus />
+                <p>Confirm password</p>
+                <input type="password" name="password2" tabindex="2" />
                 <div class="login__content__form__buttons">
                     <a href="/login">Cancel</a>
-                    <button type="submit">Reset Password</button>
+                    <button type="submit">Change Password</button>
                 </div>
             </form>
         </div>
@@ -23,7 +26,10 @@
                     <div>Sign up</div>
                 </a>
                 <a href="/login">
-                    <div class="sign-box-selected">Sign in</div>
+                    <div>Sign in</div>
+                </a>
+                <a href="/login/forgot">
+                    <div class="sign-box-selected">Forgot password</div>
                 </a>
             </div>
             <p>OR</P>

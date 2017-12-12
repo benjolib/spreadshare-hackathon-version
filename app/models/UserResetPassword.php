@@ -2,6 +2,7 @@
 
 namespace DS\Model;
 
+use DS\Model\Abstracts\AbstractUserResetPassword;
 use DS\Model\Events\UserResetPasswordEvents;
 
 /**
@@ -20,33 +21,21 @@ use DS\Model\Events\UserResetPasswordEvents;
 class UserResetPassword
     extends UserResetPasswordEvents
 {
+    
     /**
-     * @param array $param
-     * @param int   $page
-     * @param int   $limit
-     *
-     * @return array
+     * @param string $code
+     * @return UserResetPassword|AbstractUserResetPassword
      */
-    /*
-    public function findCustom($param = [], $page = 0, $limit = Paging::endlessScrollPortions)
+    public static function findFirstByCode($code)
     {
-        if (count($param))
-        {
-            return self::query()
-                       ->columns(
-                           [
-                               UserResetPassword::class . ".id",
-                           ]
-                       )
-                //->leftJoin(UserResetPassword::class, UserResetPassword::class . '.profileId = ' . Profile::class . '.id')
-                //->inWhere(Profile::class . '.id', $param)
-                       ->limit((int) $limit, (int) Paging::endlessScrollPortions * $page)
-                //->orderBy(sprintf('FIELD (id,%s)', implode(',', $param)))
-                       ->execute()
-                       ->toArray() ?: [];
-        }
-        
-        return [];
+        return parent::findFirst(
+            [
+                "conditions" => "code = ?0",
+                "limit" => 1,
+                "bind" => [$code],
+            ]
+        );
     }
-    */
+    
+    
 }
