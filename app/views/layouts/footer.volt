@@ -10,7 +10,7 @@
         <p>WELCOME</p>
         <ul>
           <li><a href="/about">About</a></li>
-          <li><a href="https://medium.com/spreadshare">Blog</a></li>
+          <li><a href="/blog">Blog</a></li>
           <li><a href="/faq">FAQ</a></li>
         </ul>
       </div>
