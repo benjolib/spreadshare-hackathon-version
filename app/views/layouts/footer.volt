@@ -37,13 +37,13 @@
     </div>
     <div class="footer__bottom__social">
       <ul>
-        <li><a href="https://www.facebook.com/groups/403500643362775">Facebook</a></li>
+        <li><a class="facebook" href="https://www.facebook.com/groups/403500643362775">Facebook</a></li>
         <li>●</li>
-        <li><a href="https://twitter.com/SpreadShareCo">Twitter</a></li>
+        <li><a class="twitter" href="https://twitter.com/SpreadShareCo">Twitter</a></li>
         <li>●</li>
-        <li><a href="https://medium.com/spreadshare">Medium</a></li>
+        <li><a class="medium" href="https://medium.com/spreadshare">Medium</a></li>
         <li>●</li>
-        <li><a href="https://www.producthunt.com/posts/spreadshare">Product Hunt</a></li>
+        <li><a class="producthunt" href="https://www.producthunt.com/posts/spreadshare">Product Hunt</a></li>
       </ul>
     </div>
   </div>
