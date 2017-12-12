@@ -9,6 +9,7 @@
  */
 return [
     'domain' => 'dev.spreadshare.co:81',
+    'description' => 'SpreadShare let\'s you crowd-organise your knowledge in data tables',
     'wallet' => 'http://ec2-18-217-109-204.us-east-2.compute.amazonaws.com/',
     'elasticsearch' => [
         'host' => 'elasticsearch',

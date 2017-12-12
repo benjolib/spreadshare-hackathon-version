@@ -6,8 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta property="og:title" content="{% block title %}{% endblock %}"/>
   <meta property="og:type"  content="website" />
-  <meta property="og:description" content="SpreadShare let's you crowd-organise your knowledge in data tables"/>
-  <meta property="fb:app_id" content="153117502101937">
+  <meta property="og:description" content="{{ config.description }}"/>
+  <meta property="og:url" content="{{ base_url }}"/>
+  <meta property="og:image" content="{{ base_url }}assets/images/icon_1024.png"/>
+  <meta property="fb:app_id" content="{{ config.hybridauth.providers.Facebook.keys.id }}">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,800" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
   <link rel="stylesheet" href="/css/styles.css">
