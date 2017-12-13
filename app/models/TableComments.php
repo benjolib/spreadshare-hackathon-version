@@ -21,6 +21,7 @@ use DS\Model\Events\TableCommentsEvents;
 class TableComments
     extends TableCommentsEvents
 {
+    
     /**
      * @param int $tableId
      * @param int $page
@@ -28,7 +29,7 @@ class TableComments
      *
      * @return array
      */
-    public function getComments(int $tableId, int $parentId = -1, $page = 0, $limit = Paging::endlessScrollPortions)
+    public static function getComments(int $tableId, int $parentId = -1, $page = 0, $limit = Paging::endlessScrollPortions)
     {
         $query = self::query()
                      ->columns(
@@ -38,6 +39,7 @@ class TableComments
                              self::class . ".comment",
                              self::class . ".votesCount",
                              self::class . ".createdAt",
+                             User::class . ".id AS userId",
                              User::class . ".name AS creator",
                              User::class . ".handle AS creatorHandle",
                              User::class . ".image AS creatorImage",

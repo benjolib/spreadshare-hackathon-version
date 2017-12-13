@@ -61,6 +61,11 @@ class UserNotificationType
     const ChangeRequestedRejected = 9;
     
     /**
+     * A user's table has been unsubscribed
+     */
+    const TableUnsubscribed = 10;
+    
+    /**
      * Map string to constants
      *
      * @var array

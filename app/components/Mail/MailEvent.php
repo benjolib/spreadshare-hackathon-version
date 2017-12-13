@@ -3,6 +3,7 @@
 namespace DS\Component\Mail;
 
 use DS\Application;
+use DS\Component\Links\HomeLink;
 use DS\Component\Mail\ViewParams\DefaultParams;
 use DS\Component\Queue\QueueInterface;
 use DS\Component\View\Volt\VoltAdapter;
@@ -115,7 +116,17 @@ class MailEvent
      */
     protected function prepareUrl(string $path = '/'): string
     {
-        return sprintf(request()->getScheme() . '://%s%s', $this->getDI()->get('config')->get('domain'), $path);
+        return HomeLink::prepareUrl($path);
+    }
+    
+    /**
+     * @param DefaultParams $viewParams
+     *
+     * @return string
+     */
+    protected function buttonNotWorkingMessage(ViewParams\DefaultParams $viewParams)
+    {
+        return sprintf('Button not working? Paste the following link into your browser: %s', $viewParams->buttonLink);
     }
     
     /**

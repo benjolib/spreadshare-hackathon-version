@@ -4,7 +4,7 @@ namespace DS\Component\Mail\Events;
 
 use DS\Component\Mail\MailEvent;
 use DS\Component\Mail\ViewParams\DefaultParams;
-use DS\Model\Events\UserEvents;
+use DS\Model\User;
 
 /**
  * Spreadshare
@@ -29,11 +29,11 @@ class SignupMail extends MailEvent
     /**
      * Prepare mail parameters for this signup email
      *
-     * @param UserEvents $userModel
+     * @param User $userModel
      *
      * @return $this
      */
-    public function prepare(UserEvents $userModel)
+    public function prepare(User $userModel)
     {
         $viewParams                      = new DefaultParams();
         $viewParams->showUnsubscribeLink = true;

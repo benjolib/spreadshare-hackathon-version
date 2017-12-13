@@ -2,6 +2,7 @@
 
 namespace DS\Controller\Table;
 
+use DS\Component\Mail\Events\NewCommentMail;
 use DS\Controller\BaseController;
 use DS\Interfaces\TableSubcontrollerInterface;
 use DS\Model\TableComments;

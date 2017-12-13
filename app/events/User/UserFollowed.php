@@ -2,6 +2,7 @@
 
 namespace DS\Events\User;
 
+use DS\Component\Mail\Events\NewFollowerMail;
 use DS\Events\AbstractEvent;
 use DS\Model\DataSource\UserNotificationType;
 use DS\Model\User;
@@ -46,6 +47,10 @@ class UserFollowed extends AbstractEvent
                 )
             )
             ->create();
+        
+        NewFollowerMail::factory(self::getDI())
+                       ->prepare(User::get($userId), User::get($followedByUserId))
+                       ->send();
     }
     
 }

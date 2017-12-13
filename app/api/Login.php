@@ -3,6 +3,7 @@
 namespace DS\Api;
 
 use DS\Application;
+use DS\Component\Mail\Events\SignupMail;
 use DS\Exceptions\GeneralUserException;
 use DS\Model\DataSource\UserStatus;
 use DS\Model\User;
@@ -69,6 +70,11 @@ class Login
             }
             else
             {
+                // Reset Signup mail
+                SignupMail::factory(di())
+                          ->prepare($user)
+                          ->send();
+                
                 throw new GeneralUserException('Your user is not confirmed, yet. Please check your email!');
             }
         }
