@@ -202,6 +202,10 @@ class LoginController
                         }
                     }
                 }
+                else
+                {
+                    $this->flash->error('Username or email address not found.');
+                }
             }
         }
         catch (\Exception $e)
