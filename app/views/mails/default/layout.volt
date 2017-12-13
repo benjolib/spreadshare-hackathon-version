@@ -95,7 +95,7 @@
                                         <tbody>
                                         <tr>
                                             <td style="width:70px;">
-                                                <img alt="" title="" height="auto" src="http://beta.spreadshare.co/assets/images/icon_1024.png"
+                                                <img alt="" title="" height="auto" src="{{ url }}/assets/images/icon_1024.png"
                                                      style="border:none;border-radius:4px;display:block;font-size:13px;outline:none;text-decoration:none;width:100%;height:auto;"
                                                      width="70">
                                             </td>
@@ -262,7 +262,7 @@
                                         <tbody>
                                         <tr>
                                             <td style="width:50px;">
-                                                <img alt="" title="" height="auto" src="{{ url }}assets/images/icon_1024.png"
+                                                <img alt="" title="" height="auto" src="{{ url }}/assets/images/icon_1024.png"
                                                      style="border:none;border-radius:4px;display:block;font-size:13px;outline:none;text-decoration:none;width:100%;height:auto;"
                                                      width="50">
                                             </td>

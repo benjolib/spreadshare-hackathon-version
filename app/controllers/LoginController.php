@@ -329,8 +329,6 @@ class LoginController
         catch (\Exception $e)
         {
             Application::instance()->log($e->getMessage());
-            var_dump($e->getMessage());
-            die;
         }
     }
     
