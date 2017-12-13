@@ -37,6 +37,7 @@ class PasswordChangedMail extends MailEvent
     {
         $viewParams                      = new DefaultParams();
         $viewParams->showUnsubscribeLink = false;
+        $viewParams->headerMessage       = $this->subject;
         $viewParams->topMessage          = nl2br(
             sprintf(
                 '%s, your SpreadShare password has been changed.

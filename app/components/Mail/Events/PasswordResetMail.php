@@ -35,9 +35,10 @@ class PasswordResetMail extends MailEvent
      */
     public function prepare(User $userModel, UserResetPasswordEvents $resetModel)
     {
-        $viewParams             = new DefaultParams();
-        $viewParams->buttonText = sprintf('Reset Password');
-        $viewParams->buttonLink = $this->prepareUrl(sprintf('/login/forgot/%s', $resetModel->getCode()));;
+        $viewParams                = new DefaultParams();
+        $viewParams->headerMessage = $this->subject;
+        $viewParams->buttonText    = sprintf('Reset Password');
+        $viewParams->buttonLink    = $this->prepareUrl(sprintf('/login/forgot/%s', $resetModel->getCode()));;
         
         $viewParams->showUnsubscribeLink = false;
         $viewParams->topMessage          = nl2br(
