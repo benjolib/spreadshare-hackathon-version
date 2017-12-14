@@ -420,12 +420,12 @@
 
           h4 {
             font-weight: 500;
-            @include rem(font-size, 11);
+            @include rem(font-size, 14);
             word-wrap: break-word;
           }
           p {
             font-weight: 400;
-            @include rem(font-size, 11);
+            @include rem(font-size, 14);
             color: $text-color-alternate;
             word-wrap: break-word;
           }
@@ -498,9 +498,10 @@
 
             &__icon {
               display: flex;
+              margin: 0 !important;
+              margin-right: 4px !important;
               @include rem(width, 11);
               @include rem(height, 11);
-              @include rem(margin-right, 4);
 
               &--vote {
                 background: url("/assets/icons/chevron-up.svg");
