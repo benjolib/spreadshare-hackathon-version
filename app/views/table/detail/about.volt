@@ -106,29 +106,16 @@
                 <p class="tableAbout__sidebars__title">Share</p>
                 <aside class="tableAbout__sidebar tableAbout__sidebar--share">
                     <div class="tableAbout__sidebar__content socialshares" data-url="http://beta.spreadshare.co/table/{{ table['id'] }}" data-title="{{ table['title'] }}"
-                         data-description="Community curated tables!" data-size="small"
-                         data-theme="brand" data-icononly>
-                        <div class="tableAbout__sidebar__content__item tableAbout__sidebar__content__item--twitter">
-                            <div class="socialshares-twitter"></div>
-                        </div>
-                        <div class="tableAbout__sidebar__content__item tableAbout__sidebar__content__item--facebook">
-                            <div class="socialshares-facebook"></div>
-                        </div>
-                        <div class="tableAbout__sidebar__content__item tableAbout__sidebar__content__item--linkedin">
-                            <div class="socialshares-linkedin"></div>
-                        </div>
-                        <div class="tableAbout__sidebar__content__item tableAbout__sidebar__content__item--googleplus">
-                            <div class="socialshares-googleplus"></div>
-                        </div>
-                        <div class="tableAbout__sidebar__content__item tableAbout__sidebar__content__item--pinterest">
-                            <div class="socialshares-pinterest"></div>
-                        </div>
-                        <div class="tableAbout__sidebar__content__item tableAbout__sidebar__content__item--tumblr">
-                            <div class="socialshares-tumblr"></div>
-                        </div>
-                        <div class="tableAbout__sidebar__content__item tableAbout__sidebar__content__item--email">
-                            <div class="socialshares-email"></div>
-                        </div>
+                    data-description="Community curated tables!" data-size="small"
+                    data-theme="brand" data-icononly>
+                        <div class="socialshares-twitter"></div>
+                        <div class="socialshares-facebook"></div>
+                        <div class="socialshares-pinterest"></div>
+                        <div class="socialshares-googleplus"></div>
+                        <div class="socialshares-reddit"></div>
+                        <div class="socialshares-tumblr"></div>
+                        <div class="socialshares-email"></div>
+                        <div class="socialshares-more"></div>
                     </div>
                 </aside>
             </div>

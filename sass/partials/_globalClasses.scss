@@ -94,8 +94,20 @@ body {
     background: lighten(#6b7c93, 10);
   }
 
-  .socialshares-btn-icononly {
+  .socialshares-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    outline: none;
+    border: none;
+    margin: 0 !important;
+    margin-left: 4px !important;
+    margin-right: 4px !important;
+    margin-bottom: 8px !important;
 
+    .socialshares-btn-icon {
+      margin-top: 2.7px;
+    }
   }
 
   .socialshares span {
