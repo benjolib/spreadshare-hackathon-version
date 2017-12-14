@@ -97,14 +97,14 @@
           </div>
         </aside>
 
+        {% if table['tags'] %}
         <p class="tableAbout__sidebars__title">Tags</p>
         <aside class="tableAbout__sidebar tableAbout__sidebar--tags">
           <div class="tableAbout__sidebar__content">
-            {% if table['tags'] %}
             <span>{{ implode('</span><span>', explode(', ', table['tags'])) }}</span>
-            {% endif %}
           </div>
         </aside>
+        {% endif %}
 
         <p class="tableAbout__sidebars__title">Share</p>
         <aside class="tableAbout__sidebar tableAbout__sidebar--share">
