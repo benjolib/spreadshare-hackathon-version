@@ -11,7 +11,7 @@
       <div class="tableAbout__info">
         <div class="tableAbout__info__row">
             {% if table['topic1'] and table['topic2'] %}
-            <div class="tableAbout__info__content tableAbout__info__content--left">
+            <div class="tableAbout__info__content tableAbout__info__content--left" style="padding-bottom: 8px;">
             {% elseif table['topic1'] or table['topic2'] %}
             <div class="tableAbout__info__content tableAbout__info__content--left" style="padding-bottom: 20px;">
             {% endif %}
