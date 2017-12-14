@@ -31,12 +31,17 @@
   &__info {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     width: 100%;
 
     @include desktop {
-      flex-direction: row;
       width: 75%;
+    }
+
+    &__row {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
     }
 
     &__content {
@@ -49,7 +54,7 @@
       &--left {
         display: flex;
         flex-direction: column;
-        margin-top: 36px;
+        margin-top: 30px;
         @include rem(margin-bottom, 16);
 
         @include desktop {
@@ -62,7 +67,7 @@
       &--right {
         display: flex;
         flex-direction: column;
-        margin-top: 36px;
+        margin-top: 30px;
 
         @include desktop {
           width: 47.5%;
@@ -347,10 +352,6 @@
     border-radius: 6px;
     color: $text-color;
 
-    @include desktop {
-      width: 75%;
-    }
-
     &__content {
       &__send {
         position: relative;
@@ -527,11 +528,10 @@
   font-weight: 500;
   text-transform: uppercase;
   @include rem(font-size, 12);
-  @include rem(margin-top, 16);
+  @include rem(margin-top, 70);
   @include rem(margin-bottom, 10);
 
   @include desktop {
-    @include rem(margin-top, -225);
     margin-bottom: 16px;
   }
 
