@@ -311,12 +311,17 @@
 
       &__create {
         display: none;
-        padding: 5px 8px;
-        padding-right: 0;
+        padding: 8px 10px;
+        padding-right: 12px;
         border: 1px solid transparent;
+        border-radius: 4px;
         font-weight: 600;
         color: #979797;
         @include rem(font-size, 14);
+
+        &:hover {
+          background: $background-color;
+        }
 
         @include desktop {
           display: block;
@@ -329,7 +334,7 @@
         }
 
         span {
-          color: #24AE69;
+          color: $text-color;
         }
       }
 
