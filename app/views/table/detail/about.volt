@@ -10,26 +10,30 @@
     <div class="tableAbout__inner">
       <div class="tableAbout__info">
         <div class="tableAbout__info__row">
-          <div class="tableAbout__info__content tableAbout__info__content--left">
+            {% if table['topic1'] and table['topic2'] %}
+            <div class="tableAbout__info__content tableAbout__info__content--left">
+            {% elseif table['topic1'] or table['topic2'] %}
+            <div class="tableAbout__info__content tableAbout__info__content--left" style="padding-bottom: 20px;">
+            {% endif %}
             <div class="tableAbout__info__content__item tableAbout__info__content__item--topic">
-              <div>Topic</div>
+              <p>Topic</p>
               <div>
                 {% if table['topic1'] %}
-                <span>{{ table['topic1'] }}</span>
+                <div>{{ table['topic1'] }}</div>
                 {% endif %}
                 {% if table['topic2'] %}
-                <span>{{ table['topic2'] }}</span>
+                <div>{{ table['topic2'] }}</div>
                 {% endif %}
               </div>
             </div>
             <div class="tableAbout__info__content__item tableAbout__info__content__item--created">
-              <div>Created</div>
+              <p>Created</p>
               <div>
                 <span>{{ formatTimestamp(table['createdAt']) }}</span>
               </div>
             </div>
             <div class="tableAbout__info__content__item tableAbout__info__content__item--type">
-              <div>Type</div>
+              <p>Type</p>
               <div>
                 {% if table['typeTitle'] %}
                 <span>{{ table['typeTitle'] }}</span>
@@ -37,13 +41,17 @@
               </div>
             </div>
             <div class="tableAbout__info__content__item tableAbout__info__content__item--locations">
-              <div>Locations</div>
+              <p>Locations</p>
               <div>
-                <span>{{ implode('</span>, <span>', explode(', ', table['locations'])) }}</span>
+                {% if table['locations'] %}
+                    <span>{{ implode('</span>, <span>', explode(', ', table['locations'])) }}</span>
+                {% else %}
+                    <span>No location specified</span>
+                {% endif %}
               </div>
             </div>
             <div class="tableAbout__info__content__item tableAbout__info__content__item--creator">
-              <div>Creator</div>
+              <p>Creator</p>
               <div>
                 <span><a href="/user/{{ table['creatorHandle'] }}"><img src="{{ table['creatorImage'] }}" height="20" /> <i>{{ table['creator'] }}</i></a></span>
               </div>
@@ -51,23 +59,23 @@
           </div>
           <div class="tableAbout__info__content tableAbout__info__content--right">
             <div class="tableAbout__info__content__item tableAbout__info__content__item--views">
-              <div>Views</div>
+              <p>Views</p>
               <div>{{ table['viewsCount'] }}</div>
             </div>
             <div class="tableAbout__info__content__item tableAbout__info__content__item--subscribers">
-              <div>Subscribers</div>
+              <p>Subscribers</p>
               <div>{{ table['subscriberCount'] }}</div>
             </div>
             <div class="tableAbout__info__content__item tableAbout__info__content__item--contributions">
-              <div>Contributions</div>
+              <p>Contributions</p>
               <div>{{ table['contributionCount'] }}</div>
             </div>
             <div class="tableAbout__info__content__item tableAbout__info__content__item--contributors">
-              <div>Contributors</div>
+              <p>Contributors</p>
               <div>{{ table['collaboratorCount'] }}</div>
             </div>
             <div class="tableAbout__info__content__item tableAbout__info__content__item--token">
-              <div>Token</div>
+              <p>Token</p>
               <div>{{ table['tokensCount'] }}</div>
             </div>
           </div>

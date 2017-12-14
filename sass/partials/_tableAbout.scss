@@ -79,25 +79,25 @@
       &__item {
         display: flex;
         justify-content: space-between;
-        margin-bottom: 5px;
+        margin-bottom: 12px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        p {
+          text-transform: uppercase;
+          font-weight: 500;
+          @include rem(font-size, 13);
+        }
 
         &--topic {
           align-items: center;
 
-          div:first-child {
-            font-weight: 500;
-            @include rem(font-size, 12);
-
-            @include desktop {
-              text-transform: uppercase;
-              @include rem(font-size, 13);
-              margin-top: 2px;
-            }
-          }
-          div:last-child {
+          div {
             @include rem(margin-top, -3);
 
-            span {
+            div {
               background: $logo-color;
               color: white;
               border-radius: 4px;
@@ -201,6 +201,12 @@
           }
         }
         &--views, &--subscribers, &--contributions, &--contributors, &--token {
+          margin-bottom: 15.4px;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+
           @include desktop {
             div {
               @include rem(margin-bottom, 2);
@@ -209,6 +215,11 @@
                 margin-bottom: 0;
               }
             }
+          }
+          p {
+            text-transform: uppercase;
+            font-weight: 500;
+            @include rem(font-size, 13);
           }
 
           div:first-child {
