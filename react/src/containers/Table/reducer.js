@@ -1,4 +1,5 @@
 // @flow
+import _ from "lodash";
 import type { Action } from "../../types";
 import type { TablesState } from "./types";
 
@@ -338,6 +339,72 @@ export const tablesReducer = (
     }
 
     case "EDIT_COL_ERROR": {
+      // TODO: show error
+      return state;
+    }
+
+    case "DELETE_ROW_REQUEST": {
+      // TODO: maybe show loader
+      return state;
+    }
+
+    case "DELETE_ROW_SUCCESS": {
+      return {
+        ...state,
+        [action.payload.tableId]: {
+          ...state[action.payload.tableId],
+          table: {
+            ...state[action.payload.tableId].table,
+            rows: state[action.payload.tableId].table.rows.filter(
+              row => row.id !== action.payload.rowId
+            ),
+            votes: state[action.payload.tableId].table.votes.filter(
+              vote => vote.rowId !== action.payload.rowId
+            )
+          }
+        }
+      };
+    }
+
+    case "DELETE_ROW_ERROR": {
+      // TODO: show error
+      return state;
+    }
+
+    case "DELETE_COL_REQUEST": {
+      // TODO: maybe show loader
+      return state;
+    }
+
+    case "DELETE_COL_SUCCESS": {
+      const colIndex = _.findIndex(
+        state[action.payload.tableId].table.columns,
+        col => col.id === action.payload.colId
+      );
+      console.log(colIndex);
+      return {
+        ...state,
+        [action.payload.tableId]: {
+          ...state[action.payload.tableId],
+          table: {
+            ...state[action.payload.tableId].table,
+            columns: [
+              ...state[action.payload.tableId].table.columns.slice(0, colIndex),
+              ...state[action.payload.tableId].table.columns.slice(colIndex + 1)
+            ],
+            rows: state[action.payload.tableId].table.rows.map(row => ({
+              ...row,
+              content: [
+                ...row.content.slice(0, colIndex),
+                ...row.content.slice(colIndex + 1)
+              ]
+            }))
+          }
+        }
+      };
+    }
+
+    case "DELETE_COL_ERROR": {
       // TODO: show error
       return state;
     }

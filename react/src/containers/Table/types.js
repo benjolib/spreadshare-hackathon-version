@@ -182,4 +182,48 @@ export type TablesAction =
         permission: string,
         error: Error
       }
+    }
+  | {
+      type: "DELETE_ROW_REQUEST",
+      payload: {
+        tableId: string,
+        rowId: string
+      }
+    }
+  | {
+      type: "DELETE_ROW_SUCCESS",
+      payload: {
+        tableId: string,
+        rowId: string
+      }
+    }
+  | {
+      type: "DELETE_ROW_ERROR",
+      payload: {
+        tableId: string,
+        rowId: string,
+        error: Error
+      }
+    }
+  | {
+      type: "DELETE_COL_REQUEST",
+      payload: {
+        tableId: string,
+        colId: string
+      }
+    }
+  | {
+      type: "DELETE_COL_SUCCESS",
+      payload: {
+        tableId: string,
+        colId: string
+      }
+    }
+  | {
+      type: "DELETE_COL_ERROR",
+      payload: {
+        tableId: string,
+        colId: string,
+        error: Error
+      }
     };

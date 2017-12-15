@@ -18,7 +18,9 @@ import {
   addRow,
   voteRow,
   editCell,
-  fetchTable
+  fetchTable,
+  deleteRow,
+  deleteCol
 } from "./actions";
 import type { ReduxState } from "../../types";
 import type { TableDataWrapper, Votes, RowsWithVotes, Cell } from "./types";
@@ -32,7 +34,7 @@ import type { Sortings } from "../../components/TableSortingMenu";
 import type { Filters } from "../../components/TableFilterMenu";
 import TableDropdownMenu from "../../components/TableDropdownMenu";
 import TableAdminEditInput from "../../components/TableAdminEditInput";
-import $ from 'jquery';
+// import $ from "jquery";
 
 const TableStyles = styled.div``;
 
@@ -45,7 +47,9 @@ type Props = {
   voteRow: typeof voteRow,
   addRow: typeof addRow,
   editCol: typeof editCol,
-  addCol: typeof addCol
+  addCol: typeof addCol,
+  deleteCol: typeof deleteCol,
+  deleteRow: typeof deleteRow
 };
 
 type State = {
@@ -75,7 +79,8 @@ class Table extends Component<Props, State> {
 
   componentDidMount() {
     this.props.fetchTable(this.props.id);
-    $(document).click(() => this.setState({ showSortings: false }));
+    // TODO: Commented this out since it broke add row
+    // $(document).click(() => this.setState({ showSortings: false }));
   }
 
   props: Props;
@@ -214,7 +219,68 @@ class Table extends Component<Props, State> {
       //   return;
       // }
 
-      if (key === "my_insert_col_left" || key === "my_insert_col_right") {
+      if (key === "my_delete_row") {
+        swal({
+          title: "Are you sure?",
+          type: "warning",
+          text: "Once deleted, you will not be able to recover this row!",
+          showLoaderOnConfirm: true,
+          showCancelButton: true,
+          preConfirm: confirmed => {
+            if (!confirmed) {
+              return;
+            }
+
+            return this.props.deleteRow(this.props.id, cell.rowId);
+          }
+        })
+          .then(result => {
+            if (!result.value) {
+              return;
+            }
+            swal({
+              title: "Success!",
+              type: "success",
+              timer: 650,
+              showConfirmButton: false
+            });
+          })
+          .catch(() => {
+            swal("Oops", "Something has gone wrong!", "error");
+          });
+      } else if (key === "my_delete_col") {
+        swal({
+          title: "Are you sure?",
+          type: "warning",
+          text: "Once deleted, you will not be able to recover this column!",
+          showLoaderOnConfirm: true,
+          showCancelButton: true,
+          preConfirm: confirmed => {
+            if (!confirmed) {
+              return;
+            }
+
+            return this.props.deleteCol(this.props.id, cell.colId);
+          }
+        })
+          .then(result => {
+            if (!result.value) {
+              return;
+            }
+            swal({
+              title: "Success!",
+              type: "success",
+              timer: 650,
+              showConfirmButton: false
+            });
+          })
+          .catch(() => {
+            swal("Oops", "Something has gone wrong!", "error");
+          });
+      } else if (
+        key === "my_insert_col_left" ||
+        key === "my_insert_col_right"
+      ) {
         let insertBeforeId;
         let insertAfterId;
         if (key === "my_insert_col_left") {
@@ -716,6 +782,12 @@ class Table extends Component<Props, State> {
                       },
                       my_insert_col_right: {
                         name: "Insert Column Right"
+                      },
+                      my_delete_row: {
+                        name: "Delete Row"
+                      },
+                      my_delete_col: {
+                        name: "Delete Column"
                       }
                     }
                   : {}),
@@ -741,7 +813,9 @@ const mapDispatchToProps = {
   voteRow,
   addRow,
   addCol,
-  editCol
+  editCol,
+  deleteRow,
+  deleteCol
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Table);

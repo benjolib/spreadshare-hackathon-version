@@ -515,3 +515,121 @@ export const editCol = (
       }, 500);
     }
   });
+
+// DELETE ROW ACTIONS
+
+export const deleteRowRequest = (tableId: string, rowId: string): Action => ({
+  type: "DELETE_ROW_REQUEST",
+  payload: {
+    tableId,
+    rowId
+  }
+});
+
+export const deleteRowSuccess = (tableId: string, rowId: string): Action => ({
+  type: "DELETE_ROW_SUCCESS",
+  payload: {
+    tableId,
+    rowId
+  }
+});
+
+export const deleteRowError = (
+  tableId: string,
+  rowId: string,
+  error: Error
+): Action => ({
+  type: "DELETE_ROW_ERROR",
+  payload: {
+    tableId,
+    rowId,
+    error
+  }
+});
+
+// thunk
+
+export const deleteRow = (tableId: string, rowId: string): ThunkAction => (
+  dispatch: Dispatch
+) =>
+  new Promise((resolve, reject) => {
+    dispatch(deleteRowRequest(tableId, rowId));
+    if (process.env.NODE_ENV === "production") {
+      saveDataApi(`delete-row/${tableId}`, {
+        rowId
+      }).then(({ error }: { error: Error }) => {
+        if (error) {
+          dispatch(deleteRowError(tableId, rowId, new Error(error)));
+          reject();
+          return;
+        }
+
+        dispatch(deleteRowSuccess(tableId, rowId));
+        resolve();
+      });
+    } else {
+      setTimeout(() => {
+        dispatch(deleteRowSuccess(tableId, rowId));
+        resolve();
+      }, 500);
+    }
+  });
+
+// DELETE COL ACTIONS
+
+export const deleteColRequest = (tableId: string, colId: string): Action => ({
+  type: "DELETE_COL_REQUEST",
+  payload: {
+    tableId,
+    colId
+  }
+});
+
+export const deleteColSuccess = (tableId: string, colId: string): Action => ({
+  type: "DELETE_COL_SUCCESS",
+  payload: {
+    tableId,
+    colId
+  }
+});
+
+export const deleteColError = (
+  tableId: string,
+  colId: string,
+  error: Error
+): Action => ({
+  type: "DELETE_COL_ERROR",
+  payload: {
+    tableId,
+    colId,
+    error
+  }
+});
+
+// thunk
+
+export const deleteCol = (tableId: string, colId: string): ThunkAction => (
+  dispatch: Dispatch
+) =>
+  new Promise((resolve, reject) => {
+    dispatch(deleteColRequest(tableId, colId));
+    if (process.env.NODE_ENV === "production") {
+      saveDataApi(`delete-col/${tableId}`, {
+        colId
+      }).then(({ error }: { error: Error }) => {
+        if (error) {
+          dispatch(deleteColError(tableId, colId, new Error(error)));
+          reject();
+          return;
+        }
+
+        dispatch(deleteColSuccess(tableId, colId));
+        resolve();
+      });
+    } else {
+      setTimeout(() => {
+        dispatch(deleteColSuccess(tableId, colId));
+        resolve();
+      }, 500);
+    }
+  });
