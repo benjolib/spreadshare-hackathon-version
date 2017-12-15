@@ -4,6 +4,7 @@ namespace DS\Component;
 
 use DS\Component\Elasticsearch\ElasticaClient;
 use DS\Interfaces\GeneralApplication;
+use Phalcon\Config;
 use Phalcon\Di;
 use Phalcon\Http\Response\Cookies;
 use Phalcon\Security;
@@ -22,6 +23,7 @@ use Phalcon\Security;
  * @version   $Version$
  * @package   DS\Component
  *
+ * @method Config getConfig()
  * @method \Phalcon\Logger\Adapter\File getLogger()
  * @method \Phalcon\Logger\Adapter\File getErrorLogger()
  * @method \Phalcon\Logger\Multiple getCliLogger()

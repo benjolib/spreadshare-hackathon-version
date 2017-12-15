@@ -101,10 +101,14 @@ class MailEvent
      */
     public function send()
     {
-        //@todo enable queuing maybe?
-        //$this->queue->queue($this->message);
-        
-        $this->mailManager->sendViaGuzzle($this->message);
+        // Only send mails in production
+        if ($this->serviceManager->getConfig()->get('mode') === 'production')
+        {
+            //@todo enable queuing maybe?
+            //$this->queue->queue($this->message);
+            
+            $this->mailManager->sendViaGuzzle($this->message);
+        }
         
         return $this;
     }
