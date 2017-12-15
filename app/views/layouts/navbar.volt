@@ -79,6 +79,8 @@
         <ul>
           <li><a href="/table/add">Create a Table</a></li>
           <li><a href="/">Home</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li class="separator"></li>
           <li><a href="/user/{{ auth.getUser().handle }}">Profile</a></li>
           <li><a href="/settings/wallet">Wallet</a></li>
           <li><a href="/settings/invite">Get Token</a></li>

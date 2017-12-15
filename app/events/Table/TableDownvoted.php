@@ -10,6 +10,7 @@ use DS\Model\Tables;
 use DS\Model\TableTokens;
 use DS\Model\User;
 use DS\Model\UserNotifications;
+use DS\Model\UserStats;
 
 /**
  * Spreadshare
@@ -77,6 +78,8 @@ class TableDownvoted extends AbstractEvent
         {
             $tableToken->delete();
         }
+        
+        UserStats::decrement($table->getOwnerUserId(), 'upvotes');
     }
     
 }

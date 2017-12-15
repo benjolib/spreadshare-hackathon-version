@@ -84,6 +84,14 @@ return [
         'methods' => ['GET'],
     ],
     [
+        'url' => '/leaderboard/{tab:[a-zA-Z0-9\-]+}',
+        'paths' => [
+            'controller' => 'Leaderboard',
+            'action' => 'index',
+        ],
+        'methods' => ['GET'],
+    ],
+    [
         'url' => '/settings',
         'paths' => [
             'controller' => 'User_Settings',

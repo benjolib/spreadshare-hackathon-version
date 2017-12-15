@@ -748,3 +748,13 @@ CREATE TABLE `tableStaffPicks` (
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+ALTER TABLE `wallet` ADD INDEX (`tokens`);
+ALTER TABLE `userStats` ADD INDEX (`contributionsCount`);
+ALTER TABLE `userStats` ADD `followerCount` INT(10)  UNSIGNED  NULL  DEFAULT NULL  AFTER `visitedAddTablePage`;
+ALTER TABLE `userStats` ADD `upvotesCount` INT(10)  NULL  DEFAULT NULL  AFTER `followerCount`;
+ALTER TABLE `userStats` CHANGE `upvotesCount` `upvotesCount` INT(10)  UNSIGNED  NULL  DEFAULT NULL;
+ALTER TABLE `userStats` ADD INDEX (`upvotesCount`);
+ALTER TABLE `userStats` ADD INDEX (`followerCount`);
+

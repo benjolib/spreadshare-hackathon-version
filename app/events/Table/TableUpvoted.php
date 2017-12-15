@@ -12,6 +12,7 @@ use DS\Model\Tables;
 use DS\Model\TableTokens;
 use DS\Model\User;
 use DS\Model\UserNotifications;
+use DS\Model\UserStats;
 
 /**
  * Spreadshare
@@ -82,6 +83,8 @@ class TableUpvoted extends AbstractEvent
                    ->setTableId($tableId)
                    ->setType(TokenDistributionType::Upvote)
                    ->create();
+        
+        UserStats::increment($table->getOwnerUserId(), 'upvotes');
     }
     
 }

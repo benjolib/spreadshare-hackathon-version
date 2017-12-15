@@ -7,6 +7,7 @@ use DS\Events\AbstractEvent;
 use DS\Model\DataSource\UserNotificationType;
 use DS\Model\User;
 use DS\Model\UserNotifications;
+use DS\Model\UserStats;
 
 /**
  * Spreadshare
@@ -51,6 +52,8 @@ class UserFollowed extends AbstractEvent
         NewFollowerMail::factory(self::getDI())
                        ->prepare(User::get($userId), User::get($followedByUserId))
                        ->send();
+        
+        UserStats::increment($userId, 'follower');
     }
     
 }

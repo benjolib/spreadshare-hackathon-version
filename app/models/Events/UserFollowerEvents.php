@@ -3,6 +3,7 @@
 namespace DS\Model\Events;
 
 use DS\Events\User\UserFollowed;
+use DS\Events\User\UserUnfollowed;
 use DS\Model\Abstracts\AbstractUserFollower;
 
 /**
@@ -49,5 +50,14 @@ abstract class UserFollowerEvents
     {
         // trigger UserFollowed event
         UserFollowed::after($this->getUserId(), $this->getFollowedByUserId());
+    }
+    
+    /**
+     * After user unfollow
+     */
+    public function afterDelete()
+    {
+        // trigger UserFollowed event
+        UserUnfollowed::after($this->getUserId(), $this->getFollowedByUserId());
     }
 }
