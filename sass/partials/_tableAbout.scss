@@ -280,6 +280,7 @@
       &--related {
         .tableAbout__sidebar__content {
           @include rem(padding, 16);
+          width: 100% !important;
 
           a {
             color: $text-color-alternate;
