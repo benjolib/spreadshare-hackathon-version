@@ -9,6 +9,7 @@
  */
 return [
     'domain' => '_HOST_',
+    'description' => 'SpreadShare let\'s you crowd-organise your knowledge in data tables',
     'wallet' => '_WALLET_',
     'elasticsearch' => [
         'host' => 'elasticsearch',
