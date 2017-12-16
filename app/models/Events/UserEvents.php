@@ -27,70 +27,94 @@ use Phalcon\Mvc\Model;
 abstract class UserEvents
     extends AbstractUser
 {
-
+    
     private $emailMinimumLength = 5;
-
+    
     /**
      * Before create
      */
     public function beforeCreate()
     {
         $this->emailConfirmationToken = preg_replace('/[^a-zA-Z0-9]/', '', base64_encode(openssl_random_pseudo_bytes(24)));
-
+        
         $this->setConfirmed(0);
-
+        
         if (!$this->getStatus())
         {
             $this->setStatus(UserStatus::Unconfirmed);
         }
     }
-
+    
     /**
      * After create
      */
     public function afterCreate()
     {
-
-       (new Wallet())->setUserId($this->getId())
-                    ->setTokens(0)
-                    ->setContractAddress('')
-                    ->setData('')
-                    ->create();
-
-
+        
+        (new Wallet())->setUserId($this->getId())
+                      ->setTokens(0)
+                      ->setContractAddress('')
+                      ->setData('')
+                      ->create();
+        
         // Create users wallet using queue
         if ($this instanceof User)
         {
             UserCreated::after($this);
         }
-
+        
         (new UserStats())->setUserId($this->getId())
                          ->create();
     }
-
+    
     /**
      * @return bool
      */
     public function beforeValidationOnCreate()
     {
         parent::beforeValidationOnCreate();
-
+        
         // Check if user with hande or email address already exists
-        if (self::findFirstByHandleOrEmail($this->getHandle(), $this->getEmail()))
+        if (($user = self::findFirstByHandleOrEmail($this->getHandle(), $this->getEmail())))
         {
-            throw new UserValidationException('A user with this email address or username already exists.');
+            if ($user->getHandle() == $this->getHandle())
+            {
+                throw new UserValidationException(
+                    'A user with this username already exists.',
+                    'handle',
+                    $this->getHandle()
+                );
+            }
+            else
+            {
+                if ($user->getEmail() == $this->getEmail())
+                {
+                    throw new UserValidationException(
+                        'A user with this email address already exists.',
+                        'email',
+                        $this->getHandle()
+                    );
+                }
+            }
+            
+            throw new UserValidationException(
+                'Error. Please select another email address or username.',
+                'email',
+                $this->getHandle()
+            );
+            
         }
-
+        
         return $this->beforeValidationOnUpdate();
     }
-
+    
     /**
      * @return bool
      */
     public function beforeValidationOnUpdate()
     {
         parent::beforeValidationOnUpdate();
-
+        
         if (strlen($this->getEmail()) < $this->emailMinimumLength)
         {
             throw new UserValidationException(
@@ -100,7 +124,7 @@ abstract class UserEvents
                 'Provide a valid email address'
             );
         }
-
+        
         if (!strlen($this->getName()))
         {
             throw new UserValidationException(
@@ -110,7 +134,7 @@ abstract class UserEvents
                 'Name is empty. Provide one.'
             );
         }
-
+        
         $urlPattern = "/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i";
         if ($this->getWebsite() && !preg_match(
                 $urlPattern,
@@ -124,22 +148,22 @@ abstract class UserEvents
                 'Please provide a valid website in the following format: [http://]www.example.com'
             );
         }
-
+        
         // Check if username is given
         if (!$this->getHandle())
         {
             return false;
         }
-
+        
         // Check if email is given
         if (!$this->getEmail())
         {
             return false;
         }
-
+        
         return true;
     }
-
+    
     /**
      * Find user by handle or email
      *

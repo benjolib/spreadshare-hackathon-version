@@ -3,6 +3,8 @@
 namespace DS\Controller;
 
 use DS\Application;
+use DS\Controller\Validation\SignupValidation;
+use DS\Exceptions\UserValidationException;
 use DS\Model\DataSource\TableFlags;
 use DS\Model\DataSource\UserStatus;
 use DS\Model\Helper\TableFilter;
@@ -53,24 +55,27 @@ class SignupController
             {
                 $this->view->setVar('post', $this->request->getPost());
                 
-                // Create new user
-                $userModel = (new User())
-                    ->addUserFromSignup(
-                        $this->request->getPost('name'),
-                        $this->request->getPost('handle'),
-                        $this->request->getPost('email'),
-                        $this->request->getPost('password')
-                    );
-                
-                // User is now directly logged in:
-                $this->serviceManager->getAuth()->storeSession($userModel);
-                
-                // Redirect to topics page
-                header('Location: /signup/topics');
-                //$this->response->redirect('/signup/topics', false);
-                
-                // Disable further rendering
-                $this->view->disable();
+                if ($this->validate(SignupValidation::getSchema()))
+                {
+                    // Create new user
+                    $userModel = (new User())
+                        ->addUserFromSignup(
+                            $this->request->getPost('name'),
+                            $this->request->getPost('handle'),
+                            $this->request->getPost('email'),
+                            $this->request->getPost('password')
+                        );
+                    
+                    // User is now directly logged in:
+                    $this->serviceManager->getAuth()->storeSession($userModel);
+                    
+                    // Redirect to topics page
+                    header('Location: /signup/topics');
+                    //$this->response->redirect('/signup/topics', false);
+                    
+                    // Disable further rendering
+                    $this->view->disable();
+                }
             }
             else
             {
@@ -86,10 +91,13 @@ class SignupController
                 );
             }
         }
+        catch (UserValidationException $e)
+        {
+            $this->view->setVar('errors', [$e->getField() => $e->getMessage()]);
+        }
         catch (\Exception $e)
         {
-            $this->view->setVar('signupSuccessfull', false);
-            $this->view->setVar('errorMessage', $e->getMessage());
+            $this->flash->error($e->getMessage());
         }
         
         $this->view->setMainView('auth/signup');

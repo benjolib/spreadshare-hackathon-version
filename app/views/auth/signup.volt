@@ -3,6 +3,7 @@
 {% block title %}SpreadShare - Sign Up{% endblock %}
 
 {% block content %}
+{{ flash.output() }}
 <div class="signup">
   <div class="signup__content">
     <div class="signup__content__wrapper">
@@ -14,13 +15,13 @@
             <p>Your name</p>
             <input name="name" value="{{ post['name'] }}" autofocus="" type="text"></br>
             <p class="signup-field-msg">We’re big on real names around here, so people know who’s who</p>
-            {% if errorMessage is defined %}<p class="signup-field-error">{{ errorMessage }}</p>{% endif %}
+            {% if errors['name'] is defined %}<p class="signup-field-error">{{ errors['name'] }}</p>{% endif %}
           </div>
           <div class="display-flex">
             <p>Username</p>
             <input name="handle" value="{{ post['handle'] }}" type="text"></br>
             <p class="signup-field-msg">Your Spreadshare URL: <span>spreadshare.co/USERNAME</span></p>
-            {% if errorMessage is defined %}<p class="signup-field-error">{{ errorMessage }}</p>{% endif %}
+            {% if errors['handle'] is defined %}<p class="signup-field-error">{{ errors['handle'] }}</p>{% endif %}
           </div>
         </div>
 
@@ -28,7 +29,7 @@
           <div class="display-flex">
             <p>Email</p>
             <input type="email" name="email" value="{{ post['email'] }}" />
-            {% if errorMessage is defined %}<p class="signup-field-error">{{ errorMessage }}</p>{% endif %}
+            {% if errors['email'] is defined %}<p class="signup-field-error">{{ errors['email'] }}</p>{% endif %}
           </div>
           <div class="display-flex">
             <p>Password</p>
@@ -36,7 +37,7 @@
             <div id="showPassword">
               <img src="/assets/icons/eye.svg" /><span id="showPasswordSpan" onclick="togglePassword('password');">Show Password</span>
             </div>
-            {% if errorMessage is defined %}<p class="signup-field-error">{{ errorMessage }}</p>{% endif %}
+            {% if errors['password'] is defined %}<p class="signup-field-error">{{ errors['password'] }}</p>{% endif %}
           </div>
         </div>
         <div class="signup__content__form__buttons">

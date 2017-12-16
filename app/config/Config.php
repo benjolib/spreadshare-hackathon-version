@@ -104,7 +104,7 @@ return [
         'DS\Listeners' => ROOT_PATH. '/app/listeners',
         'DS\Exceptions' => ROOT_PATH . '/app/exceptions/',
     ],
-    'mode' => 'production',
+    'mode' => 'development',
 
     'hybridauth' => [
         "debug_mode" => true,
