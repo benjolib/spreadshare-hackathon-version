@@ -29,6 +29,9 @@
           <button class="flag">
             <div class="flag-icon"></div>
           </button>
+          {% if auth.hasRole(2) %}
+            <button class="staff-pick" data-id="{{ table['id'] }}" title="Add Staff Pick">👏</button>
+          {% endif %}
         {% endif %}
 
         <div class="table-menu navbar__controls__dropdown" style="margin-top:80px;">

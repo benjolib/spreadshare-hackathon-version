@@ -26,26 +26,38 @@
       width: 100%;
 
       h3 {
-        width: 100%;
-        align-self: flex-start;
-        margin: 0;
-        font-weight: 600;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        margin-bottom: 5px;
-        @include rem(font-size, 16);
+        a {
+          width: 100%;
+          align-self: flex-start;
+          margin: 0;
+          font-weight: 600;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          margin-bottom: 5px;
+          @include rem(font-size, 16);
 
-        @include tablet {
-          @include rem(font-size, 18);
-        }
-        @include desktop {
-          @include rem(font-size, 20);
+          @include tablet {
+            @include rem(font-size, 18);
+          }
+          @include desktop {
+            @include rem(font-size, 20);
+          }
+
+          &:hover {
+            cursor: pointer;
+            color: $logo-color;
+          }
         }
 
-        &:hover {
-          cursor: pointer;
-          color: $logo-color;
+        span.staff-pick {
+          text-transform: uppercase;
+          color: lighten($text-color-alternate, 5);
+          margin-left: 10px;
+          line-height: 20px;
+          vertical-align: top;
+          font-weight: 300;
+          @include rem(font-size, 11);
         }
       }
 

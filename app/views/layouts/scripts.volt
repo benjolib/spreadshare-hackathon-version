@@ -209,6 +209,7 @@
           'follow-user': '/api/v1/follow-user/{id}',
           'comment-upvote': '/api/v1/vote-comment/{id}',
           'change-request': '/api/v1/change-request/{id}',
+          'staff-pick': '/api/v1/staff-pick/{id}',
         };
 
         $('a.comment-upvote').api({
@@ -252,7 +253,6 @@
             $(button).toggleClass('selected').toggleClass('following-user').toggleClass('not-following-user');
           },
         });
-
         $('button.review-change-request').api({
           method: 'POST',
           action: 'change-request',
@@ -263,6 +263,13 @@
             };
             return settings;
           },
+          onSuccess: function (response, button) {
+            location.reload();
+          },
+        });
+        $('button.staff-pick').api({
+          method: 'POST',
+          action: 'staff-pick',
           onSuccess: function (response, button) {
             location.reload();
           },

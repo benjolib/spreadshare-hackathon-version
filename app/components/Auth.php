@@ -5,6 +5,7 @@ namespace DS\Component;
 use DS\Application;
 use DS\Component\Session\Adapter\RedisAdapter;
 use DS\Model\Abstracts\AbstractUser;
+use DS\Model\DataSource\UserRoles;
 use DS\Model\User;
 use Phalcon\DI\InjectionAwareInterface;
 use Phalcon\DiInterface;
@@ -13,11 +14,10 @@ use Phalcon\Mvc\User\Component;
 /**
  * Spreadshare
  *
- * @author Dennis Stücken
- * @license proprietary
-
+ * @author    Dennis Stücken
+ * @license   proprietary
  * @copyright Spreadshare
- * @link https://www.spreadshare.co
+ * @link      https://www.spreadshare.co
  *
  * @version   $Version$
  * @package   DS\Component
@@ -44,6 +44,13 @@ class Auth
     protected $user;
     
     /**
+     * User roles
+     *
+     * @var int
+     */
+    protected $roles = 0;
+    
+    /**
      * Remember authenticated session for 15 days
      *
      * @var int
@@ -58,6 +65,16 @@ class Auth
     public function getSecurity()
     {
         return $this->security;
+    }
+    
+    /**
+     * @param int $roleId
+     *
+     * @return bool
+     */
+    public function hasRole(int $roleId = UserRoles::StaffPick)
+    {
+        return !!($this->roles & $roleId);
     }
     
     /**
@@ -131,6 +148,7 @@ class Auth
         if ($this->userId > 0)
         {
             $this->user = User::findFirstById($this->userId);
+            $this->roles = $this->user->getRoles();
         }
         else
         {

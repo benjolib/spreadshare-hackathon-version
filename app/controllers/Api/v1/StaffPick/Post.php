@@ -5,6 +5,7 @@ namespace DS\Controller\Api\v1\StaffPick;
 use DS\Controller\Api\ActionHandler;
 use DS\Controller\Api\Meta\Record;
 use DS\Controller\Api\MethodInterface;
+use DS\Model\DataSource\UserRoles;
 use DS\Model\TableStaffPicks;
 
 /**
@@ -66,9 +67,9 @@ class Post extends ActionHandler implements MethodInterface
         {
             $userId = $this->getServiceManager()->getAuth()->getUserId();
             
-            if ($userId > 0)
+            if ($userId > 0 && $this->getServiceManager()->getAuth()->hasRole(UserRoles::StaffPick))
             {
-                $tableStaffPicks = TableStaffPicks::get('tableId', $this->action);
+                $tableStaffPicks = TableStaffPicks::get($this->action, 'tableId');
                 
                 if ($tableStaffPicks->getCreatedAt())
                 {

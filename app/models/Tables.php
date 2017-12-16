@@ -56,6 +56,21 @@ class Tables
     }
     
     /**
+     * Filter staff picked tables
+     *
+     * @return Tables
+     */
+    public function filterStaffPicks(): Tables
+    {
+        $this->initQuery();
+        
+        $this->query->innerJoin(TableStaffPicks::class, TableStaffPicks::class . '.tableId = ' . Tables::class . '.id')
+                    ->orderBy(TableStaffPicks::class . '.createdAt DESC');
+        
+        return $this;
+    }
+    
+    /**
      * Filter for subscriptions by $userId. Better call selectTables() first!
      *
      * @param int $userId
@@ -191,6 +206,7 @@ class Tables
                                    TableStats::class . ".subscriberCount",
                                    Tables::class . ".typeId",
                                    Types::class . ".title as typeTitle",
+                                   "(SELECT " . TableStaffPicks::class . ".createdAt FROM " . TableStaffPicks::class . " WHERE " . TableStaffPicks::class . ".tableId = " . Tables::class . ".id) as staffPick",
                                    "(SELECT " . TableSubscription::class . ".createdAt FROM " . TableSubscription::class . " WHERE " . TableSubscription::class . ".tableId = " . Tables::class . ".id AND " . TableSubscription::class . ".userId = " . $userId . ") as userHasSubscribed",
                                    "(SELECT " . TableVotes::class . ".createdAt FROM " . TableVotes::class . " WHERE " . TableVotes::class . ".tableId = " . Tables::class . ".id AND " . TableVotes::class . ".userId = " . $userId . ") as userHasVoted",
                                    "(SELECT CUSTOM_GROUP_CONCAT(" . Tags::class . ".title, " . Tags::class . ".title, 'ASC', ', ') FROM " . TableTags::class . " INNER JOIN " . Tags::class . " ON " . Tags::class . ".id = " . TableTags::class . ".tagId WHERE " . TableTags::class . ".tableId = " . Tables::class . ".id) as tags",

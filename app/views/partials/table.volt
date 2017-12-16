@@ -1,7 +1,7 @@
 <div class="tableCard">
     <div class="tableCard__info">
         <div class="tableCard__info__title">
-            <h3><a href="/table/{{ table['id'] }}" }>{{ table['title'] }}</a></h3>
+            <h3><a href="/table/{{ table['id'] }}" }>{{ table['title'] }}</a>{% if table['staffPick'] %}<span class="staff-pick">Staff Pick 👏</span>{% endif %}</h3>
             <p>{{ table['tagline'] }}</p>
         </div>
         {% if auth.loggedIn() %}
