@@ -1,0 +1,39 @@
+.box {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  background: white;
+  border-radius: 6px;
+  @include rem2(padding, 15, 15);
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 33.33%;
+    @include rem2(padding, 15, 15);
+
+    a:hover {
+      cursor: pointer;
+
+      .box__item__content > h5 {
+        color: $logo-color;
+        transition: .5s ease color;
+      }
+    }
+
+    &__content {
+      h5 {
+        color: $text-color;
+        font-weight: 600;
+        @include rem(font-size, 18);
+        @include rem(margin-bottom, 3);
+      }
+      p {
+        color: $text-color-alternate;
+        font-weight: 400;
+        @include rem(font-size, 14);
+      }
+    }
+  }
+}

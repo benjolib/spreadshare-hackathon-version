@@ -89,6 +89,15 @@
   </div>
 </div>
 
+<div class="box" style="display: none;">
+  <div class="box__item"><a href="#"><div class="box__item__content"><h5>Box Title</h5><p>This is a box, and I am a very tiny lorem ipsum.</p></div></a></div>
+  <div class="box__item"><a href="#"><div class="box__item__content"><h5>Box Title</h5><p>This is a box, and I am a very tiny lorem ipsum.</p></div></a></div>
+  <div class="box__item"><a href="#"><div class="box__item__content"><h5>Box Title</h5><p>This is a box, and I am a very tiny lorem ipsum.</p></div></a></div>
+  <div class="box__item"><a href="#"><div class="box__item__content"><h5>Box Title</h5><p>This is a box, and I am a very tiny lorem ipsum.</p></div></a></div>
+  <div class="box__item"><a href="#"><div class="box__item__content"><h5>Box Title</h5><p>This is a box, and I am a very tiny lorem ipsum.</p></div></a></div>
+  <div class="box__item"><a href="#"><div class="box__item__content"><h5>Box Title</h5><p>This is a box, and I am a very tiny lorem ipsum.</p></div></a></div>
+</div>
+
 <form method="GET" id="sidebarForm">
   {# content #}
   <div class="container container--home">
