@@ -1,4 +1,8 @@
+{% if auth.loggedIn() %}
 <nav class="navbar">
+{% else %}
+<nav class="navbar navbar--loggedOut">
+{% endif %}
   <div class="navbar__wrapper navbar__wrapper--left">
     <div class="navbar__logo desktop-only desktop-only--flex">
       <a href="/"><img src="/assets/images/icon_1024.png" /></a>
