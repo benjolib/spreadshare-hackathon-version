@@ -65,6 +65,11 @@
   }
 }
 
+.table-menu-tab-active {
+  border-bottom: 3.4px solid $text-color;
+  padding-bottom: 7px;
+}
+
 // css hacks for responsive navbar dropdowns
 .left160 {
   left: 160px !important;
