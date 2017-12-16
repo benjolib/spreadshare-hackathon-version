@@ -44,7 +44,7 @@
 
 {{ partial('layouts/scripts') }}
 
-<script type="text/javascript" src="/js/react/main.08e01870.js"></script>
+<script type="text/javascript" src="/js/react/main.2605dcfa.js"></script>
 {% block scripts %}{% endblock %}
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110506889-1"></script>
