@@ -8,10 +8,11 @@
     width: 100%;
     justify-content: space-between;
     @include rem(padding, 50);
+    padding-bottom: 0;
 
     @include desktop {
       @include rem2(padding, 50, 100);
-      @include rem(padding-bottom, 10);
+      padding-bottom: 0;
     }
 
     &__up {
@@ -200,7 +201,6 @@
       justify-content: center;
       text-transform: uppercase;
       @include rem(margin-top, 50);
-      @include rem(margin-bottom, 16);
       @include rem(font-size, 14);
 
       @include desktop {
@@ -255,6 +255,7 @@
         align-items: center;
         position: relative;
         @include rem(margin-right, 18);
+        @include rem(padding-bottom, 7);
 
         @include desktop {
           @include rem(margin-right, 36);
@@ -386,4 +387,9 @@
 
 .jQqZcd {
   position: sticky !important;
+}
+
+#tableContainer {
+  margin-left: -28px;
+  margin-right: -28px;
 }

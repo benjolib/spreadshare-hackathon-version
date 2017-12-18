@@ -55,15 +55,15 @@
     </div>
   </div>
   <div class="table__header__menu">
-    <a href="/table/{{table['id']}}" class="table__header__menu__item {% if selectedPage == 'table' %} selected{% endif %}">
+    <a href="/table/{{table['id']}}" class="table__header__menu__item {% if selectedPage == 'table' %} selected table-menu-tab-active{% endif %}">
       {{ partial('partials/icons/table') }}
       Table
     </a>
-    <a href="/table/{{table['id']}}/about" class="table__header__menu__item{% if selectedPage == 'about' %} selected{% endif %}">
+    <a href="/table/{{table['id']}}/about" class="table__header__menu__item{% if selectedPage == 'about' %} selected table-menu-tab-active{% endif %}">
       {{ partial('partials/icons/info') }}
       About
     </a>
-    <a href="/table/{{table['id']}}/feed" class="table__header__menu__item{% if selectedPage == 'feed' %} selected{% endif %}">
+    <a href="/table/{{table['id']}}/feed" class="table__header__menu__item{% if selectedPage == 'feed' %} selected table-menu-tab-active{% endif %}">
       {{ partial('partials/icons/feed') }}
       Feed
     </a>
@@ -76,18 +76,18 @@
       Stats
     </a>
     -->
-    <a href="/table/{{table['id']}}/changelog/new" class="table__header__menu__item {% if selectedPage == 'changelog' %} selected{% endif %}">
+    <a href="/table/{{table['id']}}/changelog/new" class="table__header__menu__item {% if selectedPage == 'changelog' %} selected table-menu-tab-active{% endif %}">
       {% if tableStats.unconfirmedChangesCount %}<span>{{ tableStats.unconfirmedChangesCount }}</span>{% endif %}
       {{ partial('partials/icons/changelog') }}
       changelog
     </a>
     {%endif%}
-    <a href="/table/{{table['id']}}/users/subscribers" class="table__header__menu__item{% if selectedPage == 'users' %} selected{% endif %}">
+    <a href="/table/{{table['id']}}/users/subscribers" class="table__header__menu__item{% if selectedPage == 'users' %} selected table-menu-tab-active{% endif %}">
       {{ partial('partials/icons/people') }}
       Users
     </a>
     {% if auth.getUserId() == table['ownerUserId'] %}
-    <a href="/table/{{table['id']}}/settings/details" class="table__header__menu__item{% if selectedPage == 'settings' %} selected{% endif %}">
+    <a href="/table/{{table['id']}}/settings/details" class="table__header__menu__item{% if selectedPage == 'settings' %} selected table-menu-tab-active{% endif %}">
       {{ partial('partials/icons/settings') }}
       Settings
     </a>

@@ -1,4 +1,8 @@
+{% if auth.loggedIn() %}
 <nav class="navbar">
+{% else %}
+<nav class="navbar navbar--loggedOut">
+{% endif %}
   <div class="navbar__wrapper navbar__wrapper--left">
     <div class="navbar__logo desktop-only desktop-only--flex">
       <a href="/"><img src="/assets/images/icon_1024.png" /></a>
@@ -181,10 +185,19 @@
       </div>
     </div>
   </div>
-  <span class="navbar__login">
-    <a href="/login" class="navbar__login__login"></a>
-    <span>or</span>
-    <a href="/signup" class="navbar__login__signup">Sign up</a>
-  </span>
+
+  <div class="navbar__wrapper navbar__wrappper--right">
+    <div class="navbar__controls">
+      <a class="navbar__controls__add__create" href="/table/add">
+        <img src="/assets/icons/add-green.svg" class="navbar__controls__add" title="Create a New Table" />
+        <span>Create a Table</span>
+      </a>
+    </div>
+    <span class="navbar__login">
+      <a href="/login" class="navbar__login__login"></a>
+      <span>or</span>
+      <a href="/signup" class="navbar__login__signup">Sign up</a>
+    </span>
+  </div>
   {% endif %}
 </nav>

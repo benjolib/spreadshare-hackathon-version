@@ -187,16 +187,10 @@ class TableSortingMenu extends React.Component<Props, State> {
     });
   };
 
-  handlePropagation = ev => {
-    ev.preventDefault();
-    ev.stopPropagation();
-    ev.nativeEvent.stopImmediatePropagation();
-  };
-
   render() {
     const unusedColHeader = this.getUnusedColHeader();
     return (
-      <StyledDiv id="sortingDropdown" onClick={this.handlePropagation} hide={this.props.hide}>
+      <StyledDiv id="sortingDropdown" hide={this.props.hide}>
         <Main>
           <table>
             <tbody>

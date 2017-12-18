@@ -34,7 +34,6 @@ import type { Sortings } from "../../components/TableSortingMenu";
 import type { Filters } from "../../components/TableFilterMenu";
 import TableDropdownMenu from "../../components/TableDropdownMenu";
 import TableAdminEditInput from "../../components/TableAdminEditInput";
-// import $ from "jquery";
 
 const TableStyles = styled.div``;
 
@@ -79,8 +78,6 @@ class Table extends Component<Props, State> {
 
   componentDidMount() {
     this.props.fetchTable(this.props.id);
-    // TODO: Commented this out since it broke add row
-    // $(document).click(() => this.setState({ showSortings: false }));
   }
 
   props: Props;
@@ -117,11 +114,7 @@ class Table extends Component<Props, State> {
     });
   };
 
-  toggleSortings = ev => {
-    ev.preventDefault();
-    ev.stopPropagation();
-    ev.nativeEvent.stopImmediatePropagation();
-
+  toggleSortings = () => {
     this.setState({
       showSortings: !this.state.showSortings
     });
@@ -629,7 +622,7 @@ class Table extends Component<Props, State> {
           <TableButton
             icon="sort-white"
             className="table-button sort"
-            onClick={ev => this.toggleSortings(ev)}
+            onClick={this.toggleSortings}
           >
             Sort Table
           </TableButton>
