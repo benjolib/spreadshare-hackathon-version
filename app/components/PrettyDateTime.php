@@ -8,11 +8,10 @@ use DS\Application;
  *
  * PrettyDateTime: Base Code taken from "danielstjules/php-pretty-datetime"
  *
- * @author Dennis Stücken
- * @license proprietary
-
+ * @author    Dennis Stücken
+ * @license   proprietary
  * @copyright Spreadshare
- * @link https://www.spreadshare.co
+ * @link      https://www.spreadshare.co
  *
  * @version   $Version$
  * @package   DS\Component
@@ -73,25 +72,16 @@ class PrettyDateTime
      * @return string The date in human readable format
      * @throws \Exception
      */
-    public static function day(\DateTime $dateTime, \DateTime $reference = NULL)
+    public static function day(\DateTime $dateTime, \DateTime $reference = null, $daysOnly = false)
     {
         // If not provided, set $reference to the current DateTime
         if (!$reference)
         {
-            $reference = new \DateTime(NULL, new \DateTimeZone($dateTime->getTimezone()->getName()));
+            $reference = new \DateTime(null, new \DateTimeZone($dateTime->getTimezone()->getName()));
         }
-
-        // Get the difference between the current date and the supplied $dateTime
-        $difference = $reference->format('U') - $dateTime->format('U');
 
         // Get the date corresponding to the $dateTime
         $date = $dateTime->format('Y/m/d');
-
-        // Throw exception if the difference is NaN
-        if (is_nan($difference))
-        {
-            throw new \Exception('The difference between the DateTimes is NaN.');
-        }
 
         // Today
         if ($reference->format('Y/m/d') == $date)
@@ -134,7 +124,30 @@ class PrettyDateTime
             }
         }
 
-        return self::parse($dateTime, $reference);
+        if ($daysOnly)
+        {
+            // Get the difference between the current date and the supplied $dateTime
+            $difference = $reference->format('U') - $dateTime->format('U');
+
+            // Throw exception if the difference is NaN
+            if (is_nan($difference))
+            {
+                throw new \Exception('The difference between the DateTimes is NaN.');
+            }
+
+            if ($difference > 0)
+            {
+                return number_format($difference / 86400) . ' days ago';
+            }
+            else
+            {
+                return 'in ' . number_format($difference / 86400) . ' days';
+            }
+        }
+        else
+        {
+            return self::parse($dateTime, $reference);
+        }
     }
 
     /**
@@ -150,12 +163,12 @@ class PrettyDateTime
      * @return string The date in human readable format
      * @throws \Exception
      */
-    public static function parse(\DateTime $dateTime, \DateTime $reference = NULL)
+    public static function parse(\DateTime $dateTime, \DateTime $reference = null)
     {
         // If not provided, set $reference to the current DateTime
         if (!$reference)
         {
-            $reference = new \DateTime(NULL, new \DateTimeZone($dateTime->getTimezone()->getName()));
+            $reference = new \DateTime(null, new \DateTimeZone($dateTime->getTimezone()->getName()));
         }
 
         // Get the difference between the current date and the supplied $dateTime

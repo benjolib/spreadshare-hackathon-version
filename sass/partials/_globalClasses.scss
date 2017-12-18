@@ -11,6 +11,22 @@ body {
     font-weight: 600;
   }
 
+  .text-green {
+    color: $primary-color;
+  }
+
+  .text-grey {
+    color: $text-color;
+  }
+
+  .text-lightgrey {
+    color: $text-color-alternate;
+  }
+
+  .text-uppercase {
+    text-transform: uppercase;
+  }
+
   .filter {
     display: none;
   }
@@ -21,6 +37,10 @@ body {
 
   .open {
     display: block;
+  }
+
+  .infinite-scroll-request {
+    display: none;
   }
 
   div.ht_clone_top.handsontable {

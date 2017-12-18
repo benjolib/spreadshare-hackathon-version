@@ -168,6 +168,20 @@ class DateRange
                    ->setFrom($timestamp)
                    ->setTo($timestamp + ($days * 86400) - 1);
     }
+
+    /**
+     * Days to today range
+     *
+     * @return DateRange
+     */
+    public static function initDayFromTodayBackwards(int $day): DateRange
+    {
+        $timestamp = strtotime('-' . $day . ' days');
+
+        return self::factory()
+                   ->setFrom($timestamp)
+                   ->setTo($timestamp + 86400 - 1);
+    }
     
     /**
      * Init last year 01.01-31.12

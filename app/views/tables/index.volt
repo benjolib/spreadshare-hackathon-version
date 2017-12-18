@@ -8,140 +8,49 @@
 
 {# main section #}
 {% block content %}
-{# hero #}
-<div class="main__hero">
-  <img src="/assets/icons/close-hero.svg" id="closeHero" />
-  <h1>Community Curated Tables</h1>
-  <h2>SpreadShare let's you crowd-organise your knowledge in data tables</h2>
-  <p><a data-show="main__hero__tables" class="button" href="javascript:;">🔮 Learn more</a></p>
-  <div class="pages main__hero__tables hidden">
-    <div>
-      <h3>Tables</h3>
-      <h4>We believe in public tables as a format for collecting and distributing information</h4>
-      <p><a data-show="main__hero__collaboration" class="button blue" href="javascript:;">Next</a></p>
-      <p class="page">1 | 7</p>
-    </div>
-    <span class="circle"></span>
-  </div>
-  <div class="pages main__hero__collaboration hidden">
-    <div>
-      <h3>Collaboration</h3>
-      <h4>Collective research through crowd-sourced data creation</h4>
-      <p>
-        <a data-show="main__hero__open_data" class="button blue" href="javascript:;">Next</a>
-      </p>
-      <p class="page">2 | 7</p>
-    </div>
-    <span class="circle"></span>
-  </div>
-  <div class="pages main__hero__open_data hidden">
-    <div>
-      <h3>Open Data</h3>
-      <h4>Access to our data is and will always be free</h4>
-      <p>
-        <a data-show="main__hero__disciplines" class="button blue" href="javascript:;">Next</a>
-      </p>
-      <p class="page">3 | 7</p>
-    </div>
-    <span class="circle"></span>
-  </div>
-  <div class="pages main__hero__disciplines hidden">
-    <div>
-      <h3>Disciplines</h3>
-      <h4>All from Business over Code to Design and Finance</h4>
-      <p>
-        <a data-show="main__hero__ownership" class="button blue" href="javascript:;">Next</a>
-      </p>
-      <p class="page">4 | 7</p>
-    </div>
-    <span class="circle"></span>
-  </div>
-  <div class="pages main__hero__ownership hidden">
-    <div>
-      <h3>Ownership</h3>
-      <h4>We want SpreadShare to be owned by our contributors</h4>
-      <p>
-        <a data-show="main__hero__token" class="button blue" href="javascript:;">Next</a>
-      </p>
-      <p class="page">5 | 7</p>
-    </div>
-    <span class="circle"></span>
-  </div>
-  <div class="pages main__hero__token hidden">
-    <div>
-      <h3>Tokens</h3>
-      <h4>Tokens can be earned by creating content users appreciate</h4>
-      <p>
-        <a data-show="main__hero__autonomy" class="button blue" href="javascript:;">Next</a>
-      </p>
-      <p class="page">6 | 7</p>
-    </div>
-    <span class="circle"></span>
-  </div>
-  <div class="pages main__hero__autonomy hidden">
-    <div>
-      <h3>Autonomy</h3>
-      <h4>We are building a structure which allows our platform to work autonomously</h4>
-      <p><a data-show="" class="button blue" href="javascript:;">🙏</a></p>
-      <p class="page">7 | 7</p>
-    </div>
-    <span class="circle"></span>
-  </div>
-</div>
-
-<div class="box-container">
-    <div class="box-container__content">
-        <h3>Best of the last 7 days</h3>
-        <div class="box">
-            {% for table in bestOf %}
-              <div class="box__item">
-                  <a href="/table/{{ table['id'] }}">
-                      <div class="box__item__content">
-                          <h5>{{ table['title'] }}</h5>
-                          <p>{{ table['tagline'] }}</p>
-                      </div>
-                  </a>
-              </div>
-            {% endfor %}
-        </div>
-    </div>
-
-    <div class="box-container__content">
-        <h3>Staff Picks</h3>
-        <div class="box">
-            {% for table in staffPicks %}
-              <div class="box__item">
-                  <a href="/table/{{ table['id'] }}">
-                      <div class="box__item__content">
-                          <h5>{{ table['title'] }}</h5>
-                          <p>{{ table['tagline'] }}</p>
-                      </div>
-                  </a>
-              </div>
-            {% endfor %}
-        </div>
-    </div>
-</div>
 
 <form method="GET" id="sidebarForm">
   {# content #}
   <div class="container container--home">
-
-      {# tables content #}
-      <div class="container__content">
-          {# filters #}
-
-          {{ partial('homepage/tables') }}
-          <div class="infinite-scroll-container"></div>
-
-          <div class="page-load-status">
-              <div class="loading"></div>
+    {# tables content #}
+    <div class="container__content">
+      {# filters #}
+      <div class="main__content__tables__filters">
+        <div class="main__content__tables__filters__left">
+          <li>{{ activeDateRangeString }}</li>
+          <img src="/assets/icons/chevron-down-dark.svg" />
+          <div class="dropdown dropdown--filters">
+            <ul>
+              <li class="{% if activeDateFilter == 'today' %}link-active{% endif %}"><a href="/tables/{{ order }}/today">Today</a></li>
+              <li class="{% if activeDateFilter == 'yesterday' %}link-active{% endif %}"><a href="/tables/{{ order }}/yesterday">Yesterday</a></li>
+              <li class="{% if activeDateFilter == 'last-week' %}link-active{% endif %}"><a href="/tables/{{ order }}/last-week">Last week</a></li>
+              <li class="{% if activeDateFilter == 'last-30-days' %}link-active{% endif %}"><a href="/tables/{{ order }}/last-30-days">Last 30 Days</a></li>
+              <li class="{% if activeDateFilter == 'last-90-days' %}link-active{% endif %}"><a href="/tables/{{ order }}/last-90-days">Last 90 Days</a></li>
+              <li class="{% if activeDateFilter == 'last-year' %}link-active{% endif %}"><a href="/tables/{{ order }}/last-year">Last Year</a></li>
+              <li class="{% if activeDateFilter == 'all-time' %}link-active{% endif %}"><a href="/tables/{{ order }}/all-time">All Time</a></li>
+            </ul>
           </div>
-
+        </div>
+        <div class="main__content__tables__filters__right">
+          <li class="{% if order is 'newest' %}link-active{% endif %}"><a href="/tables/newest/{{ activeDateFilter }}">Newest</a></li>
+          <li class="{% if order is 'most-upvoted' %}link-active{% endif %}"><a href="/tables/most-upvoted/{{ activeDateFilter }}">Upvotes</a></li>
+          <li class="{% if order is 'most-viewed' %}link-active{% endif %}"><a href="/tables/most-viewed/{{ activeDateFilter }}">Views</a></li>
+          <li class="{% if order is 'most-contributed' %}link-active{% endif %}"><a href="/tables/most-contributed/{{ activeDateFilter }}">Contributions</a></li>
+        </div>
       </div>
 
+      {# cards #}
+        <div class="tables__content__main__cards">
+            {{ partial('tables/tables') }}
+        </div>
 
-      {# sidebar wrapper #}
+        <div class="page-load-status">
+            <p class="loading infinite-scroll-request"></p>
+        </div>
+    </div>
+
+
+    {# sidebar wrapper #}
     <div class="aside__wrapper">
       {# sidebar 1 #}
       <aside class="aside aside--home" id="filterByTopic">
@@ -244,10 +153,38 @@
       createPopper($('.navbar__search__filter'), $('.dropdown--notifications'));
     });
 
+    /* Popper */
+    var $referenceElement = $('.main__content__tables__filters__left');
+    if ($referenceElement.length) {
+      var $onPopper = $('.dropdown--filters');
+
+      var createPopper = function (ref, pop, place) {
+          if (!ref) {
+              ref = $referenceElement;
+          }
+          if (!pop) {
+              pop = $onPopper;
+          }
+          if (!place) {
+              place = 'bottom';
+          }
+          new Popper(ref, pop, {
+              placement: place,
+          });
+      };
+
+      new Popper($referenceElement, $onPopper, {
+          placement: 'bottom',
+      });
+      $referenceElement.click(function () {
+          $onPopper.toggleClass('show');
+      });
+    }
+
     // Load cards for infinite scrolls
     var $container = $('.tables__content__main__cards').infiniteScroll({
       path: function () {
-        var pageNumber = (this.pageIndex + 1);
+        var pageNumber = (this.loadCount + 1);
 
         $('.upvote').on('click', function () {
           $svg = $(this).find('.chevronUp').find('svg').find('path');
@@ -268,28 +205,24 @@
               button.find('.chevronUp').find('svg').find('.fillColor').removeClass('white');
               span.text(parseInt(parseInt(span.text()) - 1));
             }
-          }
+          },
         });
 
-        return '/?page=' + pageNumber;
+        return document.location.href + '?page=' + pageNumber;
       },
-      append: false,
+      responseType: 'document',
+      append: '.tableCard',
       status: '.page-load-status',
-      request: '.loading',
-      history: false,
-      debug: false,
+      history: 'push',
+      debug: true,
       scrollThreshold: 400
     });
 
-    $('.tables__content__main__cards').data('infiniteScroll').pageIndex = parseInt('{{ loadedUntilPage }}');
-
     // stop load on scroll if no results are found
     $container.on('load.infiniteScroll', function (event, response) {
-      $container.infiniteScroll( 'appendItems', $( response ).find('.tables') );
-
       //disable loadOnScroll
       if (response.getElementById("no-results")) {
-        //$container.infiniteScroll('option', { loadOnScroll: false })
+        $container.infiniteScroll('option', { loadOnScroll: false })
       }
     });
   });

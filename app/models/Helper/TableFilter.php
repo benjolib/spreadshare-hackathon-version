@@ -48,6 +48,56 @@ class TableFilter
     public $dateRange = null;
 
     /**
+     * @var bool
+     */
+    public $staffPicks = false;
+
+    /**
+     * @var bool
+     */
+    public $bestOf = false;
+
+    /**
+     * @return boolean
+     */
+    public function getBestOf(): bool
+    {
+        return $this->bestOf;
+    }
+
+    /**
+     * @param boolean $bestOf
+     *
+     * @return $this
+     */
+    public function setBestOf(bool $bestOf): TableFilter
+    {
+        $this->bestOf = $bestOf;
+
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getStaffPicks(): bool
+    {
+        return $this->staffPicks;
+    }
+
+    /**
+     * @param boolean $staffPicks
+     *
+     * @return $this
+     */
+    public function setStaffPicks(bool $staffPicks): TableFilter
+    {
+        $this->staffPicks = $staffPicks;
+
+        return $this;
+    }
+
+    /**
      * @return DateRange|null
      */
     public function getDateRange()
@@ -60,7 +110,7 @@ class TableFilter
      *
      * @return $this
      */
-    public function setDateRange($dateRange)
+    public function setDateRange($dateRange): TableFilter
     {
         $this->dateRange = $dateRange;
 

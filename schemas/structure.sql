@@ -760,3 +760,4 @@ ALTER TABLE `userStats` CHANGE `upvotesCount` `upvotesCount` INT(10)  UNSIGNED  
 ALTER TABLE `userStats` ADD INDEX (`upvotesCount`);
 ALTER TABLE `userStats` ADD INDEX (`followerCount`);
 
+ALTER TABLE `userSettings` ADD `hideHeroOnHomepage` TINYINT(1)  UNSIGNED  NULL  DEFAULT NULL  AFTER `showTokensOnProfilePage`;

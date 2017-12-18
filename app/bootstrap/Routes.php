@@ -118,7 +118,7 @@ return [
     [
         'url' => '/tables/{order:[a-z0-9\-]+}',
         'paths' => [
-            'controller' => 'Index',
+            'controller' => 'Tables',
             'action' => 'index',
         ],
         'methods' => ['GET'],
@@ -126,7 +126,7 @@ return [
     [
         'url' => '/tables/{order:[a-z0-9\-]+}/{date:[a-z0-9\-]+}',
         'paths' => [
-            'controller' => 'Index',
+            'controller' => 'Tables',
             'action' => 'index',
         ],
         'methods' => ['GET'],
