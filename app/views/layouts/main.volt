@@ -7,8 +7,8 @@
   <meta property="og:title" content="{% block title %}{% endblock %}"/>
   <meta property="og:type"  content="website" />
   <meta property="og:description" content="{{ config.description }}"/>
-  <meta property="og:url" content="{{ base_url }}"/>
-  <meta property="og:image" content="{{ base_url }}assets/images/icon_1024.png"/>
+  <meta property="og:url" content="http://{{ config.domain }}"/>
+  <meta property="og:image" content="http://{{ config.domain }}/assets/images/icon_1024.png"/>
   <meta property="fb:app_id" content="{{ config.hybridauth.providers.Facebook.keys.id }}">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,800" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
