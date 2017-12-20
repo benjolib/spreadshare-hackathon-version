@@ -43,6 +43,19 @@ class Table
     
     /**
      * @param int $tableId
+     *
+     * @return Tables
+     */
+    public function unpublish(int $tableId)
+    {
+        $tableModel = Tables::get($tableId);
+        $tableModel->setFlags(TableFlags::Unpublished)->save();
+        
+        return $tableModel;
+    }
+    
+    /**
+     * @param int $tableId
      * @param int $fixedRowsTop
      * @param int $fixedColumnsLeft
      *

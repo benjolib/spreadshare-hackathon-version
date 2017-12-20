@@ -186,6 +186,7 @@ class Tables
                            ->columns(
                                [
                                    Tables::class . ".id",
+                                   Tables::class . ".flags",
                                    Tables::class . ".title",
                                    Tables::class . ".tagline",
                                    Tables::class . ".ownerUserId",

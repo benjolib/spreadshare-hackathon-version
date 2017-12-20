@@ -14,7 +14,6 @@ use DS\Model\TableRelations;
 use DS\Model\Tables;
 use DS\Model\TableTags;
 use DS\Model\Tags;
-use Symfony\Component\VarDumper\VarDumper;
 
 /**
  * Spreadshare
@@ -81,11 +80,32 @@ class Settings
                     
                     $this->view->setVar('relatedTables', $relatedTables->findRelatedTables($table->getId()));
                     break;
-                
+                case 'options':
+                    if ($this->request->isPost())
+                    {
+                        $tableApi = new \DS\Api\Table();
+                        $tableApi->fixRowsAndColumns(
+                            $table->getId(),
+                            (int) $this->request->getPost('fixedRowsTop', null, 0),
+                            (int) $this->request->getPost('fixedColumnsLeft', null, 0)
+                        );
+                        
+                        $flags = (int) $this->request->getPost('flags');
+                        if ($flags === 1)
+                        {
+                            $tableApi->publish($table->getId());
+                        }
+                        elseif ($flags === 0)
+                        {
+                            $tableApi->unpublish($table->getId());
+                        }
+                    }
+                    
+                    $tableProps = (new TableProperties())->get($table->getId(), 'tableId');
+                    $this->view->setVar('tableProps', $tableProps);
+                    break;
                 default:
                 case 'details':
-                    $tableProps = (new TableProperties())->get($table->getId(), 'tableId');
-                    
                     if ($this->request->isPost())
                     {
                         try
@@ -107,11 +127,6 @@ class Settings
                                     $this->request->getPost('location', null, [])
                                 );
                                 
-                                $tableApi->fixRowsAndColumns(
-                                    $table->getId(),
-                                    (int) $this->request->getPost('fixedRowsTop', null, 0),
-                                    (int) $this->request->getPost('fixedColumnsLeft', null, 0)
-                                );
                             }
                         }
                         catch (\Exception $e)
@@ -163,7 +178,6 @@ class Settings
                     }
                     
                     $this->view->setVar('topics', $topics);
-                    $this->view->setVar('tableProps', $tableProps);
                     break;
             }
             

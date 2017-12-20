@@ -36,7 +36,7 @@
   }
 
   a {
-    @include rem(margin-bottom, 5);
+    @include rem(margin-bottom, 15);
 
     .aside__item {
       &:last-child {

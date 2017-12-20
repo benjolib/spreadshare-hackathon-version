@@ -16,6 +16,10 @@
                 {{ partial('table/detail/settings/related') }}
                 {% endif %}
 
+                {% if page == "options" %}
+                {{ partial('table/detail/settings/options') }}
+                {% endif %}
+
                 {% if page == "details" %}
                 {{ partial('table/detail/settings/details') }}
                 {% endif %}
@@ -33,6 +37,9 @@
         <aside class="aside aside--tableDetails">
             <a href="/table/{{ table['id'] }}/settings/details">
                 <div class="aside__item {% if page == 'details' %}item-selected{% endif %}"><p>Table Details</p></div>
+            </a>
+            <a href="/table/{{ table['id'] }}/settings/options">
+                <div class="aside__item {% if page == 'options' %}item-selected{% endif %}"><p>Table Options</p></div>
             </a>
             <a href="/table/{{ table['id'] }}/settings/related">
                 <div class="aside__item {% if page == 'related' %}item-selected{% endif %}"><p>Related Table</p></div>
