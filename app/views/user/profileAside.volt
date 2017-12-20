@@ -6,8 +6,8 @@
     <a href="/user/{{ profile.handle }}/subscribed">
       <div class="aside__item {% if currentPage == 'subscribed' %}item-selected{% endif %}"><p>Subscribed</p></div>
     </a>
-    <a href="/user/{{ profile.handle }}/owned">
-      <div class="aside__item {% if currentPage == 'owned' %}item-selected{% endif %}"><p>Owned</p></div>
+    <a href="/user/{{ profile.handle }}/created">
+      <div class="aside__item {% if currentPage == 'created' %}item-selected{% endif %}"><p>Created</p></div>
     </a>
     <a href="/user/{{ profile.handle }}/contributed">
       <div class="aside__item {% if currentPage == 'contributed' %}item-selected{% endif %}"><p>Contributed</p></div>

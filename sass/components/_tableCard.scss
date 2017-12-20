@@ -79,18 +79,23 @@
       }
     }
 
-    &__upvote {
+    &__right_buttons {
       position: absolute;
-      align-items: center;
       top: 20px;
-      right: 20px;
+      right: 10px;
+      align-items: center;
       display: flex;
       align-self: flex-start;
+    }
+
+    &__button,
+    &__upvote {
       border: 0;
       background: $upvote-background-color;
       color: $upvote-text-color;
       font-weight: 300;
       border-radius: 3px;
+      margin-right: 10px;
       @include rem2(padding, 2, 10);
 
       &:hover {
@@ -99,10 +104,24 @@
         color: $upvote-text-color;
       }
 
-      span {
+      a, a:hover, span {
         color: $text-color;
         font-weight: 600;
         @include rem(font-size, 12);
+      }
+
+      &.green {
+        background: $primary-color;
+
+        a, a:hover, span {
+          color: white;
+        }
+
+        &:hover {
+          cursor: pointer;
+          background: darken($primary-color, 4%);
+          color: white;
+        }
       }
 
       .chevronUp {

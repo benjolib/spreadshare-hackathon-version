@@ -52,7 +52,7 @@ class TableDetailController
         {
             if ($tableModel->getOwnerUserId() == $this->serviceManager->getAuth()->getUserId())
             {
-                header(sprintf('Location: /table/add/confirm?tableId=%s&redirectToTable', $tableModel->getId()));
+                // header(sprintf('Location: /table/add/confirm?tableId=%s&redirectToTable', $tableModel->getId()));
             }
             else
             {

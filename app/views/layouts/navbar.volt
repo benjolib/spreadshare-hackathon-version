@@ -86,6 +86,7 @@
           <li><a href="/leaderboard">Leaderboard</a></li>
           <li class="separator"></li>
           <li><a href="/user/{{ auth.getUser().handle }}">Profile</a></li>
+          <li><a href="/user/{{ auth.getUser().handle }}/tables">Your Tables</a></li>
           <li><a href="/settings/wallet">Wallet</a></li>
           <li><a href="/settings/invite">Get Token</a></li>
           <li><a href="/settings/personal">Settings</a></li>

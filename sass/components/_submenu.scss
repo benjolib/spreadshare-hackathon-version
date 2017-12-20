@@ -1,0 +1,48 @@
+.submenu {
+  background: $blue-background-color;
+  height: 80px;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: left;
+
+  ul {
+    margin: 0;
+    padding: 25px;
+    list-style-type: none;
+    display: flex;
+
+    li {
+
+      &.active {
+        a {
+          color: $text-color-menu-active;
+        }
+      }
+
+      a {
+        color: $text-color-menu-inactive;
+        display: block;
+        padding: 8px 16px;
+        text-decoration: none;
+        border-radius: 8px;
+        text-transform: uppercase;
+        @include rem(font-size, 13);
+        font-weight: 400;
+
+        &:hover {
+          background: darken($blue-background-color, 4);
+        }
+      }
+    }
+
+  }
+
+  @include desktop {
+    @include rem2(padding, 50, 100);
+    padding-top: 0;
+  }
+}

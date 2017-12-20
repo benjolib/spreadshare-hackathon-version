@@ -20,7 +20,7 @@ use DS\Model\User;
  * @version   $Version$
  * @package   DS\Controller\User
  */
-class Owned
+class Created
     extends BaseController
     implements UserSubcontrollerInterface
 {
