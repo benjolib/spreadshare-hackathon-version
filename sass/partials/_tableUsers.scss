@@ -138,12 +138,14 @@
 .tableUsers__item {
   display: flex;
   margin: 10px 0 10px 0;
+  width: 280px;
 }
 .tableUsers__item img {
   width: 80px;
 }
 .tableUsers__item__info {
   padding: 5px 10px 10px 20px;
+  width: 150px;
 }
 .tableUsers__item__follow {
   margin: auto;
