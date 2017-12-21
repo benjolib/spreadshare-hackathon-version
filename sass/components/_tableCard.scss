@@ -125,8 +125,6 @@
       }
 
       .chevronUp {
-        @include rem(margin-right, 14);
-
         svg {
           @include rem(width, 10);
           @include rem(height, 10);

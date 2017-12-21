@@ -4,24 +4,26 @@
             <h3><a href="/table/{{ table['id'] }}" }>{{ table['title'] }}</a>{% if table['staffPick'] %}<span class="staff-pick">Staff Pick 👏</span>{% endif %}</h3>
             <p>{{ table['tagline'] }}</p>
         </div>
+        <div class="tableCard__info__right_buttons">
         {% if auth.loggedIn() %}
             {% if table['ownerUserId'] != auth().getUserId() %}
-            <div class="tableCard__info__upvote upvote {% if table['userHasVoted'] %}selected{% endif %}" data-action="upvote" data-id="{{ table['id'] }}"
-                 onclick="var event = arguments[0] || window.event; event.stopPropagation();">
-                <div class="chevronUp">
-                    {{ partial('partials/icons/upvote') }}
+                <div class="tableCard__info__button upvote {% if table['userHasVoted'] %}selected{% endif %}" data-action="upvote" data-id="{{ table['id'] }}"
+                     onclick="var event = arguments[0] || window.event; event.stopPropagation();">
+                    <a class="chevronUp">
+                        {{ partial('partials/icons/upvote') }}
+                        <span>{{ table['votesCount'] +0 }}</span>
+                    </a>
                 </div>
-                <span>{{ table['votesCount'] +0 }}</span>
-            </div>
             {% endif %}
         {% else %}
-        <div class="tableCard__info__upvote upvote" onclick="document.location.href='/login';">
-            <div class="chevronUp">
-                {{ partial('partials/icons/upvote') }}
+            <div class="tableCard__info__button upvote" onclick="document.location.href='/login';">
+                <a class="chevronUp">
+                    {{ partial('partials/icons/upvote') }}
+                    <span>{{ table['votesCount'] +0 }}</span>
+                </a>
             </div>
-            <span>{{ table['votesCount'] +0 }}</span>
-        </div>
         {% endif %}
+        </div>
     </div>
     <div class="tableCard__stats">
         {# table type #}
