@@ -146,7 +146,7 @@ class IndexController
     {
         $tableFilter = new TableFilter();
         $tableFilter->setBestOf(true);
-        $tableFilter->setDateRange(DateRange::initThisWeek());
+        $tableFilter->setDateRange(DateRange::initLastDays(7));
 
         // Filter tables by tableFilter
         $tables = (new Tables())
