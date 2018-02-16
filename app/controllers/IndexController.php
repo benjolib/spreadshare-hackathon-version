@@ -112,7 +112,10 @@ class IndexController
                 {
                     // Return nothing if tables are empty for today.
                     $this->view->disable();
-                    die;
+                    header('Content-Type: application/json');
+                    die(json_encode([
+                        'code' => 'no-results'
+                    ]));
                 }
             }
             else

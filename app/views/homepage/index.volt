@@ -285,7 +285,14 @@
 
     // stop load on scroll if no results are found
     $container.on('load.infiniteScroll', function (event, response) {
-      $container.infiniteScroll( 'appendItems', $( response ).find('.tables') );
+      if (response) {
+        $container.infiniteScroll('appendItems', $(response).find('.tables'));
+      }
+      else {
+        // Load more
+        console.log('Loading more...')
+        $container.infiniteScroll('loadNextPage')
+      }
 
       //disable loadOnScroll
       if (response.getElementById("no-results")) {
