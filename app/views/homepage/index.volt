@@ -11,7 +11,7 @@
 {# hero #}
 <div class="main__hero">
   <img src="/assets/icons/close-hero.svg" id="closeHero" />
-  <h1>Community Curated Tables</h1>
+  <h1>Create curated lists with our community</h1>
   <h2>SpreadShare let's you crowd-organise your knowledge in data tables</h2>
   <p><a data-show="main__hero__tables" class="button" href="javascript:;">🔮 Learn more</a></p>
   <div class="pages main__hero__tables hidden">
