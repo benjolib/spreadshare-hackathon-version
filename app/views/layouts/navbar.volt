@@ -1,7 +1,6 @@
 {% if auth.loggedIn() %}
 <nav class="navbar">
 {% else %}
-<div style="height:40px;background:#252541;border-bottom:1px solid #484871;color:#fff;"><p style="text-align: center;line-height:40px;"><svg style="border-radius:50%;border:1px solid #fff;margin-right:5px;" width="25" height="25" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M40 20c0 11.046-8.954 20-20 20S0 31.046 0 20 8.954 0 20 0s20 8.954 20 20" fill="#DA552F"></path><path d="M22.667 20H17v-6h5.667c1.656 0 3 1.343 3 3s-1.344 3-3 3m0-10H13v20h4v-6h5.667c3.866 0 7-3.134 7-7s-3.134-7-7-7" fill="#FFF"></path></g></svg> SpreadShare has been nominated for a Golden Kitty Award on Product Hunt. Check it out <a style="color:#fff;text-decoration:underline;" target="_new" href="https://www.producthunt.com/posts/spreadshare-2">meow</a>! 😸</p></div>
 <nav class="navbar navbar--loggedOut">
 {% endif %}
   <div class="navbar__wrapper navbar__wrapper--left">
