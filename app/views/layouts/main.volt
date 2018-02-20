@@ -10,7 +10,12 @@
   <meta property="og:url" content="http://{{ config.domain }}"/>
   <meta property="og:image" content="http://{{ config.domain }}/assets/images/icon_1024.png"/>
   <meta property="fb:app_id" content="{{ config.hybridauth.providers.Facebook.keys.id }}">
+  {# TODO: remove if not needed anymore #}
   <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,800" rel="stylesheet">
+  {# TODO: use only needed font sizes #}
+  <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  {# TODO: use only needed font sizes #}
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:100,100i,300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
   <link rel="stylesheet" href="/css/styles.css">
   <link href="/css/main.2de178e4.css" rel="stylesheet">
@@ -32,10 +37,10 @@
 </section>
 
 {# footer #}
-{{ partial('layouts/footer') }}
+{# {{ partial('layouts/footer') }} #}
 
 <div class="white-overlay"></div>
-<a class="button green found-a-bug" href="https://betterresearch.typeform.com/to/o3W0BI" target="_blank">Report a Bug 🐞</a>
+{# <a class="button green found-a-bug" href="https://betterresearch.typeform.com/to/o3W0BI" target="_blank">Report a Bug 🐞</a> #}
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
 <script type="text/javascript" src="/js/api.js"></script>

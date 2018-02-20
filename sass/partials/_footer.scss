@@ -6,6 +6,8 @@
   color: $text-color;
   box-sizing: border-box;
   font-family: 'Montserrat', sans-serif;
+  border-top: 1px solid #E4E4E4;
+  margin-top: auto;
 
   @include tablet {
     @include rem2(padding, 0, 36);
@@ -19,7 +21,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    @include rem(margin-bottom, 50);
+    @include rem(margin-bottom, 26);
     @include rem2(padding, 0, 50);
 
     @include tablet {
@@ -35,7 +37,7 @@
     &__left {
       display: flex;
       flex-direction: column;
-      @include rem(margin-top, 50);
+      @include rem(margin-top, 26);
 
       @include desktop {
         width: 57%;
@@ -95,7 +97,7 @@
         @include rem(margin-top, 50);
       }
       @include desktop {
-        @include rem(margin-top, 112);
+        @include rem(margin-top, 26);
         justify-content: flex-start;
       }
 

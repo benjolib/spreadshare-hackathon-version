@@ -24,7 +24,7 @@ class Tables
     extends BaseController
     implements UserSubcontrollerInterface
 {
-    
+
     /**
      * Handle Subcontroller
      *
@@ -36,33 +36,20 @@ class Tables
     {
         try
         {
-            $strFilter = $this->request->get('filter', null, 'drafts');
-            switch ($strFilter)
-            {
-                case 'published':
-                    $filter = TableFlags::Published;
-                    $this->view->setVar('showPublishButton', false);
-                    break;
-                default:
-                case 'drafts':
-                    $this->view->setVar('showPublishButton', true);
-                    $filter = TableFlags::Unpublished;
-                    break;
-            }
-            $this->view->setVar('filter', $strFilter);
-            
+            $filter = TableFlags::All;
+
             $tables = (new TablesModel())->selectTables($this->serviceManager->getAuth()->getUserId(), new TableFilter(), $filter, 0)
                                          ->filterOwned((int) $user->getId());
-            
+
             $this->view->setVar('tables', $tables->getQuery()->execute()->toArray() ?: []);
-            
+
             $this->view->setMainView('user/tables/tables');
         }
         catch (\Exception $e)
         {
             throw $e;
         }
-        
+
         return $this;
     }
 }

@@ -9,10 +9,11 @@
   color: black;
   position: relative;
   box-sizing: border-box;
+  border-bottom: 1px solid #E4E4E4;
   @include rem(padding-top, 25);
 
   @include desktop {
-    @include rem2(padding, 40, 28);
+    @include rem2(padding, 26, 28);
   }
 
   &--loggedOut {

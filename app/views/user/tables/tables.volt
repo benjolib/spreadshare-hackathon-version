@@ -1,93 +1,57 @@
 {% extends 'layouts/main.volt' %}
 
-{% block title %}SpreadShare - {{ profile.name }} - Your Tables{% endblock %}
+{% block title %}SpreadShare - {{ profile.name }} - Lists{% endblock %}
 
 {% block header %}
 {% endblock %}
 
 {% block content %}
-<div class="submenu">
-    <ul>
-        <li {% if filter == 'published' %}class="active"{% endif %}><a href="/user/{{ profile.handle }}/tables?filter=published">Published Tables</a></li>
-        <li {% if filter == 'drafts' %}class="active"{% endif %}><a href="/user/{{ profile.handle }}/tables?filter=drafts">Drafts</a></li>
-    </ul>
-</div>
-
-<div class="profile" style="margin-top:50px;">
-    {{ flash.output() }}
-    <div class="container container--usersAndTables">
-        {% if tables is defined AND tables %}
-        {% if tables %}
-        <div class="container__content container__content--tables" style="width:100%;">
-            {% for table in tables %}
-            <div class="tableCard">
-                <div class="tableCard__info">
-                    <div class="tableCard__info__title">
-                        <h3><a href="/table/{{ table['id'] }}" }>{{ table['title'] }}</a>{% if table['staffPick'] %}<span class="staff-pick">Staff Pick 👏</span>{% endif %}</h3>
-                        <p>{{ table['tagline'] }}</p>
-                    </div>
-                    {% if auth.loggedIn() %}
-                    {% if table['ownerUserId'] == auth().getUserId() %}
-                    <div class="tableCard__info__right_buttons">
-                        <div class="tableCard__info__button">
-                            <a href="/table/{{ table['id'] }}/settings">Manage</a>
-                        </div>
-                        {% if showPublishButton %}
-                            <div class="tableCard__info__button green">
-                                <a href="/table/add/confirm?tableId={{ table['id'] }}&redirectToTable">Publish</a>
-                            </div>
-                        {% endif %}
-                    </div>
-                    {% endif %}
-                    {% endif %}
-                </div>
-                <div class="tableCard__stats">
-                    {# table type #}
-                    <a class="tableCard__stats__item tableCard__stats__item--type" href="/?topic=&type={{ table['typeId'] }}">
-                        {% if table['topic1'] %}
-                        <span>{{ table['topic1'] }}</span>
-                        {% else %}
-                        <span></span>
-                        {% endif %}
-                    </a>
-                    {# tokens #}
-                    <a class="tableCard__stats__item tableCard__stats__item--token" href="/table/{{ table['id'] }}">
-                        {% if table['tokensCount'] > 0 %}
-                        <span>{{ table['tokensCount'] +0 }} Tokens</span>
-                        {% else %}
-                        <span>0 Token</span>
-                        {% endif %}
-                    </a>
-                    {# views #}
-                    <a class="tableCard__stats__item tableCard__stats__item--views" href="/table/{{ table['id'] }}/about">
-                        <span><i>{{ table['viewsCount'] +0 }}</i> Views</span>
-                    </a>
-                    {# comments #}
-                    <a class="tableCard__stats__item tableCard__stats__item--comments" href="/table/{{ table['id'] }}/about#comments">
-                        <span><i>{{ table['commentsCount'] +0 }}</i> Comments</span>
-                    </a>
-                    {# contributions #}
-                    <a class="tableCard__stats__item tableCard__stats__item--contributions" href="/table/{{ table['id'] }}/users/contributors">
-                        <span><i>{{ table['contributionCount'] }}</i> Contributions</span>
-                    </a>
-                </div>
-            </div>
-
-            {% endfor %}
-        </div>
-        {% endif %}
-
-        {% else %}
-        <div class="container__content" style="margin-right:40px;">
-            <div class="container__content center" style="width:100%;padding: 40px;">
-                <div class="center" style="width:100%;">
-                    <img src="/assets/images/desktop.png" alt="" />
-                    <p>&nbsp;</p>
-                    <p>You haven't created any tables, yet.</p>
-                </div>
-            </div>
-        </div>
-        {% endif %}
+  <div class="u-flex u-sm-flexCol u-md-flexRow u-flexJustifyBetween u-md-flexAlignItemsEnd page-top-margin-bottom">
+    <div>
+      <h1 class="heading h1">Lists</h1>
+      <h2 class="page-subtitle">Manage all your lists in one place.</h2>
     </div>
-</div>
+    <div>
+      <a href="/table/add" class="button">Curate a List</a>
+    </div>
+  </div>
+
+  {% if tables is defined AND tables %}
+    <div class="u-flex u-flexCol">
+      {% for table in tables %}
+        <div class="card u-flex u-flexJustifyBetween u-flexAlignItemsCenter">
+          <div>
+            <div class="card-flag {{ table['flags'] === '2' ? 'published' : 'draft' }}">{{ table['flags'] === '2' ? 'PUBLISHED' : 'DRAFT' }}</div>
+            <h3 class="heading h3">{{ table['title'] }}</h3>
+            <p class="text">{{ table['tagline'] }}</p>
+          </div>
+          <div>
+            <div class="u-flex u-flexJustifyCenter u-flexAlignItemsCenter card-actions-button l-button-{{ table['id'] }}">
+              <img src="/assets/images/arrow-down.svg" />
+            </div>
+            <div class="dropdown card-actions-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown-{{ table['id'] }}">
+              <a href="/table/{{ table['id'] }}/settings"><img src="/assets/images/pencil2.svg" /> Edit List</a>
+              <a href="#" onclick="alert('TODO')" class="warning-color"><img src="/assets/images/bin2.svg" /> Delete List</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>You haven't created any lists.</p>
+  {% endif %}
+{% endblock %}
+
+{% block scripts %}
+  <script type="text/javascript">
+    {% for table in tables %}
+      new Popper($('.l-button-{{ table['id'] }}'), $('.l-dropdown-{{ table['id'] }}'), {
+        placement: 'bottom-end'
+      });
+
+      $('.l-button-{{ table['id'] }}').click(function () {
+        $('.l-dropdown-{{ table['id'] }}').toggleClass('show');
+      });
+    {% endfor %}
+  </script>
 {% endblock %}
