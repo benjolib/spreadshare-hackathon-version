@@ -16,9 +16,8 @@
   <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   {# TODO: use only needed font sizes #}
   <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:100,100i,300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
   <link rel="stylesheet" href="/css/styles.css">
-  <link href="/css/main.2de178e4.css" rel="stylesheet">
+  <link href="/css/main.878d83e3.css" rel="stylesheet">
   <link rel="icon" type="image/png" href="/assets/icons/favicon.png">
 
   {% block header %}{% endblock %}
@@ -49,7 +48,7 @@
 
 {{ partial('layouts/scripts') }}
 
-<script type="text/javascript" src="/js/react/main.b647a828.js"></script>
+<script type="text/javascript" src="/js/react/main.3bd21672.js"></script>
 {% block scripts %}{% endblock %}
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110506889-1"></script>

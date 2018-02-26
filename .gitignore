@@ -140,6 +140,7 @@ public/js/webtools.js
 
 # dist
 system/uploads/userimages
+system/uploads/listimages
 .idea/codeStyles/codeStyleConfig.xml
 .idea/codeStyles/Project.xml
 system/log/queue-table

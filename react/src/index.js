@@ -4,7 +4,6 @@ import "whatwg-fetch";
 import React from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
-import "sanitize.css/sanitize.css";
 import "./globalStyles";
 import configureStore from "./store";
 import Table from "./containers/Table";

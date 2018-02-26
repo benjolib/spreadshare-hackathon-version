@@ -2,15 +2,7 @@
   position: relative;
   font-family: 'Lato', sans-serif;
   background: $background-color;
-  display: flex;
-  flex-direction: column;
   width: 100%;
-  max-width: 934px;
-  margin: 0 auto;
-  padding: 40px 20px 60px 20px;
-  @media(min-width: 768px) {
-    padding: 105px 20px 125px 20px;
-  }
 
   &__hero__tables.hidden {
     display: none;

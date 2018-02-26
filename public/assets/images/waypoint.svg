@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="10px" height="12px" viewBox="0 0 10 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 5</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Home-(logged-in)-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-73.000000, -398.000000)" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Group-5" transform="translate(74.000000, 399.000000)" stroke="#B1BBC7">
+            <g id="Group">
+                <path d="M4,0.0621627907 C6.14230303,0.0621627907 7.87878788,1.85209302 7.87878788,4.06002326 C7.87878788,4.95562791 7.5929697,5.7824186 7.11054545,6.44881395" id="Shape"></path>
+                <ellipse id="Oval" cx="4" cy="4.06002326" rx="1.21212121" ry="1.27906977"></ellipse>
+                <path d="M4,10.8063488 L7.11054545,6.44881395" id="Shape"></path>
+                <path d="M4,0.0621627907 C1.85769697,0.0621627907 0.121212121,1.85209302 0.121212121,4.06002326 C0.121212121,4.95562791 0.407030303,5.7824186 0.889454545,6.44881395" id="Shape"></path>
+                <path d="M4,10.8063488 L0.889454545,6.44881395" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

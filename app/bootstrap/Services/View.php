@@ -13,26 +13,37 @@ return function (\DS\Interfaces\GeneralApplication $application, Phalcon\Di\Fact
         'view',
         function () use ($application, $di) {
             $view = new \Phalcon\Mvc\View();
-            
+
             $view->setViewsDir($application->getRootDirectory() . 'app/views/');
             $view->registerEngines(
                 [
                     ".volt" =>
                         function (\Phalcon\Mvc\View $view, $di) use ($application) {
-                            return new \DS\Component\View\Volt\VoltAdapter($view, $di, $application);
+                            $volt = new \DS\Component\View\Volt\VoltAdapter($view, $di, $application);
+
+                            $compiler = $volt->getCompiler();
+
+                            $compiler->addFilter(
+                                'truncate',
+                                function ($str, $maxLen = 35, $suffix = '...') {
+                                    return 'DS\Model\Tools::truncate(' . $str . ')';
+                                }
+                            );
+
+                            return $volt;
                         },
                 ]
             );
-            
+
             return $view;
-            
+
         }
     );
-    
+
     /*
     use Phalcon\Cache\Frontend\Output as OutputFrontend;
     use Phalcon\Cache\Backend\Memcache as MemcacheBackend;
-    
+
     // Set the views cache service
     $di->set(
         'viewCache',
@@ -43,7 +54,7 @@ return function (\DS\Interfaces\GeneralApplication $application, Phalcon\Di\Fact
                     'lifetime' => 86400,
                 ]
             );
-    
+
             // Memcached connection settings
             $cache = new MemcacheBackend(
                 $frontCache,
@@ -52,10 +63,10 @@ return function (\DS\Interfaces\GeneralApplication $application, Phalcon\Di\Fact
                     'port' => '11211',
                 ]
             );
-    
+
             return $cache;
         }
     );
     */
-    
+
 };

@@ -8,7 +8,7 @@
 
 {{ flash.output() }}
 
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
     <div class="container container--tableDetails">
         <div class="container__content">
             <div class="addTable__content__main__options">

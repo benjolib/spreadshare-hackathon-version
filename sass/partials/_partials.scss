@@ -1,0 +1,355 @@
+
+// PROFILE CARD
+
+.profile-card {
+  &__avatar {
+    width: 33px;
+    height: 33px;
+    border-radius: 9999px;
+    margin-right: 7px;
+    @media(min-width: 768px) {
+      width: 44px;
+      height: 44px;
+      margin-right: 9px;
+    }
+  }
+  &__name {
+    font-family: 'Roboto Mono', monospace;
+    font-weight: bold;
+    color: #252442;
+    line-height: 16px;
+    font-size: 12px;
+    margin-right: 10px;
+    letter-spacing: -.33px;
+    @media(min-width: 768px) {
+      font-size: 16px;
+      letter-spacing: -0.43px;
+      margin-right: 14px;
+      line-height: 21px;
+    }
+  }
+  &__follow {
+    font-family: 'Roboto Mono', monospace;
+    font-weight: bold;
+    color: #6CC69D;
+    font-size: 12px;
+    letter-spacing: .4px;
+    line-height: 16px;
+    @media(min-width: 768px) {
+      font-size: 16px;
+      letter-spacing: 0.5px;
+      line-height: 21px;
+    }
+  }
+  &__bio {
+    color: #B1BBC7;
+    line-height: 14px;
+    font-size: 12px;
+    margin-top: 1px;
+    letter-spacing: -.33px;
+    @media(min-width: 768px) {
+      font-size: 16px;
+      letter-spacing: -0.43px;
+      line-height: 19px;
+    }
+  }
+  &--type4 {
+    min-width: 70%;
+    padding:0;
+    margin-bottom: 12px;
+    margin-right: 20px;
+    &:not(:last-of-type) {
+      margin-right: 6px;
+    }
+    @media(min-width: 768px) {
+      min-width: 45%;
+      margin-bottom: 24px;
+    }
+    @media(min-width: 1024px) {
+      margin-right: 0;
+      min-width: auto;
+      padding: 15px 6px 10px 6px;
+      margin-bottom: 0;
+      &:not(:last-of-type) {
+        margin-right: 59px;
+      }
+    }
+  }
+  &--type4 & {
+    &__avatar {
+      width: 33px;
+      height: 33px;
+      margin-right: 7px;
+      @media(min-width: 768px) {
+        width: 64px;
+        height: 64px;
+        margin-right: 16px;
+      }
+    }
+    &__name {
+    }
+    &__follow {
+    }
+    &__bio {
+      max-width: 305px;
+    }
+  }
+}
+
+// LIST CARD
+
+.list-card {
+  padding-left: 14px;
+  padding-right: 14px;
+  width: 100%;
+  margin-bottom: 34px;
+  padding-bottom: 10px;
+  @media(min-width: 768px) {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 65px;
+    width: 50%;
+  }
+  @media(min-width: 1024px) {
+    width: 33%;
+  }
+  &--large {
+    @media(min-width: 1024px) {
+      width: 66.666%;
+      .list-card__subscriberCount {
+        margin-right: 10px;
+      }
+    }
+  }
+  &__image {
+    position: relative;
+    height: 146px;
+    border-radius: 4px;
+    margin-bottom: 13px;
+    @media(min-width: 768px) {
+      margin-bottom: 24px;
+      height: 258px;
+    }
+  }
+  &__listingCount {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.5);
+    font-family: 'Roboto Mono', monospace;
+    color: #2A1E3E;
+    font-size: 9px;
+    letter-spacing: -0.22px;
+    padding: 3px 5px;
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    border-bottom-right-radius: 4px;
+    @media(min-width: 768px) {
+      font-size: 12px;
+      letter-spacing: -0.29px;
+      padding: 4px 6px;
+      box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.18);
+    }
+  }
+  &__name {
+    font-size: 22px;
+    color: #2A1E3E;
+    line-height: 27px;
+    letter-spacing: -0.54px;
+    margin-bottom: 7px;
+    margin-left: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: calc(100vw - 100px);
+    @media(min-width: 768px) {
+      margin-left: 0;
+      font-size: 30px;
+      line-height: 36px;
+      letter-spacing: -0.72px;
+      width: calc(50vw - 110px);
+    }
+    @media(min-width: 1024px) {
+      width: calc(33.333vw - 110px);
+    }
+    @media(min-width: 1375px) {
+      width: calc(458px - 110px);
+    }
+  }
+  &--large {
+    .list-card__name {
+      @media(min-width: 1024px) {
+        width: calc(66.666vw - 110px);
+      }
+      @media(min-width: 1375px) {
+        width: calc(916px - 110px);
+      }
+    }
+  }
+  &__subscriberCount {
+    font-family: 'Roboto Mono', monospace;
+    color: #6CC69D;
+    letter-spacing: 1px;
+    margin-right: 5px;
+    font-size: 16px;
+    @media(min-width: 768px) {
+      font-size: 20px;
+      margin-right: 2px;
+    }
+    img {
+      width: 14px;
+      margin-right: 4px;
+      @media(min-width: 768px) {
+        margin-right: 6px;
+        width: auto;
+      }
+    }
+  }
+  &__description {
+    font-size: 15px;
+    color: #9BAABF;
+    letter-spacing: -0.36px;
+    margin-top: 1px;
+    margin-bottom: 20px;
+    margin-left: 8px;
+    @media(min-width: 768px) {
+      margin-top: 10px;
+      margin-left: 0;
+      letter-spacing: -0.48px;
+      font-size: 20px;
+      margin-bottom: 24px;
+    }
+  }
+  .profile-card {
+    margin-left: 7px;
+    @media(min-width: 768px) {
+      margin-left: 2px;
+    }
+  }
+}
+
+// ACTION CARD
+
+.action-card {
+  padding-left: 14px;
+  padding-right: 14px;
+  width: 100%;
+  margin-bottom: 34px;
+  margin-top: -10px;
+  @media(min-width: 768px) {
+    width: 50%;
+    min-height: 482px;
+    margin-bottom: 65px;
+    margin-top: 0;
+  }
+  @media(min-width: 1024px) {
+    width: 33%;
+  }
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 18px 16px 12px 16px;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.18);
+    border-radius: 4px;
+    @media(min-width: 768px) {
+      padding: 50px 50px 37px 50px;
+    }
+  }
+  &__heading {
+    font-size: 27px;
+    line-height: 33px;
+    letter-spacing: -0.72px;
+    margin-bottom: 16px;
+    margin-left: 2px;
+    @media(min-width: 768px) {
+      font-size: 40px;
+      line-height: 48px;
+      letter-spacing: -1.07px;
+      margin-bottom: 28px;
+    }
+  }
+  &__text {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 12px;
+    letter-spacing: -0.32px;
+    line-height: 16px;
+    margin-left: 2px;
+    margin-bottom: 26px;
+    @media(min-width: 768px) {
+      font-size: 16px;
+      line-height: 21px;
+      letter-spacing: -0.43px;
+      margin-bottom: 32px;
+    }
+  }
+  &__link {
+    font-weight: bold;
+    text-decoration: underline;
+    letter-spacing: -1.14px;
+    color: inherit;
+  }
+  &__button {
+    font-family: 'Roboto Mono', monospace;
+    font-weight: bold;
+    font-size: 12px;
+    margin-top: auto;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.18);
+    border-radius: 2px;
+    text-align: center;
+    height: 42px;
+    line-height: 42px;
+    letter-spacing: 0.5px;
+    @media(min-width: 768px) {
+      font-size: 16px;
+      height: 56px;
+      line-height: 56px;
+      letter-spacing: 0.67px;
+    }
+  }
+  &--yellow & {
+    &__inner {
+      background: #FFEA81;
+    }
+    &__heading {
+      color: #F65261;
+    }
+    &__text {
+      color: #F65261;
+    }
+    &__button {
+      background: #F65261;
+      color: #FFEA81;
+    }
+  }
+  &--green & {
+    &__inner {
+      background: #6CC69D;
+    }
+    &__heading {
+      color: #FFFFFF;
+    }
+    &__text {
+      color: #FFFFFF;
+    }
+    &__button {
+      background: #FFFFFF;
+      color: #6CC69D;
+    }
+  }
+  &--white & {
+    &__inner {
+      background: #F9F9F9;
+    }
+    &__heading {
+      color: #2A1E3E;
+    }
+    &__text {
+      color: #2A1E3E;
+    }
+    &__button {
+      background: #2A1E3E;
+      color: #F9F9F9;
+    }
+  }
+}

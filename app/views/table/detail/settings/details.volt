@@ -1,3 +1,22 @@
+{# image #}
+<div class="layout__content__main__personal__column">
+  <div class="layout__content__main__personal__profile__text">
+    <p>Image</p>
+  </div>
+  <div class="layout__content__main__personal__row">
+    <div class="layout__content__main__personal__profile__photo">
+      <img class="listImage" id="listImage" src="{{ table['image'] }}" />
+    </div>
+    <div class="layout__content__main__personal__profile__add">
+      <button type="button" id="listImageReplace">Replace</button>
+    </div>
+    <div class="layout__content__main__personal__profile__remove">
+      <a href="javascript:" onclick="removeImage();">Remove</a>
+    </div>
+    <input type="hidden" name="removeListImage" id="removeListImage" value="0" />
+    <input type="file" name="image" id="fileUpload" style="opacity:0; height:0;width:0;" />
+  </div>
+</div>
 {# title #}
 <div class="addTableEmpty__content__main__options__item">
     <div class="addTableEmpty__content__main__options__item__column">
@@ -43,3 +62,24 @@
         <div id="LocationSelect" data-name="location[]" data-value="{{ reactArray(locations) }}" class="react-component"></div>
     </div>
 </div>
+
+<script type="text/javascript">
+  window.addEventListener('load', function () {
+    document.querySelector('input[type="file"]').addEventListener('change', function () {
+      if (this.files && this.files[0]) {
+        var img = document.querySelector('img.listImage');
+        img.src = URL.createObjectURL(this.files[0]);
+        //img.onload = fn;
+      }
+    });
+
+    document.getElementById('listImageReplace').onclick = function () {
+      document.getElementById('fileUpload').click();
+    };
+
+    function removeImage() {
+      document.getElementById('removeListImage').value = '1';
+      document.getElementById('listImage').src = '';
+    }
+  });
+</script>

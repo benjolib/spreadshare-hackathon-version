@@ -28,7 +28,7 @@ class Tables
      * @var Criteria
      */
     private $query;
-    
+
     /**
      * @return Criteria
      */
@@ -36,7 +36,7 @@ class Tables
     {
         return $this->query;
     }
-    
+
     /**
      * Filter for upvotes by $userId. Better call selectTables() first!
      *
@@ -47,14 +47,14 @@ class Tables
     public function filterUpvoted(int $userId): Tables
     {
         $this->initQuery();
-        
+
         $this->query->innerJoin(TableVotes::class, TableVotes::class . '.tableId = ' . Tables::class . '.id')
                     ->andWhere(TableVotes::class . '.userId = :voteUserId:', ['voteUserId' => $userId])
                     ->orderBy(TableVotes::class . '.createdAt DESC');
-        
+
         return $this;
     }
-    
+
     /**
      * Filter staff picked tables
      *
@@ -63,13 +63,13 @@ class Tables
     public function filterStaffPicks(): Tables
     {
         $this->initQuery();
-        
+
         $this->query->innerJoin(TableStaffPicks::class, TableStaffPicks::class . '.tableId = ' . Tables::class . '.id')
                     ->orderBy(TableStaffPicks::class . '.createdAt DESC');
-        
+
         return $this;
     }
-    
+
     /**
      * Filter for subscriptions by $userId. Better call selectTables() first!
      *
@@ -80,14 +80,14 @@ class Tables
     public function filterSubscribed(int $userId): Tables
     {
         $this->initQuery();
-        
+
         $this->query->innerJoin(TableSubscription::class, TableSubscription::class . '.tableId = ' . Tables::class . '.id')
                     ->andWhere(TableSubscription::class . '.userId = :subscriptionUserId:', ['subscriptionUserId' => $userId])
                     ->orderBy(TableSubscription::class . '.createdAt DESC');
-        
+
         return $this;
     }
-    
+
     /**
      * Filter Tables that are owned by $userId. Better call selectTables() first!
      *
@@ -98,13 +98,13 @@ class Tables
     public function filterOwned(int $userId): Tables
     {
         $this->initQuery();
-        
+
         $this->query->andWhere(Tables::class . '.ownerUserId = :ownerUserId:', ['ownerUserId' => $userId])
                     ->orderBy(Tables::class . '.id DESC');
-        
+
         return $this;
     }
-    
+
     /**
      * Filter Tables where $userId did any contribution. Better call selectTables() first!
      *
@@ -115,16 +115,16 @@ class Tables
     public function filterContributed(int $userId): Tables
     {
         $this->initQuery();
-        
+
         $this->query->innerJoin(TableRows::class, TableRows::class . '.tableId = ' . Tables::class . '.id')
                     ->leftJoin(TableCells::class, TableCells::class . '.rowId = ' . TableRows::class . '.id')
                     ->andWhere(TableCells::class . '.userId = :cellUserId: OR ' . TableRows::class . '.userId = :rowUserId:', ['cellUserId' => $userId, 'rowUserId' => $userId])
                     ->groupBy(Tables::class . '.id')
                     ->orderBy(Tables::class . '.id DESC');
-        
+
         return $this;
     }
-    
+
     /**
      * Filter Tables that $userId visited lately. Better call selectTables() first!
      *
@@ -135,15 +135,15 @@ class Tables
     public function filterHistory(int $userId): Tables
     {
         $this->initQuery();
-        
+
         $this->query->innerJoin(TableViews::class, TableViews::class . '.tableId = ' . Tables::class . '.id')
                     ->andWhere(TableViews::class . '.userId = :viewUserId:', ['viewUserId' => $userId])
                     ->groupBy(Tables::class . '.id')
                     ->orderBy(TableViews::class . '.createdAt DESC');
-        
+
         return $this;
     }
-    
+
     /**
      * Initialize query instance
      */
@@ -154,7 +154,7 @@ class Tables
             $this->selectTables($this->serviceManager->getAuth()->getUserId(), new TableFilter(), $flags = TableFlags::Published, 0, null, Paging::endlessScrollPortions);
         }
     }
-    
+
     /**
      * @param int         $userId
      * @param TableFilter $tableFilter
@@ -168,10 +168,10 @@ class Tables
     public function findTablesAsArray(int $userId, TableFilter $tableFilter, int $flags = TableFlags::Published, int $page = 0, $orderBy = null, $limit = Paging::endlessScrollPortions): array
     {
         $this->selectTables($userId, $tableFilter, $flags, $page, $orderBy, $limit);
-        
+
         return $this->query->execute()->toArray() ?: [];
     }
-    
+
     /**
      * @param int[] $tableIds
      * @param int   $userId User id is only used for votecounting, not for filtering
@@ -189,10 +189,12 @@ class Tables
                                    Tables::class . ".flags",
                                    Tables::class . ".title",
                                    Tables::class . ".tagline",
+                                   Tables::class . ".image",
                                    Tables::class . ".ownerUserId",
                                    User::class . ".image as creatorImage",
                                    User::class . ".handle as creatorHandle",
                                    User::class . ".name as creator",
+                                   User::class . ".tagline as creatorBio",
                                    Tables::class . ".createdAt",
                                    Tables::class . ".topic1Id",
                                    "(SELECT " . Topics::class . ".title FROM " . Topics::class . " WHERE " . Topics::class . ".id = " . Tables::class . ".topic1Id) AS topic1",
@@ -212,27 +214,28 @@ class Tables
                                    "(SELECT " . TableVotes::class . ".createdAt FROM " . TableVotes::class . " WHERE " . TableVotes::class . ".tableId = " . Tables::class . ".id AND " . TableVotes::class . ".userId = " . $userId . ") as userHasVoted",
                                    "(SELECT CUSTOM_GROUP_CONCAT(" . Tags::class . ".title, " . Tags::class . ".title, 'ASC', ', ') FROM " . TableTags::class . " INNER JOIN " . Tags::class . " ON " . Tags::class . ".id = " . TableTags::class . ".tagId WHERE " . TableTags::class . ".tableId = " . Tables::class . ".id) as tags",
                                    "(SELECT CUSTOM_GROUP_CONCAT(" . Locations::class . ".locationName, " . Locations::class . ".locationName, 'ASC', ', ') FROM " . TableLocations::class . " INNER JOIN " . Locations::class . " ON " . Locations::class . ".id = " . TableLocations::class . ".locationId WHERE " . TableLocations::class . ".tableId = " . Tables::class . ".id) as locations",
+                                   "(SELECT COUNT(" . TableRows::class . ".id) FROM " . TableRows::class . " WHERE " . TableRows::class . ".tableId = " . Tables::class . ".id) as listingCount"
                                ]
                            )
                            ->innerJoin(TableStats::class, TableStats::class . '.tableId = ' . Tables::class . '.id')
                            ->innerJoin(User::class, Tables::class . '.ownerUserId = ' . User::class . '.id')
                            ->leftJoin(Types::class, Tables::class . '.typeId = ' . Types::class . '.id');
-        
+
         if ($limit !== Paging::noPaging)
         {
             $this->query->limit((int) $limit, (int) Paging::endlessScrollPortions * $page);
         }
-        
+
         if ($orderBy)
         {
             $this->query->orderBy($orderBy);
         }
-        
+
         if (count($tableFilter->getTableIds()))
         {
             $this->query->inWhere(Tables::class . '.id', $tableFilter->getTableIds());
         }
-        
+
         if ($flags)
         {
             $this->query->andWhere('flags = :flags:', ['flags' => $flags]);
@@ -241,38 +244,38 @@ class Tables
         {
             $this->query->andWhere('flags != :flags:', ['flags' => TableFlags::Deleted]);
         }
-        
+
         if ($tableFilter->getTopic())
         {
             $this->query->andWhere(Tables::class . '.topic1Id = :topic: OR ' . Tables::class . '.topic2Id = :topic:', ['topic' => $tableFilter->getTopic()]);
         }
-        
+
         if ($tableFilter->getType())
         {
             $this->query->andWhere(Tables::class . '.typeId = :type:', ['type' => $tableFilter->getType()]);
         }
-        
+
         if ($tableFilter->getStaffPicks())
         {
             $this->filterStaffPicks();
         }
-        
+
         if ($tableFilter->getLocations() && count($tableFilter->getLocations()))
         {
             $this->query->innerJoin(TableLocations::class, TableLocations::class . '.tableId = ' . Tables::class . '.id')
                         ->inWhere(TableLocations::class . '.locationId', $tableFilter->getLocations())
                         ->groupBy(Tables::class . '.id');
-            
+
         }
-        
+
         if ($tableFilter->getTags() && count($tableFilter->getTags()))
         {
             $this->query->innerJoin(TableTags::class, TableTags::class . '.tableId = ' . Tables::class . '.id')
                         ->inWhere(TableTags::class . '.tagId', $tableFilter->getTags())
                         ->groupBy(Tables::class . '.id');
-            
+
         }
-        
+
         if ($tableFilter->getDateRange())
         {
             $this->query->andWhere(
@@ -283,7 +286,7 @@ class Tables
                 ]
             );
         }
-        
+
         return $this;
     }
 }

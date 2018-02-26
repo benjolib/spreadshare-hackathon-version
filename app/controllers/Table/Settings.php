@@ -30,7 +30,7 @@ class Settings
     extends BaseDescription
     implements TableSubcontrollerInterface
 {
-    
+
     /**
      * Handle Subcontroller
      *
@@ -47,13 +47,13 @@ class Settings
             {
                 throw new SecurityException('You are not allowed to edit the settings of this table.');
             }
-            
+
             if (!$param)
             {
                 $param = 'details';
             }
             $this->view->setVar('page', $param);
-            
+
             switch ($param)
             {
                 case "related":
@@ -61,12 +61,12 @@ class Settings
                     if ($this->request->isPost())
                     {
                         $tableId = $this->request->getPost('tableId');
-                        
+
                         if ($tableId == $table->getId())
                         {
                             throw new \InvalidArgumentException('You cannot add a relation to the same table.');
                         }
-                        
+
                         if ($tableId)
                         {
                             if (!TableRelations::findRelatedTable($table->getId(), $tableId))
@@ -77,7 +77,7 @@ class Settings
                             }
                         }
                     }
-                    
+
                     $this->view->setVar('relatedTables', $relatedTables->findRelatedTables($table->getId()));
                     break;
                 case 'options':
@@ -89,7 +89,7 @@ class Settings
                             (int) $this->request->getPost('fixedRowsTop', null, 0),
                             (int) $this->request->getPost('fixedColumnsLeft', null, 0)
                         );
-                        
+
                         $flags = (int) $this->request->getPost('flags');
                         if ($flags === 1)
                         {
@@ -100,7 +100,7 @@ class Settings
                             $tableApi->unpublish($table->getId());
                         }
                     }
-                    
+
                     $tableProps = (new TableProperties())->get($table->getId(), 'tableId');
                     $this->view->setVar('tableProps', $tableProps);
                     break;
@@ -113,20 +113,34 @@ class Settings
                             if ($this->request->getPost('action') === 'delete')
                             {
                                 $table->setFlags(TableFlags::Deleted)->save();
-                                
+
                                 header('Location: /?msg=1');
                             }
                             else
                             {
-                                $this->prepareModelFromPost($table, $userId)->save();
-                                
+                                $imagePath = '';
+                                if ($this->request->hasFiles() == true)
+                                {
+                                    foreach ($this->request->getUploadedFiles() as $file)
+                                    {
+                                        if ($file->getTempName() && $file->getName() && $file->getSize())
+                                        {
+                                            $imageName = md5($table->getId()) . '.' . $file->getExtension();
+                                            $file->moveTo(ROOT_PATH . 'system/uploads/listimages/' . $imageName);
+                                            $imagePath = '/list-images/' . $imageName;
+                                        }
+                                    }
+                                }
+
+                                $this->prepareModelFromPost($table, $userId, $imagePath)->save();
+
                                 $tableApi = new \DS\Api\Table();
                                 $tableApi->handleTagAndLocationAssignment(
                                     $table,
                                     $this->request->getPost('tags', null, []),
                                     $this->request->getPost('location', null, [])
                                 );
-                                
+
                             }
                         }
                         catch (\Exception $e)
@@ -134,7 +148,7 @@ class Settings
                             $this->flash->error($e->getMessage());
                         }
                     }
-                    
+
                     $tableModel = new Tables();
                     $tables     = $tableModel->findTablesAsArray($userId, (new TableFilter())->setTableIds([$table->getId()]), 0);
                     if (!count($tables))
@@ -142,9 +156,9 @@ class Settings
                         throw new \InvalidArgumentException('Table does not exist.');
                     }
                     $loadedTable = $tables[0];
-                    
+
                     $this->view->setVar('table', $loadedTable);
-                    
+
                     $tags = [];
                     foreach (TableTags::findAllByFieldValue('tableId', $table->getId()) as $tag)
                     {
@@ -152,7 +166,7 @@ class Settings
                         $tags[]   = $tagModel->toArray(['id', 'title']);
                     }
                     $this->view->setVar('tags', $tags);
-                    
+
                     $locations = [];
                     foreach (TableLocations::findAllByFieldValue('tableId', $table->getId()) as $location)
                     {
@@ -160,7 +174,7 @@ class Settings
                         $locations[]   = $locationModel->toArray(['id', 'locationName']);
                     }
                     $this->view->setVar('locations', $locations);
-                    
+
                     $topics = [];
                     if ($loadedTable['topic1Id'])
                     {
@@ -176,11 +190,11 @@ class Settings
                             'label' => $loadedTable['topic2'],
                         ];
                     }
-                    
+
                     $this->view->setVar('topics', $topics);
                     break;
             }
-            
+
             $this->view->setMainView('table/detail/settings');
             $this->view->setVar('selectedPage', 'settings');
         }
@@ -188,7 +202,7 @@ class Settings
         {
             throw $e;
         }
-        
+
         return $this;
     }
 }

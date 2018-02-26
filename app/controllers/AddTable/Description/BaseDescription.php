@@ -7,6 +7,7 @@ use DS\Controller\BaseController;
 use DS\Interfaces\TableSubcontrollerInterface;
 use DS\Model\DataSource\TableFlags;
 use DS\Model\Tables;
+use DS\Model\Tools;
 
 /**
  * Spreadshare
@@ -23,16 +24,16 @@ abstract class BaseDescription
     extends BaseController
     implements TableSubcontrollerInterface
 {
-    
+
     /**
      * @param int $userId
      *
      * @return Tables
      */
-    protected function prepareModelFromPost(Tables $tableModel, int $userId): Tables
+    protected function prepareModelFromPost(Tables $tableModel, int $userId, $imagePath): Tables
     {
         $topic2Id = $topic1Id = null;
-        
+
         $topics = $this->request->getPost('topics', null, '');
         if (isset($topics[0]))
         {
@@ -42,19 +43,23 @@ abstract class BaseDescription
         {
             $topic2Id = $topics[1];
         }
-        
+
+        if ($imagePath)
+        {
+            $tableModel->setImage($imagePath);
+        }
+
         $tableModel->setTitle((string) $this->request->getPost('title', null, ''))
                    ->setTopic1Id((int) $topic1Id)
                    ->setTopic2Id((int) $topic2Id)
                    ->setTypeId((int) $this->request->getPost('type'))
-                   ->setImage((string) $this->request->getPost('image', '', ''))
                    ->setTagline((string) $this->request->getPost('tagline', null, ''))
                    ->setFlags(TableFlags::Unpublished)
                    ->setOwnerUserId($userId);
-        
+
         return $tableModel;
     }
-    
+
     /**
      * @param int $userId
      *
@@ -64,17 +69,31 @@ abstract class BaseDescription
     {
         if ($this->request->isPost())
         {
+            $imagePath = '';
+            if ($this->request->hasFiles() == true)
+            {
+                foreach ($this->request->getUploadedFiles() as $file)
+                {
+                    if ($file->getTempName() && $file->getName() && $file->getSize())
+                    {
+                        $imageName = Tools::guidv4(random_bytes(16)) . '.' . $file->getExtension();
+                        $file->moveTo(ROOT_PATH . 'system/uploads/listimages/' . $imageName);
+                        $imagePath = '/list-images/' . $imageName;
+                    }
+                }
+            }
+
             $tableApi          = new Table();
             $createdTableModel = $tableApi->createTable(
-                $this->prepareModelFromPost(new Tables(), $userId),
+                $this->prepareModelFromPost(new Tables(), $userId, $imagePath),
                 $this->request->getPost('tags', null, []),
                 $this->request->getPost('location', null, [])
             );
-            
+
             return $createdTableModel;
         }
-        
+
         return null;
     }
-    
+
 }

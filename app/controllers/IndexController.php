@@ -35,7 +35,7 @@ class IndexController
     /**
      * Home
      */
-    public function indexAction($order = 'most-upvoted')
+    public function indexAction($selection = 'recommended')
     {
         try
         {
@@ -44,7 +44,7 @@ class IndexController
                 // do the onboarding
                 header('Location: /signup/topics');
             }
-            
+
             // Message hack
             // @todo implement a better way for this
             if ($this->request->get('msg'))
@@ -58,108 +58,89 @@ class IndexController
                         $this->flash->success('Authorization request has been denied.');
                         break;
                 }
-                
+
             }
-            
-            // Prepare ordering
-            switch ($order)
-            {
-                case 'newest':
-                    $orderBy = Tables::class . '.createdAt DESC';
-                    break;
-                case 'most-viewed':
-                    $orderBy = TableStats::class . ".viewsCount DESC";
-                    break;
-                case 'most-contributed':
-                    $orderBy = TableStats::class . ".contributionCount DESC";
-                    break;
-                default:
-                case 'most-upvoted':
-                    $orderBy = TableStats::class . ".votesCount DESC";
-                    break;
-            }
-            
+
+
+            $tableFilter = new TableFilter();
+
+            // recommended
+            $orderBy = Tables::class . '.createdAt DESC';
+            $tableFilter->setStaffPicks(true);
+            $this->view->setVar('selectionName', 'Recommended');
+
+            // Prepare date range filtering
+            // switch ($date)
+            // {
+            //     case 'all-time':
+            //         break;
+            //     case 'last-90-days':
+            //         $range = DateRange::initLastDays(90);
+            //         break;
+            //     case 'last-week':
+            //         $range = DateRange::initLastWeek();
+            //         break;
+            //     case 'last-year':
+            //         $range = DateRange::initLastYear();
+            //         break;
+            //     case 'yesterday':
+            //         $range = DateRange::initYesterday();
+            //         break;
+            //     case 'today':
+            //         $range = DateRange::initToday();
+            //         break;
+            //     default:
+            //     case 'last-30-days':
+            //         $range = DateRange::initLastDays(30);
+            //         break;
+            // }
+            // $this->view->setVar('activeDateRangeString', str_replace('-', ' ', $date));
+            // $this->view->setVar('activeDateFilter', $date);
+
             // Assign all topics and types for the sidebar
-            $this->view->setVar('topics', Topics::find());
-            $this->view->setVar('types', Types::find());
-            
+            // $this->view->setVar('topics', Topics::find());
+            // $this->view->setVar('types', Types::find());
+
             // Prepare the table filter
-            $tableFilter            = new TableFilter();
-            $tableFilter->topic     = $this->request->get('topic', null, '');
-            $tableFilter->type      = $this->request->get('type', null, '');
-            $tableFilter->locations = $this->request->get('locations', null, []);
-            $tableFilter->tags      = $this->request->get('tags', null, []);
-            
-            // Assign locations and tags with title and id mapping so that react-select has got a valid pre-selection
-            $locations = new Locations;
-            $this->view->setVar('filteredLocations', $locations->getByIds($tableFilter->getLocations()));
-            $tags = new Tags;
-            $this->view->setVar('filteredTags', $tags->getByIds($tableFilter->getTags()));
-            
-            $this->view->setVar('sidebarFilter', $tableFilter);
-            $this->view->setVar('order', $order);
-            
-            $page = (int) $this->request->get('page', null, 0);
-            if ($this->request->isAjax())
-            {
-                $tables = $this->loadTablesForPage(
-                    $page, // Default is today (0)
+            // $tableFilter            = new TableFilter();
+            // $tableFilter->topic     = $this->request->get('topic', null, '');
+            // $tableFilter->type      = $this->request->get('type', null, '');
+            // $tableFilter->locations = $this->request->get('locations', null, []);
+            // $tableFilter->tags      = $this->request->get('tags', null, []);
+
+            // if (isset($range))
+            // {
+            //     $tableFilter->setDateRange($range);
+            // }
+            //
+            // // Assign locations and tags with title and id mapping so that react-select has got a valid pre-selection
+            // $locations = new Locations;
+            // $this->view->setVar('filteredLocations', $locations->getByIds($tableFilter->getLocations()));
+            // $tags = new Tags;
+            // $this->view->setVar('filteredTags', $tags->getByIds($tableFilter->getTags()));
+            //
+            // $this->view->setVar('sidebarFilter', $tableFilter);
+            $this->view->setVar('selection', $selection);
+
+            // Filter tables by tableFilter
+            $tables = (new Tables())
+                ->findTablesAsArray(
+                    $this->serviceManager->getAuth()->getUserId(),
                     $tableFilter,
+                    TableFlags::Published,
+                    (int) $this->request->get('page', null, 0),
                     $orderBy
                 );
-                
-                if (count($tables) === 0)
-                {
-                    // Return nothing if tables are empty for today.
-                    $this->view->disable();
-                    header('Content-Type: application/json');
-                    die(json_encode([
-                        'code' => 'no-results'
-                    ]));
-                }
-            }
-            else
-            {
-                while (count(
-                        $tables = $this->loadTablesForPage(
-                            $page, // Default is today (0)
-                            $tableFilter,
-                            $orderBy
-                        )
-                    ) === 0)
-                {
-                    $page++;
-                    
-                    if ($page === 30)
-                    {
-                        break;
-                    }
-                }
-            }
-            $this->view->setVar('loadedUntilPage', $page);
-            
-            $this->loadStaffPicks();
-            $this->loadBestOfLast7Days();
-            
-            // Inform view that this is an ajax request
-            $this->view->setVar('isAjax', $this->request->isAjax());
-            
-            // Paging instead of returning the whole page
-            if ($this->request->isAjax() && $this->request->has('page'))
-            {
-                $this->view->setMainView('homepage/tables');
-            }
-            else
-            {
-                $this->view->setMainView('homepage/index');
-            }
+            $this->view->setVar('tables', $tables);
+
+            $this->view->setMainView('homepage/index');
         }
         catch (Exception $e)
         {
             Application::instance()->log($e->getMessage(), Logger::CRITICAL);
         }
     }
-    
+
     /**
      * Load best tables from last 7 days
      */
@@ -168,7 +149,7 @@ class IndexController
         $tableFilter = new TableFilter();
         $tableFilter->setBestOf(true);
         $tableFilter->setDateRange(DateRange::initLastDays(7));
-        
+
         // Filter tables by tableFilter
         $tables = (new Tables())
             ->findTablesAsArray(
@@ -177,11 +158,11 @@ class IndexController
                 TableFlags::Published,
                 0,
                 TableStats::class . ".votesCount DESC",
-                6
+                12
             );
-        $this->view->setVar('bestOf', $tables);
+        $this->view->setVar('tables', $tables);
     }
-    
+
     /**
      * Load Staff picks
      */
@@ -189,7 +170,7 @@ class IndexController
     {
         $tableFilter = new TableFilter();
         $tableFilter->setStaffPicks(true);
-        
+
         // Filter tables by tableFilter
         $tables = (new Tables())
             ->findTablesAsArray(
@@ -198,11 +179,11 @@ class IndexController
                 TableFlags::Published,
                 0,
                 Tables::class . ".id",
-                6
+                12
             );
         $this->view->setVar('staffPicks', $tables);
     }
-    
+
     /**
      * @param int         $page
      * @param TableFilter $tableFilter
@@ -214,10 +195,10 @@ class IndexController
     {
         // Set daterange
         $tableFilter->setDateRange(DateRange::initDayFromTodayBackwards($page));
-        
+
         // Display the day in human format (today, yesterday, ..)
         $this->view->setVar('dateRangeString', PrettyDateTime::day(new \DateTime('- ' . $page . 'days'), null, true));
-        
+
         // Filter tables by tableFilter
         $tables = (new Tables())
             ->findTablesAsArray(
@@ -229,8 +210,8 @@ class IndexController
                 Paging::noPaging
             );
         $this->view->setVar('tables', $tables);
-        
+
         return $tables;
     }
-    
+
 }

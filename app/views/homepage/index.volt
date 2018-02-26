@@ -8,143 +8,351 @@
 
 {# main section #}
 {% block content %}
-{# hero #}
-<div class="main__hero">
-  <img src="/assets/icons/close-hero.svg" id="closeHero" />
-  <h1>Create curated lists with our community</h1>
-  <h2>SpreadShare let's you crowd-organise your knowledge in data tables</h2>
-  <p><a data-show="main__hero__tables" class="button" href="javascript:;">🔮 Learn more</a></p>
-  <div class="pages main__hero__tables hidden">
-    <div>
-      <h3>Tables</h3>
-      <h4>We believe in public tables as a format for collecting and distributing information</h4>
-      <p><a data-show="main__hero__collaboration" class="button blue" href="javascript:;">Next</a></p>
-      <p class="page">1 | 7</p>
+<div class="large-page-container">
+  <div class="home-heading u-flex">
+    <div class="home-heading__text home-heading-button clickable">
+      {{ selectionName }}<img src="/assets/images/home-arrow-down.svg" />
     </div>
-    <span class="circle"></span>
+    <div class="home-heading__line u-flexGrow1"></div>
   </div>
-  <div class="pages main__hero__collaboration hidden">
-    <div>
-      <h3>Collaboration</h3>
-      <h4>Collective research through crowd-sourced data creation</h4>
-      <p>
-        <a data-show="main__hero__open_data" class="button blue" href="javascript:;">Next</a>
-      </p>
-      <p class="page">2 | 7</p>
+  <div class="dropdown u-flex home-heading-dropdown">
+    <div class="u-flex u-flexCol home-heading-dropdown__col1">
+      <a href="/tables/recommended" class="{% if selection is 'recommended' %}active{% endif %}"><div><img src="/assets/images/diamond{% if selection is 'recommended' %}-green{% endif %}.svg" /></div>Recommended</a>
+      <a href="/tables/trending" class="{% if selection is 'trending' %}active{% endif %}"><div><img src="/assets/images/lightning{% if selection is 'trending' %}-green{% endif %}.svg" /></div>Trending</a>
+      <a href="/tables/recently-added" class="{% if selection is 'recently-added' %}active{% endif %}"><div><img src="/assets/images/clock{% if selection is 'recently-added' %}-green{% endif %}.svg" /></div>Recently Added</a>
+      <a href="/tables/most-viewed" class="space-below {% if selection is 'most-viewed' %}active{% endif %}"><div><img src="/assets/images/eye{% if selection is 'most-viewed' %}-green{% endif %}.svg" class="icon-eye" /></div>Most Viewed</a>
+
+      <a href="/tables/san-francisco" class="{% if selection is 'san-francisco' %}active{% endif %}"><div><img src="/assets/images/waypoint.svg" /></div>San Francisco</a>
+      <a href="/tables/new-york" class="{% if selection is 'new-york' %}active{% endif %}"><div><img src="/assets/images/waypoint.svg" /></div>New York</a>
+      <a href="/tables/london" class="{% if selection is 'london' %}active{% endif %}"><div><img src="/assets/images/waypoint.svg" /></div>London</a>
+      <a href="/tables/berlin" class="{% if selection is 'berlin' %}active{% endif %}"><div><img src="/assets/images/waypoint.svg" /></div>Berlin</a>
+      <a href="#" class="greyed-out"><div><img src="/assets/images/waypoint.svg" /></div>City missing?</a>
     </div>
-    <span class="circle"></span>
+    <div class="u-flex u-flexCol u-md-flexRow">
+      <div class="u-flex u-flexCol home-heading-dropdown__col2">
+        <a href="/tables/ai" class="{% if selection is 'ai' %}active{% endif %}">AI</a>
+        <a href="/tables/blockchain" class="{% if selection is 'blockchain' %}active{% endif %}">Blockchain</a>
+        <a href="/tables/bots" class="{% if selection is 'bots' %}active{% endif %}">Bots</a>
+        <a href="/tables/business" class="{% if selection is 'business' %}active{% endif %}">Business</a>
+        <a href="/tables/crypto" class="{% if selection is 'crypto' %}active{% endif %}">Crypto</a>
+        <a href="/tables/culture" class="{% if selection is 'culture' %}active{% endif %}">Culture</a>
+        <a href="/tables/design" class="{% if selection is 'design' %}active{% endif %}">Design</a>
+        <a href="/tables/engineering" class="{% if selection is 'engineering' %}active{% endif %}">Engineering</a>
+        <a href="/tables/finance" class="{% if selection is 'finance' %}active{% endif %}">Finance</a>
+        <a href="/tables/fundraising" class="{% if selection is 'fundraising' %}active{% endif %}">Fundraising</a>
+        <a href="/tables/growth" class="{% if selection is 'growth' %}active{% endif %}">Growth</a>
+      </div>
+      <div class="u-flex u-flexCol home-heading-dropdown__col3">
+        <a href="/tables/hiring" class="{% if selection is 'hiring' %}active{% endif %}">Hiring</a>
+        <a href="/tables/marketing" class="{% if selection is 'marketing' %}active{% endif %}">Marketing</a>
+        <a href="/tables/media" class="{% if selection is 'media' %}active{% endif %}">Media</a>
+        <a href="/tables/operations" class="{% if selection is 'operations' %}active{% endif %}">Operations</a>
+        <a href="/tables/people" class="{% if selection is 'people' %}active{% endif %}">People</a>
+        <a href="/tables/press" class="{% if selection is 'press' %}active{% endif %}">Press</a>
+        <a href="/tables/product" class="{% if selection is 'product' %}active{% endif %}">Product</a>
+        <a href="/tables/research" class="{% if selection is 'research' %}active{% endif %}">Research</a>
+        <a href="/tables/tech" class="{% if selection is 'tech' %}active{% endif %}">Tech</a>
+        <a href="/tables/everything-else" class="{% if selection is 'everything-else' %}active{% endif %}">Everything else</a>
+      </div>
+    </div>
   </div>
-  <div class="pages main__hero__open_data hidden">
-    <div>
-      <h3>Open Data</h3>
-      <h4>Access to our data is and will always be free</h4>
-      <p>
-        <a data-show="main__hero__disciplines" class="button blue" href="javascript:;">Next</a>
-      </p>
-      <p class="page">3 | 7</p>
-    </div>
-    <span class="circle"></span>
+  <div class="u-flex u-flexWrap gutter home-top-margin-bottom">
+    {% if tables[0] is defined %}
+      {{ partial('partials/list-card', [
+        'id': tables[0]['id'],
+        'image': tables[0]['image'],
+        'name': tables[0]['title'],
+        'description': tables[0]['tagline'],
+        'subscriberCount': tables[0]['subscriberCount'],
+        'listingCount': tables[0]['listingCount'],
+        'curatorHandle': tables[0]['creatorHandle'],
+        'curatorAvatar': tables[0]['creatorImage'],
+        'curatorName': tables[0]['creator'],
+        'curatorBio': tables[0]['creatorBio'],
+        'large': true
+      ]) }}
+    {% endif %}
+    {% if tables[1] is defined %}
+      {{ partial('partials/list-card', [
+        'id': tables[1]['id'],
+        'image': tables[1]['image'],
+        'name': tables[1]['title'],
+        'description': tables[1]['tagline'],
+        'subscriberCount': tables[1]['subscriberCount'],
+        'listingCount': tables[1]['listingCount'],
+        'curatorHandle': tables[1]['creatorHandle'],
+        'curatorAvatar': tables[1]['creatorImage'],
+        'curatorName': tables[1]['creator'],
+        'curatorBio': tables[1]['creatorBio'],
+        'large': false
+      ]) }}
+    {% endif %}
   </div>
-  <div class="pages main__hero__disciplines hidden">
-    <div>
-      <h3>Disciplines</h3>
-      <h4>All from Business over Code to Design and Finance</h4>
-      <p>
-        <a data-show="main__hero__ownership" class="button blue" href="javascript:;">Next</a>
-      </p>
-      <p class="page">4 | 7</p>
-    </div>
-    <span class="circle"></span>
+  <div class="u-flex u-flexWrap gutter">
+    {{ partial('partials/action-card', [
+      'color': 'yellow',
+      'heading': 'Get Tokens for Curating',
+      'text': 'A Curator creates lists which can be subscribed. Every subscriptions generates a token every day.<br /><br /><a class="action-card__link" href="#">Learn more</a> about how to become a curator.',
+      'action': '#',
+      'buttonText': 'Become a Curator'
+    ]) }}
+    {% if tables[2] is defined %}
+      {{ partial('partials/list-card', [
+        'id': tables[2]['id'],
+        'image': tables[2]['image'],
+        'name': tables[2]['title'],
+        'description': tables[2]['tagline'],
+        'subscriberCount': tables[2]['subscriberCount'],
+        'listingCount': tables[2]['listingCount'],
+        'curatorHandle': tables[2]['creatorHandle'],
+        'curatorAvatar': tables[2]['creatorImage'],
+        'curatorName': tables[2]['creator'],
+        'curatorBio': tables[2]['creatorBio'],
+        'large': false
+      ]) }}
+    {% endif %}
+    {% if tables[3] is defined %}
+      {{ partial('partials/list-card', [
+        'id': tables[3]['id'],
+        'image': tables[3]['image'],
+        'name': tables[3]['title'],
+        'description': tables[3]['tagline'],
+        'subscriberCount': tables[3]['subscriberCount'],
+        'listingCount': tables[3]['listingCount'],
+        'curatorHandle': tables[3]['creatorHandle'],
+        'curatorAvatar': tables[3]['creatorImage'],
+        'curatorName': tables[3]['creator'],
+        'curatorBio': tables[3]['creatorBio'],
+        'large': false
+      ]) }}
+    {% endif %}
+    {% if tables[4] is defined %}
+      {{ partial('partials/list-card', [
+        'id': tables[4]['id'],
+        'image': tables[4]['image'],
+        'name': tables[4]['title'],
+        'description': tables[4]['tagline'],
+        'subscriberCount': tables[4]['subscriberCount'],
+        'listingCount': tables[4]['listingCount'],
+        'curatorHandle': tables[4]['creatorHandle'],
+        'curatorAvatar': tables[4]['creatorImage'],
+        'curatorName': tables[4]['creator'],
+        'curatorBio': tables[4]['creatorBio'],
+        'large': false
+      ]) }}
+    {% endif %}
+    {{ partial('partials/action-card', [
+      'color': 'green',
+      'heading': 'Get Tokens for Collaborating',
+      'text': 'Not only the curators but any user can contribute to the lists and participate in its tokens.<br /><br /><a class="action-card__link" href="#">Learn more</a> about how to become a collaboartor.',
+      'action': '#',
+      'buttonText': 'Become a Collaborator'
+    ]) }}
+    {% if tables[5] is defined %}
+      {{ partial('partials/list-card', [
+        'id': tables[5]['id'],
+        'image': tables[5]['image'],
+        'name': tables[5]['title'],
+        'description': tables[5]['tagline'],
+        'subscriberCount': tables[5]['subscriberCount'],
+        'listingCount': tables[5]['listingCount'],
+        'curatorHandle': tables[5]['creatorHandle'],
+        'curatorAvatar': tables[5]['creatorImage'],
+        'curatorName': tables[5]['creator'],
+        'curatorBio': tables[5]['creatorBio'],
+        'large': false
+      ]) }}
+    {% endif %}
+    {% if tables[6] is defined %}
+      {{ partial('partials/list-card', [
+        'id': tables[6]['id'],
+        'image': tables[6]['image'],
+        'name': tables[6]['title'],
+        'description': tables[6]['tagline'],
+        'subscriberCount': tables[6]['subscriberCount'],
+        'listingCount': tables[6]['listingCount'],
+        'curatorHandle': tables[6]['creatorHandle'],
+        'curatorAvatar': tables[6]['creatorImage'],
+        'curatorName': tables[6]['creator'],
+        'curatorBio': tables[6]['creatorBio'],
+        'large': false
+      ]) }}
+    {% endif %}
+    {% if tables[7] is defined %}
+      {{ partial('partials/list-card', [
+        'id': tables[7]['id'],
+        'image': tables[7]['image'],
+        'name': tables[7]['title'],
+        'description': tables[7]['tagline'],
+        'subscriberCount': tables[7]['subscriberCount'],
+        'listingCount': tables[7]['listingCount'],
+        'curatorHandle': tables[7]['creatorHandle'],
+        'curatorAvatar': tables[7]['creatorImage'],
+        'curatorName': tables[7]['creator'],
+        'curatorBio': tables[7]['creatorBio'],
+        'large': false
+      ]) }}
+    {% endif %}
+    {{ partial('partials/action-card', [
+      'color': 'white',
+      'heading': 'Don’t miss important updates',
+      'text': 'You can subscribe any list to stay ahead of relevant updates.<br /><br /><a class="action-card__link" href="#">Explore</a> our most subscribed lists.',
+      'action': '#',
+      'buttonText': 'Create Account'
+    ]) }}
   </div>
-  <div class="pages main__hero__ownership hidden">
-    <div>
-      <h3>Ownership</h3>
-      <h4>We want SpreadShare to be owned by our contributors</h4>
-      <p>
-        <a data-show="main__hero__token" class="button blue" href="javascript:;">Next</a>
-      </p>
-      <p class="page">5 | 7</p>
-    </div>
-    <span class="circle"></span>
+  <div class="home-heading home-heading--type2 u-flex">
+    <div class="home-heading__text">Featured Curators</div>
+    <div class="home-heading__line u-flexGrow1"></div>
   </div>
-  <div class="pages main__hero__token hidden">
-    <div>
-      <h3>Tokens</h3>
-      <h4>Tokens can be earned by creating content users appreciate</h4>
-      <p>
-        <a data-show="main__hero__autonomy" class="button blue" href="javascript:;">Next</a>
-      </p>
-      <p class="page">6 | 7</p>
+  <div class="home-featured-curators">
+    <div class="u-flex">
+      {{ partial('partials/profile-card', [
+        'username': 'andewcoyle',
+        'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
+        'name': 'Andrew Coyle',
+        'bio': 'Designing the future of global trade @Flexport. Curating lists at Spreadshare.',
+        'type': 4
+      ]) }}
+      {{ partial('partials/profile-card', [
+        'username': 'andewcoyle',
+        'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
+        'name': 'Andrew Coyle',
+        'bio': 'Designing the future of global trade @Flexport. Curating lists at Spreadshare.',
+        'type': 4
+      ]) }}
+      {{ partial('partials/profile-card', [
+        'username': 'andewcoyle',
+        'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
+        'name': 'Andrew Coyle',
+        'bio': 'Designing the future of global trade @Flexport. Curating lists at Spreadshare.',
+        'type': 4
+      ]) }}
     </div>
-    <span class="circle"></span>
+    <div class="u-flex">
+      {{ partial('partials/profile-card', [
+        'username': 'andewcoyle',
+        'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
+        'name': 'Andrew Coyle',
+        'bio': 'Designing the future of global trade @Flexport. Curating lists at Spreadshare.',
+        'type': 4
+      ]) }}
+      {{ partial('partials/profile-card', [
+        'username': 'andewcoyle',
+        'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
+        'name': 'Andrew Coyle',
+        'bio': 'Designing the future of global trade @Flexport. Curating lists at Spreadshare.',
+        'type': 4
+      ]) }}
+      {{ partial('partials/profile-card', [
+        'username': 'andewcoyle',
+        'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
+        'name': 'Andrew Coyle',
+        'bio': 'Designing the future of global trade @Flexport. Curating lists at Spreadshare.',
+        'type': 4
+      ]) }}
+    </div>
   </div>
-  <div class="pages main__hero__autonomy hidden">
-    <div>
-      <h3>Autonomy</h3>
-      <h4>We are building a structure which allows our platform to work autonomously</h4>
-      <p><a data-show="" class="button blue" href="javascript:;">🙏</a></p>
-      <p class="page">7 | 7</p>
-    </div>
-    <span class="circle"></span>
+  <div class="u-flex u-flexWrap gutter">
+    {% if tables[8] is defined %}
+      {{ partial('partials/list-card', [
+        'id': tables[8]['id'],
+        'image': tables[8]['image'],
+        'name': tables[8]['title'],
+        'description': tables[8]['tagline'],
+        'subscriberCount': tables[8]['subscriberCount'],
+        'listingCount': tables[8]['listingCount'],
+        'curatorHandle': tables[8]['creatorHandle'],
+        'curatorAvatar': tables[8]['creatorImage'],
+        'curatorName': tables[8]['creator'],
+        'curatorBio': tables[8]['creatorBio'],
+        'large': false
+      ]) }}
+    {% endif %}
+    {{ partial('partials/action-card', [
+      'color': 'green',
+      'heading': 'Support the community',
+      'text': 'By subscribing a list you support the curators and collaborators who create them.<br /><br /><a class="action-card__link" href="#">Understand</a> how our Tokens are distributed.',
+      'action': '#',
+      'buttonText': 'Start Subscribing'
+    ]) }}
+    {% if tables[9] is defined %}
+      {{ partial('partials/list-card', [
+        'id': tables[9]['id'],
+        'image': tables[9]['image'],
+        'name': tables[9]['title'],
+        'description': tables[9]['tagline'],
+        'subscriberCount': tables[9]['subscriberCount'],
+        'listingCount': tables[9]['listingCount'],
+        'curatorHandle': tables[9]['creatorHandle'],
+        'curatorAvatar': tables[9]['creatorImage'],
+        'curatorName': tables[9]['creator'],
+        'curatorBio': tables[9]['creatorBio'],
+        'large': false
+      ]) }}
+    {% endif %}
+    {{ partial('partials/action-card', [
+      'color': 'yellow',
+      'heading': 'Build Spreadshare together with us',
+      'text': 'Co-workers are people who build the platform and manage the community together with us. Co-workers earn money for every task and can work remotely.<br /><br /><a class="action-card__link" href="#">Learn</a> how to apply.',
+      'action': '#',
+      'buttonText': 'Become a Co-Worker'
+    ]) }}
+    {% if tables[10] is defined %}
+      {{ partial('partials/list-card', [
+        'id': tables[10]['id'],
+        'image': tables[10]['image'],
+        'name': tables[10]['title'],
+        'description': tables[10]['tagline'],
+        'subscriberCount': tables[10]['subscriberCount'],
+        'listingCount': tables[10]['listingCount'],
+        'curatorHandle': tables[10]['creatorHandle'],
+        'curatorAvatar': tables[10]['creatorImage'],
+        'curatorName': tables[10]['creator'],
+        'curatorBio': tables[10]['creatorBio'],
+        'large': false
+      ]) }}
+    {% endif %}
+    {% if tables[11] is defined %}
+      {{ partial('partials/list-card', [
+        'id': tables[11]['id'],
+        'image': tables[11]['image'],
+        'name': tables[11]['title'],
+        'description': tables[11]['tagline'],
+        'subscriberCount': tables[11]['subscriberCount'],
+        'listingCount': tables[11]['listingCount'],
+        'curatorHandle': tables[11]['creatorHandle'],
+        'curatorAvatar': tables[11]['creatorImage'],
+        'curatorName': tables[11]['creator'],
+        'curatorBio': tables[11]['creatorBio'],
+        'large': false
+      ]) }}
+    {% endif %}
   </div>
 </div>
 
-<div class="box-container">
-    <div class="box-container__content">
-        <h3>Best of the last 7 days</h3>
-        <div class="box">
-            {% for table in bestOf %}
-              <div class="box__item">
-                  <a href="/table/{{ table['id'] }}">
-                      <div class="box__item__content">
-                          <h5>{{ table['title'] }}</h5>
-                          <p>{{ table['tagline'] }}</p>
-                      </div>
-                  </a>
-              </div>
-            {% endfor %}
-        </div>
-    </div>
-
-    <div class="box-container__content">
-        <h3>Staff Picks</h3>
-        <div class="box">
-            {% for table in staffPicks %}
-              <div class="box__item">
-                  <a href="/table/{{ table['id'] }}">
-                      <div class="box__item__content">
-                          <h5>{{ table['title'] }}</h5>
-                          <p>{{ table['tagline'] }}</p>
-                      </div>
-                  </a>
-              </div>
-            {% endfor %}
-        </div>
-    </div>
-</div>
-
-<form method="GET" id="sidebarForm">
+{# <form method="GET" id="sidebarForm"> #}
   {# content #}
-  <div class="container container--home">
+  {# <div class="container container--home"> #}
 
       {# tables content #}
-      <div class="container__content">
+      {# <div class="container__content"> #}
           {# filters #}
 
-          {{ partial('homepage/tables') }}
+          {# {{ partial('homepage/tables') }}
           <div class="infinite-scroll-container"></div>
 
           <div class="page-load-status">
               <div class="loading"></div>
           </div>
 
-      </div>
+      </div> #}
 
 
       {# sidebar wrapper #}
-    <div class="aside__wrapper">
+    {# <div class="aside__wrapper"> #}
       {# sidebar 1 #}
-      <aside class="aside aside--home" id="filterByTopic">
+      {# <aside class="aside aside--home" id="filterByTopic">
         <div class="main__content__sidebar__option" id="topicFilter">
           <span>Filter by Topic</span>
         </div>
@@ -162,10 +370,10 @@
           </li>
           {% endfor %}
         </ul>
-      </aside>
+      </aside> #}
 
       {# sidebar 2 #}
-      <aside class="aside aside--home" id="filterByType">
+      {# <aside class="aside aside--home" id="filterByType">
         <div class="main__content__sidebar__option" id="typeFilter">
           <span>Filter by Table Type</span>
         </div>
@@ -182,18 +390,18 @@
           </li>
           {% endfor %}
         </ul>
-      </aside>
+      </aside> #}
 
       {# sidebar 3 #}
-      <aside class="aside aside--home" id="filterByTags">
+      {# <aside class="aside aside--home" id="filterByTags">
         <div class="main__content__sidebar__option" id="tagFilter">
           <span>Filter by Tags</span>
         </div>
         <div id="TagsSelect" data-name="tags[]" data-value="{{ reactArray(filteredTags) }}" data-submit-form-on-change="sidebarForm" data-placeholder="" class="react-component"></div>
-      </aside>
+      </aside> #}
 
       {# sidebar 4 #}
-      <aside class="aside aside--home" id="filterByLocation">
+      {# <aside class="aside aside--home" id="filterByLocation">
         <div class="main__content__sidebar__option" id="locationFilter">
           <span>Filter by location</span>
         </div>
@@ -202,13 +410,13 @@
       </aside>
     </div>
   </div>
-</form>
+</form> #}
 {% endblock %}
 
 {% block scripts %}
 <script type="text/javascript">
   $(document).ready(function () {
-    $('.main__hero a.button').click(function (ev) {
+    {#/* $('.main__hero a.button').click(function (ev) {
       var show = ev.target.getAttribute('data-show');
 
       $('.pages').addClass('hidden');
@@ -223,7 +431,7 @@
 
     $('#sidebarForm ul.filter > li > label').on('change', function (ev) {
       document.getElementById('sidebarForm').submit();
-    });
+    }); */
 
     // $('.navbar__search__filter').on('click', function () {
     // 	$('.filter').toggleClass('open');
@@ -238,14 +446,14 @@
     // 	$('.filter--type').toggleClass('open');
     // });
 
-    $('#closeHero').on('click', function () {
+    /* $('#closeHero').on('click', function () {
       $('.main__hero').css('display', 'none');
       createPopper();
       createPopper($('.navbar__search__filter'), $('.dropdown--notifications'));
-    });
+    }); */
 
     // Load cards for infinite scrolls
-    var $container = $('.tables__content__main__cards').infiniteScroll({
+    /* var $container = $('.tables__content__main__cards').infiniteScroll({
       path: function () {
         var pageNumber = (this.pageIndex + 1);
 
@@ -279,12 +487,12 @@
       history: false,
       debug: false,
       scrollThreshold: 400
-    });
+    }); */
 
-    $('.tables__content__main__cards').data('infiniteScroll').pageIndex = parseInt('{{ loadedUntilPage }}');
+    /* $('.tables__content__main__cards').data('infiniteScroll').pageIndex = parseInt('{{ loadedUntilPage }}'); */
 
     // stop load on scroll if no results are found
-    $container.on('load.infiniteScroll', function (event, response) {
+    /* $container.on('load.infiniteScroll', function (event, response) {
       if (response) {
         $container.infiniteScroll('appendItems', $(response).find('.tables'));
       }
@@ -298,6 +506,14 @@
       if (response.getElementById("no-results")) {
         //$container.infiniteScroll('option', { loadOnScroll: false })
       }
+    }); */#}
+
+    new Popper($('.home-heading-button'), $('.home-heading-dropdown'), {
+      placement: 'bottom-start'
+    });
+
+    $('.home-heading-button').click(function () {
+      $('.home-heading-dropdown').toggleClass('show');
     });
   });
 </script>
