@@ -32,6 +32,17 @@ class Tools {
     }
 
     /**
+     * @param float $number
+     * @param int   $decimalPlaces
+     *
+     * @return float $number
+     */
+    public function round($number, $decimalPlaces = 0)
+    {
+      return round($number, $decimalPlaces);
+    }
+
+    /**
      * @param string $data
      *
      * @return string $str

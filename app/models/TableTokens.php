@@ -24,7 +24,7 @@ class TableTokens
     extends TableTokensEvents
 {
     use FindUserAndRowTrait, FindUserAndTableTrait;
-    
+
     /**
      * @param int    $userId
      * @param string $orderBy
@@ -43,9 +43,12 @@ class TableTokens
                                self::class . ".ownership",
                                self::class . ".tokensEarned",
                                self::class . ".type",
+                               Tables::class . ".id as tableId",
                                Tables::class . ".title as tableTitle",
                                Tables::class . ".tagline as tableTagline",
                                Tables::class . ".ownerUserId",
+                               "(SELECT COUNT(" . TableRows::class . ".id) FROM " . TableRows::class . " WHERE " . TableRows::class . ".tableId = " . Tables::class . ".id) as listingCount",
+                               "(SELECT COUNT(" . TableRows::class . ".id) FROM " . TableRows::class . " WHERE " . TableRows::class . ".tableId = " . Tables::class . ".id AND " . TableRows::class . ".userId = " . $userId . ") as yourListingCount"
                            ]
                        )
                        ->innerJoin(Tables::class, TableTokens::class . '.tableId = ' . Tables::class . '.id')
@@ -56,7 +59,7 @@ class TableTokens
                        ->execute()
                        ->toArray() ?: [];
         }
-        
+
         return [];
     }
 }

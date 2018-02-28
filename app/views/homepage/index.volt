@@ -8,7 +8,7 @@
 
 {# main section #}
 {% block content %}
-<div class="large-page-container">
+<div class="re-page re-page--large">
   <div class="home-heading u-flex">
     <div class="home-heading__text home-heading-button clickable">
       {{ selectionName }}<img src="/assets/images/home-arrow-down.svg" />

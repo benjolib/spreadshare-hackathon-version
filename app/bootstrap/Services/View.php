@@ -30,6 +30,13 @@ return function (\DS\Interfaces\GeneralApplication $application, Phalcon\Di\Fact
                                 }
                             );
 
+                            $compiler->addFilter(
+                                'round',
+                                function ($number, $decimalPlaces = 0) {
+                                    return 'DS\Model\Tools::round(' . $number . ')';
+                                }
+                            );
+
                             return $volt;
                         },
                 ]

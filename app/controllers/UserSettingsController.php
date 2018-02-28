@@ -5,6 +5,8 @@ namespace DS\Controller;
 use DS\Api\UserSettings;
 use DS\Application;
 use DS\Model\Locations;
+use DS\Model\Tables;
+use DS\Model\TableRows;
 use DS\Model\TableTokens;
 use DS\Model\User;
 use DS\Model\UserConnections;
@@ -29,15 +31,15 @@ class UserSettingsController
     extends BaseController
 {
     use NeedsLoginTrait;
-    
+
     /**
      * Home
      */
     public function indexAction($params = [])
     {
-    
+
     }
-    
+
     /**
      * @param int $id
      *
@@ -46,15 +48,15 @@ class UserSettingsController
     private function getUser($id)
     {
         $user = User::get($id);
-        
+
         if (!$user->getId())
         {
             $this->response->redirect('/');
         }
-        
+
         return $user;
     }
-    
+
     /**
      * Settings actions
      *
@@ -70,9 +72,9 @@ class UserSettingsController
             {
                 header('Location: /login');
             }
-            
+
             $this->view->setVar('profile', $this->getUser($this->serviceManager->getAuth()->getUserId()));
-            
+
             switch ($page)
             {
                 case "notifications":
@@ -98,26 +100,26 @@ class UserSettingsController
                     $this->personalAction();
                     break;
             }
-            
+
         }
         catch (Exception $e)
         {
             Application::instance()->log($e->getMessage(), Logger::CRITICAL);
         }
-        
+
         return null;
     }
-    
+
     /**
      * Personal
      */
     public function personalAction()
     {
         $userId = $this->serviceManager->getAuth()->getUserId();
-        
+
         $userSettingsModel = \DS\Model\UserSettings::get($userId, 'userId');
         $this->view->setVar('settings', $userSettingsModel);
-        
+
         if ($this->request->isPost())
         {
             $locations = Locations::getByIds($this->request->getPost('locations', null, []));
@@ -139,7 +141,7 @@ class UserSettingsController
                             }
                         }
                     }
-                    
+
                     // Save user settings
                     $userSettings = new UserSettings();
                     $userSettings->savePersonalSettings(
@@ -152,12 +154,12 @@ class UserSettingsController
                         $this->request->getPost('website'),
                         true
                     );
-                    
+
                     $userSettingsModel->setUserId($userId)
                                       ->setShowTokensOnProfilePage($this->request->getPost('showTokensOnProfilePage'))
                                       ->save();
                     $this->view->setVar('settings', $userSettingsModel);
-                    
+
                     // Reload user data
                     $this->view->setVar('profile', $this->getUser($userId));
                 }
@@ -176,12 +178,12 @@ class UserSettingsController
         {
             $locations = UserLocations::getUserLocations($userId);
         }
-        
+
         $this->view->setVar('locations', htmlentities(json_encode($locations)));
-        
+
         $this->view->setMainView('user/settings/personal');
     }
-    
+
     /**
      * Account
      */
@@ -200,10 +202,10 @@ class UserSettingsController
                 $this->view->setVar('profile', $user);
             }
         }
-        
+
         $this->view->setMainView('user/settings/account');
     }
-    
+
     /**
      * Notifications
      */
@@ -213,7 +215,7 @@ class UserSettingsController
         if ($userId > 0)
         {
             $userSettingsModel = \DS\Model\UserSettings::get($userId, 'userId')->setUserId($userId);
-            
+
             if ($this->request->isPost())
             {
                 $userSettingsModel->setTopicDigest($this->request->getPost('topicDigest'))
@@ -222,11 +224,11 @@ class UserSettingsController
                                   ->save();;
             }
         }
-        
+
         $this->view->setVar('settings', \DS\Model\UserSettings::findByFieldValue('userId', $userId));
         $this->view->setMainView('user/settings/notifications');
     }
-    
+
     /**
      * Connected Accounts
      */
@@ -239,12 +241,12 @@ class UserSettingsController
             {
                 $connectedAccounts->setUserId($this->serviceManager->getAuth()->getUserId());
             }
-            
+
             foreach ($this->request->getPost('link', null, []) as $key => $value)
             {
                 if (method_exists($connectedAccounts, 'set' . ucfirst($key)))
                 {
-                
+
                 }
                 call_user_func(
                     [
@@ -254,15 +256,15 @@ class UserSettingsController
                     $value
                 );
             }
-            
+
             $connectedAccounts->save();
-            
+
         }
-        
+
         $this->view->setVar('connections', $connectedAccounts);
         $this->view->setMainView('user/settings/connected');
     }
-    
+
     /**
      * Invite
      */
@@ -270,23 +272,29 @@ class UserSettingsController
     {
         $this->view->setMainView('user/settings/invite');
     }
-    
+
     /**
      * Wallet
      */
     public function walletAction()
     {
         $userId = $this->serviceManager->getAuth()->getUserId();
-        
+
         $walletModel = Wallet::findByFieldValue('userId', $userId);
         $this->view->setVar('wallet', $walletModel);
-        
+
         $tableTokensModel = new TableTokens();
         $this->view->setVar('tableTokens', $tableTokensModel->getTokens($userId));
-        
+
+        $tablesModel = Tables::findByOwnerUserId($userId);
+        $this->view->setVar('tableCount', count($tablesModel));
+
+        $tableRowsModel = TableRows::findByUserId($userId);
+        $this->view->setVar('submissionsCount', count($tableRowsModel));
+
         $this->view->setMainView('user/settings/wallet');
     }
-    
+
     /**
      * Donations
      */
@@ -294,5 +302,5 @@ class UserSettingsController
     {
         $this->view->setMainView('user/settings/donations');
     }
-    
+
 }
