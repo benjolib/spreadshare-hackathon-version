@@ -223,7 +223,7 @@ class Tables
 
         if ($limit !== Paging::noPaging)
         {
-            $this->query->limit((int) $limit, (int) Paging::endlessScrollPortions * $page);
+            $this->query->limit((int) $limit + 1, $limit * $page);
         }
 
         if ($orderBy)

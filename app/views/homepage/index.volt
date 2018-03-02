@@ -8,6 +8,7 @@
 
 {# main section #}
 {% block content %}
+{# {{ dump(tables) }} #}
 <div class="re-page re-page--large">
   <div class="home-heading u-flex">
     <div class="home-heading__text home-heading-button clickable">
@@ -329,6 +330,10 @@
       ]) }}
     {% endif %}
   </div>
+  <div class="u-flex u-flexWrap gutter load-more-container"></div>
+  <div class="u-flex u-flexJustifyCenter">
+    <a href="#" class="re-button re-button--load-more" {{ moreToLoad ? '' : 'style="display:none;"' }}>Load More</a>
+  </div>
 </div>
 
 {# <form method="GET" id="sidebarForm"> #}
@@ -457,28 +462,6 @@
       path: function () {
         var pageNumber = (this.pageIndex + 1);
 
-        $('.upvote').on('click', function () {
-          $svg = $(this).find('.chevronUp').find('svg').find('path');
-          $svg.attr('fill', '#B1BBC7');
-          $svg.toggleClass('white');
-        });
-
-        $('div.upvote, button.upvote').api({
-          method: 'POST',
-          onSuccess: function (response, button) {
-            var span = button.find('span');
-            if (response.data.voted) {
-              button.addClass('selected');
-              button.find('.chevronUp').find('svg').find('.fillColor').addClass('white');
-              span.text(parseInt(parseInt(span.text()) + 1));
-            } else {
-              button.removeClass('selected');
-              button.find('.chevronUp').find('svg').find('.fillColor').removeClass('white');
-              span.text(parseInt(parseInt(span.text()) - 1));
-            }
-          }
-        });
-
         return '/?page=' + pageNumber;
       },
       append: false,
@@ -514,6 +497,23 @@
 
     $('.home-heading-button').click(function () {
       $('.home-heading-dropdown').toggleClass('show');
+    });
+
+    var pageNumber = 1;
+
+    $('.re-button--load-more').on('click', function (e) {
+      e.preventDefault();
+      $.ajax(window.location.pathname + '?page=' + pageNumber)
+        .done(function (response) {
+          console.log(response);
+          if (response) {
+            $('.load-more-container').append(response);
+            pageNumber += 1;
+            if (!$('<div>' + response + '</div>').find('.moreToLoad').val()) {
+              $('.re-button--load-more').hide();
+            }
+          }
+        });
     });
   });
 </script>

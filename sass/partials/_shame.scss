@@ -1653,6 +1653,7 @@
 
 .re-subtext {
   font-family: 'Roboto Mono', monospace;
+  font-weight: normal;
   line-height: 14px;
   font-size: 10.5px;
   color: #DEE0E7;
@@ -1687,6 +1688,11 @@
     width: 232px;
     height: 56px;
     margin-bottom: 12px;
+    &--load-more {
+      margin-top: 22px;
+      width: 212px;
+      letter-spacing: 0.5px;
+    }
   }
 }
 

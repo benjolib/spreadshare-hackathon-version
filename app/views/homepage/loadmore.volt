@@ -1,4 +1,21 @@
-<div class="tables">
+<input class="moreToLoad" type="hidden" value="{{ moreToLoad }}" />
+{% for table in tables %}
+  {{ partial('partials/list-card', [
+    'id': table['id'],
+    'image': table['image'],
+    'name': table['title'],
+    'description': table['tagline'],
+    'subscriberCount': table['subscriberCount'],
+    'listingCount': table['listingCount'],
+    'curatorHandle': table['creatorHandle'],
+    'curatorAvatar': table['creatorImage'],
+    'curatorName': table['creator'],
+    'curatorBio': table['creatorBio'],
+    'large': false
+  ]) }}
+{% endfor %}
+
+{# <div class="tables">
     {% if tables %}
         <div class="main__content__tables__filters">
             <div class="main__content__tables__filters__left">
@@ -35,7 +52,7 @@
 
     {% if isAjax %}
         <script type="text/javascript">
-            $('.tables__content__main__cards').data('infiniteScroll').pageIndex = parseInt('{{ loadedUntilPage }}');
+            $('.re-page').data('loadMore').pageIndex = parseInt('{{ loadedUntilPage }}');
         </script>
     {% endif %}
-</div>
+</div> #}

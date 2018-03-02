@@ -122,96 +122,53 @@ class IndexController
             // $this->view->setVar('sidebarFilter', $tableFilter);
             $this->view->setVar('selection', $selection);
 
+            $page = (int) $this->request->get('page', null, 0);
+            $limit = 12;
+
             // Filter tables by tableFilter
             $tables = (new Tables())
                 ->findTablesAsArray(
                     $this->serviceManager->getAuth()->getUserId(),
                     $tableFilter,
                     TableFlags::Published,
-                    (int) $this->request->get('page', null, 0),
-                    $orderBy
+                    $page,
+                    $orderBy,
+                    $limit
                 );
+
+            // we fetch 1 more than limit so we can check this
+            if (count($tables) > $limit) {
+              $tables = array_slice($tables, 0, $limit);
+              $this->view->setVar('moreToLoad', true);
+            } else {
+              $this->view->setVar('moreToLoad', false);
+            }
+
             $this->view->setVar('tables', $tables);
 
-            $this->view->setMainView('homepage/index');
+            // Paging instead of returning the whole page
+            if ($this->request->isAjax() && $this->request->has('page'))
+            {
+                if (count($tables) === 0)
+                {
+                  // Return nothing if tables are empty for today.
+                  $this->view->disable();
+                  header('Content-Type: application/json');
+                  die(json_encode([
+                      'code' => 'no-results'
+                  ]));
+                }
+                $this->view->setMainView('homepage/loadmore');
+            }
+            else
+            {
+                $this->view->setMainView('homepage/index');
+            }
         }
         catch (Exception $e)
         {
             Application::instance()->log($e->getMessage(), Logger::CRITICAL);
         }
-    }
-
-    /**
-     * Load best tables from last 7 days
-     */
-    private function loadBestOfLast7Days()
-    {
-        $tableFilter = new TableFilter();
-        $tableFilter->setBestOf(true);
-        $tableFilter->setDateRange(DateRange::initLastDays(7));
-
-        // Filter tables by tableFilter
-        $tables = (new Tables())
-            ->findTablesAsArray(
-                $this->serviceManager->getAuth()->getUserId(),
-                $tableFilter,
-                TableFlags::Published,
-                0,
-                TableStats::class . ".votesCount DESC",
-                12
-            );
-        $this->view->setVar('tables', $tables);
-    }
-
-    /**
-     * Load Staff picks
-     */
-    private function loadStaffPicks()
-    {
-        $tableFilter = new TableFilter();
-        $tableFilter->setStaffPicks(true);
-
-        // Filter tables by tableFilter
-        $tables = (new Tables())
-            ->findTablesAsArray(
-                $this->serviceManager->getAuth()->getUserId(),
-                $tableFilter,
-                TableFlags::Published,
-                0,
-                Tables::class . ".id",
-                12
-            );
-        $this->view->setVar('staffPicks', $tables);
-    }
-
-    /**
-     * @param int         $page
-     * @param TableFilter $tableFilter
-     * @param string      $orderBy
-     *
-     * @return array
-     */
-    private function loadTablesForPage(int $page, TableFilter $tableFilter, string $orderBy): array
-    {
-        // Set daterange
-        $tableFilter->setDateRange(DateRange::initDayFromTodayBackwards($page));
-
-        // Display the day in human format (today, yesterday, ..)
-        $this->view->setVar('dateRangeString', PrettyDateTime::day(new \DateTime('- ' . $page . 'days'), null, true));
-
-        // Filter tables by tableFilter
-        $tables = (new Tables())
-            ->findTablesAsArray(
-                $this->serviceManager->getAuth()->getUserId(),
-                $tableFilter,
-                TableFlags::Published,
-                0,
-                $orderBy,
-                Paging::noPaging
-            );
-        $this->view->setVar('tables', $tables);
-
-        return $tables;
     }
 
 }

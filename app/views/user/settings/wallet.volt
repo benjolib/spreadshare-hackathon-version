@@ -5,6 +5,7 @@
 
 {% block content %}
 <div class="re-page">
+  {{ dump(tableTokens) }}
   <div class="page-top-margin-bottom">
     <div>
       <h1 class="re-heading">Wallet</h1>
@@ -39,21 +40,34 @@
         </tr>
       </thead>
       <tbody>
-        {% for tokens in tableTokens %}
-          <tr>
-            <td>
-              <div class="re-table-green">{{ tokens['listingCount'] }} LISTINGS</div>
-              <a href="/table/{{ tokens['tableId']}}"><h3>{{ tokens['tableTitle'] }}</h3></a>
-              <p>{{ tokens['tableTagline'] }}</p>
-            </td>
-            <td class="hide-on-small">{% if tokens['ownerUserId'] == auth.getUserId() %}OWNER{% else %}COLLABORATOR{% endif %}</td>
-            <td class="hide-on-small">{{ tokens['tokensEarned'] }}</td>
-            <td class="hide-on-small">{{ ((tokens['yourListingCount'] / tokens['listingCount']) * 100)|round(2) }}%</td>
-          </tr>
-          <tr class="re-table-space"></tr>
-        {% endfor %}
+        {{ partial('user/settings/wallet-loadmore') }}
       </tbody>
     </table>
   {% endif %}
+  <div class="u-flex u-flexJustifyCenter">
+    <a href="#" class="re-button re-button--load-more" {{ moreToLoad ? '' : 'style="display:none;"' }}>Load More</a>
+  </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+  <script type="text/javascript">
+    $(document).ready(function () {
+      var pageNumber = 1;
+
+      $('.re-button--load-more').on('click', function (e) {
+        e.preventDefault();
+        $.ajax(window.location.pathname + '?page=' + pageNumber)
+          .done(function (response) {
+            if (response) {
+              $('.re-table tbody').append(response);
+              pageNumber += 1;
+              if (!$('<div>' + response + '</div>').find('.moreToLoad').val()) {
+                $('.re-button--load-more').hide();
+              }
+            }
+          });
+      });
+    });
+  </script>
 {% endblock %}
