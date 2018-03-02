@@ -5,7 +5,7 @@
 
 {% block content %}
 <div class="re-page">
-  {{ dump(tableTokens) }}
+  {# {{ dump(tableTokens) }} #}
   <div class="page-top-margin-bottom">
     <div>
       <h1 class="re-heading">Wallet</h1>
