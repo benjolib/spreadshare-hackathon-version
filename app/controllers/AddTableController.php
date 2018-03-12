@@ -22,9 +22,7 @@ use Phalcon\Exception;
  * @version   $Version$
  * @package   DS\Controller
  */
-class AddTableController
-    extends BaseController
-    implements LoginAwareController
+class AddTableController extends BaseController implements LoginAwareController
 {
     /**
      * @return bool
@@ -46,8 +44,7 @@ class AddTableController
         $tableStats = (new UserStats())->get($this->serviceManager->getAuth()->getUserId(), 'userId');
         $this->view->setVar('visitedAddTablePage', $tableStats->getVisitedAddTablePage());
 
-        if (!$tableStats->getVisitedAddTablePage())
-        {
+        if (!$tableStats->getVisitedAddTablePage()) {
             $tableStats->setUserId($this->serviceManager->getAuth()->getUserId())->setVisitedAddTablePage(1)->save();
         }
     }
@@ -60,27 +57,22 @@ class AddTableController
         $this->view->setMainView('table/add');
         $this->view->setVar('hideChooseTable', false);
 
-        try
-        {
-            if ($this->request->isPost())
-            {
+        try {
+            if ($this->request->isPost()) {
                 $this->view->setVar('post', $this->request->getPost());
             }
 
             $userId = $this->serviceManager->getAuth()->getUserId();
 
-            if ($selection)
-            {
+            if ($selection) {
                 // Choose Table Step (onyl applies to copy-poast, csv-import and sheet-import)
-                $subClass = "DS\\Controller\\AddTable\\Description\\" . str_replace(' ', '', ucwords(str_replace('-', ' ', $selection)));
-                if (class_exists($subClass))
-                {
+                $subClass = 'DS\\Controller\\AddTable\\Description\\' . str_replace(' ', '', ucwords(str_replace('-', ' ', $selection)));
+                if (class_exists($subClass)) {
                     /**
                      * @var \DS\Interfaces\TableSubcontrollerInterface $subController
                      */
                     $subController = new $subClass();
-                    if (is_a($subController, 'DS\Interfaces\TableSubcontrollerInterface'))
-                    {
+                    if (is_a($subController, 'DS\Interfaces\TableSubcontrollerInterface')) {
                         $subController->initialize();
                         $subController->handle(/* pass dummy table model */
                             new Tables(),
@@ -91,9 +83,7 @@ class AddTableController
                     }
                 }
             }
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             $this->flash->error($e->getMessage());
         }
     }
@@ -103,40 +93,33 @@ class AddTableController
      */
     public function chooseAction($selection)
     {
-        try
-        {
+        try {
             $this->view->setMainView('table/add');
             $this->view->setVar('hideChooseTable', false);
             $userId = $this->serviceManager->getAuth()->getUserId();
 
-            if ($selection)
-            {
-                $tableId    = $this->request->get('tableId');
+            if ($selection) {
+                $tableId = $this->request->get('tableId');
                 $tableModel = Tables::getInstance($tableId);
 
-                if (!$tableModel->getId())
-                {
+                if (!$tableModel->getId()) {
                     throw new Exception('Table does not exist!');
                 }
 
                 // Choose Table Step (onyl applies to copy-poast, csv-import and sheet-import)
-                $subClass = "DS\\Controller\\AddTable\\ChooseTable\\" . str_replace(' ', '', ucwords(str_replace('-', ' ', $selection)));
-                if (class_exists($subClass))
-                {
+                $subClass = 'DS\\Controller\\AddTable\\ChooseTable\\' . str_replace(' ', '', ucwords(str_replace('-', ' ', $selection)));
+                if (class_exists($subClass)) {
                     /**
                      * @var \DS\Interfaces\TableSubcontrollerInterface $subController
                      */
                     $subController = new $subClass();
-                    if (is_a($subController, 'DS\Interfaces\TableSubcontrollerInterface'))
-                    {
+                    if (is_a($subController, 'DS\Interfaces\TableSubcontrollerInterface')) {
                         $subController->initialize();
                         $subController->handle(isset($tableModel) ? $tableModel : new Tables(), $userId, $selection, '');
                     }
                 }
             }
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             // $this->flash->error($e->getMessage());
             header('Location: /table/add');
         }
@@ -147,8 +130,7 @@ class AddTableController
      */
     public function confirmAction()
     {
-        try
-        {
+        try {
             $this->view->setMainView('table/add');
             $userId = $this->serviceManager->getAuth()->getUserId();
 
@@ -157,25 +139,20 @@ class AddTableController
             $this->view->setVar('content', 'table/add/confirm');
             $this->view->setVar('tab', 'confirm');
 
-            if ($tableId)
-            {
-
+            if ($tableId) {
                 $tableModel = Tables::get($tableId);
-                if ($tableModel->getOwnerUserId() == $userId)
-                {
+                if ($tableModel->getOwnerUserId() == $userId) {
                     $tableContent = new TableContent();
-                    $tableData    = $tableContent->getTableData($tableId, $userId);
+                    $tableData = $tableContent->getTableData($tableId, $userId);
                     $this->view->setVar('tableData', $tableData);
                     $this->view->setVar('tableProps', $tableProps = (new TableProperties())->get($tableId, 'tableId'));
 
                     $this->view->setVar('tableId', $this->request->get('tableId'));
                     $this->view->setVar('redirectToTable', $this->request->get('redirectToTable') === null ? 0 : 1);
 
-                    if ($this->request->isPost())
-                    {
+                    if ($this->request->isPost()) {
                         $tableId = $this->request->getPost('tableId');
-                        if ($tableId)
-                        {
+                        if ($tableId) {
                             $tableApi = new Table();
                             $tableApi->publish($tableId);
 
@@ -196,19 +173,13 @@ class AddTableController
                             //}
                         }
                     }
-                }
-                else
-                {
+                } else {
                     throw new SecurityException('You are not allowed to publish this table.');
                 }
             }
-        }
-        catch (SecurityException $e)
-        {
+        } catch (SecurityException $e) {
             throw $e;
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             $this->flash->error($e->getMessage());
         }
     }

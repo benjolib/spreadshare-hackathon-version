@@ -195,4 +195,12 @@ return [
         ],
         'methods' => ['GET', 'POST'],
     ],
+    [
+        'url' => '/table/{id:[0-9]+}/delete',
+        'paths' => [
+            'controller' => 'Table',
+            'action' => 'delete',
+        ],
+        'methods' => ['GET', 'POST'],
+    ],
 ];
