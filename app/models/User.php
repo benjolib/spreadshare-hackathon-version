@@ -2,11 +2,13 @@
 
 namespace DS\Model;
 
-use DS\Component\Mail\Events\SignupMail;
+use Phalcon\Db;
 use DS\Constants\Paging;
-use DS\Model\DataSource\UserStatus;
+use Phalcon\Mvc\Model\Query;
 use DS\Model\Events\UserEvents;
+use DS\Model\DataSource\UserStatus;
 use DS\Model\Helper\RandomUserImage;
+use DS\Component\Mail\Events\SignupMail;
 
 /**
  * User
@@ -21,8 +23,7 @@ use DS\Model\Helper\RandomUserImage;
  *
  * @method static User findFirstById(int $id)
  */
-class User
-    extends UserEvents
+class User extends UserEvents
 {
     /**
      * @return string
@@ -31,7 +32,7 @@ class User
     {
         return str_replace('http://', '//', parent::getImage());
     }
-    
+
     /**
      * @return UserStats
      */
@@ -39,7 +40,7 @@ class User
     {
         return UserStats::get($this->id, 'userId');
     }
-    
+
     /**
      * @param int  $tableId
      * @param bool $upvoters
@@ -51,61 +52,51 @@ class User
     public function getTableUsers(int $tableId, bool $upvoters = false, bool $subscribers = false, bool $contributors = false, bool $admins = false): array
     {
         $columns = [
-            User::class . ".id",
-            User::class . ".image",
-            User::class . ".name",
-            User::class . ".handle",
-            User::class . ".tagline",
-            User::class . ".location",
-            "(SELECT " . UserFollower::class . ".id FROM " . UserFollower::class . " WHERE " . UserFollower::class . ".userId = " . User::class . ".id AND " . UserFollower::class . ".followedByUserId = " .
-            serviceManager()->getAuth()->getUserId() . ") as following",
+            User::class . '.id',
+            User::class . '.image',
+            User::class . '.name',
+            User::class . '.handle',
+            User::class . '.tagline',
+            User::class . '.location',
+            '(SELECT ' . UserFollower::class . '.id FROM ' . UserFollower::class . ' WHERE ' . UserFollower::class . '.userId = ' . User::class . '.id AND ' . UserFollower::class . '.followedByUserId = ' .
+            serviceManager()->getAuth()->getUserId() . ') as following',
         ];
-        
+
         $query = self::query()
                      ->where(Tables::class . '.id = :tableId:', ['tableId' => $tableId])
                      ->groupBy(User::class . '.id')
                      ->limit(Paging::endlessScrollPortions);
-        
-        if ($subscribers)
-        {
+
+        if ($subscribers) {
             $query->innerJoin(TableSubscription::class, TableSubscription::class . '.userId = ' . User::class . '.id');
             $query->innerJoin(Tables::class, TableSubscription::class . '.tableId = ' . Tables::class . '.id');
             $columns[] = TableSubscription::class . '.createdAt as subscribedAt';
-        }
-        else
-        {
+        } else {
             $query->leftJoin(TableSubscription::class, TableSubscription::class . '.userId = ' . User::class . '.id');
         }
-        
-        if ($upvoters)
-        {
+
+        if ($upvoters) {
             $query->innerJoin(TableVotes::class, TableVotes::class . '.userId = ' . User::class . '.id');
             $query->innerJoin(Tables::class, TableVotes::class . '.tableId = ' . Tables::class . '.id');
-        }
-        else
-        {
+        } else {
             $query->leftJoin(TableVotes::class, TableVotes::class . '.userId = ' . User::class . '.id');
         }
-        
-        if ($contributors)
-        {
+
+        if ($contributors) {
             $query->innerJoin(TableCells::class, TableCells::class . '.userId = ' . User::class . '.id')
                   ->innerJoin(TableRows::class, TableCells::class . '.rowId = ' . TableRows::class . '.id')
                   ->innerJoin(Tables::class, TableRows::class . '.tableId = ' . Tables::class . '.id');
-        }
-        else
-        {
+        } else {
             $query->leftJoin(TableCells::class, TableCells::class . '.userId = ' . User::class . '.id');
         }
-        
-        if ($admins)
-        {
+
+        if ($admins) {
             $query->innerJoin(Tables::class, Tables::class . '.ownerUserId = ' . User::class . '.id');
         }
-        
+
         return $query->columns($columns)->execute()->toArray();
     }
-    
+
     /**
      * Get username by email address or username
      *
@@ -117,13 +108,13 @@ class User
     {
         return parent::findFirst(
             [
-                "conditions" => "handle = ?0 OR email = ?1",
-                "limit" => 1,
-                "bind" => [$usernameOrEmail, $usernameOrEmail],
+                'conditions' => 'handle = ?0 OR email = ?1',
+                'limit' => 1,
+                'bind' => [$usernameOrEmail, $usernameOrEmail],
             ]
         );
     }
-    
+
     /**
      * Save user credentials. Leave password blank to not update.
      *
@@ -134,17 +125,16 @@ class User
      */
     public function saveCredentials(string $email, string $unhashedPassword)
     {
-        if ($unhashedPassword)
-        {
+        if ($unhashedPassword) {
             $this->setSecuritySalt(serviceManager()->getSecurity()->hash($unhashedPassword));
         }
-        
+
         $this->setEmail($email)
              ->save();
-        
+
         return $this;
     }
-    
+
     /**
      * @param string $name
      * @param string $email
@@ -162,15 +152,15 @@ class User
              ->setImage(RandomUserImage::get())
              ->setSecuritySalt(serviceManager()->getSecurity()->hash($unhashedPassword))
              ->create();
-        
+
         // Send mail
         SignupMail::factory($this->getDI())
                   ->prepare($user)
                   ->send();
-        
+
         return $user;
     }
-    
+
     /**
      * @param        $name
      * @param        $handle
@@ -187,32 +177,29 @@ class User
      */
     public static function addUserFromAuthService($name, $handle, $email, $description, $tagline, $authUid, $profileImage, $city, $website = '', $provider = 'Facebook')
     {
-        $email = $email ? $email : "{$authUid}@" . strtolower($provider) . ".com";
-        $user  = User::findFirst(
+        $email = $email ? $email : "{$authUid}@" . strtolower($provider) . '.com';
+        $user = User::findFirst(
             [
-                "conditions" => " email = ?0 OR authUid = ?1",
-                "bind" => [$email, $authUid],
+                'conditions' => ' email = ?0 OR authUid = ?1',
+                'bind' => [$email, $authUid],
             ]
         );
-        
-        if ($user && $user->getAuthProvider() != $provider)
-        {
+
+        if ($user && $user->getAuthProvider() != $provider) {
             throw new \InvalidArgumentException('You already registered with this email address.');
         }
-        
+
         $urlPattern = "/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i";
-        
-        if (!$user)
-        {
+
+        if (!$user) {
             $userHandle = User::findByFieldValue('handle', $handle);
             // Add Auth UserId to handle if a user with the same handle already exists
-            if ($userHandle)
-            {
+            if ($userHandle) {
                 $handle .= '-' . $authUid;
             }
-            
+
             $user = new self();
-            
+
             $user->setEmail($email)
                  ->setName($name)
                  ->setImage($profileImage)
@@ -224,16 +211,13 @@ class User
                  ->setTagline($tagline)
                  ->setStatus(UserStatus::OnboardingIncomplete)
                  ->setLastLogin(time());
-            
-            if ($website && preg_match($urlPattern, $website))
-            {
+
+            if ($website && preg_match($urlPattern, $website)) {
                 $user->setWebsite($website);
             }
-            
+
             $user->create();
-        }
-        else
-        {
+        } else {
             $user->setEmail($email)
                  ->setName($name)
                  ->setImage($profileImage)
@@ -243,15 +227,47 @@ class User
                  ->setLocation($city)
                  ->setDescription($description)
                  ->setTagline($tagline);
-            
-            if ($website && preg_match($urlPattern, $website))
-            {
+
+            if ($website && preg_match($urlPattern, $website)) {
                 $user->setWebsite($website);
             }
-            
+
             $user->save();
         }
-        
+
         return $user;
+    }
+
+    public function getRequests()
+    {
+        $changes = $this->changes;
+
+        $query = $this->readQuery("
+             SELECT 
+                changeRequests.id, 
+                changeRequests.cellid,
+                changeRequests.from,
+                changeRequests.to,
+                changeRequests.comment, 
+                changeRequests.status,
+                tables.id as table_id,
+                tables.title as table_title,
+                tables.tagline as table_tagline,
+                tables.image as table_image,
+                (SELECT COUNT(*) from tableVotes WHERE tableVotes.tableid = tables.id) as votes
+            FROM changeRequests
+                JOIN tableCells on tableCells.id = changeRequests.cellid
+                JOIN tableRows on tableRows.id = tableCells.rowId
+                JOIN tables on tables.id = tableRows.tableId
+            WHERE changeRequests.userId = $this->id
+            ");
+
+        $query->setFetchMode(Db::FETCH_ASSOC);
+
+        return $query->fetchAll() ?: [];
+
+        return $changes;
+
+        // return $changes->cell->id;
     }
 }

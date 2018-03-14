@@ -203,4 +203,12 @@ return [
         ],
         'methods' => ['GET', 'POST'],
     ],
+    [
+        'url' => '/requests',
+        'paths' => [
+            'controller' => 'Change_Request',
+            'action' => 'index',
+        ],
+        'methods' => ['GET', 'POST'],
+    ],
 ];

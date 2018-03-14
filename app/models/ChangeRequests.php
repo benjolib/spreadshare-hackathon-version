@@ -21,8 +21,7 @@ use Phalcon\Db;
  *
  * @method static ChangeRequests findFirstById(int $id)
  */
-class ChangeRequests
-    extends ChangeRequestsEvents
+class ChangeRequests extends ChangeRequestsEvents
 {
     /**
      * @param int                  $tableId
@@ -56,37 +55,31 @@ class ChangeRequests
                      ->limit((int) $limit, (int) Paging::endlessScrollPortions * $page)
                      ->orderBy(self::class . '.id DESC');
         */
-        
+
         $params = [
             'tableId' => $tableId,
             'limit' => (int) $limit,
             'offset' => (int) Paging::endlessScrollPortions * $page,
         ];
-        
+
         $statusCheck = '';
-        if ($status !== ChangeRequestStatus::All)
-        {
-            $statusCheck      = 'AND `changeRequests`.`status` = :status';
+        if ($status !== ChangeRequestStatus::All) {
+            $statusCheck = 'AND `changeRequests`.`status` = :status';
             $params['status'] = $status;
         }
 
         $showOnlyFilter = '';
-        if ($filter->getShowOnly() === ChangeRequestsFilter::ONLY_EDITS)
-        {
+        if ($filter->getShowOnly() === ChangeRequestsFilter::ONLY_EDITS) {
             $showOnlyFilter = 'AND `changeRequests`.`to` != ""';
-        }
-        elseif ($filter->getShowOnly() === ChangeRequestsFilter::ONLY_DELETES)
-        {
+        } elseif ($filter->getShowOnly() === ChangeRequestsFilter::ONLY_DELETES) {
+            $showOnlyFilter = 'AND `changeRequests`.`to` = ""';
+        } elseif ($filter->getShowOnly() === ChangeRequestsFilter::ONLY_DELETES) {
             $showOnlyFilter = 'AND `changeRequests`.`to` = ""';
         }
-        elseif ($filter->getShowOnly() === ChangeRequestsFilter::ONLY_DELETES)
-        {
-            $showOnlyFilter = 'AND `changeRequests`.`to` = ""';
-        }
-        
+
         $query = $this->readQuery(
-            "SELECT (SELECT `tableRows`.`content` FROM `tableRows` WHERE `tableRows`.`tableId` = :tableId AND `tableRows`.`lineNumber` = 1 LIMIT 1) as `row`, (SELECT `tableColumns`.`title` FROM `tableColumns` WHERE `tableColumns`.`id` = `tableCells`.`columnId` LIMIT 1) as `column`, `changeRequests`.`id` AS `id`, `changeRequests`.`to` AS `to`, `changeRequests`.`from` AS `from`, `changeRequests`.`comment` AS `comment`, `changeRequests`.`createdAt` AS `createdAt`, `changeRequests`.`status` AS `status`, `user`.`handle` AS `userHandle`, `user`.`image` AS `userImage`, `user`.`name` AS `user` " .
-            "FROM `spreadshare`.`changeRequests`  INNER JOIN `spreadshare`.`user` ON `changeRequests`.`userId` = `user`.`id` INNER JOIN `spreadshare`.`tableCells` ON `changeRequests`.`cellId` = `tableCells`.`id` INNER JOIN `spreadshare`.`tableRows` ON `tableCells`.`rowId` = `tableRows`.`id` " .
+            'SELECT (SELECT `tableRows`.`content` FROM `tableRows` WHERE `tableRows`.`tableId` = :tableId AND `tableRows`.`lineNumber` = 1 LIMIT 1) as `row`, (SELECT `tableColumns`.`title` FROM `tableColumns` WHERE `tableColumns`.`id` = `tableCells`.`columnId` LIMIT 1) as `column`, `changeRequests`.`id` AS `id`, `changeRequests`.`to` AS `to`, `changeRequests`.`from` AS `from`, `changeRequests`.`comment` AS `comment`, `changeRequests`.`createdAt` AS `createdAt`, `changeRequests`.`status` AS `status`, `user`.`handle` AS `userHandle`, `user`.`image` AS `userImage`, `user`.`name` AS `user` ' .
+            'FROM `spreadshare`.`changeRequests`  INNER JOIN `spreadshare`.`user` ON `changeRequests`.`userId` = `user`.`id` INNER JOIN `spreadshare`.`tableCells` ON `changeRequests`.`cellId` = `tableCells`.`id` INNER JOIN `spreadshare`.`tableRows` ON `tableCells`.`rowId` = `tableRows`.`id` ' .
             "WHERE `tableRows`.`tableId` = :tableId $statusCheck $showOnlyFilter ORDER BY `changeRequests`.`id` DESC LIMIT :limit OFFSET :offset",
             $params,
             [
@@ -95,7 +88,11 @@ class ChangeRequests
             ]
         );
         $query->setFetchMode(Db::FETCH_ASSOC);
-        
+
         return $query->fetchAll() ?: [];
+    }
+
+    public function getChanges()
+    {
     }
 }
