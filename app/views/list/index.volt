@@ -1,8 +1,9 @@
 {% extends 'layouts/main.volt' %}
 
-{% block title %}SpreadShare - {{ table['title'] }} - {{ table['topic1'] }}{% endblock %}
+{% block title %}SpreadShare {% endblock %}
 
 {% block content %}
+{{ flash.output() }}
 <div class="re-page re-page--list">
   <div style="margin-bottom: 118px;">
     <div class="re-image" style="background: #f5f5f5 url({{ table['image'] }}) center / cover;"></div>
@@ -34,7 +35,7 @@
       </thead>
       <tbody>
         {% for row in tableRows %}
-          <tr data-id="{{ row['id'] }}">
+          <tr data-id="{{ row['id'] }}" class="list-row-tr">
             <td>
               <a href="#" class="vote-link {{ row['upvoted'] ? 'vote-link--upvoted' : '' }}">
                 <img class="vote-link__image" src="/assets/images/vote-lightning.svg" />
@@ -164,11 +165,11 @@
     <div class="list-tab-content list-tab-content-discussion j_table-discussion">
       {% if auth.loggedIn() %}
         <div>
-          <button class="re-button re-button--full-width re-button--tall re-button--list-discussion" style="display:none;">Write a Response</button>
-          <form method="POST" action="/table/{{ table['id'] }}">
-              <input type="hidden" name="parentId" id="commentParentId" value="" />
+          <button class="re-button re-button--full-width re-button--tall re-button--list-discussion">Write a Response</button>
+          <form method="POST" action="/list/{{ table['id'] }}" style="display:none;">
+              <input type="hidden" name="parentId" value="" />
               <div class="discussion-textarea">
-                <textarea name="comment" id="commentTextArea" placeholder="Write comment here..." minlength="3" maxlength="300"></textarea>
+                <textarea name="comment" placeholder="Write comment here..." minlength="3" maxlength="300"></textarea>
                 <button>Send</button>
               </div>
           </form>
@@ -176,7 +177,7 @@
       {% endif %}
       {% if tableComments %}
         {% for comment in tableComments %}
-          <div class="u-flex u-flexAlignItemsCenter">
+          <div class="u-flex comment">
             <a href="#" class="vote-link vote-link--discussion vote-link--upvoted">
               <img class="vote-link__image vote-link__image--green" src="/assets/images/vote-lightning-green.svg" />
               <div>{{ comment['votesCount'] }}</div>
@@ -187,25 +188,42 @@
               'name': comment['creator'],
               'bio': comment['comment'],
               'type': 9,
-              'truncate': false
+              'truncate': false,
+              'maincomment': true,
+              'subcomment': false,
+              'commentId': comment['id']
             ]) }}
+            <div class="comment-clock"><img src="/assets/images/comment-clock.svg" />{{ formatTimestamp(table['createdAt']) }}</div>
           </div>
-          {% for comment in comment['childs'] %}
-            {{ partial('partials/profile-card', [
-              'username': comment['creatorHandle'],
-              'avatar': comment['creatorImage'],
-              'name': comment['creator'],
-              'bio': comment['comment'],
-              'type': 9,
-              'truncate': false
-            ]) }}
+          {% for childComment in comment['childs'] %}
+            <div class="u-flex comment" style="margin-left:71px;">
+              <a href="#" class="vote-link vote-link--discussion vote-link--upvoted">
+                <img class="vote-link__image vote-link__image--green" src="/assets/images/vote-lightning-green.svg" />
+                <div>{{ childComment['votesCount'] }}</div>
+              </a>
+              {{ partial('partials/profile-card', [
+                'username': childComment['creatorHandle'],
+                'avatar': childComment['creatorImage'],
+                'name': childComment['creator'],
+                'bio': childComment['comment'],
+                'type': 9,
+                'truncate': false,
+                'maincomment': false,
+                'subcomment': true,
+                'commentId': comment['id']
+              ]) }}
+              <div class="comment-clock"><img src="/assets/images/comment-clock.svg" />{{ formatTimestamp(table['createdAt']) }}</div>
+            </div>
           {% endfor %}
-
-          {# <div class="tableAbout__comments__content__subcomments">
-            {% for comment in comment['childs'] %}
-            {{ partial('table/detail/subcomment') }}
-            {% endfor %}
-          </div> #}
+          {% if auth.loggedIn() %}
+            <form method="POST" action="/list/{{ table['id'] }}" style="display:none;margin-left:80px;margin-top:8px;">
+                <input type="hidden" name="parentId" class="commentParentId" value="" />
+                <div class="discussion-textarea">
+                  <textarea name="comment" class="commentTextArea" placeholder="Write comment here..." minlength="3" maxlength="300"></textarea>
+                  <button>Send</button>
+                </div>
+            </form>
+          {% endif %}
         {% endfor %}
       {% endif %}
     </div>
@@ -270,50 +288,9 @@
 {{ dump(tableRows) }}
 
 {{ dump(tableComments) }}
-
-
-{# {{ dump(tableContentRowsWithVotes) }} #}
-
-
-{# <div class="table">
-  {{ partial('table/detail/header') }}
-
-  {{ dump(table) }}
-
-  <div id="tableContainer">
-    <div id="Table" data-id="{{ table['id'] }}" data-permission="{% if auth.getUserId() == table['ownerUserId'] %}2{% elseif auth.loggedIn() %}1{% else %}0{% endif %}" class="react-component">
-        <br/>
-        <br/>
-        <div class="loading"></div>
-        <br/>
-        <br/>
-    </div>
-  </div>
-</div> #}
 {% endblock %}
 
-
 {% block scripts %}
-{# {{ partial('table/detail/flag') }}
-
-
-<script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Table",
-  "about": "{{ table['title'] }}"
-  "description": "{{ table['tagline'] }}",
-  "keywords": "{{ table['tags'] }}",
-  "dateCreated": " {{ table['createdAt'] }}",
-  "author": {
-    "@type": "Person",
-    "image": "{{ table['creatorImage'] }}",
-    "name": "{{ table['creator'] }}",
-    "sameAs": "/user/{{ table['creatorHandle'] }}"
-  }
-}
-</script> #}
-
 <script type="text/javascript">
   $(document).ready(function () {
     $('.list-tab-button-discussion').on('click', function (e) {
@@ -385,14 +362,33 @@
 
     // discussion stuff
 
-    $('.j_table-discussion').on('click', '.reply', function (ev) {
+    $('.re-button--list-discussion').on('click', function () {
+      $(this).hide().next('form').show()
+    });
+
+    $('.j_table-discussion').on('click', '.reply.reply-maincomment', function (ev) {
       ev.preventDefault();
       var target = $(ev.currentTarget);
+      var $form = target.parents('.comment').nextAll('form').first();
 
-      $('#commentTextArea').val('@' + target.attr('data-handle') + ' ');
-      $('#commentParentId').val(target.attr('data-id'));
+      $form.show();
 
-      document.getElementById('commentTextArea').focus();
+      $form.find('.commentParentId').val(target.attr('data-id'));
+
+      $form.find('.commentTextArea').focus();
+    });
+
+    $('.j_table-discussion').on('click', '.reply.reply-subcomment', function (ev) {
+      ev.preventDefault();
+      var target = $(ev.currentTarget);
+      var $form = target.parents('.comment').nextAll('form').first();
+
+      $form.show();
+
+      $form.find('.commentTextArea').val('@' + target.attr('data-handle') + ' ');
+      $form.find('.commentParentId').val(target.attr('data-id'));
+
+      $form.find('.commentTextArea').focus();
     });
   });
 </script>

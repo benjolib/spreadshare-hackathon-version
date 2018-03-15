@@ -137,7 +137,7 @@ return [
             'controller' => 'Table_Detail',
             'action' => 'index',
         ],
-        'methods' => ['GET'],
+        'methods' => ['GET', 'POST'],
     ],
     [
         'url' => '/download/table/{id:[0-9]+}/{format:[a-z]+}',
@@ -200,6 +200,15 @@ return [
         'paths' => [
             'controller' => 'Table',
             'action' => 'delete',
+        ],
+        'methods' => ['GET', 'POST'],
+    ],
+    // new routes
+    [
+        'url' => '/list/{id:[0-9]+}',
+        'paths' => [
+            'controller' => 'List',
+            'action' => 'index',
         ],
         'methods' => ['GET', 'POST'],
     ],

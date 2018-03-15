@@ -53,6 +53,17 @@
       line-height: 19px;
     }
   }
+  &--type3 & {
+    &__avatar {
+      @media(min-width: 768px) {
+        width: 24px;
+        height: 24px;
+      }
+    }
+    &__name {
+      margin-right: 6px;
+    }
+  }
   &--type4 {
     min-width: 70%;
     padding:0;
@@ -92,6 +103,34 @@
     }
     &__bio {
       max-width: 305px;
+    }
+  }
+  &--type9 {
+    margin-left: 5px;
+    margin-bottom: 24PX;
+  }
+  &--type9 & {
+    &__avatar {
+      width: 33px;
+      height: 33px;
+      margin-right: 7px;
+      @media(min-width: 768px) {
+        width: 64px;
+        height: 64px;
+        margin-right: 16px;
+      }
+    }
+    &__name {
+      margin-right: 4px;
+      @media(min-width: 768px) {
+        margin-right: 6px;
+      }
+    }
+    &__follow {
+    }
+    &__bio {
+      margin-top: 4px;
+      margin-right: 32px;
     }
   }
 }
