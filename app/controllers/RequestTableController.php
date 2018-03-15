@@ -18,20 +18,16 @@ use Phalcon\Logger;
  * @version   $Version$
  * @package   DS\Controller
  */
-class RequestTableController
-    extends BaseController
+class RequestTableController extends BaseController
 {
     /**
      * Spreadshare
      */
     public function indexAction($params = [])
     {
-        try
-        {
+        try {
             $this->view->setMainView('pages/request-table');
-        }
-        catch (Exception $e)
-        {
+        } catch (Exception $e) {
             Application::instance()->log($e->getMessage(), Logger::CRITICAL);
         }
     }

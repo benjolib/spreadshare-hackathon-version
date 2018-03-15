@@ -21,8 +21,7 @@ use Phalcon\Mvc\Model\Criteria;
  *
  * @method static self findFirstById(int $id)
  */
-class Tables
-    extends TablesEvents
+class Tables extends TablesEvents
 {
     /**
      * @var Criteria
@@ -149,8 +148,7 @@ class Tables
      */
     private function initQuery()
     {
-        if (!$this->query)
-        {
+        if (!$this->query) {
             $this->selectTables($this->serviceManager->getAuth()->getUserId(), new TableFilter(), $flags = TableFlags::Published, 0, null, Paging::endlessScrollPortions);
         }
     }
@@ -185,99 +183,85 @@ class Tables
         $this->query = self::query()
                            ->columns(
                                [
-                                   Tables::class . ".id",
-                                   Tables::class . ".flags",
-                                   Tables::class . ".title",
-                                   Tables::class . ".tagline",
-                                   Tables::class . ".image",
-                                   Tables::class . ".ownerUserId",
-                                   User::class . ".image as creatorImage",
-                                   User::class . ".handle as creatorHandle",
-                                   User::class . ".name as creator",
-                                   User::class . ".tagline as creatorBio",
-                                   Tables::class . ".createdAt",
-                                   Tables::class . ".topic1Id",
-                                   "(SELECT " . Topics::class . ".title FROM " . Topics::class . " WHERE " . Topics::class . ".id = " . Tables::class . ".topic1Id) AS topic1",
-                                   Tables::class . ".topic2Id",
-                                   "(SELECT " . Topics::class . ".title FROM " . Topics::class . " WHERE " . Topics::class . ".id = " . Tables::class . ".topic2Id) AS topic2",
-                                   TableStats::class . ".votesCount",
-                                   TableStats::class . ".viewsCount",
-                                   TableStats::class . ".commentsCount",
-                                   TableStats::class . ".collaboratorCount",
-                                   TableStats::class . ".contributionCount",
-                                   TableStats::class . ".tokensCount",
-                                   TableStats::class . ".subscriberCount",
-                                   Tables::class . ".typeId",
-                                   Types::class . ".title as typeTitle",
-                                   "(SELECT " . TableStaffPicks::class . ".createdAt FROM " . TableStaffPicks::class . " WHERE " . TableStaffPicks::class . ".tableId = " . Tables::class . ".id) as staffPick",
-                                   "(SELECT " . TableSubscription::class . ".createdAt FROM " . TableSubscription::class . " WHERE " . TableSubscription::class . ".tableId = " . Tables::class . ".id AND " . TableSubscription::class . ".userId = " . $userId . ") as userHasSubscribed",
-                                   "(SELECT " . TableVotes::class . ".createdAt FROM " . TableVotes::class . " WHERE " . TableVotes::class . ".tableId = " . Tables::class . ".id AND " . TableVotes::class . ".userId = " . $userId . ") as userHasVoted",
-                                   "(SELECT CUSTOM_GROUP_CONCAT(" . Tags::class . ".title, " . Tags::class . ".title, 'ASC', ', ') FROM " . TableTags::class . " INNER JOIN " . Tags::class . " ON " . Tags::class . ".id = " . TableTags::class . ".tagId WHERE " . TableTags::class . ".tableId = " . Tables::class . ".id) as tags",
-                                   "(SELECT CUSTOM_GROUP_CONCAT(" . Locations::class . ".locationName, " . Locations::class . ".locationName, 'ASC', ', ') FROM " . TableLocations::class . " INNER JOIN " . Locations::class . " ON " . Locations::class . ".id = " . TableLocations::class . ".locationId WHERE " . TableLocations::class . ".tableId = " . Tables::class . ".id) as locations",
-                                   "(SELECT COUNT(" . TableRows::class . ".id) FROM " . TableRows::class . " WHERE " . TableRows::class . ".tableId = " . Tables::class . ".id) as listingCount"
+                                   Tables::class . '.id',
+                                   Tables::class . '.flags',
+                                   Tables::class . '.title',
+                                   Tables::class . '.tagline',
+                                   Tables::class . '.image',
+                                   Tables::class . '.ownerUserId',
+                                   User::class . '.image as creatorImage',
+                                   User::class . '.handle as creatorHandle',
+                                   User::class . '.name as creator',
+                                   User::class . '.tagline as creatorBio',
+                                   Tables::class . '.createdAt',
+                                   Tables::class . '.topic1Id',
+                                   '(SELECT ' . Topics::class . '.title FROM ' . Topics::class . ' WHERE ' . Topics::class . '.id = ' . Tables::class . '.topic1Id) AS topic1',
+                                   Tables::class . '.topic2Id',
+                                   '(SELECT ' . Topics::class . '.title FROM ' . Topics::class . ' WHERE ' . Topics::class . '.id = ' . Tables::class . '.topic2Id) AS topic2',
+                                   TableStats::class . '.votesCount',
+                                   TableStats::class . '.viewsCount',
+                                   TableStats::class . '.commentsCount',
+                                   TableStats::class . '.collaboratorCount',
+                                   TableStats::class . '.contributionCount',
+                                   TableStats::class . '.tokensCount',
+                                   TableStats::class . '.subscriberCount',
+                                   Tables::class . '.typeId',
+                                   Types::class . '.title as typeTitle',
+                                   '(SELECT ' . TableStaffPicks::class . '.createdAt FROM ' . TableStaffPicks::class . ' WHERE ' . TableStaffPicks::class . '.tableId = ' . Tables::class . '.id) as staffPick',
+                                   '(SELECT ' . TableSubscription::class . '.createdAt FROM ' . TableSubscription::class . ' WHERE ' . TableSubscription::class . '.tableId = ' . Tables::class . '.id AND ' . TableSubscription::class . '.userId = ' . $userId . ') as userHasSubscribed',
+                                   '(SELECT ' . TableVotes::class . '.createdAt FROM ' . TableVotes::class . ' WHERE ' . TableVotes::class . '.tableId = ' . Tables::class . '.id AND ' . TableVotes::class . '.userId = ' . $userId . ') as userHasVoted',
+                                   '(SELECT CUSTOM_GROUP_CONCAT(' . Tags::class . '.title, ' . Tags::class . ".title, 'ASC', ', ') FROM " . TableTags::class . ' INNER JOIN ' . Tags::class . ' ON ' . Tags::class . '.id = ' . TableTags::class . '.tagId WHERE ' . TableTags::class . '.tableId = ' . Tables::class . '.id) as tags',
+                                   '(SELECT CUSTOM_GROUP_CONCAT(' . Locations::class . '.locationName, ' . Locations::class . ".locationName, 'ASC', ', ') FROM " . TableLocations::class . ' INNER JOIN ' . Locations::class . ' ON ' . Locations::class . '.id = ' . TableLocations::class . '.locationId WHERE ' . TableLocations::class . '.tableId = ' . Tables::class . '.id) as locations',
+                                   '(SELECT COUNT(' . TableRows::class . '.id) FROM ' . TableRows::class . ' WHERE ' . TableRows::class . '.tableId = ' . Tables::class . '.id) as listingCount'
                                ]
                            )
                            ->innerJoin(TableStats::class, TableStats::class . '.tableId = ' . Tables::class . '.id')
                            ->innerJoin(User::class, Tables::class . '.ownerUserId = ' . User::class . '.id')
                            ->leftJoin(Types::class, Tables::class . '.typeId = ' . Types::class . '.id');
 
-        if ($limit !== Paging::noPaging)
-        {
+        if ($limit !== Paging::noPaging) {
             $this->query->limit((int) $limit + 1, $limit * $page);
         }
 
-        if ($orderBy)
-        {
+        if ($orderBy) {
             $this->query->orderBy($orderBy);
         }
 
-        if (count($tableFilter->getTableIds()))
-        {
+        if (count($tableFilter->getTableIds())) {
             $this->query->inWhere(Tables::class . '.id', $tableFilter->getTableIds());
         }
 
-        if ($flags)
-        {
+        if ($flags) {
             $this->query->andWhere('flags = :flags:', ['flags' => $flags]);
-        }
-        elseif ($flags === TableFlags::All)
-        {
+        } elseif ($flags === TableFlags::All) {
             $this->query->andWhere('flags != :flags:', ['flags' => TableFlags::Deleted]);
         }
 
-        if ($tableFilter->getTopic())
-        {
+        if ($tableFilter->getTopic()) {
             $this->query->andWhere(Tables::class . '.topic1Id = :topic: OR ' . Tables::class . '.topic2Id = :topic:', ['topic' => $tableFilter->getTopic()]);
         }
 
-        if ($tableFilter->getType())
-        {
+        if ($tableFilter->getType()) {
             $this->query->andWhere(Tables::class . '.typeId = :type:', ['type' => $tableFilter->getType()]);
         }
 
-        if ($tableFilter->getStaffPicks())
-        {
+        if ($tableFilter->getStaffPicks()) {
             $this->filterStaffPicks();
         }
 
-        if ($tableFilter->getLocations() && count($tableFilter->getLocations()))
-        {
+        if ($tableFilter->getLocations() && count($tableFilter->getLocations())) {
             $this->query->innerJoin(TableLocations::class, TableLocations::class . '.tableId = ' . Tables::class . '.id')
                         ->inWhere(TableLocations::class . '.locationId', $tableFilter->getLocations())
                         ->groupBy(Tables::class . '.id');
-
         }
 
-        if ($tableFilter->getTags() && count($tableFilter->getTags()))
-        {
+        if ($tableFilter->getTags() && count($tableFilter->getTags())) {
             $this->query->innerJoin(TableTags::class, TableTags::class . '.tableId = ' . Tables::class . '.id')
                         ->inWhere(TableTags::class . '.tagId', $tableFilter->getTags())
                         ->groupBy(Tables::class . '.id');
-
         }
 
-        if ($tableFilter->getDateRange())
-        {
+        if ($tableFilter->getDateRange()) {
             $this->query->andWhere(
                 Tables::class . '.createdAt > :dateFrom: AND ' . Tables::class . '.createdAt < :dateTo:',
                 [

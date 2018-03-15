@@ -17,14 +17,13 @@ use Phalcon\Mvc\Controller as PhalconMvcController;
  * @version   $Version$
  * @package   DS\Controller
  */
-abstract class BaseController
-    extends PhalconMvcController
+abstract class BaseController extends PhalconMvcController
 {
     /**
      * @var ServiceManager
      */
     protected $serviceManager;
-    
+
     /**
      * @param ValidationSchema $schema
      *
@@ -33,54 +32,58 @@ abstract class BaseController
     protected function validate(ValidationSchema $schema)
     {
         $errors = $schema->validate($this->request->getPost());
-        if (count($errors))
-        {
+        if (count($errors)) {
             $userErrors = [];
-            foreach ($errors as $error)
-            {
+            foreach ($errors as $error) {
                 $userErrors[$error->getField()] = $error->getMessage();
             }
-            
+
             $this->view->setVar('errors', $userErrors);
         }
-        
+
         return $errors;
     }
-    
+
     /**
      * Initialize controller
      */
     public function initialize()
     {
-        if (!$this->serviceManager)
-        {
+        if (!$this->serviceManager) {
             $this->serviceManager = ServiceManager::instance($this->di);
         }
-        
+
         $this->view->setVar('base_url', $this->getBaseUrl());
-        
+
         // Providing the instance to our view
-        if (!isset($this->view->auth))
-        {
+        if (!isset($this->view->auth)) {
             $this->view->setVar('auth', $this->serviceManager->getAuth());
         }
     }
-    
-    function getBaseUrl()
+
+    public function getBaseUrl()
     {
         // output: /myproject/index.php
         $currentPath = $_SERVER['PHP_SELF'];
-        
+
         // output: Array ( [dirname] => /myproject [basename] => index.php [extension] => php [filename] => index )
         $pathInfo = pathinfo($currentPath);
-        
+
         // output: localhost
         $hostName = $_SERVER['HTTP_HOST'];
-        
+
         // output: http://
-        $protocol = (strtolower(substr($_SERVER["SERVER_PROTOCOL"], 0, 5)) === 'https') ? 'https' : 'http';
-        
+        $protocol = (strtolower(substr($_SERVER['SERVER_PROTOCOL'], 0, 5)) === 'https') ? 'https' : 'http';
+
         // return: http://localhost/myproject/
         return $protocol . '://' . $hostName . $pathInfo['dirname'];
+    }
+
+    /**
+     * Redirects user back to previous URL
+     */
+    protected function _redirectBack()
+    {
+        return $this->response->redirect($this->request->getServer('HTTP_REFERER'));
     }
 }

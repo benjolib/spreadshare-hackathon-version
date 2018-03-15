@@ -704,6 +704,7 @@ abstract class AbstractUser extends \DS\Model\Base
         $this->hasMany('id', 'DS\Model\Abstracts\UserTopics', 'userId', ['alias' => 'UserTopics']);
         $this->hasMany('id', 'DS\Model\Abstracts\Wallet', 'userId', ['alias' => 'Wallet']);
         $this->hasMany('id', 'DS\Model\ChangeRequests', 'userId', ['alias' => 'Changes']);
+        $this->hasMany('id', 'DS\Model\RequestAdd', 'user_id', ['alias' => 'RequestAdd']);
     }
 
     /**

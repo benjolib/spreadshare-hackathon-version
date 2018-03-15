@@ -211,4 +211,12 @@ return [
         ],
         'methods' => ['GET', 'POST'],
     ],
+    [
+        'url' => '/row/{id:[0-9]+}/add',
+        'paths' => [
+            'controller' => 'Request_Add',
+            'action' => 'add',
+        ],
+        'methods' => ['GET', 'POST'],
+    ],
 ];
