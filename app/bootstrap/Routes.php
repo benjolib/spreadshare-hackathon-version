@@ -221,4 +221,12 @@ return [
         ],
         'methods' => ['GET', 'POST'],
     ],
+    [
+        'url' => '/row/{id:[0-9]+}/delete',
+        'paths' => [
+            'controller' => 'Request_Delete',
+            'action' => 'delete',
+        ],
+        'methods' => ['GET', 'POST'],
+    ],
 ];
