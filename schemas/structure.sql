@@ -792,3 +792,6 @@ CREATE TABLE `row_delete_request` (
   CONSTRAINT `row_delete_request_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE,
   CONSTRAINT `row_delete_request_ibfk_2` FOREIGN KEY (`row_id`) REFERENCES `tableRows` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+
+ALTER TABLE tableRows ADD `image` varchar(255) DEFAULT NULL COMMENT 'image url' AFTER commentsCount;
