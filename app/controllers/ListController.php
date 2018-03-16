@@ -14,7 +14,6 @@ use DS\Model\TableStats;
 use DS\Controller\Api\Meta\Records;
 use Phalcon\Paginator\Adapter\NativeArray as PaginatorArray;
 
-
 // TODO: probably move this elseware
 function array_orderby()
 {
@@ -22,7 +21,7 @@ function array_orderby()
     $data = array_shift($args);
     foreach ($args as $n => $field) {
         if (is_string($field)) {
-            $tmp = array();
+            $tmp = [];
             foreach ($data as $key => $row) {
                 $tmp[$key] = $row[$field];
             }
@@ -69,7 +68,7 @@ class ListController extends BaseController
 
             if ($this->request->isPost()) {
                 if ($this->request->getPost('comment')) {
-                    $tableCommentsModel ->setUserId($this->serviceManager->getAuth()->getUserId())
+                    $tableCommentsModel->setUserId($this->serviceManager->getAuth()->getUserId())
                              ->setTableId($tableId)
                              ->setParentId($this->request->getPost('parentId') ?: null)
                              ->setVotesCount(0)
@@ -92,18 +91,18 @@ class ListController extends BaseController
             $tableContent = new Records($tableContentModel->getTableData($tableId, $this->serviceManager->getAuth()->getUserId()));
 
             $tableContentRowsWithVotes = array_map(function ($item, $index) use ($tableContent) {
-                return array(
+                return [
                 'id' => $item['id'],
                 'content' => array_map(function ($cell) {
                     $newContent = preg_replace_callback('/((http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?)/', function ($matches) {
                         return '<a class="re-table-link" target="_blank" title="' . $matches[0] . '" href="' . $matches[0] . '">' . str_ireplace('www.', '', parse_url($matches[0])['host']) . '</a>';
                     }, $cell['content']);
-                    $arr = array(
+                    $arr = [
                     'id' => $cell['id'],
                     'content' => $newContent,
                     'link' => $cell['link'],
                     'minWidth' => strlen($cell['content'])
-                  );
+                  ];
 
                     $len = strlen($cell['content']);
 
@@ -123,7 +122,8 @@ class ListController extends BaseController
                 }, $item['content']),
                 'votes' => $tableContent['votes'][$index]['votes'],
                 'upvoted' => $tableContent['votes'][$index]['upvoted'],
-              );
+                'image' => $item['image'],
+              ];
             }, $tableContent['rows'], array_keys($tableContent['rows']));
 
             $tableContentRowsWithVotesSortedByVotes = array_orderby($tableContentRowsWithVotes, 'votes', SORT_DESC);
@@ -146,15 +146,14 @@ class ListController extends BaseController
             // Create a Model paginator, show 10 rows by page starting from $currentPage
             $paginator = new PaginatorArray(
                 [
-                    'data'  => $tableContentRowsWithVotesSortedByVotes,
+                    'data' => $tableContentRowsWithVotesSortedByVotes,
                     'limit' => 10,
-                    'page'  => $currentPage,
+                    'page' => $currentPage,
                 ]
             );
 
             // Get the paginated results
             $page = $paginator->getPaginate();
-
 
             $this->view->setVar('table', $table);
             $this->view->setVar('tableContent', $tableContent);
