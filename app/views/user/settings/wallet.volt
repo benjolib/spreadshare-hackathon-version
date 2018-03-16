@@ -5,14 +5,9 @@
 
 {% block content %}
 <div class="re-page">
-  {# {{ dump(tableTokens) }} #}
-  <div class="page-top-margin-bottom">
-    <div>
-      <h1 class="re-heading">Wallet</h1>
-      <h2 class="re-subheading">Your token storage.</h2>
-      <h3 class="re-subtext">Soon we’ll introduce ways to spend and withdraw tokens.</h3>
-    </div>
-  </div>
+  <h1 class="re-heading">Wallet</h1>
+  <h2 class="re-subheading">Your token storage.</h2>
+  <h3 class="re-subtext">Soon we’ll introduce ways to spend and withdraw tokens.</h3>
 
   <div class="wallet-stats u-flex">
     <div class="u-flex u-flexCol col1">

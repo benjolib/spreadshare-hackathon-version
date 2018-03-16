@@ -39,7 +39,7 @@ class TableContent
     {
         $tableRows = new TableRows();
         $rows      = $tableRows->getRowsForTable($tableId, $userId);
-        
+
         $columnData = $votesData = $rowData = [];
         foreach ($rows as $row)
         {
@@ -53,7 +53,7 @@ class TableContent
                 'content' => json_decode($row->content, true),
             ];
         }
-        
+
         $tableColumns = TableColumns::findAllByFieldValue('tableId', $tableId);
         foreach ($tableColumns as $col)
         {
@@ -62,9 +62,9 @@ class TableContent
                 'title' => $col->getTitle(),
             ];
         }
-        
+
         $tableProps = (new TableProperties())->get($tableId, 'tableId');
-        
+
         return [
             'fixedRowsTop' => $tableProps->getFixedRowsTop(),
             'fixedColumnsLeft' => $tableProps->getFixedColumnsLeft(),
@@ -74,7 +74,7 @@ class TableContent
             'rows' => $rowData,
         ];
     }
-    
+
     /**
      * @param int    $cellId
      * @param string $content
@@ -85,17 +85,17 @@ class TableContent
     public function editCell(int $cellId, string $content, string $link): TableContent
     {
         $cellModel = (TableCells::findFirstById($cellId));
-        
+
         if ($cellModel)
         {
             $cellModel->setContent($content)
                       ->setLink($link ?: null)
                       ->save();
         }
-        
+
         return $this;
     }
-    
+
     /**
      * Adds a new row
      *
@@ -111,17 +111,17 @@ class TableContent
         {
             $newRow = new TableRows();
             $newRow->getWriteConnection()->begin();
-            
+
             if (count($rowData))
             {
                 // $allRowsForTable = TableRows::findRowsFrom($tableId, $insertAfterRowId ? $insertAfterRowId : 0);
-                
+
                 $newRow->increaseLineNumbers($tableId, $insertAfterRowId);
-                
+
                 $newRow = $newRow
                     ->setTableId($tableId)
                     ->setUserId($this->serviceManager->getAuth()->getUserId());
-                
+
                 if (!$insertAfterRowId)
                 {
                     $newRow->setLineNumber(1);
@@ -129,7 +129,7 @@ class TableContent
                 else
                 {
                     $afterRow = TableRows::findFirstById($insertAfterRowId);
-                    
+
                     if (!$afterRow)
                     {
                         throw new \InvalidArgumentException('The given rowId does not exist.');
@@ -137,9 +137,9 @@ class TableContent
                     $newRow->setLineNumber($afterRow->getLineNumber() + 1);
                 }
                 $newRow->create();
-                
+
                 $columns = TableColumns::findAllByFieldValue('tableId', $tableId);
-                
+
                 $rowContent = [];
                 foreach ($rowData as $key => $row)
                 {
@@ -150,29 +150,29 @@ class TableContent
                          ->setColumnId(isset($columns[$key]) ? $columns[$key]->getId() : null)
                          ->setUserId($newRow->getUserId())
                          ->create();
-                    
+
                     $rowContent[] = [
                         'id' => $cell->getId(),
                         'content' => $cell->getContent(),
                         'link' => $cell->getLink(),
                     ];
                 }
-                
+
                 $newRow->setContent(json_encode($rowContent))->save();
-                
+
                 $newRow->getWriteConnection()->commit();
             }
         }
         catch (\Exception $e)
         {
             $newRow->getWriteConnection()->rollback();
-            
+
             throw $e;
         }
-        
+
         return $newRow;
     }
-    
+
     /**
      * @param int    $tableId
      * @param int    $rowId
@@ -190,10 +190,10 @@ class TableContent
             $tableRowModel->setContent($rowData)
                           ->save();
         }
-        
+
         return $this;
     }
-    
+
     /**
      * Add a cell and return data for tableRows.content
      *
@@ -215,14 +215,14 @@ class TableContent
                   ->setContent($cell)
                   ->setLink($link)
                   ->create();
-        
+
         return [
             'id' => $cellModel->getId(),
             'content' => $cellModel->getContent(),
             'link' => $cellModel->getLink() ? $cellModel->getLink() : null,
         ];
     }
-    
+
     /**
      * @param int $tableId
      */
@@ -231,7 +231,7 @@ class TableContent
         (new TableColumns())->clear($tableId);
         (new TableRows())->clear($tableId);
     }
-    
+
     /**
      * @param int    $tableId
      * @param string $csvData
@@ -244,30 +244,30 @@ class TableContent
     public function addfromCsvText(int $tableId, string $csvData = '', $separator = ',', $hasHeaders = false): TableContent
     {
         $userId = serviceManager()->getAuth()->getUserId();
-        
+
         $csv  = new Csv();
         $rows = $csv->parseFromText($csvData, $separator, true, true);
-        
+
         if (!is_array($rows) || !isset($rows[0]))
         {
             throw new \InvalidArgumentException('Unable to parse csv file.');
         }
-        
+
         // Check for semicolon separated text
         if (count($rows[0]) === 1 && substr_count($rows[0][0], ';') > 0)
         {
             return $this->addfromCsvText($tableId, $csvData, ';', $hasHeaders);
         }
-        
+
         // Start sql transaction
         $db = $this->serviceManager->getDI()->get('db');
         $db->begin();
-        
+
         try
         {
             // Clear first if there is data already imported
             $this->clearTableContent($tableId);
-            
+
             $columnIds = [];
             $i         = 1;
             foreach ($rows[0] as $key => $headerField)
@@ -279,18 +279,18 @@ class TableContent
                             ->setWidth(100)
                             ->setTitle($hasHeaders ? $headerField : 'Column ' . $i++)
                             ->create();
-                
+
                 $columnIds[$key] = $columnModel->getId();
             }
-            
+
             if ($hasHeaders)
             {
                 unset($rows[0]);
             }
-            
+
             if (count($columnIds))
             {
-                
+
                 $line = 1;
                 foreach ($rows as $row)
                 {
@@ -303,12 +303,12 @@ class TableContent
                                  ->setCommentsCount(0)
                                  ->setVotesCount(0)
                                  ->create();
-                        
+
                         $cellData = [];
                         foreach ($columnIds as $key => $colId)
                         {
                             $cellContent = isset($row[$key]) && $row[$key] !== null ? $row[$key] : '';
-                            
+
                             // Check for links in cells
                             if (strpos($cellContent, 'www.') === 0)
                             {
@@ -322,7 +322,7 @@ class TableContent
                             {
                                 $cellLink = '';
                             }
-                            
+
                             $cellData[] = $this->addCell(
                                 $rowModel,
                                 $userId,
@@ -330,23 +330,23 @@ class TableContent
                                 $cellContent,
                                 $cellLink
                             );
-                            
+
                             $rowModel->setContent(json_encode($cellData))
                                      ->save();
                         }
                     }
                 }
             }
-            
+
             $db->commit();
         }
         catch (\Exception $e)
         {
             $db->rollback();
-            
+
             throw $e;
         }
-        
+
         return $this;
     }
 }

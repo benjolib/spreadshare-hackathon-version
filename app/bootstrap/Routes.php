@@ -137,7 +137,7 @@ return [
             'controller' => 'Table_Detail',
             'action' => 'index',
         ],
-        'methods' => ['GET'],
+        'methods' => ['GET', 'POST'],
     ],
     [
         'url' => '/download/table/{id:[0-9]+}/{format:[a-z]+}',
@@ -203,10 +203,12 @@ return [
         ],
         'methods' => ['GET', 'POST'],
     ],
+
+    // new routes
     [
-        'url' => '/requests',
+        'url' => '/list/{id:[0-9]+}',
         'paths' => [
-            'controller' => 'Change_Request',
+            'controller' => 'List',
             'action' => 'index',
         ],
         'methods' => ['GET', 'POST'],
