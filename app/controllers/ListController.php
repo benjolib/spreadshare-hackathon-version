@@ -12,6 +12,8 @@ use DS\Api\TableContent;
 use DS\Model\TableComments;
 use DS\Model\TableStats;
 use DS\Controller\Api\Meta\Records;
+use Phalcon\Paginator\Adapter\NativeArray as PaginatorArray;
+
 
 // TODO: probably move this elseware
 function array_orderby()
@@ -139,11 +141,27 @@ class ListController extends BaseController
 
             // set view variables
 
+            $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+
+            // Create a Model paginator, show 10 rows by page starting from $currentPage
+            $paginator = new PaginatorArray(
+                [
+                    'data'  => $tableContentRowsWithVotesSortedByVotes,
+                    'limit' => 10,
+                    'page'  => $currentPage,
+                ]
+            );
+
+            // Get the paginated results
+            $page = $paginator->getPaginate();
+
+
             $this->view->setVar('table', $table);
             $this->view->setVar('tableContent', $tableContent);
-            $this->view->setVar('tableRows', $tableContentRowsWithVotesSortedByVotes);
             $this->view->setVar('tableComments', $commentsArray);
             $this->view->setVar('tableStats', $tableStats);
+            $this->view->setVar('page', $page);
+            $this->view->setVar('tableId', $tableId);
         } catch (Exception $e) {
             Application::instance()->log($e->getMessage(), Logger::CRITICAL);
         }

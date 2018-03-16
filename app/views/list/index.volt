@@ -34,7 +34,7 @@
         </tr>
       </thead>
       <tbody>
-        {% for row in tableRows %}
+        {% for row in page.items %}
           <tr data-id="{{ row['id'] }}" class="list-row-tr">
             <td>
               <a href="#" class="vote-link {{ row['upvoted'] ? 'vote-link--upvoted' : '' }}">
@@ -55,6 +55,19 @@
         {% endfor %}
       </tbody>
     </table>
+  </div>
+  <div class="pagination">
+    <a href="/list/{{ tableId }}?page=1"><<</a>
+    <a href="/list/{{ tableId }}?page={{ page.before }}"><</a>
+    {% for p in 1..page.total_pages %}
+       {% if p === page.current %}
+      <a class="active" href="/list/{{ tableId }}?page={{ p }}">{{ p }}</a>
+      {% else %}
+      <a href="/list/{{ tableId }}?page={{ p }}">{{ p }}</a>
+      {% endif %}
+    {% endfor %}
+    <a href="/list/{{ tableId }}?page={{ page.next }}">></a>
+    <a href="/list/{{ tableId }}?page={{ page.last }}">></a>
   </div>
   <a class="re-button re-button--double-line re-button--full-width re-button--tall re-button--grey" href="#">
     Add a Listing
@@ -284,8 +297,6 @@
 {# {{ dump(tableContent['rows']) }} #}
 
 {{ dump(tableContent['columns']) }}
-
-{{ dump(tableRows) }}
 
 {{ dump(tableComments) }}
 {% endblock %}
