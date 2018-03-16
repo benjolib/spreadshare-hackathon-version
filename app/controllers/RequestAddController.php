@@ -39,6 +39,8 @@ class RequestAddController extends BaseController implements LoginAwareControlle
         $submission->comment = $comment;
         $submission->image = $image;
 
+        $submission->save();
+
         $this->flash->success('Your submission is waiting for approval');
         $this->_redirectBack();
     }
