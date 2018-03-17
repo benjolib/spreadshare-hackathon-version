@@ -4,6 +4,7 @@
 
 {% block content %}
 {{ flash.output() }}
+
 <div class="re-page re-page--list">
   <div style="margin-bottom: 118px;">
     <div class="re-image" style="background: #f5f5f5 url({{ table['image'] }}) center / cover;"></div>
@@ -343,11 +344,11 @@
   </div>
 </div>
 
+<form method="POST" action="/row/{{ table['id']}}/add" enctype="multipart/form-data" id="form_hidden">
 
-
-<form method="POST" action="/row/{{ table['id']}}/add" style="display:none;" id="form_hidden" enctype="multipart/form-data">
- 
 </form>
+
+
 
 
 {{ dump(related) }}
@@ -481,11 +482,11 @@
       var image_clone = image.clone();
       image.after(image_clone).appendTo('#form_hidden');
       
+
+
       // clone text aras
-      $('#addAListingRow textarea').each(function (txt){
-        var current = $(this);
-        var clone = current.clone();
-        current.after(clone).appendTo('#form_hidden');
+      $('#addAListingRow textarea').each(function (txt){        
+        $( "<input type='hidden' name='cells["+ txt + "]' value='"+ $(this).val() +"' />" ).appendTo( "#form_hidden" );        
       });
 
       $('#form_hidden').submit();
