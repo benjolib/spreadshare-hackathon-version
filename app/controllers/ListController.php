@@ -57,7 +57,7 @@ class ListController extends BaseController
             $contributors = $tableModel->contributors->toArray();
 
             // Subscribers
-            $subscribers = $tableModel->tableSubscription->toArray();
+            $subscribers = $tableModel->getSubscribers();
 
             // access checks
 

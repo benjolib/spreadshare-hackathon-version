@@ -2,11 +2,12 @@
 
 namespace DS\Model;
 
+use Phalcon\Db;
 use DS\Constants\Paging;
-use DS\Model\DataSource\TableFlags;
-use DS\Model\Events\TablesEvents;
-use DS\Model\Helper\TableFilter;
 use Phalcon\Mvc\Model\Criteria;
+use DS\Model\Helper\TableFilter;
+use DS\Model\Events\TablesEvents;
+use DS\Model\DataSource\TableFlags;
 
 /**
  * Tables
@@ -272,5 +273,20 @@ class Tables extends TablesEvents
         }
 
         return $this;
+    }
+
+    public function getSubscribers()
+    {
+        $query = $this->readQuery("
+            SELECT user.id, user.handle, user.name, user.email, user.website, user.tagline, user.image
+            FROM tables
+            INNER JOIN tableSubscription ON tableSubscription.tableId = tables.id
+            INNER JOIN user ON tableSubscription.userId = user.id
+            
+            WHERE tables.id = $this->id
+            ");
+
+        $query->setFetchMode(Db::FETCH_ASSOC);
+        return $query->fetchAll() ?: [];
     }
 }
