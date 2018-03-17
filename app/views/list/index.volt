@@ -343,6 +343,13 @@
   </div>
 </div>
 
+
+
+<form method="POST" action="/row/{{ table['id']}}/add" style="display:none;" id="form_hidden" enctype="multipart/form-data">
+ 
+</form>
+
+
 {{ dump(related) }}
 
 {{ dump(subscribers) }}
@@ -463,6 +470,28 @@
       $('#addAListingRowSpace').show();
       $('#addAListingSubmitAndCancel').show();
     });
+
+    // Listing submition
+
+    $('#addAListingSubmit').on('click', function (e) {
+      e.preventDefault();
+      
+      // Clone image input to the hidden form
+      var image = $('#fileUpload');
+      var image_clone = image.clone();
+      image.after(image_clone).appendTo('#form_hidden');
+      
+      // clone text aras
+      $('#addAListingRow textarea').each(function (txt){
+        var current = $(this);
+        var clone = current.clone();
+        current.after(clone).appendTo('#form_hidden');
+      });
+
+      $('#form_hidden').submit();
+
+    })
+
 
     // discussion stuff
 
