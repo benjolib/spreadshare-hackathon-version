@@ -10,7 +10,7 @@
     <div class="re-image" style="background: #f5f5f5 url({{ table['image'] }}) center / cover;"></div>
     <div class="re-pre-heading-info">
       <div>{{ table['topic1'] }}</div>
-      <div class="re-green">{{ table['tokensCount'] }} TOKEN</div>
+      <div class="re-green">{{ table['subscriberCount'] }} SUBSCRIBERS</div>
       <div class="re-lighten">{{ date("d.m.Y", table['createdAt']) }}</div>
     </div>
     <h1 class="re-heading re-heading--list">{{ table['title'] }}</h1>
@@ -54,25 +54,46 @@
           </tr>
           <tr class="re-table-space"></tr>
         {% endfor %}
+        <tr class="list-row-tr">
+          <td class="pagination-td" colspan="100">
+            <div class="pagination">
+              <a href="/list/{{ tableId }}?page=1"><<</a>
+              <a href="/list/{{ tableId }}?page={{ page.before }}"><</a>
+              {% for p in 1..page.total_pages %}
+                 {% if p === page.current %}
+                <a class="active" href="/list/{{ tableId }}?page={{ p }}">{{ p }}</a>
+                {% else %}
+                <a href="/list/{{ tableId }}?page={{ p }}">{{ p }}</a>
+                {% endif %}
+              {% endfor %}
+              <a href="/list/{{ tableId }}?page={{ page.next }}">></a>
+              <a href="/list/{{ tableId }}?page={{ page.last }}">></a>
+            </div>
+          </td>
+        </tr>
+        <tr class="list-row-tr list-row-tr--add-row">
+          <td>
+            <a href="#" class="vote-link">
+              <img class="vote-link__image" src="/assets/images/vote-lightning.svg" />
+              <div>0</div>
+            </a>
+          </td>
+          <td class="shadowcontaintd"><div class="shadowcontain"></div></td>
+          <td>
+            <div class="re-table__list-image re-table__list-image--new-row" id="addRowImage"></div>
+            <input type="file" name="image" id="fileUpload" style="display: none;" />
+          </td>
+          {% for column in tableContent['columns'] %}
+            <td><input type="text" placeholder="{{ column['title'] }}" /></td>
+          {% endfor %}
+        </tr>
+        <tr class="re-table-space"></tr>
       </tbody>
     </table>
   </div>
-  <div class="pagination">
-    <a href="/list/{{ tableId }}?page=1"><<</a>
-    <a href="/list/{{ tableId }}?page={{ page.before }}"><</a>
-    {% for p in 1..page.total_pages %}
-       {% if p === page.current %}
-      <a class="active" href="/list/{{ tableId }}?page={{ p }}">{{ p }}</a>
-      {% else %}
-      <a href="/list/{{ tableId }}?page={{ p }}">{{ p }}</a>
-      {% endif %}
-    {% endfor %}
-    <a href="/list/{{ tableId }}?page={{ page.next }}">></a>
-    <a href="/list/{{ tableId }}?page={{ page.last }}">></a>
-  </div>
   <a class="re-button re-button--double-line re-button--full-width re-button--tall re-button--grey" href="#">
     Add a Listing
-    <div class="re-button__extra-text">And reach 534 subscribers of this list</div>
+    <div class="re-button__extra-text">And reach {{ table['subscriberCount'] }} subscribers of this list</div>
   </a>
 </div>
 
@@ -96,10 +117,9 @@
       <div class="about-list__item">
         <div class="about-list__item__name">STATS</div>
         <div class="about-list__item__content">
-          <div class="about-list__part"><b>546</b> Tokens</div>
-          <div class="about-list__part"><b>345</b> Subscriptions</div>
-          <div class="about-list__part"><b>50</b> Collaborations</div>
-          <div class="about-list__part"><b>5</b> Comments</div>
+          <div class="about-list__part"><b>{{ table['subscriberCount'] }}</b> Subscriptions</div>
+          <div class="about-list__part"><b>{{ table['collaboratorCount'] }}</b> Collaborations</div>
+          <div class="about-list__part"><b>{{ table['commentsCount'] }}</b> Comments</div>
         </div>
       </div>
       <div class="about-list__item">
@@ -173,7 +193,8 @@
     <div class="list-tab-buttons">
       <a href="#" class="list-tab-button list-tab-button-discussion active">DISCUSSION</a>
       <a href="#" class="list-tab-button list-tab-button-activity">ACTIVITY</a>
-      <a href="#" class="list-tab-button list-tab-button-audience">AUDIENCE</a>
+      <a href="#" class="list-tab-button list-tab-button-subscribers">SUBSCRIBERS</a>
+      <a href="#" class="list-tab-button list-tab-button-collaborators">COLLABORATORS</a>
     </div>
 
     <div class="list-tab-content list-tab-content-discussion j_table-discussion">
@@ -246,8 +267,8 @@
       list activity
     </div>
 
-    <div class="list-tab-content list-tab-content-audience" style="display: none;">
-      <div class="list-tab-content-audience__card">
+    <div class="list-tab-content list-tab-content-subscribers" style="display: none;">
+      <div class="list-tab-content-subscribers__card">
         {{ partial('partials/profile-card', [
           'username': 'andewcoyle',
           'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
@@ -256,7 +277,7 @@
           'type': 4
         ]) }}
       </div>
-      <div class="list-tab-content-audience__card">
+      <div class="list-tab-content-subscribers__card">
         {{ partial('partials/profile-card', [
           'username': 'andewcoyle',
           'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
@@ -265,7 +286,7 @@
           'type': 4
         ]) }}
       </div>
-      <div class="list-tab-content-audience__card">
+      <div class="list-tab-content-subscribers__card">
         {{ partial('partials/profile-card', [
           'username': 'andewcoyle',
           'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
@@ -274,7 +295,46 @@
           'type': 4
         ]) }}
       </div>
-      <div class="list-tab-content-audience__card">
+      <div class="list-tab-content-subscribers__card">
+        {{ partial('partials/profile-card', [
+          'username': 'andewcoyle',
+          'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
+          'name': 'Andrew Coyle',
+          'bio': 'Designing the future of global trade @Flexport. Curating lists at Spreadshare.',
+          'type': 4
+        ]) }}
+      </div>
+    </div>
+
+    <div class="list-tab-content list-tab-content-collaborators" style="display: none;">
+      <div class="list-tab-content-collaborators__card">
+        {{ partial('partials/profile-card', [
+          'username': 'andewcoyle',
+          'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
+          'name': 'Andrew Coyle',
+          'bio': 'Designing loool the future of global trade @Flexport. Curating lists at Spreadshare.',
+          'type': 4
+        ]) }}
+      </div>
+      <div class="list-tab-content-collaborators__card">
+        {{ partial('partials/profile-card', [
+          'username': 'andewcoyle',
+          'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
+          'name': 'Andrew Coyle',
+          'bio': 'Designing the future of global trade @Flexport. Curating lists at Spreadshare.',
+          'type': 4
+        ]) }}
+      </div>
+      <div class="list-tab-content-collaborators__card">
+        {{ partial('partials/profile-card', [
+          'username': 'andewcoyle',
+          'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
+          'name': 'Andrew Coyle',
+          'bio': 'Designing the future of global trade @Flexport. Curating lists at Spreadshare.',
+          'type': 4
+        ]) }}
+      </div>
+      <div class="list-tab-content-collaborators__card">
         {{ partial('partials/profile-card', [
           'username': 'andewcoyle',
           'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
@@ -289,17 +349,17 @@
 
 {{ dump(table) }}
 
-{# {{ dump(tableStats) }} #}
+{{ dump(tableStats) }}
 
-{{ dump(tableContent) }}
+{# {{ dump(tableContent) }} #}
 
 {# {{ dump(tableContent['votes']) }} #}
 
 {# {{ dump(tableContent['rows']) }} #}
 
-{{ dump(tableContent['columns']) }}
+{# {{ dump(tableContent['columns']) }} #}
 
-{{ dump(tableComments) }}
+{# {{ dump(tableComments) }} #}
 {% endblock %}
 
 {% block scripts %}
@@ -321,12 +381,20 @@
       $('.list-tab-content-activity').show();
     });
 
-    $('.list-tab-button-audience').on('click', function (e) {
+    $('.list-tab-button-subscribers').on('click', function (e) {
       e.preventDefault();
       $('.list-tab-button').removeClass('active');
-      $('.list-tab-button-audience').addClass('active');
+      $('.list-tab-button-subscribers').addClass('active');
       $('.list-tab-content').hide();
-      $('.list-tab-content-audience').show();
+      $('.list-tab-content-subscribers').show();
+    });
+
+    $('.list-tab-button-collaborators').on('click', function (e) {
+      e.preventDefault();
+      $('.list-tab-button').removeClass('active');
+      $('.list-tab-button-collaborators').addClass('active');
+      $('.list-tab-content').hide();
+      $('.list-tab-content-collaborators').show();
     });
 
     $('.shadowcontain').each(function () {
@@ -371,6 +439,20 @@
         dataType: 'json'
       });
     });
+
+    // submit table row
+
+    document.querySelector('input[type="file"]').addEventListener('change', function () {
+      if (this.files && this.files[0]) {
+        var img = document.querySelector('#addRowImage');
+        img.style = 'background: #f5f5f5 url(' + URL.createObjectURL(this.files[0]) + ') center / cover;';
+        //img.onload = fn;
+      }
+    });
+
+    document.getElementById('addRowImage').onclick = function () {
+      document.getElementById('fileUpload').click();
+    };
 
     // discussion stuff
 

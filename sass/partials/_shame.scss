@@ -1856,6 +1856,9 @@
         border: none !important;
       }
     }
+    tr.list-row-tr--add-row td {
+      height: 100px;
+    }
     td:first-of-type {
       border-width: 1px 0 1px 1px;
       border-bottom-left-radius: 4px;
@@ -1948,6 +1951,11 @@
           width: 82px;
           height: 82px;
           border-radius: 10px;
+          &--new-row {
+            background: #FFFFFF url(/assets/images/image-placeholder.svg) center / 15px no-repeat;
+            border: 1px solid #B1BBC7;
+            border-radius: 10px;
+          }
         }
         .re-table-link {
           border: 1px solid #6CC69D;
@@ -2105,7 +2113,7 @@
   }
 }
 
-.list-tab-content-audience {
+.list-tab-content-subscribers, .list-tab-content-collaborators {
   display: flex;
   flex-wrap: wrap;
   margin: 0 -8px;
@@ -2235,4 +2243,13 @@
     margin-right: 6px;
     margin-top: -1px;
   }
+}
+
+.list-row-tr--add-row {
+
+}
+
+.pagination-td {
+  padding: 8px 0 30px 0 !important;
+  height: auto !important;
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="17px" height="18px" viewBox="0 0 17 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.1 (51147) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 7</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Views" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="List-Page-4.2" transform="translate(-357.000000, -1358.000000)" stroke="#B1BBC7" stroke-width="1.4">
+            <g id="Group-4" transform="translate(273.000000, 1316.000000)">
+                <g id="Group-7" transform="translate(85.000000, 43.000000)">
+                    <g id="Group-6">
+                        <path d="M14.8255814,15.3462326 C14.8255814,15.5516279 14.6693023,15.7183256 14.4767442,15.7183256 L0.523255814,15.7183256 C0.330697674,15.7183256 0.174418605,15.5516279 0.174418605,15.3462326 L0.174418605,0.462511628 C0.174418605,0.257116279 0.330697674,0.0904186047 0.523255814,0.0904186047 L14.4767442,0.0904186047 C14.6693023,0.0904186047 14.8255814,0.257116279 14.8255814,0.462511628 L14.8255814,15.3462326 Z" id="Shape"></path>
+                        <path d="M0.840348837,15.5322791 L4.77662791,8.42865116" id="Shape"></path>
+                        <path d="M8.83186047,15.5322791 L4.8955814,8.42865116" id="Shape"></path>
+                        <path d="M9.4977907,15.1769302 L11.794186,11.6253023" id="Shape"></path>
+                        <path d="M14.1596512,15.1769302 L11.8636047,11.6253023" id="Shape"></path>
+                        <ellipse id="Oval" cx="10.1637209" cy="5.58734884" rx="1.9977907" ry="2.13097674"></ellipse>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
