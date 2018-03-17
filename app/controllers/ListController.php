@@ -56,6 +56,9 @@ class ListController extends BaseController
             // Get Contributors
             $contributors = $tableModel->contributors->toArray();
 
+            // Subscribers
+            $subscribers = $tableModel->tableSubscription->toArray();
+
             // access checks
 
             if ($tableModel->getFlags() == TableFlags::Deleted) {
@@ -171,6 +174,7 @@ class ListController extends BaseController
             $this->view->setVar('tableId', $tableId);
             $this->view->setVar('related', $related);
             $this->view->setVar('contributors', $contributors);
+            $this->view->setVar('subscribers', $subscribers);
         } catch (Exception $e) {
             Application::instance()->log($e->getMessage(), Logger::CRITICAL);
         }
