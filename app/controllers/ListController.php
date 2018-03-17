@@ -13,6 +13,7 @@ use DS\Model\TableComments;
 use DS\Model\TableStats;
 use DS\Controller\Api\Meta\Records;
 use Phalcon\Paginator\Adapter\NativeArray as PaginatorArray;
+use DS\Model\TableRelations;
 
 // TODO: probably move this elseware
 function array_orderby()
@@ -156,12 +157,16 @@ class ListController extends BaseController
             // Get the paginated results
             $page = $paginator->getPaginate();
 
+            // Get related lists
+            $related = TableRelations::findRelatedTables($tableId);
+
             $this->view->setVar('table', $table);
             $this->view->setVar('tableContent', $tableContent);
             $this->view->setVar('tableComments', $commentsArray);
             $this->view->setVar('tableStats', $tableStats);
             $this->view->setVar('page', $page);
             $this->view->setVar('tableId', $tableId);
+            $this->view->setVar('related', $related);
         } catch (Exception $e) {
             Application::instance()->log($e->getMessage(), Logger::CRITICAL);
         }

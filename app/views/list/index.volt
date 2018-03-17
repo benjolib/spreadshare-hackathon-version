@@ -4,6 +4,7 @@
 
 {% block content %}
 {{ flash.output() }}
+
 <div class="re-page re-page--list">
   <div style="margin-bottom: 118px;">
     <div class="re-image" style="background: #f5f5f5 url({{ table['image'] }}) center / cover;"></div>
