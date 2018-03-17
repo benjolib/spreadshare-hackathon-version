@@ -18,7 +18,7 @@
     <a class="re-button re-button--double-line" href="#">
       Subscribe
       <div class="re-button__extra-text">Get new listings to your inbox</div>
-    <a>
+    </a>
   </div>
 
   <div class="table-scroll">
@@ -54,7 +54,7 @@
           <tr class="re-table-space"></tr>
         {% endfor %}
         <tr class="list-row-tr">
-          <td class="pagination-td" colspan="100">
+          <td class="pagination-td">
             <div class="pagination">
               <a href="/list/{{ tableId }}?page=1"><<</a>
               <a href="/list/{{ tableId }}?page={{ page.before }}"><</a>
@@ -70,7 +70,8 @@
               </div>
             </td>
           </tr>
-          <tr class="list-row-tr list-row-tr--add-row">
+          <tr id="addAListingRowSpace" class="re-table-space" style="display: none;"></tr>
+          <tr id="addAListingRow" class="list-row-tr list-row-tr--add-row" style="display: none;">
             <td>
               <a href="#" class="vote-link">
                 <img class="vote-link__image" src="/assets/images/vote-lightning.svg" />
@@ -83,14 +84,18 @@
               <input type="file" name="image" id="fileUpload" style="display: none;" />
             </td>
             {% for column in tableContent['columns'] %}
-            <td><input type="text" placeholder="{{ column['title'] }}" /></td>
+              <td><textarea placeholder="{{ column['title'] }}" rows="1" oninput="$(this).height(5);$(this).height($(this).prop('scrollHeight'))"></textarea></td>
             {% endfor %}
           </tr>
           <tr class="re-table-space"></tr>
       </tbody>
     </table>
   </div>
-  <a class="re-button re-button--double-line re-button--full-width re-button--tall re-button--grey" href="#">
+  <div class="addAListingSubmitAndCancel" id="addAListingSubmitAndCancel" style="display: none;">
+    <a class="re-button re-button--list-add-row" href="#" id="addAListingSubmit">Submit</a>
+    <a class="re-button re-button--list-add-row re-button--grey" href="#" id="addAListingCancel">Cancel</a>
+  </div>
+  <a id="addAListingButton" class="re-button re-button--double-line re-button--full-width re-button--tall re-button--grey" href="#">
     Add a Listing
     <div class="re-button__extra-text">And reach {{ table['subscriberCount'] }} subscribers of this list</div>
   </a>
@@ -340,6 +345,8 @@
 
 {{ dump(related) }}
 
+{{ dump(subscribers) }}
+
 {{ dump(contributors) }}
 
 {{ dump(table) }}
@@ -448,6 +455,14 @@
     document.getElementById('addRowImage').onclick = function () {
       document.getElementById('fileUpload').click();
     };
+
+    $('#addAListingButton').on('click', function (e) {
+      e.preventDefault();
+      $(this).hide();
+      $('#addAListingRow').show();
+      $('#addAListingRowSpace').show();
+      $('#addAListingSubmitAndCancel').show();
+    });
 
     // discussion stuff
 
