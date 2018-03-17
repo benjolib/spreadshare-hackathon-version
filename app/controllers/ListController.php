@@ -53,6 +53,9 @@ class ListController extends BaseController
             $tableCommentsModel = new TableComments();
             $tableStatsModel = new TableStats();
 
+            // Get Contributors
+            $contributors = $tableModel->contributors->toArray();
+
             // access checks
 
             if ($tableModel->getFlags() == TableFlags::Deleted) {
@@ -167,6 +170,7 @@ class ListController extends BaseController
             $this->view->setVar('page', $page);
             $this->view->setVar('tableId', $tableId);
             $this->view->setVar('related', $related);
+            $this->view->setVar('contributors', $contributors);
         } catch (Exception $e) {
             Application::instance()->log($e->getMessage(), Logger::CRITICAL);
         }

@@ -706,6 +706,7 @@ abstract class AbstractUser extends \DS\Model\Base
         $this->hasMany('id', 'DS\Model\ChangeRequests', 'userId', ['alias' => 'Changes']);
         $this->hasMany('id', 'DS\Model\RequestAdd', 'user_id', ['alias' => 'RequestAdd']);
         $this->hasMany('id', 'DS\Model\RequestDelete', 'user_id', ['alias' => 'RequestDelete']);
+        $this->hasMany('id', 'DS\Model\TableContributions', 'userId', ['alias' => 'Contributions']);
     }
 
     /**

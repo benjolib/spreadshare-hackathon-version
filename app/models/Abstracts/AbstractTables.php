@@ -362,12 +362,12 @@ abstract class AbstractTables extends \DS\Model\Base
         $this->hasMany('id', 'DS\Model\TableTags', 'tableId', ['alias' => 'TableTags']);
         $this->hasMany('id', 'DS\Model\TableTokens', 'tableId', ['alias' => 'TableTokens']);
         $this->hasMany('id', 'DS\Model\TableVotes', 'tableId', ['alias' => 'TableVotes']);
+        $this->hasMany('id', 'DS\Model\RequestAdd', 'table_id', ['alias' => 'RequestAdd']);
         $this->belongsTo('ownerUserId', 'DS\Model\User', 'id', ['alias' => 'User']);
         $this->belongsTo('topic1Id', 'DS\Model\Topics', 'id', ['alias' => 'Topics']);
         $this->belongsTo('topic2Id', 'DS\Model\Topics', 'id', ['alias' => 'Topics']);
         $this->belongsTo('typeId', 'DS\Model\Types', 'id', ['alias' => 'Types']);
-
-        $this->hasMany('id', 'DS\Model\RequestAdd', 'table_id', ['alias' => 'RequestAdd']);
+        $this->hasMany('id', 'DS\Model\TableContributions', 'tableId', ['alias' => 'Contributors']);
     }
 
     /**
