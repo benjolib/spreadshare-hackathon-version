@@ -123,6 +123,7 @@ class ListController extends BaseController
                 'votes' => $tableContent['votes'][$index]['votes'],
                 'upvoted' => $tableContent['votes'][$index]['upvoted'],
                 'image' => $item['image'],
+                'description' => $item['description'],
               ];
             }, $tableContent['rows'], array_keys($tableContent['rows']));
 

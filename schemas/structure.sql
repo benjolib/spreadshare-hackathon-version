@@ -795,3 +795,4 @@ CREATE TABLE `row_delete_request` (
 
 
 ALTER TABLE tableRows ADD `image` varchar(255) DEFAULT NULL COMMENT 'image url' AFTER commentsCount;
+ALTER TABLE tableRows ADD `description` TEXT DEFAULT NULL  AFTER `image`;

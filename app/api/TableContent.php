@@ -51,6 +51,7 @@ class TableContent extends BaseApi
                 'id' => $row['id'],
                 'content' => json_decode($row->content, true),
                 'image' => $row['image'],
+                'description' => $row['description'],
             ];
         }
 

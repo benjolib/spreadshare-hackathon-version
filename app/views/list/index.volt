@@ -40,7 +40,7 @@
               <a href="#" class="vote-link {{ row['upvoted'] ? 'vote-link--upvoted' : '' }}">
                 <img class="vote-link__image" src="/assets/images/vote-lightning.svg" />
                 <img class="vote-link__image vote-link__image--green" src="/assets/images/vote-lightning-green.svg" />
-                <div>{{ row['votes'] }}</div>
+                <div>{{ row['votes'] }}</div>                
               </a>
             </td>
             <td class="shadowcontaintd"><div class="shadowcontain"></div></td>
