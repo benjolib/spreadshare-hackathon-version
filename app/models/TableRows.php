@@ -19,8 +19,7 @@ use Phalcon\Paginator\Factory;
  *
  * @method static TableRows findFirstById(int $id)
  */
-class TableRows
-    extends TableRowsEvents
+class TableRows extends TableRowsEvents
 {
     /**
      * @param int $tableId
@@ -31,7 +30,7 @@ class TableRows
     {
         return $this->deleteByFieldValue('tableId', $tableId);
     }
-    
+
     /**
      * @param int $tableId
      *
@@ -41,7 +40,7 @@ class TableRows
     {
         return $this->rebuildRowCacheWithRows(self::findRowsFrom($tableId), $tableId);
     }
-    
+
     /**
      * @param Abstracts\AbstractTableRows|Abstracts\AbstractTableRows[]|\Phalcon\Mvc\Model\ResultSetInterface $rows
      * @param int                                                                                             $tableId
@@ -50,26 +49,24 @@ class TableRows
      */
     public function rebuildRowCacheWithRows(Simple $rows, int $tableId)
     {
-        foreach ($rows as $row)
-        {
+        foreach ($rows as $row) {
             $rowData = [];
-            $cells   = TableCells::findCellsByRow($row->getId());
-            
-            foreach ($cells as $cell)
-            {
+            $cells = TableCells::findCellsByRow($row->getId());
+
+            foreach ($cells as $cell) {
                 $rowData[] = [
                     'id' => $cell['id'],
                     'content' => $cell['content'] !== null ? $cell['content'] : '',
                     'link' => $cell['link'],
                 ];
             }
-            
+
             $row->setContent(json_encode($rowData))->save();
         }
-        
+
         return $rows;
     }
-    
+
     /**
      * @param int $tableId
      * @param int $beginningAtRowId
@@ -83,7 +80,7 @@ class TableRows
             ['tableId' => $tableId, 'rowId' => $beginningAtRowId]
         );
     }
-    
+
     /**
      * @param int $tableId
      * @param int $lineNumber
@@ -95,13 +92,13 @@ class TableRows
     {
         return parent::findFirst(
             [
-                "conditions" => "tableId = ?0 AND lineNumber = ?1",
-                "limit" => 1,
-                "bind" => [$tableId, $lineNumber],
+                'conditions' => 'tableId = ?0 AND lineNumber = ?1',
+                'limit' => 1,
+                'bind' => [$tableId, $lineNumber],
             ]
         );
     }
-    
+
     /**
      * @param int $tableId
      * @param int $beginningRowId
@@ -112,12 +109,12 @@ class TableRows
     {
         return parent::find(
             [
-                "conditions" => "tableId = ?0 AND id > ?1",
-                "bind" => [$tableId, $beginningRowId],
+                'conditions' => 'tableId = ?0 AND id > ?1',
+                'bind' => [$tableId, $beginningRowId],
             ]
         );
     }
-    
+
     /**
      * @param int $tableId
      *
@@ -128,16 +125,18 @@ class TableRows
         $query = self::query()
                      ->columns(
                          [
-                             TableRows::class . ".id",
-                             TableRows::class . ".content",
-                             TableRows::class . ".votesCount",
-                             TableRows::class . ".lineNumber",
-                             "(SELECT " . TableRowVotes::class . ".createdAt FROM " . TableRowVotes::class . " WHERE " . TableRowVotes::class . ".rowId = " . TableRows::class . ".id AND " . TableRowVotes::class . ".userId = " . $userId . " LIMIT 1) as userHasVoted",
+                             TableRows::class . '.id',
+                             TableRows::class . '.content',
+                             TableRows::class . '.votesCount',
+                             TableRows::class . '.lineNumber',
+                             TableRows::class . '.image',
+                             TableRows::class . '.description',
+                             '(SELECT ' . TableRowVotes::class . '.createdAt FROM ' . TableRowVotes::class . ' WHERE ' . TableRowVotes::class . '.rowId = ' . TableRows::class . '.id AND ' . TableRowVotes::class . '.userId = ' . $userId . ' LIMIT 1) as userHasVoted',
                          ]
                      )
-                     ->orderBy(TableRows::class . ".id ASC")
-                     ->where(TableRows::class . ".tableId = ?0", [$tableId]);
-        
+                     ->orderBy(TableRows::class . '.id ASC')
+                     ->where(TableRows::class . '.tableId = ?0', [$tableId]);
+
         return $query->execute();
     }
 

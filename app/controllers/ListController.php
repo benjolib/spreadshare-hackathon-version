@@ -14,7 +14,7 @@ use DS\Model\Helper\TableFilter;
 use DS\Model\DataSource\TableFlags;
 use DS\Controller\Api\Meta\Records;
 use Phalcon\Paginator\Adapter\NativeArray as PaginatorArray;
-
+use DS\Model\TableRelations;
 
 // TODO: probably move this elseware
 function array_orderby()
@@ -23,7 +23,7 @@ function array_orderby()
     $data = array_shift($args);
     foreach ($args as $n => $field) {
         if (is_string($field)) {
-            $tmp = array();
+            $tmp = [];
             foreach ($data as $key => $row) {
                 $tmp[$key] = $row[$field];
             }
@@ -50,6 +50,12 @@ class ListController extends BaseController
             $tableContentModel = new TableContent();
             $tableCommentsModel = new TableComments();
             $tableStatsModel = new TableStats();
+
+            // Get Contributors
+            $contributors = $tableModel->contributors->toArray();
+
+            // Subscribers
+            $subscribers = $tableModel->getSubscribers();
 
             // access checks
 
@@ -95,12 +101,16 @@ class ListController extends BaseController
             // table stats
 
             $tableStats = $tableStatsModel->get($tableId, 'tableId');
+            $related = TableRelations::findRelatedTables($tableId);
             $tableColumns = TableColumns::findAllByFieldValue('tableId', $tableId);
             $this->view->setVar('table', $table);
             $this->view->setVar('tableContent', $tableContent);
             $this->view->setVar('tableComments', $commentsArray);
             $this->view->setVar('tableStats', $tableStats);
             $this->view->setVar('tableColumns', $tableColumns);
+            $this->view->setVar('related', $related);
+            $this->view->setVar('contributors', $contributors);
+            $this->view->setVar('subscribers', $subscribers);
         } catch (Exception $e) {
             Application::instance()->log($e->getMessage(), Logger::CRITICAL);
         }

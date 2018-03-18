@@ -1765,6 +1765,11 @@
       line-height: 20px;
       margin-bottom: 24px;
     }
+    &--list-add-row {
+      width: 133px;
+      margin-left: 16px;
+      height: 60px;
+    }
     &__extra-text {
       font-family: 'Lato', sans-serif;
       font-weight: normal;
@@ -1831,8 +1836,8 @@
       }
     }
     td {
-      font-family: 'Roboto Mono', monospace;
-      font-size: 14px;
+      font-family: 'Lato', sans-serif;
+      font-size: 16px;
       line-height: 19px;
       color: #6A7C94;
       font-weight: normal;
@@ -1854,6 +1859,31 @@
       box-shadow: none !important;
       td {
         border: none !important;
+      }
+    }
+    tr.list-row-tr--add-row td {
+      height: 102px;
+      padding-bottom: 0px;
+      padding-top: 0px;
+      textarea {
+        font-family: 'Lato', sans-serif;
+        border: none;
+        outline: none;
+        width: 100%;
+        padding: 0;
+        font-size: 16px;
+        line-height: 19px;
+        color: #2A1E3E;
+        letter-spacing: -.43px;
+        resize: none;
+      }
+    }
+    td.pagination-td {
+      padding: 8px 0 35px 0 !important;
+      height: auto !important;
+      .pagination {
+        position: absolute;
+        width: 894px;
       }
     }
     td:first-of-type {
@@ -1948,6 +1978,12 @@
           width: 82px;
           height: 82px;
           border-radius: 10px;
+          &--new-row {
+            background: #FFFFFF url(/assets/images/image-placeholder.svg) center / 15px no-repeat;
+            border: 1px solid #ced3da;
+            border-radius: 10px;
+            cursor: pointer;
+          }
         }
         .re-table-link {
           border: 1px solid #6CC69D;
@@ -2105,7 +2141,7 @@
   }
 }
 
-.list-tab-content-audience {
+.list-tab-content-subscribers, .list-tab-content-collaborators {
   display: flex;
   flex-wrap: wrap;
   margin: 0 -8px;
@@ -2119,6 +2155,7 @@
     margin-right: 8px;
     margin-bottom: 16px;
     flex-grow: 1;
+    max-width: calc(50% - 16px);
   }
 }
 
@@ -2235,4 +2272,13 @@
     margin-right: 6px;
     margin-top: -1px;
   }
+}
+
+.list-row-tr--add-row {
+
+}
+
+.addAListingSubmitAndCancel {
+  display: flex;
+  justify-content: flex-end;
 }

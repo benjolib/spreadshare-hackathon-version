@@ -25,8 +25,7 @@ use Phalcon\Exception;
  *
  * @method static findFirstById(int $id)
  */
-class TableContent
-    extends BaseApi
+class TableContent extends BaseApi
 {
     /**
      * Get table rows, columns, metadata and votes
@@ -38,24 +37,26 @@ class TableContent
     public function getTableData(int $tableId, int $userId, int $page): array
     {
         $tableRows = new TableRows();
-        $pagination = $tableRows->getRowsForTable($tableId, $userId);
+        $rows = $tableRows->getRowsForTable($tableId, $userId);
+
         $columnData = $votesData = $rowData = [];
-        foreach ($pagination->items as $row)
-        {
+        foreach ($rows as $row) {
             $votesData[] = [
                 'rowId' => $row['id'],
                 'votes' => $row['votesCount'],
                 'upvoted' => !!$row['userHasVoted'],
             ];
-            $rowData[]   = [
+
+            $rowData[] = [
                 'id' => $row['id'],
                 'content' => json_decode($row->content, true),
+                'image' => $row['image'],
+                'description' => $row['description'],
             ];
         }
 
         $tableColumns = TableColumns::findAllByFieldValue('tableId', $tableId);
-        foreach ($tableColumns as $col)
-        {
+        foreach ($tableColumns as $col) {
             $columnData[] = [
                 'id' => $col->getId(),
                 'title' => $col->getTitle(),
@@ -91,8 +92,7 @@ class TableContent
     {
         $cellModel = (TableCells::findFirstById($cellId));
 
-        if ($cellModel)
-        {
+        if ($cellModel) {
             $cellModel->setContent($content)
                       ->setLink($link ?: null)
                       ->save();
@@ -112,13 +112,11 @@ class TableContent
      */
     public function addRow(int $tableId, array $rowData, int $insertAfterRowId = 0): TableRows
     {
-        try
-        {
+        try {
             $newRow = new TableRows();
             $newRow->getWriteConnection()->begin();
 
-            if (count($rowData))
-            {
+            if (count($rowData)) {
                 // $allRowsForTable = TableRows::findRowsFrom($tableId, $insertAfterRowId ? $insertAfterRowId : 0);
 
                 $newRow->increaseLineNumbers($tableId, $insertAfterRowId);
@@ -127,16 +125,12 @@ class TableContent
                     ->setTableId($tableId)
                     ->setUserId($this->serviceManager->getAuth()->getUserId());
 
-                if (!$insertAfterRowId)
-                {
+                if (!$insertAfterRowId) {
                     $newRow->setLineNumber(1);
-                }
-                else
-                {
+                } else {
                     $afterRow = TableRows::findFirstById($insertAfterRowId);
 
-                    if (!$afterRow)
-                    {
+                    if (!$afterRow) {
                         throw new \InvalidArgumentException('The given rowId does not exist.');
                     }
                     $newRow->setLineNumber($afterRow->getLineNumber() + 1);
@@ -146,8 +140,7 @@ class TableContent
                 $columns = TableColumns::findAllByFieldValue('tableId', $tableId);
 
                 $rowContent = [];
-                foreach ($rowData as $key => $row)
-                {
+                foreach ($rowData as $key => $row) {
                     $cell = new TableCells();
                     $cell->setRowId($newRow->getId())
                          ->setContent($row)
@@ -167,9 +160,7 @@ class TableContent
 
                 $newRow->getWriteConnection()->commit();
             }
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             $newRow->getWriteConnection()->rollback();
 
             throw $e;
@@ -189,8 +180,7 @@ class TableContent
     public function editRow(int $tableId, int $rowId, string $rowData): TableContent
     {
         $rowDataArray = json_decode($rowData);
-        if (is_array($rowDataArray))
-        {
+        if (is_array($rowDataArray)) {
             $tableRowModel = TableRows::findFirstById($rowId);
             $tableRowModel->setContent($rowData)
                           ->save();
@@ -250,17 +240,15 @@ class TableContent
     {
         $userId = serviceManager()->getAuth()->getUserId();
 
-        $csv  = new Csv();
+        $csv = new Csv();
         $rows = $csv->parseFromText($csvData, $separator, true, true);
 
-        if (!is_array($rows) || !isset($rows[0]))
-        {
+        if (!is_array($rows) || !isset($rows[0])) {
             throw new \InvalidArgumentException('Unable to parse csv file.');
         }
 
         // Check for semicolon separated text
-        if (count($rows[0]) === 1 && substr_count($rows[0][0], ';') > 0)
-        {
+        if (count($rows[0]) === 1 && substr_count($rows[0][0], ';') > 0) {
             return $this->addfromCsvText($tableId, $csvData, ';', $hasHeaders);
         }
 
@@ -268,15 +256,13 @@ class TableContent
         $db = $this->serviceManager->getDI()->get('db');
         $db->begin();
 
-        try
-        {
+        try {
             // Clear first if there is data already imported
             $this->clearTableContent($tableId);
 
             $columnIds = [];
-            $i         = 1;
-            foreach ($rows[0] as $key => $headerField)
-            {
+            $i = 1;
+            foreach ($rows[0] as $key => $headerField) {
                 $columnModel = new TableColumns();
                 $columnModel->setTableId($tableId)
                             ->setPosition($i++)
@@ -288,19 +274,14 @@ class TableContent
                 $columnIds[$key] = $columnModel->getId();
             }
 
-            if ($hasHeaders)
-            {
+            if ($hasHeaders) {
                 unset($rows[0]);
             }
 
-            if (count($columnIds))
-            {
-
+            if (count($columnIds)) {
                 $line = 1;
-                foreach ($rows as $row)
-                {
-                    if (is_array($row))
-                    {
+                foreach ($rows as $row) {
+                    if (is_array($row)) {
                         $rowModel = new TableRows();
                         $rowModel->setUserId($userId)
                                  ->setTableId($tableId)
@@ -310,21 +291,15 @@ class TableContent
                                  ->create();
 
                         $cellData = [];
-                        foreach ($columnIds as $key => $colId)
-                        {
+                        foreach ($columnIds as $key => $colId) {
                             $cellContent = isset($row[$key]) && $row[$key] !== null ? $row[$key] : '';
 
                             // Check for links in cells
-                            if (strpos($cellContent, 'www.') === 0)
-                            {
+                            if (strpos($cellContent, 'www.') === 0) {
                                 $cellLink = 'http://' . $cellContent;
-                            }
-                            elseif (strpos($cellContent, 'http://') === 0 || strpos($cellContent, 'https://') === 0)
-                            {
+                            } elseif (strpos($cellContent, 'http://') === 0 || strpos($cellContent, 'https://') === 0) {
                                 $cellLink = $cellContent;
-                            }
-                            else
-                            {
+                            } else {
                                 $cellLink = '';
                             }
 
@@ -344,9 +319,7 @@ class TableContent
             }
 
             $db->commit();
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             $db->rollback();
 
             throw $e;

@@ -3,8 +3,9 @@
 namespace DS\Controller;
 
 use DS\Model\Tables;
-use DS\Interfaces\LoginAwareController;
 use DS\Model\RequestAdd;
+use DS\Interfaces\LoginAwareController;
+use function GuzzleHttp\json_encode;
 
 class RequestAddController extends BaseController implements LoginAwareController
 {
@@ -26,18 +27,24 @@ class RequestAddController extends BaseController implements LoginAwareControlle
 
         $user = $this->serviceManager->getAuth()->getUser();
 
-        // Mocking data from the front end  - this should come from the form submited by the user
-        $content = 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eveniet inventore eaque voluptate iste provident, ipsa magni a.';
-        $comment = 'Consequuntur recusandae eligendi at ut? Dolores hic sunt provident reprehenderit facere quas explicabo';
-        $image = 'asasaasfsfs.jpg';
+        // Get form data
+        if ($this->request->hasFiles()) {
+            $image = $this->request->getUploadedFiles();
+            $image = $image[0];
+            $image->moveTo('assets/images/rows/' . $image->getName());
+        }
+
+        $content = json_encode($this->request->get('cells'));
+        $image = $image->getName();
 
         $submission = new RequestAdd();
 
         $submission->table_id = $tableId;
         $submission->user_id = $user->getId();
         $submission->content = $content;
-        $submission->comment = $comment;
         $submission->image = $image;
+
+        $submission->save();
 
         $this->flash->success('Your submission is waiting for approval');
         $this->_redirectBack();

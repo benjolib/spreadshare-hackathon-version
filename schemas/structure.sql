@@ -761,3 +761,38 @@ ALTER TABLE `userStats` ADD INDEX (`upvotesCount`);
 ALTER TABLE `userStats` ADD INDEX (`followerCount`);
 
 ALTER TABLE `userSettings` ADD `hideHeroOnHomepage` TINYINT(1)  UNSIGNED  NULL  DEFAULT NULL  AFTER `showTokensOnProfilePage`;
+
+
+DROP TABLE IF EXISTS `row_add_request`;
+CREATE TABLE `row_add_request` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) unsigned NOT NULL,
+  `table_id` int(11) unsigned NOT NULL,
+  `content` longtext NOT NULL,
+  `comment` text,
+  `image` varchar(100) DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `table_id` (`table_id`),
+  CONSTRAINT `row_add_request_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `row_add_request_ibfk_2` FOREIGN KEY (`table_id`) REFERENCES `tables` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `row_delete_request`;
+CREATE TABLE `row_delete_request` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) unsigned NOT NULL,
+  `row_id` int(11) unsigned NOT NULL,
+  `comment` text,
+  `status` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `row_id` (`row_id`),
+  CONSTRAINT `row_delete_request_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `row_delete_request_ibfk_2` FOREIGN KEY (`row_id`) REFERENCES `tableRows` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+
+ALTER TABLE tableRows ADD `image` varchar(255) DEFAULT NULL COMMENT 'image url' AFTER commentsCount;
+ALTER TABLE tableRows ADD `description` TEXT DEFAULT NULL  AFTER `image`;
