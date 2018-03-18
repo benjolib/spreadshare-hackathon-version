@@ -35,13 +35,12 @@ class TableContent
      *
      * @return array
      */
-    public function getTableData(int $tableId, int $userId): array
+    public function getTableData(int $tableId, int $userId, int $page): array
     {
         $tableRows = new TableRows();
-        $rows      = $tableRows->getRowsForTable($tableId, $userId);
-
+        $pagination = $tableRows->getRowsForTable($tableId, $userId);
         $columnData = $votesData = $rowData = [];
-        foreach ($rows as $row)
+        foreach ($pagination->items as $row)
         {
             $votesData[] = [
                 'rowId' => $row['id'],
@@ -64,7 +63,6 @@ class TableContent
         }
 
         $tableProps = (new TableProperties())->get($tableId, 'tableId');
-
         return [
             'fixedRowsTop' => $tableProps->getFixedRowsTop(),
             'fixedColumnsLeft' => $tableProps->getFixedColumnsLeft(),
@@ -72,7 +70,14 @@ class TableContent
             'votes' => $votesData,
             'columns' => $columnData,
             'rows' => $rowData,
+            'pagination' => $pagination
         ];
+    }
+
+    public function paginatedDatas(int $tableId, int $userId, string $orderBy = '', int $page = 1)
+    {
+        $tableRows = new TableRows();
+        return $tableRows->paginatedDatas($tableId, $userId, $orderBy, $page);
     }
 
     /**

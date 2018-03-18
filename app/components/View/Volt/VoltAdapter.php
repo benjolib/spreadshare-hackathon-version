@@ -106,5 +106,11 @@ class VoltAdapter extends Volt
                 return "htmlentities(json_encode({$key}, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP))";
             }
         );
+        $compiler->addFunction(
+            'filterTableRowsContent',
+            function ($key) {
+                return "\\DS\\Component\\View\\Functions\\FilterTableRowsContent::parse({$key})";
+            }
+        );
     }
 }
