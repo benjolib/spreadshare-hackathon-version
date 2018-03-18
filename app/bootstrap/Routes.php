@@ -219,7 +219,7 @@ return [
             'controller' => 'Request_Add',
             'action' => 'add',
         ],
-        'methods' => ['GET', 'POST'],
+        'methods' => ['POST'],
     ],
     [
         'url' => '/row/{id:[0-9]+}/delete',
