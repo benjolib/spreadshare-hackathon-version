@@ -12,8 +12,6 @@ use DS\Model\TableColumns;
 use DS\Model\TableComments;
 use DS\Model\Helper\TableFilter;
 use DS\Model\DataSource\TableFlags;
-use DS\Controller\Api\Meta\Records;
-use Phalcon\Paginator\Adapter\NativeArray as PaginatorArray;
 use DS\Model\TableRelations;
 
 // TODO: probably move this elseware
@@ -37,19 +35,35 @@ function array_orderby()
 
 class ListController extends BaseController
 {
-    public function indexAction($tableId)
+    public function indexAction()
     {
         try {
             $page = $this->request->getQuery('page', 'int', 1);
             $authId = $this->serviceManager->getAuth()->getUserId();
-            
 
             // models
 
-            $tableModel = Tables::get($tableId);
+            $slug = $this->dispatcher->getParam('slug');
+
+            // Try to get table by slug
+            $tableModel = Tables::findFirst([
+                'conditions' => 'slug = :slug:',
+                'bind' => [
+                    'slug' => $slug
+                ]
+            ]);
+
+            //Check if slug or id is being passed to url
+            // If not, get by id
+            if (!$tableModel) {
+                $tableModel = Tables::findFirstById($slug);
+            }
+
             $tableContentModel = new TableContent();
             $tableCommentsModel = new TableComments();
             $tableStatsModel = new TableStats();
+
+            $tableId = $tableModel->id;
 
             // Get Contributors
             $contributors = $tableModel->contributors->toArray();
@@ -73,7 +87,7 @@ class ListController extends BaseController
 
             if ($this->request->isPost()) {
                 if ($this->request->getPost('comment')) {
-                    $tableCommentsModel ->setUserId($authId)
+                    $tableCommentsModel->setUserId($authId)
                              ->setTableId($tableId)
                              ->setParentId($this->request->getPost('parentId') ?: null)
                              ->setVotesCount(0)

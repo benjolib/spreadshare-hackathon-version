@@ -206,7 +206,7 @@ return [
 
     // new routes
     [
-        'url' => '/list/{id:[0-9]+}',
+        'url' => '/list/{slug}',
         'paths' => [
             'controller' => 'List',
             'action' => 'index',
