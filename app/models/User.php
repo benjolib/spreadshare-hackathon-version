@@ -240,8 +240,6 @@ class User extends UserEvents
 
     public function getRequests()
     {
-        $changes = $this->changes;
-
         $query = $this->readQuery("
              SELECT 
                 changeRequests.id, 
@@ -265,9 +263,48 @@ class User extends UserEvents
         $query->setFetchMode(Db::FETCH_ASSOC);
 
         return $query->fetchAll() ?: [];
+    }
 
-        return $changes;
+    // Get all user's submissions
+    public function getSubmissions()
+    {
+        $query = $this->readQuery("
+            SELECT 
+                row_add_request.id, 
+                row_add_request.content,
+                row_add_request.image,
+                row_add_request.comment,
+                row_add_request.status
+            FROM 
+                row_add_request
+            WHERE
+                row_add_request.user_id = $this->id
+        ");
 
-        // return $changes->cell->id;
+        $query->setFetchMode(Db::FETCH_ASSOC);
+        $add_requests = $query->fetchAll() ?: [];
+
+        $query = $this->readQuery("
+            SELECT 
+                row_delete_request.id,
+                row_delete_request.row_id,
+                row_delete_request.comment,
+                row_delete_request.status,
+                tableRows.id,
+                tableRows.content,
+                tableRows.image,
+                tableRows.votesCount
+
+            FROM 
+                row_delete_request            
+            JOIN tableRows ON row_delete_request.row_id = tableRows.id
+            WHERE
+                row_delete_request.user_id = $this->id
+        ");
+
+        $query->setFetchMode(Db::FETCH_ASSOC);
+        $delete_requests = $query->fetchAll() ?: [];
+
+        return array_merge($add_requests, $delete_requests);
     }
 }

@@ -229,4 +229,12 @@ return [
         ],
         'methods' => ['GET', 'POST'],
     ],
+    [
+        'url' => '/submissions',
+        'paths' => [
+            'controller' => 'Submission',
+            'action' => 'index',
+        ],
+        'methods' => ['GET', 'POST'],
+    ],
 ];
