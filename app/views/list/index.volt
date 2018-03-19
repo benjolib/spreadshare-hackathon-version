@@ -5,7 +5,12 @@
 {% block content %}
 {{ flash.output() }}
 
+<p><a href="{{table['id']}}">Order by popularity</a></p>
+<p><a href="{{table['id']}}?orderby=date">Order by newer</a></p>
+
 <div class="re-page re-page--list">
+
+
   <div style="margin-bottom: 118px;">
     <div class="re-image" style="background: #f5f5f5 url({{ table['image'] }}) center / cover;"></div>
     <div class="re-pre-heading-info">
@@ -69,8 +74,8 @@
         <tr class="list-row-tr">
           <td class="pagination-td">
             <div class="pagination">
-              <a href="/list/{{ table['id'] }}?page=1"><<</a>
-              <a href="/list/{{ table['id'] }}?page={{ tableContent.before }}"> <</a>
+              <a href="/list/{{ table['id'] }}?page=1&orderby={{orderby}}"><<</a>
+              <a href="/list/{{ table['id'] }}?page={{ tableContent.before }}&orderby={{orderby}}"> <</a>
               {% if tableContent.current + 5 < tableContent.total_pages %}
               {% set endPage=tableContent.current + 5 %}
               {% else %}
@@ -83,13 +88,13 @@
               {% endif %}
               {% for p in startPage..endPage %}
                   {% if p === tableContent.current %}
-                  <a class="active" style="color:red" href="/list/{{ table['id'] }}?page={{ p }}">{{ p }}</a>
+                  <a class="active" style="color:red" href="/list/{{ table['id'] }}?page={{ p }}&orderby={{orderby}}">{{ p }}</a>
                   {% else %}
-                  <a href="/list/{{ table['id'] }}?page={{ p }}">{{ p }}</a>
+                  <a href="/list/{{ table['id'] }}?page={{ p }}&orderby={{orderby}}">{{ p }}</a>
                   {% endif %}
               {% endfor %}
-              <a href="/list/{{ table['id'] }}?page={{ tableContent.next }}">></a>
-              <a href="/list/{{ table['id'] }}?page={{ tableContent.last }}">>></a>
+              <a href="/list/{{ table['id'] }}?page={{ tableContent.next }}&orderby={{orderby}}">></a>
+              <a href="/list/{{ table['id'] }}?page={{ tableContent.last }}&orderby={{orderby}}">>></a>
             </div>
           </td>
           </tr>

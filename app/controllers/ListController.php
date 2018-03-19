@@ -39,6 +39,14 @@ class ListController extends BaseController
     {
         try {
             $page = $this->request->getQuery('page', 'int', 1);
+            $orderby = $this->request->getQuery('orderby', null, 'popularity');
+
+            if ($orderby == 'date') {
+                $orderbyquery = 'createdAt DESC';
+            } else {
+                $orderbyquery = 'votesCount DESC';
+            }
+
             $authId = $this->serviceManager->getAuth()->getUserId();
 
             // models
@@ -103,7 +111,7 @@ class ListController extends BaseController
                 TableFlags::All
             )[0];
 
-            $tableContent = $tableContentModel->paginatedDatas($tableId, $authId, 'votesCount desc', $page);
+            $tableContent = $tableContentModel->paginatedDatas($tableId, $authId, $orderbyquery, $page);
 
             // table comments
 
@@ -125,6 +133,7 @@ class ListController extends BaseController
             $this->view->setVar('related', $related);
             $this->view->setVar('contributors', $contributors);
             $this->view->setVar('subscribers', $subscribers);
+            $this->view->setVar('orderby', $orderby);
         } catch (Exception $e) {
             Application::instance()->log($e->getMessage(), Logger::CRITICAL);
         }

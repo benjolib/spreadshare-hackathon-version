@@ -147,20 +147,20 @@ class TableRows extends TableRowsEvents
                     ->from(TableRows::class)
                     ->columns(
                          [
-                             TableRows::class . ".id",
-                             TableRows::class . ".content",
-                             TableRows::class . ".votesCount",
-                             TableRows::class . ".lineNumber",
-                             TableRows::class . ".image",
-                             "(SELECT " . TableRowVotes::class . ".createdAt FROM " . TableRowVotes::class . " WHERE " . TableRowVotes::class . ".rowId = " . TableRows::class . ".id AND " . TableRowVotes::class . ".userId = " . $userId . " LIMIT 1) as userHasVoted",
+                             TableRows::class . '.id',
+                             TableRows::class . '.content',
+                             TableRows::class . '.votesCount',
+                             TableRows::class . '.lineNumber',
+                             TableRows::class . '.image',
+                             '(SELECT ' . TableRowVotes::class . '.createdAt FROM ' . TableRowVotes::class . ' WHERE ' . TableRowVotes::class . '.rowId = ' . TableRows::class . '.id AND ' . TableRowVotes::class . '.userId = ' . $userId . ' LIMIT 1) as userHasVoted',
                          ]
                      )
-                     ->orderBy($orderBy ? $orderBy : TableRows::class . ".id ASC")
-                     ->where(TableRows::class . ".tableId = ?0", [$tableId]);
+                     ->orderBy($orderBy ? $orderBy : TableRows::class . '.id ASC')
+                     ->where(TableRows::class . '.tableId = ?0', [$tableId]);
         $options = [
             'builder' => $builder,
-            'limit'   => 10,
-            'page'    => $page,
+            'limit' => 10,
+            'page' => $page,
             'adapter' => 'queryBuilder',
         ];
 
