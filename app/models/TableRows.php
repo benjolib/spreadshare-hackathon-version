@@ -151,6 +151,7 @@ class TableRows extends TableRowsEvents
                              TableRows::class . ".content",
                              TableRows::class . ".votesCount",
                              TableRows::class . ".lineNumber",
+                             TableRows::class . ".image",
                              "(SELECT " . TableRowVotes::class . ".createdAt FROM " . TableRowVotes::class . " WHERE " . TableRowVotes::class . ".rowId = " . TableRows::class . ".id AND " . TableRowVotes::class . ".userId = " . $userId . " LIMIT 1) as userHasVoted",
                          ]
                      )

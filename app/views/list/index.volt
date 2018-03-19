@@ -71,22 +71,22 @@
             <div class="pagination">
               <a href="/list/{{ table['id'] }}?page=1"><<</a>
               <a href="/list/{{ table['id'] }}?page={{ tableContent.before }}"> <</a>
-              {% if tableContent.current + 5 < tableContent.total_pages %} 
-              {% set endPage=tableContent.current + 5 %} 
-              {% else %} 
-              {% set endPage=tableContent.total_pages %} 
-              {% endif %} 
-              {% if tableContent.current - 5> 1 %} 
-              {% set startPage=tableContent.current - 5 %} 
-              {% else %} 
-              {% set startPage=1 %} 
-              {% endif %} 
-              {% for p in startPage..endPage %} 
+              {% if tableContent.current + 5 < tableContent.total_pages %}
+              {% set endPage=tableContent.current + 5 %}
+              {% else %}
+              {% set endPage=tableContent.total_pages %}
+              {% endif %}
+              {% if tableContent.current - 5> 1 %}
+              {% set startPage=tableContent.current - 5 %}
+              {% else %}
+              {% set startPage=1 %}
+              {% endif %}
+              {% for p in startPage..endPage %}
                   {% if p === tableContent.current %}
                   <a class="active" style="color:red" href="/list/{{ table['id'] }}?page={{ p }}">{{ p }}</a>
                   {% else %}
                   <a href="/list/{{ table['id'] }}?page={{ p }}">{{ p }}</a>
-                  {% endif %} 
+                  {% endif %}
               {% endfor %}
               <a href="/list/{{ table['id'] }}?page={{ tableContent.next }}">></a>
               <a href="/list/{{ table['id'] }}?page={{ tableContent.last }}">>></a>
@@ -475,17 +475,17 @@
 
     $('#addAListingSubmit').on('click', function (e) {
       e.preventDefault();
-      
+
       // Clone image input to the hidden form
       var image = $('#fileUpload');
       var image_clone = image.clone();
       image.after(image_clone).appendTo('#form_hidden');
-      
+
 
 
       // clone text aras
-      $('#addAListingRow textarea').each(function (txt){        
-        $( "<input type='hidden' name='cells["+ txt + "]' value='"+ $(this).val() +"' />" ).appendTo( "#form_hidden" );        
+      $('#addAListingRow textarea').each(function (txt){
+        $( "<input type='hidden' name='cells["+ txt + "]' value='"+ $(this).val() +"' />" ).appendTo( "#form_hidden" );
       });
 
       $('#form_hidden').submit();
