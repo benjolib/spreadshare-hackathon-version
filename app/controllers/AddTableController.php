@@ -143,7 +143,9 @@ class AddTableController extends BaseController implements LoginAwareController
                 $tableModel = Tables::get($tableId);
                 if ($tableModel->getOwnerUserId() == $userId) {
                     $tableContent = new TableContent();
-                    $tableData = $tableContent->getTableData($tableId, $userId, 1);
+
+                    $tableData = $tableContent->getTableData($tableId, $userId);
+
                     $this->view->setVar('tableData', $tableData);
                     $this->view->setVar('tableProps', $tableProps = (new TableProperties())->get($tableId, 'tableId'));
 

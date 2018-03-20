@@ -34,7 +34,7 @@ class TableContent extends BaseApi
      *
      * @return array
      */
-    public function getTableData(int $tableId, int $userId, int $page): array
+    public function getTableData(int $tableId, int $userId, int $page = 1): array
     {
         $tableRows = new TableRows();
         $rows = $tableRows->getRowsForTable($tableId, $userId);
@@ -50,12 +50,12 @@ class TableContent extends BaseApi
             $rowData[] = [
                 'id' => $row['id'],
                 'content' => json_decode($row->content, true),
-                'image' => $row['image'],
-                'description' => $row['description'],
+                'image' => $row['image']
             ];
         }
 
         $tableColumns = TableColumns::findAllByFieldValue('tableId', $tableId);
+
         foreach ($tableColumns as $col) {
             $columnData[] = [
                 'id' => $col->getId(),
@@ -71,7 +71,7 @@ class TableContent extends BaseApi
             'votes' => $votesData,
             'columns' => $columnData,
             'rows' => $rowData,
-            'pagination' => $pagination
+            // 'pagination' => $pagination
         ];
     }
 
