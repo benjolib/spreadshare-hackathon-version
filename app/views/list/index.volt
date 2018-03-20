@@ -5,12 +5,7 @@
 {% block content %}
 {{ flash.output() }}
 
-<p><a href="{{table['id']}}">Order by popularity</a></p>
-<p><a href="{{table['id']}}?orderby=date">Order by newer</a></p>
-
 <div class="re-page re-page--list">
-
-
   <div style="margin-bottom: 118px;">
     <div class="re-image" style="background: #f5f5f5 url({{ table['image'] ? table['image'] : 'https://picsum.photos/894/258/?image=' ~ table['id'] }}) center / cover;"></div>
     <div class="re-pre-heading-info">
@@ -31,7 +26,14 @@
     <table class="re-table re-table--list" data-id="{{ table['id'] }}">
       <thead>
         <tr>
-          <th style="width: 52px;padding-right: 7px;">VOTES</th>
+          <th style="width: 52px;padding-right: 7px;position: relative;cursor: pointer;">
+            <div class="l-button">VOTES <img src="/assets/images/updown.svg" style="position:absolute;top:14px;right:-4px;" /></div>
+            <div class="dropdown sort-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
+              <a href="{{table['id']}}"><img src="/assets/images/lightning.svg" /> Sort by <span>Popularity</span></a>
+
+              <a href="{{table['id']}}?orderby=date" class="warning-color"><img src="/assets/images/clock.svg" /> Sort by <span>Newest</span></a>
+            </div>
+          </th>
           <th class="shadowcontainth"></th>
           <th>{# image #}</th>
           {% for column in tableColumns %}
@@ -54,7 +56,7 @@
               <div class="re-table__list-image" style="background: #f5f5f5 url({{ row['image'] }}) center / cover;"></div>
             </td>
             {% for cell in row['content']|json_decode %}
-              {% set len = filterTableRowsContent(cell.content)|length %}
+              {% set len = filterTableRowsContent(cell.content)|striptags|length %}
                  {% if len > 160  %}
                  {% set length = 500 %}
                  {% elseif len > 80 %}
@@ -379,6 +381,29 @@
 {% block scripts %}
 <script type="text/javascript">
   $(document).ready(function () {
+    // pops
+
+    var bindPops = function () {
+      $('.l-button:not(.bound)').each(function () {
+        var $button = $(this);
+        var $dropdown = $button.next('.l-dropdown');
+
+        new Popper($button, $dropdown, {
+          placement: 'bottom-end'
+        });
+
+        $button.click(function () {
+          $dropdown.toggleClass('show');
+        });
+
+        $button.addClass('bound');
+      });
+    };
+
+    bindPops();
+
+    // binds
+
     $('.list-tab-button-discussion').on('click', function (e) {
       e.preventDefault();
       $('.list-tab-button').removeClass('active');

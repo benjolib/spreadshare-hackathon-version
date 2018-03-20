@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="6px" height="9px" viewBox="0 0 6 9" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.1 (51147) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 9</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Views" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="List-Page-3.1" transform="translate(-322.000000, -845.000000)" fill="#6CC69D">
+            <g id="Group" transform="translate(272.000000, 845.000000)">
+                <g id="Group-9" transform="translate(50.000000, 0.000000)">
+                    <g id="Group-7">
+                        <rect id="Rectangle-4" transform="translate(3.767101, 2.072123) rotate(45.000000) translate(-3.767101, -2.072123) " x="1.85627798" y="1.48388813" width="3.82164659" height="1.17647059" rx="0.588235294"></rect>
+                        <rect id="Rectangle-4" transform="translate(1.769338, 2.072123) rotate(135.000000) translate(-1.769338, -2.072123) " x="-0.141485682" y="1.48388813" width="3.82164659" height="1.17647059" rx="0.588235294"></rect>
+                    </g>
+                    <g id="Group-3" transform="translate(0.000000, 5.000000)">
+                        <rect id="Rectangle-4" transform="translate(1.769338, 2.072123) rotate(225.000000) translate(-1.769338, -2.072123) " x="-0.141485682" y="1.48388813" width="3.82164659" height="1.17647059" rx="0.588235294"></rect>
+                        <rect id="Rectangle-4" transform="translate(3.767101, 2.072123) rotate(315.000000) translate(-3.767101, -2.072123) " x="1.85627798" y="1.48388813" width="3.82164659" height="1.17647059" rx="0.588235294"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

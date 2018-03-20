@@ -1,4 +1,3 @@
-
 /** @define utilities */
 
 /* Applies to flex container
@@ -329,7 +328,6 @@
  */
 
 @media (min-width: 320px) {
-
   /* Applies to flex container
      ======================================================================== */
 
@@ -650,7 +648,6 @@
     flex: 0 0 auto !important;
     flex-basis: auto !important; /* 1 */
   }
-
 }
 
 /**
@@ -659,7 +656,6 @@
  */
 
 @media (min-width: 768px) {
-
   /* Applies to flex container
      ======================================================================== */
 
@@ -980,7 +976,6 @@
     flex: 0 0 auto !important;
     flex-basis: auto !important; /* 1 */
   }
-
 }
 
 /**
@@ -989,7 +984,6 @@
  */
 
 @media (min-width: 1024px) {
-
   /* Applies to flex container
      ======================================================================== */
 
@@ -1310,7 +1304,6 @@
     flex: 0 0 auto !important;
     flex-basis: auto !important; /* 1 */
   }
-
 }
 
 .card-actions-button {
@@ -1318,7 +1311,7 @@
   width: 40px;
   height: 40px;
   margin-left: auto;
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     width: 60px;
     height: 60px;
   }
@@ -1326,7 +1319,7 @@
 
 .card-actions-button img {
   width: 10px;
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     width: auto;
   }
 }
@@ -1336,7 +1329,7 @@
   margin-right: -1px;
   width: 120px;
   height: 86px;
-  border: 1px solid #DBDBDB;
+  border: 1px solid #dbdbdb;
   border-radius: 4px;
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.18);
   padding-left: 14px;
@@ -1346,18 +1339,18 @@
     font-family: 'Roboto Mono', monospace;
     font-weight: bold;
     font-size: 11px;
-    color: #6A7C94;
+    color: #6a7c94;
     line-height: 24px;
     letter-spacing: -0.28px;
     &.warning-color {
-      color: #FB7977;
+      color: #fb7977;
     }
     img {
       height: 10px;
       margin-right: 4px;
     }
   }
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     margin-top: -10px;
     width: 160px;
     height: 114px;
@@ -1381,7 +1374,7 @@
 
 .home-heading {
   margin-bottom: 30px;
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     margin-bottom: 34px;
   }
   &__text {
@@ -1389,34 +1382,34 @@
     font-weight: bold;
     font-size: 24px;
     letter-spacing: 0.75px;
-    color: #6CC69D;
-    border-bottom: 1px solid #6CC69D;
+    color: #6cc69d;
+    border-bottom: 1px solid #6cc69d;
     padding-bottom: 4px;
-    @media(min-width: 768px) {
+    @media (min-width: 768px) {
       padding-bottom: 6px;
     }
     img {
       margin: 0 5px 0 10px;
       width: 13px;
-      @media(min-width: 768px) {
+      @media (min-width: 768px) {
         margin: 0 6px 0 12px;
         width: auto;
       }
     }
-    @media(min-width: 768px) {
+    @media (min-width: 768px) {
       font-size: 32px;
       letter-spacing: 1px;
     }
   }
   &__line {
-    border-bottom: 1px solid #DEE0E7;
+    border-bottom: 1px solid #dee0e7;
   }
   &--type2 {
     margin-top: 5px;
     margin-left: 2px;
     margin-right: 2px;
     margin-bottom: 10px;
-    @media(min-width: 768px) {
+    @media (min-width: 768px) {
       margin-top: 45px;
       margin-left: 6px;
       margin-right: 6px;
@@ -1426,7 +1419,7 @@
   &--type2 & {
     &__text {
       letter-spacing: 0.72px;
-      @media(min-width: 768px) {
+      @media (min-width: 768px) {
         letter-spacing: -0.09px;
       }
     }
@@ -1441,10 +1434,10 @@
   &:-webkit-scrollbar {
     display: none;
   }
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     margin-bottom: 111px;
   }
-  @media(min-width: 1024px) {
+  @media (min-width: 1024px) {
     overflow-x: auto;
     margin-right: 0;
   }
@@ -1452,13 +1445,13 @@
 
 .home-heading-dropdown {
   width: 359px;
-  border: 1px solid #F8F8FB;
-  box-shadow: 0 1px 2px 0 rgba(0,0,0,0.18);
+  border: 1px solid #f8f8fb;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
   border-radius: 2px;
   margin-top: 6px;
   margin-left: -10px;
   padding: 14px 8px 22px 8px;
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     padding: 14px;
     margin-top: 8px;
     margin-left: 0;
@@ -1470,12 +1463,11 @@
   }
   &__col2 {
     width: 157px;
-    @media(min-width: 768px) {
+    @media (min-width: 768px) {
       width: 176px;
     }
   }
   &__col3 {
-
   }
   a {
     padding: 8px 6px;
@@ -1483,9 +1475,9 @@
     font-weight: bold;
     font-size: 14px;
     line-height: 16px;
-    color: #6A7C94;
+    color: #6a7c94;
     letter-spacing: -0.04px;
-    @media(min-width: 768px) {
+    @media (min-width: 768px) {
       padding: 8px;
     }
     &.space-below {
@@ -1496,7 +1488,7 @@
       color: #b2b4b9;
     }
     &.active {
-      color: #2A1E3E;
+      color: #2a1e3e;
     }
     div {
       display: inline-block;
@@ -1526,69 +1518,67 @@
 .wallet-stats {
   margin-top: 32px;
   margin-bottom: 35px;
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     margin-top: 73px;
     margin-bottom: 59px;
   }
   .col1 {
     margin-right: 55px;
     margin-left: 1px;
-    @media(min-width: 768px) {
+    @media (min-width: 768px) {
       margin-left: 0;
       margin-right: 115px;
     }
   }
   .col2 {
     margin-right: 72px;
-    @media(min-width: 768px) {
+    @media (min-width: 768px) {
       margin-right: 125px;
     }
-
   }
   .col3 {
-
   }
   &-label {
     font-family: 'Roboto Mono', monospace;
-    color: #6A7C94;
+    color: #6a7c94;
     font-weight: normal;
     font-size: 9px;
     line-height: 11px;
     letter-spacing: 0.38px;
     margin-bottom: 5px;
     white-space: nowrap;
-    @media(min-width: 768px) {
+    @media (min-width: 768px) {
       font-size: 12px;
       line-height: 16px;
       letter-spacing: 0.5px;
     }
   }
   &-stat {
-    color: #2A1E3E;
+    color: #2a1e3e;
     font-weight: bold;
     font-size: 22.5px;
     line-height: 27px;
     letter-spacing: -0.54px;
-    @media(min-width: 768px) {
+    @media (min-width: 768px) {
       font-size: 30px;
       line-height: 36px;
       letter-spacing: -0.72px;
     }
     &.green {
-      color: #6CC69D;
+      color: #6cc69d;
     }
   }
 }
 
 .lists-page-space {
   margin-bottom: 33px;
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     margin-bottom: 90px;
   }
 }
 
 .home-top-margin-bottom {
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     margin-bottom: 33px;
   }
 }
@@ -1602,7 +1592,7 @@
   margin: 0 auto;
   max-width: 934px;
   padding: 41px 20px 60px 20px;
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     padding: 105px 20px 125px 20px;
   }
   &--list {
@@ -1616,7 +1606,7 @@
     margin: 0 auto;
     max-width: 1382px;
     padding: 21px 20px 60px 20px;
-    @media(min-width: 768px) {
+    @media (min-width: 768px) {
       padding: 65px 20px 125px 20px;
     }
   }
@@ -1635,20 +1625,20 @@
     font-family: 'Roboto Mono', monospace;
     font-size: 9px;
     line-height: 11px;
-    letter-spacing: .38px;
+    letter-spacing: 0.38px;
     margin-bottom: 3px;
-    color: #6A7C94;
+    color: #6a7c94;
     text-transform: uppercase;
     &.re-green {
-      color: #6CC69D;
+      color: #6cc69d;
     }
     &.re-lighten {
-      color: #B1BBC7;
+      color: #b1bbc7;
     }
-    @media(min-width: 768px) {
+    @media (min-width: 768px) {
       font-size: 12px;
       line-height: 16px;
-      letter-spacing: .5px;
+      letter-spacing: 0.5px;
       margin-bottom: 5px;
       margin-right: 12px;
     }
@@ -1656,13 +1646,13 @@
 }
 
 .re-heading {
-  color: #2A1E3E;
+  color: #2a1e3e;
   font-weight: bold;
   font-size: 30px;
   line-height: 36px;
   letter-spacing: -0.72px;
   margin-bottom: 1px;
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     font-size: 40px;
     line-height: 48px;
     letter-spacing: -0.96px;
@@ -1674,16 +1664,16 @@
 }
 
 .re-subheading {
-  color: #9BAABF;
+  color: #9baabf;
   font-weight: normal;
   font-size: 22.5px;
   line-height: 27px;
-  letter-spacing: -.54px;
+  letter-spacing: -0.54px;
   margin-bottom: 8px;
   &--button-below {
     margin-bottom: 23px;
   }
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     font-size: 30px;
     line-height: 36px;
     letter-spacing: -0.72px;
@@ -1702,9 +1692,9 @@
   font-weight: normal;
   line-height: 14px;
   font-size: 10.5px;
-  color: #DEE0E7;
+  color: #dee0e7;
   letter-spacing: 0.38px;
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     font-size: 14px;
     line-height: 19px;
     letter-spacing: 0.5px;
@@ -1722,12 +1712,12 @@
   line-height: 16px;
   width: 174px;
   height: 42px;
-  color: #6CC69D;
-  border: 1px solid #6CC69D;
+  color: #6cc69d;
+  border: 1px solid #6cc69d;
   border-radius: 2px;
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.18);
   cursor: pointer;
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     font-size: 16px;
     line-height: 19px;
     letter-spacing: 0.67px;
@@ -1756,8 +1746,8 @@
       }
     }
     &--grey {
-      border: 1px solid #ACB8CA;
-      color: #9BAABF;
+      border: 1px solid #acb8ca;
+      color: #9baabf;
     }
     &--list-discussion {
       height: 64px;
@@ -1782,7 +1772,7 @@
 
 .re-para {
   font-size: 16px;
-  color: #2A1E3E;
+  color: #2a1e3e;
   letter-spacing: -0.39px;
   line-height: 24px;
   margin-left: 2px;
@@ -1797,7 +1787,7 @@
   thead {
     th {
       font-family: 'Roboto Mono', monospace;
-      color: #6A7C94;
+      color: #6a7c94;
       text-transform: uppercase;
       font-weight: normal;
       font-size: 12px;
@@ -1809,7 +1799,7 @@
       &.hide-on-small {
         display: none;
       }
-      @media(min-width: 768px) {
+      @media (min-width: 768px) {
         &.hide-on-small {
           display: table-cell;
         }
@@ -1824,14 +1814,14 @@
   }
   tbody {
     tr {
-      box-shadow: 0 1px 2px 0 rgba(0,0,0,.18);
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
       border-radius: 4px;
     }
     .re-table-space {
       box-shadow: none;
       border-radius: 0;
       height: 9px;
-      @media(min-width: 768px) {
+      @media (min-width: 768px) {
         height: 15px;
       }
     }
@@ -1839,17 +1829,17 @@
       font-family: 'Lato', sans-serif;
       font-size: 16px;
       line-height: 19px;
-      color: #6A7C94;
+      color: #6a7c94;
       font-weight: normal;
       letter-spacing: 0.5px;
-      border: 1px solid #F8F8FB;
+      border: 1px solid #f8f8fb;
       border-width: 1px 0 1px 0;
       padding: 19px 6px 19px 6px;
       text-align: center;
       &.hide-on-small {
         display: none;
       }
-      @media(min-width: 768px) {
+      @media (min-width: 768px) {
         &.hide-on-small {
           display: table-cell;
         }
@@ -1873,8 +1863,8 @@
         padding: 0;
         font-size: 16px;
         line-height: 19px;
-        color: #2A1E3E;
-        letter-spacing: -.43px;
+        color: #2a1e3e;
+        letter-spacing: -0.43px;
         resize: none;
       }
     }
@@ -1893,37 +1883,37 @@
       padding: 15px 20px 15px 16px;
       max-width: 400px;
       text-align: left;
-      @media(min-width: 768px) {
+      @media (min-width: 768px) {
         padding: 19px 32px 19px 23px;
       }
       div {
         font-size: 9px;
         line-height: 11px;
-        letter-spacing: .38px;
+        letter-spacing: 0.38px;
         margin-bottom: 3px;
-        color: #9BAABF;
+        color: #9baabf;
         &.re-table-green {
-          color: #6CC69D;
+          color: #6cc69d;
         }
-        @media(min-width: 768px) {
+        @media (min-width: 768px) {
           font-size: 12px;
           line-height: 16px;
-          letter-spacing: .5px;
+          letter-spacing: 0.5px;
           margin-bottom: 2px;
         }
       }
       h3 {
         font-family: 'Lato', sans-serif;
-        color: #2A1E3E;
+        color: #2a1e3e;
         font-weight: 700;
         font-size: 18px;
         line-height: 22px;
-        letter-spacing: -.43px;
+        letter-spacing: -0.43px;
         margin-bottom: 2px;
-        @media(min-width: 768px) {
+        @media (min-width: 768px) {
           font-size: 24px;
           line-height: 29px;
-          letter-spacing: -.58px;
+          letter-spacing: -0.58px;
           margin-bottom: 3px;
         }
       }
@@ -1931,14 +1921,14 @@
         font-family: 'Lato', sans-serif;
         font-size: 12px;
         line-height: 15px;
-        letter-spacing: -.29px;
-        word-spacing: .5px;
+        letter-spacing: -0.29px;
+        word-spacing: 0.5px;
         margin-bottom: 1px;
-        color: #9BAABF;
-        @media(min-width: 768px) {
+        color: #9baabf;
+        @media (min-width: 768px) {
           font-size: 16px;
           line-height: 19px;
-          letter-spacing: -.39px;
+          letter-spacing: -0.39px;
           margin-bottom: 4px;
         }
       }
@@ -1967,7 +1957,7 @@
         font-family: 'Lato', sans-serif;
         font-size: 16px;
         line-height: 19px;
-        color: #2A1E3E;
+        color: #2a1e3e;
         letter-spacing: -0.43px;
         padding-top: 16px;
         padding-bottom: 16px;
@@ -1979,17 +1969,18 @@
           height: 82px;
           border-radius: 10px;
           &--new-row {
-            background: #FFFFFF url(/assets/images/image-placeholder.svg) center / 15px no-repeat;
+            background: #ffffff url(/assets/images/image-placeholder.svg) center /
+              15px no-repeat;
             border: 1px solid #ced3da;
             border-radius: 10px;
             cursor: pointer;
           }
         }
         .re-table-link {
-          border: 1px solid #6CC69D;
+          border: 1px solid #6cc69d;
           padding: 4px;
           font-size: 16px;
-          color: #6CC69D;
+          color: #6cc69d;
           line-height: 19px;
           border-radius: 2px;
           letter-spacing: -0.43px;
@@ -2001,7 +1992,7 @@
         font-family: 'Roboto Mono', monospace;
         font-weight: bold;
         font-size: 14px;
-        color: #B1BBC7;
+        color: #b1bbc7;
         letter-spacing: -0.39px;
         text-align: center;
         line-height: 19px;
@@ -2017,7 +2008,7 @@
   text-align: center;
   font-family: 'Roboto Mono', monospace;
   font-size: 12px;
-  color: #6A7C94;
+  color: #6a7c94;
   letter-spacing: 0.5px;
   text-align: center;
   padding: 20px;
@@ -2025,7 +2016,7 @@
 }
 
 .about-list {
-  background: #F8F8FB;
+  background: #f8f8fb;
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.18);
   margin-bottom: 60px;
   &__inner {
@@ -2046,7 +2037,7 @@
     &__name {
       font-family: 'Roboto Mono', monospace;
       font-size: 12px;
-      color: #6A7C94;
+      color: #6a7c94;
       letter-spacing: 0.5px;
       margin-bottom: 6px;
     }
@@ -2054,7 +2045,7 @@
       display: flex;
       white-space: nowrap;
       font-size: 16px;
-      color: #697C95;
+      color: #697c95;
       letter-spacing: -0.43px;
     }
   }
@@ -2062,7 +2053,7 @@
     font-family: 'Roboto Mono', monospace;
     font-weight: bold;
     font-size: 16px;
-    color: #6CC69D;
+    color: #6cc69d;
     letter-spacing: 0.5px;
     padding: 2px 0;
     margin-right: 20px;
@@ -2079,7 +2070,7 @@
   &__inner {
     border-radius: 4px;
     max-width: 894px;
-    border: 1px solid #F8F8FB;
+    border: 1px solid #f8f8fb;
     box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.18);
     padding-bottom: 4px;
     width: 100%;
@@ -2090,13 +2081,13 @@
     &__name {
       font-size: 20px;
       color: #252442;
-      letter-spacing: -.425px;
+      letter-spacing: -0.425px;
       line-height: 24px;
       margin-bottom: 3px;
     }
     &__descr {
       font-size: 18px;
-      color: #9BAABF;
+      color: #9baabf;
       letter-spacing: -0.43px;
       line-height: 22px;
     }
@@ -2104,7 +2095,7 @@
       display: inline-block;
       font-family: 'Roboto Mono', monospace;
       font-size: 12px;
-      color: #6CC69D;
+      color: #6cc69d;
       letter-spacing: 0.5px;
       text-align: center;
       margin-left: 6px;
@@ -2131,23 +2122,24 @@
 .list-tab-button {
   font-family: 'Roboto Mono', monospace;
   font-size: 12px;
-  color: #6A7C94;
+  color: #6a7c94;
   letter-spacing: 0.5px;
   text-align: center;
   line-height: 16px;
   padding: 20px 16px;
   &.active {
-    color: #6CC69D;
+    color: #6cc69d;
   }
 }
 
-.list-tab-content-subscribers, .list-tab-content-collaborators {
+.list-tab-content-subscribers,
+.list-tab-content-collaborators {
   display: flex;
   flex-wrap: wrap;
   margin: 0 -8px;
   &__card {
-    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.18);
-    border: 1px solid #DBDBDB;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
+    border: 1px solid #dbdbdb;
     border-radius: 4px;
     padding: 0px 9px 6px 9px;
     margin-top: -1px;
@@ -2173,8 +2165,8 @@
 }
 
 .shadowcontain {
-  box-shadow: 0 1px 2px 0 rgba(0,0,0,0.18);
-  border: 1px solid #F8F8FB;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
+  border: 1px solid #f8f8fb;
   position: absolute;
   width: 894px;
   height: 114px;
@@ -2189,8 +2181,8 @@
   position: relative;
   margin-bottom: 20px;
   textarea {
-    background: #FFFFFF;
-    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.18);
+    background: #ffffff;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
     border-radius: 4px;
     border: none;
     width: 100%;
@@ -2208,7 +2200,7 @@
     font-family: 'Roboto Mono', monospace;
     font-weight: bold;
     font-size: 16px;
-    color: #6CC69D;
+    color: #6cc69d;
     letter-spacing: 0.67px;
     text-align: center;
     height: 40px;
@@ -2228,7 +2220,7 @@
   }
   div {
     font-family: 'Roboto Mono', monospace;
-    color: #6CC69D;
+    color: #6cc69d;
     letter-spacing: -0.29px;
     line-height: 16px;
   }
@@ -2251,7 +2243,7 @@
       display: inline-block;
     }
     div {
-      color: #6CC69D !important;
+      color: #6cc69d !important;
     }
   }
 }
@@ -2259,7 +2251,7 @@
 .comment-clock {
   font-family: 'Roboto Mono', monospace;
   font-size: 12px;
-  color: #DEE0E7;
+  color: #dee0e7;
   letter-spacing: 0.5px;
   line-height: 16px;
   margin-left: auto;
@@ -2275,10 +2267,37 @@
 }
 
 .list-row-tr--add-row {
-
 }
 
 .addAListingSubmitAndCancel {
   display: flex;
   justify-content: flex-end;
+}
+
+.sort-dropdown {
+  margin-left: -5px;
+  width: 240px;
+  height: 114px;
+  margin-top: 12px;
+  border-radius: 4px;
+  border: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
+  padding-left: 20px;
+  a {
+    text-transform: none;
+    padding: 2px 0;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: bold;
+    font-size: 14px;
+    color: #6a7c94;
+    letter-spacing: 0.5px;
+    line-height: 32px;
+    span {
+      color: #2a1e3e;
+    }
+  }
+  img {
+    margin-right: 8px;
+    width: 14px;
+  }
 }
