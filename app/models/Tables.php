@@ -187,6 +187,7 @@ class Tables extends TablesEvents
                                    Tables::class . '.id',
                                    Tables::class . '.flags',
                                    Tables::class . '.title',
+                                   Tables::class . '.slug',
                                    Tables::class . '.tagline',
                                    Tables::class . '.image',
                                    Tables::class . '.description',
@@ -283,7 +284,7 @@ class Tables extends TablesEvents
             FROM tables
             INNER JOIN tableSubscription ON tableSubscription.tableId = tables.id
             INNER JOIN user ON tableSubscription.userId = user.id
-            
+
             WHERE tables.id = $this->id
             ");
 

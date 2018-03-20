@@ -20,7 +20,7 @@
     </div>
     <h1 class="re-heading re-heading--list">{{ table['title'] }}</h1>
     <h2 class="re-subheading re-subheading--list">{{ table['tagline'] }}</h2>
-    <p class="re-para">We've asked some of the world's best designers to help us curate the best and most useful blogs, books, games, videos, and tutorials that helped them learn critical elements of design. We're organizing them all into a digestible and iterative lesson plan so you can apply this knowledge to your own projects.</p>
+    <p class="re-para">{{ table['description'] }}</p>
     <a class="re-button re-button--double-line" href="#">
       Subscribe
       <div class="re-button__extra-text">Get new listings to your inbox</div>

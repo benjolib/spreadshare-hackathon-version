@@ -33,6 +33,13 @@
     <span>Max <i>100</i> characters</span>
   </div>
 </div>
+{# slug #}
+<div class="addTableEmpty__content__main__options__item">
+    <div class="addTableEmpty__content__main__options__item__column">
+        <p>Slug</p>
+        <input type="text" placeholder="bay-area-seed-stage-business-angels" name="slug" value="{% if post is defined AND post['slug'] is defined %}{{ post['slug'] }}{% endif %}" />
+    </div>
+</div>
 {# tagline #}
 <div class="addTableEmpty__content__main__options__item">
   <div class="addTableEmpty__content__main__options__item__column">
@@ -40,6 +47,13 @@
     <input type="text" placeholder="Business Angels from SV who invest in tech startups valuated below 5MN" name="tagline" value="{% if post is defined AND post['tagline'] is defined %}{{ post['tagline'] }}{% endif %}" />
     <span>Max <i>140</i> characters</span>
   </div>
+</div>
+{# description #}
+<div class="addTableEmpty__content__main__options__item">
+    <div class="addTableEmpty__content__main__options__item__column">
+        <p>Description</p>
+        <textarea placeholder="Enter description" name="description">{% if post is defined AND post['description'] is defined %}{{ post['description'] }}{% endif %}</textarea>
+    </div>
 </div>
 {# topics #}
 <div class="addTableEmpty__content__main__options__item">

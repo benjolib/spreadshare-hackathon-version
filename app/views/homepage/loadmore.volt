@@ -2,6 +2,7 @@
 {% for table in tables %}
   {{ partial('partials/list-card', [
     'id': table['id'],
+    'slug': table['slug'],
     'image': table['image'],
     'name': table['title'],
     'description': table['tagline'],

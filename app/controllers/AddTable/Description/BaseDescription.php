@@ -20,9 +20,7 @@ use DS\Model\Tools;
  * @version   $Version$
  * @package   DS\Controller\User
  */
-abstract class BaseDescription
-    extends BaseController
-    implements TableSubcontrollerInterface
+abstract class BaseDescription extends BaseController implements TableSubcontrollerInterface
 {
 
     /**
@@ -35,25 +33,24 @@ abstract class BaseDescription
         $topic2Id = $topic1Id = null;
 
         $topics = $this->request->getPost('topics', null, '');
-        if (isset($topics[0]))
-        {
+        if (isset($topics[0])) {
             $topic1Id = $topics[0];
         }
-        if (isset($topics[1]))
-        {
+        if (isset($topics[1])) {
             $topic2Id = $topics[1];
         }
 
-        if ($imagePath)
-        {
+        if ($imagePath) {
             $tableModel->setImage($imagePath);
         }
 
-        $tableModel->setTitle((string) $this->request->getPost('title', null, ''))
+        $tableModel->setTitle((string) $this->request->getPost('title'))
+                   ->setSlug((string) $this->request->getPost('slug'))
+                   ->setDescription((string) $this->request->getPost('description'))
                    ->setTopic1Id((int) $topic1Id)
                    ->setTopic2Id((int) $topic2Id)
                    ->setTypeId((int) $this->request->getPost('type'))
-                   ->setTagline((string) $this->request->getPost('tagline', null, ''))
+                   ->setTagline((string) $this->request->getPost('tagline'))
                    ->setFlags(TableFlags::Unpublished)
                    ->setOwnerUserId($userId);
 
@@ -67,15 +64,11 @@ abstract class BaseDescription
      */
     protected function handlePost(int $userId, int $tableId = 0)
     {
-        if ($this->request->isPost())
-        {
+        if ($this->request->isPost()) {
             $imagePath = '';
-            if ($this->request->hasFiles() == true)
-            {
-                foreach ($this->request->getUploadedFiles() as $file)
-                {
-                    if ($file->getTempName() && $file->getName() && $file->getSize())
-                    {
+            if ($this->request->hasFiles() == true) {
+                foreach ($this->request->getUploadedFiles() as $file) {
+                    if ($file->getTempName() && $file->getName() && $file->getSize()) {
                         $imageName = Tools::guidv4(random_bytes(16)) . '.' . $file->getExtension();
                         $file->moveTo(ROOT_PATH . 'system/uploads/listimages/' . $imageName);
                         $imagePath = '/list-images/' . $imageName;
@@ -95,5 +88,4 @@ abstract class BaseDescription
 
         return null;
     }
-
 }

@@ -61,6 +61,7 @@
     {% if tables[0] is defined %}
       {{ partial('partials/list-card', [
         'id': tables[0]['id'],
+        'slug': tables[0]['slug'],
         'image': tables[0]['image'],
         'name': tables[0]['title'],
         'description': tables[0]['tagline'],
@@ -76,6 +77,7 @@
     {% if tables[1] is defined %}
       {{ partial('partials/list-card', [
         'id': tables[1]['id'],
+        'slug': tables[1]['slug'],
         'image': tables[1]['image'],
         'name': tables[1]['title'],
         'description': tables[1]['tagline'],
@@ -100,6 +102,7 @@
     {% if tables[2] is defined %}
       {{ partial('partials/list-card', [
         'id': tables[2]['id'],
+        'slug': tables[2]['slug'],
         'image': tables[2]['image'],
         'name': tables[2]['title'],
         'description': tables[2]['tagline'],
@@ -115,6 +118,7 @@
     {% if tables[3] is defined %}
       {{ partial('partials/list-card', [
         'id': tables[3]['id'],
+        'slug': tables[3]['slug'],
         'image': tables[3]['image'],
         'name': tables[3]['title'],
         'description': tables[3]['tagline'],
@@ -130,6 +134,7 @@
     {% if tables[4] is defined %}
       {{ partial('partials/list-card', [
         'id': tables[4]['id'],
+        'slug': tables[4]['slug'],
         'image': tables[4]['image'],
         'name': tables[4]['title'],
         'description': tables[4]['tagline'],
@@ -152,6 +157,7 @@
     {% if tables[5] is defined %}
       {{ partial('partials/list-card', [
         'id': tables[5]['id'],
+        'slug': tables[5]['slug'],
         'image': tables[5]['image'],
         'name': tables[5]['title'],
         'description': tables[5]['tagline'],
@@ -167,6 +173,7 @@
     {% if tables[6] is defined %}
       {{ partial('partials/list-card', [
         'id': tables[6]['id'],
+        'slug': tables[6]['slug'],
         'image': tables[6]['image'],
         'name': tables[6]['title'],
         'description': tables[6]['tagline'],
@@ -182,6 +189,7 @@
     {% if tables[7] is defined %}
       {{ partial('partials/list-card', [
         'id': tables[7]['id'],
+        'slug': tables[7]['slug'],
         'image': tables[7]['image'],
         'name': tables[7]['title'],
         'description': tables[7]['tagline'],
@@ -258,6 +266,7 @@
     {% if tables[8] is defined %}
       {{ partial('partials/list-card', [
         'id': tables[8]['id'],
+        'slug': tables[8]['slug'],
         'image': tables[8]['image'],
         'name': tables[8]['title'],
         'description': tables[8]['tagline'],
@@ -280,6 +289,7 @@
     {% if tables[9] is defined %}
       {{ partial('partials/list-card', [
         'id': tables[9]['id'],
+        'slug': tables[9]['slug'],
         'image': tables[9]['image'],
         'name': tables[9]['title'],
         'description': tables[9]['tagline'],
@@ -302,6 +312,7 @@
     {% if tables[10] is defined %}
       {{ partial('partials/list-card', [
         'id': tables[10]['id'],
+        'slug': tables[10]['slug'],
         'image': tables[10]['image'],
         'name': tables[10]['title'],
         'description': tables[10]['tagline'],
@@ -317,6 +328,7 @@
     {% if tables[11] is defined %}
       {{ partial('partials/list-card', [
         'id': tables[11]['id'],
+        'slug': tables[11]['slug'],
         'image': tables[11]['image'],
         'name': tables[11]['title'],
         'description': tables[11]['tagline'],

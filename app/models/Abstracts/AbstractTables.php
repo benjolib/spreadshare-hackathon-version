@@ -169,6 +169,33 @@ abstract class AbstractTables extends \DS\Model\Base
     }
 
     /**
+     * Method to set the value of field slug
+     *
+     * @param string $slug
+     * @return $this
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+
+    /**
+     * Method to set the value of field description
+     *
+     * @param string $description
+     * @return $this
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
      * Method to set the value of field tagline
      *
      * @param string $tagline

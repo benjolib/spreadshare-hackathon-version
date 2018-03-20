@@ -21,8 +21,15 @@
 <div class="addTableEmpty__content__main__options__item">
     <div class="addTableEmpty__content__main__options__item__column">
         <p>Title</p>
-        <input type="text" placeholder="Bay Area Seed-stage Business Angels" autofocus name="title" value="{{ table['title'] }}" />
+        <input type="text" placeholder="Bay Area Seed-stage Business Angels" name="title" value="{{ table['title'] }}" />
         <span>Max <i>100</i> characters</span>
+    </div>
+</div>
+{# slug #}
+<div class="addTableEmpty__content__main__options__item">
+    <div class="addTableEmpty__content__main__options__item__column">
+        <p>Slug</p>
+        <input type="text" placeholder="bay-area-seed-stage-business-angels" name="slug" value="{{ table['slug'] }}" />
     </div>
 </div>
 {# tagline #}
@@ -31,6 +38,13 @@
         <p>Tagline</p>
         <input type="text" placeholder="Business Angels from SV who invest in tech startups valuated below 5MN" name="tagline" value="{{ table['tagline'] }}" />
         <span>Max <i>140</i> characters</span>
+    </div>
+</div>
+{# description #}
+<div class="addTableEmpty__content__main__options__item">
+    <div class="addTableEmpty__content__main__options__item__column">
+        <p>Description</p>
+        <textarea placeholder="Enter description" name="description">{{ table['description'] }}</textarea>
     </div>
 </div>
 {# topics #}
