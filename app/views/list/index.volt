@@ -16,7 +16,7 @@
     <h1 class="re-heading re-heading--list">{{ table['title'] }}</h1>
     <h2 class="re-subheading re-subheading--list">{{ table['tagline'] }}</h2>
     <p class="re-para">{{ table['description'] }}</p>
-    <a class="re-button re-button--double-line" href="#">
+    <a class="re-button re-button--double-line" href="subscribe/{{table['id']}}">
       Subscribe
       <div class="re-button__extra-text">Get new listings to your inbox</div>
     </a>

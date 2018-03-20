@@ -17,8 +17,7 @@ use DS\Model\Events\TableSubscriptionEvents;
  *
  * @method static findFirstById(int $id)
  */
-class TableSubscription
-    extends TableSubscriptionEvents
+class TableSubscription extends TableSubscriptionEvents
 {
     /**
      * @param int $userId
@@ -31,10 +30,10 @@ class TableSubscription
         $this->setUserId($userId)
              ->setTableId($tableId)
              ->create();
-        
+
         return $this;
     }
-    
+
     /**
      * @param int $userId
      * @param int $tableId
@@ -44,14 +43,13 @@ class TableSubscription
     public function unsubscribe(int $userId, int $tableId)
     {
         $model = static::findSubscription($userId, $tableId);
-        if ($model)
-        {
+        if ($model) {
             $model->delete();
         }
-        
+
         return $this;
     }
-    
+
     /**
      * Allows to query this model by the given sql field name and it's value
      *
@@ -64,9 +62,9 @@ class TableSubscription
     {
         return self::findFirst(
             [
-                "conditions" => 'tableId = ?0 AND userId = ?1',
-                "limit" => 1,
-                "bind" => [$tableId, $userId],
+                'conditions' => 'tableId = ?0 AND userId = ?1',
+                'limit' => 1,
+                'bind' => [$tableId, $userId],
             ]
         );
     }

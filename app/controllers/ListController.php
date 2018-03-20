@@ -134,6 +134,7 @@ class ListController extends BaseController
             $this->view->setVar('contributors', $contributors);
             $this->view->setVar('subscribers', $subscribers);
             $this->view->setVar('orderby', $orderby);
+            $this->view->setVar('userId', $authId);
         } catch (Exception $e) {
             Application::instance()->log($e->getMessage(), Logger::CRITICAL);
         }

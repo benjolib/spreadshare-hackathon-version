@@ -237,4 +237,12 @@ return [
         ],
         'methods' => ['GET', 'POST'],
     ],
+    [
+        'url' => '/list/subscribe/{tableId:[0-9]+}',
+        'paths' => [
+            'controller' => 'List_Subscription',
+            'action' => 'subscribe',
+        ],
+        'methods' => ['GET', 'POST'],
+    ]
 ];
