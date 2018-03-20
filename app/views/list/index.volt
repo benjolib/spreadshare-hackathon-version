@@ -12,7 +12,7 @@
 
 
   <div style="margin-bottom: 118px;">
-    <div class="re-image" style="background: #f5f5f5 url({{ table['image'] }}) center / cover;"></div>
+    <div class="re-image" style="background: #f5f5f5 url({{ table['image'] ? table['image'] : 'https://picsum.photos/894/258/?image=' ~ table['id'] }}) center / cover;"></div>
     <div class="re-pre-heading-info">
       <div>{{ table['topic1'] }}</div>
       <div class="re-green">{{ table['subscriberCount'] }} SUBSCRIBERS</div>

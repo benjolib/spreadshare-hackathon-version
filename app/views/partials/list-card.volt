@@ -1,6 +1,6 @@
 <div class="list-card {{ large ? 'list-card--large' : '' }}">
   <a href="/list/{{ slug ? slug : id }}">
-    <div class="list-card__image" style="background: #f5f5f5 url({{ image }}) center / cover;">
+    <div class="list-card__image" style="background: #f5f5f5 url({{ image ? image : 'https://picsum.photos/' ~ (large ? 872 : 416) ~ '/258/?image=' ~ id }}) center / cover;">
       <div class="list-card__listingCount">{{ listingCount }} LISTINGS</div>
     </div>
   </a>
