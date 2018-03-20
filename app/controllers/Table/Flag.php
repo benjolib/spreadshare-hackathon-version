@@ -18,11 +18,8 @@ use DS\Model\Tables;
  * @version   $Version$
  * @package   DS\Controller\User
  */
-class Flag
-    extends BaseController
-    implements TableSubcontrollerInterface
+class Flag extends BaseController implements TableSubcontrollerInterface
 {
-    
     /**
      * Handle Subcontroller
      *
@@ -32,19 +29,16 @@ class Flag
      */
     public function handle(Tables $table, int $userId, string $tab, string $param)
     {
-        try
-        {
-            if ($param)
-            {
-                if ($this->request->isAjax() && $this->request->isPost())
-                {
+        try {
+            if ($param) {
+                if ($this->request->isAjax() && $this->request->isPost()) {
                     $flags = new TableFlags();
                     $flags->setUserId($this->serviceManager->getAuth()->getUserId())
                           ->setTableId($table->getId())
                           ->setText($this->request->getPost('text'))
                           ->setFlag($param)
                           ->create();
-                    
+
                     $this->response->setContent(
                         json_encode(
                             [
@@ -56,12 +50,10 @@ class Flag
                     die;
                 }
             }
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             throw $e;
         }
-        
+
         return $this;
     }
 }

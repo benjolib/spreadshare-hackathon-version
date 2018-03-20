@@ -141,11 +141,11 @@
       <div class="about-list__item">
         <div class="about-list__item__name">ACTIONS</div>
         <div class="about-list__item__content">
-          <a class="about-list__action" href="#">Subscribe</a>
+          <a class="about-list__action" href="subscribe/{{table['id']}}">Subscribe</a>
           <a class="about-list__action" href="#">Collaborate</a>
-          <a class="about-list__action" href="#">Download</a>
-          <a class="about-list__action" href="#">Comment</a>
-          <a class="about-list__action" href="#">Flag</a>
+          <a class="about-list__action" href="/download/table/{{table['id']}}/csv">Download</a>
+          <a class="about-list__action" href="#comment">Comment</a>
+          <a class="about-list__action" href="flag/{{table['id']}}">Flag</a>
         </div>
       </div>
       <div class="about-list__item">
@@ -223,7 +223,8 @@
       <a href="#" class="list-tab-button list-tab-button-collaborators">COLLABORATORS</a>
     </div>
 
-    <div class="list-tab-content list-tab-content-discussion j_table-discussion">
+
+    <div class="list-tab-content list-tab-content-discussion j_table-discussion" id="comment">
       {% if auth.loggedIn() %}
         <div>
           <button class="re-button re-button--full-width re-button--tall re-button--list-discussion">Write a Response</button>

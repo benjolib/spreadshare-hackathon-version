@@ -244,5 +244,21 @@ return [
             'action' => 'subscribe',
         ],
         'methods' => ['GET', 'POST'],
-    ]
+    ],
+    [
+        'url' => '/list/comment/{tableId:[0-9]+}',
+        'paths' => [
+            'controller' => 'List_Subscription',
+            'action' => 'subscribe',
+        ],
+        'methods' => ['GET', 'POST'],
+    ],
+    [
+        'url' => '/list/flag/{tableId:[0-9]+}',
+        'paths' => [
+            'controller' => 'List_Flag',
+            'action' => 'flag',
+        ],
+        'methods' => ['GET', 'POST'],
+    ],
 ];
