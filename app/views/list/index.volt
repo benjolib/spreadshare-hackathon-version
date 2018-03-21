@@ -159,10 +159,10 @@
       <div class="about-list__item">
         <div class="about-list__item__name">SHARE</div>
         <div class="about-list__item__content">
-          <div class="about-list__part">Twitter</div>
-          <div class="about-list__part">Facebook</div>
-          <div class="about-list__part">Hacker News</div>
-          <div class="about-list__part">Reddit</div>
+          <div class="about-list__part"><a href="#" id="share-twitter">Twitter</a></div>
+          <div class="about-list__part"><a id="share-facebook" href="#">Facebook</a></div>
+          <div class="about-list__part"><a id="share-hacker" href="#">Hacker News</a></div>
+          <div class="about-list__part"><a id="share-reddit" href="#">Reddit</a></div>
         </div>
       </div>
     </div>
@@ -557,5 +557,36 @@
       $form.find('.commentTextArea').focus();
     });
   });
+
+
+  // Sharing
+
+    var url = window.location.href;
+    var title = "{{ table['title'] }}";
+
+  $('#share-twitter').on('click', function (e) {
+    e.preventDefault();
+    var txt = 'Check this spreadsheet out! ';
+    window.open('http://twitter.com/share?url='+encodeURIComponent(url
+)+'&text='+encodeURIComponent(txt), '', 'left=0,top=0,width=550,height=450,personalbar=0,toolbar=0,scrollbars=0,resizable=0');
+  })
+
+  $('#share-hacker').on('click', function (e) {
+    e.preventDefault();
+    var txt = 'Check this spreadsheet out! ';
+    window.open('https://news.ycombinator.com/submitlink?u='+encodeURIComponent(url
+)+'&t='+encodeURIComponent(title), '', 'left=0,top=0,width=550,height=450,personalbar=0,toolbar=0,scrollbars=0,resizable=0');
+  })
+
+  $('#share-reddit').on('click', function (e) {
+    e.preventDefault();
+    var txt = 'Check this spreadsheet out! ';
+    window.open('https://www.reddit.com/submit?url='+encodeURIComponent(url
+), '', 'left=0,top=0,width=550,height=450,personalbar=0,toolbar=0,scrollbars=0,resizable=0');
+  })
+
+
+
+
 </script>
 {% endblock %}
