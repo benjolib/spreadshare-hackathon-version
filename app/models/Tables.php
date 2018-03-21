@@ -291,4 +291,19 @@ class Tables extends TablesEvents
         $query->setFetchMode(Db::FETCH_ASSOC);
         return $query->fetchAll() ?: [];
     }
+
+    public function getTags()
+    {
+        $query = $this->readQuery("
+            SELECT tags.id, tags.title
+            FROM tables
+            INNER JOIN tableTags ON tableTags.tableId = tables.id
+            INNER JOIN tags ON tableTags.tagId = tags.id
+
+            WHERE tables.id = $this->id
+            ");
+
+        $query->setFetchMode(Db::FETCH_ASSOC);
+        return $query->fetchAll() ?: [];
+    }
 }

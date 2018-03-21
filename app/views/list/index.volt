@@ -182,11 +182,9 @@
       <div class="about-list__item">
         <div class="about-list__item__name">TAGS</div>
         <div class="about-list__item__content">
-          <div class="about-list__part">Design Tools</div>
-          <div class="about-list__part">UI & UX Design</div>
-          <div class="about-list__part">Graphic Design</div>
-          <div class="about-list__part">Prototyping</div>
-          <div class="about-list__part">Click Dummies</div>
+            {%for tag in tags %}
+              <div class="about-list__part">{{tag['title']}}</div>
+            {%endfor%}
         </div>
       </div>
       <div class="about-list__item">

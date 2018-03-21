@@ -79,6 +79,10 @@ class ListController extends BaseController
             // Subscribers
             $subscribers = $tableModel->getSubscribers();
 
+            // Tags
+
+            $tags = $tableModel->getTags();
+
             // access checks
 
             if ($tableModel->getFlags() == TableFlags::Deleted) {
@@ -125,6 +129,7 @@ class ListController extends BaseController
             $tableStats = $tableStatsModel->get($tableId, 'tableId');
             $related = TableRelations::findRelatedTables($tableId);
             $tableColumns = TableColumns::findAllByFieldValue('tableId', $tableId);
+
             $this->view->setVar('table', $table);
             $this->view->setVar('tableContent', $tableContent);
             $this->view->setVar('tableComments', $commentsArray);
@@ -135,6 +140,7 @@ class ListController extends BaseController
             $this->view->setVar('subscribers', $subscribers);
             $this->view->setVar('orderby', $orderby);
             $this->view->setVar('userId', $authId);
+            $this->view->setVar('tags', $tags);
         } catch (Exception $e) {
             Application::instance()->log($e->getMessage(), Logger::CRITICAL);
         }
