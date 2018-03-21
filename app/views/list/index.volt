@@ -190,7 +190,10 @@
       <div class="about-list__item">
         <div class="about-list__item__name">REGION</div>
         <div class="about-list__item__content">
-          <div class="about-list__part">All Regions</div>
+          {% for tablelocation in tablemodel.tableLocations %}            
+            <div class="about-list__part">{{ tablelocation.locations.locationName }}</div>
+          {% endfor %}
+          
         </div>
       </div>
     </div>

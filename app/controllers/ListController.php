@@ -141,6 +141,7 @@ class ListController extends BaseController
             $this->view->setVar('orderby', $orderby);
             $this->view->setVar('userId', $authId);
             $this->view->setVar('tags', $tags);
+            $this->view->setVar('tablemodel', $tableModel);
         } catch (Exception $e) {
             Application::instance()->log($e->getMessage(), Logger::CRITICAL);
         }
