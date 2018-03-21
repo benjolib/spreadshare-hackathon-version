@@ -68,6 +68,14 @@ return [
         'methods' => ['GET'],
     ],
     [
+        'url' => '/user/follow/{user:[a-zA-Z0-9\-]+}',
+        'paths' => [
+            'controller' => 'User_Follow',
+            'action' => 'follow',
+        ],
+        'methods' => ['GET'],
+    ],
+    [
         'url' => '/user/{user:[a-zA-Z0-9\-]+}/{page:[a-z]+}',
         'paths' => [
             'controller' => 'User',

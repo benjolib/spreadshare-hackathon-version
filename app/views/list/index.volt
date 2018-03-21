@@ -171,9 +171,10 @@
         <div class="about-list__item__name">CURATED BY</div>
         <div class="about-list__item__content">
           {{ partial('partials/profile-card', [
-            'username': 'andewcoyle',
-            'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
-            'name': 'Andrew Coyle',
+            'username': table['creatorHandle'],
+            'avatar': table['creatorImage'],
+            'name': table['creator'],
+            'id': table['ownerUserId'],
             'type': 3
           ]) }}
         </div>
