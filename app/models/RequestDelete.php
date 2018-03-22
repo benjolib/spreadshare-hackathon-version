@@ -2,15 +2,15 @@
 
 namespace DS\Model;
 
-use Phalcon\Mvc\Model;
-
-class RequestDelete extends Model
+class RequestDelete extends BaseEvents
 {
     public $id;
     public $user_id;
     public $row_id;
     public $comment;
     public $status;
+    protected $createdAt;
+    protected $updatedAt;
 
     public function initialize()
     {
@@ -20,16 +20,5 @@ class RequestDelete extends Model
         // Defining ORM relationships and aliases
         $this->belongsTo('user_id', '\DS\Model\User', 'id', ['alias' => 'user']);
         $this->belongsTo('row_id', '\DS\Model\TableRows', 'id', ['alias' => 'row']);
-
-        $this->addBehavior(new Timestampable([
-            'beforeValidationOnCreate' => [
-                'field' => 'created_at',
-                'format' => 'Y-m-d H:i:s',
-            ],
-            'beforeValidationOnUpdate' => [
-                'field' => 'updated_at',
-                'format' => 'Y-m-d H:i:s',
-            ],
-        ]));
     }
 }

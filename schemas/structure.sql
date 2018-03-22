@@ -772,8 +772,6 @@ CREATE TABLE `row_add_request` (
   `comment` text,
   `image` varchar(100) DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0',
-  `created_at` datetime(),
-  `updated_at` datetime(),
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `table_id` (`table_id`),
@@ -800,3 +798,10 @@ CREATE TABLE `row_delete_request` (
 
 ALTER TABLE tableRows ADD `image` varchar(255) DEFAULT NULL COMMENT 'image url' AFTER commentsCount;
 ALTER TABLE tables ADD `description` TEXT DEFAULT NULL  AFTER `image`;
+ALTER TABLE row_add_request ADD `createdAt` INT(10) unsigned DEFAULT NULL;
+ALTER TABLE row_add_request ADD `updateddAt` INT(10) unsigned DEFAULT NULL;
+ALTER TABLE row_delete_request ADD `createdAt` INT(10) unsigned DEFAULT NULL;
+ALTER TABLE row_delete_request ADD `updateddAt` INT(10) unsigned DEFAULT NULL;
+
+
+
