@@ -6,7 +6,7 @@
 {{ flash.output() }}
 
 <div class="re-page re-page--list">
-  <div style="margin-bottom: 118px;">
+  <div class="list-page-space">
     <div class="re-image" style="background: #f5f5f5 url({{ table['image'] ? table['image'] : 'https://picsum.photos/894/258/?image=' ~ table['id'] }}) center / cover;"></div>
     <div class="re-pre-heading-info">
       <div>{{ table['topic1'] }}</div>
@@ -26,8 +26,8 @@
     <table class="re-table re-table--list" data-id="{{ table['id'] }}">
       <thead>
         <tr>
-          <th style="width: 52px;padding-right: 7px;position: relative;cursor: pointer;">
-            <div class="l-button">VOTES <img src="/assets/images/updown.svg" style="position:absolute;top:14px;right:-4px;" /></div>
+          <th>
+            <div class="l-button">VOTES <img src="/assets/images/updown.svg" class="updown" /></div>
             <div class="dropdown sort-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
               <a href="{{table['id']}}"><img src="/assets/images/lightning.svg" /> Sort by <span>Popularity</span></a>
 
@@ -182,18 +182,22 @@
       <div class="about-list__item">
         <div class="about-list__item__name">TAGS</div>
         <div class="about-list__item__content">
-            {%for tag in tags %}
+            {% for tag in tags %}
               <div class="about-list__part">{{tag['title']}}</div>
-            {%endfor%}
+            {% else %}
+              <div class="about-list__part">No Tags</div>
+            {% endfor %}
         </div>
       </div>
       <div class="about-list__item">
         <div class="about-list__item__name">REGION</div>
         <div class="about-list__item__content">
-          {% for tablelocation in tablemodel.tableLocations %}            
+          {% for tablelocation in tablemodel.tableLocations %}
             <div class="about-list__part">{{ tablelocation.locations.locationName }}</div>
+          {% else %}
+            <div class="about-list__part">No Region</div>
           {% endfor %}
-          
+
         </div>
       </div>
     </div>
@@ -257,7 +261,7 @@
               'subcomment': false,
               'commentId': comment['id']
             ]) }}
-            <div class="comment-clock"><img src="/assets/images/comment-clock.svg" />{{ formatTimestamp(table['createdAt']) }}</div>
+            <div class="comment-clock"><img src="/assets/images/comment-clock.svg" />{{ formatTimestamp(comment['createdAt']) }}</div>
           </div>
           {% for childComment in comment['childs'] %}
             <div class="u-flex comment" style="margin-left:71px;">
@@ -276,7 +280,7 @@
                 'subcomment': true,
                 'commentId': comment['id']
               ]) }}
-              <div class="comment-clock"><img src="/assets/images/comment-clock.svg" />{{ formatTimestamp(table['createdAt']) }}</div>
+              <div class="comment-clock"><img src="/assets/images/comment-clock.svg" />{{ formatTimestamp(childComment['createdAt']) }}</div>
             </div>
           {% endfor %}
           {% if auth.loggedIn() %}
@@ -439,10 +443,24 @@
       $('.list-tab-content-collaborators').show();
     });
 
-    $('.shadowcontain').each(function () {
-      var $this = $(this);
-      $this.height($this.parents('tr').height() - 3);
-    });
+    var resizeTimer;
+
+    var rowHeights = function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function() {
+        $('.shadowcontain').each(function () {
+          var $this = $(this);
+          $this.height('auto');
+          setTimeout(function () {
+            $this.height($this.parents('tr').height() - 3);
+          }, 0);
+        });
+      }, 250);
+    };
+
+    $(window).resize(rowHeights);
+
+    rowHeights();
 
     var domUpdateVote = function ($el, vote) {
       var $votesCounter = $el.find('div');
@@ -514,17 +532,13 @@
       var image_clone = image.clone();
       image.after(image_clone).appendTo('#form_hidden');
 
-
-
       // clone text aras
       $('#addAListingRow textarea').each(function (txt){
         $( "<input type='hidden' name='cells["+ txt + "]' value='"+ $(this).val() +"' />" ).appendTo( "#form_hidden" );
       });
 
       $('#form_hidden').submit();
-
     })
-
 
     // discussion stuff
 

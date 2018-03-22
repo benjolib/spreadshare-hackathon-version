@@ -1328,7 +1328,7 @@
   margin-top: -5px;
   margin-right: -1px;
   width: 120px;
-  height: 86px;
+  height: 87px;
   border: 1px solid #dbdbdb;
   border-radius: 4px;
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.18);
@@ -1577,6 +1577,13 @@
   }
 }
 
+.list-page-space {
+  margin-bottom: 61px;
+  @media (min-width: 768px) {
+    margin-bottom: 118px;
+  }
+}
+
 .home-top-margin-bottom {
   @media (min-width: 768px) {
     margin-bottom: 33px;
@@ -1613,20 +1620,30 @@
 }
 
 .re-image {
-  height: 258px;
-  border-radius: 4px;
-  margin-bottom: 39px;
+  height: 163px;
+  margin-bottom: 20px;
+  margin-top: -36px;
+  margin-left: -20px;
+  margin-right: -20px;
+  @media (min-width: 768px) {
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 39px;
+    height: 258px;
+    border-radius: 4px;
+  }
 }
 
 .re-pre-heading-info {
   display: flex;
-  margin-left: 3px;
   > div {
     font-family: 'Roboto Mono', monospace;
     font-size: 9px;
     line-height: 11px;
     letter-spacing: 0.38px;
-    margin-bottom: 3px;
+    margin-bottom: 8px;
+    margin-right: 8px;
     color: #6a7c94;
     text-transform: uppercase;
     &.re-green {
@@ -1643,6 +1660,9 @@
       margin-right: 12px;
     }
   }
+  @media (min-width: 768px) {
+    margin-left: 3px;
+  }
 }
 
 .re-heading {
@@ -1652,6 +1672,15 @@
   line-height: 36px;
   letter-spacing: -0.72px;
   margin-bottom: 1px;
+
+  /* Investors in New Yor: */
+  font-weight: bold;
+  font-size: 22.5px;
+  line-height: 27px;
+  color: #2a1e3e;
+  letter-spacing: -0.54px;
+  margin-bottom: 8px;
+
   @media (min-width: 768px) {
     font-size: 40px;
     line-height: 48px;
@@ -1670,6 +1699,14 @@
   line-height: 27px;
   letter-spacing: -0.54px;
   margin-bottom: 8px;
+
+  /* A list of angel inve: */
+  font-size: 15px;
+  line-height: 18px;
+  color: #9baabf;
+  letter-spacing: -0.36px;
+  margin-bottom: 15px;
+
   &--button-below {
     margin-bottom: 23px;
   }
@@ -1717,6 +1754,24 @@
   border-radius: 2px;
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.18);
   cursor: pointer;
+  &--double-line {
+    width: 157px;
+    line-height: 21px;
+    flex-direction: column;
+    height: 50px;
+  }
+  &__extra-text {
+    font-family: 'Lato', sans-serif;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 15px;
+    letter-spacing: -0.27px;
+
+    /* Get new listings to: */
+    font-size: 8px;
+    letter-spacing: -0.2px;
+    line-height: 11px;
+  }
   @media (min-width: 768px) {
     font-size: 16px;
     line-height: 19px;
@@ -1733,6 +1788,7 @@
       width: 256px;
       line-height: 21px;
       flex-direction: column;
+      height: 56px;
     }
     &--full-width {
       width: 100%;
@@ -1771,13 +1827,20 @@
 }
 
 .re-para {
-  font-size: 16px;
+  /* We've asked some of: */
+  font-size: 12px;
   color: #2a1e3e;
-  letter-spacing: -0.39px;
-  line-height: 24px;
-  margin-left: 2px;
-  padding-right: 60px;
-  margin-bottom: 27px;
+  letter-spacing: -0.29px;
+  line-height: 18px;
+  margin-bottom: 21px;
+  @media (min-width: 768px) {
+    font-size: 16px;
+    letter-spacing: -0.39px;
+    line-height: 24px;
+    margin-left: 2px;
+    padding-right: 60px;
+    margin-bottom: 27px;
+  }
 }
 
 .re-table {
@@ -1790,9 +1853,9 @@
       color: #6a7c94;
       text-transform: uppercase;
       font-weight: normal;
-      font-size: 12px;
-      line-height: 16px;
-      letter-spacing: 0.5px;
+      font-size: 9px;
+      letter-spacing: 0.38px;
+      line-height: 11px;
       text-align: center;
       white-space: nowrap;
       padding: 10px 6px 20px 6px;
@@ -1800,6 +1863,9 @@
         display: none;
       }
       @media (min-width: 768px) {
+        font-size: 12px;
+        line-height: 16px;
+        letter-spacing: 0.5px;
         &.hide-on-small {
           display: table-cell;
         }
@@ -1820,7 +1886,7 @@
     .re-table-space {
       box-shadow: none;
       border-radius: 0;
-      height: 9px;
+      height: 10px;
       @media (min-width: 768px) {
         height: 15px;
       }
@@ -1874,6 +1940,18 @@
       .pagination {
         position: absolute;
         width: 894px;
+        line-height: 18px;
+        a {
+          padding: 0 8px;
+          color: #9baabf;
+          font-family: 'Roboto Mono', monospace;
+          font-weight: bold;
+          font-size: 12px;
+          letter-spacing: -0.29px;
+          &.active {
+            color: #2a1e3e !important;
+          }
+        }
       }
     }
     td:first-of-type {
@@ -1946,28 +2024,62 @@
         text-align: left;
         padding-left: 0px;
         padding-right: 32px;
+        padding: 8px 6px 10px 6px;
+        @media (min-width: 768px) {
+          padding: 10px 6px 14px 6px;
+        }
+        .updown {
+          position: absolute;
+          top: 9.5px;
+          right: -5px;
+          width: 5px;
+          @media (min-width: 768px) {
+            right: -4px;
+            top: 14px;
+            width: auto;
+          }
+        }
       }
       th:first-of-type {
-        padding-left: 6px;
+        padding-left: 4px;
+        position: relative;
+        cursor: pointer;
+        min-width: 38px;
+        padding-right: 4px;
+        @media (min-width: 768px) {
+          min-width: 52px;
+          padding-left: 6px;
+          padding-right: 7px;
+        }
       }
     }
     tbody {
       td {
-        height: 115px;
+        height: 86px;
         font-family: 'Lato', sans-serif;
         font-size: 16px;
         line-height: 19px;
         color: #2a1e3e;
         letter-spacing: -0.43px;
-        padding-top: 16px;
-        padding-bottom: 16px;
+        padding-top: 8px;
+        padding-bottom: 8px;
         padding-left: 0;
         padding-right: 32px;
         text-align: left;
+        @media (min-width: 768px) {
+          padding-top: 16px;
+          padding-bottom: 16px;
+          height: 115px;
+        }
         .re-table__list-image {
-          width: 82px;
-          height: 82px;
-          border-radius: 10px;
+          width: 61.5px;
+          height: 61.5px;
+          border-radius: 7.5px;
+          @media (min-width: 768px) {
+            width: 82px;
+            height: 82px;
+            border-radius: 10px;
+          }
           &--new-row {
             background: #ffffff url(/assets/images/image-placeholder.svg) center /
               15px no-repeat;
@@ -1988,7 +2100,7 @@
       }
       td:first-of-type {
         padding-left: 0;
-        padding-right: 4px;
+        padding-right: 0px;
         font-family: 'Roboto Mono', monospace;
         font-weight: bold;
         font-size: 14px;
@@ -1996,6 +2108,20 @@
         letter-spacing: -0.39px;
         text-align: center;
         line-height: 19px;
+        @media (min-width: 768px) {
+          padding-right: 4px;
+        }
+        div {
+          font-weight: bold;
+          font-size: 10.5px;
+          letter-spacing: -0.29px;
+          text-align: center;
+          margin-bottom: 1px;
+          @media (min-width: 768px) {
+            font-size: 14px;
+            letter-spacing: -0.39px;
+          }
+        }
       }
       td:last-of-type {
         padding-right: 6px;
@@ -2061,6 +2187,9 @@
   &__part {
     padding: 2px 0;
     margin-right: 8px;
+    a {
+      color: #697c95;
+    }
   }
 }
 
@@ -2168,11 +2297,16 @@
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
   border: 1px solid #f8f8fb;
   position: absolute;
-  width: 894px;
-  height: 114px;
   border-radius: 4px;
-  transform: translateX(-52px);
+  transform: translateX(-38px);
   pointer-events: none;
+  width: calc(100vw - 40px);
+  max-width: 894px;
+  height: 86px;
+  @media (min-width: 768px) {
+    transform: translateX(-52px);
+    height: 114px;
+  }
 }
 
 // table discussion stuff
@@ -2213,7 +2347,12 @@
   text-align: center;
   .vote-link__image {
     display: inline-block;
-    margin-bottom: 6px;
+    margin-bottom: 5px;
+    width: 11px;
+    @media (min-width: 768px) {
+      margin-bottom: 6px;
+      width: auto;
+    }
   }
   .vote-link__image--green {
     display: none;
@@ -2299,5 +2438,55 @@
   img {
     margin-right: 8px;
     width: 14px;
+  }
+}
+
+.submission-status {
+  border-radius: 4px;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  padding: 2px 6px;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  &--pending {
+    color: #9baabf;
+    border: 1px solid #9baabf;
+  }
+  &--confirmed {
+    color: #27c280;
+    border: 1px solid #27c280;
+  }
+  &--rejected {
+    color: #f97a7a;
+    border: 1px solid #f97a7a;
+  }
+}
+
+.submission-comment {
+  font-family: 'Roboto Mono', monospace;
+  font-style: italic;
+  font-size: 12px;
+  color: #9baabf;
+  letter-spacing: 0.5px;
+  margin-top: 8px;
+  margin-left: 12px;
+}
+
+.submission-clock {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 12px;
+  color: #dee0e7;
+  letter-spacing: 0.5px;
+  line-height: 16px;
+  margin-left: auto;
+  white-space: nowrap;
+  text-transform: uppercase;
+  word-spacing: -4px;
+  margin-top: 8px;
+  margin-right: 3px;
+  img {
+    margin-right: 3px;
+    margin-top: -1px;
   }
 }

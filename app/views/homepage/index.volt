@@ -217,6 +217,7 @@
   <div class="home-featured-curators">
     <div class="u-flex">
       {{ partial('partials/profile-card', [
+        'id': 1,
         'username': 'andewcoyle',
         'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
         'name': 'Andrew Coyle',
@@ -224,6 +225,7 @@
         'type': 4
       ]) }}
       {{ partial('partials/profile-card', [
+        'id': 1,
         'username': 'andewcoyle',
         'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
         'name': 'Andrew Coyle',
@@ -231,6 +233,7 @@
         'type': 4
       ]) }}
       {{ partial('partials/profile-card', [
+        'id': 1,
         'username': 'andewcoyle',
         'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
         'name': 'Andrew Coyle',
@@ -240,6 +243,7 @@
     </div>
     <div class="u-flex">
       {{ partial('partials/profile-card', [
+        'id': 1,
         'username': 'andewcoyle',
         'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
         'name': 'Andrew Coyle',
@@ -247,6 +251,7 @@
         'type': 4
       ]) }}
       {{ partial('partials/profile-card', [
+        'id': 1,
         'username': 'andewcoyle',
         'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
         'name': 'Andrew Coyle',
@@ -254,6 +259,7 @@
         'type': 4
       ]) }}
       {{ partial('partials/profile-card', [
+        'id': 1,
         'username': 'andewcoyle',
         'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
         'name': 'Andrew Coyle',
