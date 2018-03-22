@@ -42,7 +42,7 @@
         </tr>
       </thead>
       <tbody>
-        {% for row in tableContent.items %}
+        {% for row in tableContent.items %}          
           <tr data-id="{{ row['id'] }}" class="list-row-tr">
             <td>
               <a href="#" class="vote-link {{ row['userHasVoted'] ? 'vote-link--upvoted' : '' }}">

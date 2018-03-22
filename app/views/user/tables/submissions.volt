@@ -6,6 +6,7 @@
 
 {% block content %}
 {{ flash.output() }}
+
 <div class="re-page">
   <div class="u-flex u-sm-flexCol u-md-flexRow u-flexJustifyBetween u-md-flexAlignItemsEnd lists-page-space">
     <div>

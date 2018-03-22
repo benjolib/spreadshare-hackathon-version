@@ -274,7 +274,8 @@ class User extends UserEvents
                 row_add_request.content,
                 row_add_request.image,
                 row_add_request.comment,
-                row_add_request.status
+                row_add_request.status,
+                row_add_request.table_id
             FROM 
                 row_add_request
             WHERE
@@ -284,16 +285,25 @@ class User extends UserEvents
         $query->setFetchMode(Db::FETCH_ASSOC);
         $add_requests = $query->fetchAll() ?: [];
 
+        foreach ($add_requests as $id => $submission) {
+            $table = Tables::findFirstById($submission['table_id']);
+
+            foreach ($table->tableColumns as $column) {
+                $add_requests[$id]['columns'][] = $column->title;
+            }
+        }
+
         $query = $this->readQuery("
             SELECT 
                 row_delete_request.id,
                 row_delete_request.row_id,
                 row_delete_request.comment,
-                row_delete_request.status,
+                row_delete_request.status,                
                 tableRows.id,
                 tableRows.content,
                 tableRows.image,
-                tableRows.votesCount
+                tableRows.votesCount,
+                tableRows.tableId as table_id
 
             FROM 
                 row_delete_request            
@@ -304,6 +314,13 @@ class User extends UserEvents
 
         $query->setFetchMode(Db::FETCH_ASSOC);
         $delete_requests = $query->fetchAll() ?: [];
+        foreach ($delete_requests as $id => $submission) {
+            $table = Tables::findFirstById($submission['table_id']);
+
+            foreach ($table->tableColumns as $column) {
+                $delete_requests[$id]['columns'][] = $column->title;
+            }
+        }
 
         return array_merge($add_requests, $delete_requests);
     }
