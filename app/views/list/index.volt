@@ -7,6 +7,7 @@
 
 
 
+
 <div class="re-page re-page--list">
   <div class="list-page-space">
     <div class="re-image" style="background: #f5f5f5 url({{ table['image'] ? table['image'] : 'https://picsum.photos/894/258/?image=' ~ table['id'] }}) center / cover;"></div>
@@ -387,6 +388,13 @@
 {%for contrib in tablemodel.contributors %}
 
   <p>{{ contrib.users.name}}</p>
+{% endfor %}
+
+<h2>Subscribers</h2>
+<p>The same goes here :)</p>
+{%for subscr in tablemodel.tableSubscription %}
+
+  <p>{{ subscr.user.name}}</p>
 {% endfor %}
 
 
