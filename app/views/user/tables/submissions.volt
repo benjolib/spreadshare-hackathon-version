@@ -37,8 +37,8 @@
               </th>
               <th class="shadowcontainth"></th>
               <th>{# image #}</th>
-              {% for cell in submission['content']|json_decode %}
-                <th>TEST</th>
+              {% for column in submission['columns'] %}
+                <th>{{ column }}</th>
               {% endfor %}
             </tr>
           </thead>
