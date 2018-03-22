@@ -16,27 +16,25 @@ use Phalcon\Mvc\User\Component;
  * @version   $Version$
  * @package   DS\Component
  */
-class StringFormat
-    extends Component
+class StringFormat extends Component
 {
     /**
      * @var PrettyDateTime
      */
     private $date = null;
-    
+
     /**
      * @return $this
      */
     public function init()
     {
-        if (!$this->date)
-        {
+        if (!$this->date) {
             $this->date = new PrettyDateTime();
         }
-        
+
         return $this;
     }
-    
+
     /**
      * @return StringFormat
      */
@@ -44,7 +42,7 @@ class StringFormat
     {
         return (new self())->init();
     }
-    
+
     /**
      * @param $date
      *
@@ -55,7 +53,7 @@ class StringFormat
     {
         return $this->date->day(new \DateTime($date));
     }
-    
+
     /**
      * @param string $date
      *
@@ -66,7 +64,7 @@ class StringFormat
     {
         return $this->date->parse(new \DateTime($date));
     }
-    
+
     /**
      * @param int $timestamp
      *
@@ -77,5 +75,4 @@ class StringFormat
     {
         return $this->date->parse(new \DateTime(date('Y-m-d H:i:s', $timestamp)));
     }
-    
 }

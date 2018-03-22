@@ -24,53 +24,52 @@ use DS\Model\User;
  * @version   $Version$
  * @package   DS\Model
  */
-abstract class TableCommentsEvents
-    extends AbstractTableComments
+abstract class TableCommentsEvents extends AbstractTableComments
 {
-    
     /**
      * @return bool
      */
     public function beforeValidationOnCreate()
     {
         parent::beforeValidationOnCreate();
-        
+
         // Convert Emojis to their UTF-8 hex notation
         $emoji = new Emoji();
         $this->setComment($emoji->convert($this->getComment()));
-        
+        $this->created = time();
+
         return true;
     }
-    
+
     /**
      * @return bool
      */
     public function beforeValidationOnUpdate()
     {
         parent::beforeValidationOnUpdate();
-        
+
         return $this->beforeValidationOnCreate();
     }
-    
+
     /**
      * @return bool
      */
     public function afterSave()
     {
         (new TableStats())->increment($this->getTableId(), 'comments');
-        
+
         TableCommented::after($this->userId, Tables::get($this->getTableId()));
-        
+
         return true;
     }
-    
+
     /**
      * After create table comment
      */
     public function afterCreate()
     {
         $tableModel = Tables::get($this->getTableId());
-        
+
         // Email notification for owner of the table
         NewCommentMail::factory($this->getDI())
                       ->prepare(
@@ -79,14 +78,12 @@ abstract class TableCommentsEvents
                           $this
                       )
                       ->send();
-        
+
         // Send mail to all commentors
         $authUserId = serviceManager()->getAuth()->getUserId();
-        $sent       = [$authUserId => true, $tableModel->getOwnerUserId() => true];
-        foreach (TableComments::getComments($this->getTableId(), -1, 0, 1000) as $comment)
-        {
-            if (!isset($sent[$comment['userId']]))
-            {
+        $sent = [$authUserId => true, $tableModel->getOwnerUserId() => true];
+        foreach (TableComments::getComments($this->getTableId(), -1, 0, 1000) as $comment) {
+            if (!isset($sent[$comment['userId']])) {
                 // Email notification
                 NewCommentMail::factory($this->getDI())
                               ->prepare(
@@ -95,7 +92,7 @@ abstract class TableCommentsEvents
                                   self::get($comment['id'])
                               )
                               ->send();
-                
+
                 $sent[$comment['userId']] = true;
             }
         }

@@ -16,7 +16,7 @@ class VoltAdapter extends Volt
      * @var array
      */
     private $functions = [
-        # misc
+        // misc
         'di',
         'auth',
         'serviceManager',
@@ -46,13 +46,13 @@ class VoltAdapter extends Volt
         # path
         'base_uri',
         */
-        # php
+        // php
         'json_decode',
         'strtotime',
         'explode',
         'implode',
     ];
-    
+
     /**
      * Constructor.
      *
@@ -62,44 +62,43 @@ class VoltAdapter extends Volt
     public function __construct(ViewBaseInterface $view, DiInterface $di = null, Application $application)
     {
         parent::__construct($view, $di);
-        
+
         $this->setOptions(
             [
                 'compiledSeparator' => '_',
-                "compiledPath" => $application->getRootDirectory() . "system/cache/volt/",
+                'compiledPath' => $application->getRootDirectory() . 'system/cache/volt/',
                 'stat' => true,
                 'compileAlways' => true,
             ]
         );
-        
+
         //$view->cache();
-        
+
         /**
          * Add some functions to the volt compiler
          *
          * @var $compiler Volt\Compiler
          */
         $compiler = $this->getCompiler();
-        
-        foreach ($this->functions as $func)
-        {
+
+        foreach ($this->functions as $func) {
             $compiler->addFunction($func, $func);
         }
-        
+
         $compiler->addFunction(
             'formatTimestamp',
             function ($key) {
                 return "\\DS\\Component\\UserComponent\\StringFormat::factory()->prettyDateTimestamp({$key})";
             }
         );
-        
+
         $compiler->addFunction(
             'parseUser',
             function ($key) {
                 return "\\DS\\Component\\View\\Functions\\UserToProfileUrl::parse({$key})";
             }
         );
-        
+
         $compiler->addFunction(
             'reactArray',
             function ($key) {

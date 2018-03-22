@@ -1,4 +1,5 @@
 <?php
+
 namespace DS\Component;
 
 use DS\Application;
@@ -43,19 +44,19 @@ class PrettyDateTime
         // $prepend is added to the start of the string if the supplied
         // difference is greater than 0, and $append if less than
         $prepend = ($difference < 0) ? 'In ' : '';
-        $append  = ($difference > 0) ? ' ago' : '';
+        $append = ($difference > 0) ? ' ago' : '';
 
         $difference = floor(abs($difference));
 
         // If difference is plural, add an 's' to $unit
-        if ($difference > 1)
-        {
+        if ($difference > 1) {
             $unit = $unit . 's';
         }
 
         //return sprintf('%s%d %s%s', $prepend, $difference, $unit, $append);
         return sprintf(
-            Application::instance()->getDI()->get('intl')->t($prepend . '%d ' . $unit . $append), $difference
+            Application::instance()->getDI()->get('intl')->t($prepend . '%d ' . $unit . $append),
+            $difference
         );
     }
 
@@ -75,8 +76,7 @@ class PrettyDateTime
     public static function day(\DateTime $dateTime, \DateTime $reference = null, $daysOnly = false)
     {
         // If not provided, set $reference to the current DateTime
-        if (!$reference)
-        {
+        if (!$reference) {
             $reference = new \DateTime(null, new \DateTimeZone($dateTime->getTimezone()->getName()));
         }
 
@@ -84,68 +84,51 @@ class PrettyDateTime
         $date = $dateTime->format('Y/m/d');
 
         // Today
-        if ($reference->format('Y/m/d') == $date)
-        {
+        if ($reference->format('Y/m/d') == $date) {
             return 'Today';
         }
 
         $yesterday = clone $reference;
         $yesterday->modify('- 1 day');
 
-        if ($yesterday->format('Y/m/d') == $date)
-        {
+        if ($yesterday->format('Y/m/d') == $date) {
             return 'Yesterday';
-        }
-        else
-        {
+        } else {
             $yesterday2 = clone $reference;
             $yesterday2->modify('- 2 day');
 
-            if ($yesterday2->format('Y/m/d') == $date)
-            {
+            if ($yesterday2->format('Y/m/d') == $date) {
                 return 'Day before yesterday';
-            }
-            else
-            {
+            } else {
                 $tomorrow = clone $reference;
                 $tomorrow->modify('+ 1 day');
 
                 $tomorrow2 = clone $reference;
                 $tomorrow2->modify('+ 2 day');
 
-                if ($tomorrow->format('Y/m/d') == $date)
-                {
+                if ($tomorrow->format('Y/m/d') == $date) {
                     return 'Tomorrow';
-                }
-                else if ($tomorrow2->format('Y/m/d') == $date)
-                {
+                } elseif ($tomorrow2->format('Y/m/d') == $date) {
                     return 'Day after tomorrow';
                 }
             }
         }
 
-        if ($daysOnly)
-        {
+        if ($daysOnly) {
             // Get the difference between the current date and the supplied $dateTime
             $difference = $reference->format('U') - $dateTime->format('U');
 
             // Throw exception if the difference is NaN
-            if (is_nan($difference))
-            {
+            if (is_nan($difference)) {
                 throw new \Exception('The difference between the DateTimes is NaN.');
             }
 
-            if ($difference > 0)
-            {
+            if ($difference > 0) {
                 return number_format($difference / 86400) . ' days ago';
-            }
-            else
-            {
+            } else {
                 return 'in ' . number_format($difference / 86400) . ' days';
             }
-        }
-        else
-        {
+        } else {
             return self::parse($dateTime, $reference);
         }
     }
@@ -166,41 +149,31 @@ class PrettyDateTime
     public static function parse(\DateTime $dateTime, \DateTime $reference = null)
     {
         // If not provided, set $reference to the current DateTime
-        if (!$reference)
-        {
+        if (!$reference) {
             $reference = new \DateTime(null, new \DateTimeZone($dateTime->getTimezone()->getName()));
         }
 
         // Get the difference between the current date and the supplied $dateTime
         $difference = $reference->format('U') - $dateTime->format('U');
-        $absDiff    = abs($difference);
+        $absDiff = abs($difference);
 
         // Get the date corresponding to the $dateTime
         $date = $dateTime->format('Y/m/d');
 
         // Throw exception if the difference is NaN
-        if (is_nan($difference))
-        {
+        if (is_nan($difference)) {
             throw new \Exception('The difference between the DateTimes is NaN.');
         }
 
         // Today
-        if ($reference->format('Y/m/d') == $date)
-        {
-            if (0 <= $difference && $absDiff < self::MINUTE)
-            {
+        if ($reference->format('Y/m/d') == $date) {
+            if (0 <= $difference && $absDiff < self::MINUTE) {
                 return 'Moments ago';
-            }
-            elseif ($difference < 0 && $absDiff < self::MINUTE)
-            {
+            } elseif ($difference < 0 && $absDiff < self::MINUTE) {
                 return 'Seconds from now';
-            }
-            elseif ($absDiff < self::HOUR)
-            {
+            } elseif ($absDiff < self::HOUR) {
                 return self::prettyFormat($difference / self::MINUTE, 'min');
-            }
-            else
-            {
+            } else {
                 return self::prettyFormat($difference / self::HOUR, 'h');
             }
         }
@@ -211,24 +184,15 @@ class PrettyDateTime
         $tomorrow = clone $reference;
         $tomorrow->modify('+ 1 day');
 
-        if ($yesterday->format('Y/m/d') == $date)
-        {
+        if ($yesterday->format('Y/m/d') == $date) {
             return 'Yesterday';
-        }
-        else if ($tomorrow->format('Y/m/d') == $date)
-        {
+        } elseif ($tomorrow->format('Y/m/d') == $date) {
             return 'Tomorrow';
-        }
-        else if ($absDiff / self::DAY <= 7)
-        {
+        } elseif ($absDiff / self::DAY <= 7) {
             return self::prettyFormat($difference / self::DAY, 'day');
-        }
-        else if ($absDiff / self::WEEK <= 5)
-        {
+        } elseif ($absDiff / self::WEEK <= 5) {
             return self::prettyFormat($difference / self::WEEK, 'week');
-        }
-        else if ($absDiff / self::MONTH < 12)
-        {
+        } elseif ($absDiff / self::MONTH < 12) {
             return self::prettyFormat($difference / self::MONTH, 'month');
         }
 
