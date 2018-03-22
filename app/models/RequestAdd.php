@@ -3,6 +3,7 @@
 namespace DS\Model;
 
 use Phalcon\Mvc\Model;
+use Phalcon\Mvc\Model\Behavior\Timestampable;
 
 class RequestAdd extends Model
 {
@@ -22,5 +23,16 @@ class RequestAdd extends Model
         // Defining ORM relationships and aliases
         $this->belongsTo('user_id', '\DS\Model\User', 'id', ['alias' => 'user']);
         $this->belongsTo('table_id', '\DS\Model\Tables', 'id', ['alias' => 'table']);
+
+        $this->addBehavior(new Timestampable([
+            'beforeValidationOnCreate' => [
+                'field' => 'created_at',
+                'format' => 'Y-m-d H:i:s',
+            ],
+            'beforeValidationOnUpdate' => [
+                'field' => 'updated_at',
+                'format' => 'Y-m-d H:i:s',
+            ],
+        ]));
     }
 }

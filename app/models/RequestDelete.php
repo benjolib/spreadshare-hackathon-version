@@ -20,5 +20,16 @@ class RequestDelete extends Model
         // Defining ORM relationships and aliases
         $this->belongsTo('user_id', '\DS\Model\User', 'id', ['alias' => 'user']);
         $this->belongsTo('row_id', '\DS\Model\TableRows', 'id', ['alias' => 'row']);
+
+        $this->addBehavior(new Timestampable([
+            'beforeValidationOnCreate' => [
+                'field' => 'created_at',
+                'format' => 'Y-m-d H:i:s',
+            ],
+            'beforeValidationOnUpdate' => [
+                'field' => 'updated_at',
+                'format' => 'Y-m-d H:i:s',
+            ],
+        ]));
     }
 }
