@@ -45,7 +45,7 @@
         </tr>
       </thead>
       <tbody>
-        {% for row in tableContent.items %}          
+        {% for row in tableContent.items %}
           <tr data-id="{{ row['id'] }}" class="list-row-tr">
             <td>
               <a href="#" class="vote-link {{ row['userHasVoted'] ? 'vote-link--upvoted' : '' }}">
@@ -304,100 +304,36 @@
     </div>
 
     <div class="list-tab-content list-tab-content-subscribers" style="display: none;">
-      <div class="list-tab-content-subscribers__card">
-        {{ partial('partials/profile-card', [
-          'username': 'andewcoyle',
-          'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
-          'name': 'Andrew Coyle',
-          'bio': 'Designing the future of global trade @Flexport. Curating lists at Spreadshare.',
-          'type': 4
-        ]) }}
-      </div>
-      <div class="list-tab-content-subscribers__card">
-        {{ partial('partials/profile-card', [
-          'username': 'andewcoyle',
-          'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
-          'name': 'Andrew Coyle',
-          'bio': 'Designing the future of global trade @Flexport. Curating lists at Spreadshare.',
-          'type': 4
-        ]) }}
-      </div>
-      <div class="list-tab-content-subscribers__card">
-        {{ partial('partials/profile-card', [
-          'username': 'andewcoyle',
-          'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
-          'name': 'Andrew Coyle',
-          'bio': 'Designing the future of global trade @Flexport. Curating lists at Spreadshare.',
-          'type': 4
-        ]) }}
-      </div>
-      <div class="list-tab-content-subscribers__card">
-        {{ partial('partials/profile-card', [
-          'username': 'andewcoyle',
-          'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
-          'name': 'Andrew Coyle',
-          'bio': 'Designing the future of global trade @Flexport. Curating lists at Spreadshare.',
-          'type': 4
-        ]) }}
-      </div>
+      {% for subscriber in tablemodel.tableSubscription %}
+        <div class="list-tab-content-subscribers__card">
+          {{ partial('partials/profile-card', [
+            'id': subscriber.user.id,
+            'username': subscriber.user.handle,
+            'avatar': subscriber.user.image,
+            'name': subscriber.user.name,
+            'bio': subscriber.user.tagline,
+            'type': 4
+          ]) }}
+        </div>
+      {% endfor %}
     </div>
 
     <div class="list-tab-content list-tab-content-collaborators" style="display: none;">
-      <div class="list-tab-content-collaborators__card">
-        {{ partial('partials/profile-card', [
-          'username': 'andewcoyle',
-          'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
-          'name': 'Andrew Coyle',
-          'bio': 'Designing the future test of global trade @Flexport. Curating lists at Spreadshare.',
-          'type': 4
-        ]) }}
-      </div>
-      <div class="list-tab-content-collaborators__card">
-        {{ partial('partials/profile-card', [
-          'username': 'andewcoyle',
-          'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
-          'name': 'Andrew Coyle',
-          'bio': 'Designing the future of global trade @Flexport. Curating lists at Spreadshare.',
-          'type': 4
-        ]) }}
-      </div>
-      <div class="list-tab-content-collaborators__card">
-        {{ partial('partials/profile-card', [
-          'username': 'andewcoyle',
-          'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
-          'name': 'Andrew Coyle',
-          'bio': 'Designing the future of global trade @Flexport. Curating lists at Spreadshare.',
-          'type': 4
-        ]) }}
-      </div>
-      <div class="list-tab-content-collaborators__card">
-        {{ partial('partials/profile-card', [
-          'username': 'andewcoyle',
-          'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
-          'name': 'Andrew Coyle',
-          'bio': 'Designing the future of global trade @Flexport. Curating lists at Spreadshare.',
-          'type': 4
-        ]) }}
-      </div>
+      {% for contributor in tablemodel.contributors %}
+        <div class="list-tab-content-collaborators__card">
+          {{ partial('partials/profile-card', [
+            'id': contributor.user.id,
+            'username': contributor.user.handle,
+            'avatar': contributor.user.image,
+            'name': contributor.user.name,
+            'bio': contributor.user.tagline,
+            'type': 4
+          ]) }}
+        </div>
+      {% endfor %}
     </div>
   </div>
 </div>
-
-<h2>Contributors</h2>
-<p>contrib.users is a instance of each contributors model. So you can access its atributes just by using a dot</p>
-{%for contrib in tablemodel.contributors %}
-
-  <p>{{ contrib.users.name}}</p>
-{% endfor %}
-
-<h2>Subscribers</h2>
-<p>The same goes here :)</p>
-{%for subscr in tablemodel.tableSubscription %}
-
-  <p>{{ subscr.user.name}}</p>
-{% endfor %}
-
-
 
 <form method="POST" action="/row/{{ table['id']}}/add" enctype="multipart/form-data" id="form_hidden">
 
