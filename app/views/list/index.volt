@@ -5,6 +5,8 @@
 {% block content %}
 {{ flash.output() }}
 
+
+
 <div class="re-page re-page--list">
   <div class="list-page-space">
     <div class="re-image" style="background: #f5f5f5 url({{ table['image'] ? table['image'] : 'https://picsum.photos/894/258/?image=' ~ table['id'] }}) center / cover;"></div>
@@ -379,6 +381,15 @@
     </div>
   </div>
 </div>
+
+<h2>Contributors</h2>
+<p>contrib.users is a instance of each contributors model. So you can access its atributes just by using a dot</p>
+{%for contrib in tablemodel.contributors %}
+
+  <p>{{ contrib.users.name}}</p>
+{% endfor %}
+
+
 
 <form method="POST" action="/row/{{ table['id']}}/add" enctype="multipart/form-data" id="form_hidden">
 

@@ -201,7 +201,7 @@ abstract class AbstractTableContributors extends \DS\Model\Base
         $this->setSchema('spreadshare');
         $this->setSource('tableContributors');
         $this->belongsTo('tableId', 'DS\Model\Tables', 'id', ['alias' => 'Tables']);
-        $this->belongsTo('tableId', 'DS\Model\User', 'id', ['alias' => 'Users']);
+        $this->belongsTo('userId', 'DS\Model\User', 'id', ['alias' => 'Users']);
     }
 
     /**
