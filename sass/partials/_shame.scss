@@ -2405,6 +2405,10 @@
   }
 }
 
+.empty-discussion {
+  margin: 0;
+}
+
 .list-tab-content-activity {
   display: flex;
   flex-wrap: wrap;
@@ -2429,6 +2433,7 @@
     width: calc(100% - 16px);
     @media (min-width: 768px) {
       width: calc(50% - 16px);
+      max-width: calc(50% - 16px);
       padding: 0px 6px 6px 11px;
       margin-left: 8px;
       margin-right: 8px;
