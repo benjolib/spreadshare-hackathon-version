@@ -608,6 +608,14 @@
 ), '', 'left=0,top=0,width=550,height=450,personalbar=0,toolbar=0,scrollbars=0,resizable=0');
   })
 
+  $('#share-facebook').on('click', function (e) {
+    e.preventDefault();
+    FB.ui({
+    method: 'share',
+    display: 'popup',
+    href: url,
+  }, function(response){});
+  })
 
 
 
