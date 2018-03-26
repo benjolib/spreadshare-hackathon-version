@@ -170,6 +170,12 @@ class ListController extends BaseController
             $this->view->setVar('userId', $authId);
             $this->view->setVar('tags', $tags);
             $this->view->setVar('tablemodel', $tableModel);
+
+            /* foreach ($tableModel->contributors as $c) {
+                var_dump($c->users);
+            }
+
+            exit; */
         } catch (Exception $e) {
             Application::instance()->log($e->getMessage(), Logger::CRITICAL);
         }

@@ -345,11 +345,11 @@
       {% for contributor in tablemodel.contributors %}
         <div class="list-tab-content-collaborators__card">
           {{ partial('partials/profile-card', [
-            'id': contributor.user.id,
-            'username': contributor.user.handle,
-            'avatar': contributor.user.image,
-            'name': contributor.user.name,
-            'bio': contributor.user.tagline,
+            'id': contributor.users.id,
+            'username': contributor.users.handle,
+            'avatar': contributor.users.image,
+            'name': contributor.users.name,
+            'bio': contributor.users.tagline,
             'type': 10,
             'truncate': true
           ]) }}
