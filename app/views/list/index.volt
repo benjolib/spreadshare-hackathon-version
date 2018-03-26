@@ -55,7 +55,7 @@
               <div class="shadowcontain">
                 <div class="l-button" style="position: absolute;top: 0;right: 6px;pointer-events: all;cursor: pointer;"><img src="/assets/images/dotdotdot.svg" /></div>
                 <div class="dropdown list-row-remove-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
-                  <a href="#"><img src="/assets/images/bin.svg" /> Request to remove</a>
+                  <a href="/row/{{ table['id']}}/delete"><img src="/assets/images/bin.svg" /> Request to remove</a>
                 </div>
               </div>
             </td>
