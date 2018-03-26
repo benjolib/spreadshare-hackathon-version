@@ -28,11 +28,11 @@
         <div class="submission-comment">{{ submission['comment'] }}</div>
         <div class="submission-clock"><img src="/assets/images/comment-clock.svg" />TODAY</div>
       </div>
-      <div class="table-scroll" style="margin-bottom: 36px;">
+      <div class="table-scroll table-scroll--submissions">
         <table class="re-table re-table--list">
           <thead>
             <tr>
-              <th style="width: 52px;padding-right: 7px;">
+              <th>
                 VOTES
               </th>
               <th class="shadowcontainth"></th>
@@ -51,7 +51,14 @@
                     <div>0</div>
                   </a>
                 </td>
-                <td class="shadowcontaintd"><div class="shadowcontain"></div></td>
+                <td class="shadowcontaintd">
+                  <div class="shadowcontain">
+                    <div class="l-button" style="position: absolute;top: 0;right: 6px;pointer-events: all;cursor: pointer;"><img src="/assets/images/dotdotdot.svg" /></div>
+                    <div class="dropdown list-row-remove-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
+                      <a href="#"><img src="/assets/images/bin.svg" /> Revoke submission</a>
+                    </div>
+                  </div>
+                </td>
                 <td>
                   <div class="re-table__list-image" style="background: #f5f5f5 url(/assets/images/rows/{{ submission['image'] }}) center / cover;"></div>
                 </td>
@@ -78,4 +85,32 @@
     {% endfor %}
   {% endif %}
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+  $(document).ready(function () {
+    // pops
+
+    var bindPops = function () {
+      $('.l-button:not(.bound)').each(function () {
+        var $button = $(this);
+        var $dropdown = $button.next('.l-dropdown');
+
+        new Popper($button, $dropdown, {
+          placement: 'bottom-end'
+        });
+
+        $button.click(function () {
+          $dropdown.toggleClass('show');
+        });
+
+        $button.addClass('bound');
+      });
+    };
+
+    bindPops();
+
+  });
+</script>
 {% endblock %}

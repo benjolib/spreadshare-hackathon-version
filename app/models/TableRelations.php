@@ -4,6 +4,7 @@ namespace DS\Model;
 
 use DS\Constants\Paging;
 use DS\Model\Events\TableRelationsEvents;
+use DS\Model\TableStaffPicks;
 
 /**
  * TableRelations
@@ -18,10 +19,9 @@ use DS\Model\Events\TableRelationsEvents;
  *
  * @method static findFirstById(int $id)
  */
-class TableRelations
-    extends TableRelationsEvents
+class TableRelations extends TableRelationsEvents
 {
-    
+
     /**
      * @param int $tableId
      * @param int $relatedTableId
@@ -38,7 +38,7 @@ class TableRelations
             ]
         );
     }
-    
+
     /**
      * @param int $tableId
      * @param int $page
@@ -48,8 +48,7 @@ class TableRelations
      */
     public function findRelatedTables(int $tableId, $page = 0, $limit = Paging::endlessScrollPortions)
     {
-        if ($tableId)
-        {
+        if ($tableId) {
             return self::query()
                        ->columns(
                            [
@@ -57,6 +56,7 @@ class TableRelations
                                Tables::class . ".title",
                                Tables::class . ".tagline",
                                TableRelations::class . ".createdAt",
+                               '(SELECT ' . TableStaffPicks::class . '.createdAt FROM ' . TableStaffPicks::class . ' WHERE ' . TableStaffPicks::class . '.tableId = ' . Tables::class . '.id) as staffPick',
                            ]
                        )
                        ->innerJoin(Tables::class, TableRelations::class . '.relatedTableId = ' . Tables::class . '.id')
@@ -66,7 +66,7 @@ class TableRelations
                        ->execute()
                        ->toArray() ?: [];
         }
-        
+
         return [];
     }
 }

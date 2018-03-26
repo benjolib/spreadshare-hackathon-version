@@ -5,9 +5,6 @@
 {% block content %}
 {{ flash.output() }}
 
-
-
-
 <div class="re-page re-page--list">
   <div class="list-page-space">
     <div class="re-image" style="background: #f5f5f5 url({{ table['image'] ? table['image'] : 'https://picsum.photos/894/258/?image=' ~ table['id'] }}) center / cover;"></div>
@@ -48,13 +45,20 @@
         {% for row in tableContent.items %}
           <tr data-id="{{ row['id'] }}" class="list-row-tr">
             <td>
-              <a href="#" class="vote-link {{ row['userHasVoted'] ? 'vote-link--upvoted' : '' }}">
+              <a href="#" class="j_listing-vote vote-link {{ row['userHasVoted'] ? 'vote-link--upvoted' : '' }}">
                 <img class="vote-link__image" src="/assets/images/vote-lightning.svg" />
                 <img class="vote-link__image vote-link__image--green" src="/assets/images/vote-lightning-green.svg" />
                 <div>{{ row['votesCount'] }}</div>
               </a>
             </td>
-            <td class="shadowcontaintd"><div class="shadowcontain"></div></td>
+            <td class="shadowcontaintd">
+              <div class="shadowcontain">
+                <div class="l-button" style="position: absolute;top: 0;right: 6px;pointer-events: all;cursor: pointer;"><img src="/assets/images/dotdotdot.svg" /></div>
+                <div class="dropdown list-row-remove-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
+                  <a href="#"><img src="/assets/images/bin.svg" /> Request to remove</a>
+                </div>
+              </div>
+            </td>
             <td>
               <div class="re-table__list-image" style="background: #f5f5f5 url({{ row['image'] }}) center / cover;"></div>
             </td>
@@ -129,7 +133,7 @@
     <a class="re-button re-button--list-add-row re-button--grey" href="#" id="addAListingCancel">Cancel</a>
   </div>
   <a id="addAListingButton" class="re-button re-button--double-line re-button--full-width re-button--tall re-button--grey" href="#">
-    Add a Listing
+    Collaborate
     <div class="re-button__extra-text">And reach {{ table['subscriberCount'] }} subscribers of this list</div>
   </a>
 </div>
@@ -148,7 +152,14 @@
           <a class="about-list__action" href="#">Collaborate</a>
           <a class="about-list__action" href="/download/table/{{table['id']}}/csv">Download</a>
           <a class="about-list__action" href="#comment">Comment</a>
-          <a class="about-list__action" href="flag/{{table['id']}}">Flag</a>
+          <a class="about-list__action l-button" href="javascript:;">Flag</a>
+          <div class="dropdown flag-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
+            <a href="#">Duplicate</a>
+            <a href="#">Spam</a>
+            <a href="#">Copyright</a>
+            <a href="#">inappropriate</a>
+            <a href="#">Other</a>
+          </div>
         </div>
       </div>
       <div class="about-list__item">
@@ -232,7 +243,6 @@
       <a href="#" class="list-tab-button list-tab-button-collaborators">COLLABORATORS</a>
     </div>
 
-
     <div class="list-tab-content list-tab-content-discussion j_table-discussion" id="comment">
       {% if auth.loggedIn() %}
         <div>
@@ -249,7 +259,8 @@
       {% if tableComments %}
         {% for comment in tableComments %}
           <div class="u-flex comment">
-            <a href="#" class="vote-link vote-link--discussion vote-link--upvoted">
+            <a href="#" class="j_comment-vote vote-link vote-link--discussion" data-id="{{ comment['id'] }}">
+              <img class="vote-link__image" src="/assets/images/vote-lightning.svg" />
               <img class="vote-link__image vote-link__image--green" src="/assets/images/vote-lightning-green.svg" />
               <div>{{ comment['votesCount'] }}</div>
             </a>
@@ -268,7 +279,8 @@
           </div>
           {% for childComment in comment['childs'] %}
             <div class="u-flex comment" style="margin-left:71px;">
-              <a href="#" class="vote-link vote-link--discussion vote-link--upvoted">
+              <a href="#" class="j_comment-vote vote-link vote-link--discussion" data-id="{{ childComment['id'] }}">
+                <img class="vote-link__image" src="/assets/images/vote-lightning.svg" />
                 <img class="vote-link__image vote-link__image--green" src="/assets/images/vote-lightning-green.svg" />
                 <div>{{ childComment['votesCount'] }}</div>
               </a>
@@ -296,11 +308,17 @@
             </form>
           {% endif %}
         {% endfor %}
+      {% else %}
+        <div class="empty-discussion">
+          No Comments
+        </div>
       {% endif %}
     </div>
 
     <div class="list-tab-content list-tab-content-activity" style="display: none;">
-      list activity
+      <div class="empty-activity">
+        No Activity
+      </div>
     </div>
 
     <div class="list-tab-content list-tab-content-subscribers" style="display: none;">
@@ -312,8 +330,13 @@
             'avatar': subscriber.user.image,
             'name': subscriber.user.name,
             'bio': subscriber.user.tagline,
-            'type': 4
+            'type': 10,
+            'truncate': true
           ]) }}
+        </div>
+      {% else %}
+        <div class="empty-subscribers">
+          No Subscribers
         </div>
       {% endfor %}
     </div>
@@ -327,8 +350,13 @@
             'avatar': contributor.user.image,
             'name': contributor.user.name,
             'bio': contributor.user.tagline,
-            'type': 4
+            'type': 10,
+            'truncate': true
           ]) }}
+        </div>
+      {% else %}
+        <div class="empty-collaborators">
+          No Collaborators
         </div>
       {% endfor %}
     </div>
@@ -433,7 +461,7 @@
       }
     };
 
-    $('.vote-link').on('click', function (e) {
+    $('.j_listing-vote').on('click', function (e) {
       e.preventDefault();
       var $this = $(this);
 
@@ -447,6 +475,23 @@
         type: "POST",
         url: '/api/v1/vote-row/' + tableId,
         data: JSON.stringify({ rowId: rowId }),
+        success: function (res) {
+
+        },
+        contentType: "application/json; charset=utf-8",
+        dataType: 'json'
+      });
+    });
+
+    $('.j_comment-vote').on('click', function (e) {
+      e.preventDefault();
+      var $this = $(this);
+
+      domUpdateVote($this, !$this.hasClass('vote-link--upvoted'));
+
+      $.ajax({
+        type: "POST",
+        url: '/api/v1/vote-comment/' + $this.data('id'),
         success: function (res) {
 
         },
@@ -475,6 +520,15 @@
       $('#addAListingRow').show();
       $('#addAListingRowSpace').show();
       $('#addAListingSubmitAndCancel').show();
+      rowHeights();
+    });
+
+    $('#addAListingCancel').on('click', function (e) {
+      e.preventDefault();
+      $('#addAListingButton').show();
+      $('#addAListingRow').hide();
+      $('#addAListingRowSpace').hide();
+      $('#addAListingSubmitAndCancel').hide();
     });
 
     // Listing submition
