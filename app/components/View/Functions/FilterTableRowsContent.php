@@ -21,7 +21,7 @@ class FilterTableRowsContent extends Component
     public static function parse($text)
     {
         return preg_replace_callback('/((http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?)/', function ($matches) {
-                    return '<a class="re-table-link" target="_blank" title="' . $matches[0] . '" href="' . $matches[0] . '">' . str_ireplace('www.', '', parse_url($matches[0])['host']) . '</a>';
-                }, $text);
+            return '<a class="re-table-link" target="_blank" title="' . $matches[0] . '" href="' . $matches[0] . '">' . str_ireplace('www.', '', parse_url($matches[0])['host']) . '</a>';
+        }, $text);
     }
 }

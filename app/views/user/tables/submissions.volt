@@ -62,21 +62,25 @@
                 <td>
                   <div class="re-table__list-image" style="background: #f5f5f5 url(/assets/images/rows/{{ submission['image'] }}) center / cover;"></div>
                 </td>
+                
+                
+                {% if (submission['content']) %}
                 {% for cell in submission['content']|json_decode %}
-                  {% set len = filterTableRowsContent(cell)|striptags|length %}
-                     {% if len > 160  %}
-                     {% set length = 500 %}
-                     {% elseif len > 80 %}
-                     {% set length = 200 %}
-                     {% elseif len > 40 %}
-                     {% set length = 175 %}
-                     {% elseif len > 20 %}
-                     {% set length = 150 %}
-                     {% else %}
-                     {% set length = 0 %}
-                     {% endif %}
-                  <td style="min-width: {{ length }}px;">{{ filterTableRowsContent(cell) }}</td>
-                {% endfor %}
+                    {% set len = filterTableRowsContent(cell)|striptags|length %}
+                      {% if len > 160  %}
+                      {% set length = 500 %}
+                      {% elseif len > 80 %}
+                      {% set length = 200 %}
+                      {% elseif len > 40 %}
+                      {% set length = 175 %}
+                      {% elseif len > 20 %}
+                      {% set length = 150 %}
+                      {% else %}
+                      {% set length = 0 %}
+                      {% endif %}
+                    <td style="min-width: {{ length }}px;">{{ filterTableRowsContent(cell) }}</td>
+                  {% endfor %}
+                {% endif %}
             </tr>
             <tr class="re-table-space"></tr>
           </tbody>

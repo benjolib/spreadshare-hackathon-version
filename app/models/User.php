@@ -316,6 +316,15 @@ class User extends UserEvents
         $delete_requests = $query->fetchAll() ?: [];
         foreach ($delete_requests as $id => $submission) {
             $table = Tables::findFirstById($submission['table_id']);
+            $content = '[';
+
+            foreach (json_decode($delete_requests[$id]['content']) as $value) {
+                $content .= '"' . $value->content . '",';
+            }
+            $content = rtrim($content, ',');
+            $content .= ']';
+
+            $delete_requests[$id]['content'] = $content;
 
             foreach ($table->tableColumns as $column) {
                 $delete_requests[$id]['columns'][] = $column->title;
