@@ -17,6 +17,9 @@
 
   {% if submissions is defined AND submissions %}
     {% for submission in submissions %}
+
+      
+
       <div class="u-flex">
         {% if submission['status'] === '0' %}
           <div class="submission-status submission-status--pending">PENDING</div>

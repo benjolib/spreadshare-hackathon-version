@@ -275,7 +275,8 @@ class User extends UserEvents
                 row_add_request.image,
                 row_add_request.comment,
                 row_add_request.status,
-                row_add_request.table_id
+                row_add_request.table_id,
+                row_add_request.createdAt
             FROM 
                 row_add_request
             WHERE
@@ -298,7 +299,8 @@ class User extends UserEvents
                 row_delete_request.id,
                 row_delete_request.row_id,
                 row_delete_request.comment,
-                row_delete_request.status,                
+                row_delete_request.status,
+                row_delete_request.createdAt,                
                 tableRows.id,
                 tableRows.content,
                 tableRows.image,
