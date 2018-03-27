@@ -154,11 +154,11 @@
           <a class="about-list__action" href="#comment">Comment</a>
           <a class="about-list__action l-button" href="javascript:;">Flag</a>
           <div class="dropdown flag-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
-            <a href="#">Duplicate</a>
-            <a href="#">Spam</a>
-            <a href="#">Copyright</a>
-            <a href="#">inappropriate</a>
-            <a href="#">Other</a>
+            <a href="flag/{{table['id']}}/duplicate">Duplicate</a>
+            <a href="flag/{{table['id']}}/spam">Spam</a>
+            <a href="flag/{{table['id']}}/copyright">Copyright</a>
+            <a href="flag/{{table['id']}}/inappropriate">inappropriate</a>
+            <a href="flag/{{table['id']}}/other">Other</a>
           </div>
         </div>
       </div>

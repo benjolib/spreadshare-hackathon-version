@@ -16,20 +16,26 @@ class ListFlagController extends BaseController implements LoginAwareController
     public function flagAction()
     {
         $tableId = $this->dispatcher->getParam('tableId');
+        $reason = $this->dispatcher->getParam('reason');
+
+        if ($reason != 'duplicate' && $reason != 'copyright' && $reason != 'spam' && $reason != 'inappropriate') {
+            $reason = 'other';
+        }
+
         $userId = $this->serviceManager->getAuth()->getUserId();
 
         $table = Tables::findFirst($tableId);
 
         // Check if table exists
         if ($table->count() === 0) {
-            $this->flash->error('The table you are trying to add to does not exist');
+            $this->flash->error('The table you are trying to flag to does not exist');
             $this->_redirectBack();
         }
 
         $flags = new TableFlags();
         $flags->setUserId($userId)
                           ->setTableId($table->id)
-                          ->setFlag($param)
+                          ->setFlag($reason)
                           ->create();
 
         $this->flash->success('You have flagged this list');

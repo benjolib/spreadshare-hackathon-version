@@ -262,7 +262,7 @@ return [
         'methods' => ['GET', 'POST'],
     ],
     [
-        'url' => '/list/flag/{tableId:[0-9]+}',
+        'url' => '/list/flag/{tableId:[0-9]+}/{reason}',
         'paths' => [
             'controller' => 'List_Flag',
             'action' => 'flag',
