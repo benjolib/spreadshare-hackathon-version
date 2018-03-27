@@ -49,4 +49,28 @@ class RequestAddController extends BaseController implements LoginAwareControlle
         $this->flash->success('Your submission is waiting for approval');
         $this->_redirectBack();
     }
+
+    public function revokeAction()
+    {
+        $submissionId = $this->dispatcher->getParam('id');
+
+        $request = RequestAdd::find($submissionId);
+
+        // Check if table exists
+        if ($request->count() === 0) {
+            $this->flash->error('The submission you are trying to edit does not exist');
+            $this->_redirectBack();
+        }
+
+        $user = $this->serviceManager->getAuth()->getUser();
+
+        if ($request->getFirst()->user_id != $user->id) {
+            $this->flash->error('You do not have permission to edit this submission');
+            $this->_redirectBack();
+        }
+
+        $request->delete();
+        $this->flash->success('You have revoked this submission');
+        $this->_redirectBack();
+    }
 }

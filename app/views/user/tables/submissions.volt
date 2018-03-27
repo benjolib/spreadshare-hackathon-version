@@ -58,7 +58,13 @@
                   <div class="shadowcontain">
                     <div class="l-button" style="position: absolute;top: 0;right: 6px;pointer-events: all;cursor: pointer;"><img src="/assets/images/dotdotdot.svg" /></div>
                     <div class="dropdown list-row-remove-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
-                      <a href="#"><img src="/assets/images/bin.svg" /> Revoke submission</a>
+                      {% if (submission['kind'] == 'add')%}
+                        <a href="submissions/add/revoke/{{submission['id']}}"><img src="/assets/images/bin.svg"> Revoke submission</a>
+                      {%endif%}
+                      {% if (submission['kind'] == 'delete')%}
+                        <a href="submissions/delete/revoke/{{submission['id']}}"><img src="/assets/images/bin.svg"> Revoke submission</a>
+                      {%endif%}
+                      
                     </div>
                   </div>
                 </td>

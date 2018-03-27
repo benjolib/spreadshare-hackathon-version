@@ -771,7 +771,7 @@ CREATE TABLE `row_add_request` (
   `content` longtext NOT NULL,
   `comment` text,
   `image` varchar(100) DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `status` tinyint(1) NOT NULL DEFAULT '0'
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `table_id` (`table_id`),
@@ -785,9 +785,7 @@ CREATE TABLE `row_delete_request` (
   `user_id` int(11) unsigned NOT NULL,
   `row_id` int(11) unsigned NOT NULL,
   `comment` text,
-  `status` tinyint(4) NOT NULL DEFAULT '0',
-  `created_at` int(11),
-  `updated_at` int(11),
+  `status` tinyint(4) NOT NULL DEFAULT '0'
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `row_id` (`row_id`),

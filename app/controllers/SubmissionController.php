@@ -16,7 +16,6 @@ class SubmissionController extends BaseController implements LoginAwareControlle
         $this->view->setMainView('user/tables/submissions');
 
         $user = $this->serviceManager->getAuth()->getUser();
-
         $this->view->setVar('submissions', $user->getSubmissions());
     }
 }

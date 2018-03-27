@@ -292,6 +292,7 @@ class User extends UserEvents
             foreach ($table->tableColumns as $column) {
                 $add_requests[$id]['columns'][] = $column->title;
             }
+            $add_requests[$id]['kind'] = 'add';
         }
 
         $query = $this->readQuery("
@@ -327,6 +328,7 @@ class User extends UserEvents
             $content .= ']';
 
             $delete_requests[$id]['content'] = $content;
+            $delete_requests[$id]['kind'] = 'delete';
 
             foreach ($table->tableColumns as $column) {
                 $delete_requests[$id]['columns'][] = $column->title;
