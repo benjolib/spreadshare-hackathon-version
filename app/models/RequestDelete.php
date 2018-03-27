@@ -21,4 +21,6 @@ class RequestDelete extends BaseEvents
         $this->belongsTo('user_id', '\DS\Model\User', 'id', ['alias' => 'user']);
         $this->belongsTo('row_id', '\DS\Model\TableRows', 'id', ['alias' => 'row']);
     }
+
+    
 }
