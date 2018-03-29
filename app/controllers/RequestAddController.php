@@ -35,6 +35,16 @@ class RequestAddController extends BaseController implements LoginAwareControlle
         }
 
         $content = json_encode($this->request->get('cells'));
+
+        // Clear string from quotes and brakets and commas
+        $contentcleaned = str_replace(['[', ']', ',', '"'], '', $content);
+
+        if (strlen($contentcleaned) === 0) {
+            $this->flash->error('You have to fill at least a cell');
+            $this->_redirectBack();
+            return;
+        }
+
         $image = $image->getName();
 
         $submission = new RequestAdd();
