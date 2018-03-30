@@ -8,11 +8,9 @@
 {{ flash.output() }}
 
 <div class="re-page">
-  <div class="u-flex u-sm-flexCol u-md-flexRow u-flexJustifyBetween u-md-flexAlignItemsEnd lists-page-space">
-    <div>
-      <h1 class="re-heading">Submissions</h1>
-      <h2 class="re-subheading re-subheading--button-below">A history of all your submitted listings.</h2>
-    </div>
+  <div class="submissions-page-space">
+    <h1 class="re-heading">Submissions</h1>
+    <h2 class="re-subheading">A history of all your submitted listings.</h2>
   </div>
 
   {% if submissions is defined AND submissions %}
@@ -64,7 +62,6 @@
                       {% if (submission['kind'] == 'delete')%}
                         <a href="submissions/delete/revoke/{{submission['id']}}"><img src="/assets/images/bin.svg"> Revoke submission</a>
                       {%endif%}
-
                     </div>
                   </div>
                 </td>
@@ -123,6 +120,25 @@
     };
 
     bindPops();
+
+    var resizeTimer;
+
+    var rowHeights = function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function() {
+        $('.shadowcontain').each(function () {
+          var $this = $(this);
+          $this.height('auto');
+          setTimeout(function () {
+            $this.height($this.parents('tr').height() - 3);
+          }, 0);
+        });
+      }, 250);
+    };
+
+    $(window).resize(rowHeights);
+
+    rowHeights();
 
   });
 </script>

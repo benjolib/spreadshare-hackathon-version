@@ -153,7 +153,7 @@
           <a class="about-list__action" href="/download/table/{{table['id']}}/csv">Download</a>
           <a class="about-list__action" href="#comment">Comment</a>
           <a class="about-list__action l-button" href="javascript:;">Flag</a>
-          <div class="dropdown flag-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
+          <div class="dropdown flag-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown" data-dropdown-placement="right">
             <a href="flag/{{table['id']}}/duplicate">Duplicate</a>
             <a href="flag/{{table['id']}}/spam">Spam</a>
             <a href="flag/{{table['id']}}/copyright">Copyright</a>
@@ -379,7 +379,7 @@
         var $dropdown = $button.next('.l-dropdown');
 
         new Popper($button, $dropdown, {
-          placement: 'bottom-end'
+          placement: $dropdown.data('dropdown-placement') || 'bottom-end',
         });
 
         $button.click(function () {

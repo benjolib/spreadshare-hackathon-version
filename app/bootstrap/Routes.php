@@ -261,7 +261,14 @@ return [
         ],
         'methods' => ['GET', 'POST'],
     ],
-
+    [
+        'url' => '/collaborations',
+        'paths' => [
+            'controller' => 'Collaboration',
+            'action' => 'index',
+        ],
+        'methods' => ['GET', 'POST'],
+    ],
     [
         'url' => '/list/subscribe/{tableId:[0-9]+}',
         'paths' => [
