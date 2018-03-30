@@ -18,7 +18,7 @@
   {% if submissions is defined AND submissions %}
     {% for submission in submissions %}
 
-      
+
 
       <div class="u-flex">
         {% if submission['status'] === '0' %}
@@ -29,7 +29,7 @@
           <div class="submission-status submission-status--rejected">REJECTED</div>
         {% endif %}
         <div class="submission-comment">{{ submission['comment'] }}</div>
-        <div class="submission-clock"><img src="/assets/images/comment-clock.svg" />TODAY</div>
+        <div class="submission-clock"><img src="/assets/images/comment-clock.svg" />{{ formatTimestamp(submission['createdAt']) }}</div>
       </div>
       <div class="table-scroll table-scroll--submissions">
         <table class="re-table re-table--list">
@@ -64,15 +64,15 @@
                       {% if (submission['kind'] == 'delete')%}
                         <a href="submissions/delete/revoke/{{submission['id']}}"><img src="/assets/images/bin.svg"> Revoke submission</a>
                       {%endif%}
-                      
+
                     </div>
                   </div>
                 </td>
                 <td>
                   <div class="re-table__list-image" style="background: #f5f5f5 url(/assets/images/rows/{{ submission['image'] }}) center / cover;"></div>
                 </td>
-                
-                
+
+
                 {% if (submission['content']) %}
                 {% for cell in submission['content']|json_decode %}
                     {% set len = filterTableRowsContent(cell)|striptags|length %}
