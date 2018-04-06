@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="10px" height="8px" viewBox="0 0 10 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.2 (51160) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 3</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Views" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Overlays-4" transform="translate(-1048.000000, -324.000000)">
+            <g id="Group-3" transform="translate(1049.000000, 324.000000)">
+                <g id="Group" transform="translate(0.000000, 0.495000)" stroke="#6CC69D" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.7425">
+                    <path d="M2.6419186,5.75780192 L0.293546512,5.75780192 C0.185521395,5.75780192 0.0978488372,5.6034 0.0978488372,5.496975 L0.0978488372,0.0951923077 C0.0978488372,-0.0114230769 0.185521395,0.0462634615 0.293546512,0.0462634615 L8.12145349,0.0462634615 C8.2294786,0.0462634615 8.31715116,-0.0112326923 8.31715116,0.0951923077 L8.31715116,5.49678462 C8.31715116,5.6034 8.2294786,5.75761154 8.12145349,5.75761154 L5.38168605,5.75761154" id="Shape"></path>
+                    <path d="M4.01180233,7.42347692 L5.30829942,5.88021923" id="Shape"></path>
+                    <path d="M4.01180233,7.42347692 L2.71530523,5.88021923" id="Shape"></path>
+                </g>
+                <text id="?" font-family="OpenSans-Bold, Open Sans" font-size="4.95" font-weight="bold" letter-spacing="-0.132647067" fill="#6CC69D">
+                    <tspan x="2.97" y="5">?</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

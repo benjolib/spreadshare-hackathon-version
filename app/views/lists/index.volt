@@ -1,6 +1,6 @@
 {% extends 'layouts/main.volt' %}
 
-{% block title %}SpreadShare - {{ profile.name }} - Lists{% endblock %}
+{% block title %}SpreadShare - Lists{% endblock %}
 
 {% block header %}
 {% endblock %}
@@ -13,14 +13,14 @@
         <h2 class="re-subheading re-subheading--button-below">Manage all your lists in one place.</h2>
       </div>
       <div>
-        <a href="/table/add" class="re-button">Curate a List</a>
+        <a href="/table/add" class="re-button">Create a List</a>
       </div>
     </div>
 
     {% if tables is defined AND tables %}
       <table class="re-table">
         <tbody>
-          {{ partial('user/tables/tables') }}
+          {{ partial('lists/content') }}
         </tbody>
       </table>
     {% endif %}
@@ -33,23 +33,6 @@
 {% block scripts %}
   <script type="text/javascript">
     $(document).ready(function () {
-      var bindPops = function () {
-        $('.l-button:not(.bound)').each(function () {
-          var $button = $(this);
-          var $dropdown = $button.next('.l-dropdown');
-
-          new Popper($button, $dropdown, {
-            placement: 'bottom-end'
-          });
-
-          $button.click(function () {
-            $dropdown.toggleClass('show');
-          });
-
-          $button.addClass('bound');
-        });
-      };
-
       var pageNumber = 1;
 
       $('.re-button--load-more').on('click', function (e) {
@@ -62,12 +45,10 @@
               if (!$('<div>' + response + '</div>').find('.moreToLoad').val()) {
                 $('.re-button--load-more').hide();
               }
-              bindPops();
+              window.bindPops();
             }
           });
       });
-
-      bindPops();
     });
   </script>
 {% endblock %}

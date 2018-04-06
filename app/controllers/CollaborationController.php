@@ -13,10 +13,10 @@ class CollaborationController extends BaseController implements LoginAwareContro
 
     public function indexAction()
     {
-        $this->view->setMainView('user/tables/collaborations');
+        $this->view->setMainView('collaborations/index');
 
         $user = $this->serviceManager->getAuth()->getUser();
-        
+
         $this->view->setVar('collaborations', $user->getSubmissions());
     }
 }

@@ -14,54 +14,6 @@ use DS\Model\Helper\TableFilter;
 use DS\Model\DataSource\TableFlags;
 use DS\Model\TableRelations;
 
-// TODO: probably move this elseware
-function array_orderby()
-{
-    $args = func_get_args();
-    $data = array_shift($args);
-    foreach ($args as $n => $field) {
-        if (is_string($field)) {
-            $tmp = [];
-            foreach ($data as $key => $row) {
-                $tmp[$key] = $row[$field];
-            }
-            $args[$n] = $tmp;
-        }
-    }
-    $args[] = &$data;
-    call_user_func_array('array_multisort', $args);
-    return array_pop($args);
-}
-function humanTiming($time)
-{
-    return time();
-    $time = time() - $time; // to get the time since that moment
-
-    if ($time < 60) {
-        return 'Just now';
-    }
-
-    $tokens = [
-        31536000 => 'year',
-        2592000 => 'month',
-        604800 => 'week',
-        86400 => 'day',
-        3600 => 'hour',
-        60 => 'minute',
-        1 => 'second',
-    ];
-
-    foreach ($tokens as $unit => $text) {
-        if ($time < $unit) {
-            continue;
-        }
-        $numberOfUnits = floor($time / $unit);
-
-        return $numberOfUnits . ' ' . $text . (($numberOfUnits > 1) ? 's ago' : ' ago');
-    }
-
-    return '';
-}
 class ListController extends BaseController
 {
     public function indexAction()

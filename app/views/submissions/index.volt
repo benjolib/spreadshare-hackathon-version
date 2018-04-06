@@ -100,27 +100,6 @@
 {% block scripts %}
 <script type="text/javascript">
   $(document).ready(function () {
-    // pops
-
-    var bindPops = function () {
-      $('.l-button:not(.bound)').each(function () {
-        var $button = $(this);
-        var $dropdown = $button.next('.l-dropdown');
-
-        new Popper($button, $dropdown, {
-          placement: 'bottom-end'
-        });
-
-        $button.click(function () {
-          $dropdown.toggleClass('show');
-        });
-
-        $button.addClass('bound');
-      });
-    };
-
-    bindPops();
-
     var resizeTimer;
 
     var rowHeights = function () {

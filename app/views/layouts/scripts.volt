@@ -42,7 +42,7 @@
     });
 
     var timer;
-    var delay = 600; // 0.6 seconds delay after last input
+    var delay = 0; // 0.6 seconds delay after last input
     // autoCompleteHandler to handle response
     function autoCompleteHandler(response) {
 
@@ -58,7 +58,7 @@
       // foreach array
       $.each(response.data.hits.hits, function (key, val) {
         // item
-        items.push("<a href='/table/" + val._id + "'><div class='item'><div class='title'>" + val._source.title + "</div><div class='tagline'>" + val._source.tagline + "</div></div></a>");
+        items.push("<a href='/list/" + val._id + "'><div class='item'><div class='title'>" + val._source.title + "</div><div class='tagline'>" + val._source.tagline + "</div></div></a>");
       });
       // append list to array
       $(searchItems).append(items.join(''));
@@ -69,39 +69,48 @@
     var onSearchPopper = $('.search-autocomplete');
     // On change of the field
 
-    $(searchFieldEl).on("change paste keyup", function () {
+    var prevSearch = '';
+
+    $(searchFieldEl).on("change keyup paste", function () {
 
 
       /* Popper */
       var searchReferenceElement = $(this);
 
       var searchEl = $(this).val();
-      // append href link
-      $(".all-results").wrap("<a href='/search?query=" + searchEl + "'/>")
-      // When the search query is greater than 3
-      if (searchEl.length > 3) {
 
-        window.clearTimeout(timer);
-        timer = window.setTimeout(function () {
-          // AJAX Query
-          $.ajax({
-            url: "/api/v1/search/",
-            method: "GET",
-            crossDomain: true,
-            dataType: "JSON",
-            data: { "query": searchEl.trim() },
-            success: function (response) {
-              autoCompleteHandler(response)
-            }
-          });
+      if (searchEl !== prevSearch ) {
+        prevSearch = searchEl;
+        if (searchEl.length > 0) {
+          // append href link
+          $(".all-results").attr('href', '/search?query=" + searchEl + "')
+            window.clearTimeout(timer);
+            timer = window.setTimeout(function () {
+              // AJAX Query
+              $.ajax({
+                url: "/api/v1/search/",
+                method: "GET",
+                crossDomain: true,
+                dataType: "JSON",
+                data: { "query": searchEl.trim() },
+                success: function (response) {
+                  autoCompleteHandler(response)
+                }
+              });
 
-        }, delay);
+            }, delay);
 
-        onSearchPopper.addClass('show');
+            onSearchPopper.addClass('show');
 
-        new Popper(searchReferenceElement, onSearchPopper, {
-          placement: 'bottom',
-        });
+            new Popper(searchReferenceElement, onSearchPopper, {
+              placement: 'bottom-start',
+              modifiers: {
+                offset: {
+                  offset: -26
+                }
+              }
+            });
+        }
       }
     });
 
@@ -290,4 +299,63 @@
     var foundABug = document.getElementsByClassName('found-a-bug')[0];
     foundABug.style.display = 'none';
   };
+
+  $(document).ready(function () {
+    // pops
+
+    window.bindPops = function () {
+      $('.l-button:not(.bound)').each(function () {
+        var $button = $(this);
+        // default select l-dropdown under button
+        var $dropdown = $button.next('.l-dropdown');
+        // if specified use the target dropdown instead
+        if ($button.data('dropdown-target')) {
+          $dropdown = $($button.data('dropdown-target'));
+        }
+
+        new Popper($button, $dropdown, {
+          placement: $button.data('dropdown-placement') || 'bottom-end',
+          modifiers: {
+            offset: {
+              offset: Number($button.data('dropdown-offset')) || 0
+            }
+          }
+        });
+
+        $button.click(function () {
+          $('.l-dropdown').removeClass('show');
+          $dropdown.toggleClass('show');
+        });
+
+        $button.addClass('bound');
+      });
+    };
+
+    window.bindPops();
+
+
+    var hidePopover = function(element, e){
+      if (!$(element).is(e.target) && $(element).has(e.target).length === 0 && !$('.l-button').is(e.target) && $('.l-button').has(e.target).length === 0){
+        $(element).removeClass('show');
+      }
+    }
+
+    $('body').on('click', function (e) {
+      $('.l-dropdown').each(function (index, el) {
+        hidePopover(el, e);
+      });
+    });
+
+    $('.re-header__search').on('click', function (e) {
+      e.preventDefault();
+      $('.re-header__search-open').show();
+      $("input.navbar__search__field").focus();
+    });
+
+    $('.search-close').on('click', function (e) {
+      e.preventDefault();
+      $('.re-header__search-open').hide();
+      $("input.navbar__search__field").val("");
+    });
+  });
 </script>

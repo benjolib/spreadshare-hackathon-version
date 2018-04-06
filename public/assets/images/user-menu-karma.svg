@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="11px" height="9px" viewBox="0 0 11 9" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.2 (51160) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 7</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Views" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Overlays-3" transform="translate(-1048.000000, -388.000000)" stroke="#6CC69D" stroke-width="0.7">
+            <g id="Group-7" transform="translate(1049.000000, 389.000000)">
+                <path d="M0,1.93126316 L1.29767442,0.0887894737 C1.29767442,0.0143684211 1.39604651,0 1.51744186,0 L7.48255814,0 C7.60395349,0 7.70232558,0.0143684211 7.70232558,0.0887894737 L8.79069767,1.95428947" id="Shape"></path>
+                <path d="M4.10902053,6.77289474 L0.0447879715,2.23707895 C-0.0824678425,2.09228947 0.076601925,2 0.331113553,2 L8.45978797,2 C8.7142996,2 8.87336937,2.09228947 8.74611355,2.23707895 L4.68188099,6.81728947 C4.55441588,6.96189474 4.23627634,6.91768421 4.10902053,6.77289474 Z" id="Shape"></path>
+                <path d="M4.23529412,6.52307895 L5.97668947,0" id="Shape"></path>
+                <path d="M2.11764706,0 L3.77532148,6.60615789" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

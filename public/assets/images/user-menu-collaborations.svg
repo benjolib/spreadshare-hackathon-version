@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="9px" height="10px" viewBox="0 0 9 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.2 (51160) - http://www.bohemiancoding.com/sketch -->
+    <title>Group</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Views" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Overlays-3" transform="translate(-1049.000000, -195.000000)" stroke="#6CC69D" stroke-width="0.7">
+            <g id="Group" transform="translate(1050.000000, 196.000000)">
+                <path d="M5.83333333,7.67311628 C5.83333333,7.77581395 5.75292308,7.85916279 5.65384615,7.85916279 L0.269230769,7.85916279 C0.170153846,7.85916279 0.0897435897,7.77581395 0.0897435897,7.67311628 L0.0897435897,1.34753488 C0.0897435897,1.24483721 0.170153846,1.16148837 0.269230769,1.16148837 L5.65384615,1.16148837 C5.75292308,1.16148837 5.83333333,1.24483721 5.83333333,1.34753488 L5.83333333,7.67311628 Z" id="Shape" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M1.34615385,0.0451602471 L6.72071795,0.0452093023 C6.82535897,0.0452093023 6.91025641,0.039627907 6.91025641,0.147534884 L6.91025641,6.55683721" id="Shape" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M0.0887096774,2.93333333 L5.41129032,2.93333333" id="Line-2" stroke-linecap="square"></path>
+                <path d="M0.0887096774,4.53333333 L5.41129032,4.53333333" id="Line-2" stroke-linecap="square"></path>
+                <path d="M0.0887096774,6.13333333 L5.41129032,6.13333333" id="Line-2" stroke-linecap="square"></path>
+            </g>
+        </g>
+    </g>
+</svg>

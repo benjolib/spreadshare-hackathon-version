@@ -60,7 +60,7 @@ return [
         'methods' => ['GET', 'POST'],
     ],
     [
-        'url' => '/user/{user:[a-zA-Z0-9\-]+}',
+        'url' => '/profile/{user:[a-zA-Z0-9\-]+}',
         'paths' => [
             'controller' => 'User',
             'action' => 'profile',
@@ -100,7 +100,7 @@ return [
         'methods' => ['GET'],
     ],
     [
-        'url' => '/settings',
+        'url' => '/oldsettings',
         'paths' => [
             'controller' => 'User_Settings',
             'action' => 'settings',
@@ -108,7 +108,7 @@ return [
         'methods' => ['GET', 'POST'],
     ],
     [
-        'url' => '/settings/{page:[a-zA-Z0-9\-]+}',
+        'url' => '/oldsettings/{page:[a-zA-Z0-9\-]+}',
         'paths' => [
             'controller' => 'User_Settings', // @see https://docs.phalconphp.com/en/latest/routing -> camelized
             'action' => 'settings',
@@ -122,22 +122,6 @@ return [
             'action' => 'ajax',
         ],
         'methods' => ['POST'],
-    ],
-    [
-        'url' => '/tables/{order:[a-z0-9\-]+}',
-        'paths' => [
-            'controller' => 'Tables',
-            'action' => 'index',
-        ],
-        'methods' => ['GET'],
-    ],
-    [
-        'url' => '/tables/{order:[a-z0-9\-]+}/{date:[a-z0-9\-]+}',
-        'paths' => [
-            'controller' => 'Tables',
-            'action' => 'index',
-        ],
-        'methods' => ['GET'],
     ],
     [
         'url' => '/table/{id:[0-9]+}',
@@ -212,7 +196,18 @@ return [
         'methods' => ['GET', 'POST'],
     ],
 
-    // new routes
+    // NEW ROUTES
+
+    // pages
+
+    [
+        'url' => '/explore/{order:[a-z0-9\-]+}',
+        'paths' => [
+            'controller' => 'Explore',
+            'action' => 'index',
+        ],
+        'methods' => ['GET', 'POST'],
+    ],
     [
         'url' => '/list/{slug}',
         'paths' => [
@@ -221,6 +216,57 @@ return [
         ],
         'methods' => ['GET', 'POST'],
     ],
+    [
+        'url' => '/submissions',
+        'paths' => [
+            'controller' => 'Submission',
+            'action' => 'index',
+        ],
+        'methods' => ['GET', 'POST'],
+    ],
+    [
+        'url' => '/collaborations',
+        'paths' => [
+            'controller' => 'Collaboration',
+            'action' => 'index',
+        ],
+        'methods' => ['GET', 'POST'],
+    ],
+    [
+        'url' => '/lists',
+        'paths' => [
+            'controller' => 'Lists',
+            'action' => 'index',
+        ],
+        'methods' => ['GET', 'POST'],
+    ],
+    [
+        'url' => '/karma',
+        'paths' => [
+            'controller' => 'Karma',
+            'action' => 'index',
+        ],
+        'methods' => ['GET', 'POST'],
+    ],
+    [
+        'url' => '/settings',
+        'paths' => [
+            'controller' => 'Settings',
+            'action' => 'index',
+        ],
+        'methods' => ['GET', 'POST'],
+    ],
+    [
+        'url' => '/for-you',
+        'paths' => [
+            'controller' => 'ForYou',
+            'action' => 'index',
+        ],
+        'methods' => ['GET', 'POST'],
+    ],
+
+    // api
+
     [
         'url' => '/row/{id:[0-9]+}/add',
         'paths' => [
@@ -238,14 +284,6 @@ return [
         'methods' => ['GET', 'POST'],
     ],
     [
-        'url' => '/submissions',
-        'paths' => [
-            'controller' => 'Submission',
-            'action' => 'index',
-        ],
-        'methods' => ['GET', 'POST'],
-    ],
-    [
         'url' => '/submissions/add/revoke/{id:[0-9]+}',
         'paths' => [
             'controller' => 'Request_Add',
@@ -258,14 +296,6 @@ return [
         'paths' => [
             'controller' => 'Request_Delete',
             'action' => 'revoke',
-        ],
-        'methods' => ['GET', 'POST'],
-    ],
-    [
-        'url' => '/collaborations',
-        'paths' => [
-            'controller' => 'Collaboration',
-            'action' => 'index',
         ],
         'methods' => ['GET', 'POST'],
     ],

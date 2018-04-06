@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="8px" height="8px" viewBox="0 0 8 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.2 (51160) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 9</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Views" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Overlays-3" transform="translate(-1250.000000, -388.000000)">
+            <g id="Group-9" transform="translate(1250.000000, 389.000000)">
+                <polygon id="Shape" stroke="#DEE0E7" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round" points="7 2.15234764 7 6 0.897435897 6 0.897435897 0 7 0"></polygon>
+                <rect id="Rectangle-2" fill="#FFFFFF" x="0" y="1.94117647" width="1.61538462" height="2.29411765"></rect>
+                <polyline id="Shape" stroke="#DEE0E7" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round" transform="translate(3.364128, 2.286816) rotate(-90.000000) translate(-3.364128, -2.286816) " points="2.5450608 -0.183772158 2.52854798 4.75740431 4.19970843 3.22074074"></polyline>
+                <path d="M5.94389744,4.59052941 L4.25923077,3.04764706" id="Shape" stroke="#DEE0E7" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round" transform="translate(5.156667, 3.882353) rotate(-90.000000) translate(-5.156667, -3.882353) "></path>
+            </g>
+        </g>
+    </g>
+</svg>

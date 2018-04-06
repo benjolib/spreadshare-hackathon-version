@@ -1847,11 +1847,24 @@
       line-height: 15px;
       letter-spacing: -0.27px;
     }
+    &--header {
+      display: inline-flex;
+      margin-left: auto;
+      margin-bottom: 0;
+      width: 206px;
+      margin-right: 15px;
+      margin-top: 2px;
+      span {
+        margin-right: 4px;
+      }
+      img {
+        margin-left: 12px;
+      }
+    }
   }
 }
 
 .re-para {
-  /* We've asked some of: */
   font-size: 12px;
   color: #2a1e3e;
   letter-spacing: -0.29px;
@@ -2983,6 +2996,238 @@
       padding: 0 28px;
       font-size: 16px;
       letter-spacing: 0.5px;
+    }
+  }
+}
+
+.re-header {
+  display: flex;
+  justify-content: center;
+  height: 90px;
+  border-bottom: 1px solid #e4e4e4;
+  &__inner {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 1420px;
+    padding: 0 12px 0 24px;
+    position: relative;
+  }
+  &__logo {
+    margin-right: 28px;
+    img {
+      margin-top: 6px;
+    }
+  }
+  &__item {
+    font-family: 'Roboto Mono', monospace;
+    font-weight: bold;
+    font-size: 18px;
+    color: #697c95;
+    letter-spacing: 0.8px;
+    padding: 24px 6px 20px 6px;
+    margin-right: 32px;
+    display: inline-flex;
+    align-items: center;
+    height: 91px;
+    &.active {
+      border-bottom: 1px solid #6cc69d;
+    }
+  }
+  &__search {
+    padding: 4px;
+    margin-left: 2px;
+    img {
+      margin-top: 6px;
+    }
+  }
+  &__search-open {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: white;
+    height: 89px;
+    width: 526px;
+    display: flex;
+    img:first-of-type {
+      padding-left: 40px;
+      margin-top: 8px;
+    }
+    img:last-of-type {
+      padding: 0 20px;
+      margin-top: 2px;
+      cursor: pointer;
+    }
+    input {
+      width: 100%;
+      border: none;
+      padding: 0 40px;
+      margin-top: 4px;
+      outline: none;
+    }
+  }
+  &__add {
+    margin-left: auto;
+    margin-top: 8px;
+  }
+  &__paperPencil {
+    margin-top: 8px;
+    margin-left: 38px;
+  }
+  &__bell {
+    margin-top: 8px;
+    margin-left: 37px;
+    position: relative;
+    span {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 11px;
+      color: #6cc69d;
+      letter-spacing: -0.19px;
+      text-align: right;
+      position: absolute;
+      top: -7px;
+      left: 18px;
+    }
+  }
+  &__user {
+    margin-top: 8px;
+    margin-left: 34px;
+    img {
+      width: 32px;
+      height: 32px;
+      border-radius: 9999px;
+    }
+  }
+  &__dotdotdot {
+    margin-right: 0px;
+    margin-top: 10px;
+    margin-left: 21px;
+  }
+}
+
+.user-dropdown {
+  margin-top: 26px;
+  width: 415px;
+  height: 356px;
+  border: 1px solid #f8f8fb;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
+  border-radius: 4px;
+  padding: 32px 18px;
+  &__column {
+    &:first-of-type {
+      width: 53%;
+    }
+    &:last-of-type {
+      width: 47%;
+    }
+  }
+  &__item {
+    display: flex;
+    margin-bottom: 27px;
+    &__image {
+      width: 24px;
+      height: 24px;
+      border-radius: 9999px;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 8px;
+      &--profile img {
+        width: 24px;
+        height: 24px;
+        border-radius: 9999px;
+      }
+      &--highlight {
+        border: 1px solid #6cc69d;
+      }
+    }
+    &__text {
+      display: flex;
+      flex-direction: column;
+      h3 {
+        font-family: 'Roboto Mono', monospace;
+        font-weight: bold;
+        font-size: 14px;
+        color: #2a1e3e;
+        letter-spacing: 0.5px;
+        line-height: 19px;
+        margin-top: 3px;
+      }
+      span {
+        font-family: 'Lato', sans-serif;
+        font-size: 12px;
+        color: #b1bbc7;
+        letter-spacing: -0.32px;
+        line-height: 15px;
+        // display: flex;
+      }
+      &--dull {
+        h3 {
+          color: #6a7c94;
+        }
+      }
+      &--logout {
+        h3 {
+          color: #b1bbc7;
+        }
+      }
+    }
+  }
+}
+
+.notification-dropdown {
+  width: 332px;
+  height: 510px;
+  margin-top: 30px;
+  border: 1px solid #f8f8fb;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
+  border-radius: 4px;
+  padding: 18px 10px 18px 20px;
+  &__notification {
+    margin-bottom: 28px;
+    &__image {
+      width: 44px;
+      height: 44px;
+      border-radius: 9999px;
+      margin-right: 10px;
+    }
+    &__name {
+      font-family: 'Roboto Mono', monospace;
+      font-weight: bold;
+      font-size: 16px;
+      color: #252442;
+      letter-spacing: -0.43px;
+    }
+    &__text {
+      font-family: 'Lato', sans-serif;
+      font-size: 16px;
+      color: #b1bbc7;
+      letter-spacing: -0.43px;
+      a {
+        color: #68c79c;
+      }
+    }
+    &__date {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 12px;
+      color: #dee0e7;
+      letter-spacing: 0.5px;
+      margin-top: 1px;
+      img {
+        margin-right: 2px;
+        margin-top: -1px;
+      }
+    }
+    &__see-all {
+      font-family: 'Roboto Mono', monospace;
+      font-weight: bold;
+      font-size: 16px;
+      color: #6cc69d;
+      letter-spacing: -0.34px;
+      text-align: center;
+      margin-right: 10px;
+      margin-top: auto;
     }
   }
 }

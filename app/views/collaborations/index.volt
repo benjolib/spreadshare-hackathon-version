@@ -11,7 +11,7 @@
   <div class="collaborations-page-space">
     <h1 class="re-heading">Collaborations</h1>
     <h2 class="re-subheading">Manage submissions to your lists.</h2>
-    <h3 class="re-subtext hide-on-small">Looking for a listing you submitted? Go to your <a href="#">submitted listings.</a></h3>
+    <h3 class="re-subtext hide-on-small">Looking for a listing you submitted? Go to your <a href="/submissions">submitted listings.</a></h3>
   </div>
 
   {% set numbers = [1, 2, 3] %}
@@ -57,10 +57,10 @@
                     <a class="collaboration-accept" href="#">
                       <img src="/assets/images/check.svg">
                     </a>
-                    <a class="l-button collaboration-reject" href="javascript:;">
+                    <a class="l-button collaboration-reject" href="javascript:;" data-dropdown-placement="left-end">
                       <img src="/assets/images/cross.svg">
                     </a>
-                    <div class="dropdown collaboration-reject-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown" data-dropdown-placement="left-end">
+                    <div class="dropdown collaboration-reject-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
                       <form class="u-flex collaboration-reject-dropdown__form">
                         <label class="collaboration-reject-dropdown__reason">
                           <div>REASON FOR REJECTION</div>
@@ -91,27 +91,6 @@
 {% block scripts %}
 <script type="text/javascript">
   $(document).ready(function () {
-    // pops
-
-    var bindPops = function () {
-      $('.l-button:not(.bound)').each(function () {
-        var $button = $(this);
-        var $dropdown = $button.next('.l-dropdown');
-
-        new Popper($button, $dropdown, {
-          placement: $dropdown.data('dropdown-placement') || 'bottom-end'
-        });
-
-        $button.click(function () {
-          $dropdown.toggleClass('show');
-        });
-
-        $button.addClass('bound');
-      });
-    };
-
-    bindPops();
-
     var resizeTimer;
 
     var rowHeights = function () {

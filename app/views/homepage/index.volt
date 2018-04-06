@@ -11,49 +11,49 @@
 {# {{ dump(tables) }} #}
 <div class="re-page re-page--large">
   <div class="home-heading u-flex">
-    <div class="home-heading__text home-heading-button clickable">
+    <div class="home-heading__text home-heading-button clickable l-button" data-dropdown-placement="bottom-start" data-dropdown-target=".home-heading-dropdown">
       {{ selectionName }}<img src="/assets/images/home-arrow-down.svg" />
     </div>
     <div class="home-heading__line u-flexGrow1"></div>
   </div>
-  <div class="dropdown u-flex home-heading-dropdown">
+  <div class="l-dropdown dropdown u-flex home-heading-dropdown">
     <div class="u-flex u-flexCol home-heading-dropdown__col1">
-      <a href="/tables/recommended" class="{% if selection is 'recommended' %}active{% endif %}"><div><img src="/assets/images/diamond{% if selection is 'recommended' %}-green{% endif %}.svg" /></div>Recommended</a>
-      <a href="/tables/trending" class="{% if selection is 'trending' %}active{% endif %}"><div><img src="/assets/images/lightning{% if selection is 'trending' %}-green{% endif %}.svg" /></div>Trending</a>
-      <a href="/tables/recently-added" class="{% if selection is 'recently-added' %}active{% endif %}"><div><img src="/assets/images/clock{% if selection is 'recently-added' %}-green{% endif %}.svg" /></div>Recently Added</a>
-      <a href="/tables/most-viewed" class="space-below {% if selection is 'most-viewed' %}active{% endif %}"><div><img src="/assets/images/eye{% if selection is 'most-viewed' %}-green{% endif %}.svg" class="icon-eye" /></div>Most Viewed</a>
+      <a href="/" class="{% if selection is 'recommended' %}active{% endif %}"><div><img src="/assets/images/diamond{% if selection is 'recommended' %}-green{% endif %}.svg" /></div>Recommended</a>
+      <a href="/explore/trending" class="{% if selection is 'trending' %}active{% endif %}"><div><img src="/assets/images/lightning{% if selection is 'trending' %}-green{% endif %}.svg" /></div>Trending</a>
+      <a href="/explore/recently-added" class="{% if selection is 'recently-added' %}active{% endif %}"><div><img src="/assets/images/clock{% if selection is 'recently-added' %}-green{% endif %}.svg" /></div>Recently Added</a>
+      <a href="/explore/most-viewed" class="space-below {% if selection is 'most-viewed' %}active{% endif %}"><div><img src="/assets/images/eye{% if selection is 'most-viewed' %}-green{% endif %}.svg" class="icon-eye" /></div>Most Viewed</a>
 
-      <a href="/tables/san-francisco" class="{% if selection is 'san-francisco' %}active{% endif %}"><div><img src="/assets/images/waypoint.svg" /></div>San Francisco</a>
-      <a href="/tables/new-york" class="{% if selection is 'new-york' %}active{% endif %}"><div><img src="/assets/images/waypoint.svg" /></div>New York</a>
-      <a href="/tables/london" class="{% if selection is 'london' %}active{% endif %}"><div><img src="/assets/images/waypoint.svg" /></div>London</a>
-      <a href="/tables/berlin" class="{% if selection is 'berlin' %}active{% endif %}"><div><img src="/assets/images/waypoint.svg" /></div>Berlin</a>
+      <a href="/explore/san-francisco" class="{% if selection is 'san-francisco' %}active{% endif %}"><div><img src="/assets/images/waypoint.svg" /></div>San Francisco</a>
+      <a href="/explore/new-york" class="{% if selection is 'new-york' %}active{% endif %}"><div><img src="/assets/images/waypoint.svg" /></div>New York</a>
+      <a href="/explore/london" class="{% if selection is 'london' %}active{% endif %}"><div><img src="/assets/images/waypoint.svg" /></div>London</a>
+      <a href="/explore/berlin" class="{% if selection is 'berlin' %}active{% endif %}"><div><img src="/assets/images/waypoint.svg" /></div>Berlin</a>
       <a href="#" class="greyed-out"><div><img src="/assets/images/waypoint.svg" /></div>City missing?</a>
     </div>
     <div class="u-flex u-flexCol u-md-flexRow">
       <div class="u-flex u-flexCol home-heading-dropdown__col2">
-        <a href="/tables/ai" class="{% if selection is 'ai' %}active{% endif %}">AI</a>
-        <a href="/tables/blockchain" class="{% if selection is 'blockchain' %}active{% endif %}">Blockchain</a>
-        <a href="/tables/bots" class="{% if selection is 'bots' %}active{% endif %}">Bots</a>
-        <a href="/tables/business" class="{% if selection is 'business' %}active{% endif %}">Business</a>
-        <a href="/tables/crypto" class="{% if selection is 'crypto' %}active{% endif %}">Crypto</a>
-        <a href="/tables/culture" class="{% if selection is 'culture' %}active{% endif %}">Culture</a>
-        <a href="/tables/design" class="{% if selection is 'design' %}active{% endif %}">Design</a>
-        <a href="/tables/engineering" class="{% if selection is 'engineering' %}active{% endif %}">Engineering</a>
-        <a href="/tables/finance" class="{% if selection is 'finance' %}active{% endif %}">Finance</a>
-        <a href="/tables/fundraising" class="{% if selection is 'fundraising' %}active{% endif %}">Fundraising</a>
-        <a href="/tables/growth" class="{% if selection is 'growth' %}active{% endif %}">Growth</a>
+        <a href="/explore/ai" class="{% if selection is 'ai' %}active{% endif %}">AI</a>
+        <a href="/explore/blockchain" class="{% if selection is 'blockchain' %}active{% endif %}">Blockchain</a>
+        <a href="/explore/bots" class="{% if selection is 'bots' %}active{% endif %}">Bots</a>
+        <a href="/explore/business" class="{% if selection is 'business' %}active{% endif %}">Business</a>
+        <a href="/explore/crypto" class="{% if selection is 'crypto' %}active{% endif %}">Crypto</a>
+        <a href="/explore/culture" class="{% if selection is 'culture' %}active{% endif %}">Culture</a>
+        <a href="/explore/design" class="{% if selection is 'design' %}active{% endif %}">Design</a>
+        <a href="/explore/engineering" class="{% if selection is 'engineering' %}active{% endif %}">Engineering</a>
+        <a href="/explore/finance" class="{% if selection is 'finance' %}active{% endif %}">Finance</a>
+        <a href="/explore/fundraising" class="{% if selection is 'fundraising' %}active{% endif %}">Fundraising</a>
+        <a href="/explore/growth" class="{% if selection is 'growth' %}active{% endif %}">Growth</a>
       </div>
       <div class="u-flex u-flexCol home-heading-dropdown__col3">
-        <a href="/tables/hiring" class="{% if selection is 'hiring' %}active{% endif %}">Hiring</a>
-        <a href="/tables/marketing" class="{% if selection is 'marketing' %}active{% endif %}">Marketing</a>
-        <a href="/tables/media" class="{% if selection is 'media' %}active{% endif %}">Media</a>
-        <a href="/tables/operations" class="{% if selection is 'operations' %}active{% endif %}">Operations</a>
-        <a href="/tables/people" class="{% if selection is 'people' %}active{% endif %}">People</a>
-        <a href="/tables/press" class="{% if selection is 'press' %}active{% endif %}">Press</a>
-        <a href="/tables/product" class="{% if selection is 'product' %}active{% endif %}">Product</a>
-        <a href="/tables/research" class="{% if selection is 'research' %}active{% endif %}">Research</a>
-        <a href="/tables/tech" class="{% if selection is 'tech' %}active{% endif %}">Tech</a>
-        <a href="/tables/everything-else" class="{% if selection is 'everything-else' %}active{% endif %}">Everything else</a>
+        <a href="/explore/hiring" class="{% if selection is 'hiring' %}active{% endif %}">Hiring</a>
+        <a href="/explore/marketing" class="{% if selection is 'marketing' %}active{% endif %}">Marketing</a>
+        <a href="/explore/media" class="{% if selection is 'media' %}active{% endif %}">Media</a>
+        <a href="/explore/operations" class="{% if selection is 'operations' %}active{% endif %}">Operations</a>
+        <a href="/explore/people" class="{% if selection is 'people' %}active{% endif %}">People</a>
+        <a href="/explore/press" class="{% if selection is 'press' %}active{% endif %}">Press</a>
+        <a href="/explore/product" class="{% if selection is 'product' %}active{% endif %}">Product</a>
+        <a href="/explore/research" class="{% if selection is 'research' %}active{% endif %}">Research</a>
+        <a href="/explore/tech" class="{% if selection is 'tech' %}active{% endif %}">Tech</a>
+        <a href="/explore/everything-else" class="{% if selection is 'everything-else' %}active{% endif %}">Everything else</a>
       </div>
     </div>
   </div>
@@ -509,13 +509,13 @@
       }
     }); */#}
 
-    new Popper($('.home-heading-button'), $('.home-heading-dropdown'), {
+    /* new Popper($('.home-heading-button'), $('.home-heading-dropdown'), {
       placement: 'bottom-start'
     });
 
     $('.home-heading-button').click(function () {
       $('.home-heading-dropdown').toggleClass('show');
-    });
+    }); */
 
     var pageNumber = 1;
 

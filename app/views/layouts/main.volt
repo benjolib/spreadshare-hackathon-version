@@ -44,7 +44,7 @@
 </script>
 
 {# navbar #}
-{{ partial('layouts/navbar') }}
+{{ partial('layouts/header') }}
 
 {# main section #}
 <section class="main">

@@ -29,7 +29,7 @@ class Get extends ActionHandler implements MethodInterface
     {
         return false;
     }
-    
+
     /**
      * Process Get Method
      *
@@ -65,15 +65,12 @@ class Get extends ActionHandler implements MethodInterface
      */
     public function process()
     {
-        
         $query = filter_var($this->request->get('q'), FILTER_SANITIZE_STRING);
-        
-        if (!$query || strlen($query) < 3)
-        {
+
+        if (!$query || strlen($query) < 1) {
             throw new \InvalidArgumentException('Please provide at least 3 characters for searching.');
         }
-        
+
         return new Records(Table::searchTableByName($query));
     }
-    
 }

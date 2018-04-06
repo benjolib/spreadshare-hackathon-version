@@ -152,8 +152,8 @@
           <a class="about-list__action" href="#">Collaborate</a>
           <a class="about-list__action" href="/download/table/{{table['id']}}/csv">Download</a>
           <a class="about-list__action" href="#comment">Comment</a>
-          <a class="about-list__action l-button" href="javascript:;">Flag</a>
-          <div class="dropdown flag-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown" data-dropdown-placement="right">
+          <a class="about-list__action l-button" href="javascript:;" data-dropdown-placement="right">Flag</a>
+          <div class="dropdown flag-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
             <a href="flag/{{table['id']}}/duplicate">Duplicate</a>
             <a href="flag/{{table['id']}}/spam">Spam</a>
             <a href="flag/{{table['id']}}/copyright">Copyright</a>
@@ -371,27 +371,6 @@
 {% block scripts %}
 <script type="text/javascript">
   $(document).ready(function () {
-    // pops
-
-    var bindPops = function () {
-      $('.l-button:not(.bound)').each(function () {
-        var $button = $(this);
-        var $dropdown = $button.next('.l-dropdown');
-
-        new Popper($button, $dropdown, {
-          placement: $dropdown.data('dropdown-placement') || 'bottom-end',
-        });
-
-        $button.click(function () {
-          $dropdown.toggleClass('show');
-        });
-
-        $button.addClass('bound');
-      });
-    };
-
-    bindPops();
-
     // binds
 
     $('.list-tab-button-discussion').on('click', function (e) {

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="19px" height="22px" viewBox="0 0 19 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.2 (51160) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 4</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Header-Bar" transform="translate(-1305.000000, -38.000000)" stroke="#6A7C94" stroke-width="1.53">
+            <g id="Group-4" transform="translate(1306.000000, 39.000000)">
+                <path d="M8.48430703,18 C8.48430703,18 3.0572561,18 1.44178573,18 C-0.173684642,18 -0.13596116,16.4468184 0.157678419,15.6365524 C1.16836593,12.8478253 2.9105872,13.3486904 2.9105872,11.095533 C2.9105872,9.54999827 2.9105872,8.03563891 2.9105872,5.92600602 C2.9105872,1.56586277 7.39636183,1 8.5,1 C9.60363817,1 14.0894128,1.56586277 14.0894128,5.92600602 C14.0894128,8.03563891 14.0894128,9.54999827 14.0894128,11.095533 C14.0894128,13.3486904 15.8316341,12.8478253 16.8423216,15.6365524 C17.1359612,16.4468184 17.1736846,18 15.5582143,18 C13.9427439,18 8.51569297,18 8.51569297,18 L8.48430703,18 Z" id="Shape"></path>
+                <path d="M11,18 C11,19.1043148 9.8806899,20 8.5,20 C7.1193101,20 6,19.1045519 6,18" id="Shape"></path>
+                <path d="M7,1 C7,1 7.43191964,0 8.55357143,0 C9.6755276,0 10,0.960167131 10,0.960167131" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>
