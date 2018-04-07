@@ -83,7 +83,7 @@
         prevSearch = searchEl;
         if (searchEl.length > 0) {
           // append href link
-          $(".all-results").attr('href', '/search?query=" + searchEl + "')
+          $(".all-results").attr('href', '/search?query=' + searchEl + '')
             window.clearTimeout(timer);
             timer = window.setTimeout(function () {
               // AJAX Query
@@ -323,8 +323,12 @@
         });
 
         $button.click(function () {
+          console.log('open dropdown');
           $('.l-dropdown').removeClass('show');
-          $dropdown.toggleClass('show');
+          $dropdown.addClass('show');
+          if ($button.data('dropdown-active-class')) {
+            $button.addClass($button.data('dropdown-active-class'));
+          }
         });
 
         $button.addClass('bound');
@@ -341,8 +345,17 @@
     }
 
     $('body').on('click', function (e) {
+      console.log('click anywhere close');
       $('.l-dropdown').each(function (index, el) {
         hidePopover(el, e);
+      });
+      $('.l-button').each(function (index, item) {
+        var $item = $(item);
+        if (!$item.is(e.target) && $item.has(e.target).length === 0 && !$('.l-dropdown').is(e.target) && $('.l-dropdown').has(e.target).length === 0){
+          if ($item.data('dropdown-active-class') && $item.hasClass($item.data('dropdown-active-class'))) {
+            $item.removeClass($item.data('dropdown-active-class'));
+          }
+        }
       });
     });
 

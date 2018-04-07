@@ -3,7 +3,7 @@
     <td>
       {% if isAjax %}<input class="moreToLoad" type="hidden" value="{{ moreToLoad }}" />{% endif %}
       <div class="{{ table['flags'] === '2' ? 're-table-green' : '' }}">{{ table['flags'] === '2' ? 'PUBLISHED' : 'DRAFT' }}</div>
-      <a href="/table/{{ table['id'] }}"><h3>{{ table['title'] }}</h3></a>
+      <a href="/list/{{ table['id'] }}"><h3>{{ table['title'] }}</h3></a>
       <p>{{ table['tagline'] }}</p>
     </td>
     <td>

@@ -1616,6 +1616,9 @@
       padding-bottom: 70px;
     }
   }
+  &--search {
+    padding-top: 73px;
+  }
   &--large {
     display: flex;
     flex-direction: column;
@@ -3044,7 +3047,7 @@
   &__search-open {
     position: absolute;
     top: 0;
-    left: 0;
+    left: -9px;
     background: white;
     height: 89px;
     width: 526px;
@@ -3228,6 +3231,81 @@
       text-align: center;
       margin-right: 10px;
       margin-top: auto;
+    }
+  }
+}
+
+.search-filter {
+  &__label {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 12px;
+    color: #6a7c94;
+    letter-spacing: 0.5px;
+    margin-bottom: 16px;
+  }
+  &__dropdowns {
+    display: flex;
+    margin-bottom: 72px;
+  }
+  &__dropdown-button {
+    background: #ffffff;
+    border: 1px solid #6cc69d;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
+    border-radius: 2px;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: bold;
+    font-size: 16px;
+    color: #6cc69d;
+    letter-spacing: -0.39px;
+    width: 380px;
+    height: 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+    cursor: pointer;
+    &:first-of-type {
+      margin-right: 24px;
+    }
+    &--active {
+      opacity: 0;
+    }
+  }
+  &__dropdown {
+    background: #ffffff;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
+    border-radius: 2px;
+    letter-spacing: -0.39px;
+    width: 380px;
+    height: 432px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #b1bbc7;
+    margin-top: -56px;
+  }
+  &__dropdown-inner {
+    font-family: 'Roboto Mono', monospace;
+    font-weight: bold;
+    font-size: 16px;
+    color: #6cc69d;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+    height: 55px;
+  }
+  &__dropdown-menu {
+    padding: 0 24px;
+    &__col1 {
+      width: 168px;
+    }
+    a {
+      font-family: 'Roboto Mono', monospace;
+      font-weight: bold;
+      font-size: 14px;
+      color: #6a7c94;
+      letter-spacing: 0.5px;
+      padding: 6px 0 7px 0;
     }
   }
 }

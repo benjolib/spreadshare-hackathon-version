@@ -26,24 +26,21 @@ use Phalcon\Logger;
  * @version   $Version$
  * @package   DS\Controller
  */
-class SearchController
-    extends BaseController
+class SearchController extends BaseController
 {
     /**
      * Home
      */
     public function indexAction($order = 'newest')
     {
-        try
-        {
+        try {
             $searchController = new Get();
             $searchController->setDI($this->getDI());
             $results = $searchController->process();
             $tables  = $results->getData();
-            
+
             // Prepare ordering
-            switch ($order)
-            {
+            switch ($order) {
                 case 'most-upvoted':
                     $orderBy = TableStats::class . ".votesCount DESC";
                     break;
@@ -57,40 +54,37 @@ class SearchController
                     $orderBy = Tables::class . '.createdAt DESC';
                     break;
             }
-            
+
             $this->view->setVar('totalCount', $tables['hits']['total']);
             $this->view->setVar('query', $this->request->get('query'));
             // Assign all topics and types for the sidebar
             $this->view->setVar('topics', Topics::find());
             $this->view->setVar('types', Types::find());
             $this->view->setVar('entity', [[]]);
-            
+
             // Prepare the table filter
             $tableFilter            = new TableFilter();
             $tableFilter->topic     = $this->request->get('topic', null, '');
             $tableFilter->type      = $this->request->get('type', null, '');
             $tableFilter->locations = $this->request->get('locations', null, []);
             $tableFilter->tags      = $this->request->get('tags', null, []);
-            
+
             // If total hits greater than zero
-            if ($tables['hits']['total'] > 0)
-            {
+            if ($tables['hits']['total'] > 0) {
                 $tableFilter->tableIds = array_column($tables['hits']['hits'], '_id');
-            }
-            else
-            {
+            } else {
                 $tableFilter->tableIds = [0];
             }
-            
+
             // Assign locations and tags with title and id mapping so that react-select has got a valid pre-selection
             $locations = new Locations;
             $this->view->setVar('filteredLocations', $locations->getByIds($tableFilter->getLocations()));
             $tags = new Tags;
             $this->view->setVar('filteredTags', $tags->getByIds($tableFilter->getTags()));
-            
+
             $this->view->setVar('sidebarFilter', $tableFilter);
             $this->view->setVar('order', $order);
-            
+
             $tableResult = (new Tables())
                 ->findTablesAsArray(
                     $this->serviceManager->getAuth()->getUserId(),
@@ -99,16 +93,13 @@ class SearchController
                     0,
                     $orderBy
                 );
-            
+
             // Filter tables by tableFilter
             $this->view->setVar('tables', $tableResult);
             $this->view->setVar('tablesCount', count($tableResult));
             $this->view->setMainView('search/index');
-        }
-        catch (Exception $e)
-        {
+        } catch (Exception $e) {
             Application::instance()->log($e->getMessage(), Logger::CRITICAL);
         }
     }
-    
 }

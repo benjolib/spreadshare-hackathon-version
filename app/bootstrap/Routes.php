@@ -241,6 +241,14 @@ return [
         'methods' => ['GET', 'POST'],
     ],
     [
+        'url' => '/search',
+        'paths' => [
+            'controller' => 'Search',
+            'action' => 'index',
+        ],
+        'methods' => ['GET', 'POST'],
+    ],
+    [
         'url' => '/karma',
         'paths' => [
             'controller' => 'Karma',

@@ -8,144 +8,100 @@
 
 {# main section #}
 {% block content %}
-
-<form method="GET" id="searchSidebarForm">
-    {# content #}
-    <input type="hidden" name="query" value="{{ query }}" />
-
-    <div class="container container--home">
-        {# tables content #}
-        <div class="container__content">
-
-            {# filters #}
-            <div class="main__content__tables__filters">
-                <div class="main__content__tables__filters__left">
-                    <span class="main__content__tables__filters__left__searchTitle"> Search results ({{ tablesCount }} of {{ totalCount }})</span>
-                </div>
-            </div>
-
-            {# cards #}
-            <div class="tables__content__main__cards">
-                {% if tables %}
-                    {% for table in tables %}
-                        {{ partial('partials/table') }}
-                    {% endfor %}
-                {% else %}
-
-                <div class="tables__content__main__cards__item center" style="padding:40px;">
-                    <div>
-                        <img src="/assets/images/desktop.png" alt="" />
-                        <p>&nbsp;</p>
-                        <p>We couldn't find any tables matching your search.</p>
-                    </div>
-                </div>
-                {% endif %}
-            </div>
-        </div>
-
-        {# sidebar wrapper #}
-        <div class="aside__wrapper">
-
-            {# sidebar 1 #}
-            <aside class="aside aside--home" id="filterByEntity">
-                <div class="main__content__sidebar__option" id="filterEntity">
-                    <span>Filter Search Results</span>
-                </div>
-                <ul class="filter open filter--entity">
-                    <li>
-                        <label class="selected">
-                            <input type="radio" name="entity" checked="checked" value="">All</input>
-                        </label>
-                    </li>
-                </ul>
-
-            </aside>
-
-
-            {# sidebar 2 #}
-            <aside class="aside aside--home" id="filterByTopic">
-                <div class="main__content__sidebar__option" id="topicFilter">
-                    <span>Filter by Topic</span>
-                </div>
-                <ul class="filter open filter--topic {% if sidebarFilter.topic %}open{% endif %}">
-                    <li>
-                        <label {% if sidebarFilter.topic== "" %}class="selected"{% endif %}>
-                        <input type="radio" name="topic" {% if sidebarFilter.topic== "" %}checked="checked"{% endif %} value="" /> All
-                        </label>
-                    </li>
-                    {% for topic in topics %}
-                    <li>
-                        <label {% if sidebarFilter.topic== topic.id %}class="selected" {% endif %} title="{{ topic.title|e }}">
-                            <input type="radio" name="topic" {% if sidebarFilter.topic== topic.id %}checked="checked" {% endif %} value="{{ topic.id }}" /> {{ topic.title|e }}
-                        </label>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </aside>
-
-            {# sidebar 3 #}
-            <aside class="aside aside--home" id="filterByType">
-                <div class="main__content__sidebar__option" id="typeFilter">
-                    <span>Filter by Table Type</span>
-                </div>
-                <ul class="filter open filter--type {% if sidebarFilter.type %}open{% endif %}">
-                    <li>
-                        <label {% if sidebarFilter.type== "" %}class="selected"{% endif %}>
-                        <input type="radio" name="type" {% if sidebarFilter.type== "" %}checked="checked"{% endif %} value="" />All</label>
-                    </li>
-                    {% for type in types %}
-                    <li>
-                        <label {% if sidebarFilter.type== type.id %}class="selected" {% endif %} title="{{ type.title|e }}">
-                            <input type="radio" name="type" {% if sidebarFilter.type== type.id %}checked="checked" {% endif %} value="{{ type.id }}" /> {{ type.title|e }}
-                        </label>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </aside>
-
-            {# sidebar 4 #}
-            <aside class="aside aside--home" id="filterByTags">
-                <div class="main__content__sidebar__option" id="tagFilter">
-                    <span>Filter by Tags</span>
-                </div>
-                <div id="TagsSelect" data-name="tags[]" data-value="{{ reactArray(filteredTags) }}" data-submit-form-on-change="searchSidebarForm" data-placeholder="" class="react-component"></div>
-            </aside>
-
-            {# sidebar 5 #}
-            <aside class="aside aside--home" id="filterByLocation">
-                <div class="main__content__sidebar__option" id="locationFilter">
-                    <span>Filter by location</span>
-                </div>
-                <div id="LocationSelect" data-name="locations[]" data-value="{{ reactArray(filteredLocations) }}" data-submit-form-on-change="searchSidebarForm" data-placeholder=""
-                     class="react-component"></div>
-            </aside>
-        </div>
+<div class="re-page re-page--search">
+  {# <div class="u-flex u-sm-flexCol u-md-flexRow u-flexJustifyBetween u-md-flexAlignItemsEnd lists-page-space">
+    <div>
+      <h1 class="re-heading">Lists</h1>
+      <h2 class="re-subheading re-subheading--button-below">Manage all your lists in one place.</h2>
     </div>
-</form>
+    <div>
+      <a href="/table/add" class="re-button">Create a List</a>
+    </div>
+  </div> #}
+  <div class="search-filter ">
+    <div class="search-filter__label">FILTER BY</div>
+    <div class="search-filter__dropdowns">
+      <div class="search-filter__dropdown-button l-button"  data-dropdown-placement="bottom" data-dropdown-active-class="search-filter__dropdown-button--active">
+        Topics<img src="/assets/images/dropdown-arrow-up.svg" />
+      </div>
+      <div class="search-filter__dropdown dropdown l-dropdown">
+        <div class="search-filter__dropdown-inner">Topics<img src="/assets/images/dropdown-arrow-down.svg" /></div>
+        <div class="search-filter__dropdown-menu u-flex u-flexCol u-md-flexRow">
+          <div class="u-flex u-flexCol search-filter__dropdown-menu__col1">
+            <a href="/explore/ai" class="{% if '' is 'ai' %}active{% endif %}">AI</a>
+            <a href="/explore/blockchain" class="{% if '' is 'blockchain' %}active{% endif %}">Blockchain</a>
+            <a href="/explore/bots" class="{% if '' is 'bots' %}active{% endif %}">Bots</a>
+            <a href="/explore/business" class="{% if '' is 'business' %}active{% endif %}">Business</a>
+            <a href="/explore/crypto" class="{% if '' is 'crypto' %}active{% endif %}">Crypto</a>
+            <a href="/explore/culture" class="{% if '' is 'culture' %}active{% endif %}">Culture</a>
+            <a href="/explore/design" class="{% if '' is 'design' %}active{% endif %}">Design</a>
+            <a href="/explore/engineering" class="{% if '' is 'engineering' %}active{% endif %}">Engineering</a>
+            <a href="/explore/finance" class="{% if '' is 'finance' %}active{% endif %}">Finance</a>
+            <a href="/explore/fundraising" class="{% if '' is 'fundraising' %}active{% endif %}">Fundraising</a>
+            <a href="/explore/growth" class="{% if '' is 'growth' %}active{% endif %}">Growth</a>
+          </div>
+          <div class="u-flex u-flexCol search-filter__dropdown-menu__col2">
+            <a href="/explore/hiring" class="{% if '' is 'hiring' %}active{% endif %}">Hiring</a>
+            <a href="/explore/marketing" class="{% if '' is 'marketing' %}active{% endif %}">Marketing</a>
+            <a href="/explore/media" class="{% if '' is 'media' %}active{% endif %}">Media</a>
+            <a href="/explore/operations" class="{% if '' is 'operations' %}active{% endif %}">Operations</a>
+            <a href="/explore/people" class="{% if '' is 'people' %}active{% endif %}">People</a>
+            <a href="/explore/press" class="{% if '' is 'press' %}active{% endif %}">Press</a>
+            <a href="/explore/product" class="{% if '' is 'product' %}active{% endif %}">Product</a>
+            <a href="/explore/research" class="{% if '' is 'research' %}active{% endif %}">Research</a>
+            <a href="/explore/tech" class="{% if '' is 'tech' %}active{% endif %}">Tech</a>
+            <a href="/explore/everything-else" class="{% if '' is 'everything-else' %}active{% endif %}">Everything else</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="search-filter__dropdown-button l-button" data-dropdown-placement="bottom" data-dropdown-active-class="search-filter__dropdown-button--active">
+        Tags<img src="/assets/images/dropdown-arrow-up.svg" />
+      </div>
+      <div class="search-filter__dropdown dropdown l-dropdown">
+        <div class="search-filter__dropdown-inner">Tags<img src="/assets/images/dropdown-arrow-down.svg" /></div>
+        <div class="search-filter__dropdown-menu"></div>
+      </div>
+    </div>
+  </div>
+
+  {% if tables is defined AND tables %}
+    <table class="re-table">
+      <thead>
+        <tr>
+          <th style="padding-bottom: 16px;padding-left:2px;">LISTS</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{ partial('search/content') }}
+      </tbody>
+    </table>
+  {% endif %}
+  {# <div class="u-flex u-flexJustifyCenter">
+    <a href="#" class="re-button re-button--load-more" {{ moreToLoad ? '' : 'style="display:none;"' }}>Load More</a>
+  </div> #}
+</div>
 {% endblock %}
 
 {% block scripts %}
 <script type="text/javascript">
   $(document).ready(function () {
+    var pageNumber = 1;
 
-    $('#searchSidebarForm ul.filter > li > label').on('change', function (ev) {
-      document.getElementById('searchSidebarForm').submit();
+    $('.re-button--load-more').on('click', function (e) {
+      e.preventDefault();
+      $.ajax(window.location.pathname + '?page=' + pageNumber)
+        .done(function (response) {
+          if (response) {
+            $('.re-table tbody').append(response);
+            pageNumber += 1;
+            if (!$('<div>' + response + '</div>').find('.moreToLoad').val()) {
+              $('.re-button--load-more').hide();
+            }
+            window.bindPops();
+          }
+        });
     });
   });
-
-  // $('.navbar__search__filter').on('click', function () {
-  // 	$('.filter').toggleClass('open');
-  // 	window.location.hash = "#filters";
-  // });
-
-  // $('#topicFilter').on('click', function () {
-  // 	$('.filter--topic').toggleClass('open');
-  // });
-
-  // $('#typeFilter').on('click', function () {
-  // 	$('.filter--type').toggleClass('open');
-  // });
-
-
 </script>
 {% endblock %}
