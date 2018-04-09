@@ -86,6 +86,7 @@ class ListController extends BaseController
                              ->setVotesCount(0)
                              ->setComment($this->request->getPost('comment'))
                              ->create();
+                    $this->flash->success('Comment added - Your comment was added');
                     header('Location: /list/' . $tableId);
                 }
             }
