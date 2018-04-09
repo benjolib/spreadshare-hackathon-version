@@ -15,7 +15,8 @@ namespace DS\Model;
  *
  * @method static truncate(string $str, int $maxLen = 35, string $suffix = '...')
  */
-class Tools {
+class Tools
+{
     /**
      * @param string $str
      * @param int   $maxLen
@@ -25,10 +26,10 @@ class Tools {
      */
     public function truncate($str, $maxLen = 30, $suffix = '...')
     {
-      if(strlen($str) > $maxLen) {
-        $str = trim(substr($str, 0, $maxLen))."...";
-      }
-      return $str;
+        if (strlen($str) > $maxLen) {
+            $str = trim(substr($str, 0, $maxLen))."...";
+        }
+        return $str;
     }
 
     /**
@@ -39,7 +40,18 @@ class Tools {
      */
     public function round($number, $decimalPlaces = 0)
     {
-      return round($number, $decimalPlaces);
+        return round($number, $decimalPlaces);
+    }
+
+    /**
+     * @param float $number
+     * @param int   $decimalPlaces
+     *
+     * @return float $number
+     */
+    public function split($str, $delimiter)
+    {
+        return explode($delimiter, $str);
     }
 
     /**

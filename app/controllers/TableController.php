@@ -52,7 +52,7 @@ class TableController extends BaseController implements LoginAwareController
 
             if ($tableModel->getOwnerUserId() == $userId) {
                 $tableModel->delete();
-                $this->flash->success('Your table has been successfully deleted.');
+                $this->flash->success('Table deleted - Your table has been successfully deleted.');
 
                 header('Location:/user/' . $this->serviceManager->getAuth()->getUser()->getHandle() . '/tables');
             } else {

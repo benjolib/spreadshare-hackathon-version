@@ -37,13 +37,19 @@ return function (\DS\Interfaces\GeneralApplication $application, Phalcon\Di\Fact
                                 }
                             );
 
+                            $compiler->addFilter(
+                                'split',
+                                function ($str, $delimiter) {
+                                    return 'DS\Model\Tools::split(' . $str . ')';
+                                }
+                            );
+
                             return $volt;
                         },
                 ]
             );
 
             return $view;
-
         }
     );
 
@@ -75,5 +81,4 @@ return function (\DS\Interfaces\GeneralApplication $application, Phalcon\Di\Fact
         }
     );
     */
-
 };

@@ -3309,3 +3309,61 @@
     }
   }
 }
+
+.flash {
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  z-index: 999999;
+  overflow: hidden;
+  pointer-events: none;
+  &__message {
+    background: #ffffff;
+    border: 1px solid #f8f8fb;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
+    border-radius: 4px;
+    width: 305px;
+    padding: 15px 18px 14px 18px;
+    margin-bottom: 9px;
+    transition: transform 0.4s ease-in-out;
+    pointer-events: all;
+    &__heading {
+      font-family: 'Lato', sans-serif;
+      font-weight: bold;
+      font-size: 16px;
+      color: #2a1e3e;
+      letter-spacing: -0.43px;
+      margin-bottom: 2px;
+    }
+    &__text {
+      font-family: 'Lato', sans-serif;
+      font-size: 16px;
+      color: #bbbbbb;
+      letter-spacing: -0.43px;
+    }
+    &--hide {
+      transform: translate3d(315px, 0px, 0px);
+    }
+    &--success & {
+      &__text {
+        color: #6cc69d;
+      }
+    }
+    &--warning & {
+      &__text {
+        color: #c6aa6c;
+      }
+    }
+    &--notice & {
+      &__text {
+        color: #bbbbbb;
+      }
+    }
+    &--error & {
+      &__text {
+        color: #f97a7a;
+      }
+    }
+  }
+}

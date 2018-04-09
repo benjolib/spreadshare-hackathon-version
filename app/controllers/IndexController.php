@@ -47,10 +47,10 @@ class IndexController extends BaseController
             if ($this->request->get('msg')) {
                 switch ($this->request->get('msg')) {
                     case "1":
-                        $this->flash->success('Your table has been successfully deleted.');
+                        $this->flash->success('Table deleted - Your table has been successfully deleted.');
                         break;
                     case "2":
-                        $this->flash->success('Authorization request has been denied.');
+                        $this->flash->error('Authorization denied - Authorization request has been denied.');
                         break;
                 }
             }

@@ -1,32 +1,32 @@
-.flash {
-  font-size: 14px;
-  font-weight: 500;
-  display: flex;
-  border: 1px solid black;
-  border-radius: 6px;
-  width: 100%;
-  align-self: center;
-  @include rem2(padding, 5, 10);
-  @include rem(margin-bottom, 30);
-
- &-success {
-  background: $success;
-  border-color: darken($success, 8%);
-  color: lighten($success, 60%);
- }
- &-warning {
-  background: $warning;
-  border-color: darken($warning, 8%);
-  color: darken($warning, 30%);
- }
- &-notice {
-  background: $notice;
-  border-color: darken($notice, 8%);
-  color: darken($notice, 20%);
- }
- &-error {
-  background: $error;
-  border-color: darken($error, 8%);
-  color: darken($error, 20%);
- }
-}
+// .flash {
+//   font-size: 14px;
+//   font-weight: 500;
+//   display: flex;
+//   border: 1px solid black;
+//   border-radius: 6px;
+//   width: 100%;
+//   align-self: center;
+//   @include rem2(padding, 5, 10);
+//   @include rem(margin-bottom, 30);
+//
+//  &-success {
+//   background: $success;
+//   border-color: darken($success, 8%);
+//   color: lighten($success, 60%);
+//  }
+//  &-warning {
+//   background: $warning;
+//   border-color: darken($warning, 8%);
+//   color: darken($warning, 30%);
+//  }
+//  &-notice {
+//   background: $notice;
+//   border-color: darken($notice, 8%);
+//   color: darken($notice, 20%);
+//  }
+//  &-error {
+//   background: $error;
+//   border-color: darken($error, 8%);
+//   color: darken($error, 20%);
+//  }
+// }

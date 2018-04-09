@@ -193,12 +193,16 @@
     });
 
     // flash messages timeout
-    var $flash = $('.flash');
-    if ($flash.length > 0) {
-      setTimeout(function () {
-        $flash.css('display', 'none');
-      }, 7000);
-    }
+    var time = 150;
+    var $flashes = $('.flash__message');
+    setTimeout(function () {
+      $flashes.each(function (index, item) {
+        var $flash = $(item);
+        setTimeout(function () {
+          $flash.addClass('flash__message--hide');
+        }, time * index)
+      });
+    }, 7000);
 
     // search bar shadow
     var $searchBar = $('.navbar__search');

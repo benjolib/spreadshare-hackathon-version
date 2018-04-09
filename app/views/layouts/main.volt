@@ -48,7 +48,21 @@
 
 {# main section #}
 <section class="main">
-  {{ flash.output() }}
+  {# {{ dump(flash.getMessages()) }} #}
+  <div class="flash">
+
+    {% set flashMessages = flash.getMessages() %}
+    {% if flashMessages %}
+      {% for type, messages in flashMessages %}
+        {% for message in messages %}
+          <div class="flash__message flash__message--{{ type }}">
+            <div class="flash__message__heading">{{ message|split(' - ')[0] }}</div>
+            <div class="flash__message__text">{{ message|split(' - ')[1] }}</div>
+          </div>
+        {% endfor %}
+      {% endfor %}
+    {% endif %}
+  </div>
 
   {# content #}
   {% block content %}{% endblock %}

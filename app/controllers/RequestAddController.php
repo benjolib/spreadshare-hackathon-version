@@ -21,7 +21,7 @@ class RequestAddController extends BaseController implements LoginAwareControlle
 
         // Check if table exists
         if ($table->count() === 0) {
-            $this->flash->error('The table you are trying to add to does not exist');
+            $this->flash->error('Cannot find table - The table you are trying to add to does not exist');
             $this->_redirectBack();
         }
 
@@ -40,7 +40,7 @@ class RequestAddController extends BaseController implements LoginAwareControlle
         $contentcleaned = str_replace(['[', ']', ',', '"'], '', $content);
 
         if (strlen($contentcleaned) === 0) {
-            $this->flash->error('You have to fill at least a cell');
+            $this->flash->error('Listing empty - You can’t submit an empty listing');
             $this->_redirectBack();
             return;
         }
@@ -56,7 +56,7 @@ class RequestAddController extends BaseController implements LoginAwareControlle
 
         $submission->save();
 
-        $this->flash->success('Your submission is waiting for approval');
+        $this->flash->success('Listing submitted - Your listing is pending review ');
         $this->_redirectBack();
     }
 
@@ -68,19 +68,19 @@ class RequestAddController extends BaseController implements LoginAwareControlle
 
         // Check if table exists
         if ($request->count() === 0) {
-            $this->flash->error('The submission you are trying to edit does not exist');
+            $this->flash->error('Submission not found - The submission you are trying to edit does not exist');
             $this->_redirectBack();
         }
 
         $user = $this->serviceManager->getAuth()->getUser();
 
         if ($request->getFirst()->user_id != $user->id) {
-            $this->flash->error('You do not have permission to edit this submission');
+            $this->flash->error('No permission - You do not have permission to edit this submission');
             $this->_redirectBack();
         }
 
         $request->delete();
-        $this->flash->success('You have revoked this submission');
+        $this->flash->success('Submission revoked - You have revoked this submission');
         $this->_redirectBack();
     }
 }

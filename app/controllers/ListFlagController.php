@@ -28,7 +28,7 @@ class ListFlagController extends BaseController implements LoginAwareController
 
         // Check if table exists
         if ($table->count() === 0) {
-            $this->flash->error('The table you are trying to flag to does not exist');
+            $this->flash->error('Table not found - The table you are trying to flag to does not exist');
             $this->_redirectBack();
         }
 
@@ -38,7 +38,7 @@ class ListFlagController extends BaseController implements LoginAwareController
                           ->setFlag($reason)
                           ->create();
 
-        $this->flash->success('You have flagged this list');
+        $this->flash->success("List flagged - Thanks for taking care, we’ll review this list");
         $this->_redirectBack();
     }
 }

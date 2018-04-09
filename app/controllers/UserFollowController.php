@@ -21,14 +21,14 @@ class UserFollowController extends BaseController implements LoginAwareControlle
 
         // Check if table exists
         if ($usertofollow->count() === 0) {
-            $this->flash->error('The user you are trying to follow does not exist');
+            $this->flash->error('User not found - The user you are trying to follow does not exist');
             $this->_redirectBack();
         }
 
         $follow = new UserFollower();
         $follow->toggleFollow($user, $follower);
 
-        $this->flash->success('You are now following this user');
+        $this->flash->success('Follow success - You are now following this user');
         $this->_redirectBack();
     }
 }

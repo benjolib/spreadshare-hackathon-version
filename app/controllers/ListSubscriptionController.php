@@ -22,14 +22,14 @@ class ListSubscriptionController extends BaseController implements LoginAwareCon
 
         // Check if table exists
         if ($table->count() === 0) {
-            $this->flash->error('The table you are trying to add to does not exist');
+            $this->flash->error('Table not found - The table you are trying to add to does not exist');
             $this->_redirectBack();
         }
 
         $subscription = new TableSubscription();
         $subscription->subscribe($userId, $tableId);
 
-        $this->flash->success('You have been subscribed to this list');
+        $this->flash->success('Subscribed - You have been subscribed to this list');
         $this->_redirectBack();
     }
 }
