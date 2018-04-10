@@ -272,6 +272,22 @@ return [
         ],
         'methods' => ['GET', 'POST'],
     ],
+    [
+        'url' => '/sign-up',
+        'paths' => [
+            'controller' => 'TempSignUp',
+            'action' => 'index',
+        ],
+        'methods' => ['GET', 'POST'],
+    ],
+    [
+        'url' => '/sign-in',
+        'paths' => [
+            'controller' => 'TempSignIn',
+            'action' => 'index',
+        ],
+        'methods' => ['GET', 'POST'],
+    ],
 
     // api
 

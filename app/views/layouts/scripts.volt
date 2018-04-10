@@ -374,5 +374,42 @@
       $('.re-header__search-open').hide();
       $("input.navbar__search__field").val("");
     });
+
+    window.createAlert = function (type, heading, text, timeout) {
+      if (type !== 'notice' && type !== 'warning' && type !== 'success' && type !== 'error') {
+        console.error('createAlert fail: use a type (arg 0) of notice, warning, success or error');
+        return;
+      }
+
+      if (!heading) {
+        console.error('createAlert fail: supply a heading (arg 1)');
+        return;
+      }
+
+      if (!text) {
+        console.error('createAlert fail: supply text (arg 2)');
+        return;
+      }
+
+      timeout = timeout || 5000;
+
+      var $flashMessage = $(
+        '<div class="flash__message flash__message--' + type + ' flash__message--hide">' +
+          '<div class="flash__message__heading">' + heading + '</div>' +
+          '<div class="flash__message__text">' + text + '</div>' +
+        '</div>'
+      );
+
+      $('.flash').prepend($flashMessage);
+      setTimeout(function () {
+        $flashMessage.removeClass('flash__message--hide');
+      }, 0);
+      setTimeout(function () {
+        $flashMessage.addClass('flash__message--hide');
+        setTimeout(function () {
+          $flashMessage.remove();
+        }, 500);
+      }, timeout);
+    };
   });
 </script>

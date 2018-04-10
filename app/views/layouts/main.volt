@@ -44,13 +44,13 @@
 </script>
 
 {# navbar #}
-{{ partial('layouts/header') }}
+{% if hideHeader is empty or not hideHeader %}
+  {{ partial('layouts/header') }}
+{% endif %}
 
 {# main section #}
 <section class="main">
-  {# {{ dump(flash.getMessages()) }} #}
   <div class="flash">
-
     {% set flashMessages = flash.getMessages() %}
     {% if flashMessages %}
       {% for type, messages in flashMessages %}
