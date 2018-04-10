@@ -3,7 +3,7 @@
     <a class="re-header__logo" href="/"><img src="/assets/images/logo.png" /></a>
     <a class="re-header__item {{ exploreActive is not empty and exploreActive ? 'active': '' }}" href="/">Explore</a>
     <a class="re-header__item {{ forYouActive is not empty and forYouActive ? 'active': '' }}" href="/for-you">For You</a>
-    <a class="re-header__search" href="#"><img src="/assets/images/search.svg" /></a>
+    <a class="re-header__search" href="#"><img class="re-header__search__img" src="/assets/images/search.svg" /><img class="re-header__search__img-green" src="/assets/images/search-green.svg" /></a>
     <div class="re-header__search-open" style="{% if query is not defined %}display:none;{% endif %}">
       <img src="/assets/images/search-green.svg" />
       <input type="text" placeholder="Search" class="navbar__search__field" value="{% if query is defined %}{{ query }}{% endif %}" />
@@ -52,19 +52,19 @@
       </div>
 
       <a class="re-header__user l-button" data-dropdown-placement="bottom-end" data-dropdown-offset="48" href="javascript:;"><img src="{{ auth.getUser().getImage() }}" /></a>
-      <div class="l-dropdown dropdown user-dropdown u-flex">
+      <div class="l-dropdown dropdown re-header__user-dropdown user-dropdown u-flex">
         <div class="user-dropdown__column">
           <a href="/profile/{{ auth.getUser().handle }}" class="user-dropdown__item">
             <div class="user-dropdown__item__image user-dropdown__item__image--profile"><img src="{{ auth.getUser().getImage() }}" /></div>
             <div class="user-dropdown__item__text">
-              <h3>Profile</h3>
+              <h3>You</h3>
               <span>Your public profile</span>
             </div>
           </a>
           <a href="/lists" class="user-dropdown__item">
             <div class="user-dropdown__item__image"><img src="/assets/images/user-menu-lists.svg" /></div>
             <div class="user-dropdown__item__text">
-              <h3>Lists</h3>
+              <h3>Your Lists</h3>
               <span>All lists created by you</span>
             </div>
           </a>
@@ -72,7 +72,7 @@
             <div class="user-dropdown__item__image"><img src="/assets/images/user-menu-subscriptions.svg" /></div>
             <div class="user-dropdown__item__text">
               <h3>Subscriptions</h3>
-              <span>Lists you are subscribed to</span>
+              <span>Lists you are subscribed</span>
             </div>
           </a>
           <a href="/submissions" class="user-dropdown__item">
@@ -82,6 +82,22 @@
               <span>All listings you submitted</span>
             </div>
           </a>
+          <a href="/collaborations" class="user-dropdown__item">
+            <div class="user-dropdown__item__image"><img src="/assets/images/user-menu-collaborations.svg" /></div>
+            <div class="user-dropdown__item__text">
+              <h3>Collaborations</h3>
+              <span>Community requests to you</span>
+            </div>
+          </a>
+        </div>
+        <div class="user-dropdown__column">
+          <a href="/table/add" class="user-dropdown__item">
+            <div class="user-dropdown__item__image user-dropdown__item__image--fill-highlight"><img src="/assets/images/user-menu-create.svg" /></div>
+            <div class="user-dropdown__item__text">
+              <h3>Create List</h3>
+              <span>Here you can create a list</span>
+            </div>
+          </a>
           <a href="/karma" class="user-dropdown__item">
             <div class="user-dropdown__item__image"><img src="/assets/images/user-menu-karma.svg" /></div>
             <div class="user-dropdown__item__text">
@@ -89,32 +105,16 @@
               <span>Your Karma points</span>
             </div>
           </a>
-        </div>
-        <div class="user-dropdown__column">
-          <a href="/sales" class="user-dropdown__item">
-            <div class="user-dropdown__item__image"><img src="/assets/images/user-menu-sales.svg" /></div>
-            <div class="user-dropdown__item__text user-dropdown__item__text--dull">
-              <h3>Sales</h3>
-              <span>Your sold lists</span>
-            </div>
-          </a>
-          <a href="/purchases" class="user-dropdown__item">
-            <div class="user-dropdown__item__image"><img src="/assets/images/user-menu-purchases.svg" /></div>
-            <div class="user-dropdown__item__text user-dropdown__item__text--dull">
-              <h3>Purchases</h3>
-              <span>Your purchased lists</span>
-            </div>
-          </a>
           <a href="/history" class="user-dropdown__item">
             <div class="user-dropdown__item__image"><img src="/assets/images/user-menu-history.svg" /></div>
-            <div class="user-dropdown__item__text user-dropdown__item__text--dull">
+            <div class="user-dropdown__item__text">
               <h3>History</h3>
               <span>All lists you have seen</span>
             </div>
           </a>
           <a href="/settings" class="user-dropdown__item">
             <div class="user-dropdown__item__image"><img src="/assets/images/user-menu-settings.svg" /></div>
-            <div class="user-dropdown__item__text user-dropdown__item__text--dull">
+            <div class="user-dropdown__item__text">
               <h3>Settings</h3>
               <span>Manage your account</span>
             </div>
@@ -130,10 +130,10 @@
       </div>
 
       <a class="re-header__dotdotdot l-button" data-dropdown-placement="bottom-end" data-dropdown-offset="20" href="javascript:;"><img src="/assets/images/header-dotdotdot.svg" /></a>
-      <div class="l-dropdown dropdown user-dropdown u-flex" style="margin-top: 29px;height:294px;">
+      <div class="l-dropdown dropdown re-header__dotdotdot-dropdown user-dropdown u-flex" style="margin-top: 29px;">
         <div class="user-dropdown__column">
           <a href="/karma-challenge" class="user-dropdown__item">
-            <div class="user-dropdown__item__image user-dropdown__item__image--highlight"><img src="/assets/images/user-menu-karma-challenge.svg" /></div>
+            <div class="user-dropdown__item__image user-dropdown__item__image--fill-highlight"><img src="/assets/images/user-menu-karma-challenge.svg" /></div>
             <div class="user-dropdown__item__text">
               <h3>Karma Challenge</h3>
               <span>Earn money for contributing</span>
@@ -153,20 +153,13 @@
               <span>Want to join our team?</span>
             </div>
           </a>
+        </div>
+        <div class="user-dropdown__column">
           <a href="/faq" class="user-dropdown__item">
             <div class="user-dropdown__item__image"><img src="/assets/images/user-menu-faq.svg" /></div>
             <div class="user-dropdown__item__text">
               <h3>Frequently Asked</h3>
-              <span>Learn how Spreadshare works</span>
-            </div>
-          </a>
-        </div>
-        <div class="user-dropdown__column">
-          <a href="/sell" class="user-dropdown__item">
-            <div class="user-dropdown__item__image user-dropdown__item__image--highlight"><img src="/assets/images/user-menu-sell.svg" /></div>
-            <div class="user-dropdown__item__text">
-              <h3>Sell your Lists</h3>
-              <span>Earn money by selling lists</span>
+              <span>How Spreadshare works</span>
             </div>
           </a>
           <a href="/blog" class="user-dropdown__item">
@@ -180,9 +173,137 @@
             <div class="user-dropdown__item__image"><img src="/assets/images/user-menu-terms.svg" /></div>
             <div class="user-dropdown__item__text">
               <h3>Terms</h3>
-              <span>All lists you have seen</span>
+              <span>Terms, conditions & privacy</span>
             </div>
           </a>
+        </div>
+      </div>
+
+      <a class="re-header__hamburger l-button" data-dropdown-placement="bottom-end" href="javascript:;"><img src="/assets/images/hamburger.svg" /></a>
+      <div class="l-dropdown dropdown user-dropdown u-flex u-flexCol user-dropdown--no-margin">
+        <div class="u-flex user-dropdown__white-section">
+          <div class="user-dropdown__column">
+            <a href="/profile/{{ auth.getUser().handle }}" class="user-dropdown__item">
+              <div class="user-dropdown__item__image user-dropdown__item__image--profile"><img src="{{ auth.getUser().getImage() }}" /></div>
+              <div class="user-dropdown__item__text">
+                <h3>You</h3>
+                <span>Your public profile</span>
+              </div>
+            </a>
+            <a href="/lists" class="user-dropdown__item">
+              <div class="user-dropdown__item__image"><img src="/assets/images/user-menu-lists.svg" /></div>
+              <div class="user-dropdown__item__text">
+                <h3>Your Lists</h3>
+                <span>All lists created by you</span>
+              </div>
+            </a>
+            <a href="/subscriptions" class="user-dropdown__item">
+              <div class="user-dropdown__item__image"><img src="/assets/images/user-menu-subscriptions.svg" /></div>
+              <div class="user-dropdown__item__text">
+                <h3>Subscriptions</h3>
+                <span>Lists you are subscribed</span>
+              </div>
+            </a>
+            <a href="/submissions" class="user-dropdown__item">
+              <div class="user-dropdown__item__image"><img src="/assets/images/user-menu-submissions.svg" /></div>
+              <div class="user-dropdown__item__text">
+                <h3>Submissions</h3>
+                <span>All listings you submitted</span>
+              </div>
+            </a>
+            <a href="/collaborations" class="user-dropdown__item">
+              <div class="user-dropdown__item__image"><img src="/assets/images/user-menu-collaborations.svg" /></div>
+              <div class="user-dropdown__item__text">
+                <h3>Collaborations</h3>
+                <span>Community requests to you</span>
+              </div>
+            </a>
+          </div>
+          <div class="user-dropdown__column">
+            <a href="/table/add" class="user-dropdown__item">
+              <div class="user-dropdown__item__image user-dropdown__item__image--fill-highlight"><img src="/assets/images/user-menu-create.svg" /></div>
+              <div class="user-dropdown__item__text">
+                <h3>Create List</h3>
+                <span>Here you can create a list</span>
+              </div>
+            </a>
+            <a href="/karma" class="user-dropdown__item">
+              <div class="user-dropdown__item__image"><img src="/assets/images/user-menu-karma.svg" /></div>
+              <div class="user-dropdown__item__text">
+                <h3>Karma</h3>
+                <span>Your Karma points</span>
+              </div>
+            </a>
+            <a href="/history" class="user-dropdown__item">
+              <div class="user-dropdown__item__image"><img src="/assets/images/user-menu-history.svg" /></div>
+              <div class="user-dropdown__item__text">
+                <h3>History</h3>
+                <span>All lists you have seen</span>
+              </div>
+            </a>
+            <a href="/settings" class="user-dropdown__item">
+              <div class="user-dropdown__item__image"><img src="/assets/images/user-menu-settings.svg" /></div>
+              <div class="user-dropdown__item__text">
+                <h3>Settings</h3>
+                <span>Manage your account</span>
+              </div>
+            </a>
+            <a href="/logout" class="user-dropdown__item">
+              <div class="user-dropdown__item__image"><img src="/assets/images/user-menu-logout.svg" /></div>
+              <div class="user-dropdown__item__text user-dropdown__item__text--logout">
+                <h3>Logout</h3>
+                <span>See you soon</span>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="u-flex user-dropdown__grey-section">
+          <div class="user-dropdown__column">
+            <a href="/karma-challenge" class="user-dropdown__item">
+              <div class="user-dropdown__item__image user-dropdown__item__image--fill-highlight"><img src="/assets/images/user-menu-karma-challenge.svg" /></div>
+              <div class="user-dropdown__item__text">
+                <h3>Karma Challenge</h3>
+                <span>Earn money for contributing</span>
+              </div>
+            </a>
+            <a href="/about" class="user-dropdown__item">
+              <div class="user-dropdown__item__image"><img src="/assets/images/user-menu-about.svg" /></div>
+              <div class="user-dropdown__item__text">
+                <h3>About</h3>
+                <span>Who we are, what we do</span>
+              </div>
+            </a>
+            <a href="/jobs" class="user-dropdown__item">
+              <div class="user-dropdown__item__image"><img src="/assets/images/user-menu-jobs.svg" /></div>
+              <div class="user-dropdown__item__text">
+                <h3>Jobs</h3>
+                <span>Want to join our team?</span>
+              </div>
+            </a>
+          </div>
+          <div class="user-dropdown__column">
+            <a href="/faq" class="user-dropdown__item">
+              <div class="user-dropdown__item__image"><img src="/assets/images/user-menu-faq.svg" /></div>
+              <div class="user-dropdown__item__text">
+                <h3>Frequently Asked</h3>
+                <span>How Spreadshare works</span>
+              </div>
+            </a>
+            <a href="/blog" class="user-dropdown__item">
+              <div class="user-dropdown__item__image"><img src="/assets/images/user-menu-blog.svg" /></div>
+              <div class="user-dropdown__item__text">
+                <h3>Blog</h3>
+                <span>What inspires us to write</span>
+              </div>
+            </a>
+            <a href="/terms" class="user-dropdown__item">
+              <div class="user-dropdown__item__image"><img src="/assets/images/user-menu-terms.svg" /></div>
+              <div class="user-dropdown__item__text">
+                <h3>Terms</h3>
+                <span>Terms, conditions & privacy</span>
+              </div>
+            </a>
+          </div>
         </div>
       </div>
     {% else %}

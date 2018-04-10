@@ -1782,11 +1782,6 @@
   &__extra-text {
     font-family: 'Lato', sans-serif;
     font-weight: normal;
-    font-size: 12px;
-    line-height: 15px;
-    letter-spacing: -0.27px;
-
-    /* Get new listings to: */
     font-size: 9px;
     letter-spacing: -0.2px;
     line-height: 11px;
@@ -1802,6 +1797,27 @@
     width: 100px;
     margin: 12px 6px 0;
     height: 45px;
+  }
+  &--header {
+    display: inline-flex;
+    margin-left: auto;
+    margin-bottom: 0;
+    width: 206px;
+    margin-right: 4px;
+    margin-top: 4px;
+    height: 56px;
+    font-size: 16px;
+    line-height: 19px;
+    letter-spacing: 0.67px;
+    @media (min-width: 768px) {
+      margin-top: 2px;
+    }
+    span {
+      margin-right: 4px;
+    }
+    img {
+      margin-left: 12px;
+    }
   }
   @media (min-width: 768px) {
     font-size: 16px;
@@ -3006,8 +3022,11 @@
 .re-header {
   display: flex;
   justify-content: center;
-  height: 90px;
+  height: 88px;
   border-bottom: 1px solid #e4e4e4;
+  @media (min-width: 768px) {
+    height: 90px;
+  }
   &__inner {
     display: flex;
     align-items: center;
@@ -3017,12 +3036,17 @@
     position: relative;
   }
   &__logo {
+    display: none;
     margin-right: 28px;
+    @media (min-width: 768px) {
+      display: inline-block;
+    }
     img {
       margin-top: 6px;
     }
   }
   &__item {
+    display: none;
     font-family: 'Roboto Mono', monospace;
     font-weight: bold;
     font-size: 18px;
@@ -3030,9 +3054,11 @@
     letter-spacing: 0.8px;
     padding: 24px 6px 20px 6px;
     margin-right: 32px;
-    display: inline-flex;
     align-items: center;
     height: 91px;
+    @media (min-width: 768px) {
+      display: inline-flex;
+    }
     &.active {
       border-bottom: 1px solid #6cc69d;
     }
@@ -3040,8 +3066,22 @@
   &__search {
     padding: 4px;
     margin-left: 2px;
-    img {
+    &__img {
+      display: none;
       margin-top: 6px;
+    }
+    &__img-green {
+      display: inline-block;
+      margin-top: 2px;
+      margin-left: -7px;
+    }
+    @media (min-width: 768px) {
+      &__img {
+        display: inline-block;
+      }
+      &__img-green {
+        display: none;
+      }
     }
   }
   &__search-open {
@@ -3049,38 +3089,93 @@
     top: 0;
     left: -9px;
     background: white;
-    height: 89px;
-    width: 526px;
+    height: 87px;
+    width: 100%;
     display: flex;
+    @media (min-width: 768px) {
+      height: 89px;
+      width: 526px;
+    }
     img:first-of-type {
       padding-left: 40px;
-      margin-top: 8px;
+      margin-top: 4px;
+      margin-left: -8px;
+      @media (min-width: 768px) {
+        margin-top: 8px;
+      }
     }
     img:last-of-type {
-      padding: 0 20px;
+      padding: 0 16px;
       margin-top: 2px;
       cursor: pointer;
+      @media (min-width: 768px) {
+        padding: 0 20px;
+      }
     }
     input {
       width: 100%;
       border: none;
-      padding: 0 40px;
+      padding: 0px 34px;
       margin-top: 4px;
       outline: none;
+      letter-spacing: -0.39px;
+      z-index: 100;
+      @media (min-width: 768px) {
+        padding: 0 40px;
+      }
     }
   }
   &__add {
     margin-left: auto;
     margin-top: 8px;
+    display: none;
+    @media (min-width: 768px) {
+      display: inline-block;
+    }
   }
   &__paperPencil {
-    margin-top: 8px;
-    margin-left: 38px;
+    margin-top: 0px;
+    margin-left: auto;
+    @media (min-width: 768px) {
+      margin-top: 8px;
+      margin-left: 38px;
+    }
+    img {
+      width: 15px;
+      @media (min-width: 768px) {
+        width: auto;
+      }
+    }
+    span {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 11px;
+      color: #6cc69d;
+      text-align: right;
+      position: absolute;
+      letter-spacing: -0.29px;
+      top: -4px;
+      left: 14px;
+      @media (min-width: 768px) {
+        letter-spacing: -0.19px;
+        top: -7px;
+        left: 18px;
+      }
+    }
   }
   &__bell {
-    margin-top: 8px;
-    margin-left: 37px;
+    margin-top: 0px;
+    margin-left: 30px;
     position: relative;
+    @media (min-width: 768px) {
+      margin-top: 8px;
+      margin-left: 37px;
+    }
+    img {
+      width: 14px;
+      @media (min-width: 768px) {
+        width: auto;
+      }
+    }
     span {
       font-family: 'Roboto Mono', monospace;
       font-size: 11px;
@@ -3095,6 +3190,16 @@
   &__user {
     margin-top: 8px;
     margin-left: 34px;
+    display: none;
+    &-dropdown {
+      display: none;
+    }
+    @media (min-width: 768px) {
+      display: inline-block;
+      &-dropdown {
+        display: inline-block;
+      }
+    }
     img {
       width: 32px;
       height: 32px;
@@ -3105,44 +3210,89 @@
     margin-right: 0px;
     margin-top: 10px;
     margin-left: 21px;
+    display: none;
+    &-dropdown {
+      display: none;
+    }
+    @media (min-width: 768px) {
+      display: inline-block;
+      &-dropdown {
+        display: inline-block;
+      }
+    }
+  }
+  &__hamburger {
+    padding: 12px;
+    margin-left: 20px;
+    @media (min-width: 768px) {
+      display: none;
+    }
   }
 }
 
 .user-dropdown {
   margin-top: 26px;
-  width: 415px;
-  height: 356px;
+  width: calc(100% - 10px);
   border: 1px solid #f8f8fb;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
   border-radius: 4px;
-  padding: 32px 18px;
+  padding: 32px 18px 0px 18px;
+  left: 0;
+  @media (min-width: 768px) {
+    width: 415px;
+  }
   &__column {
     &:first-of-type {
-      width: 53%;
+      width: 56%;
+      @media (min-width: 768px) {
+        width: 53%;
+      }
     }
     &:last-of-type {
       width: 47%;
     }
   }
+  &--no-margin {
+    padding: 0px;
+  }
+  &__white-section {
+    padding: 21px 30px 8px 30px;
+  }
+  &__grey-section {
+    padding: 21px 30px 8px 30px;
+    background: #f8f8fb;
+  }
   &__item {
     display: flex;
-    margin-bottom: 27px;
+    margin-bottom: 22px;
+    @media (min-width: 768px) {
+      margin-bottom: 27px;
+    }
     &__image {
-      width: 24px;
-      height: 24px;
+      width: 18px;
+      height: 18px;
       border-radius: 9999px;
       box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-right: 8px;
-      &--profile img {
+      margin-right: 6px;
+      @media (min-width: 768px) {
         width: 24px;
         height: 24px;
-        border-radius: 9999px;
+        margin-right: 8px;
       }
-      &--highlight {
-        border: 1px solid #6cc69d;
+      &--profile img {
+        width: 18px;
+        height: 18px;
+        border-radius: 9999px;
+        @media (min-width: 768px) {
+          width: 24px;
+          height: 24px;
+        }
+      }
+      &--fill-highlight {
+        background: #50bc93;
       }
     }
     &__text {
@@ -3151,19 +3301,27 @@
       h3 {
         font-family: 'Roboto Mono', monospace;
         font-weight: bold;
-        font-size: 14px;
         color: #2a1e3e;
-        letter-spacing: 0.5px;
-        line-height: 19px;
+        font-size: 10.5px;
+        letter-spacing: 0.38px;
+        line-height: 12px;
         margin-top: 3px;
+        @media (min-width: 768px) {
+          letter-spacing: 0.5px;
+          line-height: 19px;
+          font-size: 14px;
+        }
       }
       span {
         font-family: 'Lato', sans-serif;
-        font-size: 12px;
         color: #b1bbc7;
-        letter-spacing: -0.32px;
-        line-height: 15px;
-        // display: flex;
+        font-size: 9px;
+        letter-spacing: -0.24px;
+        @media (min-width: 768px) {
+          letter-spacing: -0.32px;
+          line-height: 15px;
+          font-size: 12px;
+        }
       }
       &--dull {
         h3 {
@@ -3180,13 +3338,18 @@
 }
 
 .notification-dropdown {
-  width: 332px;
+  width: calc(100% - 10px);
+  left: 0;
   height: 510px;
-  margin-top: 30px;
+  margin-top: 40px;
   border: 1px solid #f8f8fb;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
   border-radius: 4px;
   padding: 18px 10px 18px 20px;
+  @media (min-width: 768px) {
+    width: 332px;
+    margin-top: 30px;
+  }
   &__notification {
     margin-bottom: 28px;
     &__image {
