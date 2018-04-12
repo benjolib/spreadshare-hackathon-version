@@ -15,9 +15,6 @@
 
   {% if submissions is defined AND submissions %}
     {% for submission in submissions %}
-
-
-
       <div class="u-flex">
         {% if submission['status'] === '0' %}
           <div class="submission-status submission-status--pending">PENDING</div>
@@ -84,7 +81,9 @@
                       {% else %}
                       {% set length = 0 %}
                       {% endif %}
-                    <td style="min-width: {{ length }}px;">{{ filterTableRowsContent(cell) }}</td>
+                    <td style="min-width: {{ length }}px;">
+                      {{ filterTableRowsContent(cell) }}
+                    </td>
                   {% endfor %}
                 {% endif %}
             </tr>
@@ -100,24 +99,6 @@
 {% block scripts %}
 <script type="text/javascript">
   $(document).ready(function () {
-    var resizeTimer;
-
-    var rowHeights = function () {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(function() {
-        $('.shadowcontain').each(function () {
-          var $this = $(this);
-          $this.height('auto');
-          setTimeout(function () {
-            $this.height($this.parents('tr').height() - 3);
-          }, 0);
-        });
-      }, 250);
-    };
-
-    $(window).resize(rowHeights);
-
-    rowHeights();
 
   });
 </script>

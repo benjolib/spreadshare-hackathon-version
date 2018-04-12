@@ -63,9 +63,9 @@
             {% for cell in row['content']|json_decode %}
               {% set len = filterTableRowsContent(cell.content)|striptags|length %}
                  {% if len > 160  %}
-                 {% set length = 500 %}
+                 {% set length = 480 %}
                  {% elseif len > 80 %}
-                 {% set length = 200 %}
+                 {% set length = 300 %}
                  {% elseif len > 40 %}
                  {% set length = 175 %}
                  {% elseif len > 20 %}
@@ -403,25 +403,6 @@
       $('.list-tab-content-collaborators').show();
     });
 
-    var resizeTimer;
-
-    var rowHeights = function () {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(function() {
-        $('.shadowcontain').each(function () {
-          var $this = $(this);
-          $this.height('auto');
-          setTimeout(function () {
-            $this.height($this.parents('tr').height() - 3);
-          }, 0);
-        });
-      }, 250);
-    };
-
-    $(window).resize(rowHeights);
-
-    rowHeights();
-
     var domUpdateVote = function ($el, vote) {
       var $votesCounter = $el.find('div');
       var votes = Number($votesCounter.text());
@@ -497,7 +478,6 @@
       $('#addAListingRow').show();
       $('#addAListingRowSpace').show();
       $('#addAListingSubmitAndCancel').show();
-      rowHeights();
     });
 
     $('#addAListingCancel').on('click', function (e) {

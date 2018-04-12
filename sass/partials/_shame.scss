@@ -2000,6 +2000,12 @@
           letter-spacing: -0.43px;
         }
       }
+      .shadowcontain {
+        height: 76px !important;
+        @media (min-width: 768px) {
+          height: 102px !important;
+        }
+      }
     }
     td.pagination-td {
       height: auto !important;
@@ -3906,5 +3912,26 @@
   .sign-up-already-account-link {
     font-size: 16px;
     letter-spacing: -0.39px;
+  }
+}
+
+.table-cell-show-more-button {
+  font-family: 'Roboto Mono', monospace;
+  font-weight: bold;
+  color: #68c79c;
+  margin-left: 4px;
+  font-size: 12px;
+  letter-spacing: -0.23px;
+  @media (min-width: 768px) {
+    font-size: 16px;
+    letter-spacing: -0.43px;
+  }
+}
+
+.table-cell-show-more-dropdown {
+  width: 280px;
+  padding: 20px;
+  @media (min-width: 768px) {
+    width: 480px;
   }
 }

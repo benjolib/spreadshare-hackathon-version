@@ -91,25 +91,7 @@
 {% block scripts %}
 <script type="text/javascript">
   $(document).ready(function () {
-    var resizeTimer;
-
-    var rowHeights = function () {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(function() {
-        $('.shadowcontain').each(function () {
-          var $this = $(this);
-          $this.height('auto');
-          setTimeout(function () {
-            $this.height($this.parents('tr').height() - 3);
-          }, 0);
-        });
-      }, 250);
-    };
-
-    $(window).resize(rowHeights);
-
-    rowHeights();
-
+    
   });
 </script>
 {% endblock %}
