@@ -21,12 +21,12 @@
   <div class="search-filter ">
     <div class="search-filter__label">FILTER BY</div>
     <div class="search-filter__dropdowns">
-      <div class="search-filter__dropdown-button l-button"  data-dropdown-placement="bottom" data-dropdown-active-class="search-filter__dropdown-button--active">
+      <div class="search-filter__dropdown-button l-button"  data-dropdown-placement="bottom-start" data-dropdown-active-class="search-filter__dropdown-button--active">
         Topics<img src="/assets/images/dropdown-arrow-up.svg" />
       </div>
       <div class="search-filter__dropdown dropdown l-dropdown">
         <div class="search-filter__dropdown-inner">Topics<img src="/assets/images/dropdown-arrow-down.svg" /></div>
-        <div class="search-filter__dropdown-menu u-flex u-flexCol u-md-flexRow">
+        <div class="search-filter__dropdown-menu u-flex">
           <div class="u-flex u-flexCol search-filter__dropdown-menu__col1">
             <a href="/explore/ai" class="{% if '' is 'ai' %}active{% endif %}">AI</a>
             <a href="/explore/blockchain" class="{% if '' is 'blockchain' %}active{% endif %}">Blockchain</a>
@@ -55,13 +55,13 @@
         </div>
       </div>
 
-      <div class="search-filter__dropdown-button l-button" data-dropdown-placement="bottom" data-dropdown-active-class="search-filter__dropdown-button--active">
+      {# <div class="search-filter__dropdown-button l-button" data-dropdown-placement="bottom" data-dropdown-active-class="search-filter__dropdown-button--active">
         Tags<img src="/assets/images/dropdown-arrow-up.svg" />
       </div>
       <div class="search-filter__dropdown dropdown l-dropdown">
         <div class="search-filter__dropdown-inner">Tags<img src="/assets/images/dropdown-arrow-down.svg" /></div>
         <div class="search-filter__dropdown-menu"></div>
-      </div>
+      </div> #}
     </div>
   </div>
 
@@ -69,7 +69,7 @@
     <table class="re-table">
       <thead>
         <tr>
-          <th style="padding-bottom: 16px;padding-left:2px;">LISTS</th>
+          <th class="hide-on-small" style="padding-bottom: 16px;padding-left:2px;">LISTS</th>
         </tr>
       </thead>
       <tbody>
