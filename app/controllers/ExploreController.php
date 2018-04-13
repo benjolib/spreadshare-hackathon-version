@@ -42,11 +42,11 @@ class ExploreController extends IndexController implements LoginAwareController
     /**
      * Table
      */
-    public function indexAction($selection = 'recommended')
+    public function indexAction($selection = 'recommended', $secondSelection = '')
     {
         try {
             $this->view->setVar('exploreActive', true);
-            
+
             $tableFilter = new TableFilter();
 
             switch ($selection) {
@@ -199,6 +199,35 @@ class ExploreController extends IndexController implements LoginAwareController
                     break;
                 default:
                     break;
+            }
+
+            if ($selection === 'san-francisco' or $selection === 'new-york' or $selection === 'london' or $selection === 'berlin') {
+                switch ($secondSelection) {
+                  case 'recommended':
+                      $orderBy = Tables::class . '.createdAt DESC';
+                      $tableFilter->setStaffPicks(true);
+                      $this->view->setVar('secondSelectionName', 'Recommended');
+                      $this->view->setVar('secondSelection', 'recommended');
+                      break;
+                  case 'trending':
+                      $orderBy = TableStats::class . ".subscriberCount DESC, " . Tables::class . '.createdAt DESC';
+                      $tableFilter->setBestOf(true);
+                      $tableFilter->setDateRange(DateRange::initLastDays(7));
+                      $this->view->setVar('secondSelectionName', 'Trending');
+                      $this->view->setVar('secondSelection', 'trending');
+                      break;
+                  case 'newest':
+                      $orderBy = Tables::class . ".createdAt DESC";
+                      $this->view->setVar('secondSelectionName', 'Newest');
+                      $this->view->setVar('secondSelection', 'newest');
+                      break;
+                  default:
+                      $orderBy = Tables::class . '.createdAt DESC';
+                      $tableFilter->setStaffPicks(true);
+                      $this->view->setVar('secondSelectionName', 'Recommended');
+                      $this->view->setVar('secondSelection', 'recommended');
+                      break;
+                  }
             }
 
             $this->view->setVar('selection', $selection);

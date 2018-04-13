@@ -201,7 +201,15 @@ return [
     // pages
 
     [
-        'url' => '/explore/{order:[a-z0-9\-]+}',
+        'url' => '/explore/{selection:[a-z0-9\-]+}',
+        'paths' => [
+            'controller' => 'Explore',
+            'action' => 'index',
+        ],
+        'methods' => ['GET', 'POST'],
+    ],
+    [
+        'url' => '/explore/{selection:[a-z0-9\-]+}/{secondSelection:[a-z0-9\-]+}',
         'paths' => [
             'controller' => 'Explore',
             'action' => 'index',

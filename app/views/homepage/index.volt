@@ -14,7 +14,23 @@
     <div class="home-heading__text home-heading-button clickable l-button" data-dropdown-placement="bottom-start" data-dropdown-target=".home-heading-dropdown">
       {{ selectionName }}<img src="/assets/images/home-arrow-down.svg" />
     </div>
-    <div class="home-heading__line u-flexGrow1"></div>
+    <div class="home-heading__line u-flexGrow1">
+      {% if selection === 'san-francisco' or selection === 'new-york' or selection === 'london' or selection === 'berlin' %}
+        <div class="home-secondary-filters-desktop">
+          <a href="/explore/{{ selection }}/recommended" class="{% if secondSelection is 'recommended' %}active{% endif %}">Recommended</a>
+          <a href="/explore/{{ selection }}/trending" class="{% if secondSelection is 'trending' %}active{% endif %}">Trending</a>
+          <a href="/explore/{{ selection }}/newest" class="{% if secondSelection is 'newest' %}active{% endif %}">Newest</a>
+        </div>
+        <div class="home-secondary-filters-mobile">
+          <div class="l-button button">{{ secondSelectionName }} <img src="/assets/images/home-arrow-down.svg" /></div>
+          <div class="l-dropdown dropdown secondary-filter-dropdown">
+            <a href="/explore/{{ selection }}/recommended" class="{% if secondSelection is 'recommended' %}active{% endif %}">Recommended</a>
+            <a href="/explore/{{ selection }}/trending" class="{% if secondSelection is 'trending' %}active{% endif %}">Trending</a>
+            <a href="/explore/{{ selection }}/newest" class="{% if secondSelection is 'newest' %}active{% endif %}">Newest</a>
+          </div>
+        </div>
+      {% endif %}
+    </div>
   </div>
   <div class="l-dropdown dropdown u-flex home-heading-dropdown">
     <div class="u-flex u-flexCol home-heading-dropdown__col1">
@@ -23,10 +39,10 @@
       <a href="/explore/recently-added" class="{% if selection is 'recently-added' %}active{% endif %}"><div><img src="/assets/images/clock{% if selection is 'recently-added' %}-green{% endif %}.svg" /></div>Recently Added</a>
       <a href="/explore/most-viewed" class="space-below {% if selection is 'most-viewed' %}active{% endif %}"><div><img src="/assets/images/eye{% if selection is 'most-viewed' %}-green{% endif %}.svg" class="icon-eye" /></div>Most Viewed</a>
 
-      <a href="/explore/san-francisco" class="{% if selection is 'san-francisco' %}active{% endif %}"><div><img src="/assets/images/waypoint.svg" /></div>San Francisco</a>
-      <a href="/explore/new-york" class="{% if selection is 'new-york' %}active{% endif %}"><div><img src="/assets/images/waypoint.svg" /></div>New York</a>
-      <a href="/explore/london" class="{% if selection is 'london' %}active{% endif %}"><div><img src="/assets/images/waypoint.svg" /></div>London</a>
-      <a href="/explore/berlin" class="{% if selection is 'berlin' %}active{% endif %}"><div><img src="/assets/images/waypoint.svg" /></div>Berlin</a>
+      <a href="/explore/san-francisco" class="{% if selection is 'san-francisco' %}active{% endif %}"><div><img src="/assets/images/waypoint{% if selection is 'san-francisco' %}-green{% endif %}.svg" /></div>San Francisco</a>
+      <a href="/explore/new-york" class="{% if selection is 'new-york' %}active{% endif %}"><div><img src="/assets/images/waypoint{% if selection is 'new-york' %}-green{% endif %}.svg" /></div>New York</a>
+      <a href="/explore/london" class="{% if selection is 'london' %}active{% endif %}"><div><img src="/assets/images/waypoint{% if selection is 'london' %}-green{% endif %}.svg" /></div>London</a>
+      <a href="/explore/berlin" class="{% if selection is 'berlin' %}active{% endif %}"><div><img src="/assets/images/waypoint{% if selection is 'berlin' %}-green{% endif %}.svg" /></div>Berlin</a>
       <a href="#" class="greyed-out"><div><img src="/assets/images/waypoint.svg" /></div>City missing?</a>
     </div>
     <div class="u-flex u-flexCol u-md-flexRow">
