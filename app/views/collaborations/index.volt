@@ -5,8 +5,6 @@
 {% endblock %}
 
 {% block content %}
-{{ flash.output() }}
-
 <div class="re-page">
   <div class="collaborations-page-space">
     <h1 class="re-heading">Collaborations</h1>
@@ -76,7 +74,7 @@
                 <div class="re-table__list-image" style="background: #f5f5f5 url(https://abduzeedo.com//sites/default/files/originals/abdz_marvelapp_logodesignprocess.jpg) center / cover;"></div>
               </td>
               <td style="min-width: 0px;">{{ filterTableRowsContent('Marvel') }}</td>
-              <td style="min-width: 200px;">{{ filterTableRowsContent('The all-in-one enterprise design platform. From built-in wireframing to developer handoff, Marvel gives every team the tools they need to bring ideas to life.') }}</td>
+              <td style="min-width: 250px;">{{ filterTableRowsContent('The all-in-one enterprise design platform. From built-in wireframing to developer handoff, Marvel gives every team the tools they need to bring ideas to life.') }}</td>
               <td style="min-width: 0px;">{{ filterTableRowsContent('https://marvelapp.com/') }}</td>
               <td style="width:55px;min-width:55px"></td>
           </tr>
@@ -91,7 +89,7 @@
 {% block scripts %}
 <script type="text/javascript">
   $(document).ready(function () {
-    
+
   });
 </script>
 {% endblock %}

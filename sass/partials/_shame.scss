@@ -4030,3 +4030,96 @@
     }
   }
 }
+
+.for-you-table {
+  border: 1px solid #f8f8fb;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
+  border-radius: 4px;
+  margin-bottom: 30px;
+  @media (min-width: 768px) {
+    margin-bottom: 64px;
+  }
+  &__image {
+    height: 146px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    position: relative;
+    @media (min-width: 768px) {
+      height: 258px;
+    }
+  }
+  &__listingCount {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.5);
+    font-family: 'Roboto Mono', monospace;
+    color: #2a1e3e;
+    font-size: 9px;
+    letter-spacing: -0.22px;
+    padding: 3px 5px;
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    @media (min-width: 768px) {
+      font-size: 12px;
+      letter-spacing: -0.29px;
+      padding: 2px 6px;
+      box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.18);
+    }
+  }
+  &__bottom {
+    padding: 12px 9px 12px 9px;
+    position: relative;
+    @media (min-width: 768px) {
+      padding: 17px 18px 19px 23px;
+    }
+  }
+  &__heading {
+    font-family: 'Lato';
+    font-weight: bold;
+    color: #2a1e3e;
+    font-size: 22.5px;
+    letter-spacing: -0.54px;
+    margin-bottom: 8px;
+    @media (min-width: 768px) {
+      margin-bottom: 2px;
+      font-size: 30px;
+      letter-spacing: -0.72px;
+    }
+  }
+  &__tagline {
+    font-family: 'Lato';
+    font-size: 15px;
+    letter-spacing: -0.36px;
+    color: #9baabf;
+    @media (min-width: 768px) {
+      font-size: 22.5px;
+      letter-spacing: -0.54px;
+    }
+  }
+  &__subscriberCount {
+    font-family: 'Roboto Mono', monospace;
+    font-weight: bold;
+    font-size: 12px;
+    color: #6cc69d;
+    position: absolute;
+    top: 21px;
+    right: 12px;
+    letter-spacing: 0.8px;
+    @media (min-width: 768px) {
+      top: 40px;
+      right: 22px;
+      font-size: 18px;
+      letter-spacing: 0.9px;
+    }
+    img {
+      margin-right: 4px;
+      width: 12px;
+      @media (min-width: 768px) {
+        width: auto;
+      }
+    }
+  }
+}
