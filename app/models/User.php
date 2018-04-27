@@ -276,9 +276,11 @@ class User extends UserEvents
                 row_add_request.comment,
                 row_add_request.status,
                 row_add_request.table_id,
-                row_add_request.createdAt
+                row_add_request.createdAt,
+                tables.title
             FROM 
                 row_add_request
+            JOIN tables ON row_add_request.table_id = tables.id
             WHERE
                 row_add_request.user_id = $this->id
         ");
@@ -306,17 +308,113 @@ class User extends UserEvents
                 tableRows.content,
                 tableRows.image,
                 tableRows.votesCount,
-                tableRows.tableId as table_id
+                tableRows.tableId as table_id,
+                tables.title
 
             FROM 
                 row_delete_request            
-            JOIN tableRows ON row_delete_request.row_id = tableRows.id
+            JOIN tableRows 
+                ON row_delete_request.row_id = tableRows.id
+            JOIN tables 
+                ON tableRows.tableId = tables.id
             WHERE
                 row_delete_request.user_id = $this->id
         ");
 
         $query->setFetchMode(Db::FETCH_ASSOC);
         $delete_requests = $query->fetchAll() ?: [];
+        foreach ($delete_requests as $id => $submission) {
+            $table = Tables::findFirstById($submission['table_id']);
+            $content = '[';
+
+            foreach (json_decode($delete_requests[$id]['content']) as $value) {
+                $content .= '"' . $value->content . '",';
+            }
+            $content = rtrim($content, ',');
+            $content .= ']';
+
+            $delete_requests[$id]['content'] = $content;
+            $delete_requests[$id]['kind'] = 'delete';
+
+            foreach ($table->tableColumns as $column) {
+                $delete_requests[$id]['columns'][] = $column->title;
+            }
+        }
+
+        return array_merge($add_requests, $delete_requests);
+    }
+
+    // Get all collaborations to user's listings
+    public function getCollaborations()
+    {
+        // Get the ids of all tables created by the user
+        $query = $this->readQuery("SELECT id FROM tables WHERE ownerUserId = $this->id");
+        $query->setFetchMode(Db::FETCH_ASSOC);
+        $user_tables = $query->fetchAll() ? : [];
+        
+        // Flatten array
+        $user_tables = array_map(function ($element) {
+            return intval($element['id']);
+        }, $user_tables);
+        // Transform to list
+        $user_tables = implode("','", $user_tables);
+
+
+        $query = $this->readQuery("
+            SELECT 
+                row_add_request.id, 
+                row_add_request.content,
+                row_add_request.image,
+                row_add_request.comment,
+                row_add_request.status,
+                row_add_request.table_id,
+                row_add_request.createdAt,
+                tables.title
+            FROM 
+                row_add_request
+            JOIN tables ON row_add_request.table_id = tables.id
+            WHERE
+                row_add_request.table_id IN ('".$user_tables."')
+        ");
+
+        $query->setFetchMode(Db::FETCH_ASSOC);
+        $add_requests = $query->fetchAll() ? : [];
+
+        foreach ($add_requests as $id => $submission) {
+            $table = Tables::findFirstById($submission['table_id']);
+
+            foreach ($table->tableColumns as $column) {
+                $add_requests[$id]['columns'][] = $column->title;
+            }
+            $add_requests[$id]['kind'] = 'add';
+        }
+
+        $query = $this->readQuery("
+            SELECT 
+                row_delete_request.id,
+                row_delete_request.row_id,
+                row_delete_request.comment,
+                row_delete_request.status,
+                row_delete_request.createdAt,                
+                tableRows.id,
+                tableRows.content,
+                tableRows.image,
+                tableRows.votesCount,
+                tableRows.tableId as table_id,
+                tables.title
+
+            FROM 
+                row_delete_request            
+            JOIN tableRows 
+                ON row_delete_request.row_id = tableRows.id
+            JOIN tables 
+                ON tableRows.tableId = tables.id
+            WHERE
+                tableRows.tableId IN ('" . $user_tables . "')
+        ");
+
+        $query->setFetchMode(Db::FETCH_ASSOC);
+        $delete_requests = $query->fetchAll() ? : [];
         foreach ($delete_requests as $id => $submission) {
             $table = Tables::findFirstById($submission['table_id']);
             $content = '[';
