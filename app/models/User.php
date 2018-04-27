@@ -9,6 +9,7 @@ use DS\Model\Events\UserEvents;
 use DS\Model\DataSource\UserStatus;
 use DS\Model\Helper\RandomUserImage;
 use DS\Component\Mail\Events\SignupMail;
+use function GuzzleHttp\json_decode;
 
 /**
  * User
@@ -369,10 +370,15 @@ class User extends UserEvents
                 row_add_request.status,
                 row_add_request.table_id,
                 row_add_request.createdAt,
-                tables.title
+                tables.title,
+                user.name as user_name,
+                user.image as user_image
             FROM 
                 row_add_request
-            JOIN tables ON row_add_request.table_id = tables.id
+            JOIN tables 
+                ON row_add_request.table_id = tables.id
+            JOIN user
+                ON row_add_request.user_id = user.id
             WHERE
                 row_add_request.table_id IN ('".$user_tables."')
         ");
@@ -382,6 +388,8 @@ class User extends UserEvents
 
         foreach ($add_requests as $id => $submission) {
             $table = Tables::findFirstById($submission['table_id']);
+
+            $add_requests[$id]['content']  = json_decode($submission['content']);
 
             foreach ($table->tableColumns as $column) {
                 $add_requests[$id]['columns'][] = $column->title;
@@ -401,7 +409,9 @@ class User extends UserEvents
                 tableRows.image,
                 tableRows.votesCount,
                 tableRows.tableId as table_id,
-                tables.title
+                tables.title,
+                user.name as user_name,
+                user.image as user_image
 
             FROM 
                 row_delete_request            
@@ -409,6 +419,8 @@ class User extends UserEvents
                 ON row_delete_request.row_id = tableRows.id
             JOIN tables 
                 ON tableRows.tableId = tables.id
+            JOIN user
+                ON row_delete_request.user_id = user.id
             WHERE
                 tableRows.tableId IN ('" . $user_tables . "')
         ");
@@ -425,7 +437,8 @@ class User extends UserEvents
             $content = rtrim($content, ',');
             $content .= ']';
 
-            $delete_requests[$id]['content'] = $content;
+            $delete_requests[$id]['content'] = json_decode($content);
+
             $delete_requests[$id]['kind'] = 'delete';
 
             foreach ($table->tableColumns as $column) {
