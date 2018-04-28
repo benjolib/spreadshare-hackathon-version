@@ -1,21 +1,20 @@
 <?php
-
 namespace DS\Controller;
 
 use DS\Model\Tables;
 use DS\Model\RequestAdd;
 use DS\Interfaces\LoginAwareController;
 use function GuzzleHttp\json_encode;
+use DS\Model\TableRows;
+use DS\Api\TableContent;
+use function GuzzleHttp\json_decode;
 
-class RequestAddController extends BaseController implements LoginAwareController
-{
-    public function needsLogin()
-    {
+class RequestAddController extends BaseController implements LoginAwareController {
+    public function needsLogin() {
         return true;
     }
 
-    public function addAction()
-    {
+    public function addAction() {
         $tableId = $this->dispatcher->getParam('id');
         $table = Tables::find($tableId);
 
@@ -60,8 +59,7 @@ class RequestAddController extends BaseController implements LoginAwareControlle
         $this->_redirectBack();
     }
 
-    public function revokeAction()
-    {
+    public function revokeAction() {
         $submissionId = $this->dispatcher->getParam('id');
 
         $request = RequestAdd::find($submissionId);
@@ -81,6 +79,39 @@ class RequestAddController extends BaseController implements LoginAwareControlle
 
         $request->delete();
         $this->flash->success('Submission revoked - You have revoked this submission');
+        $this->_redirectBack();
+    }
+
+    public function approveAction() {
+        $submissionId = $this->dispatcher->getParam('id');
+
+        $request = RequestAdd::findFirst($submissionId);
+
+        // Check if table exists
+        if (!$request or $request->count() === 0) {
+            $this->flash->error('Submission not found - The submission you are trying to edit does not exist');
+            $this->_redirectBack();
+        }
+        
+        $user = $this->serviceManager->getAuth()->getUser();
+
+        if ($request->table->ownerUserId != $user->id) {
+            $this->flash->error('No permission - You do not have permission to edit this submission');
+            $this->_redirectBack();
+        }
+
+
+        // Handle approval
+
+        $request->status = 1;
+        $request->save();
+        
+        $content = json_decode($request->content);
+
+        $tablecontent = new TableContent();
+        $tablecontent->addRow($request->table->id, $content);
+
+        $this->flash->success('Submission approved - You have approved this submission');
         $this->_redirectBack();
     }
 }
