@@ -332,6 +332,15 @@ return [
         'methods' => ['GET', 'POST'],
     ],
     [
+        'url' => '/collaborations/add/approve/{id:[0-9]+}',
+        'paths' => [
+            'controller' => 'Request_Add',
+            'action' => 'approve',
+        ],
+        'methods' => ['GET', 'POST'],
+    ],
+    
+    [
         'url' => '/submissions/delete/revoke/{id:[0-9]+}',
         'paths' => [
             'controller' => 'Request_Delete',
