@@ -1,5 +1,4 @@
 <?php
-
 namespace DS\Model;
 
 use Phalcon\Db;
@@ -24,21 +23,18 @@ use function GuzzleHttp\json_decode;
  *
  * @method static User findFirstById(int $id)
  */
-class User extends UserEvents
-{
+class User extends UserEvents {
     /**
      * @return string
      */
-    public function getImage(): string
-    {
+    public function getImage(): string {
         return str_replace('http://', '//', parent::getImage());
     }
 
     /**
      * @return UserStats
      */
-    public function getStats()
-    {
+    public function getStats() {
         return UserStats::get($this->id, 'userId');
     }
 
@@ -50,8 +46,7 @@ class User extends UserEvents
      *
      * @return array
      */
-    public function getTableUsers(int $tableId, bool $upvoters = false, bool $subscribers = false, bool $contributors = false, bool $admins = false): array
-    {
+    public function getTableUsers(int $tableId, bool $upvoters = false, bool $subscribers = false, bool $contributors = false, bool $admins = false): array {
         $columns = [
             User::class . '.id',
             User::class . '.image',
@@ -105,8 +100,7 @@ class User extends UserEvents
      *
      * @return Abstracts\AbstractUser|\Phalcon\Mvc\Model\ResultInterface
      */
-    public static function findFirstByUsernameOrEmail($usernameOrEmail)
-    {
+    public static function findFirstByUsernameOrEmail($usernameOrEmail) {
         return parent::findFirst(
             [
                 'conditions' => 'handle = ?0 OR email = ?1',
@@ -124,8 +118,7 @@ class User extends UserEvents
      *
      * @return $this
      */
-    public function saveCredentials(string $email, string $unhashedPassword)
-    {
+    public function saveCredentials(string $email, string $unhashedPassword) {
         if ($unhashedPassword) {
             $this->setSecuritySalt(serviceManager()->getSecurity()->hash($unhashedPassword));
         }
@@ -144,8 +137,7 @@ class User extends UserEvents
      *
      * @return User
      */
-    public function addUserFromSignup($name, $handle, $email, $unhashedPassword)
-    {
+    public function addUserFromSignup($name, $handle, $email, $unhashedPassword) {
         $user = new User();
         $user->setName($name)
              ->setHandle($handle)
@@ -176,8 +168,7 @@ class User extends UserEvents
      *
      * @return User|\Phalcon\Mvc\Model\ResultInterface
      */
-    public static function addUserFromAuthService($name, $handle, $email, $description, $tagline, $authUid, $profileImage, $city, $website = '', $provider = 'Facebook')
-    {
+    public static function addUserFromAuthService($name, $handle, $email, $description, $tagline, $authUid, $profileImage, $city, $website = '', $provider = 'Facebook') {
         $email = $email ? $email : "{$authUid}@" . strtolower($provider) . '.com';
         $user = User::findFirst(
             [
@@ -239,8 +230,7 @@ class User extends UserEvents
         return $user;
     }
 
-    public function getRequests()
-    {
+    public function getRequests() {
         $query = $this->readQuery("
              SELECT 
                 changeRequests.id, 
@@ -267,8 +257,7 @@ class User extends UserEvents
     }
 
     // Get all user's submissions
-    public function getSubmissions()
-    {
+    public function getSubmissions() {
         $query = $this->readQuery("
             SELECT 
                 row_add_request.id, 
@@ -346,8 +335,7 @@ class User extends UserEvents
     }
 
     // Get all collaborations to user's listings
-    public function getCollaborations()
-    {
+    public function getCollaborations() {
         // Get the ids of all tables created by the user
         $query = $this->readQuery("SELECT id FROM tables WHERE ownerUserId = $this->id");
         $query->setFetchMode(Db::FETCH_ASSOC);
@@ -381,6 +369,8 @@ class User extends UserEvents
                 ON row_add_request.user_id = user.id
             WHERE
                 row_add_request.table_id IN ('".$user_tables."')
+                AND
+                row_add_request.status = 0
         ");
 
         $query->setFetchMode(Db::FETCH_ASSOC);
