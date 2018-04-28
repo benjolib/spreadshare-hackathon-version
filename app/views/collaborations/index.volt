@@ -12,19 +12,20 @@
     <h3 class="re-subtext hide-on-small">Looking for a listing you submitted? Go to your <a href="/submissions">submitted listings.</a></h3>
   </div>
 
-  {% set numbers = [1, 2, 3] %}
 
-  {% for number in numbers %}
+  {{ dump(collaborations) }}
+
+  {% for collab in collaborations %}
     <div class="u-flex u-sm-flexCol u-md-flexRow">
-      <div class="collaboration-info u-flex">
-        <img class="collaboration-info__image" src="https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg" />
+      <div class="collaboration-info u-flex">        
+          <img class="collaboration-info__image" src={{ collab['user_image'] }}>
         <div>
-          <a class="collaboration-info__user-name" href="#">Andrew Coyle</a>
+          <a class="collaboration-info__user-name" href="#">{{ collab['user_name'] }}</a>
           <span class="collaboration-info__text">submitted a listing to</span>
-          <a class="collaboration-info__table-name" href="#">Design Tools</a>
+          <a class="collaboration-info__table-name" href="#">{{ collab['title'] }}</a>
         </div>
       </div>
-      <div class="collaboration-clock"><img src="/assets/images/comment-clock.svg" />TODAY</div>
+      <div class="collaboration-clock"><img src="/assets/images/comment-clock.svg" />{{ formatTimestamp(collab['createdAt']) }}</div>
     </div>
     <div class="table-scroll table-scroll--collaborations">
       <table class="re-table re-table--list">
@@ -34,10 +35,12 @@
               VOTES
             </th>
             <th class="shadowcontainth"></th>
-            <th>{# image #}</th>
-            <th>TOOL NAME</th>
-            <th>WHAT IT DOES</th>
-            <th>WEBSITE</th>
+            <th>
+              {#image#}              
+            </th>
+            {% for column in collab['columns']%}
+              <th>{{column}}</th>
+            {% endfor %}
           </tr>
         </thead>
         <tbody>
@@ -52,7 +55,7 @@
               <td class="shadowcontaintd">
                 <div class="shadowcontain">
                   <div class="u-flex u-flexCol" style="position: absolute;top: 0;right: 0px;pointer-events: all;cursor: pointer;">
-                    <a class="collaboration-accept" href="#">
+                    <a class="collaboration-accept" href="/collaborations/add/approve/{{ collab['id']}}">
                       <img src="/assets/images/check.svg">
                     </a>
                     <a class="l-button collaboration-reject" href="javascript:;" data-dropdown-placement="left-end">
@@ -70,13 +73,14 @@
                   </div>
                 </div>
               </td>
+              
               <td>
-                <div class="re-table__list-image" style="background: #f5f5f5 url(https://abduzeedo.com//sites/default/files/originals/abdz_marvelapp_logodesignprocess.jpg) center / cover;"></div>
+                <div class="re-table__list-image" style="background: #f5f5f5 url({{ collab['image'] }}) center / cover;"></div>
               </td>
-              <td style="min-width: 0px;">{{ filterTableRowsContent('Marvel') }}</td>
-              <td style="min-width: 250px;">{{ filterTableRowsContent('The all-in-one enterprise design platform. From built-in wireframing to developer handoff, Marvel gives every team the tools they need to bring ideas to life.') }}</td>
-              <td style="min-width: 0px;">{{ filterTableRowsContent('https://marvelapp.com/') }}</td>
-              <td style="width:55px;min-width:55px"></td>
+
+              {% for cont in collab['content'] %}
+                <td style="min-width: 0px;">{{ filterTableRowsContent( cont ) }}</td>
+              {% endfor %}
           </tr>
           <tr class="re-table-space"></tr>
         </tbody>
