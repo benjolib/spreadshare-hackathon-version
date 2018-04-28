@@ -2,12 +2,13 @@
 namespace DS\Controller;
 
 use DS\Model\Tables;
-use DS\Model\RequestAdd;
-use DS\Interfaces\LoginAwareController;
-use function GuzzleHttp\json_encode;
 use DS\Model\TableRows;
 use DS\Api\TableContent;
+use DS\Model\RequestAdd;
+use Phalcon\Http\Request;
 use function GuzzleHttp\json_decode;
+use function GuzzleHttp\json_encode;
+use DS\Interfaces\LoginAwareController;
 
 class RequestAddController extends BaseController implements LoginAwareController {
     public function needsLogin() {
@@ -112,6 +113,39 @@ class RequestAddController extends BaseController implements LoginAwareControlle
         $tablecontent->addRow($request->table->id, $content);
 
         $this->flash->success('Submission approved - You have approved this submission');
+        $this->_redirectBack();
+    }
+
+    public function denyAction() {
+        $submissionId = $this->dispatcher->getParam('id');
+        
+        $requestpost = new Request();
+        $reason = $requestpost->getPost('reason');
+
+        $request = RequestAdd::findFirst($submissionId);
+
+        // Check if table exists
+        if (!$request or $request->count() === 0) {
+            $this->flash->error('Submission not found - The submission you are trying to edit does not exist');
+            $this->_redirectBack();
+        }
+        
+        $user = $this->serviceManager->getAuth()->getUser();
+
+        if ($request->table->ownerUserId != $user->id) {
+            $this->flash->error('No permission - You do not have permission to edit this submission');
+            $this->_redirectBack();
+        }
+
+
+        // Handle approval
+
+        $request->status = 2;
+        $request->comment = $reason;
+        $request->save();
+        
+
+        $this->flash->success('Submission was declined - You have declined this submission');
         $this->_redirectBack();
     }
 }
