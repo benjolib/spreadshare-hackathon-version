@@ -348,6 +348,22 @@ return [
         'methods' => ['GET', 'POST'],
     ],
     [
+        'url' => '/collaborations/delete/approve/{id:[0-9]+}',
+        'paths' => [
+            'controller' => 'Request_Delete',
+            'action' => 'approve',
+        ],
+        'methods' => ['GET', 'POST'],
+    ],
+    [
+        'url' => '/collaborations/delete/deny/{id:[0-9]+}',
+        'paths' => [
+            'controller' => 'Request_Delete',
+            'action' => 'deny',
+        ],
+        'methods' => ['GET', 'POST'],
+    ],
+    [
         'url' => '/submissions/delete/revoke/{id:[0-9]+}',
         'paths' => [
             'controller' => 'Request_Delete',

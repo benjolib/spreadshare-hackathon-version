@@ -394,7 +394,7 @@ class User extends UserEvents {
                 row_delete_request.comment,
                 row_delete_request.status,
                 row_delete_request.createdAt,                
-                tableRows.id,
+                tableRows.id as table_row_id,
                 tableRows.content,
                 tableRows.image,
                 tableRows.votesCount,
@@ -413,6 +413,8 @@ class User extends UserEvents {
                 ON row_delete_request.user_id = user.id
             WHERE
                 tableRows.tableId IN ('" . $user_tables . "')
+                AND
+                row_delete_request.status = 0
         ");
 
         $query->setFetchMode(Db::FETCH_ASSOC);

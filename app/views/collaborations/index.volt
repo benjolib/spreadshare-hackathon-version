@@ -13,15 +13,28 @@
   </div>
 
 
-  {{ dump(collaborations) }}
-
   {% for collab in collaborations %}
+
+
+    {% if collab['kind'] == 'add' %}
+      {% set approve_link = "/collaborations/add/approve/" ~ collab['id'] %}
+      {% set deny_link = "/collaborations/add/deny/" ~ collab['id'] %}
+      {% set action = 'submitted a listing to' %}
+    {% else %}
+      {%  set approve_link = "/collaborations/delete/approve/" ~ collab['id'] %}
+      {%  set deny_link = "/collaborations/delete/deny/" ~  collab['id'] %}
+      {% set action = 'requested to delete a listing on' %}
+    {% endif %}
+
+  
+
+
     <div class="u-flex u-sm-flexCol u-md-flexRow">
       <div class="collaboration-info u-flex">        
           <img class="collaboration-info__image" src={{ collab['user_image'] }}>
         <div>
           <a class="collaboration-info__user-name" href="#">{{ collab['user_name'] }}</a>
-          <span class="collaboration-info__text">submitted a listing to</span>
+          <span class="collaboration-info__text">{{ action }}</span>
           <a class="collaboration-info__table-name" href="#">{{ collab['title'] }}</a>
         </div>
       </div>
@@ -52,20 +65,24 @@
                   <div>0</div>
                 </a>
               </td>
+
+
+              
+
               <td class="shadowcontaintd">
                 <div class="shadowcontain">
                   <div class="u-flex u-flexCol" style="position: absolute;top: 0;right: 0px;pointer-events: all;cursor: pointer;">
-                    <a class="collaboration-accept" href="/collaborations/add/approve/{{ collab['id']}}">
+                    <a class="collaboration-accept" href={{approve_link}}>
                       <img src="/assets/images/check.svg">
                     </a>
                     <a class="l-button collaboration-reject" href="javascript:;" data-dropdown-placement="left-end">
                       <img src="/assets/images/cross.svg">
                     </a>
                     <div class="dropdown collaboration-reject-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
-                      <form class="u-flex collaboration-reject-dropdown__form">
-                        <label class="collaboration-reject-dropdown__reason">
+                      <form class="u-flex collaboration-reject-dropdown__form" action={{deny_link}} method="POST">
+                        <label class="collaboration-reject-dropdown__reason" >
                           <div>REASON FOR REJECTION</div>
-                          <input type="text" placeholder="Reason here..." />
+                          <input type="text" name="reason" placeholder="Reason here..." />
                         </label>
                         <button class="collaboration-reject-dropdown__send-button">Send</button>
                       </form>
