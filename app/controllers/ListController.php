@@ -87,7 +87,7 @@ class ListController extends BaseController
                              ->setComment($this->request->getPost('comment'))
                              ->create();
                     $this->flash->success('Comment added - Your comment was added');
-                    header('Location: /list/' . $tableId);
+                    $this->_redirectBack();
                 }
             }
 
