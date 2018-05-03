@@ -304,6 +304,14 @@ return [
         ],
         'methods' => ['GET', 'POST'],
     ],
+    [
+        'url' => '/subscriptions',
+        'paths' => [
+            'controller' => 'Subscriptions',
+            'action' => 'index',
+        ],
+        'methods' => ['GET', 'POST'],
+    ],
 
     // api
 

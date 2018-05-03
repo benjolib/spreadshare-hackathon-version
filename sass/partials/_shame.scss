@@ -1311,9 +1311,26 @@
   width: 40px;
   height: 40px;
   margin-left: auto;
+  position: relative;
+  &__text {
+    position: absolute;
+    font-family: 'Roboto Mono';
+    font-weight: bold;
+    font-size: 14px;
+    color: #50bc93;
+    letter-spacing: -0.38px;
+    text-align: right;
+    right: 35px;
+    line-height: 32px;
+    font-size: 12px;
+  }
   @media (min-width: 768px) {
     width: 60px;
     height: 60px;
+    &__text {
+      font-size: 14px;
+      right: 45px;
+    }
   }
 }
 
@@ -1335,6 +1352,9 @@
   padding-left: 14px;
   text-align: left;
   margin-right: -8px;
+  &--tall {
+    height: 120px;
+  }
   a {
     font-family: 'Roboto Mono', monospace;
     font-weight: bold;
@@ -1355,6 +1375,9 @@
     width: 160px;
     height: 114px;
     padding-left: 22px;
+    &--tall {
+      height: 180px;
+    }
     a {
       font-size: 14px;
       line-height: 36px;
