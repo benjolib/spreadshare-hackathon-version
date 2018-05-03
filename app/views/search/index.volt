@@ -9,16 +9,7 @@
 {# main section #}
 {% block content %}
 <div class="re-page re-page--search">
-  {# <div class="u-flex u-sm-flexCol u-md-flexRow u-flexJustifyBetween u-md-flexAlignItemsEnd lists-page-space">
-    <div>
-      <h1 class="re-heading">Lists</h1>
-      <h2 class="re-subheading re-subheading--button-below">Manage all your lists in one place.</h2>
-    </div>
-    <div>
-      <a href="/table/add" class="re-button">Create a List</a>
-    </div>
-  </div> #}
-  <div class="search-filter ">
+  {# <div class="search-filter ">
     <div class="search-filter__label">FILTER BY</div>
     <div class="search-filter__dropdowns">
       <div class="search-filter__dropdown-button l-button"  data-dropdown-placement="bottom-start" data-dropdown-active-class="search-filter__dropdown-button--active">
@@ -55,23 +46,18 @@
         </div>
       </div>
 
-      {# <div class="search-filter__dropdown-button l-button" data-dropdown-placement="bottom" data-dropdown-active-class="search-filter__dropdown-button--active">
+      <div class="search-filter__dropdown-button l-button" data-dropdown-placement="bottom" data-dropdown-active-class="search-filter__dropdown-button--active">
         Tags<img src="/assets/images/dropdown-arrow-up.svg" />
       </div>
       <div class="search-filter__dropdown dropdown l-dropdown">
         <div class="search-filter__dropdown-inner">Tags<img src="/assets/images/dropdown-arrow-down.svg" /></div>
         <div class="search-filter__dropdown-menu"></div>
-      </div> #}
+      </div>
     </div>
-  </div>
+  </div> #}
 
   {% if tables is defined AND tables %}
     <table class="re-table">
-      <thead>
-        <tr>
-          <th class="hide-on-small" style="padding-bottom: 16px;padding-left:2px;">LISTS</th>
-        </tr>
-      </thead>
       <tbody>
         {{ partial('search/content') }}
       </tbody>
