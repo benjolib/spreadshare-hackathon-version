@@ -83,10 +83,12 @@
         'description': tables[0]['tagline'],
         'subscriberCount': tables[0]['subscriberCount'],
         'listingCount': tables[0]['listingCount'],
+        'showCurator': true,
         'curatorHandle': tables[0]['creatorHandle'],
         'curatorAvatar': tables[0]['creatorImage'],
         'curatorName': tables[0]['creator'],
         'curatorBio': tables[0]['creatorBio'],
+        'half': false,
         'large': true
       ]) }}
     {% endif %}
@@ -99,10 +101,12 @@
         'description': tables[1]['tagline'],
         'subscriberCount': tables[1]['subscriberCount'],
         'listingCount': tables[1]['listingCount'],
+        'showCurator': true,
         'curatorHandle': tables[1]['creatorHandle'],
         'curatorAvatar': tables[1]['creatorImage'],
         'curatorName': tables[1]['creator'],
         'curatorBio': tables[1]['creatorBio'],
+        'half': false,
         'large': false
       ]) }}
     {% endif %}
@@ -124,10 +128,12 @@
         'description': tables[2]['tagline'],
         'subscriberCount': tables[2]['subscriberCount'],
         'listingCount': tables[2]['listingCount'],
+        'showCurator': true,
         'curatorHandle': tables[2]['creatorHandle'],
         'curatorAvatar': tables[2]['creatorImage'],
         'curatorName': tables[2]['creator'],
         'curatorBio': tables[2]['creatorBio'],
+        'half': false,
         'large': false
       ]) }}
     {% endif %}
@@ -140,10 +146,12 @@
         'description': tables[3]['tagline'],
         'subscriberCount': tables[3]['subscriberCount'],
         'listingCount': tables[3]['listingCount'],
+        'showCurator': true,
         'curatorHandle': tables[3]['creatorHandle'],
         'curatorAvatar': tables[3]['creatorImage'],
         'curatorName': tables[3]['creator'],
         'curatorBio': tables[3]['creatorBio'],
+        'half': false,
         'large': false
       ]) }}
     {% endif %}
@@ -156,10 +164,12 @@
         'description': tables[4]['tagline'],
         'subscriberCount': tables[4]['subscriberCount'],
         'listingCount': tables[4]['listingCount'],
+        'showCurator': true,
         'curatorHandle': tables[4]['creatorHandle'],
         'curatorAvatar': tables[4]['creatorImage'],
         'curatorName': tables[4]['creator'],
         'curatorBio': tables[4]['creatorBio'],
+        'half': false,
         'large': false
       ]) }}
     {% endif %}
@@ -179,10 +189,12 @@
         'description': tables[5]['tagline'],
         'subscriberCount': tables[5]['subscriberCount'],
         'listingCount': tables[5]['listingCount'],
+        'showCurator': true,
         'curatorHandle': tables[5]['creatorHandle'],
         'curatorAvatar': tables[5]['creatorImage'],
         'curatorName': tables[5]['creator'],
         'curatorBio': tables[5]['creatorBio'],
+        'half': false,
         'large': false
       ]) }}
     {% endif %}
@@ -195,10 +207,12 @@
         'description': tables[6]['tagline'],
         'subscriberCount': tables[6]['subscriberCount'],
         'listingCount': tables[6]['listingCount'],
+        'showCurator': true,
         'curatorHandle': tables[6]['creatorHandle'],
         'curatorAvatar': tables[6]['creatorImage'],
         'curatorName': tables[6]['creator'],
         'curatorBio': tables[6]['creatorBio'],
+        'half': false,
         'large': false
       ]) }}
     {% endif %}
@@ -211,10 +225,12 @@
         'description': tables[7]['tagline'],
         'subscriberCount': tables[7]['subscriberCount'],
         'listingCount': tables[7]['listingCount'],
+        'showCurator': true,
         'curatorHandle': tables[7]['creatorHandle'],
         'curatorAvatar': tables[7]['creatorImage'],
         'curatorName': tables[7]['creator'],
         'curatorBio': tables[7]['creatorBio'],
+        'half': false,
         'large': false
       ]) }}
     {% endif %}
@@ -294,10 +310,12 @@
         'description': tables[8]['tagline'],
         'subscriberCount': tables[8]['subscriberCount'],
         'listingCount': tables[8]['listingCount'],
+        'showCurator': true,
         'curatorHandle': tables[8]['creatorHandle'],
         'curatorAvatar': tables[8]['creatorImage'],
         'curatorName': tables[8]['creator'],
         'curatorBio': tables[8]['creatorBio'],
+        'half': false,
         'large': false
       ]) }}
     {% endif %}
@@ -317,10 +335,12 @@
         'description': tables[9]['tagline'],
         'subscriberCount': tables[9]['subscriberCount'],
         'listingCount': tables[9]['listingCount'],
+        'showCurator': true,
         'curatorHandle': tables[9]['creatorHandle'],
         'curatorAvatar': tables[9]['creatorImage'],
         'curatorName': tables[9]['creator'],
         'curatorBio': tables[9]['creatorBio'],
+        'half': false,
         'large': false
       ]) }}
     {% endif %}
@@ -340,10 +360,12 @@
         'description': tables[10]['tagline'],
         'subscriberCount': tables[10]['subscriberCount'],
         'listingCount': tables[10]['listingCount'],
+        'showCurator': true,
         'curatorHandle': tables[10]['creatorHandle'],
         'curatorAvatar': tables[10]['creatorImage'],
         'curatorName': tables[10]['creator'],
         'curatorBio': tables[10]['creatorBio'],
+        'half': false,
         'large': false
       ]) }}
     {% endif %}
@@ -356,10 +378,12 @@
         'description': tables[11]['tagline'],
         'subscriberCount': tables[11]['subscriberCount'],
         'listingCount': tables[11]['listingCount'],
+        'showCurator': true,
         'curatorHandle': tables[11]['creatorHandle'],
         'curatorAvatar': tables[11]['creatorImage'],
         'curatorName': tables[11]['creator'],
         'curatorBio': tables[11]['creatorBio'],
+        'half': false,
         'large': false
       ]) }}
     {% endif %}

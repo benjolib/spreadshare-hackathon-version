@@ -1390,9 +1390,19 @@
   }
 }
 
+.small-gutter {
+  margin-left: -8px;
+  margin-right: -8px;
+}
+
 .gutter {
   margin-left: -13px;
   margin-right: -13px;
+}
+
+.big-gutter {
+  margin-left: -20px;
+  margin-right: -20px;
 }
 
 .home-heading {
@@ -2195,8 +2205,7 @@
             border-radius: 10px;
           }
           &--new-row {
-            background: #ffffff url(/assets/images/image-placeholder.svg) center /
-              15px no-repeat;
+            background: #ffffff url(/assets/images/image-placeholder.svg) center / 15px no-repeat;
             border: 1px solid #ced3da;
             border-radius: 10px;
             cursor: pointer;
@@ -4211,6 +4220,295 @@
     margin-bottom: 11px;
     &.active {
       color: #6cc69d;
+    }
+  }
+}
+
+// PROFILE
+
+.profile-info {
+  h1 {
+    font-family: 'Lato', sans-serif;
+    color: #2a1e3e;
+    margin: 0px 0px 16px 0px;
+    font-weight: 700;
+    font-size: 30px;
+    letter-spacing: -0.72px;
+    @media (min-width: 768px) {
+      margin: -2px 0 12px -2px;
+      letter-spacing: -1.5px;
+      word-spacing: 0.5px;
+      font-size: 40px;
+    }
+  }
+
+  h2 {
+    font-family: 'Lato', sans-serif;
+    font-size: 30;
+    color: #2a1e3e;
+    letter-spacing: -0.35px;
+  }
+
+  h3 {
+    font-family: 'Lato', sans-serif;
+    font-weight: normal;
+    color: #9baabf;
+    max-width: 600px;
+    margin-top: 0;
+    margin-bottom: 9px;
+    font-size: 16px;
+    letter-spacing: -0.39px;
+    @media (min-width: 768px) {
+      font-size: 24px;
+      letter-spacing: -0.6px;
+    }
+  }
+
+  a {
+    font-family: 'Roboto Mono', monospace;
+  }
+
+  &__col1 {
+    display: flex;
+    flex-direction: column;
+    order: 1;
+    @media (min-width: 768px) {
+      order: 0;
+    }
+  }
+
+  &__col2 {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .nav {
+    width: 100%;
+    height: 90px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 60px;
+  }
+
+  .status a,
+  .social-links a {
+    display: inline-block;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 9px;
+    letter-spacing: 0.38px;
+    @media (min-width: 768px) {
+      font-size: 12px;
+      letter-spacing: 0.5px;
+    }
+  }
+
+  .status a {
+    margin: 0 12px 12px 0;
+    &.status-link-green {
+      color: #6cc69d;
+    }
+    @media (min-width: 768px) {
+    }
+  }
+
+  .status a span {
+    font-weight: 700;
+  }
+
+  .social-links {
+    margin-bottom: 60px;
+    @media (min-width: 768px) {
+      margin-bottom: 0;
+    }
+  }
+
+  .social-links a {
+    letter-spacing: 0px;
+    margin-right: 16px;
+    &.social-link-green {
+      color: #6cc69d;
+    }
+    @media (min-width: 768px) {
+      margin-right: 24px;
+    }
+  }
+
+  .status a,
+  .social-links a {
+    color: #697c95;
+  }
+
+  .status a:hover,
+  .social-links a:hover {
+    color: #6cc69d;
+  }
+
+  .profile-image {
+    width: 90px;
+    height: 90px;
+    border-radius: 9999px;
+    margin-right: 32px;
+    @media (min-width: 768px) {
+      width: 120px;
+      height: 120px;
+      margin-top: 2px;
+    }
+  }
+
+  .edit-button {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    margin: 32px 0 132px 0;
+    width: 133px;
+    height: 56px;
+    color: #2dad6b;
+    border: 1px solid #2dad6b;
+    border-radius: 2px;
+    text-decoration: none;
+    text-align: center;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
+    font-family: 'Roboto Mono', monospace;
+    font-weight: bold;
+    @media (min-width: 768px) {
+      display: flex;
+    }
+  }
+
+  .small-edit-button {
+    display: flex;
+    margin: 24px 0 40px;
+    width: 100px;
+    height: 42px;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    @media (min-width: 768px) {
+      display: none;
+    }
+  }
+
+  .profile-image-upload {
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8) url('/assets/images/profile-image-upload.svg') center no-repeat;
+    display: none;
+    cursor: pointer;
+    background-size: 30px;
+    @media (min-width: 768px) {
+      background-size: auto;
+    }
+    &--editing {
+      display: block;
+    }
+  }
+
+  .profile-buttons {
+    .save-and-cancel {
+      display: none;
+    }
+    &--editing {
+      .edit-button {
+        display: none;
+      }
+      .save-and-cancel {
+        display: flex;
+      }
+    }
+  }
+
+  .follow-button {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    margin: 32px 16px 132px 0;
+    width: 133px;
+    height: 56px;
+    color: #2dad6b;
+    border: 1px solid #2dad6b;
+    border-radius: 2px;
+    text-decoration: none;
+    text-align: center;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
+    font-family: 'Roboto Mono', monospace;
+    font-weight: bold;
+    @media (min-width: 768px) {
+      display: flex;
+    }
+  }
+
+  .small-follow-button {
+    display: flex;
+    margin: 24px 12px 40px 0;
+    width: 100px;
+    height: 42px;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    @media (min-width: 768px) {
+      display: none;
+    }
+  }
+
+  .save-button {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    margin: 32px 16px 132px 0;
+    width: 133px;
+    height: 56px;
+    color: #2dad6b;
+    border: 1px solid #2dad6b;
+    border-radius: 2px;
+    text-decoration: none;
+    text-align: center;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
+    font-family: 'Roboto Mono', monospace;
+    font-weight: bold;
+    @media (min-width: 768px) {
+      display: flex;
+    }
+  }
+
+  .small-save-button {
+    display: flex;
+    margin: 24px 12px 40px 0;
+    width: 100px;
+    height: 42px;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    @media (min-width: 768px) {
+      display: none;
+    }
+  }
+
+  .cancel-button {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    margin: 32px 0 132px 0;
+    width: 133px;
+    height: 56px;
+    color: #b1bbc7;
+    border: 1px solid #b1bbc7;
+    border-radius: 2px;
+    text-decoration: none;
+    text-align: center;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
+    font-family: 'Roboto Mono', monospace;
+    font-weight: bold;
+    @media (min-width: 768px) {
+      display: flex;
+    }
+  }
+
+  .small-cancel-button {
+    display: flex;
+    margin: 24px 0 40px;
+    width: 100px;
+    height: 42px;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    @media (min-width: 768px) {
+      display: none;
     }
   }
 }

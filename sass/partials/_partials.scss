@@ -225,6 +225,14 @@
       }
     }
   }
+  &--half {
+    @media (min-width: 1024px) {
+      width: 50%;
+      .list-card__subscriberCount {
+        margin-right: 10px;
+      }
+    }
+  }
   &__image {
     position: relative;
     height: 146px;
@@ -287,6 +295,16 @@
       }
       @media (min-width: 1375px) {
         width: calc(916px - 110px);
+      }
+    }
+  }
+  &--half {
+    .list-card__name {
+      @media (min-width: 1024px) {
+        width: calc(37vw - 147px);
+      }
+      @media (min-width: 1375px) {
+        width: calc(462px - 110px);
       }
     }
   }
