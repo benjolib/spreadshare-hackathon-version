@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="10px" height="9px" viewBox="0 0 10 9" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50 (54983) - http://www.bohemiancoding.com/sketch -->
+    <title>Group</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Views" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Create-List-1" transform="translate(-304.000000, -1006.000000)" stroke-width="0.8">
+            <g id="Group-5" transform="translate(297.000000, 998.000000)">
+                <g id="Group-2">
+                    <g id="Group" transform="translate(8.000000, 8.000000)">
+                        <polyline id="Shape" stroke="#50BC93" points="0.108108108 5.8486 0.108108108 7.8486 7.89189189 7.8486 7.89189189 5.8486"></polyline>
+                        <polyline id="Shape" stroke="#6CC69D" points="3.99524324 0.1486 3.97535135 5.7486 6.91891892 3.141"></polyline>
+                        <path d="M3.97535135,5.7486 L1.08108108,3.146" id="Shape" stroke="#6CC69D"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

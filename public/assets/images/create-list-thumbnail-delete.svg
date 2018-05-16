@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="10px" height="11px" viewBox="0 0 10 11" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50 (54983) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 6</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Views" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Create-List-1" transform="translate(-336.000000, -1005.000000)">
+            <g id="Group-5" transform="translate(297.000000, 998.000000)">
+                <g id="Group-7" transform="translate(32.000000, 0.000000)">
+                    <g id="Group-6" transform="translate(8.000000, 7.000000)">
+                        <path d="M6.12758974,9.83878704 L2.07753846,9.83878704 C1.28451282,9.83878704 0.717948718,9.06487963 0.717948718,8.24156481 L0.717948718,2.40339815 C0.717948718,2.16807407 0.825230769,2.17212037 1.05189744,2.17212037 L6.94810256,2.17212037 C7.17476923,2.17212037 7.28205128,2.16828704 7.28205128,2.40339815 L7.28205128,8.45452778 C7.28205128,9.16028704 6.80738462,9.83878704 6.12758974,9.83878704 Z" id="Shape" stroke="#DB7962" stroke-width="0.8" stroke-linecap="round"></path>
+                        <path d="M0.102564103,2.17212037 L7.8974359,2.17212037" id="Shape" stroke="#DB7962" stroke-width="0.8" stroke-linecap="round"></path>
+                        <rect id="Rectangle-5" fill="#DB7962" x="3.6" y="3.75" width="1" height="4.58333333" rx="0.5"></rect>
+                        <rect id="Rectangle-5" fill="#DB7962" x="5.2" y="3.75" width="1" height="4.58333333" rx="0.5"></rect>
+                        <rect id="Rectangle-5" fill="#DB7962" x="2" y="3.75" width="1" height="4.58333333" rx="0.5"></rect>
+                        <rect id="Rectangle-5" fill="#DB7962" x="2" y="0" width="1" height="2.08333333" rx="0.5"></rect>
+                        <rect id="Rectangle-5" fill="#DB7962" transform="translate(4.000000, 0.416667) rotate(90.000000) translate(-4.000000, -0.416667) " x="3.6" y="-1.66666667" width="1" height="4.16666667" rx="0.5"></rect>
+                        <rect id="Rectangle-5" fill="#DB7962" x="5.2" y="0" width="1" height="2.08333333" rx="0.5"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

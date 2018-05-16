@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="21px" viewBox="0 0 18 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50 (54983) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 6</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Create-List" transform="translate(-1121.000000, -325.000000)">
+            <g id="Group-3" transform="translate(1042.000000, 311.000000)">
+                <g id="Group-6" transform="translate(80.000000, 14.000000)">
+                    <path d="M12.2551795,19.6775741 L4.15507692,19.6775741 C2.56902564,19.6775741 1.43589744,18.1297593 1.43589744,16.4831296 L1.43589744,4.8067963 C1.43589744,4.33614815 1.65046154,4.34424074 2.10379487,4.34424074 L13.8962051,4.34424074 C14.3495385,4.34424074 14.5641026,4.33657407 14.5641026,4.8067963 L14.5641026,16.9090556 C14.5641026,18.3205741 13.6147692,19.6775741 12.2551795,19.6775741 Z" id="Shape" stroke="#DB7962" stroke-width="1.6" stroke-linecap="round"></path>
+                    <path d="M0.205128205,4.34424074 L15.7948718,4.34424074" id="Shape" stroke="#DB7962" stroke-width="1.6" stroke-linecap="round"></path>
+                    <rect id="Rectangle-5" fill="#DB7962" x="7.2" y="7.5" width="1.6" height="9.16666667" rx="0.8"></rect>
+                    <rect id="Rectangle-5" fill="#DB7962" x="10.4" y="7.5" width="1.6" height="9.16666667" rx="0.8"></rect>
+                    <rect id="Rectangle-5" fill="#DB7962" x="4" y="7.5" width="1.6" height="9.16666667" rx="0.8"></rect>
+                    <rect id="Rectangle-5" fill="#DB7962" x="4" y="0" width="1.6" height="4.16666667" rx="0.8"></rect>
+                    <rect id="Rectangle-5" fill="#DB7962" transform="translate(8.000000, 0.833333) rotate(90.000000) translate(-8.000000, -0.833333) " x="7.2" y="-3.33333333" width="1.6" height="8.33333333" rx="0.8"></rect>
+                    <rect id="Rectangle-5" fill="#DB7962" x="10.4" y="0" width="1.6" height="4.16666667" rx="0.8"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

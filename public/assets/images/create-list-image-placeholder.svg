@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="92px" height="92px" viewBox="0 0 92 92" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50 (54983) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 7</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Create-List" transform="translate(-676.000000, -200.000000)" stroke="#DEE0E7" stroke-width="8">
+            <g id="Group-7" transform="translate(680.000000, 204.000000)">
+                <path d="M84,82 C84,83.104 83.104,84 82,84 L2,84 C0.896,84 0,83.104 0,82 L0,2 C0,0.896 0.896,0 2,0 L82,0 C83.104,0 84,0.896 84,2 L84,82 Z" id="Shape"></path>
+                <path d="M2,76 L24,38" id="Shape"></path>
+                <path d="M48,76 L26,38" id="Shape"></path>
+                <path d="M52,74 L66,54" id="Shape"></path>
+                <path d="M80,74 L66,54" id="Shape"></path>
+                <circle id="Oval" cx="55" cy="21" r="11"></circle>
+            </g>
+        </g>
+    </g>
+</svg>
