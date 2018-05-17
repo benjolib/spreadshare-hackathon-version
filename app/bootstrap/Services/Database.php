@@ -28,18 +28,27 @@ return function (\DS\Interfaces\GeneralApplication $application, Phalcon\Di\Fact
     $config['read-database']['dialectClass']  = $dialect;
     /** @noinspection PhpIllegalStringOffsetInspection */
     $config['write-database']['dialectClass'] = $dialect;
-    
+
+
+    if ($di->has('testing')) {
+        $readdatabase = $writedatabase = $config['test-database'];
+    } else {
+        $readdatabase = $config['read-database'];
+        $writedatabase = $config['write-database'];
+    }
+
+
     // Set the database services
-    $di['read-database']  = function () use ($config)
+    $di['read-database']  = function () use ($readdatabase)
     {
         return new DbAdapter(
-            (array) $config['read-database']
+            (array)$readdatabase
         );
     };
-    $di['write-database'] = function () use ($config)
+    $di['write-database'] = function () use ($writedatabase)
     {
         return new DbAdapter(
-            (array) $config['write-database']
+            (array)$writedatabase
         );
     };
     $di['db'] = $di['write-database'];

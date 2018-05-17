@@ -122,8 +122,6 @@ final class Application
 
     /**
      * @param DiInterface $di
-     * @param Config      $config
-     *
      * @return Application
      */
     public static function initialize(DiInterface $di)

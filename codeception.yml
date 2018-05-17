@@ -1,0 +1,22 @@
+namespace: SpreadShareTests
+paths:
+    tests: tests
+    output: tests/_output
+    data: tests/_data
+    support: tests/_support
+    envs: tests/_envs
+actor_suffix: Tester
+extensions:
+    enabled:
+        - Codeception\Extension\RunFailed
+settings:
+  shuffle: true
+  colors: true
+  report_useless_tests: true
+  log_incomplete_skipped: true
+coverage:
+  enabled: true
+  include:
+    - app/*
+  exclude:
+    - app/config/*
