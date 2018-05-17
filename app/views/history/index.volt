@@ -11,78 +11,20 @@
   </div>
 
   <div class="u-flex u-flexWrap big-gutter">
-    {{ partial('partials/list-card', [
-      'id': 1,
-      'slug': 'berlin-living',
-      'image': 'http://www.babooka.nl/content/images/thumbs/0001984_living-in-style-berlin.jpeg',
-      'name': 'Berlin Living',
-      'description': 'Looking for a flat? Get the most recent market updates, curated by Airbnb',
-      'subscriberCount': 239,
-      'listingCount': 100,
-      'showCurator': false,
-      'half': true,
-      'large': false
-    ]) }}
-    {{ partial('partials/list-card', [
-      'id': 1,
-      'slug': 'berlin-living',
-      'image': 'http://www.babooka.nl/content/images/thumbs/0001984_living-in-style-berlin.jpeg',
-      'name': 'Berlin Living',
-      'description': 'Looking for a flat? Get the most recent market updates, curated by Airbnb',
-      'subscriberCount': 239,
-      'listingCount': 100,
-      'showCurator': false,
-      'half': true,
-      'large': false
-    ]) }}
-    {{ partial('partials/list-card', [
-      'id': 1,
-      'slug': 'berlin-living',
-      'image': 'http://www.babooka.nl/content/images/thumbs/0001984_living-in-style-berlin.jpeg',
-      'name': 'Berlin Living',
-      'description': 'Looking for a flat? Get the most recent market updates, curated by Airbnb',
-      'subscriberCount': 239,
-      'listingCount': 100,
-      'showCurator': false,
-      'half': true,
-      'large': false
-    ]) }}
-    {{ partial('partials/list-card', [
-      'id': 1,
-      'slug': 'berlin-living',
-      'image': 'http://www.babooka.nl/content/images/thumbs/0001984_living-in-style-berlin.jpeg',
-      'name': 'Berlin Living',
-      'description': 'Looking for a flat? Get the most recent market updates, curated by Airbnb',
-      'subscriberCount': 239,
-      'listingCount': 100,
-      'showCurator': false,
-      'half': true,
-      'large': false
-    ]) }}
-    {{ partial('partials/list-card', [
-      'id': 1,
-      'slug': 'berlin-living',
-      'image': 'http://www.babooka.nl/content/images/thumbs/0001984_living-in-style-berlin.jpeg',
-      'name': 'Berlin Living',
-      'description': 'Looking for a flat? Get the most recent market updates, curated by Airbnb',
-      'subscriberCount': 239,
-      'listingCount': 100,
-      'showCurator': false,
-      'half': true,
-      'large': false
-    ]) }}
-    {{ partial('partials/list-card', [
-      'id': 1,
-      'slug': 'berlin-living',
-      'image': 'http://www.babooka.nl/content/images/thumbs/0001984_living-in-style-berlin.jpeg',
-      'name': 'Berlin Living',
-      'description': 'Looking for a flat? Get the most recent market updates, curated by Airbnb',
-      'subscriberCount': 239,
-      'listingCount': 100,
-      'showCurator': false,
-      'half': true,
-      'large': false
-    ]) }}
+    {% for table in tables %}
+      {{ partial('partials/list-card', [
+        'id': table['id'],
+        'slug': table['slug'],
+        'image': table['image'],
+        'name': table['title'],
+        'description': table['tagline'],
+        'subscriberCount': table['subscriberCount'],
+        'listingCount': table['listingCount'],
+        'showCurator': false,
+        'half': true,
+        'large': false
+      ]) }}
+    {% endfor %}
   <div>
 </div>
 {% endblock %}
