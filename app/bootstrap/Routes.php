@@ -320,6 +320,14 @@ return [
         ],
         'methods' => ['GET', 'POST'],
     ],
+    [
+        'url' => '/history',
+        'paths' => [
+            'controller' => 'History',
+            'action' => 'index',
+        ],
+        'methods' => ['GET', 'POST'],
+    ],
 
     // api
 
