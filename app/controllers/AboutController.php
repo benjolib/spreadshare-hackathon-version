@@ -18,20 +18,16 @@ use Phalcon\Mvc\Controller as PhalconMvcController;
  * @version   $Version$
  * @package   DS\Controller
  */
-class AboutController
-    extends PhalconMvcController
+class AboutController extends PhalconMvcController
 {
     /**
      * About
      */
     public function indexAction($params = [])
     {
-        try
-        {
-            $this->view->setMainView('pages/about/vision');
-        }
-        catch (Exception $e)
-        {
+        try {
+            $this->view->setMainView('about/index');
+        } catch (Exception $e) {
             Application::instance()->log($e->getMessage(), Logger::CRITICAL);
         }
     }
@@ -41,12 +37,9 @@ class AboutController
      */
     public function howitworksAction($params = [])
     {
-        try
-        {
+        try {
             $this->view->setMainView('pages/about/howitworks');
-        }
-        catch (Exception $e)
-        {
+        } catch (Exception $e) {
             Application::instance()->log($e->getMessage(), Logger::CRITICAL);
         }
     }
@@ -56,12 +49,9 @@ class AboutController
      */
     public function problemAction($params = [])
     {
-        try
-        {
+        try {
             $this->view->setMainView('pages/about/problem');
-        }
-        catch (Exception $e)
-        {
+        } catch (Exception $e) {
             Application::instance()->log($e->getMessage(), Logger::CRITICAL);
         }
     }
@@ -71,12 +61,9 @@ class AboutController
      */
     public function solutionAction($params = [])
     {
-        try
-        {
+        try {
             $this->view->setMainView('pages/about/solution');
-        }
-        catch (Exception $e)
-        {
+        } catch (Exception $e) {
             Application::instance()->log($e->getMessage(), Logger::CRITICAL);
         }
     }
@@ -87,12 +74,9 @@ class AboutController
      */
     public function blockchainAction($params = [])
     {
-        try
-        {
+        try {
             $this->view->setMainView('pages/about/blockchain');
-        }
-        catch (Exception $e)
-        {
+        } catch (Exception $e) {
             Application::instance()->log($e->getMessage(), Logger::CRITICAL);
         }
     }
@@ -103,12 +87,9 @@ class AboutController
      */
     public function roadmapAction($params = [])
     {
-        try
-        {
+        try {
             $this->view->setMainView('pages/about/roadmap');
-        }
-        catch (Exception $e)
-        {
+        } catch (Exception $e) {
             Application::instance()->log($e->getMessage(), Logger::CRITICAL);
         }
     }
