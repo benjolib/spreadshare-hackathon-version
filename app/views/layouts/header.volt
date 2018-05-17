@@ -1,4 +1,4 @@
-<header class="re-header">
+<header class="re-header {{ editing is not empty and editing ? 're-header--editing': '' }}">
   <div class="re-header__inner">
     <a class="re-header__logo" href="/"><img src="/assets/images/logo.png" /></a>
     <a class="re-header__item {{ exploreActive is not empty and exploreActive ? 'active': '' }}" href="/">Explore</a>
@@ -314,6 +314,14 @@
         <img src="/assets/images/join-button-google.svg" />
       </a>
     {% endif %}
+  </div>
+  <div class="re-header__editing">
+    <a href="#" class="re-button re-button--grey">Cancel</a>
+    <a href="#" class="re-button">Publish</a>
+    <img class="l-button re-header__editing__arrow" src="/assets/images/header-editing-arrow-down.svg" />
+    <div class="dropdown list-editing-draft-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
+      <a href="#"><img src="/assets/images/list-editing-draft-save.svg" /> Save as Draft</a>
+    </div>
   </div>
 </header>
 {# {% if auth.loggedIn() %}

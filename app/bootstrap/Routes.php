@@ -312,6 +312,30 @@ return [
         ],
         'methods' => ['GET', 'POST'],
     ],
+    [
+        'url' => '/create-list',
+        'paths' => [
+            'controller' => 'CreateList',
+            'action' => 'index',
+        ],
+        'methods' => ['GET', 'POST'],
+    ],
+    [
+        'url' => '/history',
+        'paths' => [
+            'controller' => 'History',
+            'action' => 'index',
+        ],
+        'methods' => ['GET', 'POST'],
+    ],
+    [
+        'url' => '/about',
+        'paths' => [
+            'controller' => 'About',
+            'action' => 'index',
+        ],
+        'methods' => ['GET', 'POST'],
+    ],
 
     // api
 

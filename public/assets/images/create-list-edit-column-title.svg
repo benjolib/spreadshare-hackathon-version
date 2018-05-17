@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="11px" viewBox="0 0 12 11" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50 (54983) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 7</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Views" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Create-List-2.1" transform="translate(-486.000000, -924.000000)" stroke="#2DAD6B">
+            <g id="Group-7" transform="translate(487.000000, 924.000000)">
+                <path d="M9,6.33 L9,9 C9,9.55228475 8.55228475,10 8,10 L1,10 C0.44771525,10 0,9.55228475 0,9 L0,2 C-1.11022302e-16,1.44771525 0.44771525,1 1,1 L3.67,1" id="Shape"></path>
+                <polygon id="Shape" points="8 0 10 2 5 7 3 7 3 5"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

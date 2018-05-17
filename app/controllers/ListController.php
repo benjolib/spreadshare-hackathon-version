@@ -13,6 +13,7 @@ use DS\Model\TableComments;
 use DS\Model\Helper\TableFilter;
 use DS\Model\DataSource\TableFlags;
 use DS\Model\TableRelations;
+use DS\Events\Table\TableViewed;
 
 class ListController extends BaseController
 {
@@ -53,6 +54,8 @@ class ListController extends BaseController
             $tableStatsModel = new TableStats();
 
             $tableId = $tableModel->id;
+
+            TableViewed::after($authId, (int) $tableId);
 
             // Get Contributors
             $contributors = $tableModel->contributors->toArray();
