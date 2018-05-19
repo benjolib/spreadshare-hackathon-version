@@ -27,8 +27,7 @@ use Phalcon\Logger;
  * @version   $Version$
  * @package   DS\Controller
  */
-class UserSettingsController
-    extends BaseController
+class UserSettingsController extends BaseController
 {
     use NeedsLoginTrait;
 
@@ -37,7 +36,6 @@ class UserSettingsController
      */
     public function indexAction($params = [])
     {
-
     }
 
     /**
@@ -49,8 +47,7 @@ class UserSettingsController
     {
         $user = User::get($id);
 
-        if (!$user->getId())
-        {
+        if (!$user->getId()) {
             $this->response->redirect('/');
         }
 
@@ -66,17 +63,14 @@ class UserSettingsController
      */
     public function settingsAction($page)
     {
-        try
-        {
-            if (!$this->serviceManager->getAuth()->getUserId())
-            {
+        try {
+            if (!$this->serviceManager->getAuth()->getUserId()) {
                 header('Location: /login');
             }
 
             $this->view->setVar('profile', $this->getUser($this->serviceManager->getAuth()->getUserId()));
 
-            switch ($page)
-            {
+            switch ($page) {
                 case "notifications":
                     $this->notificationsAction();
                     break;
@@ -100,10 +94,7 @@ class UserSettingsController
                     $this->personalAction();
                     break;
             }
-
-        }
-        catch (Exception $e)
-        {
+        } catch (Exception $e) {
             Application::instance()->log($e->getMessage(), Logger::CRITICAL);
         }
 
@@ -120,21 +111,15 @@ class UserSettingsController
         $userSettingsModel = \DS\Model\UserSettings::get($userId, 'userId');
         $this->view->setVar('settings', $userSettingsModel);
 
-        if ($this->request->isPost())
-        {
+        if ($this->request->isPost()) {
             $locations = Locations::getByIds($this->request->getPost('locations', null, []));
-            try
-            {
-                if ($userId > 0)
-                {
+            try {
+                if ($userId > 0) {
                     // Prepare image
                     $imagePath = '';
-                    if ($this->request->hasFiles() == true)
-                    {
-                        foreach ($this->request->getUploadedFiles() as $file)
-                        {
-                            if ($file->getTempName() && $file->getName() && $file->getSize())
-                            {
+                    if ($this->request->hasFiles() == true) {
+                        foreach ($this->request->getUploadedFiles() as $file) {
+                            if ($file->getTempName() && $file->getName() && $file->getSize()) {
                                 $imageName = md5($userId) . '.' . $file->getExtension();
                                 $file->moveTo(ROOT_PATH . 'system/uploads/userimages/' . $imageName);
                                 $imagePath = '/user-images/' . $imageName;
@@ -163,19 +148,13 @@ class UserSettingsController
                     // Reload user data
                     $this->view->setVar('profile', $this->getUser($userId));
                 }
-            }
-            catch (\Exception $e)
-            {
+            } catch (\Exception $e) {
                 $this->flash->error($e->getMessage());
-            }
-            finally
-            {
+            } finally {
                 // Send new user model to view
                 $this->view->setVar('post', $this->request->getPost());
             }
-        }
-        else
-        {
+        } else {
             $locations = UserLocations::getUserLocations($userId);
         }
 
@@ -189,11 +168,9 @@ class UserSettingsController
      */
     public function accountAction()
     {
-        if ($this->request->isPost())
-        {
+        if ($this->request->isPost()) {
             $userId = $this->serviceManager->getAuth()->getUserId();
-            if ($userId > 0)
-            {
+            if ($userId > 0) {
                 $user = (new UserSettings())->saveAccountSettings(
                     $userId,
                     $this->request->getPost('email'),
@@ -212,16 +189,15 @@ class UserSettingsController
     public function notificationsAction()
     {
         $userId = $this->serviceManager->getAuth()->getUserId();
-        if ($userId > 0)
-        {
+        if ($userId > 0) {
             $userSettingsModel = \DS\Model\UserSettings::get($userId, 'userId')->setUserId($userId);
 
-            if ($this->request->isPost())
-            {
+            if ($this->request->isPost()) {
                 $userSettingsModel->setTopicDigest($this->request->getPost('topicDigest'))
                                   ->setFollowDigest($this->request->getPost('followerDigest'))
                                   ->setNewProductAnnouncements($this->request->getPost('newProductAnnouncements'))
-                                  ->save();;
+                                  ->save();
+                ;
             }
         }
 
@@ -235,18 +211,13 @@ class UserSettingsController
     public function connectedAction()
     {
         $connectedAccounts = UserConnections::get($this->serviceManager->getAuth()->getUserId(), 'userId');
-        if ($this->request->isPost())
-        {
-            if (!$connectedAccounts->getUserId())
-            {
+        if ($this->request->isPost()) {
+            if (!$connectedAccounts->getUserId()) {
                 $connectedAccounts->setUserId($this->serviceManager->getAuth()->getUserId());
             }
 
-            foreach ($this->request->getPost('link', null, []) as $key => $value)
-            {
-                if (method_exists($connectedAccounts, 'set' . ucfirst($key)))
-                {
-
+            foreach ($this->request->getPost('link', null, []) as $key => $value) {
+                if (method_exists($connectedAccounts, 'set' . ucfirst($key))) {
                 }
                 call_user_func(
                     [
@@ -258,7 +229,6 @@ class UserSettingsController
             }
 
             $connectedAccounts->save();
-
         }
 
         $this->view->setVar('connections', $connectedAccounts);
@@ -297,10 +267,10 @@ class UserSettingsController
 
         // we fetch 1 more than limit so we can check this
         if (count($tableTokens) > $limit) {
-          $tableTokens = array_slice($tableTokens, 0, $limit);
-          $this->view->setVar('moreToLoad', true);
+            $tableTokens = array_slice($tableTokens, 0, $limit);
+            $this->view->setVar('moreToLoad', true);
         } else {
-          $this->view->setVar('moreToLoad', false);
+            $this->view->setVar('moreToLoad', false);
         }
 
         $this->view->setVar('tableTokens', $tableTokens);
@@ -309,21 +279,17 @@ class UserSettingsController
         $this->view->setVar('isAjax', $this->request->isAjax());
 
         // Paging instead of returning the whole page
-        if ($this->request->isAjax() && $this->request->has('page'))
-        {
-            if (count($tableTokens) === 0)
-            {
-              // Return nothing if tableTokens are empty for today.
-              $this->view->disable();
-              header('Content-Type: application/json');
-              die(json_encode([
+        if ($this->request->isAjax() && $this->request->has('page')) {
+            if (count($tableTokens) === 0) {
+                // Return nothing if tableTokens are empty for today.
+                $this->view->disable();
+                header('Content-Type: application/json');
+                die(json_encode([
                   'code' => 'no-results'
               ]));
             }
             $this->view->setMainView('user/settings/wallet-loadmore');
-        }
-        else
-        {
+        } else {
             $this->view->setMainView('user/settings/wallet');
         }
     }
@@ -335,5 +301,4 @@ class UserSettingsController
     {
         $this->view->setMainView('user/settings/donations');
     }
-
 }
