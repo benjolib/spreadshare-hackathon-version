@@ -15,16 +15,6 @@ return [
         'host' => 'elasticsearch',
         'port' => '9200',
     ],
-    'test-database' => [
-        'adapter' => 'Mysql',
-        'host' => 'mysqltest',
-        'port' => '3306',
-        'username' => 'root',
-        'password' => 'spreadshare',
-        'dbname' => 'spreadshare',
-        'charset' => 'utf8',
-        'profile' => false,
-    ],
     'read-database' => [
         'adapter' => 'Mysql',
         'host' => 'mysql1',

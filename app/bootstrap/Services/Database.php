@@ -29,30 +29,21 @@ return function (\DS\Interfaces\GeneralApplication $application, Phalcon\Di\Fact
     /** @noinspection PhpIllegalStringOffsetInspection */
     $config['write-database']['dialectClass'] = $dialect;
 
-
-    if ($di->has('testing')) {
-        $readdatabase = $writedatabase = $config['test-database'];
-    } else {
-        $readdatabase = $config['read-database'];
-        $writedatabase = $config['write-database'];
-    }
-
-
     // Set the database services
-    $di['read-database']  = function () use ($readdatabase)
+    $di['read-database']  = function () use ($config)
     {
         return new DbAdapter(
-            (array)$readdatabase
+            (array) $config['read-database']
         );
     };
-    $di['write-database'] = function () use ($writedatabase)
+    $di['write-database'] = function () use ($config)
     {
         return new DbAdapter(
-            (array)$writedatabase
+            (array) $config['write-database']
         );
     };
     $di['db'] = $di['write-database'];
-    
+
     // Ignore unknown columns to prevent unexpected error messages,
     // as seen on github issue https://github.com/phalcon/cphalcon/issues/1652
     // \Phalcon\Mvc\Model::setup(['ignoreUnknownColumns' => true]);

@@ -1,0 +1,80 @@
+[mysql]
+
+# CLIENT #
+port                           = 3306
+max_allowed_packet             = 1024M
+
+[mysqld]
+
+# GENERAL #
+user                           = mysql
+default-storage-engine         = InnoDB
+socket                         = /tmp/mysql.sock
+pid-file                       = /usr/local/mysql/data/mysqld.local.pid
+datadir                        = /var/lib/mysql
+
+# MyISAM #
+key-buffer-size                = 32M
+
+# SAFETY #
+max_allowed_packet             = 1024M
+max-connect-errors             = 100000
+
+# TIMEOUT
+wait_timeout                   = 600
+interactive_timeout            = 600
+
+# BINARY LOGGING #
+expire-logs-days               = 10
+sync-binlog                    = 1
+
+innodb_stats_sample_pages = 512
+
+# CACHES AND LIMITS #
+tmp-table-size                 = 16M
+max-heap-table-size            = 16M
+query-cache-type               = 0 # better to disable query caching on testing and dev machines
+query_cache_limit              = 80M
+query_cache_size               = 0
+max-connections                = 50
+#thread-cache-size              = 50
+
+tmp_table_size = 64M
+max_heap_table_size = 64M
+open-files-limit               = 10000
+innodb_open_files              = 10000
+
+table_open_cache = 64
+table_open_cache_instances = 1
+
+table-definition-cache         = 3096
+table-open-cache               = 1024
+
+# leave join_buffer_size the default
+host_cache_size                = 128
+
+# INNODB #
+innodb-flush-method            = O_DIRECT
+innodb-log-files-in-group      = 2
+innodb-log-file-size           = 256M
+innodb-flush-log-at-trx-commit = 1
+innodb-file-per-table          = 1
+innodb_buffer_pool_size        = 3072M
+innodb                         = FORCE
+innodb_strict_mode             = 0
+
+# LOGGING #
+log-error                      = "/var/log/mysql/error.log"
+slow-query-log                 = 1
+slow_query_log_file            = "/var/log/mysql/slow-query.log"
+long_query_time = 1
+min_examined_row_limit         = 50000
+log-queries-not-using-indexes
+
+default_tmp_storage_engine = InnoDB
+sql-mode = ""
+
+log-warnings = 1
+
+log-slow-slave-statements
+log-slow-admin-statements

@@ -9,7 +9,5 @@
  */
 
 use DS\Application;
-
 $di = include_once('Init.php');
-$di->set('testing', true);
 return Application::initialize($di);

@@ -7,19 +7,14 @@
 actor: AcceptanceTester
 modules:
     enabled:
-#        - Phalcon:
-#            bootstrap: 'app/bootstrap/InitTest.php'
-#            cleanup: true
-#            savepoints: true
-#            url: http://app
         - PhpBrowser:
             url: http://app
         - \SpreadShareTests\Helper\Acceptance
         - Db:
-            dsn: 'mysql:host=mysqltest;dbname=spreadshare'
+            dsn: 'mysql:host=mysql1;dbname=spreadshare'
             user: 'spreadshare'
             password: 'spreadshare'
             populate: false
             cleanup: true
             reconnect: true
-            dump: 'schemas/minimalDataForTesting.sql'
+            dump: 'tests/_data/dump.sql'
