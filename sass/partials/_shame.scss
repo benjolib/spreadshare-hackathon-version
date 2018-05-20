@@ -1653,12 +1653,12 @@
   width: 100%;
   margin: 0 auto;
   max-width: 934px;
-  padding: 41px 20px 60px 20px;
+  padding: 129px 20px 60px 20px;
   @media (min-width: 768px) {
-    padding: 105px 20px 125px 20px;
+    padding: 195px 20px 125px 20px;
   }
   &--list {
-    padding-top: 36px;
+    padding-top: 126px;
     padding-bottom: 28px;
     @media (min-width: 768px) {
       padding-bottom: 70px;
@@ -1679,9 +1679,9 @@
     width: 100%;
     margin: 0 auto;
     max-width: 1382px;
-    padding: 21px 20px 60px 20px;
+    padding: 109px 20px 60px 20px;
     @media (min-width: 768px) {
-      padding: 65px 20px 125px 20px;
+      padding: 155px 20px 125px 20px;
     }
   }
 }
@@ -1935,6 +1935,10 @@
   &--grey {
     border: 1px solid #acb8ca;
     color: #9baabf;
+  }
+  &--light-grey {
+    border: 1px solid #dee0e7;
+    color: #dee0e7;
   }
   &--list-add-row {
     width: 100px;
@@ -3237,6 +3241,12 @@
 }
 
 .re-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background: white;
   display: flex;
   justify-content: center;
   height: 88px;
@@ -3833,8 +3843,33 @@
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
   width: 246px;
   height: 61px;
-  padding: 10px;
+  padding: 10px 13px;
   margin-bottom: 11px;
+  justify-content: space-between;
+  user-select: none;
+  p {
+    font-family: 'Lato';
+    font-size: 12px;
+    color: #2a1e3e;
+    letter-spacing: -0.6px;
+    line-height: 24px;
+  }
+  & > div:first-of-type {
+    width: 100%;
+    min-width: 60%;
+  }
+  & > div:nth-of-type(2) {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.re-field--settings {
+  width: 100%;
+  border: 1px solid #f8f8fb;
+  .re-field__input {
+    width: 100%;
+  }
 }
 
 .re-field--success {
@@ -3861,7 +3896,7 @@
 }
 
 .re-field__image {
-  margin-left: 8px;
+  margin-left: 0;
   margin-right: 11px;
   width: 18px;
 }
@@ -3905,14 +3940,24 @@
   .re-field {
     width: 328px;
     height: 81px;
-    padding: 10px;
+    padding: 10px 23px;
     margin-bottom: 15px;
     border-radius: 4px;
+    p {
+      font-size: 16px;
+    }
+  }
+
+  .re-field--settings {
+    width: 100%;
+    .re-field__input {
+      width: 100%;
+    }
   }
 
   .re-field__image {
     width: auto;
-    margin-left: 13px;
+    margin-left: 0;
     margin-right: 15px;
   }
 
@@ -5028,4 +5073,106 @@
     letter-spacing: 0.5px;
     line-height: 32px;
   }
+}
+
+.settings-tabs-buttons {
+  margin-top: 70px;
+  margin-bottom: 23px;
+}
+
+.settings-tabs-button {
+  font-family: 'Lato';
+  font-weight: normal;
+  font-size: 20px;
+  color: #e1e1e1;
+  letter-spacing: -0.58px;
+  margin-right: 25px;
+  @media (min-width: 768px) {
+    font-size: 24px;
+    margin-right: 30px;
+  }
+  &.active {
+    color: #2a1e3e;
+  }
+}
+
+.settings-seperator-heading {
+  font-family: 'Lato';
+  font-weight: normal;
+  font-size: 20px;
+  color: #2a1e3e;
+  letter-spacing: -0.58px;
+  margin-top: 60px;
+  margin-bottom: 20px;
+  @media (min-width: 768px) {
+    font-size: 24px;
+    margin-top: 80px;
+  }
+}
+
+.settings-delete-account-button {
+  font-family: 'Roboto Mono', sans-serif;
+  font-weight: bold;
+  font-size: 12px;
+  color: #dee0e7;
+  letter-spacing: -0.2px;
+  text-align: center;
+  margin-top: 10px;
+  @media (min-width: 768px) {
+    font-size: 16px;
+  }
+}
+
+.on-off-switch {
+  input {
+    display: none;
+  }
+  .on-off {
+    cursor: pointer;
+    white-space: nowrap;
+    span {
+      font-family: 'Roboto Mono', sans-serif;
+      font-weight: bold;
+      font-size: 12px;
+      letter-spacing: -0.17px;
+      padding: 5px;
+      @media (min-width: 768px) {
+        font-size: 14px;
+      }
+    }
+    .on {
+      color: #dee0e7;
+    }
+    .off {
+      color: #f97a7a;
+    }
+  }
+  input:checked + .on-off {
+    .on {
+      color: #2dad6b;
+    }
+    .off {
+      color: #dee0e7;
+    }
+  }
+}
+
+.manage-subscriptions-link {
+  font-family: 'Roboto Mono', sans-serif;
+  font-weight: bold;
+  font-size: 12px;
+  color: #2dad6b;
+  letter-spacing: -0.17px;
+  white-space: nowrap;
+  @media (min-width: 768px) {
+    font-size: 14px;
+  }
+}
+
+.show-password {
+  font-family: 'Roboto Mono', sans-serif;
+  font-weight: bold;
+  font-size: 12px;
+  color: #2dad6b;
+  letter-spacing: 0.5px;
 }
