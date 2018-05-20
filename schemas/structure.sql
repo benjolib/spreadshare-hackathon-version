@@ -323,6 +323,7 @@ DROP TABLE IF EXISTS `tableSubscription`;
 CREATE TABLE `tableSubscription` (
   `tableId` int(11) unsigned NOT NULL,
   `userId` int(11) unsigned NOT NULL,
+  `type` char(1) NOT NULL DEFAULT 'D' COMMENT 'D=Daily,W=Weekly,M=Monthly',
   `createdAt` int(10) DEFAULT NULL,
   PRIMARY KEY (`tableId`,`userId`),
   KEY `userId` (`userId`),
