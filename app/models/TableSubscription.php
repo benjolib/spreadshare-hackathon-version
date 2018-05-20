@@ -2,6 +2,7 @@
 
 namespace DS\Model;
 
+use DS\Dto\UserSubscription;
 use DS\Model\Events\TableSubscriptionEvents;
 
 /**
@@ -28,8 +29,8 @@ class TableSubscription extends TableSubscriptionEvents
     public function subscribe(int $userId, int $tableId)
     {
         $this->setUserId($userId)
-             ->setTableId($tableId)
-             ->create();
+            ->setTableId($tableId)
+            ->create();
 
         return $this;
     }
@@ -67,5 +68,27 @@ class TableSubscription extends TableSubscriptionEvents
                 'bind' => [$tableId, $userId],
             ]
         );
+    }
+
+    /**
+     * @param int $userId
+     * @return UserSubscription[]
+     */
+    public static function findUserSubscriptions(int $userId)
+    {
+        $subs = self::findAllByFieldValue('userId', $userId);
+        $result = [];
+        foreach ($subs as $sub) {
+            $numSubs = TableSubscription::count(
+                [
+                    'tableId = ?0',
+                    'bind' => [
+                        $sub->tableId
+                    ]
+                ]
+            );
+            $result[] = new UserSubscription($sub->userId, $sub->tableId, $sub->Tables->title, $sub->Tables->tagline , $sub->type, $numSubs);
+        }
+        return $result;
     }
 }

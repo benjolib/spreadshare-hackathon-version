@@ -123,14 +123,14 @@ abstract class Base
         
         throw new \InvalidArgumentException('Invalid field name provided. This field is not available in this model.');
     }
-    
+
     /**
      * Allows to query this model by the given sql field name and it's value
      *
      * @param string $field
      * @param string $value
      *
-     * @return static[]
+     * @return \Phalcon\Mvc\Model\ResultsetInterface
      */
     public static function findAllByFieldValue($field, $value)
     {

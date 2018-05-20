@@ -3,6 +3,7 @@
 namespace DS\Controller;
 
 use DS\Interfaces\LoginAwareController;
+use DS\Model\TableSubscription;
 
 class SubscriptionsController extends BaseController implements LoginAwareController
 {
@@ -13,8 +14,9 @@ class SubscriptionsController extends BaseController implements LoginAwareContro
 
     public function indexAction()
     {
+        $userId = $this->serviceManager->getAuth()->getUserId();
+        $subscriptions = TableSubscription::findUserSubscriptions($userId);
+        $this->view->setVar('subscriptions', $subscriptions);
         $this->view->setMainView('subscriptions/index');
-
-        $user = $this->serviceManager->getAuth()->getUser();
     }
 }

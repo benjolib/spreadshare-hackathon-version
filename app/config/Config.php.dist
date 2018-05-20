@@ -103,6 +103,7 @@ return [
         'DS\Events' => ROOT_PATH . '/app/events/',
         'DS\Listeners' => ROOT_PATH. '/app/listeners',
         'DS\Exceptions' => ROOT_PATH . '/app/exceptions/',
+        'DS\Dto' => ROOT_PATH . '/app/dto/',
     ],
     'mode' => '_ENVIRONMENT_',
     

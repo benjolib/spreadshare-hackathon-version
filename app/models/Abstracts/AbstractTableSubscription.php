@@ -35,6 +35,19 @@ abstract class AbstractTableSubscription extends \DS\Model\Base
      */
     protected $createdAt;
 
+    protected $type;
+
+    public function setType($type)
+    {
+        $this->type = $type;
+        return $this;
+    }
+
+    public function getType()
+    {
+        return $this->type;
+    }
+
     /**
      * Method to set the value of field tableId
      *
