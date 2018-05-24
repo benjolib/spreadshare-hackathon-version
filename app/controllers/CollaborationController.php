@@ -18,5 +18,6 @@ class CollaborationController extends BaseController implements LoginAwareContro
         $user = $this->serviceManager->getAuth()->getUser();
 
         $this->view->setVar('collaborations', $user->getCollaborations());
+        $this->view->setVar('submissions', $user->getSubmissions());
     }
 }
