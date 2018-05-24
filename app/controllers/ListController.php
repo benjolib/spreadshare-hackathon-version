@@ -114,6 +114,7 @@ class ListController extends BaseController
             $related = TableRelations::findRelatedTables($tableId);
             $tableColumns = TableColumns::findAllByFieldValue('tableId', $tableId);
 
+            $this->view->setMainView('list/index');
             $this->view->setVar('table', $table);
             $this->view->setVar('tableContent', $tableContent);
             $this->view->setVar('tableComments', $commentsArray);

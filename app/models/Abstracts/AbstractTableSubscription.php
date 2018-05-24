@@ -35,6 +35,10 @@ abstract class AbstractTableSubscription extends \DS\Model\Base
      */
     protected $createdAt;
 
+    /**
+     * @var string
+     * @Column(type="string", length=1, nullable=false)
+     */
     protected $type;
 
     public function setType($type)

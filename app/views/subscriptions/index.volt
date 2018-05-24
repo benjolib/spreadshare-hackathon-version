@@ -13,11 +13,15 @@
     </div>
 
     {# {% if tables is defined AND tables %} #}
+    <form id="subscriptions_form" method="post" action="/subscriptions">
+        <input type="hidden" name="table_id" value=""/>
+        <input type="hidden" name="subscription_freq" value=""/>
       <table class="re-table">
         <tbody>
           {{ partial('subscriptions/content') }}
         </tbody>
       </table>
+    </form>
     {# {% endif %} #}
     {# <div class="u-flex u-flexJustifyCenter">
       <a href="#" class="re-button re-button--load-more" {{ moreToLoad ? '' : 'style="display:none;"' }}>Load More</a>
@@ -45,5 +49,10 @@
           });
       });
     });
+    function subsFreqOnClick(id, freq) {
+        $('[name="table_id"]').val(id);
+        $('[name="subscription_freq"]').val(freq);
+        $('#subscriptions_form').submit();
+    }
   </script>
 {% endblock %}
