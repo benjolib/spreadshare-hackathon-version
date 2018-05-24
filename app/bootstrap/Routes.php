@@ -36,30 +36,6 @@ return [
         'methods' => ['GET'],
     ],
     [
-        'url' => '/signup/topics',
-        'paths' => [
-            'controller' => 'Signup',
-            'action' => 'topics',
-        ],
-        'methods' => ['GET', 'POST'],
-    ],
-    [
-        'url' => '/signup/follow',
-        'paths' => [
-            'controller' => 'Signup',
-            'action' => 'follow',
-        ],
-        'methods' => ['GET', 'POST'],
-    ],
-    [
-        'url' => '/signup/location',
-        'paths' => [
-            'controller' => 'Signup',
-            'action' => 'location',
-        ],
-        'methods' => ['GET', 'POST'],
-    ],
-    [
         'url' => '/profile/{user:[a-zA-Z0-9\-]+}',
         'paths' => [
             'controller' => 'User',

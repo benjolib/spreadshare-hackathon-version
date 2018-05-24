@@ -53,7 +53,8 @@ class LoginController extends BaseController
 
             // Login request callback from Facebook or Google
             if ($this->request->get('state') && $this->request->get('code')) {
-                if(isset($_SERVER['FACEBOOK_ID'])) {
+                if($this->session->has('facebook_signin')) {
+                    $this->session->remove('facebook_signin');
                     return $this->loginWithFacebookAction();
                 }
                 return $this->loginWithGoogleAction();
@@ -193,6 +194,7 @@ class LoginController extends BaseController
      */
     public function loginWithFacebookAction()
     {
+        $this->session->set('facebook_signin', true);
         return $this->loginWith('Facebook');
     }
 

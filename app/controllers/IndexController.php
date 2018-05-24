@@ -39,7 +39,7 @@ class IndexController extends BaseController
         try {
             if ($this->serviceManager->getAuth()->loggedIn() && $this->serviceManager->getAuth()->getUser()->getStatus() == UserStatus::OnboardingIncomplete) {
                 // do the onboarding
-                header('Location: /signup/topics');
+                header('Location: /signup');
             }
 
             // Message hack
