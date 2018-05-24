@@ -36,15 +36,6 @@ class LoginController extends BaseController
     public function indexAction($params = [])
     {
         try {
-            // Login request with username and password
-            if ($this->request->isPost() && $this->request->getPost('username') && $this->request->getPost('password')) {
-                // Login...
-                $login = new Login();
-                if ($login->login($this->request->getPost('username'), $this->request->getPost('password'))) {
-                    header('Location: /');
-                }
-            }
-
             // Email confirmation request
             if ($this->request->get('token')) {
                 $user = (new User())->findByFieldValue('emailConfirmationToken', $this->request->get('token'));
@@ -62,8 +53,10 @@ class LoginController extends BaseController
 
             // Login request callback from Facebook or Google
             if ($this->request->get('state') && $this->request->get('code')) {
-                $this->loginWithFacebookAction();
-                $this->loginWithGoogleAction();
+                if(isset($_SERVER['FACEBOOK_ID'])) {
+                    return $this->loginWithFacebookAction();
+                }
+                return $this->loginWithGoogleAction();
             }
 
             /**
@@ -83,7 +76,7 @@ class LoginController extends BaseController
             $this->flash->error($e->getMessage());
         }
 
-        $this->view->setMainView('auth/login');
+        $this->view->setMainView('sign-in/index');
 
         return null;
     }
@@ -268,7 +261,7 @@ class LoginController extends BaseController
 
             // Redirect to topics page if the user was created
             if ((int) $user->getOperationMade() === (int) $user::OP_CREATE) {
-                $redirect = '/signup/topics';
+                $redirect = '/signup';
             } else {
                 $redirect = '/';
             }

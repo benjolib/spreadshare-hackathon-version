@@ -7,7 +7,7 @@
 <p class="sign-in-up-pretext">CONTRIBUTE</p>
 <h3 class="sign-in-up-heading">Almost there</h3>
 <p class="sign-in-up-text">Finish creating your account</p>
-<form class="sign-up-form" action="/">
+<form class="sign-up-form" action="/signup" method="post">
   <label class="re-field">
     <img class="re-field__image re-field__image-default" src="/assets/images/circle-default.svg" />
     <img class="re-field__image re-field__image-success" src="/assets/images/circle-success.svg" />
