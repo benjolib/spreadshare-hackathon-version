@@ -70,7 +70,8 @@ class UserController
                 }
                 $this->view->setVar('connections', $connectionList);
                 
-                $this->view->setVar('following', UserFollower::findFollower($user->getId(), $this->serviceManager->getAuth()->getUserId()));
+                $this->view->setVar('numFollowing', UserFollower::countFollowing($user->getId()));
+                $this->view->setVar('numFollowers', UserFollower::countFollowers($user->getId()));
                 $this->view->setVar('currentPage', $page);
                 $this->view->setVar('profile', $user);
                 $this->view->setVar('settings', UserSettings::get($user->getId(), 'userId'));

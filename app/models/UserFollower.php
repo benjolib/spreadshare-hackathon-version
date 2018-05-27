@@ -76,6 +76,26 @@ class UserFollower
         
         return $query->execute()->toArray() ?: [];
     }
+
+    public static function countFollowers(int $userId)
+    {
+        return self::count([
+            'userId = ?0',
+            'bind' => [
+                $userId
+            ],
+        ]);
+    }
+
+    public static function countFollowing(int $userId)
+    {
+        return self::count([
+            'followedByUserId = ?0',
+            'bind' => [
+                $userId
+            ],
+        ]);
+    }
     
     /**
      * @param int $userId
