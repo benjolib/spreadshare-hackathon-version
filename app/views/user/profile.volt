@@ -16,14 +16,9 @@
 				<a href="#"><span>{{ numFollowing }}</span> FOLLOWING</a>
 			</div>
 			<div class="social-links">
-				<a href="#">Berlin</a>
-				<a href="#" class="social-link-green">Spreadshare Co</a>
-				<a href="#">Medium</a>
-				<a href="#">Dribble</a>
-				<a href="#">LinkedIn</a>
-				<a href="#">Github</a>
-				<a href="#">Twitter</a>
-				<a href="#">Facebook</a>
+                {% for connection in connections %}
+                    <a href="{{ connection['link'] }}">{{ connection['name'] }}</a>
+                {% endfor %}
 			</div>
       <div class="profile-buttons">
         {% if auth.loggedIn() and auth.getUserId() != profile.id %}

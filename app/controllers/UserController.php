@@ -68,6 +68,7 @@ class UserController
                         }
                     }
                 }
+                
                 $this->view->setVar('connections', $connectionList);
                 
                 $this->view->setVar('numFollowing', UserFollower::countFollowing($user->getId()));

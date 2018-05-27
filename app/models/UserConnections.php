@@ -65,4 +65,9 @@ class UserConnections
             'bandcamp',
         ];
     }
+
+    public static function getAllConnections(int $userId)
+    {
+        return self::findAllByFieldValue('userId', $userId);
+    }
 }
