@@ -138,6 +138,7 @@ public/webtools.php
 public/css/webtools.css
 public/js/webtools-ie.js
 public/js/webtools.js
+public/userimages/*
 
 # dist
 system/uploads/userimages

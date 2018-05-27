@@ -99,4 +99,22 @@ class UserController
             $this->serviceManager->getLogger()->error($e->getMessage());
         }
     }
+
+    public function profileUpdateAction()
+    {
+        if ($this->request->isPost()) {
+            $user = $this->serviceManager->getAuth()->getUser();
+            if ($this->request->hasFiles()) {
+                $file = $this->request->getUploadedFiles()[0];
+                $path = ROOT_PATH.'public/userimages/';
+                $file->moveTo($path.$user->getId().'.'.$file->getExtension());
+                $user->setImage('/userimages/'.$user->getId().'.'.$file->getExtension());
+            }
+            $user->setName($this->request->get('name'))
+                ->setTagline($this->request->get('tagline'))
+                ->save();
+            $this->response->redirect('/profile/'.$user->getHandle(),true);
+        }
+
+    }
 }
