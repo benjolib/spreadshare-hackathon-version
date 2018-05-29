@@ -17,8 +17,8 @@
                 <h1 class="profile-name">{{ profile.name }}</h1>
                 <h3 class="profile-tagline">{{ profile.tagline }}</h3>
                 <div class="status">
-                    <a href="#" class="status-link-green"><span>{{ numFollowers }}</span> FOLLOWERS</a>
-                    <a href="#"><span>{{ numFollowing }}</span> FOLLOWING</a>
+                    <a href="/profile/{{ profile.handle }}/followers" class="status-link-green"><span>{{ numFollowers }}</span> FOLLOWERS</a>
+                    <a href="/profile/{{ profile.handle }}/following"><span>{{ numFollowing }}</span> FOLLOWING</a>
                 </div>
                 <div class="social-links">
                     {% for connection in connections %}
@@ -59,179 +59,40 @@
                 </div>
             </div>
         </div>
-        {% if auth.loggedIn() and auth.getUserId() != profile.id %}
+        {% if currentPage == 'following' or currentPage == 'folowers' %}
             <div class="u-flex u-flexWrap small-gutter">
-                {# {% for subscriber in tablemodel.tableSubscription %} #}
+                {% for user in users %}
                 <div class="list-tab-content-subscribers__card">
                     {{ partial('partials/profile-card', [
-                        'id': 1,
-                        'username': 'andrewcoyle',
-                        'avatar': 'https://pbs.twimg.com/profile_images/983400206711455745/PsX5Kquv_400x400.jpg',
-                        'name': 'Andrew Coyle',
-                        'bio': 'Designing the future of global trade @Flexport. Sharing curated lists on Spreadshare.',
+                        'id': user['id'],
+                        'username': user['handle'],
+                        'avatar': user['image'],
+                        'name': user['name'],
+                        'bio': user['tagline'],
                         'type': 10,
                         'truncate': true
                     ]) }}
                 </div>
-                <div class="list-tab-content-subscribers__card">
-                    {{ partial('partials/profile-card', [
-                        'id': 1,
-                        'username': 'andrewcoyle',
-                        'avatar': 'https://pbs.twimg.com/profile_images/983400206711455745/PsX5Kquv_400x400.jpg',
-                        'name': 'Andrew Coyle',
-                        'bio': 'Designing the future of global trade @Flexport. Sharing curated lists on Spreadshare.',
-                        'type': 10,
-                        'truncate': true
-                    ]) }}
-                </div>
-                <div class="list-tab-content-subscribers__card">
-                    {{ partial('partials/profile-card', [
-                        'id': 1,
-                        'username': 'andrewcoyle',
-                        'avatar': 'https://pbs.twimg.com/profile_images/983400206711455745/PsX5Kquv_400x400.jpg',
-                        'name': 'Andrew Coyle',
-                        'bio': 'Designing the future of global trade @Flexport. Sharing curated lists on Spreadshare.',
-                        'type': 10,
-                        'truncate': true
-                    ]) }}
-                </div>
-                <div class="list-tab-content-subscribers__card">
-                    {{ partial('partials/profile-card', [
-                        'id': 1,
-                        'username': 'andrewcoyle',
-                        'avatar': 'https://pbs.twimg.com/profile_images/983400206711455745/PsX5Kquv_400x400.jpg',
-                        'name': 'Andrew Coyle',
-                        'bio': 'Designing the future of global trade @Flexport. Sharing curated lists on Spreadshare.',
-                        'type': 10,
-                        'truncate': true
-                    ]) }}
-                </div>
-                <div class="list-tab-content-subscribers__card">
-                    {{ partial('partials/profile-card', [
-                        'id': 1,
-                        'username': 'andrewcoyle',
-                        'avatar': 'https://pbs.twimg.com/profile_images/983400206711455745/PsX5Kquv_400x400.jpg',
-                        'name': 'Andrew Coyle',
-                        'bio': 'Designing the future of global trade @Flexport. Sharing curated lists on Spreadshare.',
-                        'type': 10,
-                        'truncate': true
-                    ]) }}
-                </div>
-                <div class="list-tab-content-subscribers__card">
-                    {{ partial('partials/profile-card', [
-                        'id': 1,
-                        'username': 'andrewcoyle',
-                        'avatar': 'https://pbs.twimg.com/profile_images/983400206711455745/PsX5Kquv_400x400.jpg',
-                        'name': 'Andrew Coyle',
-                        'bio': 'Designing the future of global trade @Flexport. Sharing curated lists on Spreadshare.',
-                        'type': 10,
-                        'truncate': true
-                    ]) }}
-                </div>
-                <div class="list-tab-content-subscribers__card">
-                    {{ partial('partials/profile-card', [
-                        'id': 1,
-                        'username': 'andrewcoyle',
-                        'avatar': 'https://pbs.twimg.com/profile_images/983400206711455745/PsX5Kquv_400x400.jpg',
-                        'name': 'Andrew Coyle',
-                        'bio': 'Designing the future of global trade @Flexport. Sharing curated lists on Spreadshare.',
-                        'type': 10,
-                        'truncate': true
-                    ]) }}
-                </div>
-                <div class="list-tab-content-subscribers__card">
-                    {{ partial('partials/profile-card', [
-                        'id': 1,
-                        'username': 'andrewcoyle',
-                        'avatar': 'https://pbs.twimg.com/profile_images/983400206711455745/PsX5Kquv_400x400.jpg',
-                        'name': 'Andrew Coyle',
-                        'bio': 'Designing the future of global trade @Flexport. Sharing curated lists on Spreadshare.',
-                        'type': 10,
-                        'truncate': true
-                    ]) }}
-                </div>
-                {# {% else %}
-                  <div class="empty-subscribers">
-                    No Subscribers
-                  </div>
-                {% endfor %} #}
+                {% endfor %}
             </div>
         {% endif %}
 
-        {% if auth.loggedIn() and auth.getUserId() == profile.id %}
+        {% if currentPage == "upvoted" %}
             <div class="u-flex u-flexWrap big-gutter">
+                {% for createdList in createdLists %}
                 {{ partial('partials/list-card', [
-                    'id': 1,
-                    'slug': 'berlin-living',
-                    'image': 'http://www.babooka.nl/content/images/thumbs/0001984_living-in-style-berlin.jpeg',
-                    'name': 'Berlin Living',
-                    'description': 'Looking for a flat? Get the most recent market updates, curated by Airbnb',
-                    'subscriberCount': 239,
-                    'listingCount': 100,
+                    'id': createdList['id'],
+                    'slug': createdList['slug'],
+                    'image': createdList['image'],
+                    'name': createdList['title'],
+                    'description': createdList['description'],
+                    'subscriberCount': createdList['subscriberCount'],
+                    'listingCount': createdList['listingCount'],
                     'showCurator': false,
                     'half': true,
                     'large': false
                 ]) }}
-                {{ partial('partials/list-card', [
-                    'id': 1,
-                    'slug': 'berlin-living',
-                    'image': 'http://www.babooka.nl/content/images/thumbs/0001984_living-in-style-berlin.jpeg',
-                    'name': 'Berlin Living',
-                    'description': 'Looking for a flat? Get the most recent market updates, curated by Airbnb',
-                    'subscriberCount': 239,
-                    'listingCount': 100,
-                    'showCurator': false,
-                    'half': true,
-                    'large': false
-                ]) }}
-                {{ partial('partials/list-card', [
-                    'id': 1,
-                    'slug': 'berlin-living',
-                    'image': 'http://www.babooka.nl/content/images/thumbs/0001984_living-in-style-berlin.jpeg',
-                    'name': 'Berlin Living',
-                    'description': 'Looking for a flat? Get the most recent market updates, curated by Airbnb',
-                    'subscriberCount': 239,
-                    'listingCount': 100,
-                    'showCurator': false,
-                    'half': true,
-                    'large': false
-                ]) }}
-                {{ partial('partials/list-card', [
-                    'id': 1,
-                    'slug': 'berlin-living',
-                    'image': 'http://www.babooka.nl/content/images/thumbs/0001984_living-in-style-berlin.jpeg',
-                    'name': 'Berlin Living',
-                    'description': 'Looking for a flat? Get the most recent market updates, curated by Airbnb',
-                    'subscriberCount': 239,
-                    'listingCount': 100,
-                    'showCurator': false,
-                    'half': true,
-                    'large': false
-                ]) }}
-                {{ partial('partials/list-card', [
-                    'id': 1,
-                    'slug': 'berlin-living',
-                    'image': 'http://www.babooka.nl/content/images/thumbs/0001984_living-in-style-berlin.jpeg',
-                    'name': 'Berlin Living',
-                    'description': 'Looking for a flat? Get the most recent market updates, curated by Airbnb',
-                    'subscriberCount': 239,
-                    'listingCount': 100,
-                    'showCurator': false,
-                    'half': true,
-                    'large': false
-                ]) }}
-                {{ partial('partials/list-card', [
-                    'id': 1,
-                    'slug': 'berlin-living',
-                    'image': 'http://www.babooka.nl/content/images/thumbs/0001984_living-in-style-berlin.jpeg',
-                    'name': 'Berlin Living',
-                    'description': 'Looking for a flat? Get the most recent market updates, curated by Airbnb',
-                    'subscriberCount': 239,
-                    'listingCount': 100,
-                    'showCurator': false,
-                    'half': true,
-                    'large': false
-                ]) }}
+                {% endfor %}
             </div>
         {% endif %}
     </div>

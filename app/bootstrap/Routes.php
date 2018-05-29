@@ -36,6 +36,14 @@ return [
         'methods' => ['GET'],
     ],
     [
+        'url' => '/profile/{user:[a-zA-Z0-9\-]+}/{page:[a-z]+}',
+        'paths' => [
+            'controller' => 'User',
+            'action' => 'profile',
+        ],
+        'methods' => ['GET'],
+    ],
+    [
         'url' => '/profile/{user:[a-zA-Z0-9\-]+}',
         'paths' => [
             'controller' => 'User',
@@ -51,6 +59,7 @@ return [
         ],
         'methods' => ['GET'],
     ],
+    //TODO This one looks like can be removed
     [
         'url' => '/user/{user:[a-zA-Z0-9\-]+}/{page:[a-z]+}',
         'paths' => [

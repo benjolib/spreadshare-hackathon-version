@@ -2,6 +2,8 @@
 
 namespace DS\Controller;
 
+use DS\Model\Helper\TableFilter;
+use DS\Model\Tables;
 use DS\Model\User;
 use DS\Model\UserConnections;
 use DS\Model\UserFollower;
@@ -68,7 +70,14 @@ class UserController
                         }
                     }
                 }
-                
+
+                $createdLists = (new Tables())
+                    ->selectTables($this->serviceManager->getAuth()->getUserId(), new TableFilter())
+                    ->filterOwned($user->getId())->getQuery()->execute()->toArray() ?: [];
+
+
+                $this->view->setVar('createdLists', $createdLists);
+
                 $this->view->setVar('connections', $connectionList);
                 
                 $this->view->setVar('numFollowing', UserFollower::countFollowing($user->getId()));
