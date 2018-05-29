@@ -8,10 +8,12 @@
     'description': table['tagline'],
     'subscriberCount': table['subscriberCount'],
     'listingCount': table['listingCount'],
+    'showCurator': true,
     'curatorHandle': table['creatorHandle'],
     'curatorAvatar': table['creatorImage'],
     'curatorName': table['creator'],
     'curatorBio': table['creatorBio'],
+    'half': false,
     'large': false
   ]) }}
 {% endfor %}
