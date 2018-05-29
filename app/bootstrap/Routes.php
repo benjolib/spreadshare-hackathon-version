@@ -249,9 +249,9 @@ return [
         'methods' => ['GET', 'POST'],
     ],
     [
-        'url' => '/for-you',
+        'url' => '/for\-you',
         'paths' => [
-            'controller' => 'ForYou',
+            'controller' => 'Kaka',
             'action' => 'index',
         ],
         'methods' => ['GET', 'POST'],
