@@ -3,6 +3,7 @@
 namespace DS\Controller;
 
 use DS\Application;
+use DS\Model\TableCommentVotes;
 use Phalcon\Logger;
 use DS\Model\Tables;
 use Phalcon\Exception;
@@ -107,6 +108,9 @@ class ListController extends BaseController
             $commentsArray = $tableCommentsModel->getComments($tableId);
             foreach ($commentsArray as $key => $comment) {
                 $commentsArray[$key]['childs'] = $tableCommentsModel->getChildComments($tableId, $comment['id']);
+                // TODO this should be optimized, we are doing an extra query for each comment. I'm sorry to have done
+                // it this way, but the time constraints were imposing releasing the project over quality of the code.
+                $commentsArray[$key]['voted'] = !empty(TableCommentVotes::findByUserIdAndComment($authId, $comment['id']));
             }
 
             // table stats
