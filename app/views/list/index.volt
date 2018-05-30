@@ -5,19 +5,29 @@
 {% block content %}
 <div class="re-page re-page--list">
   <div class="list-page-space">
-    <div class="re-image" style="background: #f5f5f5 url({{ table['image'] ? table['image'] : 'https://picsum.photos/894/258/?image=' ~ table['id'] }}) center / cover;"></div>
-    <div class="re-pre-heading-info">
+    <div class="re-image" style="background: #f5f5f5 url({{ table['image'] ? table['image'] : '' }}) center / cover;">
+      <div class="re-image__upload-button"></div>
+      <div class="re-image__delete-button"></div>
+    </div>
+    <input type="file" name="image" id="re-image-fileUpload" style="display: none;" />
+    {# <div class="re-pre-heading-info">
       <div>{{ table['topic1'] }}</div>
       <div class="re-green">{{ table['subscriberCount'] }} SUBSCRIBERS</div>
       <div class="re-lighten">{{ date("d.m.Y", table['createdAt']) }}</div>
-    </div>
+    </div> #}
     <h1 class="re-heading re-heading--list">{{ table['title'] }}</h1>
-    <h2 class="re-subheading re-subheading--list">{{ table['tagline'] }}</h2>
+    <h2 class="re-subheading re-subheading--list"><span class="actual-tagline">{{ table['tagline'] }}</span>, curated by <a href="{{ table['creatorHandle'] }}">{{ table['creator'] }}</a></h2>
     <p class="re-para">{{ table['description'] }}</p>
-    <a class="re-button re-button--double-line" href="subscribe/{{table['id']}}">
-      Subscribe
-      <div class="re-button__extra-text">Get new listings to your inbox</div>
-    </a>
+    <div class="u-flex">
+      <a class="re-button re-button--double-line" href="subscribe/{{table['id']}}">
+        Subscribe
+        <div class="re-button__extra-text">Get new listings to your inbox</div>
+      </a>
+      <a class="re-button re-button--double-line list-edit-button" href="#" style="margin-left:8px">
+        Edit List
+        <div class="re-button__extra-text">You own this list so you can edit</div>
+      </a>
+    </div>
   </div>
 
   <div class="table-scroll">
@@ -59,7 +69,11 @@
                 </div>
               </td>
               <td>
-                <div class="re-table__list-image" style="background: #f5f5f5 url({{ row['image'] }}) center / cover;"></div>
+                <div class="re-table__list-image {{ row['image'] ? '' : 're-table__list-image--empty' }}" style="background: #f5f5f5 url({{ row['image'] }}) center / cover;">
+                  <div class="re-table__list-image__upload-button"></div>
+                  <div class="re-table__list-image__delete-button"></div>
+                </div>
+                <input type="file" name="image" class="re-table__list-image-fileUpload" style="display: none;" />
               </td>
               {% for cell in row['content']|json_decode %}
                 {% set len = filterTableRowsContent(cell.content)|striptags|length %}
@@ -74,7 +88,7 @@
                    {% else %}
                    {% set length = 0 %}
                    {% endif %}
-                <td style="min-width: {{ length }}px;">{{ filterTableRowsContent(cell.content) }}</td>
+                <td style="min-width: {{ length }}px;"><div>{{ filterTableRowsContent(cell.content) }}</div></td>
               {% endfor %}
             </tr>
             <tr class="re-table-space"></tr>
@@ -120,10 +134,10 @@
             <td class="shadowcontaintd"><div class="shadowcontain"></div></td>
             <td>
               <div class="re-table__list-image re-table__list-image--new-row" id="addRowImage"></div>
-              <input type="file" name="image" id="fileUpload" style="display: none;" />
+              <input type="file" name="image" id="new-row-fileUpload" style="display: none;" />
             </td>
             {% for column in tableColumns %}
-              <td><textarea placeholder="{{ column.title }}" rows="1" oninput="$(this).height(5);$(this).height($(this).prop('scrollHeight'))"></textarea></td>
+              <td><textarea placeholder="{{ column.title }}" rows="1" class="cell-input-sizing"></textarea></td>
             {% endfor %}
           </tr>
           <tr class="re-table-space"></tr>
@@ -140,49 +154,31 @@
   </a>
 </div>
 
-
 <div class="list-page-section-label">
-  ABOUT THIS LIST
+  RELATED LISTS
 </div>
-<div class="about-list">
-  <div class="about-list__inner">
-    <div class="about-list__col">
-      <div class="about-list__item">
-        <div class="about-list__item__name">ACTIONS</div>
-        <div class="about-list__item__content">
-          <a class="about-list__action" href="subscribe/{{table['id']}}">Subscribe</a>
-          <a class="about-list__action" href="#">Collaborate</a>
-          <a class="about-list__action" href="/download/table/{{table['id']}}/csv">Download</a>
-          <a class="about-list__action" href="#comment">Comment</a>
-          <a class="about-list__action l-button" href="javascript:;" data-dropdown-placement="right">Flag</a>
-          <div class="dropdown flag-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
-            <a href="flag/{{table['id']}}/duplicate">Duplicate</a>
-            <a href="flag/{{table['id']}}/spam">Spam</a>
-            <a href="flag/{{table['id']}}/copyright">Copyright</a>
-            <a href="flag/{{table['id']}}/inappropriate">inappropriate</a>
-            <a href="flag/{{table['id']}}/other">Other</a>
-          </div>
-        </div>
+<div class="related-lists u-flex u-flexJustifyCenter">
+  <div class="related-lists__inner u-flex u-flexWrap">
+    {% for relatedTable in related %}
+      <div class="related-lists__item">
+        <a href="/list/{{ relatedTable['id'] }}"><div class="related-lists__item__name">{{ relatedTable['title'] }}{% if relatedTable['staffPick'] %} <div class="related-lists__item__staff-pick">STAFF PICK 👏</div>{% endif %}</div></a>
+        <div class="related-lists__item__descr">{{ relatedTable['tagline']|truncate(42) }}</div>
       </div>
-      <div class="about-list__item">
-        <div class="about-list__item__name">STATS</div>
-        <div class="about-list__item__content">
-          <div class="about-list__part"><b>{{ table['subscriberCount'] }}</b> Subscriptions</div>
-          <div class="about-list__part"><b>{{ table['contributionCount'] }}</b> Collaborations</div>
-          <div class="about-list__part"><b>{{ table['commentsCount'] }}</b> Comments</div>
-        </div>
-      </div>
-      <div class="about-list__item">
-        <div class="about-list__item__name">SHARE</div>
-        <div class="about-list__item__content">
-          <div class="about-list__part"><a href="#" id="share-twitter">Twitter</a></div>
-          <div class="about-list__part"><a id="share-facebook" href="#">Facebook</a></div>
-          <div class="about-list__part"><a id="share-hacker" href="#">Hacker News</a></div>
-          <div class="about-list__part"><a id="share-reddit" href="#">Reddit</a></div>
-        </div>
-      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="list-tabs">
+  <div class="list-tabs__inner">
+    <div class="list-tab-buttons">
+      <a href="#" class="list-tab-button list-tab-button-about active">ABOUT</a>
+      <a href="#" class="list-tab-button list-tab-button-discussion">DISCUSSION</a>
+      <a href="#" class="list-tab-button list-tab-button-activity">ACTIVITY</a>
+      <a href="#" class="list-tab-button list-tab-button-subscribers">SUBSCRIBERS</a>
+      <a href="#" class="list-tab-button list-tab-button-collaborators">COLLABORATORS</a>
     </div>
-    <div class="about-list__col">
+
+    <div class="list-tab-content list-tab-content-about">
       <div class="about-list__item">
         <div class="about-list__item__name">CURATED BY</div>
         <div class="about-list__item__content">
@@ -198,54 +194,24 @@
       <div class="about-list__item">
         <div class="about-list__item__name">TAGS</div>
         <div class="about-list__item__content">
-            {% for tag in tags %}
-              <div class="about-list__part">{{tag['title']}}</div>
+            {% for i, tag in tags %}
+              <div class="about-list__part">{{tag['title']}}{{ i + 1 < tags|length ? ', ' : '' }}</div>
             {% else %}
               <div class="about-list__part">No Tags</div>
             {% endfor %}
         </div>
       </div>
       <div class="about-list__item">
-        <div class="about-list__item__name">REGION</div>
+        <div class="about-list__item__name">STATS</div>
         <div class="about-list__item__content">
-          {% for tablelocation in tablemodel.tableLocations %}
-            <div class="about-list__part">{{ tablelocation.locations.locationName }}</div>
-          {% else %}
-            <div class="about-list__part">No Region</div>
-          {% endfor %}
-
+          <div class="about-list__part"><b>{{ table['subscriberCount'] }}</b> Subscriptions, </div>
+          <div class="about-list__part"><b>{{ table['contributionCount'] }}</b> Collaborations, </div>
+          <div class="about-list__part"><b>{{ table['commentsCount'] }}</b> Comments</div>
         </div>
       </div>
     </div>
-  </div>
-</div>
 
-{% if related|length %}
-  <div class="list-page-section-label">
-    RELATED LISTS
-  </div>
-  <div class="related-lists u-flex u-flexJustifyCenter">
-    <div class="related-lists__inner u-flex u-flexWrap">
-      {% for relatedTable in related %}
-        <div class="related-lists__item">
-          <a href="/list/{{ relatedTable['id'] }}"><div class="related-lists__item__name">{{ relatedTable['title'] }}{% if relatedTable['staffPick'] %} <div class="related-lists__item__staff-pick">STAFF PICK 👏</div>{% endif %}</div></a>
-          <div class="related-lists__item__descr">{{ relatedTable['tagline']|truncate(42) }}</div>
-        </div>
-      {% endfor %}
-    </div>
-  </div>
-{% endif %}
-
-<div class="list-tabs">
-  <div class="list-tabs__inner">
-    <div class="list-tab-buttons">
-      <a href="#" class="list-tab-button list-tab-button-discussion active">DISCUSSION</a>
-      <a href="#" class="list-tab-button list-tab-button-activity">ACTIVITY</a>
-      <a href="#" class="list-tab-button list-tab-button-subscribers">SUBSCRIBERS</a>
-      <a href="#" class="list-tab-button list-tab-button-collaborators">COLLABORATORS</a>
-    </div>
-
-    <div class="list-tab-content list-tab-content-discussion j_table-discussion" id="comment">
+    <div class="list-tab-content list-tab-content-discussion j_table-discussion" id="comment" style="display: none;">
       {% if auth.loggedIn() %}
         <div>
           <button class="re-button re-button--full-width re-button--tall re-button--list-discussion">Write a Response</button>
@@ -373,7 +339,71 @@
 {% block scripts %}
 <script type="text/javascript">
   $(document).ready(function () {
+    function listCellInputSizing() {
+      var $this = $(this);
+
+      $this.height(5);
+      var height = $this.prop('scrollHeight');
+      if (height > 76) {
+        height = 76;
+      }
+      $this.height(height);
+
+      var len = $this.val().length;
+      var minWidth = 0;
+      if (len > 160) {
+        minWidth = 480;
+      } else if (len > 80) {
+        minWidth = 300;
+      } else if (len > 40) {
+        minWidth = 175;
+      } else if (len > 20) {
+        minWidth = 150;
+      }
+
+      $this.parents('td').attr('style', 'min-width:' + minWidth + 'px;');
+    }
+
+    $('.cell-input-sizing').on('input', listCellInputSizing);
+
+    function listCellEditableSizing() {
+      console.log('blinput');
+      var $this = $(this);
+
+      var len = $this.text().length;
+      console.log(len);
+      var minWidth = 0;
+      if (len > 160) {
+        minWidth = 480;
+      } else if (len > 80) {
+        minWidth = 300;
+      } else if (len > 40) {
+        minWidth = 175;
+      } else if (len > 20) {
+        minWidth = 150;
+      }
+
+      $this.parents('td').attr('style', 'min-width:' + minWidth + 'px;');
+    }
+
+    function bindListCellEditableSizing() {
+      console.log('blon');
+      $('.re-table tr.list-row-tr:not(.list-row-tr--add-row) td:nth-of-type(1n+4) div').on('input', listCellEditableSizing);
+    }
+
+    function unbindListCellEditableSizing() {
+      console.log('bloff');
+      $('.re-table tr.list-row-tr:not(.list-row-tr--add-row) td:nth-of-type(1n+4) div').off('input', listCellEditableSizing);
+    }
     // binds
+
+    $('.list-tab-button-about').on('click', function (e) {
+      e.preventDefault();
+      $('.list-tab-button').removeClass('active');
+      $('.list-tab-button-about').addClass('active');
+      $('.list-tab-content').hide();
+      $('.list-tab-content-about').show();
+    });
 
     $('.list-tab-button-discussion').on('click', function (e) {
       e.preventDefault();
@@ -464,7 +494,7 @@
 
     // submit table row
 
-    document.querySelector('input[type="file"]').addEventListener('change', function () {
+    document.querySelector('#new-row-fileUpload').addEventListener('change', function () {
       if (this.files && this.files[0]) {
         var img = document.querySelector('#addRowImage');
         img.style = 'background: #f5f5f5 url(' + URL.createObjectURL(this.files[0]) + ') center / cover;';
@@ -473,7 +503,7 @@
     });
 
     document.getElementById('addRowImage').onclick = function () {
-      document.getElementById('fileUpload').click();
+      document.getElementById('new-row-fileUpload').click();
     };
 
     $('#addAListingButton').on('click', function (e) {
@@ -539,6 +569,184 @@
       $form.find('.commentParentId').val(target.attr('data-id'));
 
       $form.find('.commentTextArea').focus();
+    });
+
+
+    // list edit stuff
+
+    function linkifyAndDropdownifyCells() {
+      $('.re-table tr.list-row-tr:not(.list-row-tr--add-row)').each(function(){
+        $(this).find('td:nth-of-type(1n+4) div').each(function(){
+          var $this = $(this);
+          var maxPos = 161;
+          var rawText = $this.text();
+          var text = '';
+          var linkStrippedText = rawText.replace(/((http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?)/g, function (match) {
+            return (new URL(match))['host'].replace('www.', '');
+          });
+          if (linkStrippedText.length > maxPos) {
+            var lastPos = maxPos - 3;
+            text = rawText.substr(0, lastPos);
+            text = text.substr(0, Math.min(text.length, text.lastIndexOf(" "))) + '...';
+            text += '<a href="javascript:;" class="table-cell-show-more-button l-button" data-dropdown-placement="bottom">More</a>';
+            text += '<div class="l-dropdown dropdown table-cell-show-more-dropdown">' + rawText + '</div>';
+          } else {
+            text = rawText;
+          }
+          text = text.replace(/((http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?)/g, function (match) {
+            return '<a class="re-table-link" target="_blank" title="' + match + '" href="' + match + '">' + (new URL(match))['host'].replace('www.', '') + '</a>';
+          })
+          $this.html(text);
+        });
+        window.bindPops();
+      });
+    }
+
+    function unlinkifyAndUnDropdownifyCells() {
+      $('.re-table').find('.re-table-link').replaceWith($('.re-table').find('.re-table-link').attr('href'));
+      $('.table-cell-show-more-dropdown').each(function(){
+        var $this = $(this);
+        $this.parents('td').html('<div>' + $this.text() + '</div>');
+      });
+    }
+
+    var listImage;
+    var listName;
+    var listTagline;
+    var listDescription;
+    var listColumns;
+    var listRows;
+
+    document.querySelector('#re-image-fileUpload').addEventListener('change', function () {
+      if (this.files && this.files[0]) {
+        var img = $('.re-image');
+        img.attr('style', 'background: #f5f5f5 url(' + URL.createObjectURL(this.files[0]) + ') center / cover;');
+        //img.onload = fn;
+      }
+    });
+    document.querySelector('.re-image__upload-button').onclick = function () {
+      document.getElementById('re-image-fileUpload').click();
+    };
+    document.querySelector('.re-image__delete-button').onclick = function () {
+      document.getElementById('re-image-fileUpload').value = "";
+      var img = $('.re-image');
+      img.attr('style', 'background: #f5f5f5 url() center / cover;');
+    };
+
+    $('.re-table__list-image-fileUpload').on('change', function () {
+      if (this.files && this.files[0]) {
+        var img = $(this).parents('td').find('.re-table__list-image');
+        img.removeClass('re-table__list-image--empty');
+        img.attr('style', 'background: #f5f5f5 url(' + URL.createObjectURL(this.files[0]) + ') center / cover;');
+        //img.onload = fn;
+      }
+    });
+    $('.re-table__list-image__upload-button').on('click', function () {
+      $(this).parents('td').find('.re-table__list-image-fileUpload').click();
+    });
+    $('.re-table__list-image__delete-button').on('click', function () {
+      $(this).parents('td').find('.re-table__list-image-fileUpload').val('');
+      var img = $(this).parents('td').find('.re-table__list-image');
+      img.addClass('re-table__list-image--empty');
+      img.attr('style', 'background: #f5f5f5 url() center / cover;');
+    });
+
+    $('.list-edit-button').on('click', function (e) {
+      e.preventDefault();
+
+      unlinkifyAndUnDropdownifyCells();
+
+      listImage = $('.re-image').attr('style');
+      listName = $('.re-heading').text();
+      listTagline = $('.re-subheading .actual-tagline').text();
+      listDescription = $('.re-para').text();
+      listColumns = $('.re-table th:nth-of-type(1n+4)').map(function(){ return this.innerText });
+      listRows = $('.re-table tr.list-row-tr:not(.list-row-tr--add-row)').map(function(){
+        var $this = $(this);
+        return {
+          id: $this.data('id'),
+          image: $this.find('.re-table__list-image').attr('style'),
+          content: $this.find('td:nth-of-type(1n+4) div').map(function(){
+            return this.innerText;
+          }),
+        }
+      });
+
+      console.log(listRows);
+
+      $('.re-header').addClass('re-header--editing');
+      $('.re-image').addClass('re-image--editing');
+      $('.re-heading').attr('contenteditable', 'true');
+      $('.re-subheading .actual-tagline').attr('contenteditable', 'true');
+      $('.re-para').attr('contenteditable', 'true');
+      $('.re-table th:nth-of-type(1n+4)').attr('contenteditable', 'true');
+      $('.re-table tr.list-row-tr:not(.list-row-tr--add-row) td:nth-of-type(1n+4) div').attr('contenteditable', 'true');
+      $('.re-table__list-image').addClass('re-table__list-image--editing');
+      bindListCellEditableSizing();
+    });
+
+    $('.re-header .cancel-button').on('click', function (e) {
+      e.preventDefault();
+      $('.re-header').removeClass('re-header--editing');
+      $('.re-image').removeClass('re-image--editing');
+      $('.re-heading').attr('contenteditable', 'false');
+      $('.re-subheading .actual-tagline').attr('contenteditable', 'false');
+      $('.re-para').attr('contenteditable', 'false');
+      $('.re-table th:nth-of-type(1n+4)').attr('contenteditable', 'false');
+      $('.re-table tr.list-row-tr:not(.list-row-tr--add-row) td:nth-of-type(1n+4) div').attr('contenteditable', 'false');
+      unbindListCellEditableSizing();
+
+      $('.re-image').attr('style', listImage);
+      $('.re-heading').text(listName);
+      $('.re-subheading .actual-tagline').text(listTagline);
+      $('.re-para').text(listDescription);
+      $('.re-table th:nth-of-type(1n+4)').each(function (i) {
+        $(this).text(listColumns[i]);
+      });
+      $('.re-table tr.list-row-tr:not(.list-row-tr--add-row)').each(function(i){
+        var $this = $(this);
+        $this.find('.re-table__list-image').attr('style', listRows[i].image);
+        $this.find('td:nth-of-type(1n+4) div').each(function(ii){
+          $(this).text(listRows[i].content[ii]);
+        });
+      });
+      $('.re-table__list-image').removeClass('re-table__list-image--editing');
+
+      linkifyAndDropdownifyCells();
+    });
+
+    $('.re-header .save-button').on('click', function (e) {
+      e.preventDefault();
+      $('.re-header').removeClass('re-header--editing');
+      $('.re-image').removeClass('re-image--editing');
+      $('.re-heading').attr('contenteditable', 'false');
+      $('.re-subheading .actual-tagline').attr('contenteditable', 'false');
+      $('.re-para').attr('contenteditable', 'false');
+      $('.re-table th:nth-of-type(1n+4)').attr('contenteditable', 'false');
+      $('.re-table tr.list-row-tr:not(.list-row-tr--add-row) td:nth-of-type(1n+4) div').attr('contenteditable', 'false');
+      unbindListCellEditableSizing();
+
+      listImage = $('.re-image').attr('style');
+      listName = $('.re-heading').text();
+      listTagline = $('.re-subheading .actual-tagline').text();
+      listDescription = $('.re-para').text();
+      listColumns = $('.re-table th:nth-of-type(1n+4)').map(function(){ return this.innerText });
+      listRows = $('.re-table tr.list-row-tr:not(.list-row-tr--add-row)').map(function(){
+        var $this = $(this);
+        return {
+          id: $this.data('id'),
+          image: $this.find('.re-table__list-image').attr('style'),
+          content: $this.find('td:nth-of-type(1n+4) div').map(function(){
+            return this.innerText;
+          }),
+        }
+      });
+      $('.re-table__list-image').removeClass('re-table__list-image--editing');
+
+      linkifyAndDropdownifyCells();
+
+      // TODO: fill in some form values and submit, or do an ajax request.
+      window.createAlert('success', 'List Saved', 'Your list has been saved!')
     });
   });
 

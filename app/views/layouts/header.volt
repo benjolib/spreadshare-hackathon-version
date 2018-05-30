@@ -316,8 +316,8 @@
     {% endif %}
   </div>
   <div class="re-header__editing">
-    <a href="#" class="re-button re-button--grey">Cancel</a>
-    <a href="#" class="re-button">Publish</a>
+    <a href="#" class="re-button re-button--grey cancel-button">Cancel</a>
+    <a href="#" class="re-button save-button">Publish</a>
     <img class="l-button re-header__editing__arrow" src="/assets/images/header-editing-arrow-down.svg" />
     <div class="dropdown list-editing-draft-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
       <a href="#"><img src="/assets/images/list-editing-draft-save.svg" /> Save as Draft</a>

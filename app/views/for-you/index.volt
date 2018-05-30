@@ -87,6 +87,9 @@
       </div>
     </div>
   {% endfor %}
+  <div class="u-flex u-flexJustifyCenter">
+    <a href="#" class="re-button re-button--load-more">Load More</a>
+  </div>
 </div>
 {% endblock %}
 
