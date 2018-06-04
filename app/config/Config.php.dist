@@ -104,6 +104,8 @@ return [
         'DS\Listeners' => ROOT_PATH. '/app/listeners',
         'DS\Exceptions' => ROOT_PATH . '/app/exceptions/',
         'DS\Dto' => ROOT_PATH . '/app/dto/',
+        'DS\Dto\Feed' => ROOT_PATH . '/app/dto/feed/',
+        'DS\Services' => ROOT_PATH . '/app/services/',
     ],
     'mode' => '_ENVIRONMENT_',
     
