@@ -812,7 +812,7 @@
       leaveEditUrl();
 
       // TODO: fill in some form values and submit, or do an ajax request.
-      window.createAlert('success', 'List Saved', 'Your list has been saved!')
+      window.createAlert('success', 'List Saved', 'Your list has been saved!');
     });
 
     var href = location.href;
