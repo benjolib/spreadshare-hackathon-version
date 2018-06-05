@@ -366,12 +366,14 @@
     $('.re-header__search').on('click', function (e) {
       e.preventDefault();
       $('.re-header__search-open').show();
+      $('.re-header__search').attr('style', 'opacity:0;pointer-events:none;');
       $("input.navbar__search__field").focus();
     });
 
     $('.search-close').on('click', function (e) {
       e.preventDefault();
       $('.re-header__search-open').hide();
+      $('.re-header__search').attr('style', 'opacity:1;pointer-events:auto;');
       $("input.navbar__search__field").val("");
     });
 

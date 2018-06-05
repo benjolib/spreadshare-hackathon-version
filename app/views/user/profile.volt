@@ -48,7 +48,6 @@
                     {% if auth.loggedIn() and auth.getUserId() != profile.id %}
                         <a class="follow-button small-follow-button" href="#">Follow</a>
                     {% endif %}
-
                     {% if auth.loggedIn() and auth.getUserId() == profile.id %}
                         <a class="edit-button small-edit-button" href="#">Edit</a>
                         <div class="save-and-cancel">
@@ -60,7 +59,7 @@
             </div>
         </div>
         {% if currentPage == 'following' or currentPage == 'folowers' %}
-            <div class="u-flex u-flexWrap small-gutter">
+            <div class="u-flex u-flexWrap med-gutter">
                 {% for user in users %}
                 <div class="list-tab-content-subscribers__card">
                     {{ partial('partials/profile-card', [
@@ -89,7 +88,8 @@
                     'subscriberCount': createdList['subscriberCount'],
                     'listingCount': createdList['listingCount'],
                     'showCurator': false,
-                    'half': true,
+                    'small': true,
+                    'half': false,
                     'large': false
                 ]) }}
                 {% endfor %}

@@ -211,7 +211,7 @@
   @media (min-width: 768px) {
     padding-left: 20px;
     padding-right: 20px;
-    margin-bottom: 65px;
+    margin-bottom: 61px;
     width: 50%;
   }
   @media (min-width: 1024px) {
@@ -239,36 +239,36 @@
     border-radius: 4px;
     margin-bottom: 13px;
     @media (min-width: 768px) {
-      margin-bottom: 24px;
+      margin-bottom: 19px;
       height: 258px;
     }
   }
-  &__listingCount {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0.5);
-    font-family: 'Roboto Mono', monospace;
-    color: #2a1e3e;
-    font-size: 9px;
-    letter-spacing: -0.22px;
-    padding: 3px 5px;
-    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
-    border-radius: 2px;
-    border-bottom-right-radius: 4px;
-    @media (min-width: 768px) {
-      font-size: 12px;
-      letter-spacing: -0.29px;
-      padding: 2px 6px;
-      box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.18);
-    }
-  }
+  // &__listingCount {
+  //   position: absolute;
+  //   right: 0;
+  //   bottom: 0;
+  //   background: rgba(255, 255, 255, 0.5);
+  //   font-family: 'Roboto Mono', monospace;
+  //   color: #2a1e3e;
+  //   font-size: 9px;
+  //   letter-spacing: -0.22px;
+  //   padding: 3px 5px;
+  //   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+  //   border-radius: 2px;
+  //   border-bottom-right-radius: 4px;
+  //   @media (min-width: 768px) {
+  //     font-size: 12px;
+  //     letter-spacing: -0.29px;
+  //     padding: 2px 6px;
+  //     box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.18);
+  //   }
+  // }
   &__name {
     font-size: 22.5px;
     color: #2a1e3e;
     line-height: 27px;
     letter-spacing: -0.54px;
-    margin-bottom: 7px;
+    margin-bottom: 14px;
     margin-left: 8px;
     white-space: nowrap;
     overflow: hidden;
@@ -309,13 +309,15 @@
     }
   }
   &__subscriberCount {
-    font-family: 'Roboto Mono', monospace;
-    color: #6cc69d;
-    letter-spacing: 1px;
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    color: #ea612d;
+    letter-spacing: -0.67px;
     margin-right: 5px;
-    font-size: 16px;
+    font-size: 18px;
+    margin-top: -11px;
     @media (min-width: 768px) {
-      font-size: 20px;
+      font-size: 24px;
       margin-right: 2px;
     }
     img {
@@ -334,6 +336,9 @@
     margin-top: 1px;
     margin-bottom: 20px;
     margin-left: 8px;
+    a {
+      color: #2dad6b;
+    }
     @media (min-width: 768px) {
       margin-top: 10px;
       margin-left: 0;
@@ -346,6 +351,39 @@
     margin-left: 7px;
     @media (min-width: 768px) {
       margin-left: 2px;
+    }
+  }
+  &--small {
+    width: 33.333%;
+    padding-left: 12px;
+    padding-right: 12px;
+    margin-bottom: 40px;
+    .list-card__image {
+      height: 175px;
+      margin-bottom: 6px;
+    }
+    .list-card__name {
+      font-size: 21px;
+      margin-bottom: 0px;
+      width: calc(33.33vw - 110px);
+      @media (min-width: 950px) {
+        width: calc(322px - 110px);
+      }
+    }
+    .list-card__description {
+      font-size: 14px;
+    }
+    .list-card__subscriberCount {
+      font-size: 17px;
+      margin-top: 0;
+      img {
+        margin-right: 3px;
+        width: 16px;
+      }
+    }
+    @media (min-width: 768px) {
+      padding-left: 12px;
+      padding-right: 12px;
     }
   }
 }
@@ -362,8 +400,8 @@
     padding-left: 20px;
     padding-right: 20px;
     width: 50%;
-    min-height: 482px;
-    margin-bottom: 65px;
+    min-height: 423px;
+    margin-bottom: 82px;
     margin-top: 0;
   }
   @media (min-width: 1024px) {
@@ -377,7 +415,7 @@
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
     border-radius: 4px;
     @media (min-width: 768px) {
-      padding: 50px 50px 37px 50px;
+      padding: 68px 50px 50px 50px;
     }
   }
   &__heading {
@@ -385,12 +423,12 @@
     line-height: 33px;
     letter-spacing: -0.72px;
     margin-bottom: 16px;
-    margin-left: 2px;
+    margin-left: 4px;
     @media (min-width: 768px) {
       font-size: 40px;
       line-height: 48px;
       letter-spacing: -1.07px;
-      margin-bottom: 28px;
+      margin-bottom: 34px;
     }
   }
   &__text {
@@ -398,13 +436,14 @@
     font-size: 12px;
     letter-spacing: -0.32px;
     line-height: 16px;
-    margin-left: 2px;
+    margin-left: 4px;
     margin-bottom: 26px;
     @media (min-width: 768px) {
       font-size: 16px;
       line-height: 21px;
-      letter-spacing: -0.43px;
+      letter-spacing: -0.5px;
       margin-bottom: 32px;
+      margin-right: -10px;
     }
   }
   &__link {
@@ -423,32 +462,18 @@
     text-align: center;
     height: 42px;
     line-height: 42px;
-    letter-spacing: 0.5px;
+    letter-spacing: -0.3px;
     @media (min-width: 768px) {
       font-size: 16px;
       height: 56px;
       line-height: 56px;
-      letter-spacing: 0.67px;
+      letter-spacing: -0.5px;
     }
   }
-  &--yellow & {
+  &--orange-bird & {
     &__inner {
-      background: #ffea81;
-    }
-    &__heading {
-      color: #f65261;
-    }
-    &__text {
-      color: #f65261;
-    }
-    &__button {
-      background: #f65261;
-      color: #ffea81;
-    }
-  }
-  &--green & {
-    &__inner {
-      background: #6cc69d;
+      background: url(/assets/images/9-0/orange-bird-background.png) center /
+        cover;
     }
     &__heading {
       color: #ffffff;
@@ -458,22 +483,55 @@
     }
     &__button {
       background: #ffffff;
-      color: #6cc69d;
+      color: #ea612d;
     }
   }
-  &--white & {
+  &--purple-whale & {
     &__inner {
-      background: #f9f9f9;
+      background: url(/assets/images/9-0/purple-whale-background.png) center /
+        cover;
     }
     &__heading {
-      color: #2a1e3e;
+      color: #ffffff;
     }
     &__text {
-      color: #2a1e3e;
+      color: #ffffff;
     }
     &__button {
-      background: #2a1e3e;
-      color: #f9f9f9;
+      background: #ffffff;
+      color: #2c247f;
+    }
+  }
+  &--blue-octopus & {
+    &__inner {
+      background: url(/assets/images/9-0/blue-octopus-background.png) center /
+        cover;
+    }
+    &__heading {
+      color: #ffffff;
+    }
+    &__text {
+      color: #ffffff;
+    }
+    &__button {
+      background: #ffffff;
+      color: #2860f5;
+    }
+  }
+  &--green-lightning & {
+    &__inner {
+      background: url(/assets/images/9-0/green-lightning-background.png) center /
+        cover;
+    }
+    &__heading {
+      color: #ffffff;
+    }
+    &__text {
+      color: #ffffff;
+    }
+    &__button {
+      background: #ffffff;
+      color: #2dad6b;
     }
   }
 }

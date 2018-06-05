@@ -34,7 +34,7 @@ class IndexController extends BaseController
     /**
      * Home
      */
-    public function indexAction($selection = 'recommended')
+    public function indexAction($selection = 'recently-added')
     {
         try {
             if ($this->serviceManager->getAuth()->loggedIn() && $this->serviceManager->getAuth()->getUser()->getStatus() == UserStatus::OnboardingIncomplete) {
@@ -60,15 +60,14 @@ class IndexController extends BaseController
 
             $tableFilter = new TableFilter();
 
-            // recommended
-            $orderBy = Tables::class . '.createdAt DESC';
-            $tableFilter->setStaffPicks(true);
-            $this->view->setVar('selectionName', 'Recommended');
+            // recently-added
+            $orderBy = Tables::class . ".createdAt DESC";
+            $this->view->setVar('selectionName', 'Recently Added');
 
             $this->view->setVar('selection', $selection);
 
             $page = (int) $this->request->get('page', null, 0);
-            $limit = 12;
+            $limit = 23;
 
             // Filter tables by tableFilter
             $tables = (new Tables())

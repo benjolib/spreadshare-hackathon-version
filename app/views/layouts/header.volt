@@ -1,9 +1,10 @@
 <header class="re-header {{ editing is not empty and editing ? 're-header--editing': '' }}">
   <div class="re-header__inner">
-    <a class="re-header__logo" href="/"><img src="/assets/images/logo.png" /></a>
-    <a class="re-header__item {{ exploreActive is not empty and exploreActive ? 'active': '' }}" href="/">Explore</a>
-    <a class="re-header__item {{ forYouActive is not empty and forYouActive ? 'active': '' }}" href="/for-you">For You</a>
-    <a class="re-header__search" href="#"><img class="re-header__search__img" src="/assets/images/search.svg" /><img class="re-header__search__img-green" src="/assets/images/search-green.svg" /></a>
+    <a class="re-header__logo" href="/"><img src="/assets/images/9-0/logo.png" /></a>
+    <a class="re-header__item feed {{ forYouActive is not empty and forYouActive ? 'active': '' }}" href="/for-you"><img src="/assets/images/9-0/header-feed-bird.svg" /> Feed</a>
+    <a class="re-header__item explore {{ exploreActive is not empty and exploreActive ? 'active': '' }}" href="/"><img src="/assets/images/9-0/header-explore-whale.svg" /> Explore</a>
+    <a class="re-header__item collabs {{ collabsActive is not empty and collabsActive ? 'active': '' }}" href="/collaborations"><img src="/assets/images/9-0/header-collabs-octopus.svg" /> Collabs</a>
+    <a class="re-header__search" href="#"><img class="re-header__search__img" src="/assets/images/9-0/header-search.png" /></a>
     <div class="re-header__search-open" style="{% if query is not defined %}display:none;{% endif %}">
       <img src="/assets/images/search-green.svg" />
       <input type="text" placeholder="Search" class="navbar__search__field" value="{% if query is defined %}{{ query }}{% endif %}" />
@@ -21,12 +22,11 @@
       <a href="#" class="all-results">More Results</a>
     </div>
     {% if auth.loggedIn() %}
-      <a class="re-header__add" href="/table/add"><img src="/assets/images/header-add.svg" /></a>
-      <a class="re-header__paperPencil" href="/collaborations"><img src="/assets/images/header-paper-pencil.svg" /></a>
+      <a class="re-header__add" href="/table/add"><img src="/assets/images/9-0/header-add.png" /></a>
 
       <a class="re-header__bell l-button" data-dropdown-placement="bottom-end" data-dropdown-offset="114" href="javascript:;">
         {% if auth.getUser().getStats().getUnreadNotificationsCount() > 0 %}<span>{{ auth.getUser().getStats().getUnreadNotificationsCount() }}</span>{% endif %}
-        <img src="/assets/images/header-bell.svg" />
+        <img src="/assets/images/9-0/header-notifications.png" />
       </a>
       <div class="l-dropdown dropdown notification-dropdown u-flex u-flexCol">
         {% set numbers = [1, 2, 3, 4, 5, 6] %}
@@ -52,7 +52,26 @@
       </div>
 
       <a class="re-header__user l-button" data-dropdown-placement="bottom-end" data-dropdown-offset="48" href="javascript:;"><img src="{{ auth.getUser().getImage() }}" /></a>
-      <div class="l-dropdown dropdown re-header__user-dropdown user-dropdown u-flex">
+      <div class="l-dropdown dropdown re-header__user-dropdown2 user-dropdown2 u-flex">
+        <div>YOU</div>
+        <a href="/profile/{{ auth.getUser().handle }}">This is your <span>profile</span></a>
+        <a href="/subscriptions">All lists your <span>subscribed</span> to</a>
+        <a href="/history" style="margin-bottom:36px">All lists you've <span>recently viewed</span></a>
+
+        <div>SETTINGS</div>
+        <a href="/settings">Adjust your <span>email settings</span></a>
+        <a href="/settings" style="margin-bottom:36px">Manage your <span>account</span></a>
+
+        <div>FOR CURATORS</div>
+        <a href="/lists">All <span>lists</span> created by you</a>
+        <a href="/stats" style="margin-bottom:13px"><span>Stats</span> for all your lists</a>
+
+        <div>ABOUT</div>
+        <a href="/about" style="margin-bottom:22px">Blog, Jobs, <span>About</span> and more</a>
+
+        <a href="/logout" class="logout">Logout</a>
+      </div>
+      {# <div class="l-dropdown dropdown re-header__user-dropdown user-dropdown u-flex">
         <div class="user-dropdown__column">
           <a href="/profile/{{ auth.getUser().handle }}" class="user-dropdown__item">
             <div class="user-dropdown__item__image user-dropdown__item__image--profile"><img src="{{ auth.getUser().getImage() }}" /></div>
@@ -127,9 +146,9 @@
             </div>
           </a>
         </div>
-      </div>
+      </div> #}
 
-      <a class="re-header__dotdotdot l-button" data-dropdown-placement="bottom-end" data-dropdown-offset="20" href="javascript:;"><img src="/assets/images/header-dotdotdot.svg" /></a>
+      {# <a class="re-header__dotdotdot l-button" data-dropdown-placement="bottom-end" data-dropdown-offset="20" href="javascript:;"><img src="/assets/images/header-dotdotdot.svg" /></a>
       <div class="l-dropdown dropdown re-header__dotdotdot-dropdown user-dropdown u-flex" style="margin-top: 29px;">
         <div class="user-dropdown__column">
           <a href="/karma-challenge" class="user-dropdown__item">
@@ -177,7 +196,7 @@
             </div>
           </a>
         </div>
-      </div>
+      </div> #}
 
       <a class="re-header__hamburger l-button" data-dropdown-placement="bottom-end" href="javascript:;"><img src="/assets/images/hamburger.svg" /></a>
       <div class="l-dropdown dropdown user-dropdown u-flex u-flexCol user-dropdown--no-margin">
@@ -308,7 +327,7 @@
       </div>
     {% else %}
       <a class="re-button re-button--header" href="/login">
-        <span>Join with</span>
+        <span>Join us via</span>
         <img src="/assets/images/join-button-facebook.svg" />
         <img src="/assets/images/join-button-twitter.svg" />
         <img src="/assets/images/join-button-google.svg" />

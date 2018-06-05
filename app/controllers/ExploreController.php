@@ -42,7 +42,7 @@ class ExploreController extends IndexController implements LoginAwareController
     /**
      * Table
      */
-    public function indexAction($selection = 'recommended', $secondSelection = '')
+    public function indexAction($selection = 'recently-added', $secondSelection = '')
     {
         try {
             $this->view->setVar('exploreActive', true);
@@ -51,7 +51,6 @@ class ExploreController extends IndexController implements LoginAwareController
 
             switch ($selection) {
                 case 'recommended':
-                    header('Location: /');
                     $orderBy = Tables::class . '.createdAt DESC';
                     $tableFilter->setStaffPicks(true);
                     $this->view->setVar('selectionName', 'Recommended');
@@ -63,6 +62,7 @@ class ExploreController extends IndexController implements LoginAwareController
                     $this->view->setVar('selectionName', 'Trending');
                     break;
                 case 'recently-added':
+                    header('Location: /');
                     $orderBy = Tables::class . ".createdAt DESC";
                     $this->view->setVar('selectionName', 'Recently Added');
                     break;
@@ -233,7 +233,7 @@ class ExploreController extends IndexController implements LoginAwareController
             $this->view->setVar('selection', $selection);
 
             $page = (int) $this->request->get('page', null, 0);
-            $limit = 12;
+            $limit = 23;
 
             // Filter tables by tableFilter
             $tables = (new Tables())

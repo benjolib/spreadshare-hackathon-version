@@ -5,6 +5,7 @@ namespace DS\Model;
 use DS\Constants\Paging;
 use DS\Model\Events\TableRelationsEvents;
 use DS\Model\TableStaffPicks;
+use DS\Model\TableStats;
 
 /**
  * TableRelations
