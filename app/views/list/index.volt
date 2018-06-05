@@ -160,54 +160,7 @@
     You might also like
   </div>
   <div class="related-lists-new med-gutter">
-    {{ partial('partials/list-card', [
-      'id': 123,
-      'slug': 'sluggy-slug',
-      'image': 'blah',
-      'name': "Remote CTO's",
-      'description': 'For CTO’s looking for a new remote job and companies looking to hire',
-      'subscriberCount': 239,
-      'showCurator': true,
-      'curatorHandle': 'remotejobs',
-      'curatorAvatar': 'blah',
-      'curatorName': 'Remote Jobs',
-      'curatorBio': '',
-      'small': true,
-      'half': false,
-      'large': false
-    ]) }}
-    {{ partial('partials/list-card', [
-      'id': 123,
-      'slug': 'sluggy-slug',
-      'image': 'blah',
-      'name': "Remote CTO's",
-      'description': 'For CTO’s looking for a new remote job and companies looking to hire',
-      'subscriberCount': 239,
-      'showCurator': true,
-      'curatorHandle': 'remotejobs',
-      'curatorAvatar': 'blah',
-      'curatorName': 'Remote Jobs',
-      'curatorBio': '',
-      'small': true,
-      'half': false,
-      'large': false
-    ]) }}
-    {{ partial('partials/list-card', [
-      'id': 123,
-      'slug': 'sluggy-slug',
-      'image': 'blah',
-      'name': "Remote CTO's",
-      'description': 'For CTO’s looking for a new remote job and companies looking to hire',
-      'subscriberCount': 239,
-      'showCurator': true,
-      'curatorHandle': 'remotejobs',
-      'curatorAvatar': 'blah',
-      'curatorName': 'Remote Jobs',
-      'curatorBio': '',
-      'small': true,
-      'half': false,
-      'large': false
-    ]) }}
+    {{ partial('list/related-lists') }}
   </div>
 </div>
 <input type="text" id="related-lists-edit" class="related-lists-edit" value="sluggy-slug, 123, sluggy-slug, sluggy-slug" style="display:none;" />
