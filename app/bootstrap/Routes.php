@@ -298,7 +298,7 @@ return [
         'methods' => ['GET', 'POST'],
     ],
     [
-        'url' => '/create-list',
+        'url' => '/create\-list',
         'paths' => [
             'controller' => 'CreateList',
             'action' => 'index',

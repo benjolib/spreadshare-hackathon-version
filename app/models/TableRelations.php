@@ -53,10 +53,17 @@ class TableRelations extends TableRelationsEvents
                        ->columns(
                            [
                                Tables::class . ".id",
-                               Tables::class . ".title",
-                               Tables::class . ".tagline",
+                               Tables::class . ".title as name",
+                               Tables::class . ".tagline as slug",
+                               Tables::class . ".image",
+                               Tables::class . ".description",
                                TableRelations::class . ".createdAt",
                                '(SELECT ' . TableStaffPicks::class . '.createdAt FROM ' . TableStaffPicks::class . ' WHERE ' . TableStaffPicks::class . '.tableId = ' . Tables::class . '.id) as staffPick',
+                               '(SELECT COUNT(*) FROM ' . TableSubscription::class . 'ts WHERE ts.tableId = ' . Tables::class . '.id) as subscriberCount',
+                               User::class . ".handle as curatorHandle",
+                               User::class . ".image as curatorImage",
+                               User::class . ".name as curatorName",
+                               User::class . ".description as curatorBio",
                            ]
                        )
                        ->innerJoin(Tables::class, TableRelations::class . '.relatedTableId = ' . Tables::class . '.id')
