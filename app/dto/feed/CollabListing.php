@@ -1,9 +1,10 @@
 <?php
 namespace DS\Dto\Feed;
 
-class NewList extends AbstractList {
+class CollabListing extends AbstractListing {
+
     public function getType(): string
     {
-        return 'newList';
+        return 'collabListing';
     }
 }

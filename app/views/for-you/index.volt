@@ -9,17 +9,9 @@
         <h1 class="re-heading">For You</h1>
         <h2 class="re-subheading">Activity of users you follow and lists you subscribe.</h2>
     </div>
-
-    {% for element in feedElements %}
-        {% switch element.getType() %}
-        {% case "listing" %}
-            {{ partial('for-you/submittedListing', ['listing': element]) }}
-        {% break %}
-        {% case "newList" %}
-            {{ partial('for-you/newList', ['newList': element]) }}
-        {% break %}
-        {% endswitch %}
-    {% endfor %}
+    <div id="elements">
+        {{ partial('for-you/content') }}
+    </div>
     <div class="u-flex u-flexJustifyCenter">
         <a href="#" class="re-button re-button--load-more">Load More</a>
     </div>
@@ -29,7 +21,18 @@
 {% block scripts %}
     <script type="text/javascript">
         $(document).ready(function () {
-
+            var pageNumber = {{ page }}+1;
+            var feedDate = {{ feedDate }};
+            $('.re-button--load-more').on('click', function (e) {
+                e.preventDefault();
+                $.ajax(window.location.pathname + '?page=' + pageNumber +'&date='+ feedDate)
+                    .done(function (response) {
+                        if (response) {
+                            $('#elements').append(response);
+                            pageNumber += 1;
+                        }
+                    });
+            });
         });
     </script>
 {% endblock %}

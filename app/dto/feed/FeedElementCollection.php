@@ -10,7 +10,7 @@ namespace DS\Dto\Feed;
 class FeedElementCollection
 {
     /** @var FeedDto[] */
-    public $elements;
+    public $elements = [];
 
     public function add(FeedDto $element)
     {

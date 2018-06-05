@@ -3,7 +3,7 @@
         <img class="collaboration-info__image" src="{{ listing.userImage }}" />
         <div>
             <a class="collaboration-info__user-name" href="/profile/{{ listing.userHandle }}">{{ listing.userName }}</a>
-            <span class="collaboration-info__text">submitted a listing to</span>
+            <span class="collaboration-info__text">spreaded a listing from</span>
             <a class="collaboration-info__table-name" href="/list/{{ listing.tableId }}">{{ listing.tableName }}</a>
         </div>
     </div>

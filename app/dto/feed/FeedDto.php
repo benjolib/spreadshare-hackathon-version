@@ -12,5 +12,5 @@ interface FeedDto
 {
     public function getCreatedAt():\DateTimeImmutable;
     public function getType():string;
-    public function getId():int;
+    public function getId():string;
 }

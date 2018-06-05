@@ -1,9 +1,10 @@
 <?php
 namespace DS\Dto\Feed;
 
-class NewList extends AbstractList {
+class VotedListing extends AbstractListing {
+
     public function getType(): string
     {
-        return 'newList';
+        return 'votedListing';
     }
 }

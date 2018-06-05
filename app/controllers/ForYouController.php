@@ -14,41 +14,40 @@ class ForYouController extends BaseController implements LoginAwareController
 
     public function indexAction()
     {
-        $feedDate = new \DateTimeImmutable();
         $fs = new FeedService();
         $authId = $this->serviceManager->getAuth()->getUserId();
-        $postsInSubscribedLists = $fs->postsInMySubscribedLists($authId, 10, $feedDate, 0);
-        $newListsFromMyFollowed = $fs->newListsFromMyFollowed($authId, 10, $feedDate, 0);
-        $listsSubscribedByMyFollowed = $fs->listsSubscribedByMyFollowed($authId, 10, $feedDate, 0);
-        
+        $postsPerPage = 10;
+        if ($this->request->isAjax() && $this->request->has('page') && $this->request->has('date')) {
+            $initialPage = (int)$this->request->get('page', 'int');
+            $feedDate = (new \DateTimeImmutable())->setTimestamp($this->request->get('date','int'));
+            $this->view->setMainView('for-you/content');
+        } else {
+            $initialPage = 0;
+            $feedDate = new \DateTimeImmutable();
+            $this->view->setMainView('for-you/index');
+        }
+        $postsInSubscribedLists = $fs->postsInMySubscribedLists($authId, $postsPerPage, $feedDate, $initialPage);
+        $newListsFromMyFollowed = $fs->newListsFromMyFollowed($authId, $postsPerPage, $feedDate, $initialPage);
+        $listsSubscribedByMyFollowed = $fs->listsSubscribedByMyFollowed($authId, $postsPerPage, $feedDate, $initialPage);
+        $postsFromUsersIFollow = $fs->postsFromUsersIFollow($authId, $postsPerPage, $feedDate, $initialPage);
+        $votesFromUsersIFollow = $fs->votesFromUsersIFollow($authId, $postsPerPage, $feedDate, $initialPage);
+        $collabsFromUsersIFollow = $fs->collabsFromUsersIFollow($authId, $postsPerPage, $feedDate, $initialPage);
+
         $feedElements = $fs->getOrderedFeed(
             $postsInSubscribedLists->elements, 
-            $newListsFromMyFollowed->elements
+            $newListsFromMyFollowed->elements,
+            $listsSubscribedByMyFollowed->elements,
+            $postsFromUsersIFollow->elements,
+            $votesFromUsersIFollow->elements,
+            $collabsFromUsersIFollow->elements
         );
-        
+
 
         $this->view->setVar('feedElements', $feedElements);
         $this->view->setVar('feedDate', $feedDate->getTimestamp());
-        //GET POSTS ON LISTS I SUBSCRIBE
-        
-        //GET COMMENTS ON LISTS I SUBSCRIBE
-        
-        // GET NEW CURATOR ON LISTS I SUBSCRIBE
-        
-        //GET SUBSCRIPTIONS OF USERS I FOLLOW
-        
-        //GET PUBLICATIONS OF USERS I FOLLOW
-        
-        //GET SPREADS OF USERS I FOLLOW
-        
-        //GET COLLABORATIONS OF USERS I FOLLOW
-        
-        //ORDER BY DATE
-        
-        //DATE OF LEAST RECENT
+        $this->view->setVar('page', $initialPage);
 
         $this->view->setVar('forYouActive', true);
 
-        $this->view->setMainView('for-you/index');
     }
 }

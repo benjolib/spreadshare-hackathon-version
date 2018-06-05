@@ -34,7 +34,7 @@ class ErrorController extends PhalconMvcController
     {
         $this->response->setStatusCode(500, 'Error');
         
-        $this->view->setVar('error', $exception->getMessage());
+        $this->view->setVar('error', $exception->getMessage().'<br>'.nl2br($exception->getTraceAsString()));
         $this->view->setMainView('404/500');
         
     }
