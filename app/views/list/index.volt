@@ -18,16 +18,15 @@
     <h1 class="re-heading re-heading--list">{{ table['title'] }}</h1>
     <h2 class="re-subheading re-subheading--list"><span class="actual-tagline">{{ table['tagline'] }}</span>, curated by <a href="{{ table['creatorHandle'] }}">{{ table['creator'] }}</a></h2>
     <p class="re-para">{{ table['description'] }}</p>
-    <div class="u-flex">
-      <a class="re-button re-button--double-line" href="subscribe/{{table['id']}}">
-        Subscribe
-        <div class="re-button__extra-text">Get new listings to your inbox</div>
+    <div class="u-flex u-flexAlignItemsCenter">
+      <a class="re-button re-button--list-subscribe" href="subscribe/{{table['id']}}">
+        <img src="/assets/images/9-0/list-subscribe-button-bird.svg" /> Subscribe
       </a>
-      <a class="re-button re-button--double-line list-edit-button" href="#" style="margin-left:8px">
-        Edit List
-        <div class="re-button__extra-text">You own this list so you can edit</div>
-      </a>
+      <span class="subscribe-button-message">Receive all updates to this publication in your feed and inbox</span>
     </div>
+    {# <a class="re-button list-edit-button" href="#" style="margin-left:8px">
+      Edit
+    </a> #}
   </div>
 
   <div class="table-scroll">
@@ -122,25 +121,25 @@
               <a href="/list/{{ table['id'] }}?page={{ tableContent.last }}&orderby={{orderby}}">>></a>
             </div>
           </td>
-          </tr>
-          <tr id="addAListingRowSpace" class="re-table-space" style="display: none;"></tr>
-          <tr id="addAListingRow" class="list-row-tr list-row-tr--add-row" style="display: none;">
-            <td>
-              <a href="#" class="vote-link">
-                <img class="vote-link__image" src="/assets/images/vote-lightning.svg" />
-                <div>0</div>
-              </a>
-            </td>
-            <td class="shadowcontaintd"><div class="shadowcontain"></div></td>
-            <td>
-              <div class="re-table__list-image re-table__list-image--new-row" id="addRowImage"></div>
-              <input type="file" name="image" id="new-row-fileUpload" style="display: none;" />
-            </td>
-            {% for column in tableColumns %}
-              <td><textarea placeholder="{{ column.title }}" rows="1" class="cell-input-sizing"></textarea></td>
-            {% endfor %}
-          </tr>
-          <tr class="re-table-space"></tr>
+        </tr>
+        <tr id="addAListingRowSpace" class="re-table-space" style="display: none;"></tr>
+        <tr id="addAListingRow" class="list-row-tr list-row-tr--add-row" style="display: none;">
+          <td>
+            <a href="#" class="vote-link">
+              <img class="vote-link__image" src="/assets/images/vote-lightning.svg" />
+              <div>0</div>
+            </a>
+          </td>
+          <td class="shadowcontaintd"><div class="shadowcontain"></div></td>
+          <td>
+            <div class="re-table__list-image re-table__list-image--new-row" id="addRowImage"></div>
+            <input type="file" name="image" id="new-row-fileUpload" style="display: none;" />
+          </td>
+          {% for column in tableColumns %}
+            <td><textarea placeholder="{{ column.title }}" rows="1" class="cell-input-sizing"></textarea></td>
+          {% endfor %}
+        </tr>
+        <tr class="re-table-space"></tr>
       </tbody>
     </table>
   </div>
@@ -148,13 +147,72 @@
     <a class="re-button re-button--list-add-row" href="#" id="addAListingSubmit">Submit</a>
     <a class="re-button re-button--list-add-row re-button--grey" href="#" id="addAListingCancel">Cancel</a>
   </div>
-  <a id="addAListingButton" class="re-button re-button--double-line re-button--full-width re-button--tall re-button--grey" href="#">
+  <div class="u-flex u-flexAlignItemsCenter addAListingButton" id="addAListingButton" style="margin-top: 8px;margin-bottom:64px;">
+    <a class="re-button re-button--list-collaborate" href="#">
+      <img src="/assets/images/9-0/list-collaborate-button-octopus.svg" /> Collaborate
+    </a>
+    <span class="subscribe-button-message">Contribute and get endorsed by the curators if your post will be published.</span>
+  </div>
+  {# <a id="addAListingButton" class="re-button re-button--list-collaborate" href="#">
     Collaborate
-    <div class="re-button__extra-text">And reach {{ table['subscriberCount'] }} subscribers of this list</div>
-  </a>
+  </a> #}
+  <div class="related-lists-new-heading">
+    You might also like
+  </div>
+  <div class="related-lists-new med-gutter">
+    {{ partial('partials/list-card', [
+      'id': 123,
+      'slug': 'sluggy-slug',
+      'image': 'blah',
+      'name': "Remote CTO's",
+      'description': 'For CTO’s looking for a new remote job and companies looking to hire',
+      'subscriberCount': 239,
+      'showCurator': true,
+      'curatorHandle': 'remotejobs',
+      'curatorAvatar': 'blah',
+      'curatorName': 'Remote Jobs',
+      'curatorBio': '',
+      'small': true,
+      'half': false,
+      'large': false
+    ]) }}
+    {{ partial('partials/list-card', [
+      'id': 123,
+      'slug': 'sluggy-slug',
+      'image': 'blah',
+      'name': "Remote CTO's",
+      'description': 'For CTO’s looking for a new remote job and companies looking to hire',
+      'subscriberCount': 239,
+      'showCurator': true,
+      'curatorHandle': 'remotejobs',
+      'curatorAvatar': 'blah',
+      'curatorName': 'Remote Jobs',
+      'curatorBio': '',
+      'small': true,
+      'half': false,
+      'large': false
+    ]) }}
+    {{ partial('partials/list-card', [
+      'id': 123,
+      'slug': 'sluggy-slug',
+      'image': 'blah',
+      'name': "Remote CTO's",
+      'description': 'For CTO’s looking for a new remote job and companies looking to hire',
+      'subscriberCount': 239,
+      'showCurator': true,
+      'curatorHandle': 'remotejobs',
+      'curatorAvatar': 'blah',
+      'curatorName': 'Remote Jobs',
+      'curatorBio': '',
+      'small': true,
+      'half': false,
+      'large': false
+    ]) }}
+  </div>
 </div>
+<input type="text" id="related-lists-edit" class="related-lists-edit" value="sluggy-slug, 123, sluggy-slug, sluggy-slug" style="display:none;" />
 
-<div class="list-page-section-label">
+{# <div class="list-page-section-label">
   RELATED LISTS
 </div>
 <div class="related-lists u-flex u-flexJustifyCenter">
@@ -166,39 +224,44 @@
       </div>
     {% endfor %}
   </div>
-</div>
+</div> #}
 
 <div class="list-tabs">
-  <div class="list-tabs__inner">
-    <div class="list-tab-buttons">
-      <a href="#" class="list-tab-button list-tab-button-about active">ABOUT</a>
-      <a href="#" class="list-tab-button list-tab-button-discussion">DISCUSSION</a>
-      <a href="#" class="list-tab-button list-tab-button-activity">ACTIVITY</a>
-      <a href="#" class="list-tab-button list-tab-button-subscribers">SUBSCRIBERS</a>
-      <a href="#" class="list-tab-button list-tab-button-collaborators">COLLABORATORS</a>
+  <div class="list-tab-buttons">
+    <div class="list-tabs__inner">
+      <a href="#" class="list-tab-button list-tab-button-about active">About</a>
+      <a href="#" class="list-tab-button list-tab-button-discussion">Discussion</a>
+      <a href="#" class="list-tab-button list-tab-button-subscribers">Subscribers</a>
+      <a href="#" class="list-tab-button list-tab-button-collaborators">Collaborators</a>
+      <a href="#" class="list-tab-button list-tab-button-activity">History</a>
     </div>
+  </div>
 
-    <div class="list-tab-content list-tab-content-about">
+  <div class="list-tab-content list-tab-content-about">
+    <div class="list-tabs__inner-padded">
       <div class="about-list__item">
         <div class="about-list__item__name">CURATED BY</div>
         <div class="about-list__item__content">
-          {{ partial('partials/profile-card', [
-            'username': table['creatorHandle'],
-            'avatar': table['creatorImage'],
-            'name': table['creator'],
-            'id': table['ownerUserId'],
-            'type': 3
-          ]) }}
+          <div id="curators">
+            {{ partial('partials/profile-card', [
+              'username': table['creatorHandle'],
+              'avatar': table['creatorImage'],
+              'name': table['creator'],
+              'id': table['ownerUserId'],
+              'type': 3
+            ]) }}
+          </div>
+          <input type="text" id="curators-edit" class="curators-edit" value="{{ table['creatorHandle'] }}" style="display:none;" />
         </div>
       </div>
       <div class="about-list__item">
         <div class="about-list__item__name">TAGS</div>
         <div class="about-list__item__content">
+          <div class="tags" id="tags">
             {% for i, tag in tags %}
-              <div class="about-list__part">{{tag['title']}}{{ i + 1 < tags|length ? ', ' : '' }}</div>
-            {% else %}
-              <div class="about-list__part">No Tags</div>
+              {{tag['title']}}{{ i + 1 < tags|length ? ', ' : '' }}
             {% endfor %}
+          </div>
         </div>
       </div>
       <div class="about-list__item">
@@ -210,12 +273,14 @@
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="list-tab-content list-tab-content-discussion j_table-discussion" id="comment" style="display: none;">
+  <div class="list-tab-content list-tab-content-discussion j_table-discussion" id="comment" style="display: none;">
+    <div class="list-tabs__inner-padded">
       {% if auth.loggedIn() %}
         <div>
-          <button class="re-button re-button--full-width re-button--tall re-button--list-discussion">Write a Response</button>
-          <form method="POST" action="/list/{{ table['id'] }}" style="display:none;">
+          <button class="re-button re-button--full-width re-button--tall re-button--list-discussion" style="display:none;">Write a Response</button>
+          <form method="POST" action="/list/{{ table['id'] }}">
               <input type="hidden" name="parentId" value="" />
               <div class="discussion-textarea">
                 <textarea name="comment" placeholder="Write comment here..." minlength="3" maxlength="300"></textarea>
@@ -282,14 +347,11 @@
         </div>
       {% endif %}
     </div>
+  </div>
 
-    <div class="list-tab-content list-tab-content-activity" style="display: none;">
-      <div class="empty-activity">
-        No Activity
-      </div>
-    </div>
-
-    <div class="list-tab-content list-tab-content-subscribers" style="display: none;">
+  <div class="list-tab-content list-tab-content-subscribers" style="display: none;">
+    <div class="list-tabs__inner-padded">
+      <div class="list-tab-subscriber-collaborator-wrap">
       {% for subscriber in tablemodel.tableSubscription %}
         <div class="list-tab-content-subscribers__card">
           {{ partial('partials/profile-card', [
@@ -307,9 +369,12 @@
           No Subscribers
         </div>
       {% endfor %}
+      </div>
     </div>
+  </div>
 
-    <div class="list-tab-content list-tab-content-collaborators" style="display: none;">
+  <div class="list-tab-content list-tab-content-collaborators" style="display: none;">
+    <div class="list-tabs__inner-padded">
       {% for contributor in tablemodel.contributors %}
         <div class="list-tab-content-collaborators__card">
           {{ partial('partials/profile-card', [
@@ -327,6 +392,14 @@
           No Collaborators
         </div>
       {% endfor %}
+    </div>
+  </div>
+
+  <div class="list-tab-content list-tab-content-activity" style="display: none;">
+    <div class="list-tabs__inner-padded">
+      <div class="empty-activity">
+        No Activity
+      </div>
     </div>
   </div>
 </div>
@@ -616,6 +689,9 @@
     var listDescription;
     var listColumns;
     var listRows;
+    var listTags;
+    var listRelated;
+    var listCurators;
 
     document.querySelector('#re-image-fileUpload').addEventListener('change', function () {
       if (this.files && this.files[0]) {
@@ -651,9 +727,8 @@
       img.attr('style', 'background: #f5f5f5 url() center / cover;');
     });
 
-    $('.list-edit-button').on('click', function (e) {
-      e.preventDefault();
 
+    function startEditList () {
       unlinkifyAndUnDropdownifyCells();
 
       listImage = $('.re-image').attr('style');
@@ -671,6 +746,9 @@
           }),
         }
       });
+      listTags = $('#tags').text();
+      listRelated = $('#related-lists-edit').val();
+      listCurators = $('#curators-edit').val();
 
       console.log(listRows);
 
@@ -680,10 +758,27 @@
       $('.re-subheading .actual-tagline').attr('contenteditable', 'true');
       $('.re-para').attr('contenteditable', 'true');
       $('.re-table th:nth-of-type(1n+4)').attr('contenteditable', 'true');
+      $('#tags').attr('contenteditable', 'true');
+      $('.related-lists-new').hide();
+      $('#related-lists-edit').show();
+      $('#curators').hide();
+      $('#curators-edit').show();
       $('.re-table tr.list-row-tr:not(.list-row-tr--add-row) td:nth-of-type(1n+4) div').attr('contenteditable', 'true');
       $('.re-table__list-image').addClass('re-table__list-image--editing');
       bindListCellEditableSizing();
-    });
+    }
+
+    /* $('.list-edit-button').on('click', function (e) {
+      e.preventDefault();
+
+
+    }); */
+
+    function leaveEditUrl() {
+      var url = window.location.pathname;
+      url = url.replace(url.match(/([^\/]*)\/*$/)[1], '').replace('//', '/');
+      history.pushState(null, null, url);
+    }
 
     $('.re-header .cancel-button').on('click', function (e) {
       e.preventDefault();
@@ -694,6 +789,7 @@
       $('.re-para').attr('contenteditable', 'false');
       $('.re-table th:nth-of-type(1n+4)').attr('contenteditable', 'false');
       $('.re-table tr.list-row-tr:not(.list-row-tr--add-row) td:nth-of-type(1n+4) div').attr('contenteditable', 'false');
+      $('#tags').attr('contenteditable', 'false');
       unbindListCellEditableSizing();
 
       $('.re-image').attr('style', listImage);
@@ -710,9 +806,17 @@
           $(this).text(listRows[i].content[ii]);
         });
       });
+      $('#related-lists-edit').val(listRelated);
       $('.re-table__list-image').removeClass('re-table__list-image--editing');
+      $('#tags').text(listTags);
+      $('#curators').text(listCurators);
+      $('.related-lists-new').show();
+      $('#related-lists-edit').hide();
+      $('#curators').show();
+      $('#curators-edit').hide();
 
       linkifyAndDropdownifyCells();
+      leaveEditUrl();
     });
 
     $('.re-header .save-button').on('click', function (e) {
@@ -724,6 +828,7 @@
       $('.re-para').attr('contenteditable', 'false');
       $('.re-table th:nth-of-type(1n+4)').attr('contenteditable', 'false');
       $('.re-table tr.list-row-tr:not(.list-row-tr--add-row) td:nth-of-type(1n+4) div').attr('contenteditable', 'false');
+      $('#tags').attr('contenteditable', 'false');
       unbindListCellEditableSizing();
 
       listImage = $('.re-image').attr('style');
@@ -741,13 +846,28 @@
           }),
         }
       });
+      listTags = $('#tags').text();
+      listRelated = $('#related-lists-edit').val();
+      listCurators = $('#curators-edit').val();
       $('.re-table__list-image').removeClass('re-table__list-image--editing');
+      $('.related-lists-new').show();
+      $('#related-lists-edit').hide();
+      $('#curators').show();
+      $('#curators-edit').hide();
 
       linkifyAndDropdownifyCells();
+      leaveEditUrl();
 
       // TODO: fill in some form values and submit, or do an ajax request.
       window.createAlert('success', 'List Saved', 'Your list has been saved!')
     });
+
+    var href = location.href;
+    var lastUrlPathSegment = href.match(/([^\/]*)\/*$/)[1];
+    console.log(lastUrlPathSegment);
+    if (lastUrlPathSegment === 'edit') {
+      startEditList();
+    }
   });
 
 

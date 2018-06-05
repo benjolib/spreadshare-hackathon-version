@@ -10,7 +10,11 @@
 {% block content %}
 {# {{ dump(tables) }} #}
 <div class="re-page re-page--large">
-  <div class="home-heading u-flex">
+  <div class="homepage-space">
+    <h1 class="re-heading">Explore</h1>
+    <h2 class="re-subheading re-subheading--button-below">We hand-curate the best lists for you every day</h2>
+  </div>
+  {# <div class="home-heading u-flex">
     <div class="home-heading__text home-heading-button clickable l-button" data-dropdown-placement="bottom-start" data-dropdown-target=".home-heading-dropdown">
       {{ selectionName }}<img src="/assets/images/home-arrow-down.svg" />
     </div>
@@ -72,8 +76,9 @@
         <a href="/explore/everything-else" class="{% if selection is 'everything-else' %}active{% endif %}">Everything else</a>
       </div>
     </div>
-  </div>
-  <div class="u-flex u-flexWrap gutter home-top-margin-bottom">
+  </div> #}
+
+  <div class="u-flex u-flexWrap homepage-gutter home-top-margin-bottom">
     {% if tables[0] is defined %}
       {{ partial('partials/list-card', [
         'id': tables[0]['id'],
@@ -89,7 +94,7 @@
         'curatorName': tables[0]['creator'],
         'curatorBio': tables[0]['creatorBio'],
         'half': false,
-        'large': true
+        'large': false
       ]) }}
     {% endif %}
     {% if tables[1] is defined %}
@@ -110,15 +115,6 @@
         'large': false
       ]) }}
     {% endif %}
-  </div>
-  <div class="u-flex u-flexWrap gutter">
-    {{ partial('partials/action-card', [
-      'color': 'yellow',
-      'heading': 'Get Tokens for Curating',
-      'text': 'A Curator creates lists which can be subscribed. Every subscriptions generates a token every day.<br /><br /><a class="action-card__link" href="#">Learn more</a> about how to become a curator.',
-      'action': '#',
-      'buttonText': 'Become a Curator'
-    ]) }}
     {% if tables[2] is defined %}
       {{ partial('partials/list-card', [
         'id': tables[2]['id'],
@@ -137,6 +133,15 @@
         'large': false
       ]) }}
     {% endif %}
+  </div>
+  <div class="u-flex u-flexWrap homepage-gutter">
+    {{ partial('partials/action-card', [
+      'color': 'orange-bird',
+      'heading': 'Subscribe',
+      'text': 'Subscribe to your favorite topics and collections.<br /><br />Because you want to keep track of relevant updates',
+      'action': '#',
+      'buttonText': 'Manage Subscriptions'
+    ]) }}
     {% if tables[3] is defined %}
       {{ partial('partials/list-card', [
         'id': tables[3]['id'],
@@ -173,12 +178,55 @@
         'large': false
       ]) }}
     {% endif %}
+  </div>
+</div>
+<div class="trending-topics">
+  <div class="trending-topics__inner">
+    <h3>Trending Topics</h3>
+    <div class="trending-topics__items">
+      <div>UX Design</div>
+      <div>Crypto</div>
+      <div>Token Curated Registries</div>
+      <div>YCombinator</div>
+      <div>Venture Capital</div>
+      <div>Remote Jobs</div>
+      <div>Nomads</div>
+      <div>Book Recommendations</div>
+      <div>Freebies</div>
+      <div>Product Builders</div>
+      <div>Decentralisation</div>
+      <div>C-Level</div>
+      <div>Future of Work</div>
+      <div>Silicon Valley</div>
+      <div>Prototyping</div>
+      <div>Frameworks</div>
+      <div>Something Else</div>
+      <div>Religion</div>
+    </div>
+  </div>
+</div>
+<div class="re-page re-page--large">
+  <div class="u-flex u-flexWrap homepage-gutter">
     {{ partial('partials/action-card', [
-      'color': 'green',
-      'heading': 'Get Tokens for Collaborating',
-      'text': 'Not only the curators but any user can contribute to the lists and participate in its tokens.<br /><br /><a class="action-card__link" href="#">Learn more</a> about how to become a collaboartor.',
+      'color': 'purple-whale',
+      'heading': 'Curate',
+      'text': 'Curate collections and publications.<br /><br />Because you want your curation to spread.',
       'action': '#',
-      'buttonText': 'Become a Collaborator'
+      'buttonText': 'Manage Subscriptions'
+    ]) }}
+    {{ partial('partials/action-card', [
+      'color': 'blue-octopus',
+      'heading': 'Collaborate',
+      'text': 'Collaborate with your favorite curators.<br /><br />Because you want to get endorsed by trusted experts.',
+      'action': '#',
+      'buttonText': 'Manage Subscriptions'
+    ]) }}
+    {{ partial('partials/action-card', [
+      'color': 'green-lightning',
+      'heading': 'Spread',
+      'text': 'Spread the best content with your followers.<br /><br />Because you want your peers to be as informed as you are.',
+      'action': '#',
+      'buttonText': 'Manage Subscriptions'
     ]) }}
     {% if tables[5] is defined %}
       {{ partial('partials/list-card', [
@@ -234,73 +282,7 @@
         'large': false
       ]) }}
     {% endif %}
-    {{ partial('partials/action-card', [
-      'color': 'white',
-      'heading': 'Don’t miss important updates',
-      'text': 'You can subscribe any list to stay ahead of relevant updates.<br /><br /><a class="action-card__link" href="#">Explore</a> our most subscribed lists.',
-      'action': '#',
-      'buttonText': 'Create Account'
-    ]) }}
-  </div>
-  <div class="home-heading home-heading--type2 u-flex">
-    <div class="home-heading__text">Featured Curators</div>
-    <div class="home-heading__line u-flexGrow1"></div>
-  </div>
-  <div class="home-featured-curators">
-    <div class="u-flex">
-      {{ partial('partials/profile-card', [
-        'id': 1,
-        'username': 'andewcoyle',
-        'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
-        'name': 'Andrew Coyle',
-        'bio': 'Designing the future of global trade @Flexport. Curating lists at Spreadshare.',
-        'type': 4
-      ]) }}
-      {{ partial('partials/profile-card', [
-        'id': 1,
-        'username': 'andewcoyle',
-        'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
-        'name': 'Andrew Coyle',
-        'bio': 'Designing the future of global trade @Flexport. Curating lists at Spreadshare.',
-        'type': 4
-      ]) }}
-      {{ partial('partials/profile-card', [
-        'id': 1,
-        'username': 'andewcoyle',
-        'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
-        'name': 'Andrew Coyle',
-        'bio': 'Designing the future of global trade @Flexport. Curating lists at Spreadshare.',
-        'type': 4
-      ]) }}
-    </div>
-    <div class="u-flex">
-      {{ partial('partials/profile-card', [
-        'id': 1,
-        'username': 'andewcoyle',
-        'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
-        'name': 'Andrew Coyle',
-        'bio': 'Designing the future of global trade @Flexport. Curating lists at Spreadshare.',
-        'type': 4
-      ]) }}
-      {{ partial('partials/profile-card', [
-        'id': 1,
-        'username': 'andewcoyle',
-        'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
-        'name': 'Andrew Coyle',
-        'bio': 'Designing the future of global trade @Flexport. Curating lists at Spreadshare.',
-        'type': 4
-      ]) }}
-      {{ partial('partials/profile-card', [
-        'id': 1,
-        'username': 'andewcoyle',
-        'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
-        'name': 'Andrew Coyle',
-        'bio': 'Designing the future of global trade @Flexport. Curating lists at Spreadshare.',
-        'type': 4
-      ]) }}
-    </div>
-  </div>
-  <div class="u-flex u-flexWrap gutter">
+
     {% if tables[8] is defined %}
       {{ partial('partials/list-card', [
         'id': tables[8]['id'],
@@ -319,13 +301,6 @@
         'large': false
       ]) }}
     {% endif %}
-    {{ partial('partials/action-card', [
-      'color': 'green',
-      'heading': 'Support the community',
-      'text': 'By subscribing a list you support the curators and collaborators who create them.<br /><br /><a class="action-card__link" href="#">Understand</a> how our Tokens are distributed.',
-      'action': '#',
-      'buttonText': 'Start Subscribing'
-    ]) }}
     {% if tables[9] is defined %}
       {{ partial('partials/list-card', [
         'id': tables[9]['id'],
@@ -344,13 +319,6 @@
         'large': false
       ]) }}
     {% endif %}
-    {{ partial('partials/action-card', [
-      'color': 'yellow',
-      'heading': 'Build Spreadshare together with us',
-      'text': 'Co-workers are people who build the platform and manage the community together with us. Co-workers earn money for every task and can work remotely.<br /><br /><a class="action-card__link" href="#">Learn</a> how to apply.',
-      'action': '#',
-      'buttonText': 'Become a Co-Worker'
-    ]) }}
     {% if tables[10] is defined %}
       {{ partial('partials/list-card', [
         'id': tables[10]['id'],
@@ -369,6 +337,7 @@
         'large': false
       ]) }}
     {% endif %}
+
     {% if tables[11] is defined %}
       {{ partial('partials/list-card', [
         'id': tables[11]['id'],
@@ -387,8 +356,268 @@
         'large': false
       ]) }}
     {% endif %}
+    {% if tables[12] is defined %}
+      {{ partial('partials/list-card', [
+        'id': tables[12]['id'],
+        'slug': tables[12]['slug'],
+        'image': tables[12]['image'],
+        'name': tables[12]['title'],
+        'description': tables[12]['tagline'],
+        'subscriberCount': tables[12]['subscriberCount'],
+        'listingCount': tables[12]['listingCount'],
+        'showCurator': true,
+        'curatorHandle': tables[12]['creatorHandle'],
+        'curatorAvatar': tables[12]['creatorImage'],
+        'curatorName': tables[12]['creator'],
+        'curatorBio': tables[12]['creatorBio'],
+        'half': false,
+        'large': false
+      ]) }}
+    {% endif %}
+    {% if tables[13] is defined %}
+      {{ partial('partials/list-card', [
+        'id': tables[13]['id'],
+        'slug': tables[13]['slug'],
+        'image': tables[13]['image'],
+        'name': tables[13]['title'],
+        'description': tables[13]['tagline'],
+        'subscriberCount': tables[13]['subscriberCount'],
+        'listingCount': tables[13]['listingCount'],
+        'showCurator': true,
+        'curatorHandle': tables[13]['creatorHandle'],
+        'curatorAvatar': tables[13]['creatorImage'],
+        'curatorName': tables[13]['creator'],
+        'curatorBio': tables[13]['creatorBio'],
+        'half': false,
+        'large': false
+      ]) }}
+    {% endif %}
+
+    {% if tables[5] is defined %}
+      {{ partial('partials/list-card', [
+        'id': tables[14]['id'],
+        'slug': tables[14]['slug'],
+        'image': tables[14]['image'],
+        'name': tables[14]['title'],
+        'description': tables[14]['tagline'],
+        'subscriberCount': tables[14]['subscriberCount'],
+        'listingCount': tables[14]['listingCount'],
+        'showCurator': true,
+        'curatorHandle': tables[14]['creatorHandle'],
+        'curatorAvatar': tables[14]['creatorImage'],
+        'curatorName': tables[14]['creator'],
+        'curatorBio': tables[14]['creatorBio'],
+        'half': false,
+        'large': false
+      ]) }}
+    {% endif %}
+    {% if tables[15] is defined %}
+      {{ partial('partials/list-card', [
+        'id': tables[15]['id'],
+        'slug': tables[15]['slug'],
+        'image': tables[15]['image'],
+        'name': tables[15]['title'],
+        'description': tables[15]['tagline'],
+        'subscriberCount': tables[15]['subscriberCount'],
+        'listingCount': tables[15]['listingCount'],
+        'showCurator': true,
+        'curatorHandle': tables[15]['creatorHandle'],
+        'curatorAvatar': tables[15]['creatorImage'],
+        'curatorName': tables[15]['creator'],
+        'curatorBio': tables[15]['creatorBio'],
+        'half': false,
+        'large': false
+      ]) }}
+    {% endif %}
+    {% if tables[16] is defined %}
+      {{ partial('partials/list-card', [
+        'id': tables[16]['id'],
+        'slug': tables[16]['slug'],
+        'image': tables[16]['image'],
+        'name': tables[16]['title'],
+        'description': tables[16]['tagline'],
+        'subscriberCount': tables[16]['subscriberCount'],
+        'listingCount': tables[16]['listingCount'],
+        'showCurator': true,
+        'curatorHandle': tables[16]['creatorHandle'],
+        'curatorAvatar': tables[16]['creatorImage'],
+        'curatorName': tables[16]['creator'],
+        'curatorBio': tables[16]['creatorBio'],
+        'half': false,
+        'large': false
+      ]) }}
+    {% endif %}
   </div>
-  <div class="u-flex u-flexWrap gutter load-more-container"></div>
+</div>
+<div class="featured-curators">
+  <div class="featured-curators__inner">
+    <h3>Featured Curators</h3>
+    <div class="u-flex">
+      {{ partial('partials/profile-card', [
+        'id': 1,
+        'username': 'andewcoyle',
+        'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
+        'name': 'Andrew Coyle',
+        'bio': 'Designing the future of global trade @Flexport. Curating lists at Spreadshare.',
+        'type': 4
+      ]) }}
+      {{ partial('partials/profile-card', [
+        'id': 1,
+        'username': 'andewcoyle',
+        'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
+        'name': 'Andrew Coyle',
+        'bio': 'Designing the future of global trade @Flexport. Curating lists at Spreadshare.',
+        'type': 4
+      ]) }}
+      {{ partial('partials/profile-card', [
+        'id': 1,
+        'username': 'andewcoyle',
+        'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
+        'name': 'Andrew Coyle',
+        'bio': 'Designing the future of global trade @Flexport. Curating lists at Spreadshare.',
+        'type': 4
+      ]) }}
+    </div>
+    <div class="u-flex">
+      {{ partial('partials/profile-card', [
+        'id': 1,
+        'username': 'andewcoyle',
+        'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
+        'name': 'Andrew Coyle',
+        'bio': 'Designing the future of global trade @Flexport. Curating lists at Spreadshare.',
+        'type': 4
+      ]) }}
+      {{ partial('partials/profile-card', [
+        'id': 1,
+        'username': 'andewcoyle',
+        'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
+        'name': 'Andrew Coyle',
+        'bio': 'Designing the future of global trade @Flexport. Curating lists at Spreadshare.',
+        'type': 4
+      ]) }}
+      {{ partial('partials/profile-card', [
+        'id': 1,
+        'username': 'andewcoyle',
+        'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
+        'name': 'Andrew Coyle',
+        'bio': 'Designing the future of global trade @Flexport. Curating lists at Spreadshare.',
+        'type': 4
+      ]) }}
+    </div>
+  </div>
+</div>
+<div class="re-page re-page--large">
+  <div class="u-flex u-flexWrap homepage-gutter">
+    {% if tables[17] is defined %}
+      {{ partial('partials/list-card', [
+        'id': tables[17]['id'],
+        'slug': tables[17]['slug'],
+        'image': tables[17]['image'],
+        'name': tables[17]['title'],
+        'description': tables[17]['tagline'],
+        'subscriberCount': tables[17]['subscriberCount'],
+        'listingCount': tables[17]['listingCount'],
+        'showCurator': true,
+        'curatorHandle': tables[17]['creatorHandle'],
+        'curatorAvatar': tables[17]['creatorImage'],
+        'curatorName': tables[17]['creator'],
+        'curatorBio': tables[17]['creatorBio'],
+        'half': false,
+        'large': false
+      ]) }}
+    {% endif %}
+    {% if tables[18] is defined %}
+      {{ partial('partials/list-card', [
+        'id': tables[18]['id'],
+        'slug': tables[18]['slug'],
+        'image': tables[18]['image'],
+        'name': tables[18]['title'],
+        'description': tables[18]['tagline'],
+        'subscriberCount': tables[18]['subscriberCount'],
+        'listingCount': tables[18]['listingCount'],
+        'showCurator': true,
+        'curatorHandle': tables[18]['creatorHandle'],
+        'curatorAvatar': tables[18]['creatorImage'],
+        'curatorName': tables[18]['creator'],
+        'curatorBio': tables[18]['creatorBio'],
+        'half': false,
+        'large': false
+      ]) }}
+    {% endif %}
+    {% if tables[19] is defined %}
+      {{ partial('partials/list-card', [
+        'id': tables[19]['id'],
+        'slug': tables[19]['slug'],
+        'image': tables[19]['image'],
+        'name': tables[19]['title'],
+        'description': tables[19]['tagline'],
+        'subscriberCount': tables[19]['subscriberCount'],
+        'listingCount': tables[19]['listingCount'],
+        'showCurator': true,
+        'curatorHandle': tables[19]['creatorHandle'],
+        'curatorAvatar': tables[19]['creatorImage'],
+        'curatorName': tables[19]['creator'],
+        'curatorBio': tables[19]['creatorBio'],
+        'half': false,
+        'large': false
+      ]) }}
+    {% endif %}
+    {% if tables[20] is defined %}
+      {{ partial('partials/list-card', [
+        'id': tables[20]['id'],
+        'slug': tables[20]['slug'],
+        'image': tables[20]['image'],
+        'name': tables[20]['title'],
+        'description': tables[20]['tagline'],
+        'subscriberCount': tables[20]['subscriberCount'],
+        'listingCount': tables[20]['listingCount'],
+        'showCurator': true,
+        'curatorHandle': tables[20]['creatorHandle'],
+        'curatorAvatar': tables[20]['creatorImage'],
+        'curatorName': tables[20]['creator'],
+        'curatorBio': tables[20]['creatorBio'],
+        'half': false,
+        'large': false
+      ]) }}
+    {% endif %}
+    {% if tables[21] is defined %}
+      {{ partial('partials/list-card', [
+        'id': tables[21]['id'],
+        'slug': tables[21]['slug'],
+        'image': tables[21]['image'],
+        'name': tables[21]['title'],
+        'description': tables[21]['tagline'],
+        'subscriberCount': tables[21]['subscriberCount'],
+        'listingCount': tables[21]['listingCount'],
+        'showCurator': true,
+        'curatorHandle': tables[21]['creatorHandle'],
+        'curatorAvatar': tables[21]['creatorImage'],
+        'curatorName': tables[21]['creator'],
+        'curatorBio': tables[21]['creatorBio'],
+        'half': false,
+        'large': false
+      ]) }}
+    {% endif %}
+    {% if tables[22] is defined %}
+      {{ partial('partials/list-card', [
+        'id': tables[22]['id'],
+        'slug': tables[22]['slug'],
+        'image': tables[22]['image'],
+        'name': tables[22]['title'],
+        'description': tables[22]['tagline'],
+        'subscriberCount': tables[22]['subscriberCount'],
+        'listingCount': tables[22]['listingCount'],
+        'showCurator': true,
+        'curatorHandle': tables[22]['creatorHandle'],
+        'curatorAvatar': tables[22]['creatorImage'],
+        'curatorName': tables[22]['creator'],
+        'curatorBio': tables[22]['creatorBio'],
+        'half': false,
+        'large': false
+      ]) }}
+    {% endif %}
+  </div>
+  <div class="u-flex u-flexWrap homepage-gutter load-more-container"></div>
   <div class="u-flex u-flexJustifyCenter">
     <a href="#" class="re-button re-button--load-more" {{ moreToLoad ? '' : 'style="display:none;"' }}>Load More</a>
   </div>
