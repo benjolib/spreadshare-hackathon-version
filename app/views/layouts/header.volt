@@ -22,7 +22,7 @@
       <a href="#" class="all-results">More Results</a>
     </div>
     {% if auth.loggedIn() %}
-      <a class="re-header__add" href="/table/add"><img src="/assets/images/9-0/header-add.png" /></a>
+      <a class="re-header__add" href="/create-list"><img src="/assets/images/9-0/header-add.png" /></a>
 
       <a class="re-header__bell l-button" data-dropdown-placement="bottom-end" data-dropdown-offset="114" href="javascript:;">
         {% if auth.getUser().getStats().getUnreadNotificationsCount() > 0 %}<span>{{ auth.getUser().getStats().getUnreadNotificationsCount() }}</span>{% endif %}
@@ -239,7 +239,7 @@
             </a>
           </div>
           <div class="user-dropdown__column">
-            <a href="/table/add" class="user-dropdown__item">
+            <a href="/create-list" class="user-dropdown__item">
               <div class="user-dropdown__item__image user-dropdown__item__image--fill-highlight"><img src="/assets/images/user-menu-create.svg" /></div>
               <div class="user-dropdown__item__text">
                 <h3>Create List</h3>
