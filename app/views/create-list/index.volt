@@ -42,7 +42,8 @@
           Do your posts have thumbnails?
         </p>
         <label class="on-off-switch">
-          <input type="checkbox" name="thumbnails" />
+          {# <input type="checkbox" name="thumbnails" /> #}
+          {{ check_field('thumbnails') }}
           <div class="on-off">
             <span class="on">On</span>
             <span class="off">Off</span>
