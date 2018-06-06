@@ -5,7 +5,7 @@
 
 {% block content %}
   <div class="re-page re-page--create-list">
-    <form>
+    <form id="createListFrom" method="post" action="/create-list" enctype="multipart/form-data">
       <div class="re-image re-image--create-list">
         <div class="re-image__upload-button"></div>
         <div class="re-image__delete-button"></div>
@@ -14,23 +14,26 @@
       <div class="re-heading-input">
         <img class="re-heading-input__tick" src="/assets/images/input-tick.svg" />
         <img class="re-heading-input__tick-green" src="/assets/images/input-tick-green.svg" />
-        <input type="text" placeholder="Your publication's title" name="name" />
+        {{ text_field('name', 'placeholder':"Your publication's title") }}
+        {#<input type="text" placeholder="Your publication's title" name="name" />#}
       </div>
       <div class="re-subheading-input">
         <img class="re-heading-input__tick" src="/assets/images/input-tick.svg" />
         <img class="re-heading-input__tick-green" src="/assets/images/input-tick-green.svg" />
-        <input type="text" placeholder="Write a tagline for your publication" name="tagline" />
+          {{ text_field('tagline', 'placeholder':"Write a tagline for your publication") }}
+        {#<input type="text" placeholder="Write a tagline for your publication" name="tagline" />#}
       </div>
       <div class="re-para-input">
         <img class="re-heading-input__tick" src="/assets/images/input-tick.svg" />
         <img class="re-heading-input__tick-green" src="/assets/images/input-tick-green.svg" />
-        <input type="text" placeholder="Write a short desciption text" name="description" />
+          {{ text_field('description', 'placeholder':"Write a short description text") }}
+        {#<input type="text" placeholder="Write a short desciption text" name="description" />#}
       </div>
 
       <div class="create-list-add-tags">
         <img class="re-heading-input__tick" src="/assets/images/input-tick.svg" />
         <img class="re-heading-input__tick-green" src="/assets/images/input-tick-green.svg" />
-        <p>Add at least 3 tags: <input type="text" placeholder="Tags" name="tags" /></p>
+        <p>Add at least 3 tags: {{ text_field('tags', 'placeholder':"Tags") }}{#<input type="text" placeholder="Tags" name="tags" />#}</p>
       </div>
       <div class="create-list-has-thumbnails">
         <img class="re-heading-input__tick" src="/assets/images/input-tick.svg" />
@@ -47,10 +50,10 @@
         </label>
       </div>
       <div class="create-list-add-curator">
-        <p>If there are other curators than you? <input type="text" placeholder="Curators" name="curators" /></p>
+        <p>If there are other curators than you? {{ text_field('curators', 'placeholder':"Curators") }}{#<input type="text" placeholder="Curators" name="curators" />#}</p>
       </div>
       <div class="create-list-add-related">
-        <p>Related lists: <input type="text" placeholder="Related" name="related-lists" /></p>
+        <p>Related lists: {{ text_field('related-lists', 'placeholder':"Related") }}{#<input type="text" placeholder="Related" name="related-lists" />#}</p>
       </div>
 
       <div class="create-create-list-tabs">

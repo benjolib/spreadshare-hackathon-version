@@ -13,6 +13,11 @@ class CreateListController extends BaseController implements LoginAwareControlle
 
     public function indexAction()
     {
+        if ($this->request->isPost()) {
+            $this->view->setVar('post', $this->request->getPost());
+        }
+        
+        
         $this->view->setMainView('create-list/index');
 
         $user = $this->serviceManager->getAuth()->getUser();
