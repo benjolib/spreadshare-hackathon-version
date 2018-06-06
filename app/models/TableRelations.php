@@ -51,28 +51,22 @@ class TableRelations extends TableRelationsEvents
     {
         if ($tableId) {
             return self::query()
-                       ->columns(
-                           [
-                               Tables::class . ".id",
-                               Tables::class . ".title as name",
-                               Tables::class . ".tagline as slug",
-                               Tables::class . ".image",
-                               Tables::class . ".description",
-                               TableRelations::class . ".createdAt",
-                               '(SELECT ' . TableStaffPicks::class . '.createdAt FROM ' . TableStaffPicks::class . ' WHERE ' . TableStaffPicks::class . '.tableId = ' . Tables::class . '.id) as staffPick',
-                               '(SELECT COUNT(*) FROM ' . TableSubscription::class . 'ts WHERE ts.tableId = ' . Tables::class . '.id) as subscriberCount',
-                               User::class . ".handle as curatorHandle",
-                               User::class . ".image as curatorImage",
-                               User::class . ".name as curatorName",
-                               User::class . ".description as curatorBio",
-                           ]
-                       )
-                       ->innerJoin(Tables::class, TableRelations::class . '.relatedTableId = ' . Tables::class . '.id')
-                       ->where(TableRelations::class . '.tableId = ?0', [$tableId])
-                       ->limit((int) $limit, (int) Paging::endlessScrollPortions * $page)
-                       ->orderBy(TableRelations::class . '.createdAt DESC')
-                       ->execute()
-                       ->toArray() ?: [];
+                ->columns(
+                    [
+                        Tables::class . ".id",
+                        Tables::class . ".title",
+                        Tables::class . ".tagline",
+                        TableRelations::class . ".createdAt",
+                        '(SELECT ' . TableStaffPicks::class . '.createdAt FROM ' . TableStaffPicks::class . ' WHERE ' . TableStaffPicks::class . '.tableId = ' . Tables::class . '.id) as staffPick',
+                    ]
+                
+                )
+                ->innerJoin(Tables::class, TableRelations::class . '.relatedTableId = ' . Tables::class . '.id')
+                ->where(TableRelations::class . '.tableId = ?0', [$tableId])
+                ->limit((int)$limit, (int)Paging::endlessScrollPortions * $page)
+                ->orderBy(TableRelations::class . '.createdAt DESC')
+                ->execute()
+                ->toArray() ?: [];
         }
 
         return [];
