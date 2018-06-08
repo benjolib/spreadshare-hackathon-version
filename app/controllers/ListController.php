@@ -116,6 +116,9 @@ class ListController extends BaseController
             // table stats
             $tableStats = $tableStatsModel->get($tableId, 'tableId');
             $related = TableRelations::findRelatedTables($tableId);
+            foreach ($related as $key => $value) {
+                $related[$key]['subscriberCount'] = TableStats::get($value['id'])->getSubscriberCount();
+            }
             $tableColumns = TableColumns::findAllByFieldValue('tableId', $tableId);
 
             $this->view->setMainView('list/index');

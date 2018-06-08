@@ -53,15 +53,27 @@ class TableRelations extends TableRelationsEvents
             return self::query()
                 ->columns(
                     [
+//                        Tables::class . ".id",
+//                        Tables::class . ".title",
+//                        Tables::class . ".tagline",
+//                        TableRelations::class . ".createdAt",
+//                        '(SELECT ' . TableStaffPicks::class . '.createdAt FROM ' . TableStaffPicks::class . ' WHERE ' . TableStaffPicks::class . '.tableId = ' . Tables::class . '.id) as staffPick',
                         Tables::class . ".id",
-                        Tables::class . ".title",
-                        Tables::class . ".tagline",
+                        Tables::class . ".title as name",
+                        Tables::class . ".tagline as slug",
+                        Tables::class . ".image",
+                        Tables::class . ".description",
                         TableRelations::class . ".createdAt",
                         '(SELECT ' . TableStaffPicks::class . '.createdAt FROM ' . TableStaffPicks::class . ' WHERE ' . TableStaffPicks::class . '.tableId = ' . Tables::class . '.id) as staffPick',
+                        User::class . ".handle as curatorHandle",
+                        User::class . ".image as curatorImage",
+                        User::class . ".name as curatorName",
+                        User::class . ".description as curatorBio",
                     ]
                 
                 )
                 ->innerJoin(Tables::class, TableRelations::class . '.relatedTableId = ' . Tables::class . '.id')
+                ->innerJoin(User::class, Tables::class . '.ownerUserId = '.User::class.'.id')
                 ->where(TableRelations::class . '.tableId = ?0', [$tableId])
                 ->limit((int)$limit, (int)Paging::endlessScrollPortions * $page)
                 ->orderBy(TableRelations::class . '.createdAt DESC')
