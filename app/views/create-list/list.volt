@@ -13,7 +13,7 @@
         <th class="shadowcontainth"></th>
         <th>{# image #}</th>
         {% for column in tableColumns %}
-          <th>{{ column.title }}</th>
+          <th>{{ column }}</th>
         {% endfor %}
       </tr>
     </thead>
