@@ -19,9 +19,14 @@
     <h2 class="re-subheading re-subheading--list"><span class="actual-tagline">{{ table['tagline'] }}</span>, curated by <a href="{{ table['creatorHandle'] }}">{{ table['creator'] }}</a></h2>
     <p class="re-para">{{ table['description'] }}</p>
     <div class="u-flex u-flexAlignItemsCenter">
-      <a class="re-button re-button--list-subscribe" href="subscribe/{{table['id']}}">
+      <a class="re-button re-button--list-subscribe l-button" href="javascript:;" data-dropdown-placement="right" data-dropdown-offset="6">
         <img src="/assets/images/9-0/list-subscribe-button-bird.svg" /> Subscribe
       </a>
+      <div class="dropdown card-actions-dropdown card-actions-dropdown--tall u-flex u-flexCol u-flexJustifyCenter l-dropdown" style="margin-left: 18px;">
+          <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'D')">Daily</a>
+          <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'W')">Weekly</a>
+          <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'M')">Monthly</a>
+      </div>
       <span class="subscribe-button-message">Receive all updates to this publication in your feed and inbox</span>
     </div>
     {# <a class="re-button list-edit-button" href="#" style="margin-left:8px">
@@ -372,10 +377,20 @@
   <input type="hidden" id="list-related" name="list-related" value="" />
   <input type="hidden" id="list-curators" name="list-curators" value="" />
 </form>
+
+<form id="subscriptions_form" method="post" action="/subscriptions">
+    <input type="hidden" name="table_id" value=""/>
+    <input type="hidden" name="subscription_freq" value=""/>
+</form>
 {% endblock %}
 
 {% block scripts %}
 <script type="text/javascript">
+  function subsFreqOnClick(id, freq) {
+      $('[name="table_id"]').val(id);
+      $('[name="subscription_freq"]').val(freq);
+      $('#subscriptions_form').submit();
+  }
   $(document).ready(function () {
     function listCellInputSizing() {
       var $this = $(this);

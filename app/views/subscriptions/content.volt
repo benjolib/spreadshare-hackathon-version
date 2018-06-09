@@ -24,10 +24,10 @@
                 <span class="card-actions-button__text">{{ type }}</span><img src="/assets/images/arrow-down.svg"/>
             </div>
             <div class="dropdown card-actions-dropdown card-actions-dropdown--tall u-flex u-flexCol u-flexJustifyCenter l-dropdown">
-                <a href="#" onclick="subsFreqOnClick({{ subscription.tableId }}, 'D')">Daily</a>
-                <a href="#" onclick="subsFreqOnClick({{ subscription.tableId }}, 'W')">Weekly</a>
-                <a href="#" onclick="subsFreqOnClick({{ subscription.tableId }}, 'M')">Monthly</a>
-                <a href="#" onclick="subsFreqOnClick({{ subscription.tableId }}, 'U')"class="warning-color">Unsubscribe</a>
+                <a href="javascript:;" onclick="subsFreqOnClick({{ subscription.tableId }}, 'D')">Daily</a>
+                <a href="javascript:;" onclick="subsFreqOnClick({{ subscription.tableId }}, 'W')">Weekly</a>
+                <a href="javascript:;" onclick="subsFreqOnClick({{ subscription.tableId }}, 'M')">Monthly</a>
+                <a href="javascript:;" onclick="subsFreqOnClick({{ subscription.tableId }}, 'U')"class="warning-color">Unsubscribe</a>
             </div>
         </td>
     </tr>
