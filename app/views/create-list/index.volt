@@ -167,7 +167,13 @@
 
         $('#create-list-step').val('2');
         $('#list-columns').val(JSON.stringify(listColumns.get()));
-        $('#list-rows').val(JSON.stringify(listRows.get()));
+        $('#list-rows').val(JSON.stringify(listRows.get().map(function (row) {
+          return {
+            id: row.id,
+            content: row.content,
+            image: row.image.replace('background: #f5f5f5 url(', '').replace(') center / cover;', '')
+          };
+        })));
 
         $('#createListFrom').submit();
       });
