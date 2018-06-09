@@ -14,7 +14,7 @@
     </thead>
     <tbody>
       {% if tableContent is not empty and tableContent %}
-        {% for row in tableContent.items %}
+        {% for row in tableContent %}
           <tr class="list-row-tr">
             <td>
             </td>
@@ -27,14 +27,14 @@
               </div>
             </td>
             <td>
-              <div class="re-table__list-image {{ row['image'] ? '' : 're-table__list-image--empty' }}" style="background: #f5f5f5 url({{ row['image'] }}) center / cover;">
+              <div class="re-table__list-image re-table__list-image--empty" style="background: #f5f5f5 center / cover;">
                 <div class="re-table__list-image__upload-button"></div>
                 <div class="re-table__list-image__delete-button"></div>
               </div>
               <input type="file" name="image" class="re-table__list-image-fileUpload" style="display: none;" />
             </td>
-            {% for cell in row['content']|json_decode %}
-              {% set len = filterTableRowsContent(cell.content)|striptags|length %}
+            {% for cell in row %}
+              {% set len = filterTableRowsContent(cell)|striptags|length %}
                  {% if len > 160  %}
                  {% set length = 480 %}
                  {% elseif len > 80 %}
@@ -46,7 +46,7 @@
                  {% else %}
                  {% set length = 0 %}
                  {% endif %}
-              <td style="min-width: {{ length }}px;"><div>{{ filterTableRowsContent(cell.content) }}</div></td>
+              <td style="min-width: {{ length }}px;"><div>{{ filterTableRowsContent(cell) }}</div></td>
             {% endfor %}
           </tr>
           <tr class="re-table-space"></tr>

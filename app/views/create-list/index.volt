@@ -65,10 +65,14 @@
           </div>
 
           <div class="create-list-tab-content create-list-tab-content-copy">
-            <div class="create-list-copy-textarea-container">
+              {% if tableColumns is not empty %}
+                  {{ partial('create-list/list') }}
+                  {% else %}
+                    <div class="create-list-copy-textarea-container">
               <textarea class="create-list-copy-textarea" placeholder="Paste here" name="copy"></textarea>
               <button class="re-button create-list-copy-button">Format to List</button>
-            </div>
+                    </div>
+              {% endif %}
             <div class="l-button create-list-copy-seperator-chooser" data-dropdown-placement="bottom-start">
               SEPERATE BY
               <div class="create-list-copy-seperator-chooser__seperator">COMMA <img src="/assets/images/create-list-copy-dropdown-arrow.svg" /></div>
