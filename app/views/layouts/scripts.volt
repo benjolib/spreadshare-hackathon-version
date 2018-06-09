@@ -116,56 +116,11 @@
 
     //$('.navbar__search').focusout(function() { // if(!flag) onSearchPopper.removeClass('show') });
 
-    /* Profile Menu Popper */
-    var referenceElement;
-    var popperProfileMenu = $('.profile-menu');
-
-    /* Notifications Popper */
-    var refElem;
-    var popperNotifications = $('.dropdown--notifications');
-
-    // initial state
-    if (window.innerWidth < 1024) {
-      referenceElement = $('.navbar__controls__add--menu');
-      refElem = $('.navbar__controls__add--notification');
-    } else {
-      referenceElement = $('.navbar__controls__notification');
-      refElem = $('.navbar__controls__add--notification');
-    }
-
-    if (popperNotifications.length > 0) {
-      // create poppers
-      new Popper(refElem, popperNotifications, {
-        placement: 'bottom'
+    $('.re-header__bell').click(function (ev) {
+      $.get("/api/v1/notifications?p=" + 0, function (data) {
+        $('.notification-dropdown').html(data);
       });
-
-      // event listener
-      $(window).resize(function () {
-        if (window.innerWidth < 1024) {
-          referenceElement = $('.navbar__controls__add--menu');
-          refElem = $('.navbar__controls__add--notification');
-          popperNotifications.removeClass('left160');
-        } else {
-          referenceElement = $('.navbar__controls__notification');
-          refElem = $('.navbar__controls__add--notification');
-        }
-        new Popper(refElem, popperNotifications, {
-          placement: 'bottom'
-        });
-      });
-
-      //toggle menu
-      $('#profileImage').click(function () {
-        popperNotifications.removeClass('show');
-        $(popperProfileMenu).toggleClass('show');
-      });
-      // toggle notifications
-      $('.re-header__bell').click(function (ev) {
-        $.get("/api/v1/notifications?p=" + 0, function (data) {
-          $('.notification-dropdown').html(data);
-        });
-      });
-    }
+    });
 
     $(document).bind('click', function (e) {
       var closestSearch = $(e.target).closest('.navbar__search');
@@ -175,10 +130,6 @@
         onSearchPopper.removeClass('show');
       }
       //console.log("closestControl", closestControl.length);
-      if (!closestControl.length) {
-        popperProfileMenu.removeClass('show');
-        popperNotifications.removeClass('show');
-      }
 
     });
 

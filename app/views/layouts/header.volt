@@ -29,7 +29,7 @@
         <img src="/assets/images/9-0/header-notifications.png" />
       </a>
       <div class="l-dropdown dropdown notification-dropdown u-flex u-flexCol">
-        {% set numbers = [1, 2, 3, 4, 5, 6] %}
+        {# {% set numbers = [1, 2, 3, 4, 5, 6] %}
 
         {% for number in numbers %}
           <div class="notification-dropdown__notification u-flex u-flexAlignItemsCenter">
@@ -48,7 +48,7 @@
           </div>
         {% endfor %}
 
-        <a href="/activity" class="notification-dropdown__notification__see-all">See All</a>
+        <a href="/activity" class="notification-dropdown__notification__see-all">See All</a> #}
       </div>
 
       <a class="re-header__user l-button" data-dropdown-placement="bottom-end" data-dropdown-offset="20" href="javascript:;"><img src="{{ auth.getUser().getImage() }}" /></a>

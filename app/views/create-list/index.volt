@@ -161,7 +161,7 @@
             image: $this.find('.re-table__list-image').attr('style'),
             content: $this.find('td:nth-of-type(1n+4) div').map(function(){
               return this.innerText;
-            }),
+            }).get(),
           }
         });
 

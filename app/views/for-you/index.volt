@@ -6,8 +6,8 @@
 {% block content %}
 <div class="re-page">
     <div class="collaborations-page-space">
-        <h1 class="re-heading">For You</h1>
-        <h2 class="re-subheading">Activity of users you follow and lists you subscribe.</h2>
+        <h1 class="re-heading">Feed</h1>
+        <h2 class="re-subheading">Updates from publications and people you follow</h2>
     </div>
     <div id="elements">
         {{ partial('for-you/content') }}

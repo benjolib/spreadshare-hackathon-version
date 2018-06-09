@@ -31,7 +31,7 @@ class Get extends ActionHandler implements MethodInterface
     {
         return true;
     }
-    
+
     /**
      * Process Get Method
      *
@@ -39,25 +39,20 @@ class Get extends ActionHandler implements MethodInterface
      */
     public function process()
     {
-        if ($this->request->isAjax())
-        {
+        if ($this->request->isAjax()) {
             $userId = $this->getServiceManager()->getAuth()->getUserId();
-            
-            if ($userId > 0)
-            {
+
+            if ($userId > 0) {
                 $page               = $this->request->get('p', null, 0);
                 $notifications      = new UserNotifications;
                 $notificationsArray = $notifications->findNotifications($userId, null, $page, 10);
-                
-                if (count($notificationsArray))
-                {
+
+                if (count($notificationsArray)) {
                     UserStats::decrement($userId, 'unreadNotifications', count($notificationsArray));
-                    
+
                     $output = '';
-                    foreach ($notificationsArray as $notification)
-                    {
-                        try
-                        {
+                    foreach ($notificationsArray as $notification) {
+                        try {
                             $output .= '<div class="tableFeed__item">
 <div class="tableFeed__item__avatar">
   <a href="/user/' . $notification['userHandle'] . '">
@@ -80,30 +75,24 @@ class Get extends ActionHandler implements MethodInterface
   </a>
 </div>
 </div>';
-                        }
-                        catch (\Exception $e)
-                        {
-                        
+                        } catch (\Exception $e) {
                         }
                     }
-                    
+
                     $output .= '<div class="tableFeed__item" style="margin-left:42%;">
     <a href="/feed">See all</a>
 </div>';
-                }
-                else
-                {
+                } else {
                     $output = '<div class="center">
-  <p>There are no notifications available for you 😢</p>
+  <p>You have no notifications</p>
 </div>';
                 }
-                
+
                 $this->response->setContent($output)->send();
                 die;
             }
         }
-        
+
         return new Record(true);
     }
-    
 }
