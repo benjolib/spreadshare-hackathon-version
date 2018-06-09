@@ -715,8 +715,6 @@
       listRelated = $('#related-lists-edit').val();
       listCurators = $('#curators-edit').val();
 
-      console.log(listRows);
-
       $('.re-header').addClass('re-header--editing');
       $('.re-image').addClass('re-image--editing');
       $('.re-heading').attr('contenteditable', 'true');
@@ -815,7 +813,7 @@
       $('#list-tags').val(listTags);
       $('#list-related').val(listRelated);
       $('#list-curators').val(listCurators);
-      
+
       $('#edit-list-form').submit();
     });
 

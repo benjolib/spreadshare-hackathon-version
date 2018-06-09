@@ -93,6 +93,10 @@
 
         </div>
       </div>
+
+      <input type="hidden" id="create-list-step" name="step" value="1" />
+      <input type="hidden" id="list-columns" name="list-columns" value="" />
+      <input type="hidden" id="list-rows" name="list-rows" value="" />
     </form>
   </div>
 {% endblock %}
@@ -134,6 +138,34 @@
         $('.create-list-tab-button-copy').removeClass('re-button--grey');
         $('.create-list-tab-content').hide();
         $('.create-list-tab-content-copy').show();
+      });
+
+      $('.create-list-copy-button').on('click', function (e) {
+        e.preventDefault();
+
+        $('#createListFrom').submit();
+      });
+
+      $('.re-header .save-button').on('click', function (e) {
+        e.preventDefault();
+
+        var listColumns = $('.re-table th:nth-of-type(1n+4)').map(function(){ return this.innerText });
+        var listRows = $('.re-table tr.list-row-tr:not(.list-row-tr--add-row)').map(function(){
+          var $this = $(this);
+          return {
+            id: $this.data('id'),
+            image: $this.find('.re-table__list-image').attr('style'),
+            content: $this.find('td:nth-of-type(1n+4) div').map(function(){
+              return this.innerText;
+            }),
+          }
+        });
+
+        $('#create-list-step').val('2');
+        $('#list-columns').val(JSON.stringify(listColumns.get()));
+        $('#list-rows').val(JSON.stringify(listRows.get()));
+
+        $('#createListFrom').submit();
       });
     });
   </script>
