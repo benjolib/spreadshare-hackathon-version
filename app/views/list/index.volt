@@ -156,14 +156,14 @@
   {# <a id="addAListingButton" class="re-button re-button--list-collaborate" href="#">
     Collaborate
   </a> #}
-  <div class="related-lists-new-heading">
+  <div class="related-lists-new-heading" style="{{ related|length === 0 ? 'display:none;' : '' }}">
     You might also like
   </div>
   <div class="related-lists-new med-gutter">
     {{ partial('list/related-lists') }}
   </div>
 </div>
-<input type="text" id="related-lists-edit" class="related-lists-edit" value="sluggy-slug, 123, sluggy-slug, sluggy-slug" style="display:none;" />
+<input type="text" id="related-lists-edit" class="related-lists-edit" value="" style="display:none;" />
 
 {# <div class="list-page-section-label">
   RELATED LISTS
@@ -728,6 +728,7 @@
       $('#curators-edit').show();
       $('.re-table tr.list-row-tr:not(.list-row-tr--add-row) td:nth-of-type(1n+4) div').attr('contenteditable', 'true');
       $('.re-table__list-image').addClass('re-table__list-image--editing');
+      $('.related-lists-new-heading').show();
       bindListCellEditableSizing();
     }
 
@@ -777,6 +778,9 @@
       $('#related-lists-edit').hide();
       $('#curators').show();
       $('#curators-edit').hide();
+      if (!listRelated.length) {
+        $('.related-lists-new-heading').hide();
+      }
 
       linkifyAndDropdownifyCells();
       leaveEditUrl();
