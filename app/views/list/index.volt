@@ -360,6 +360,18 @@
 <form method="POST" action="/row/{{ table['id']}}/add" enctype="multipart/form-data" id="form_hidden">
 
 </form>
+
+<form method="POST" action="/list/{{ table['id']}}/edit" enctype='multipart/form-data' id="edit-list-form">
+  <input type="hidden" id="list-image" name="list-image" value="" />
+  <input type="hidden" id="list-name" name="list-name" value="" />
+  <input type="hidden" id="list-tagline" name="list-tagline" value="" />
+  <input type="hidden" id="list-description" name="list-description" value="" />
+  <input type="hidden" id="list-columns" name="list-columns" value="" />
+  <input type="hidden" id="list-rows" name="list-rows" value="" />
+  <input type="hidden" id="list-tags" name="list-tags" value="" />
+  <input type="hidden" id="list-related" name="list-related" value="" />
+  <input type="hidden" id="list-curators" name="list-curators" value="" />
+</form>
 {% endblock %}
 
 {% block scripts %}
@@ -774,15 +786,6 @@
 
     $('.re-header .save-button').on('click', function (e) {
       e.preventDefault();
-      $('.re-header').removeClass('re-header--editing');
-      $('.re-image').removeClass('re-image--editing');
-      $('.re-heading').attr('contenteditable', 'false');
-      $('.re-subheading .actual-tagline').attr('contenteditable', 'false');
-      $('.re-para').attr('contenteditable', 'false');
-      $('.re-table th:nth-of-type(1n+4)').attr('contenteditable', 'false');
-      $('.re-table tr.list-row-tr:not(.list-row-tr--add-row) td:nth-of-type(1n+4) div').attr('contenteditable', 'false');
-      $('#tags').attr('contenteditable', 'false');
-      unbindListCellEditableSizing();
 
       listImage = $('.re-image').attr('style');
       listName = $('.re-heading').text();
@@ -802,17 +805,18 @@
       listTags = $('#tags').text();
       listRelated = $('#related-lists-edit').val();
       listCurators = $('#curators-edit').val();
-      $('.re-table__list-image').removeClass('re-table__list-image--editing');
-      $('.related-lists-new').show();
-      $('#related-lists-edit').hide();
-      $('#curators').show();
-      $('#curators-edit').hide();
 
-      linkifyAndDropdownifyCells();
-      leaveEditUrl();
-
-      // TODO: fill in some form values and submit, or do an ajax request.
-      window.createAlert('success', 'List Saved', 'Your list has been saved!');
+      $('#list-image').val(listImage.replace('background: #f5f5f5 url(', '').replace(') center / cover;', ''));
+      $('#list-name').val(listName);
+      $('#list-tagline').val(listTagline);
+      $('#list-description').val(listDescription);
+      $('#list-columns').val(JSON.stringify(listColumns.get()));
+      $('#list-rows').val(JSON.stringify(listRows.get()));
+      $('#list-tags').val(listTags);
+      $('#list-related').val(listRelated);
+      $('#list-curators').val(listCurators);
+      
+      $('#edit-list-form').submit();
     });
 
     var href = location.href;

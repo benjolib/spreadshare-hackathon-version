@@ -16,7 +16,6 @@ use DS\Model\UserTopics;
 use Phalcon\Exception;
 use Phalcon\Logger;
 
-
 class SignupController extends BaseController implements LoginAwareController
 {
     public function needsLogin()
@@ -30,7 +29,6 @@ class SignupController extends BaseController implements LoginAwareController
         if ($user->getStatus() == UserStatus::OnboardingIncomplete) {
             // Login request with username and password
             if ($this->request->isPost() && $this->request->getPost('username') && $this->request->getPost('email')) {
-
                 $user
                     ->setHandle($this->request->getPost('username'))
                     ->setEmail($this->request->getPost('email'))
@@ -38,10 +36,8 @@ class SignupController extends BaseController implements LoginAwareController
                     ->save();
                 header('Location: /');
             }
-
         }
-        $this->view->setVar('hideHeader', true);
+        // $this->view->setVar('hideHeader', true);
         $this->view->setMainView('sign-up/index');
     }
 }
-

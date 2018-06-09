@@ -133,11 +133,8 @@
       refElem = $('.navbar__controls__add--notification');
     }
 
-    if (popperProfileMenu.length > 0 && popperNotifications.length > 0) {
+    if (popperNotifications.length > 0) {
       // create poppers
-      new Popper(referenceElement, popperProfileMenu, {
-        placement: 'bottom'
-      });
       new Popper(refElem, popperNotifications, {
         placement: 'bottom'
       });
@@ -152,9 +149,6 @@
           referenceElement = $('.navbar__controls__notification');
           refElem = $('.navbar__controls__add--notification');
         }
-        new Popper(referenceElement, popperProfileMenu, {
-          placement: 'bottom'
-        });
         new Popper(refElem, popperNotifications, {
           placement: 'bottom'
         });
@@ -166,13 +160,9 @@
         $(popperProfileMenu).toggleClass('show');
       });
       // toggle notifications
-      $('#notificationButton').click(function (ev) {
-        popperProfileMenu.removeClass('show');
-        $(popperNotifications).toggleClass('show');
-
+      $('.re-header__bell').click(function (ev) {
         $.get("/api/v1/notifications?p=" + 0, function (data) {
-          $(popperNotifications).html(data);
-          $('#notificationButton').find('span').remove()
+          $('.notification-dropdown').html(data);
         });
       });
     }
@@ -289,20 +279,6 @@
         });
     {% endif %}
   });
-
-  if (window.location.pathname.includes('signup')) {
-    var navControls = document.getElementsByClassName('navbar__controls')[0];
-    navControls.style.visibility = 'hidden';
-    var onboardButton = document.getElementById('continueOnboard');
-    onboardButton.style.position = 'fixed';
-    onboardButton.style.top = '36px';
-    onboardButton.style.zIndex = '3';
-    var navbar = document.getElementsByClassName('navbar')[0];
-    navbar.style.position = 'fixed';
-    navbar.style.zIndex = '2';
-    var foundABug = document.getElementsByClassName('found-a-bug')[0];
-    foundABug.style.display = 'none';
-  };
 
   $(document).ready(function () {
     // pops

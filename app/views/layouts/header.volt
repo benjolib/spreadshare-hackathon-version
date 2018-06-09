@@ -24,7 +24,7 @@
     {% if auth.loggedIn() %}
       <a class="re-header__add" href="/create-list"><img src="/assets/images/9-0/header-add.png" /></a>
 
-      <a class="re-header__bell l-button" data-dropdown-placement="bottom-end" data-dropdown-offset="114" href="javascript:;">
+      <a class="re-header__bell l-button" data-dropdown-placement="bottom-end" data-dropdown-offset="74" href="javascript:;">
         {% if auth.getUser().getStats().getUnreadNotificationsCount() > 0 %}<span>{{ auth.getUser().getStats().getUnreadNotificationsCount() }}</span>{% endif %}
         <img src="/assets/images/9-0/header-notifications.png" />
       </a>
@@ -51,7 +51,7 @@
         <a href="/activity" class="notification-dropdown__notification__see-all">See All</a>
       </div>
 
-      <a class="re-header__user l-button" data-dropdown-placement="bottom-end" data-dropdown-offset="48" href="javascript:;"><img src="{{ auth.getUser().getImage() }}" /></a>
+      <a class="re-header__user l-button" data-dropdown-placement="bottom-end" data-dropdown-offset="20" href="javascript:;"><img src="{{ auth.getUser().getImage() }}" /></a>
       <div class="l-dropdown dropdown re-header__user-dropdown2 user-dropdown2 u-flex">
         <div>YOU</div>
         <a href="/profile/{{ auth.getUser().handle }}">This is your <span>profile</span></a>
@@ -336,7 +336,7 @@
   </div>
   <div class="re-header__editing">
     <a href="#" class="re-button re-button--grey cancel-button">Cancel</a>
-    <a href="#" onclick="$('#createListFrom').submit()" class="re-button save-button">Publish</a>
+    <a href="#" class="re-button save-button">Publish</a>
     <img class="l-button re-header__editing__arrow" src="/assets/images/header-editing-arrow-down.svg" />
     <div class="dropdown list-editing-draft-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
       <a href="#"><img src="/assets/images/list-editing-draft-save.svg" /> Save as Draft</a>
