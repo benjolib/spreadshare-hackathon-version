@@ -53,13 +53,8 @@ class TableRelations extends TableRelationsEvents
             return self::query()
                 ->columns(
                     [
-//                        Tables::class . ".id",
-//                        Tables::class . ".title",
-//                        Tables::class . ".tagline",
-//                        TableRelations::class . ".createdAt",
-//                        '(SELECT ' . TableStaffPicks::class . '.createdAt FROM ' . TableStaffPicks::class . ' WHERE ' . TableStaffPicks::class . '.tableId = ' . Tables::class . '.id) as staffPick',
                         Tables::class . ".id",
-                        Tables::class . ".title as name",
+                        Tables::class . ".title as name", 
                         Tables::class . ".tagline as slug",
                         Tables::class . ".image",
                         Tables::class . ".description",
