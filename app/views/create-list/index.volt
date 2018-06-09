@@ -150,6 +150,104 @@
         $('#createListFrom').submit();
       });
 
+      // list edit stuff
+
+      function listCellEditableSizing() {
+        console.log('blinput');
+        var $this = $(this);
+
+        var len = $this.text().length;
+        console.log(len);
+        var minWidth = 0;
+        if (len > 160) {
+          minWidth = 480;
+        } else if (len > 80) {
+          minWidth = 300;
+        } else if (len > 40) {
+          minWidth = 175;
+        } else if (len > 20) {
+          minWidth = 150;
+        }
+
+        $this.parents('td').attr('style', 'min-width:' + minWidth + 'px;');
+      }
+
+      function bindListCellEditableSizing() {
+        console.log('blon');
+        $('.re-table tr.list-row-tr:not(.list-row-tr--add-row) td:nth-of-type(1n+4) div').on('input', listCellEditableSizing);
+      }
+
+      function unbindListCellEditableSizing() {
+        console.log('bloff');
+        $('.re-table tr.list-row-tr:not(.list-row-tr--add-row) td:nth-of-type(1n+4) div').off('input', listCellEditableSizing);
+      }
+
+      function linkifyAndDropdownifyCells() {
+        $('.re-table tr.list-row-tr:not(.list-row-tr--add-row)').each(function(){
+          $(this).find('td:nth-of-type(1n+4) div').each(function(){
+            var $this = $(this);
+            var maxPos = 161;
+            var rawText = $this.text();
+            var text = '';
+            var linkStrippedText = rawText.replace(/((http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?)/g, function (match) {
+              return (new URL(match))['host'].replace('www.', '');
+            });
+            if (linkStrippedText.length > maxPos) {
+              var lastPos = maxPos - 3;
+              text = rawText.substr(0, lastPos);
+              text = text.substr(0, Math.min(text.length, text.lastIndexOf(" "))) + '...';
+              text += '<a href="javascript:;" class="table-cell-show-more-button l-button" data-dropdown-placement="bottom">More</a>';
+              text += '<div class="l-dropdown dropdown table-cell-show-more-dropdown">' + rawText + '</div>';
+            } else {
+              text = rawText;
+            }
+            text = text.replace(/((http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?)/g, function (match) {
+              return '<a class="re-table-link" target="_blank" title="' + match + '" href="' + match + '">' + (new URL(match))['host'].replace('www.', '') + '</a>';
+            })
+            $this.html(text);
+          });
+          window.bindPops();
+        });
+      }
+
+      function unlinkifyAndUnDropdownifyCells() {
+        $('.re-table').find('.re-table-link').replaceWith($('.re-table').find('.re-table-link').attr('href'));
+        $('.table-cell-show-more-dropdown').each(function(){
+          var $this = $(this);
+          $this.parents('td').html('<div>' + $this.text() + '</div>');
+        });
+      }
+
+      $('.re-table__list-image-fileUpload').on('change', function () {
+        if (this.files && this.files[0]) {
+          var img = $(this).parents('td').find('.re-table__list-image');
+          img.removeClass('re-table__list-image--empty');
+          img.attr('style', 'background: #f5f5f5 url(' + URL.createObjectURL(this.files[0]) + ') center / cover;');
+          //img.onload = fn;
+        }
+      });
+      $('.re-table__list-image__upload-button').on('click', function () {
+        $(this).parents('td').find('.re-table__list-image-fileUpload').click();
+      });
+      $('.re-table__list-image__delete-button').on('click', function () {
+        $(this).parents('td').find('.re-table__list-image-fileUpload').val('');
+        var img = $(this).parents('td').find('.re-table__list-image');
+        img.addClass('re-table__list-image--empty');
+        img.attr('style', 'background: #f5f5f5 url() center / cover;');
+      });
+
+
+      function startEditList () {
+        unlinkifyAndUnDropdownifyCells();
+
+        $('.re-table th:nth-of-type(1n+4)').attr('contenteditable', 'true');
+        $('.re-table tr.list-row-tr:not(.list-row-tr--add-row) td:nth-of-type(1n+4) div').attr('contenteditable', 'true');
+        $('.re-table__list-image').addClass('re-table__list-image--editing');
+        bindListCellEditableSizing();
+      }
+
+      startEditList();
+
       $('.re-header .save-button').on('click', function (e) {
         e.preventDefault();
 
