@@ -362,6 +362,13 @@
   </div>
 </div>
 
+<div id="list-context-menu" class="list-context-menu">
+  <a href="javascript:;" class="edit-column-name"><img src="/assets/images/9-0/list-edit-column-name.svg" /> Edit Column Name</a>
+  <a href="javascript:;" class="add-column-left"><img src="/assets/images/9-0/list-add-column-left.svg" /> Add Column Left</a>
+  <a href="javascript:;" class="add-column-right"><img src="/assets/images/9-0/list-add-column-right.svg" /> Add Column Right</a>
+  <a href="javascript:;" class="remove-column"><img src="/assets/images/9-0/list-remove-column.svg" /> Remove Column</a>
+</div>
+
 <form method="POST" action="/row/{{ table['id']}}/add" enctype="multipart/form-data" id="form_hidden">
 
 </form>
@@ -848,6 +855,95 @@
     if (lastUrlPathSegment === 'edit') {
       startEditList();
     }
+
+    var mouse = { pageX: 0, pageY: 0 };
+    var ref = {
+      getBoundingClientRect: () => ({
+        top: mouse.pageY,
+        right: mouse.pageX,
+        bottom: mouse.pageY,
+        left: mouse.pageX,
+        width: 0,
+        height: 0,
+      }),
+      clientWidth: 0,
+      clientHeight: 0,
+    }
+
+    var pop = document.getElementById('list-context-menu');
+
+    var popInstance;
+    new Popper(ref, pop, {
+      placement: 'right-start',
+      onCreate({ instance }) {
+        popInstance = instance;
+      }
+    });
+
+    $('.re-table tr').on('contextmenu', function (e) {
+      e.preventDefault();
+      mouse = { pageX: e.clientX, pageY: e.clientY };
+      popInstance.scheduleUpdate();
+      $('#list-context-menu').addClass('show');
+    });
+
+
+    var permission = "2";
+
+    $('.edit-column-name').on('click', function () {
+
+    });
+
+    $('.add-column-left').on('click', function () {
+      swal({
+        title: "What is the title of the new column?",
+        input: "text",
+        text: "Please type the new column title.",
+        showCancelButton: true,
+        showLoaderOnConfirm: true,
+        preConfirm: newValue => {
+          if (typeof newValue !== "string") {
+            return;
+          }
+
+          return addCol(
+            $('.re-table').data('id'),
+            newValue,
+            permission
+          );
+        }
+      })
+        .then(result => {
+          if (!result.value) {
+            return;
+          }
+          if (permission === "1") {
+            swal(
+              "Success!",
+              "The request to add this column is awaiting approval.",
+              "success"
+            );
+          } else if (permission === "2") {
+            swal({
+              title: "Success!",
+              type: "success",
+              timer: 650,
+              showConfirmButton: false
+            });
+          }
+        })
+        .catch(() => {
+          swal("Oops", "Something has gone wrong!", "error");
+        });
+    });
+
+    $('.add-column-right').on('click', function () {
+
+    });
+
+    $('.remove-column').on('click', function () {
+
+    });
   });
 
 

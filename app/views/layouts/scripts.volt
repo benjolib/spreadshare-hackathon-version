@@ -280,6 +280,7 @@
       $('.l-dropdown').each(function (index, el) {
         hidePopover(el, e);
       });
+      hidePopover($('#list-context-menu'), e);
       $('.l-button').each(function (index, item) {
         var $item = $(item);
         if (!$item.is(e.target) && $item.has(e.target).length === 0 && !$('.l-dropdown').is(e.target) && $('.l-dropdown').has(e.target).length === 0){

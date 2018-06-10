@@ -124,6 +124,9 @@
         img.attr('style', 'background: #f5f5f5 url() center / cover;');
       };
 
+      document.querySelector('#create-list-fileUpload').addEventListener('change', function () {
+        $('#createListFrom').submit();
+      });
       document.querySelector('#file-upload-button').onclick = function () {
         document.getElementById('create-list-fileUpload').click();
       };

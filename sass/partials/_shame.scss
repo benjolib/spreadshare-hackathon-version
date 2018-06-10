@@ -5449,3 +5449,27 @@
   top: 15px;
   right: 6px;
 }
+
+.list-context-menu {
+  background: #ffffff;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
+  border-radius: 4px;
+  width: 226px;
+  height: 194px;
+  visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 20px;
+  a {
+    font-family: 'Roboto Mono', monospace;
+    font-weight: bold;
+    font-size: 14px;
+    color: #9baabf;
+    letter-spacing: -0.38px;
+    line-height: 32px;
+    padding: 4px;
+    img {
+      margin-right: 4px;
+    }
+  }
+}
