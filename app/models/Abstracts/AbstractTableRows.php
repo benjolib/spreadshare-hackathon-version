@@ -43,6 +43,13 @@ abstract class AbstractTableRows extends \DS\Model\Base
 
     /**
      *
+     * @var string
+     * @Column(type="string", nullable=true)
+     */
+    protected $image;
+
+    /**
+     *
      * @var integer
      * @Column(type="integer", length=11, nullable=true)
      */
@@ -190,6 +197,12 @@ abstract class AbstractTableRows extends \DS\Model\Base
     {
         $this->createdAt = $createdAt;
 
+        return $this;
+    }
+
+    public function setImage($image)
+    {
+        $this->image = $image;
         return $this;
     }
 

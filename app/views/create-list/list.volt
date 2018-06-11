@@ -27,7 +27,7 @@
               </div>
             </td>
             <td>
-              <div class="re-table__list-image re-table__list-image--empty" style="background: #f5f5f5 url() center / cover;">
+              <div class="re-table__list-image re-table__list-image--empty" style="background: #f5f5f5 center / cover;">
                 <div class="re-table__list-image__upload-button"></div>
                 <div class="re-table__list-image__delete-button"></div>
               </div>

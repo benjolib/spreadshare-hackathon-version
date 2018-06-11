@@ -51,7 +51,7 @@ abstract class TablesEvents
 
         if (strlen($this->getTitle()) < 4)
         {
-            throw new \InvalidArgumentException('Please provide at least four chracters for the table name.');
+            throw new \InvalidArgumentException('Please provide at least four characters for the table name.');
         }
 
         // Check if table with this name already exists
@@ -66,15 +66,15 @@ abstract class TablesEvents
             $this->setTypeId(null);
         }
 
-        if (!$this->getTopic1Id())
-        {
-            throw new \InvalidArgumentException('Please select at least one topic for your table.');
-        }
-
-        if (!$this->getTopic2Id())
-        {
-            $this->setTopic2Id(null);
-        }
+//        if (!$this->getTopic1Id())
+//        {
+//            throw new \InvalidArgumentException('Please select at least one topic for your table.');
+//        }
+//
+//        if (!$this->getTopic2Id())
+//        {
+//            $this->setTopic2Id(null);
+//        }
 
         if ($this->getTypeId() && Types::findFirstById($this->getTypeId()) === false)
         {

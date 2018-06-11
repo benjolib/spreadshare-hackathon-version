@@ -6,7 +6,12 @@
 {% block content %}
   <div class="re-page re-page--create-list">
     <form id="createListFrom" method="post" action="/create-list" enctype="multipart/form-data">
-      <div class="re-image re-image--create-list">
+        {% if tempImage is defined %}
+            {%  set imageStyle='background: #f5f5f5 url(/temptableimages/'~tempImage~') center / cover;' %}
+            {{ hidden_field('tempImage','value':tempImage) }}
+        {% else %}
+            {% set imageStyle='' %}
+        {% endif %}      <div class="re-image re-image--create-list" style="{{ imageStyle }}">
         <div class="re-image__upload-button"></div>
         <div class="re-image__delete-button"></div>
       </div>
@@ -69,7 +74,8 @@
                   {{ partial('create-list/list') }}
                   {% else %}
                     <div class="create-list-copy-textarea-container">
-              <textarea class="create-list-copy-textarea" placeholder="Paste here" name="copy"></textarea>
+                      {{ text_area('copy', 'placeholder':'Paste here','class':'create-list-copy-textarea') }}
+              {#<textarea class="create-list-copy-textarea" placeholder="Paste here" name="copy"></textarea>#}
               <button class="re-button create-list-copy-button">Format to List</button>
                     </div>
               {% endif %}

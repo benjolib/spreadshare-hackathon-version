@@ -163,8 +163,23 @@ abstract class AbstractTables extends \DS\Model\Base
      */
     public function setTitle($title)
     {
-        $this->title = $title;
+        if (empty($title))
+        {
+            throw new \InvalidArgumentException('Please give a name for the table');
+        }
 
+        if (strlen($title) < 4)
+        {
+            throw new \InvalidArgumentException('Please provide at least four characters for the table name.');
+        }
+
+        $tableCheck = self::findByFieldValue('title', $title);
+        if ($tableCheck && $tableCheck->getId() != $this->getId())
+        {
+            throw new \InvalidArgumentException('A table with the exact same title already exists. Please choose another title');
+        }
+
+        $this->title = $title;
         return $this;
     }
 
