@@ -248,9 +248,9 @@ class CreateListController extends BaseController implements LoginAwareControlle
     protected function setColumns($tableId, $columns)
     {
         $columns = json_decode($columns, true);
-        foreach ($columns as $column) {
+        foreach ($columns as $position => $column) {
             $c = new TableColumns();
-            $c->setTableId($tableId)->setTitle($column)->save();
+            $c->setTableId($tableId)->setTitle($column)->setPosition($position)->save();
         }
     }
 
