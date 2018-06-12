@@ -13,7 +13,8 @@
         {{ partial('for-you/content') }}
     </div>
     <div class="u-flex u-flexJustifyCenter">
-        <a href="#" class="re-button re-button--load-more">Load More</a>
+        
+        {% if feedElements|length is 0 %}  {% else %} <a href="#" class="re-button re-button--load-more">Load More</a> {%endif%}
     </div>
 </div>
 {% endblock %}
@@ -23,6 +24,7 @@
         $(document).ready(function () {
             var pageNumber = {{ page }}+1;
             var feedDate = {{ feedDate }};
+            //TODO [improve] do not use class as element pointer
             $('.re-button--load-more').on('click', function (e) {
                 e.preventDefault();
                 $.ajax(window.location.pathname + '?page=' + pageNumber +'&date='+ feedDate)
