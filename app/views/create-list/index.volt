@@ -100,14 +100,29 @@
   <div class="item" data-value="ax"><i class="ax flag"></i>Aland Islands</div>
   </div></div>
       </div>
+
+
+
+
+
+
+      <div class="create-list-add-curator">
+       <!-- <p>If there are other curators than you? {{ text_field('related-lists', 'placeholder':"Related") }}{#<input type="text" placeholder="Related" name="related-list" />#}</p>
+      -->
+      <div class="ui fluid multiple search selection dropdown">
+  <input type="hidden" name="related-lists">
+  <i class="dropdown icon"></i>
+  <div class="default text">Pick a related lists</div>
+  <div class="menu">
+
+  </div></div>
+      </div>
+
       <div class="create-list-add-related">
         <!--<p>Related lists: {{ text_field('related-lists', 'placeholder':"Related") }}{#<input type="text" placeholder="Related" name="related-lists" />#}</p>
     -->
       <select name="related-lists" multiple="" class="ui search fluid dropdown">
-          <option value="">Recommended related lists to your subscribers</option>
-          <option value="angular">Other list</option>
-          <option value="css">Awesome list</option>
-          <option value="design">List of fame</option>
+  
         </select>      
       </div>
 
@@ -167,7 +182,7 @@
   allowAdditions: true,
    apiSettings: {
       // this url parses query server side and returns filtered results
-      url: '/tags/{query}'
+      url: '/api/v2/tags/?q={query}'
     }
 });
     $(document).ready(function () {
