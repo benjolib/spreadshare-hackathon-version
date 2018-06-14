@@ -44,10 +44,12 @@
     <div class="create-list-add-tags">
       <img class="re-heading-input__tick tagsdisabled" src="/assets/images/input-tick.svg" />
       <img class="re-heading-input__tick-green tagschecked" src="/assets/images/input-tick-green.svg" />
-      <!-- <p>If there are other curators than you? {{ text_field('tags', 'placeholder':"Tags") }}{#<input type="text" placeholder="Tags" name="tags" />#}</p>
+      <!-- <p>If there are other curators than you? {{ text_field('tags', 'placeholder':"Tags") }}
+      {#<input type="text" placeholder="Tags" name="tags" />#}</p>
           -->
       <div class="ui fluid multiple search selection dropdown tags">
         <input type="hidden" name="tags">
+        {{ hidden_field('tags', 'placeholder':"Tags") }}
         <i class="dropdown icon"></i>
         <div class="default text">Add at least 3 tag</div>
         <div class="menu">

@@ -3635,9 +3635,9 @@
 
 .flash {
   position: fixed;
-  top: 0;
+  top: 50;
   right: 0;
-  padding: 10px;
+  padding: 90px 10px 10px 10px;
   z-index: 999999;
   overflow: hidden;
   pointer-events: none;
@@ -5188,4 +5188,3 @@
     }
   }
 }
-
