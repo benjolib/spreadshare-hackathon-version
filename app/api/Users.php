@@ -60,4 +60,19 @@ class Users
         
         return $user;
     }
+
+    public static function searchByName($name, $limit = 100)
+    {
+        $locations = new User;
+
+        return $locations->find(
+            [
+                "conditions" => "name LIKE ?0",
+                'columns' => 'id as value, name as name',
+                "order" => "name ASC",
+                "limit" => $limit,
+                "bind" => [$name . '%'],
+            ]
+        )->toArray();
+    }
 }
