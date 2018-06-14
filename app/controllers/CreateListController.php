@@ -92,9 +92,18 @@ class CreateListController extends BaseController implements LoginAwareControlle
                     $table->save();
                     $tableId = $table->getId();
 
-                    $this->setCurators($tableId, $this->request->get('curators'));
-                    $this->setRelatedLists($tableId, $this->request->get('related-lists'));
-                    $this->setTags($tableId, $this->request->get('tags'));
+                    $curatorsIdsAndNames = $this->setCurators($tableId, $this->request->get('curators'));
+                    $relatedListsIdsAndNames = $this->setRelatedLists($tableId, $this->request->get('related-lists'));
+                    $tagsIdsAndNames = $this->setTags($tableId, $this->request->get('tags'));
+
+                    $this->view->setVar('tags', empty($tagsIdsAndNames)?[]:array_column($tagsIdsAndNames, 'id'));
+                    $this->view->setVar('tagsNames', empty($tagsIdsAndNames)?[]:array_column($tagsIdsAndNames, 'name'));
+                    $this->view->setVar('curators', empty($curatorsIdsAndNames)?[]:array_column($curatorsIdsAndNames, 'id'));
+                    $this->view->setVar('curatorsNames', empty($curatorsIdsAndNames)?[]:array_column($curatorsIdsAndNames, 'name'));
+                    $this->view->setVar('related-lists', empty($relatedListsIdsAndNames)?[]:array_column($relatedListsIdsAndNames, 'id'));
+                    $this->view->setVar('related-listsNames', empty($relatedListsIdsAndNames)?[]:array_column($relatedListsIdsAndNames, 'name'));
+
+
                     $tableContentFromCsv = $this->tableContentFromCsv($csv);
                     $this->view->setVar('tableId', $tableId);
                     $this->view->setVar('tableColumns', $tableContentFromCsv[0]);
@@ -147,22 +156,24 @@ class CreateListController extends BaseController implements LoginAwareControlle
         }
     }
 
-    protected function getTagsIds($tagsList): array
+    protected function getTagsIdsAndNames($tagsList): array
     {
         $tagsIds = explode(',', $tagsList);
         if (count($tagsIds) < 3) {
             throw new \Exception('Error in tags - you should add at least three tags');
         }
         foreach ($tagsIds as $tag) {
+            /** @var Tags $t */
             $t = Tags::findFirstById($tag);
             if (empty($t)) {
                 throw new \Exception("Error in tags - Tag $tag doesn't exist");
             }
+            $result[] = ['id'=> $tag, 'name'=>$t->getTitle()];
         }
-        return $tagsIds;
+        return result;
     }
 
-    protected function getCuratorsIds($curatorsList): array
+    protected function getCuratorsIdsAndNames($curatorsList): array
     {
         if (empty($curatorsList)) return [];
 
@@ -172,11 +183,12 @@ class CreateListController extends BaseController implements LoginAwareControlle
             if (empty($c)) {
                 throw new \Exception("Error in curators - Curator $curator doesn't exist. Make sure you input the correct handle");
             }
+            $result[] = ['id'=> $curator, 'name'=>$c->getName()];
         }
-        return $curatorsIds;
+        return $result;
     }
 
-    protected function getRelatedListsIds($relatedLists): array
+    protected function getRelatedListsIdsAndTitles($relatedLists): array
     {
         if (empty($relatedLists)) return [];
 
@@ -186,11 +198,12 @@ class CreateListController extends BaseController implements LoginAwareControlle
             if (empty($l)) {
                 throw new \Exception("Error in related lists - List with id $listId doesn't exist");
             }
+            $result[] = ['id'=> $listId, 'name'=>$l->getTitle()];
         }
         return $relLists;
     }
 
-    protected function setTags($tableId, $tagsList)
+    protected function setTags($tableId, $tagsList):array
     {
         $oldTags = TableTags::findAllByFieldValue('tableId', $tableId)?:[];
         /** @var TableTags $tag */
@@ -198,14 +211,15 @@ class CreateListController extends BaseController implements LoginAwareControlle
             $tag->delete();
         }
 
-        $tagsIds = $this->getTagsIds($tagsList);
+        $tagsIds = $this->getTagsIdsAndNames($tagsList);
         foreach ($tagsIds as $id) {
             $tag = new TableTags();
-            $tag->setTableId($tableId)->setTagId($id)->save();
+            $tag->setTableId($tableId)->setTagId($id['id'])->save();
         }
+        return $tagsIds;
     }
 
-    protected function setCurators($tableId, $curatorsList)
+    protected function setCurators($tableId, $curatorsList):array
     {
         $oldCurators = TableContributions::findAllByFieldValue('tableId', $tableId)?:[];
         /** @var TableContributions $curator */
@@ -213,16 +227,17 @@ class CreateListController extends BaseController implements LoginAwareControlle
             $curator->delete();
         }
 
-        if (empty($curatorsList)) return;
+        if (empty($curatorsList)) return [];
 
-        $ids = $this->getCuratorsIds($curatorsList);
+        $ids = $this->getCuratorsIdsAndNames($curatorsList);
         foreach ($ids as $id) {
             $tc = new TableContributions();
-            $tc->setTableId($tableId)->setUserId($id)->save();
+            $tc->setTableId($tableId)->setUserId($id['id'])->save();
         }
+        return $ids;
     }
 
-    protected function setRelatedLists($tableId, $relatedLists)
+    protected function setRelatedLists($tableId, $relatedLists):array
     {
         $oldRelatedLists = TableRelations::findAllByFieldValue('tableId', $tableId)?:[];
         /** @var TableRelations $relatedList */
@@ -230,13 +245,14 @@ class CreateListController extends BaseController implements LoginAwareControlle
             $relatedList->delete();
         }
 
-        if (empty($relatedLists)) return;
+        if (empty($relatedLists)) return [];
 
-        $ids = $this->getRelatedListsIds($relatedLists);
+        $ids = $this->getRelatedListsIdsAndTitles($relatedLists);
         foreach ($ids as $id) {
             $rt = new TableRelations();
-            $rt->setTableId($tableId)->setRelatedTableId($id)->save();
+            $rt->setTableId($tableId)->setRelatedTableId($id['id'])->save();
         }
+        return $ids;
     }
 
     protected function setColumns($tableId, $columns)
