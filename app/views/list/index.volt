@@ -43,7 +43,7 @@
             <div class="dropdown sort-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
               <a href="{{table['id']}}"><img src="/assets/images/lightning.svg" /> Sort by <span>Popularity</span></a>
 
-              <a href="{{table['id']}}?orderby=date" class="warning-color"><img src="/assets/images/clock.svg" /> Sort by <span>Newest</span></a>
+              <a href="/list/{{table['id']}}?orderby=date" class="warning-color"><img src="/assets/images/clock.svg" /> Sort by <span>Newest</span></a>
             </div>
           </th>
           <th class="shadowcontainth"></th>

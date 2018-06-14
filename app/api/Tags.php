@@ -54,5 +54,20 @@ class Tags
             ]
         )->toArray(['id', 'locationName']);
     }
-    
+
+    public static function newSearchByName($name, $limit = 100)
+    {
+        $locations = new TagsModel;
+
+        return $locations->find(
+            [
+                "conditions" => "title LIKE ?0",
+                'columns' => 'id as value, title as name',
+                "order" => "title ASC",
+                "limit" => $limit,
+                "bind" => [$name . '%'],
+            ]
+        )->toArray();
+    }
+
 }
