@@ -28,7 +28,7 @@
         {% if auth.getUser().getStats().getUnreadNotificationsCount() > 0 %}<span>{{ auth.getUser().getStats().getUnreadNotificationsCount() }}</span>{% endif %}
         <img src="/assets/images/9-0/header-notifications.png" />
       </a>
-      <div class="l-dropdown dropdown notification-dropdown u-flex u-flexCol">
+      <div class="l-dropdown sh-dropdown notification-dropdown u-flex u-flexCol">
         {# {% set numbers = [1, 2, 3, 4, 5, 6] %}
 
         {% for number in numbers %}
@@ -52,7 +52,7 @@
       </div>
 
       <a class="re-header__user l-button" data-dropdown-placement="bottom-end" data-dropdown-offset="20" href="javascript:;"><img src="{{ auth.getUser().getImage() }}" /></a>
-      <div class="l-dropdown dropdown re-header__user-dropdown2 user-dropdown2 u-flex">
+      <div class="l-dropdown sh-dropdown re-header__user-dropdown2 user-dropdown2 u-flex">
         <div>YOU</div>
         <a href="/profile/{{ auth.getUser().handle }}">This is your <span>profile</span></a>
         <a href="/subscriptions">All lists your <span>subscribed</span> to</a>
@@ -199,7 +199,7 @@
       </div> #}
 
       <a class="re-header__hamburger l-button" data-dropdown-placement="bottom-end" href="javascript:;"><img src="/assets/images/hamburger.svg" /></a>
-      <div class="l-dropdown dropdown user-dropdown u-flex u-flexCol user-dropdown--no-margin">
+      <div class="l-dropdown sh-dropdown user-dropdown u-flex u-flexCol user-dropdown--no-margin">
         <div class="u-flex user-dropdown__white-section">
           <div class="user-dropdown__column">
             <a href="/profile/{{ auth.getUser().handle }}" class="user-dropdown__item">
@@ -338,7 +338,7 @@
     <a href="#" class="re-button re-button--grey cancel-button">Cancel</a>
     <a href="#" class="re-button save-button">Publish</a>
     <img class="l-button re-header__editing__arrow" src="/assets/images/header-editing-arrow-down.svg" />
-    <div class="dropdown list-editing-draft-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
+    <div class="sh-dropdown list-editing-draft-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
       <a href="#"><img src="/assets/images/list-editing-draft-save.svg" /> Save as Draft</a>
     </div>
   </div>

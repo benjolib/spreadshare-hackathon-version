@@ -18,6 +18,7 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:100,100i,300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
   <link rel="stylesheet" href="/css/styles.css">
   <link href="/css/main.878d83e3.css" rel="stylesheet">
+  <link href="/semantic/semantic.min.css" rel="stylesheet">
   <link rel="icon" type="image/png" href="/assets/icons/favicon.png">
 
   {% block header %}{% endblock %}
@@ -25,6 +26,7 @@
 </head>
 <body>
 <script>
+
   window.fbAsyncInit = function() {
     FB.init({
       appId            : '153117502101937',
@@ -75,13 +77,14 @@
 {# <a class="button green found-a-bug" href="https://betterresearch.typeform.com/to/o3W0BI" target="_blank">Report a Bug 🐞</a> #}
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
-<script type="text/javascript" src="/js/api.js"></script>
+<script type="text/javascript" src="/js/api.js"></script> 
 <script type="text/javascript" src="/js/jquery.sticky-sidebar.min.js"></script>
 <script type="text/javascript" src="/js/infinite-scroll.min.js"></script>
+<script type="text/javascript" src="/semantic/semantic.min.js"></script>
 
 {{ partial('layouts/scripts') }}
 
-<script type="text/javascript" src="/js/react/main.3bd21672.js"></script>
+{#<script type="text/javascript" src="/js/react/main.3bd21672.js"></script>#}
 {% block scripts %}{% endblock %}
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110506889-1"></script>
@@ -91,6 +94,8 @@
   gtag('js', new Date());
 
   gtag('config', 'UA-110506889-1');
+
+   
 </script>
 </body>
 </html>

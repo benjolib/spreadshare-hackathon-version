@@ -4,8 +4,10 @@
 {% endblock %}
 
 {% block content %}
+
   <div class="re-page re-page--create-list">
     <form id="createListFrom" method="post" action="/create-list" enctype="multipart/form-data">
+    
         {% if tempImage is defined %}
             {%  set imageStyle='background: #f5f5f5 url(/temptableimages/'~tempImage~') center / cover;' %}
             {{ hidden_field('tempImage','value':tempImage) }}
@@ -19,28 +21,59 @@
       <div class="re-heading-input">
         <img class="re-heading-input__tick" src="/assets/images/input-tick.svg" />
         <img class="re-heading-input__tick-green" src="/assets/images/input-tick-green.svg" />
-        {{ text_field('name', 'placeholder':"Your publication's title") }}
-        {#<input type="text" placeholder="Your publication's title" name="name" />#}
+        <div class="ui input" style="width:100%">
+        {{ text_field('name', 'placeholder':"Your publication's title", 'autocomplete':"off") }}
+        {#<input type="text" placeholder="Your publication's title" name="name" style="border:0px" />#}
+      </div>
       </div>
       <div class="re-subheading-input">
         <img class="re-heading-input__tick" src="/assets/images/input-tick.svg" />
         <img class="re-heading-input__tick-green" src="/assets/images/input-tick-green.svg" />
-          {{ text_field('tagline', 'placeholder':"Write a tagline for your publication") }}
-        {#<input type="text" placeholder="Write a tagline for your publication" name="tagline" />#}
+        <div class="ui input" style="width:100%">
+          {{ text_field('tagline', 'placeholder':"Write a tagline for your publication", 'autocomplete':"off") }}
+        {#<input type="text" placeholder="Write a tagline for your publication" name="tagline" style="border:0px"/>#}
+        </div>
       </div>
       <div class="re-para-input">
         <img class="re-heading-input__tick" src="/assets/images/input-tick.svg" />
         <img class="re-heading-input__tick-green" src="/assets/images/input-tick-green.svg" />
-          {{ text_field('description', 'placeholder':"Write a short description text") }}
-        {#<input type="text" placeholder="Write a short desciption text" name="description" />#}
+        <div class="ui input" style="width:100%">
+          {{ text_field('description', 'placeholder':"Write a short description text", 'autocomplete':"off") }}
+        {#<input type="text" placeholder="Write a short desciption text" name="description" style="border:0px" />#}
+      </div>
       </div>
 
       <div class="create-list-add-tags">
         <img class="re-heading-input__tick" src="/assets/images/input-tick.svg" />
         <img class="re-heading-input__tick-green" src="/assets/images/input-tick-green.svg" />
-        <p>Add at least 3 tags: {{ text_field('tags', 'placeholder':"Tags") }}{#<input type="text" placeholder="Tags" name="tags" />#}</p>
+       
+
+        
+          <select name="tags" multiple="" class="ui search fluid dropdown">
+          <option value="">Add at least 3 tags</option>
+          <option value="angular" selected>Angular</option>
+          <option value="css" selected>CSS</option>
+          <option value="design">Graphic Design</option>
+          <option value="ember">Ember</option>
+          <option value="html">HTML</option>
+          <option value="ia">Information Architecture</option>
+          <option value="javascript">Javascript</option>
+          <option value="mech">Mechanical Engineering</option>
+          <option value="meteor">Meteor</option>
+          <option value="node">NodeJS</option>
+          <option value="plumbing">Plumbing</option>
+          <option value="python">Python</option>
+          <option value="rails">Rails</option>
+          <option value="react">React</option>
+          <option value="repair">Kitchen Repair</option>
+          <option value="ruby">Ruby</option>
+          <option value="ui">UI Design</option>
+          <option value="ux">User Experience</option>
+        </select>
+   
+
       </div>
-      <div class="create-list-has-thumbnails">
+      <!--<div class="create-list-has-thumbnails">
         <img class="re-heading-input__tick" src="/assets/images/input-tick.svg" />
         <img class="re-heading-input__tick-green" src="/assets/images/input-tick-green.svg" />
         <p>
@@ -54,12 +87,28 @@
             <span class="off">Off</span>
           </div>
         </label>
-      </div>
+      </div>-->
       <div class="create-list-add-curator">
-        <p>If there are other curators than you? {{ text_field('curators', 'placeholder':"Curators") }}{#<input type="text" placeholder="Curators" name="curators" />#}</p>
+       <!-- <p>If there are other curators than you? {{ text_field('curators', 'placeholder':"Curators") }}{#<input type="text" placeholder="Curators" name="curators" />#}</p>
+      -->
+      <div class="ui fluid multiple search selection dropdown">
+  <input type="hidden" name="country">
+  <i class="dropdown icon"></i>
+  <div class="default text">Select other curators</div>
+  <div class="menu">
+  <div class="item" data-value="af"><i class="af flag"></i>Afghanistan</div>
+  <div class="item" data-value="ax"><i class="ax flag"></i>Aland Islands</div>
+  </div></div>
       </div>
       <div class="create-list-add-related">
-        <p>Related lists: {{ text_field('related-lists', 'placeholder':"Related") }}{#<input type="text" placeholder="Related" name="related-lists" />#}</p>
+        <!--<p>Related lists: {{ text_field('related-lists', 'placeholder':"Related") }}{#<input type="text" placeholder="Related" name="related-lists" />#}</p>
+    -->
+      <select name="related-lists" multiple="" class="ui search fluid dropdown">
+          <option value="">Recommended related lists to your subscribers</option>
+          <option value="angular">Other list</option>
+          <option value="css">Awesome list</option>
+          <option value="design">List of fame</option>
+        </select>      
       </div>
 
       <div class="create-create-list-tabs">
@@ -79,7 +128,7 @@
               <button class="re-button create-list-copy-button">Format to List</button>
                     </div>
               {% endif %}
-            <div class="l-button create-list-copy-seperator-chooser" data-dropdown-placement="bottom-start">
+            <!--<div class="l-button create-list-copy-seperator-chooser" data-dropdown-placement="bottom-start">
               SEPERATE BY
               <div class="create-list-copy-seperator-chooser__seperator">COMMA <img src="/assets/images/create-list-copy-dropdown-arrow.svg" /></div>
             </div>
@@ -89,7 +138,7 @@
               <a href="#">Space</a>
               <a href="#">Tab</a>
             </div>
-            <input type="text" value="," name="seperator" />
+            <input type="text" value="," name="seperator" />-->
           </div>
 
           <div class="create-list-tab-content create-list-tab-content-import" style="display: none;">
@@ -113,7 +162,16 @@
 
 {% block scripts %}
   <script type="text/javascript">
+  
+  $('.ui.dropdown').dropdown({
+  allowAdditions: true,
+   apiSettings: {
+      // this url parses query server side and returns filtered results
+      url: '/tags/{query}'
+    }
+});
     $(document).ready(function () {
+      $('.ui.dropdown').style = "visibility:hidden"
       document.querySelector('#re-image-fileUpload').addEventListener('change', function () {
         if (this.files && this.files[0]) {
           var img = $('.re-image');
@@ -284,6 +342,11 @@
 
         $('#createListFrom').submit();
       });
+       
+
+       
+    
     });
   </script>
+   
 {% endblock %}

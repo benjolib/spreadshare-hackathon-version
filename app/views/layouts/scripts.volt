@@ -1,4 +1,5 @@
 <script type="text/javascript">
+  
   window.initOnOffSwitches = function() {
     var $NoSwitch = $('.NSwitch');
     var $YesSwitch = $('.YSwitch');
@@ -234,6 +235,7 @@
   $(document).ready(function () {
     // pops
 
+  
     window.bindPops = function () {
       $('.l-button:not(.bound)').each(function () {
         var $button = $(this);
@@ -342,4 +344,7 @@
       }, timeout);
     };
   });
+
+ 
+
 </script>

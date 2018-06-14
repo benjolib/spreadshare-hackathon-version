@@ -22,7 +22,7 @@
       <a class="re-button re-button--list-subscribe l-button" href="javascript:;" data-dropdown-placement="right" data-dropdown-offset="6">
         <img src="/assets/images/9-0/list-subscribe-button-bird.svg" /> Subscribe
       </a>
-      <div class="dropdown card-actions-dropdown card-actions-dropdown--tall u-flex u-flexCol u-flexJustifyCenter l-dropdown" style="margin-left: 18px;">
+      <div class="sh-dropdown card-actions-dropdown card-actions-dropdown--tall u-flex u-flexCol u-flexJustifyCenter l-dropdown" style="margin-left: 18px;">
           <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'D')">Daily</a>
           <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'W')">Weekly</a>
           <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'M')">Monthly</a>
@@ -40,7 +40,7 @@
         <tr>
           <th>
             <div class="l-button">VOTES <img src="/assets/images/updown.svg" class="updown" /></div>
-            <div class="dropdown sort-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
+            <div class="sh-dropdown sort-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
               <a href="{{table['id']}}"><img src="/assets/images/lightning.svg" /> Sort by <span>Popularity</span></a>
 
               <a href="{{table['id']}}?orderby=date" class="warning-color"><img src="/assets/images/clock.svg" /> Sort by <span>Newest</span></a>
@@ -67,7 +67,7 @@
               <td class="shadowcontaintd">
                 <div class="shadowcontain">
                   <div class="l-button" style="position: absolute;top: 0;right: 6px;pointer-events: all;cursor: pointer;"><img src="/assets/images/dotdotdot.svg" /></div>
-                  <div class="dropdown list-row-remove-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
+                  <div class="sh-dropdown list-row-remove-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
                     <a href="/row/{{ row['id']}}/delete"><img src="/assets/images/bin.svg" /> Request to remove</a>
                   </div>
                 </div>
@@ -649,7 +649,7 @@
             text = rawText.substr(0, lastPos);
             text = text.substr(0, Math.min(text.length, text.lastIndexOf(" "))) + '...';
             text += '<a href="javascript:;" class="table-cell-show-more-button l-button" data-dropdown-placement="bottom">More</a>';
-            text += '<div class="l-dropdown dropdown table-cell-show-more-dropdown">' + rawText + '</div>';
+            text += '<div class="l-dropdown sh-dropdown table-cell-show-more-dropdown">' + rawText + '</div>';
           } else {
             text = rawText;
           }
