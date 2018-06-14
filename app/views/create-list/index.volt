@@ -11,25 +11,28 @@
       <div class="re-image__delete-button"></div>
     </div>
     <input type="file" name="image" id="re-image-fileUpload" style="display: none;" />
+    
+    
+    
     <div class="re-heading-input">
-      <img class="re-heading-input__tick" src="/assets/images/input-tick.svg" />
-      <img class="re-heading-input__tick-green" src="/assets/images/input-tick-green.svg" />
+      <img class="re-heading-input__tick titledisabled" src="/assets/images/input-tick.svg" />
+      <img id="titlechecked" class="re-heading-input__tick-green titlechecked" src="/assets/images/input-tick-green.svg" />
       <div class="ui input" style="width:100%">
         {{ text_field('name', 'placeholder':"Your publication's title", 'autocomplete':"off") }} {#
         <input type="text" placeholder="Your publication's title" name="name" style="border:0px" />#}
       </div>
     </div>
     <div class="re-subheading-input">
-      <img class="re-heading-input__tick" src="/assets/images/input-tick.svg" />
-      <img class="re-heading-input__tick-green" src="/assets/images/input-tick-green.svg" />
+      <img class="re-heading-input__tick taglinedisabled" src="/assets/images/input-tick.svg" />
+      <img class="re-heading-input__tick-green taglinechecked" src="/assets/images/input-tick-green.svg" />
       <div class="ui input" style="width:100%">
         {{ text_field('tagline', 'placeholder':"Write a tagline for your publication", 'autocomplete':"off") }} {#
         <input type="text" placeholder="Write a tagline for your publication" name="tagline" style="border:0px" />#}
       </div>
     </div>
     <div class="re-para-input">
-      <img class="re-heading-input__tick" src="/assets/images/input-tick.svg" />
-      <img class="re-heading-input__tick-green" src="/assets/images/input-tick-green.svg" />
+      <img class="re-heading-input__tick descdisabled" src="/assets/images/input-tick.svg" />
+      <img class="re-heading-input__tick-green descchecked" src="/assets/images/input-tick-green.svg" />
       <div class="ui input" style="width:100%">
         {{ text_field('description', 'placeholder':"Write a short description text", 'autocomplete':"off") }} {#
         <input type="text" placeholder="Write a short desciption text" name="description" style="border:0px" />#}
@@ -39,11 +42,11 @@
 
 
     <div class="create-list-add-tags">
-      <img class="re-heading-input__tick" src="/assets/images/input-tick.svg" />
-      <img class="re-heading-input__tick-green" src="/assets/images/input-tick-green.svg" />
+      <img class="re-heading-input__tick tagsdisabled" src="/assets/images/input-tick.svg" />
+      <img class="re-heading-input__tick-green tagschecked" src="/assets/images/input-tick-green.svg" />
       <!-- <p>If there are other curators than you? {{ text_field('tags', 'placeholder':"Tags") }}{#<input type="text" placeholder="Tags" name="tags" />#}</p>
           -->
-      <div class="ui fluid multiple search selection dropdown">
+      <div class="ui fluid multiple search selection dropdown tags">
         <input type="hidden" name="tags">
         <i class="dropdown icon"></i>
         <div class="default text">Add at least 3 tag</div>
@@ -87,7 +90,7 @@
     <div class="create-list-add-related">
       <!-- <p>If there are other curators than you? {{ text_field('related-lists', 'placeholder':"Related") }}{#<input type="text" placeholder="Related" name="related-list" />#}</p>
       -->
-      <div class="ui fluid multiple search selection dropdown">
+      <div class="ui fluid multiple search selection dropdown related">
         <input type="hidden" name="related-lists">
         <i class="dropdown icon"></i>
         <div class="default text">Pick a related lists</div>
@@ -157,6 +160,7 @@
   });
   $('.ui.dropdown.curators').dropdown({
     allowAdditions: true,
+    hideAdditions: false,
     apiSettings: {
       // this url parses query server side and returns filtered results
       url: '/api/v2/curators/?q={query}'
@@ -164,13 +168,37 @@
   });
   $('.ui.dropdown.related').dropdown({
     allowAdditions: true,
+    label: {
+  transition : 'horizontal flip',
+  duration   : 200,
+  variation  : false
+},
     apiSettings: {
       // this url parses query server side and returns filtered results
-      url: '/api/v2/tags/?q={query}'
+      url: '/api/v2/lists/?q={query}'
     }
   });
   $(document).ready(function () {
-    $('.ui.dropdown').style = "visibility:hidden"
+    $('.ui.input input').on('change', function(e) { 
+      console.log(e.target.name)
+      if(e.target.name ==='name'){
+      $('.titlechecked').show()
+      $('.titledisabled').hide()
+      }
+      if(e.target.name ==='tags'){
+      $('.tagschecked').show()
+      $('.tagsdisabled').hide()
+      }
+      if(e.target.name ==='tagline'){
+      $('.taglinechecked').show()
+      $('.taglinedisabled').hide()
+      }
+      if(e.target.name ==='description'){
+      $('.descchecked').show()
+      $('.descdisabled').hide()
+      }
+     });
+
     document.querySelector('#re-image-fileUpload').addEventListener('change', function () {
       if (this.files && this.files[0]) {
         var img = $('.re-image');
