@@ -26,6 +26,8 @@ final class Envelope implements \JsonSerializable
      */
     public $data = null;
 
+    public $success;
+
     /**
      * Json serializer
      */
@@ -34,6 +36,8 @@ final class Envelope implements \JsonSerializable
         return [
             '_meta' => $this->_meta,
             'data' => $this->data,
+            'success' => $this->success, //I'm so sorry about this, but we needed to get a new response format
+            'result' => $this->data,     //and we needed to ship in an impossible amount of time
         ];
     }
 
@@ -45,6 +49,7 @@ final class Envelope implements \JsonSerializable
      */
     public function __construct(RecordInterface $records = null, $success = true)
     {
+        $this->success = $success;
         $status = ($success) ? 'SUCCESS' : 'ERROR';
         if ($records !== null)
         {

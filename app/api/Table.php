@@ -95,6 +95,21 @@ class Table
             ]
         )->toArray();
     }
+
+    public static function newSearchTableByName(string $name, int $limit = 100)
+    {
+        $locations = new Tables();
+
+        return $locations->find(
+            [
+                "conditions" => "title LIKE ?0",
+                'columns' => 'id as value, title as name',
+                "order" => "title ASC",
+                "limit" => $limit,
+                "bind" => ['%' . $name . '%'],
+            ]
+        )->toArray();
+    }
     
     public function saveTable(
         int $tableId,

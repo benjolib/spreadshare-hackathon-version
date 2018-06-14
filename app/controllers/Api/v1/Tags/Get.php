@@ -81,8 +81,8 @@ class Get extends ActionHandler implements MethodInterface
         {
             throw new \InvalidArgumentException(sprintf('Give at least %d characters.', $this->searchMinimum));
         }
-        
-        return new Records(Tags::searchByName($query, 50));
+        $result = new Records(Tags::searchByName($query, 50));
+        return $result;
     }
     
 }

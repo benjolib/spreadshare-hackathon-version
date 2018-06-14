@@ -3,10 +3,12 @@ namespace DS\Controller\Api\Response;
 
 use DS\Constants\Services;
 use DS\Controller\Api\Meta\Envelope;
+use DS\Controller\Api\Meta\EnvelopeV2;
 use DS\Controller\Api\Meta\Error;
 use DS\Controller\Api\Meta\RecordInterface;
 use DS\Controller\Api\Response;
 use Phalcon\Http\Request;
+use Phalcon\Mvc\Router;
 
 /**
  *
@@ -35,7 +37,7 @@ class Json extends Response
      * @param RecordInterface $records
      * @param bool            $error
      *
-     * @return RecordInterface|Envelope
+     * @return RecordInterface|Envelope|EnvelopeV2
      */
     private function prepare(RecordInterface $records = null, $error = false)
     {
@@ -48,9 +50,13 @@ class Json extends Response
         {
             $this->envelope = false;
         }
-
         if ($this->envelope)
         {
+            /** @var Router $router */
+            $router =$this->getDI()->get('router');
+            if (strpos($router->getRewriteUri(), 'v2') !== false) {
+                return new EnvelopeV2($records, !$error);
+            }
             return new Envelope($records, !$error);
         }
 
