@@ -30,7 +30,7 @@ final class EnvelopeV2 implements \JsonSerializable
     {
         return [
             'success' => $this->success,
-            'result' => $this->data,
+            'results' => $this->data,
         ];
     }
 
