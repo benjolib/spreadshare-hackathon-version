@@ -53,8 +53,6 @@ class CreateListController extends BaseController implements LoginAwareControlle
                         }
                     } catch (\Exception $e) {
                         $table->delete();
-                        var_dump($e->getMessage());
-                        die ($e->getTraceAsString());
                         $this->flash->error($e->getMessage());
                         return;
                     }
@@ -72,20 +70,6 @@ class CreateListController extends BaseController implements LoginAwareControlle
                 $this->response->redirect("/list/" . $tableId, true);
 
             } else {
-                try {
-                    $table = $this->getTable(
-                        $user->getId(),
-                        $this->request->get('name'),
-                        $this->request->get('description')
-                    );
-                    $this->getTagsIds($this->request->get('tags'));
-                    $this->getCuratorsIds($this->request->get('curators'));
-                    $this->getRelatedListsIds($this->request->get('related-lists'));
-                } catch (\Exception $e) {
-                    $this->flash->error($e->getMessage());
-                    return;
-                }
-
                 $csv = $this->request->get('copy');
 
                 if ($this->request->hasFiles(true)) {
@@ -111,6 +95,20 @@ class CreateListController extends BaseController implements LoginAwareControlle
                     $this->flash->error($e->getMessage());
                     return;
                 }
+                try {
+                    $table = $this->getTable(
+                        $user->getId(),
+                        $this->request->get('name'),
+                        $this->request->get('description')
+                    );
+                    $this->getTagsIds($this->request->get('tags'));
+                    $this->getCuratorsIds($this->request->get('curators'));
+                    $this->getRelatedListsIds($this->request->get('related-lists'));
+                } catch (\Exception $e) {
+                    $this->flash->error($e->getMessage());
+                    return;
+                }
+
             }
         }
 
@@ -121,15 +119,15 @@ class CreateListController extends BaseController implements LoginAwareControlle
     protected function tableContentFromCsv($csv): array
     {
         $newlineSeparator = "\r\n";
-        $lineSeparator = $this->request->get('seperator');
-        $tableColumns = explode($lineSeparator, strtok($csv, $newlineSeparator));
+        $colSeparator = ',';
+        $tableColumns = explode($colSeparator, strtok($csv, $newlineSeparator));
         $numColumns = count($tableColumns);
 
         $line = strtok($newlineSeparator);
         $tableContent[] = $tableColumns;
         $rowNumber = 1;
         while ($line !== false) {
-            $row = explode($lineSeparator, $line);
+            $row = explode($colSeparator, $line);
             if (count($row) !== $numColumns) {
                 throw new \Exception("Wrong number of columns - The row $rowNumber has a different number of columns");
             }
@@ -155,24 +153,15 @@ class CreateListController extends BaseController implements LoginAwareControlle
 
     protected function getTagsIds($tagsList): array
     {
-        $tags = explode(',', $tagsList);
-        if (count($tags) < 3) {
+        $tagsIds = explode(',', $tagsList);
+        if (count($tagsIds) < 3) {
             throw new \Exception('Error in tags - you should add at least three tags (separated by commas)');
         }
-        $tagIds = [];
-        foreach ($tags as $tag) {
-            $t = Tags::findFirst(
-                [
-                    "title = :tag:",
-                    'bind' => [
-                        'tag' => $tag
-                    ],
-                ]
-            );
+        foreach ($tagsIds as $tag) {
+            $t = Tags::findFirstById($tag);
             if (empty($t)) {
                 throw new \Exception("Error in tags - Tag $tag doesn't exist");
             }
-            $tagsIds[] = $t->getId();
         }
         return $tagsIds;
     }
@@ -181,21 +170,12 @@ class CreateListController extends BaseController implements LoginAwareControlle
     {
         if (empty($curatorsList)) return [];
 
-        $curators = explode(',', $curatorsList);
-        $curatorsIds = [];
-        foreach ($curators as $curator) {
-            $c = User::findFirst(
-                [
-                    "handle = :handle:",
-                    'bind' => [
-                        'handle' => $curator,
-                    ]
-                ]
-            );
+        $curatorsIds = explode(',', $curatorsList);
+        foreach ($curatorsIds as $curator) {
+            $c = User::findFirstById($curator);
             if (empty($c)) {
                 throw new \Exception("Error in curators - Curator $curator doesn't exist. Make sure you input the correct handle");
             }
-            $curatorsIds[] = $c->getId();
         }
         return $curatorsIds;
     }
