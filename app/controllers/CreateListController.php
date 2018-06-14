@@ -3,6 +3,7 @@
 namespace DS\Controller;
 
 use DS\Interfaces\LoginAwareController;
+use DS\Model\DataSource\TableFlags;
 use DS\Model\TableColumns;
 use DS\Model\TableContributions;
 use DS\Model\TableRelations;
@@ -29,13 +30,13 @@ class CreateListController extends BaseController implements LoginAwareControlle
         if ($this->request->isPost()) {
             if ($this->request->get('step') == '2') {
                 try {
-                    $table = $this->getTable(
-                        $user->getId(),
-                        $this->request->get('name'),
-                        $this->request->get('description')
-                    );
+                    $tableId = $this->request->get('tableId');
+                    $table = Tables::findFirstById($tableId);
+                    $table->setOwnerUserId($user->getId())
+                        ->setTitle($this->request->get('name'))
+                        ->setTagline($this->request->get('tagline'))
+                        ->setDescription($this->request->get('description'));
                     $table->save();
-                    $tableId = $table->getId();
                     try {
                         $this->setCurators($tableId, $this->request->get('curators'));
                         $this->setRelatedLists($tableId, $this->request->get('related-lists'));
@@ -51,8 +52,9 @@ class CreateListController extends BaseController implements LoginAwareControlle
                         if (!empty($image)) {
                             $table->setImage($image)->save();
                         }
+                        $table->setFlags(TableFlags::Published);
+                        $table->save();
                     } catch (\Exception $e) {
-                        $table->delete();
                         $this->flash->error($e->getMessage());
                         return;
                     }
@@ -60,13 +62,6 @@ class CreateListController extends BaseController implements LoginAwareControlle
                     $this->flash->error($e->getMessage());
                     return;
                 }
-//                var_dump("tableId$tableId");
-//                foreach ($this->request->getUploadedFiles() as $key => $uploadedFile) {
-//                    var_dump($key);
-//                    var_dump($uploadedFile);
-//                }
-//                var_dump($this->request->getPost());
-//                die();
                 $this->response->redirect("/list/" . $tableId, true);
 
             } else {
@@ -88,27 +83,27 @@ class CreateListController extends BaseController implements LoginAwareControlle
                     }
                 }
                 try {
-                    $tableContentFromCsv = $this->tableContentFromCsv($csv);
-                    $this->view->setVar('tableColumns', $tableContentFromCsv[0]);
-                    $this->view->setVar('tableContent', array_splice($tableContentFromCsv, 1));
-                } catch (\Exception $e) {
-                    $this->flash->error($e->getMessage());
-                    return;
-                }
-                try {
                     $table = $this->getTable(
                         $user->getId(),
                         $this->request->get('name'),
+                        $this->request->get('tagline'),
                         $this->request->get('description')
                     );
-                    $this->getTagsIds($this->request->get('tags'));
-                    $this->getCuratorsIds($this->request->get('curators'));
-                    $this->getRelatedListsIds($this->request->get('related-lists'));
+                    $table->save();
+                    $tableId = $table->getId();
+
+                    $this->setCurators($tableId, $this->request->get('curators'));
+                    $this->setRelatedLists($tableId, $this->request->get('related-lists'));
+                    $this->setTags($tableId, $this->request->get('tags'));
+                    $tableContentFromCsv = $this->tableContentFromCsv($csv);
+                    $this->view->setVar('tableId', $tableId);
+                    $this->view->setVar('tableColumns', $tableContentFromCsv[0]);
+                    $this->view->setVar('tableContent', array_splice($tableContentFromCsv, 1));
                 } catch (\Exception $e) {
+                    if (!empty($table)) $table->delete();
                     $this->flash->error($e->getMessage());
                     return;
                 }
-
             }
         }
 
@@ -138,13 +133,14 @@ class CreateListController extends BaseController implements LoginAwareControlle
         return $tableContent;
     }
 
-    protected function getTable($userId, $name, $description)
+    protected function getTable($userId, $name,$tagline, $description)
     {
         try {
             $table = new Tables();
             $table->setOwnerUserId($userId)
                 ->setTitle($name)
-                ->setTagline($description);
+                ->setTagline($tagline)
+                ->setDescription($description);
             return $table;
         } catch (\Exception $e) {
             throw new \Exception('Error on table data - ' . $e->getMessage());
@@ -155,7 +151,7 @@ class CreateListController extends BaseController implements LoginAwareControlle
     {
         $tagsIds = explode(',', $tagsList);
         if (count($tagsIds) < 3) {
-            throw new \Exception('Error in tags - you should add at least three tags (separated by commas)');
+            throw new \Exception('Error in tags - you should add at least three tags');
         }
         foreach ($tagsIds as $tag) {
             $t = Tags::findFirstById($tag);
@@ -196,6 +192,12 @@ class CreateListController extends BaseController implements LoginAwareControlle
 
     protected function setTags($tableId, $tagsList)
     {
+        $oldTags = TableTags::findAllByFieldValue('tableId', $tableId)?:[];
+        /** @var TableTags $tag */
+        foreach ($oldTags as $tag) {
+            $tag->delete();
+        }
+
         $tagsIds = $this->getTagsIds($tagsList);
         foreach ($tagsIds as $id) {
             $tag = new TableTags();
@@ -205,6 +207,12 @@ class CreateListController extends BaseController implements LoginAwareControlle
 
     protected function setCurators($tableId, $curatorsList)
     {
+        $oldCurators = TableContributions::findAllByFieldValue('tableId', $tableId)?:[];
+        /** @var TableContributions $curator */
+        foreach ($oldCurators as $curator) {
+            $curator->delete();
+        }
+
         if (empty($curatorsList)) return;
 
         $ids = $this->getCuratorsIds($curatorsList);
@@ -216,6 +224,12 @@ class CreateListController extends BaseController implements LoginAwareControlle
 
     protected function setRelatedLists($tableId, $relatedLists)
     {
+        $oldRelatedLists = TableRelations::findAllByFieldValue('tableId', $tableId)?:[];
+        /** @var TableRelations $relatedList */
+        foreach ($oldRelatedLists as $relatedList) {
+            $relatedList->delete();
+        }
+
         if (empty($relatedLists)) return;
 
         $ids = $this->getRelatedListsIds($relatedLists);
@@ -227,6 +241,12 @@ class CreateListController extends BaseController implements LoginAwareControlle
 
     protected function setColumns($tableId, $columns)
     {
+        $oldColumns = TableColumns::findAllByFieldValue('tableId', $tableId)?:[];
+        /** @var TableColumns $column */
+        foreach ($oldColumns as $column) {
+            $column->delete();
+        }
+
         $columns = json_decode($columns, true);
         foreach ($columns as $position => $column) {
             $c = new TableColumns();

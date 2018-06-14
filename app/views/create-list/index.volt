@@ -2,7 +2,7 @@
 
 <div class="re-page re-page--create-list">
   <form id="createListFrom" method="post" action="/create-list" enctype="multipart/form-data">
-
+    {% if tableId is defined %} {{ hidden_field('tableId', 'value':tableId) }} {% endif %}
     {% if tempImage is defined %} {% set imageStyle='background: #f5f5f5 url(/temptableimages/'~tempImage~') center / cover;'
     %} {{ hidden_field('tempImage','value':tempImage) }} {% else %} {% set imageStyle='' %} {% endif %}
     <div class="re-image re-image--create-list"
