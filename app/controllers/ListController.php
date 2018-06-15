@@ -85,7 +85,7 @@ class ListController extends BaseController
         }
         if (isset($post)) {
 
-            $post['relatedLists'] = empty($relatedListsIdsAndNames)?[]:array_column($relatedListsIdsAndNames, 'id');
+            $post['related-lists'] = empty($relatedListsIdsAndNames)?[]:array_column($relatedListsIdsAndNames, 'id');
             $post['curators'] = empty($curatorsIdsAndNames)?[]:array_column($curatorsIdsAndNames, 'id');
             $post['tags'] = empty($tagsIdsAndNames)?[]:array_column($tagsIdsAndNames, 'id');
             $this->view->setVar('post', $post);
