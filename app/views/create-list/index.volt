@@ -8,7 +8,7 @@
     <div class="re-image re-image--create-list"
       style="{{ imageStyle }}">
       <div class="re-image__upload-button"></div>
-      <div class="re-image__delete-button"></div>
+       <!-- <div class="re-image__delete-button"></div> -->
     </div>
     <input type="file" name="image" id="re-image-fileUpload" style="display: none;" />
     
