@@ -52,7 +52,7 @@
         
         {{ hidden_field('tags', 'placeholder':"Tags") }}
         <i class="dropdown icon"></i>
-        <div class="default text">Add at least 3 tag</div>
+        <div class="default text input">Add at least 3 tag</div>
         <div class="menu">
         {% if tagsNames is defined %}
         {% for index, tag in tagsNames %}
@@ -82,13 +82,13 @@
           </div>
         </label>
       </div>-->
-      
+
     <div class="create-list-add-curators">
 
       <div class="ui fluid curators multiple search selection dropdown">
          {{ hidden_field('curators', 'placeholder':"Curators") }}
         <i class="dropdown icon"></i>
-        <div class="default text">If there are other curators than you?</div>
+        <div class="default text">Add another person if yoou're curating in a team. Note, add the user name.</div>
         <div class="menu">
         {% if curatorsNames is defined %}
         {% for index, curator in curatorsNames %}
@@ -104,7 +104,7 @@
       <div class="ui fluid multiple search selection dropdown related">
         {{ hidden_field('related-lists', 'placeholder':"Tags") }}
         <i class="dropdown icon"></i>
-        <div class="default text">If there are other curators than you?</div>
+        <div class="default text">Recommend related lists to your subscribers.</div>
         <div class="menu">
         {% if relatedListsNames is defined %}
         {% for index, related in relatedListsNames %}
