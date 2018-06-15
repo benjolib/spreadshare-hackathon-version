@@ -4,6 +4,9 @@ namespace DS\Controller;
 
 use DS\Application;
 use DS\Model\TableCommentVotes;
+use DS\Model\TableContributions;
+use DS\Model\TableRows;
+use DS\Services\Stream as StreamService;
 use Phalcon\Logger;
 use DS\Model\Tables;
 use Phalcon\Exception;
@@ -18,6 +21,63 @@ use DS\Events\Table\TableViewed;
 
 class ListController extends BaseController
 {
+    public function editAction($tableIdOrSlug)
+    {
+        $ss = new StreamService();
+        $this->view->setMainView('create-list/index');
+        $table = Tables::findFirstById($tableIdOrSlug);
+        if (empty($table)) {
+            $table = Tables::findByFieldValue('slug', $tableIdOrSlug);
+            if (empty($table)) {
+                throw new \Exception("Table $tableIdOrSlug doesn't exist.");
+            }
+        }
+        $tableId = $table->getId();
+        $tableColumns = TableColumns::findAllByFieldValue('tableId', $tableId)->toArray();
+        if (empty($tableColumns)) {
+            throw new \Exception("Unexpected error, table $tableId without columns");
+        }
+        $tableContent = $this->getContentArray($tableId);
+        if ($this->request->isPost()) {
+            try{
+                $this->view->setVar('post', $this->request->getPost());
+                $table->setTitle($this->request->getPost('name'))
+                    ->setTagLIne($this->request->getPost('tagline'))
+                    ->setDescription($this->request->getPost('description'));
+                $table->save();
+            } catch (\Exception $e) {
+                $this->flash->error($e->getMessage());
+                return;
+            }
+        } else {
+            $this->view->setVar('title', $table->getTitle());
+            $this->view->setVar('tagline', $table->getTagline());
+            $this->view->setVar('description', $table->getDescription());
+            try {
+                $curatorsIds = $ss->getCuratorIdsFromTable($tableId);
+                $relatedListsIds = $ss->getRelatedListsIdsFromTable($tableId);
+                $tagsIds = $ss->getTagsIdsFromTable($tableId);
+
+
+                $curatorsIdsAndNames = $ss->getCuratorsIdsAndNames(implode(',',$curatorsIds));
+                $relatedListsIdsAndNames = $ss->getRelatedListsIdsAndTitles(implode(',',$relatedListsIds));
+                $tagsIdsAndNames = $ss->getTagsIdsAndNames(implode(',',$tagsIds));
+            } catch (\Exception $e) {
+                $this->flash->error($e->getMessage());
+                return;
+            }
+        }
+        $this->view->setVar('tags', empty($tagsIdsAndNames)?[]:array_column($tagsIdsAndNames, 'id'));
+        $this->view->setVar('tagsNames', empty($tagsIdsAndNames)?[]:array_column($tagsIdsAndNames, 'name'));
+        $this->view->setVar('curators', empty($curatorsIdsAndNames)?[]:array_column($curatorsIdsAndNames, 'id'));
+        $this->view->setVar('curatorsNames', empty($curatorsIdsAndNames)?[]:array_column($curatorsIdsAndNames, 'name'));
+        $this->view->setVar('relatedLists', empty($relatedListsIdsAndNames)?[]:array_column($relatedListsIdsAndNames, 'id'));
+        $this->view->setVar('relatedListsNames', empty($relatedListsIdsAndNames)?[]:array_column($relatedListsIdsAndNames, 'name'));
+
+        $this->view->setVar('tableColumns', $tableColumns);
+        $this->view->setVar('tableContent', $tableContent);
+    }
+
     public function indexAction()
     {
         try {
@@ -143,5 +203,15 @@ class ListController extends BaseController
         } catch (Exception $e) {
             Application::instance()->log($e->getMessage(), Logger::CRITICAL);
         }
+    }
+
+    private function getContentArray(int $tableId) :array
+    {
+        $tableContent = TableRows::findRowsFrom($tableId);
+        $result = [];
+        foreach ($tableContent as $row) {
+            $result[] = array_column(json_decode($row->getContent(), true), 'content');
+        }
+        return $result;
     }
 }

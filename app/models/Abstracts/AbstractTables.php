@@ -58,6 +58,20 @@ abstract class AbstractTables extends \DS\Model\Base
     /**
      *
      * @var string
+     * @Column(type="string", length=100, nullable=false)
+     */
+    protected $slug;
+
+    /**
+     *
+     * @var string
+     * @Column(type="string", length=255, nullable=false)
+     */
+    protected $description;
+
+    /**
+     *
+     * @var string
      * @Column(type="string", length=140, nullable=true)
      */
     protected $tagline;
@@ -343,6 +357,11 @@ abstract class AbstractTables extends \DS\Model\Base
     public function getTagline()
     {
         return $this->tagline;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
     }
 
     /**

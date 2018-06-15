@@ -210,10 +210,10 @@ return [
         'methods' => ['GET', 'POST'],
     ],
     [
-        'url' => '/list/{slug}/edit',
+        'url' => '/list/{id}/edit',
         'paths' => [
             'controller' => 'List',
-            'action' => 'index',
+            'action' => 'edit',
         ],
         'methods' => ['GET', 'POST'],
     ],
