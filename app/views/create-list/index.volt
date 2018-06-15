@@ -18,6 +18,9 @@
       <img class="re-heading-input__tick titledisabled" src="/assets/images/input-tick.svg" />
       <img id="titlechecked" class="re-heading-input__tick-green titlechecked" src="/assets/images/input-tick-green.svg" />
       <div class="ui input" style="width:100%">
+        {% if post['name'] is not defined %}
+        {% set post['name'] = "" %}
+        {% endif %}
         {{ text_field('name', 'placeholder':"Your publication's title", 'autocomplete':"off", 'value':post['name']) }} {#
         <input type="text" placeholder="Your publication's title" name="name" style="border:0px" />#}
       </div>
