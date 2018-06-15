@@ -170,7 +170,7 @@ class CreateListController extends BaseController implements LoginAwareControlle
             }
             $result[] = ['id'=> $tag, 'name'=>$t->getTitle()];
         }
-        return result;
+        return $result;
     }
 
     protected function getCuratorsIdsAndNames($curatorsList): array
