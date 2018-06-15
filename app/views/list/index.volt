@@ -16,7 +16,7 @@
       <div class="re-lighten">{{ date("d.m.Y", table['createdAt']) }}</div>
     </div> #}
     <h1 class="re-heading re-heading--list">{{ table['title'] }}</h1>
-    <h2 class="re-subheading re-subheading--list"><span class="actual-tagline">{{ table['tagline'] }}</span>, curated by <a href="{{ table['creatorHandle'] }}">{{ table['creator'] }}</a></h2>
+    <h2 class="re-subheading re-subheading--list"><span class="actual-tagline">{{ table['tagline'] }}</span>, curated by <a href="/profile/{{ table['creatorHandle'] }}">{{ table['creator'] }}</a></h2>
     <p class="re-para">{{ table['description'] }}</p>
     <div class="u-flex u-flexAlignItemsCenter">
       <a class="re-button re-button--list-subscribe l-button" href="javascript:;" data-dropdown-placement="right" data-dropdown-offset="6">
