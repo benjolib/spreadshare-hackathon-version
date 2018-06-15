@@ -29,7 +29,10 @@
       <img class="re-heading-input__tick taglinedisabled" src="/assets/images/input-tick.svg" />
       <img class="re-heading-input__tick-green taglinechecked" src="/assets/images/input-tick-green.svg" />
       <div class="ui input" style="width:100%">
-        {{ text_field('tagline', 'placeholder':"Write a tagline for your publication", 'autocomplete':"off") }} {#
+       {% if post['tagline'] is not defined %}
+        {% set post['tagline'] = "" %}
+        {% endif %}
+        {{ text_field('tagline', 'placeholder':"Write a tagline for your publication", 'autocomplete':"off", 'value':post['tagline']) }} {#
         <input type="text" placeholder="Write a tagline for your publication" name="tagline" style="border:0px" />#}
       </div>
     </div>
@@ -37,7 +40,10 @@
       <img class="re-heading-input__tick descdisabled" src="/assets/images/input-tick.svg" />
       <img class="re-heading-input__tick-green descchecked" src="/assets/images/input-tick-green.svg" />
       <div class="ui input" style="width:100%">
-        {{ text_field('description', 'placeholder':"Write a short description text", 'autocomplete':"off") }} {#
+       {% if post['description'] is not defined %}
+        {% set post['description'] = "" %}
+        {% endif %}
+        {{ text_field('description', 'placeholder':"Write a short description text", 'autocomplete':"off", 'value':post['description']) }} {#
         <input type="text" placeholder="Write a short desciption text" name="description" style="border:0px" />#}
       </div>
     </div>
@@ -59,7 +65,7 @@
         <div class="menu">
         {% if tagsNames is defined %}
         {% for index, tag in tagsNames %}
-          <div class="item" data-value='{{ tags[index] }}'>{{ tag }}</div>
+          <div class="item" data-value='{{ post['tags'][index] }}'>{{ tag }}</div>
         {%  endfor %}
         {% endif %}
 
@@ -95,7 +101,7 @@
         <div class="menu">
         {% if curatorsNames is defined %}
         {% for index, curator in curatorsNames %}
-          <div class="item" data-value='{{ curators[index] }}'>{{ curator }}</div>
+          <div class="item" data-value='{{ post['curators'][index] }}'>{{ curator }}</div>
         {%  endfor %}
         {% endif %}
       </div>
@@ -111,7 +117,7 @@
         <div class="menu">
         {% if relatedListsNames is defined %}
         {% for index, related in relatedListsNames %}
-          <div class="item" data-value='{{ relatedLists[index] }}'>{{ related }}</div>
+          <div class="item" data-value='{{ post['related-lists'][index] }}'>{{ related }}</div>
         {%  endfor %}
         {% endif %}
       </div>
