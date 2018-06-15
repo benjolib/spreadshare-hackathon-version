@@ -68,7 +68,7 @@ class ListController extends BaseController
             $post['name'] = $table->getTitle();
             $post['tagline'] = $table->getTagline();
             $post['description'] = $table->getDescription();
-            $this->view->setVar('post', $post);
+
             try {
                 $curatorsIds = $ss->getCuratorIdsFromTable($tableId);
                 $relatedListsIds = $ss->getRelatedListsIdsFromTable($tableId);
@@ -83,12 +83,16 @@ class ListController extends BaseController
                 return;
             }
         }
+        if (isset($post)) {
+
+            $post['relatedLists'] = empty($relatedListsIdsAndNames)?[]:array_column($relatedListsIdsAndNames, 'id');
+            $post['curators'] = empty($curatorsIdsAndNames)?[]:array_column($curatorsIdsAndNames, 'id');
+            $post['tags'] = empty($tagsIdsAndNames)?[]:array_column($tagsIdsAndNames, 'id');
+            $this->view->setVar('post', $post);
+        }
         $this->view->setVar('tempImage', $table->getImage());
-        $this->view->setVar('tags', empty($tagsIdsAndNames)?[]:array_column($tagsIdsAndNames, 'id'));
         $this->view->setVar('tagsNames', empty($tagsIdsAndNames)?[]:array_column($tagsIdsAndNames, 'name'));
-        $this->view->setVar('curators', empty($curatorsIdsAndNames)?[]:array_column($curatorsIdsAndNames, 'id'));
         $this->view->setVar('curatorsNames', empty($curatorsIdsAndNames)?[]:array_column($curatorsIdsAndNames, 'name'));
-        $this->view->setVar('relatedLists', empty($relatedListsIdsAndNames)?[]:array_column($relatedListsIdsAndNames, 'id'));
         $this->view->setVar('relatedListsNames', empty($relatedListsIdsAndNames)?[]:array_column($relatedListsIdsAndNames, 'name'));
 
         $this->view->setVar('tableColumns', $tableColumns);
