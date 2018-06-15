@@ -195,4 +195,17 @@ class Stream
         }
         return $result;
     }
+
+    public function getImagePath($tableId, $uploadedfiles)
+    {
+        /** @var File $file */
+        foreach($uploadedfiles as $file) {
+            if ($file->getKey() =='image') {
+                $imagePath = '/tableimages/'.$tableId.'.'.$file->getExtension();
+                $file->moveTo(ROOT_PATH.'public'.$imagePath);
+                return $imagePath;
+            }
+        }
+        return "";
+    }
 }

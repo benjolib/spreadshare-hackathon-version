@@ -38,7 +38,7 @@ class CreateListController extends BaseController implements LoginAwareControlle
                         $ss->setTags($tableId, $this->request->get('tags'));
                         $ss->setColumns($tableId, $this->request->get('list-columns'));
                         $ss->setRows($tableId, $this->request->get('list-rows'), $this->request->getUploadedFiles(true));
-                        $image = $this->getImagePath(
+                        $image = $ss->getImagePath(
                             $tableId,
                             $this->request->getUploadedFiles(true)
                         );
@@ -80,7 +80,7 @@ class CreateListController extends BaseController implements LoginAwareControlle
                         }
                     }
 
-                    $image = $this->getImagePath(
+                    $image = $ss->getImagePath(
                         $tableId,
                         $this->request->getUploadedFiles(true)
                     );
@@ -154,19 +154,5 @@ class CreateListController extends BaseController implements LoginAwareControlle
         } catch (\Exception $e) {
             throw new \Exception('Error on table data - ' . $e->getMessage());
         }
-    }
-
-
-    protected function getImagePath($tableId, $uploadedfiles)
-    {
-        /** @var File $file */
-        foreach($uploadedfiles as $file) {
-            if ($file->getKey() =='image') {
-                $imagePath = '/tableimages/'.$tableId.'.'.$file->getExtension();
-                $file->moveTo(ROOT_PATH.'public'.$imagePath);
-                return $imagePath;
-            }
-        }
-        return "";
     }
 }

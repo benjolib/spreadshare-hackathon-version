@@ -39,13 +39,27 @@ class ListController extends BaseController
         }
         $tableContent = $this->getContentArray($tableId);
         if ($this->request->isPost()) {
-            var_dump($this->request->getPost());die();
             try{
                 $this->view->setVar('post', $this->request->getPost());
                 $table->setTitle($this->request->getPost('name'))
                     ->setTagLIne($this->request->getPost('tagline'))
                     ->setDescription($this->request->getPost('description'));
                 $table->save();
+                $ss->setCurators($tableId, $this->request->get('curators'));
+                $ss->setRelatedLists($tableId, $this->request->get('related-lists'));
+                $ss->setTags($tableId, $this->request->get('tags'));
+                $ss->setColumns($tableId, $this->request->get('list-columns'));
+                $ss->setRows($tableId, $this->request->get('list-rows'), $this->request->getUploadedFiles(true));
+                $image = $ss->getImagePath(
+                    $tableId,
+                    $this->request->getUploadedFiles(true)
+                );
+                if (!empty($image)) {
+                    $table->setImage($image)->save();
+                }
+                $table->setFlags(TableFlags::Published);
+                $table->save();
+
             } catch (\Exception $e) {
                 $this->flash->error($e->getMessage());
                 return;
