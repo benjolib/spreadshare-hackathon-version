@@ -139,7 +139,7 @@
       'color': 'orange-bird',
       'heading': 'Subscribe',
       'text': 'Subscribe to your favorite topics and collections.<br /><br />Because you want to keep track of relevant updates',
-      'action': '#',
+      'action': '/subscriptions',
       'buttonText': 'Manage Subscriptions'
     ]) }}
     {% if tables[3] is defined %}
@@ -211,21 +211,21 @@
       'color': 'purple-whale',
       'heading': 'Curate',
       'text': 'Curate collections and publications.<br /><br />Because you want your curation to spread.',
-      'action': '#',
+      'action': '/subscriptions',
       'buttonText': 'Manage Subscriptions'
     ]) }}
     {{ partial('partials/action-card', [
       'color': 'blue-octopus',
       'heading': 'Collaborate',
       'text': 'Collaborate with your favorite curators.<br /><br />Because you want to get endorsed by trusted experts.',
-      'action': '#',
+      'action': '/subscriptions',
       'buttonText': 'Manage Subscriptions'
     ]) }}
     {{ partial('partials/action-card', [
       'color': 'green-lightning',
       'heading': 'Spread',
       'text': 'Spread the best content with your followers.<br /><br />Because you want your peers to be as informed as you are.',
-      'action': '#',
+      'action': '/subscriptions',
       'buttonText': 'Manage Subscriptions'
     ]) }}
     {% if tables[5] is defined %}
