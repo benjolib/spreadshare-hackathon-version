@@ -35,7 +35,7 @@ class ListController extends BaseController
         $tableId = $table->getId();
         $tableColumns = array_column(TableColumns::findAllByFieldValue('tableId', $tableId)->toArray(), 'title');
         if (empty($tableColumns)) {
-            throw new \Exception("Unexpected error, table $tableId without columns");
+            throw new \Exception("Unexpected error - table $tableId without columns");
         }
         $tableContent = $this->getContentArray($tableId);
         if ($this->request->isPost()) {
@@ -61,7 +61,7 @@ class ListController extends BaseController
                 $table->save();
 
             } catch (\Exception $e) {
-                $this->flash->error($e->getMessage());
+                $this->flash->error("Unexpected error -".$e->getMessage());
                 return;
             }
         } else {
@@ -79,7 +79,7 @@ class ListController extends BaseController
                 $relatedListsIdsAndNames = $ss->getRelatedListsIdsAndTitles(implode(',',$relatedListsIds));
                 $tagsIdsAndNames = $ss->getTagsIdsAndNames(implode(',',$tagsIds));
             } catch (\Exception $e) {
-                $this->flash->error($e->getMessage());
+                $this->flash->error("Unexpected error -".$e->getMessage());
                 return;
             }
         }
