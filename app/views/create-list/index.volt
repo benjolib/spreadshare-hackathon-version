@@ -1,7 +1,7 @@
 {% extends 'layouts/main.volt' %} {% block header %} {% endblock %} {% block content %}
 
 <div class="re-page re-page--create-list">
-  <form id="createListFrom" method="post" action="/create-list" enctype="multipart/form-data">
+  <form id="createListFrom" method="post" action="" enctype="multipart/form-data">
     {% if tableId is defined %} {{ hidden_field('tableId', 'value':tableId) }} {% endif %}
     {% if tempImage is defined %} {% set imageStyle='background: #f5f5f5 url('~tempImage~') center / cover;'
     %} {{ hidden_field('tempImage','value':tempImage) }} {% else %} {% set imageStyle='' %} {% endif %}
