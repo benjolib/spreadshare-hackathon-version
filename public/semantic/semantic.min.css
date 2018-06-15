@@ -13640,7 +13640,7 @@
      background-color: #e0e0e0;
      border-color: #e0e0e0;
      background-image: none;
-     color: rgba(0, 0, 0, .8)
+     color: rgb(56, 79, 111);
  }
 
  .ui.labels a.label:hover:before,
@@ -13673,7 +13673,7 @@
  a.ui.active.label:ActiveHover:before {
      background-color: #c8c8c8;
      background-image: none;
-     color: rgba(0, 0, 0, .95)
+     color: rgb(56, 79, 111);
  }
 
  .ui.label.visible:not(.dropdown),
@@ -27566,6 +27566,7 @@
      font-size: 1em;
      padding: .35714286em .78571429em;
      margin: .14285714rem .28571429rem .14285714rem 0;
+     background-color: #f8f8fb;
      /* -webkit-box-shadow: 0 0 0 1px rgba(34, 36, 38, .15) inset;
      box-shadow: 0 0 0 1px rgba(34, 36, 38, .15) inset */
  }
@@ -33605,8 +33606,4 @@
      100% {
          background-color: #fcfcfd
      }
- }
-
- ui.label {
-     color: rgb(56, 79, 111) !important;
  }
