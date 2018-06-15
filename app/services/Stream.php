@@ -167,11 +167,12 @@ class Stream
     public function getCuratorIdsFromTable(int $tableId):array
     {
         /** @var TableContributions[] $curators */
-        $curators = TableContributions::findByFieldValue('tableId', $tableId);
+        $curators = TableContributions::findAllByFieldValue('tableId', $tableId);
         $result = [];
         foreach ($curators as $curator) {
             $result[] = $curator->getUserId();
         }
+        var_dump($result);
         return $result;
     }
 
