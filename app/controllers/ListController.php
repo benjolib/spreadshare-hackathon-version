@@ -39,6 +39,7 @@ class ListController extends BaseController
         }
         $tableContent = $this->getContentArray($tableId);
         if ($this->request->isPost()) {
+            var_dump($this->request->getPost());die();
             try{
                 $this->view->setVar('post', $this->request->getPost());
                 $table->setTitle($this->request->getPost('name'))
@@ -67,6 +68,7 @@ class ListController extends BaseController
                 return;
             }
         }
+        $this->view->setVar('tempImage', $table->getImage());
         $this->view->setVar('tags', empty($tagsIdsAndNames)?[]:array_column($tagsIdsAndNames, 'id'));
         $this->view->setVar('tagsNames', empty($tagsIdsAndNames)?[]:array_column($tagsIdsAndNames, 'name'));
         $this->view->setVar('curators', empty($curatorsIdsAndNames)?[]:array_column($curatorsIdsAndNames, 'id'));
@@ -76,6 +78,8 @@ class ListController extends BaseController
 
         $this->view->setVar('tableColumns', $tableColumns);
         $this->view->setVar('tableContent', $tableContent);
+        $this->view->setVar('editing', true);
+
     }
 
     public function indexAction()
