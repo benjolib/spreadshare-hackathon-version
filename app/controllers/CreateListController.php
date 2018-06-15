@@ -20,6 +20,7 @@ class CreateListController extends BaseController implements LoginAwareControlle
         $ss = new StreamService();
 
         $this->view->setMainView('create-list/index');
+        $this->view->setVar('editing', true);
         $user = $this->serviceManager->getAuth()->getUser();
         $this->view->setVar('post', $this->request->getPost());
         if ($this->request->isPost()) {
@@ -59,14 +60,19 @@ class CreateListController extends BaseController implements LoginAwareControlle
 
             } else {
                 try {
-                    $table = $this->getTable(
-                        $user->getId(),
-                        $this->request->get('name'),
-                        $this->request->get('tagline'),
-                        $this->request->get('description')
-                    );
-                    $table->save();
+                    if (!empty($this->request->getPost('tableId'))) {
+                        $table = Tables::findFirstById($this->request->getPost('tableId'));
+                    } else {
+                        $table = $this->getTable(
+                            $user->getId(),
+                            $this->request->get('name'),
+                            $this->request->get('tagline'),
+                            $this->request->get('description')
+                        );
+                        $table->save();
+                    }
                     $tableId = $table->getId();
+                    $this->view->setVar('tableId', $tableId);
 
                     $csv = $this->request->get('copy');
 
@@ -88,8 +94,7 @@ class CreateListController extends BaseController implements LoginAwareControlle
                         $table->setImage($image)->save();
                         $this->view->setVar('tempImage', $image);
                     } else {
-                        $this->flash->error('No image received - Please select an image for your stream');
-                        return;
+                        throw new \Exception('No image received - Please select an image for your stream');
                     }
 
                     $curatorsIdsAndNames = $ss->setCurators($tableId, $this->request->get('curators'));
@@ -105,19 +110,14 @@ class CreateListController extends BaseController implements LoginAwareControlle
 
 
                     $tableContentFromCsv = $this->tableContentFromCsv($csv);
-                    $this->view->setVar('tableId', $tableId);
                     $this->view->setVar('tableColumns', $tableContentFromCsv[0]);
                     $this->view->setVar('tableContent', array_splice($tableContentFromCsv, 1));
                 } catch (\Exception $e) {
-                    if (!empty($table)) $table->delete();
                     $this->flash->error($e->getMessage());
                     return;
                 }
             }
         }
-
-
-        $this->view->setVar('editing', true);
     }
 
     protected function tableContentFromCsv($csv): array
