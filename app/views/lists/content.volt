@@ -10,11 +10,12 @@
       <div class="u-flex u-flexJustifyCenter u-flexAlignItemsCenter card-actions-button l-button">
         <img src="/assets/images/arrow-down.svg" />
       </div>
-      <div class="dropdown card-actions-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
-        <a href="/table/{{ table['id'] }}/settings"><img src="/assets/images/pencil2.svg" /> Edit List</a>
-
+      <div class="sh-dropdown card-actions-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
+        <a href="/list/{{ table['id'] }}/edit"><img src="/assets/images/pencil2.svg" /> Edit List</a>
+        <!--
         <a href="/table/{{ table['id'] }}/delete" class="warning-color"><img src="/assets/images/bin2.svg" /> Delete List</a>
-      </div>
+          -->   
+        </div>
     </td>
   </tr>
   <tr class="re-table-space"></tr>
