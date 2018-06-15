@@ -48,15 +48,23 @@
       {#<input type="text" placeholder="Tags" name="tags" />#}</p>
           -->
       <div class="ui fluid multiple search selection dropdown tags">
-        <input type="hidden" name="tags">
+      
+        
         {{ hidden_field('tags', 'placeholder':"Tags") }}
         <i class="dropdown icon"></i>
         <div class="default text">Add at least 3 tag</div>
         <div class="menu">
+        {% if tagsNames is defined %}
+        {% for index, tag in tagsNames %}
+          <div class="item" data-value='{{ tags[index] }}'>{{ tag }}</div>
+        {%  endfor %}
+        {% endif %}
 
+              
         </div>
       </div>
     </div>
+
 
 
     <!--<div class="create-list-has-thumbnails">
@@ -79,36 +87,38 @@
       <!-- <p>If there are other curators than you? {{ text_field('curators', 'placeholder':"Curators") }}{#<input type="text" placeholder="Curators" name="curators" />#}</p>
           -->
       <div class="ui fluid curators multiple search selection dropdown">
-        <input type="hidden" name="curators">
+         {{ hidden_field('curators', 'placeholder':"Curators") }}
         <i class="dropdown icon"></i>
-        <div class="default text">Select other curators</div>
+        <div class="default text">Collaborators?</div>
         <div class="menu">
-
-        </div>
+        {% if curatorsNames is defined %}
+        {% for index, curator in curatorsNames %}
+          <div class="item" data-value='{{ curators[index] }}'>{{ curator }}</div>
+        {%  endfor %}
+        {% endif %}
       </div>
-    </div>
+    </div></div>
 
 
     <div class="create-list-add-related">
       <!-- <p>If there are other curators than you? {{ text_field('related-lists', 'placeholder':"Related") }}{#<input type="text" placeholder="Related" name="related-list" />#}</p>
       -->
       <div class="ui fluid multiple search selection dropdown related">
-        <input type="hidden" name="related-lists">
+        {{ hidden_field('related-lists', 'placeholder':"Tags") }}
         <i class="dropdown icon"></i>
-        <div class="default text">Pick a related lists</div>
+        <div class="default text">Related Lists?</div>
         <div class="menu">
-
-        </div>
+        {% if relatedlistsNames is defined %}
+        {% for index, relatedlist in relatedlistsNames %}
+          <div class="item" data-value='{{ related-lists[index] }}'>{{ related-list }}</div>
+        {%  endfor %}
+        {% endif %}
       </div>
 
-    </div>
+    </div></div>
 
 
-    {% if tagsNames is defined %}
-   {% for index, tag in tagsNames %}
-    {{ index }} {{  tag['name'] }}
-{%  endfor %}
-{% endif %}
+    
  
     <div class="create-create-list-tabs">
       <div class="create-create-list-tabs__inner">
@@ -163,15 +173,24 @@
     apiSettings: {
       // this url parses query server side and returns filtered results
       url: '/api/v2/tags/?q={query}'
-    }
+    },
+    label: {
+  transition : 'horizontal flip',
+  duration   : 200,
+  variation  : false
+},
   });
   $('.ui.dropdown.curators').dropdown({
     allowAdditions: true,
-    hideAdditions: false,
     apiSettings: {
       // this url parses query server side and returns filtered results
       url: '/api/v2/curators/?q={query}'
-    }
+    },
+    label: {
+  transition : 'horizontal flip',
+  duration   : 200,
+  variation  : false
+},
   });
   $('.ui.dropdown.related').dropdown({
     allowAdditions: true,
@@ -187,7 +206,12 @@
   });
   $(document).ready(function () {
 
-
+  //     $(window).keydown(function(event){
+  //   if(event.keyCode == 13) {
+  //     event.preventDefault();
+  //     return false;
+  //   }
+  // });
      if(tags.value.split(",").map(Number).length >= 3) {
        $('.tagschecked').show()
             $('.tagsdisabled').hide()
@@ -234,7 +258,6 @@
       
       if(e.target.name ==='description'){
         if(e.target.value.length > 3){
-          console.log("here")
             $('.descchecked').show()
             $('.descdisabled').hide()
         }else {
@@ -242,15 +265,18 @@
              $('.descdisabled').show()
         }
       }
-      if(e.target.name ==='tags' ){
-      $('.tagschecked').show()
-      $('.tagsdisabled').hide()
-      }
       
-
-
      });
-
+    $('.ui.multiple').on('change', function(e) { 
+      console.log("tag",tags.value.split(",").map(Number).length)
+        if(tags.value.split(",").map(Number).length >=3){
+            $('.tagschecked').show()
+            $('.tagsdisabled').hide()
+        }else {
+             $('.tagschecked').hide()
+             $('.tagsdisabled').show()
+        }
+    })
     document.querySelector('#re-image-fileUpload').addEventListener('change', function () {
       if (this.files && this.files[0]) {
         var img = $('.re-image');
@@ -262,9 +288,14 @@
       document.getElementById('re-image-fileUpload').click();
     };
     document.querySelector('.re-image__delete-button').onclick = function () {
-      document.getElementById('re-image-fileUpload').value = "";
-      var img = $('.re-image');
-      img.attr('style', 'background: #f5f5f5 url() center / cover;');
+      if(document.getElementById('re-image-fileUpload').value != ""){
+            console.log("asdsa")
+            document.getElementById('re-image-fileUpload').value = "";
+            var img = $('.re-image');
+            img.attr('style', '');
+      }
+      
+      
     };
 
     document.querySelector('#create-list-fileUpload').addEventListener('change', function () {
