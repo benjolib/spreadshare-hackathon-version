@@ -6,7 +6,7 @@
   </a>
   <div class="u-flex u-flexJustifyBetween">
     <a href="/list/{{ slug ? slug : id }}"><h3 class="list-card__name">{{ name }}</h3></a>
-    <a href="#" class="list-card__subscriberCount u-flex u-flexAlignItemsCenter"><img src="/assets/images/9-0/list-card-subscriber-bird.svg" /> {{ subscriberCount }}</a>
+    <a href="/list/{{ slug ? slug : id }}" class="list-card__subscriberCount u-flex u-flexAlignItemsCenter"><img src="/assets/images/9-0/list-card-subscriber-bird.svg" /> {{ subscriberCount }}</a>
   </div>
   <p class="list-card__description">{{ description }}{% if showCurator %}, curated by <a href="/profile/{{ curatorHandle }}">{{ curatorName }}</a>{% endif %}</p>
   {# {% if showCurator %}
