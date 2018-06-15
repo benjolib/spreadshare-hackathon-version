@@ -33,7 +33,7 @@ class ListController extends BaseController
             }
         }
         $tableId = $table->getId();
-        $tableColumns = TableColumns::findAllByFieldValue('tableId', $tableId)->toArray();
+        $tableColumns = array_column(TableColumns::findAllByFieldValue('tableId', $tableId)->toArray(), 'title');
         if (empty($tableColumns)) {
             throw new \Exception("Unexpected error, table $tableId without columns");
         }
@@ -51,9 +51,10 @@ class ListController extends BaseController
                 return;
             }
         } else {
-            $this->view->setVar('title', $table->getTitle());
-            $this->view->setVar('tagline', $table->getTagline());
-            $this->view->setVar('description', $table->getDescription());
+            $post['name'] = $table->getTitle();
+            $post['tagline'] = $table->getTagline();
+            $post['description'] = $table->getDescription();
+            $this->view->setVar('post', $post);
             try {
                 $curatorsIds = $ss->getCuratorIdsFromTable($tableId);
                 $relatedListsIds = $ss->getRelatedListsIdsFromTable($tableId);
