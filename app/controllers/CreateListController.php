@@ -38,11 +38,9 @@ class CreateListController extends BaseController implements LoginAwareControlle
                         $ss->setTags($tableId, $this->request->get('tags'));
                         $ss->setColumns($tableId, $this->request->get('list-columns'));
                         $ss->setRows($tableId, $this->request->get('list-rows'), $this->request->getUploadedFiles(true));
-                        $ss = $this->getImagePath(
-                            $user->getId(),
+                        $image = $this->getImagePath(
                             $tableId,
-                            $this->request->getUploadedFiles(true),
-                            $this->request->get('tempImage')
+                            $this->request->getUploadedFiles(true)
                         );
                         if (!empty($image)) {
                             $table->setImage($image)->save();
@@ -60,23 +58,6 @@ class CreateListController extends BaseController implements LoginAwareControlle
                 $this->response->redirect("/list/" . $tableId, true);
 
             } else {
-                $csv = $this->request->get('copy');
-
-                if ($this->request->hasFiles(true)) {
-                    foreach ($this->request->getUploadedFiles(true) as $key => $uploadedFile) {
-                        switch ($uploadedFile->getKey()) {
-                            case 'file':
-                                $csv = file_get_contents($uploadedFile->getTempName());
-                                break;
-                            case 'image':
-                                $imageName = 'tmpTableImg-'.$user->getId() . '.' . $uploadedFile->getExtension();
-                                $imagePath = 'temptableimages/' . $imageName;
-                                $uploadedFile->moveTo(ROOT_PATH . 'public/' . $imagePath);
-                                $this->view->setVar('tempImage', $imageName);
-                                break;
-                        }
-                    }
-                }
                 try {
                     $table = $this->getTable(
                         $user->getId(),
@@ -86,6 +67,30 @@ class CreateListController extends BaseController implements LoginAwareControlle
                     );
                     $table->save();
                     $tableId = $table->getId();
+
+                    $csv = $this->request->get('copy');
+
+                    if ($this->request->hasFiles(true)) {
+                        foreach ($this->request->getUploadedFiles(true) as $key => $uploadedFile) {
+                            switch ($uploadedFile->getKey()) {
+                                case 'file':
+                                    $csv = file_get_contents($uploadedFile->getTempName());
+                                    break;
+                            }
+                        }
+                    }
+
+                    $image = $this->getImagePath(
+                        $tableId,
+                        $this->request->getUploadedFiles(true)
+                    );
+                    if (!empty($image)) {
+                        $table->setImage($image)->save();
+                        $this->view->setVar('tempImage', $image);
+                    } else {
+                        $this->flash->error('No image received - Please select an image for your stream');
+                        return;
+                    }
 
                     $curatorsIdsAndNames = $ss->setCurators($tableId, $this->request->get('curators'));
                     $relatedListsIdsAndNames = $ss->setRelatedLists($tableId, $this->request->get('related-lists'));
@@ -152,34 +157,15 @@ class CreateListController extends BaseController implements LoginAwareControlle
     }
 
 
-    protected function getImagePath($userId, $tableId, $uploadedfiles, $tempImage)
+    protected function getImagePath($tableId, $uploadedfiles)
     {
         /** @var File $file */
         foreach($uploadedfiles as $file) {
             if ($file->getKey() =='image') {
-                $imagePath = 'tableimages/'.$tableId.'.'.$file->getExtension();
-                $file->moveTo(ROOT_PATH.'public/'.$imagePath);
+                $imagePath = '/tableimages/'.$tableId.'.'.$file->getExtension();
+                $file->moveTo(ROOT_PATH.'public'.$imagePath);
                 return $imagePath;
             }
-        }
-        if (!empty($tempImage)) {
-            $fileUserId = substr(
-                $tempImage,
-                strrpos($tempImage, '-')+1,
-                strrpos($tempImage, '-')-strrpos($tempImage,'.')-1);
-            if ($fileUserId != $userId) {
-                var_dump($fileUserId);
-                var_dump($userId);
-                throw new \Exception("Error with image - temporary image doesn't match user id");
-            }
-            $fileExtension = substr($tempImage, strrpos($tempImage, '.'));
-
-            $imagePath = '/tableimages/' . $tableId . $fileExtension;
-            rename(
-                ROOT_PATH.'public/temptableimages/'.$tempImage,
-                ROOT_PATH . 'public' . $imagePath
-            );
-            return $imagePath;
         }
         return "";
     }

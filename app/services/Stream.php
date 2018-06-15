@@ -168,6 +168,7 @@ class Stream
     {
         /** @var TableContributions[] $curators */
         $curators = TableContributions::findByFieldValue('tableId', $tableId);
+        $result = [];
         foreach ($curators as $curator) {
             $result[] = $curator->getUserId();
         }
@@ -178,6 +179,7 @@ class Stream
     {
         /** @var TableRelations[] $relatedLists */
         $relatedLists = TableRelations::findAllByFieldValue('tableId', $tableId);
+        $result = [];
         foreach ($relatedLists as $relatedList) {
             $result[] = $relatedList->getRelatedTableId();
         }
@@ -187,6 +189,7 @@ class Stream
     {
         /** @var TableTags[] $tags */
         $tags = TableTags::findAllByFieldValue('tableId', $tableId);
+        $result = [];
         foreach ($tags as $tag) {
             $result[] = $tag->getTagId();
         }
