@@ -104,7 +104,12 @@
     </div>
 
 
-
+    {% if tagsNames is defined %}
+   {% for index, tag in tagsNames %}
+    {{ index }} {{  tag['name'] }}
+{%  endfor %}
+{% endif %}
+ 
     <div class="create-create-list-tabs">
       <div class="create-create-list-tabs__inner">
         <div class="create-list-tab-buttons u-flex extra-small-gutter">
@@ -181,24 +186,69 @@
     }
   });
   $(document).ready(function () {
-    $('.ui.input input').on('change', function(e) { 
-      console.log(e.target.name)
+
+
+     if(tags.value.split(",").map(Number).length >= 3) {
+       $('.tagschecked').show()
+            $('.tagsdisabled').hide()
+     }
+   
+     if(document.getElementById("name").value.length > 3) {
+       $('.titlechecked').show()
+            $('.titledisabled').hide()
+     }
+     if(tagline.value.length > 3) {
+       $('.taglinechecked').show()
+            $('.taglinedisabled').hide()
+     }
+      if(description.value.length >= 3) {
+       $('.descchecked').show()
+            $('.descdisabled').hide()
+     }
+     if(tags.value.split(",").map(Number).length >= 3) {
+       $('.tagschecked').show()
+            $('.tagsdisabled').hide()
+     }
+
+    $('.ui.input input').on('input', function(e) { 
+      console.log(e.target.name, e.target.value.length)
       if(e.target.name ==='name'){
-      $('.titlechecked').show()
-      $('.titledisabled').hide()
+        if(e.target.value.length > 3){
+            $('.titlechecked').show()
+            $('.titledisabled').hide()
+        }else {
+             $('.titlechecked').hide()
+             $('.titledisabled').show()
+        }
       }
-      if(e.target.name ==='tags'){
+       if(e.target.name ==='tagline'){
+        if(e.target.value.length > 3){
+          console.log("here")
+            $('.taglinechecked').show()
+            $('.taglinedisabled').hide()
+        }else {
+             $('.taglinechecked').hide()
+             $('.taglinedisabled').show()
+        }
+      }
+      
+      if(e.target.name ==='description'){
+        if(e.target.value.length > 3){
+          console.log("here")
+            $('.descchecked').show()
+            $('.descdisabled').hide()
+        }else {
+             $('.descchecked').hide()
+             $('.descdisabled').show()
+        }
+      }
+      if(e.target.name ==='tags' ){
       $('.tagschecked').show()
       $('.tagsdisabled').hide()
       }
-      if(e.target.name ==='tagline'){
-      $('.taglinechecked').show()
-      $('.taglinedisabled').hide()
-      }
-      if(e.target.name ==='description'){
-      $('.descchecked').show()
-      $('.descdisabled').hide()
-      }
+      
+
+
      });
 
     document.querySelector('#re-image-fileUpload').addEventListener('change', function () {
