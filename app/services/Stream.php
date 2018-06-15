@@ -65,7 +65,7 @@ class Stream
             }
             $result[] = ['id' => $listId, 'name' => $l->getTitle()];
         }
-        return $relLists;
+        return $result;
     }
 
     public function setTags($tableId, $tagsList): array
