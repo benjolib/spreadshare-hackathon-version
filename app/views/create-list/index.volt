@@ -82,14 +82,13 @@
           </div>
         </label>
       </div>-->
+      
     <div class="create-list-add-curators">
 
-      <!-- <p>If there are other curators than you? {{ text_field('curators', 'placeholder':"Curators") }}{#<input type="text" placeholder="Curators" name="curators" />#}</p>
-          -->
       <div class="ui fluid curators multiple search selection dropdown">
          {{ hidden_field('curators', 'placeholder':"Curators") }}
         <i class="dropdown icon"></i>
-        <div class="default text">Collaborators?</div>
+        <div class="default text">If there are other curators than you?</div>
         <div class="menu">
         {% if curatorsNames is defined %}
         {% for index, curator in curatorsNames %}
@@ -101,16 +100,15 @@
 
 
     <div class="create-list-add-related">
-      <!-- <p>If there are other curators than you? {{ text_field('related-lists', 'placeholder':"Related") }}{#<input type="text" placeholder="Related" name="related-list" />#}</p>
-      -->
+
       <div class="ui fluid multiple search selection dropdown related">
         {{ hidden_field('related-lists', 'placeholder':"Tags") }}
         <i class="dropdown icon"></i>
-        <div class="default text">Related Lists?</div>
+        <div class="default text">If there are other curators than you?</div>
         <div class="menu">
-        {% if relatedlistsNames is defined %}
-        {% for index, relatedlist in relatedlistsNames %}
-          <div class="item" data-value='{{ related-lists[index] }}'>{{ related-list }}</div>
+        {% if relatedListsNames is defined %}
+        {% for index, related in relatedListsNames %}
+          <div class="item" data-value='{{ relatedLists[index] }}'>{{ related }}</div>
         {%  endfor %}
         {% endif %}
       </div>
