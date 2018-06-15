@@ -172,7 +172,6 @@ class Stream
         foreach ($curators as $curator) {
             $result[] = $curator->getUserId();
         }
-        var_dump($result);
         return $result;
     }
 
