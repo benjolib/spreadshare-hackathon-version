@@ -9,14 +9,18 @@
 namespace DS\Component\View\Functions;
 
 
+use DS\Component\ServiceManager;
 use DS\Model\UserFollower;
 use Phalcon\Mvc\User\Component;
 
 class Following extends Component
 {
-    public static function amIFollowing($I, $userId)
+    public static function amIFollowing($userId)
     {
-        return !empty(UserFollower::findFollower($userId, $I));
+        $s = new self;
+        $serviceManager = ServiceManager::instance($s->getDI());
+        $authId = $serviceManager->getAuth()->getUserid();
+        return !empty(UserFollower::findFollower($userId, $authId));
     }
 
 }
