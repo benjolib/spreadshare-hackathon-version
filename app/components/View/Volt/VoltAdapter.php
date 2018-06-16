@@ -111,5 +111,11 @@ class VoltAdapter extends Volt
                 return "\\DS\\Component\\View\\Functions\\FilterTableRowsContent::parse({$key})";
             }
         );
+        $compiler->addFunction(
+            'amIFollowing',
+            function ($args) {
+                return "\\DS\\Component\\View\\Functions\\Following::amIFollowing({$args})";
+            }
+        );
     }
 }
