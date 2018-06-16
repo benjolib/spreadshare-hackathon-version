@@ -40,7 +40,15 @@ class ListController extends BaseController
         $tableContent = $this->getContentArray($tableId);
         if ($this->request->isPost()) {
             try{
-                $this->view->setVar('post', $this->request->getPost());
+                
+                // convert strings to arrays from post
+                $post = $this->request->getPost();
+                $post['related-lists'] = explode(",",$this->request->getPost()['related-lists']);
+                $post['curators'] = explode(",", $this->request->getPost()['curators']);
+                $post['tags'] = explode(",",$this->request->getPost()['tags']);
+                $this->view->setVar('post', $post);
+               // var_dump($post);die();
+            
                 $table->setTitle($this->request->getPost('name'))
                     ->setTagLIne($this->request->getPost('tagline'))
                     ->setDescription($this->request->getPost('description'));
@@ -69,7 +77,9 @@ class ListController extends BaseController
             $post['tagline'] = $table->getTagline();
             $post['description'] = $table->getDescription();
 
-            try {
+           
+        }
+         try {
                 $curatorsIds = $ss->getCuratorIdsFromTable($tableId);
                 $relatedListsIds = $ss->getRelatedListsIdsFromTable($tableId);
                 $tagsIds = $ss->getTagsIdsFromTable($tableId);
@@ -82,7 +92,6 @@ class ListController extends BaseController
                 $this->flash->error("Unexpected error -".$e->getMessage());
                 return;
             }
-        }
         if (isset($post)) {
 
             $post['related-lists'] = empty($relatedListsIdsAndNames)?[]:array_column($relatedListsIdsAndNames, 'id');
@@ -90,6 +99,7 @@ class ListController extends BaseController
             $post['tags'] = empty($tagsIdsAndNames)?[]:array_column($tagsIdsAndNames, 'id');
             $this->view->setVar('post', $post);
         }
+    
         $this->view->setVar('tempImage', $table->getImage());
         $this->view->setVar('tagsNames', empty($tagsIdsAndNames)?[]:array_column($tagsIdsAndNames, 'name'));
         $this->view->setVar('curatorsNames', empty($curatorsIdsAndNames)?[]:array_column($curatorsIdsAndNames, 'name'));

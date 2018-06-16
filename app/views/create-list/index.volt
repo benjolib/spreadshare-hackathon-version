@@ -53,17 +53,21 @@
     <div class="create-list-add-tags">
       <img class="re-heading-input__tick tagsdisabled" src="/assets/images/input-tick.svg" />
       <img class="re-heading-input__tick-green tagschecked" src="/assets/images/input-tick-green.svg" />
-      <!-- <p>If there are other curators than you? {{ text_field('tags', 'placeholder':"Tags") }}
-      {#<input type="text" placeholder="Tags" name="tags" />#}</p>
-          -->
+   
       <div class="ui fluid multiple search selection dropdown tags">
       
-        
-        {{ hidden_field('tags', 'placeholder':"Tags") }}
+        {% if post['tags'] is not defined %}
+        {% set post['tags'] = "" %}
+        {% else %}
+        {% set post['tags'] = implode(",", post['tags']) %}
+        {% endif %}
+        {{ hidden_field('tags', 'placeholder':"Tags", 'value': post['tags']) }}
+
+      
         <i class="dropdown icon"></i>
         <div class="default text input">Add at least 3 tags</div>
         <div class="menu">
-        {% if tagsNames is defined %}
+        {% if tagsNames is defined %} asa
         {% for index, tag in tagsNames %}
           <div class="item" data-value='{{ post['tags'][index] }}'>{{ tag }}</div>
         {%  endfor %}
@@ -95,7 +99,12 @@
     <div class="create-list-add-curators">
         
       <div class="ui fluid curators multiple search selection dropdown">
-         {{ hidden_field('curators', 'placeholder':"Curators") }}
+       {% if post['curators'] is not defined %}
+        {% set post['curators'] = "" %}
+        {% else %}
+        {% set post['curators'] = implode(",", post['curators']) %}
+        {% endif %}
+         {{ hidden_field('curators', 'placeholder':"Curators", 'value': post['curators']) }}
         <i class="dropdown icon"></i>
         <div class="default text"><b><u>Optional</u></b>  Add another person if yoou're curating in a team</div>
         <div class="menu">
@@ -111,7 +120,14 @@
     <div class="create-list-add-related">
 
       <div class="ui fluid multiple search selection dropdown related">
-        {{ hidden_field('related-lists', 'placeholder':"Tags") }}
+        
+        {% if post['related-lists'] is not defined %}
+        {% set post['related-lists'] = "" %}
+        {% else %}
+        {% set post['related-lists'] = implode(",", post['related-lists']) %}
+        {% endif %}
+
+        {{ hidden_field('related-lists', 'placeholder':"Related Lists", 'value':post['related-lists']) }}
         <i class="dropdown icon"></i>
         <div class="default text"><u>Optional</u></b> Recommend related lists to your subscribers</div>
         <div class="menu">
