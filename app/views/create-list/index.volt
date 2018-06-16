@@ -446,6 +446,7 @@
 
 
     function startEditList() {
+      console.log("editing")
       unlinkifyAndUnDropdownifyCells();
 
       $('.re-table th:nth-of-type(1n+4)').attr('contenteditable', 'true');
