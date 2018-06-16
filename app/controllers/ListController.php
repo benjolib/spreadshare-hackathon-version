@@ -47,7 +47,7 @@ class ListController extends BaseController
                 $post['curators'] = explode(",", $this->request->getPost()['curators']);
                 $post['tags'] = explode(",",$this->request->getPost()['tags']);
                 $this->view->setVar('post', $post);
-
+               // var_dump($post);die();
             
                 $table->setTitle($this->request->getPost('name'))
                     ->setTagLIne($this->request->getPost('tagline'))
@@ -77,7 +77,9 @@ class ListController extends BaseController
             $post['tagline'] = $table->getTagline();
             $post['description'] = $table->getDescription();
 
-            try {
+           
+        }
+         try {
                 $curatorsIds = $ss->getCuratorIdsFromTable($tableId);
                 $relatedListsIds = $ss->getRelatedListsIdsFromTable($tableId);
                 $tagsIds = $ss->getTagsIdsFromTable($tableId);
@@ -90,7 +92,6 @@ class ListController extends BaseController
                 $this->flash->error("Unexpected error -".$e->getMessage());
                 return;
             }
-        }
         if (isset($post)) {
 
             $post['related-lists'] = empty($relatedListsIdsAndNames)?[]:array_column($relatedListsIdsAndNames, 'id');
