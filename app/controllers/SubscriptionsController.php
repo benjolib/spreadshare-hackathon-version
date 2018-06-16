@@ -24,6 +24,11 @@ class SubscriptionsController extends BaseController implements LoginAwareContro
                     1 => $userId
                 ]
             ]);
+            if (empty($subscription)) {
+                $subscription = new TableSubscription();
+                $subscription->setTableId($this->request->get('table_id'))
+                    ->setUserId($userId);
+            }
             $freq = $this->request->get('subscription_freq');
             switch ($freq) {
                 case 'U':
