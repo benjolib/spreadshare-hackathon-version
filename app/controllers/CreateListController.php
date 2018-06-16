@@ -22,8 +22,15 @@ class CreateListController extends BaseController implements LoginAwareControlle
         $this->view->setMainView('create-list/index');
         $this->view->setVar('editing', true);
         $user = $this->serviceManager->getAuth()->getUser();
-        $this->view->setVar('post', $this->request->getPost());
+         
+
         if ($this->request->isPost()) {
+        // convert strings to arrays from post
+        $post = $this->request->getPost();
+        $post['related-lists'] = explode(",",$this->request->getPost()['related-lists']);
+        $post['curators'] = explode(",", $this->request->getPost()['curators']);
+        $post['tags'] = explode(",",$this->request->getPost()['tags']);
+        $this->view->setVar('post', $post);
             if ($this->request->get('step') == '2') {
                 try {
                     $tableId = $this->request->get('tableId');
@@ -107,7 +114,7 @@ class CreateListController extends BaseController implements LoginAwareControlle
                     $this->view->setVar('curatorsNames', empty($curatorsIdsAndNames)?[]:array_column($curatorsIdsAndNames, 'name'));
                     $this->view->setVar('relatedLists', empty($relatedListsIdsAndNames)?[]:array_column($relatedListsIdsAndNames, 'id'));
                     $this->view->setVar('relatedListsNames', empty($relatedListsIdsAndNames)?[]:array_column($relatedListsIdsAndNames, 'name'));
-
+                    //var_dump(array_column($tagsIdsAndNames, 'name'));die();
 
                     $tableContentFromCsv = $this->tableContentFromCsv($csv);
                     $this->view->setVar('tableColumns', $tableContentFromCsv[0]);
