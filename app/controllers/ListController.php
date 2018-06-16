@@ -6,6 +6,7 @@ use DS\Application;
 use DS\Model\TableCommentVotes;
 use DS\Model\TableContributions;
 use DS\Model\TableRows;
+use DS\Model\TableSubscription;
 use DS\Services\Stream as StreamService;
 use Phalcon\Logger;
 use DS\Model\Tables;
@@ -211,6 +212,8 @@ class ListController extends BaseController
                 $related[$key]['subscriberCount'] = TableStats::get($value['id'])->getSubscriberCount();
             }
             $tableColumns = TableColumns::findAllByFieldValue('tableId', $tableId);
+
+            $this->view->setVar('subscribed', !empty(TableSubscription::findSubscription($authId, $tableId)));
 
             $this->view->setMainView('list/index');
             $this->view->setVar('table', $table);
