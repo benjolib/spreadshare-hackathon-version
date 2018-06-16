@@ -142,7 +142,7 @@ class CreateListController extends BaseController implements LoginAwareControlle
             if (count($row) !== $numColumns) {
                 throw new \Exception("Wrong number of columns - The row $rowNumber has a different number of columns");
             }
-            $tableContent[] = $row;
+            $tableContent[] = ['id' => '', 'content'=>$row];
             $line = strtok($newlineSeparator);
             $rowNumber++;
         }

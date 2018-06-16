@@ -40,15 +40,13 @@ class ListController extends BaseController
         $tableContent = $this->getContentArray($tableId);
         if ($this->request->isPost()) {
             try{
-                
                 // convert strings to arrays from post
                 $post = $this->request->getPost();
                 $post['related-lists'] = explode(",",$this->request->getPost()['related-lists']);
                 $post['curators'] = explode(",", $this->request->getPost()['curators']);
                 $post['tags'] = explode(",",$this->request->getPost()['tags']);
                 $this->view->setVar('post', $post);
-               // var_dump($post);die();
-            
+
                 $table->setTitle($this->request->getPost('name'))
                     ->setTagLIne($this->request->getPost('tagline'))
                     ->setDescription($this->request->getPost('description'));
@@ -67,11 +65,11 @@ class ListController extends BaseController
                 }
                 $table->setFlags(TableFlags::Published);
                 $table->save();
-
             } catch (\Exception $e) {
                 $this->flash->error("Unexpected error -".$e->getMessage());
                 return;
             }
+            $this->response->redirect("/list/" . $tableId, true);
         } else {
             $post['name'] = $table->getTitle();
             $post['tagline'] = $table->getTagline();
@@ -243,7 +241,10 @@ class ListController extends BaseController
         $tableContent = TableRows::findRowsFrom($tableId);
         $result = [];
         foreach ($tableContent as $row) {
-            $result[] = array_column(json_decode($row->getContent(), true), 'content');
+            $result[] = [
+                'id' => $row->getId(),
+                'content' => array_column(json_decode($row->getContent(), true), 'content')
+            ];
         }
         return $result;
     }

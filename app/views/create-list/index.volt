@@ -4,7 +4,7 @@
   <form id="createListFrom" method="post" action="" enctype="multipart/form-data">
     {% if tableId is defined %} {{ hidden_field('tableId', 'value':tableId) }} {% endif %}
     {% if tempImage is defined %} {% set imageStyle='background: #f5f5f5 url('~tempImage~') center / cover;'
-    %} {{ hidden_field('tempImage','value':tempImage) }} {% else %} {% set imageStyle='' %} {% endif %}
+    %} {# TODO I don't think the hidden field is needed anymore #} %} {{ hidden_field('tempImage','value':tempImage) }} {% else %} {% set imageStyle='' %} {% endif %}
     <div class="re-image re-image--create-list"
       style="{{ imageStyle }}">
       <div class="re-image__upload-button"></div>
