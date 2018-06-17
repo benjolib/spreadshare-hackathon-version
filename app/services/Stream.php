@@ -147,12 +147,17 @@ class Stream
         $decodedRows = json_decode($rows);
         foreach ($decodedRows as $key => $decodedRow) {
             $contentToInsert = '[';
-            foreach ($decodedRow->content as $content) {
+            $rowId = $decodedRow->row->id;
+            foreach ($decodedRow->row->content as $content) {
                 $contentToInsert .= '{"content":"' . $content . '"},';
             }
             $contentToInsert = rtrim($contentToInsert, ',');
             $contentToInsert .= ']';
-            $row = new TableRows();
+            if (empty($rowId)) {
+                $row = new TableRows();
+            } else {
+                $row = TableRows::findFirstById($rowId);
+            }
             $row->setTableId($tableId)->setContent($contentToInsert)->save();
             if (!empty($images['listing-image-' . $key])) {
                 /** @var FileInterface|File $file */
