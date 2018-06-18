@@ -181,7 +181,7 @@
                     </td>
 
                     <td>
-                      <div class="re-table__list-image" style="background: #f5f5f5 url({{ collab['image'] }}) center / cover;"></div>
+                      <div class="re-table__list-image" style="background: #f5f5f5 url(/assets/images/rows/{{ submission['image'] }}) center / cover;"></div>
                     </td>
 
                     {% for cont in collab['content'] %}
