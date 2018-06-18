@@ -114,7 +114,6 @@ class CreateListController extends BaseController implements LoginAwareControlle
                     $this->view->setVar('curatorsNames', empty($curatorsIdsAndNames)?[]:array_column($curatorsIdsAndNames, 'name'));
                     $this->view->setVar('relatedLists', empty($relatedListsIdsAndNames)?[]:array_column($relatedListsIdsAndNames, 'id'));
                     $this->view->setVar('relatedListsNames', empty($relatedListsIdsAndNames)?[]:array_column($relatedListsIdsAndNames, 'name'));
-                    //var_dump(array_column($tagsIdsAndNames, 'name'));die();
 
                     $tableContentFromCsv = $this->tableContentFromCsv($csv);
                     $this->view->setVar('tableColumns', $tableContentFromCsv[0]);
