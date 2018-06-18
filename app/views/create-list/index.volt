@@ -66,7 +66,7 @@
         <i class="dropdown icon"></i>
         <div class="default text input">Add at least 3 tags</div>
         <div class="menu">
-        {% if tagsNames is defined %} asa
+        {% if tagsNames is defined %}
         {% for index, tag in tagsNames %}
           <div class="item" data-value='{{ post['tags'][index] }}'>{{ tag }}</div>
         {%  endfor %}
@@ -228,12 +228,14 @@
   });
   $(document).ready(function () {
 
-  //     $(window).keydown(function(event){
-  //   if(event.keyCode == 13) {
-  //     event.preventDefault();
-  //     return false;
-  //   }
-  // });
+  
+    $(".search").keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+    })
+
      if(tags.value.split(",").map(Number).length >= 3) {
        $('.tagschecked').show()
             $('.tagsdisabled').hide()
@@ -372,7 +374,6 @@
     }
 
     function bindListCellEditableSizing() {
-      console.log('blon');
       $('.re-table tr.list-row-tr:not(.list-row-tr--add-row) td:nth-of-type(1n+4) div').on('input',
         listCellEditableSizing);
     }
