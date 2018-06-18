@@ -17,8 +17,8 @@
                 <h1 class="profile-name">{{ profile.name }}</h1>
                 <h3 class="profile-tagline">{{ profile.tagline }}</h3>
                 <div class="status">
-                    <a href="/profile/{{ profile.handle }}/followers" class="status-link-green"><span>{{ numFollowers }}</span> FOLLOWERS</a>
-                    <a href="/profile/{{ profile.handle }}/following"><span>{{ numFollowing }}</span> FOLLOWING</a>
+                    <a href="/user/{{ profile.handle }}/followers" class="status-link-green"><span>{{ numFollowers }}</span> FOLLOWERS</a>
+                    <a href="/user/{{ profile.handle }}/following"><span>{{ numFollowing }}</span> FOLLOWING</a>
                 </div>
                 <div class="social-links">
                     {% for connection in connections %}
@@ -27,7 +27,7 @@
                 </div>
                 <div class="profile-buttons">
                     {% if auth.loggedIn() and auth.getUserId() != profile.id %}
-                        <a class="follow-button" href="/user/follow/{{ profile.id }}">Follow</a>
+                        <a class="follow-button" href="/user/follow/{{ profile.id }}">{% if amIFollowing(profile.id) %}Unfollow{% else %}Follow{% endif %}</a>
                     {% endif %}
 
                     {% if auth.loggedIn() and auth.getUserId() == profile.id %}
@@ -46,7 +46,7 @@
                 </div>
                 <div class="profile-buttons">
                     {% if auth.loggedIn() and auth.getUserId() != profile.id %}
-                        <a class="follow-button small-follow-button" href="#">Follow</a>
+                        <a class="follow-button small-follow-button" href="#">{% if amIFollowing(profile.id) %}Unfollow{% else %}Follow{% endif %}</a>
                     {% endif %}
                     {% if auth.loggedIn() and auth.getUserId() == profile.id %}
                         <a class="edit-button small-edit-button" href="#">Edit</a>
