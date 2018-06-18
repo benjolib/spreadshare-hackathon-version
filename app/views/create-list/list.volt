@@ -13,16 +13,21 @@
       </tr>
     </thead>
     <tbody>
+    
+      
+
       {% if tableContent is not empty and tableContent %}
         {% for i, row in tableContent %}
-          <tr class="list-row-tr">
+          {{ row['content'][0] }}
+          <tr class="list-row-tr" id="{{ row['id'] }}">
             <td>
             </td>
             <td class="shadowcontaintd">
               <div class="shadowcontain">
-                <div class="l-button" style="position: absolute;top: 0;right: 6px;pointer-events: all;cursor: pointer;"><img src="/assets/images/dotdotdot.svg" /></div>
+                <div class="l-button" style="position: absolute;top: 0;right: 6px;pointer-events: all;cursor: pointer;">
+                <!--<img src="/assets/images/dotdotdot.svg" />--> ...</div>
                 <div class="sh-dropdown list-row-remove-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
-                  <a href="#"><img src="/assets/images/bin.svg" /> Remove listing</a>
+<!--<a href="#"><img src="/assets/images/bin.svg" /> Remove listing</a>-->
                 </div>
               </div>
             </td>
