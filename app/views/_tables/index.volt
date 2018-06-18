@@ -19,7 +19,7 @@
         <div class="main__content__tables__filters__left">
           <li>{{ activeDateRangeString }}</li>
           <img src="/assets/icons/chevron-down-dark.svg" />
-          <div class="dropdown dropdown--filters">
+          <div class="sh-dropdown dropdown--filters">
             <ul>
               <li class="{% if activeDateFilter == 'today' %}link-active{% endif %}"><a href="/tables/{{ order }}/today">Today</a></li>
               <li class="{% if activeDateFilter == 'yesterday' %}link-active{% endif %}"><a href="/tables/{{ order }}/yesterday">Yesterday</a></li>

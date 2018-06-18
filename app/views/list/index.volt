@@ -55,7 +55,7 @@
       </thead>
       <tbody>
         {% if tableContent is not empty and tableContent %}
-          {% for row in tableContent.items %}
+          {% for index, row in tableContent.items %}
           
             <tr data-id="{{ row['id'] }}" class="list-row-tr">
               <td>
@@ -75,7 +75,7 @@
               </td>
               <td>
                 <div class="re-table__list-image {{ row['image'] ? '' : 're-table__list-image--empty' }}" style="background: #f5f5f5 url({{ row['image'] }}) center / cover;">
-                  <img data-name="{{ table['title'] }}" class="{{ row['image'] ? '' : 'empty' }}"/> 
+                  <img data-name="{{ row['content']|json_decode[0].content }}" class="{{ row['image'] ? '' : 'empty' }}"/> 
                   <div class="re-table__list-image__upload-button"></div>
                   <div class="re-table__list-image__delete-button"></div>
                 </div>
