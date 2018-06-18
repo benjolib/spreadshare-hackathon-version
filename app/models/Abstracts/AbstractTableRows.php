@@ -245,6 +245,15 @@ abstract class AbstractTableRows extends \DS\Model\Base
     {
         return $this->content;
     }
+    /**
+     * Returns the value of field content
+     *
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
 
     /**
      * Returns the value of field lineNumber

@@ -246,7 +246,8 @@ class ListController extends BaseController
         foreach ($tableContent as $row) {
             $result[] = [
                 'id' => $row->getId(),
-                'content' => array_column(json_decode($row->getContent(), true), 'content')
+                'content' => array_column(json_decode($row->getContent(), true), 'content'),
+                'image' => $row->getImage(),
             ];
         }
         return $result;
