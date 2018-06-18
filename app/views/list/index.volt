@@ -880,12 +880,12 @@
       }
     });
 
-    $('.re-table tr').on('contextmenu', function (e) {
-      e.preventDefault();
-      mouse = { pageX: e.clientX, pageY: e.clientY };
-      popInstance.scheduleUpdate();
-      $('#list-context-menu').addClass('show');
-    });
+    // $('.re-table tr').on('contextmenu', function (e) {
+    //   e.preventDefault();
+    //   mouse = { pageX: e.clientX, pageY: e.clientY };
+    //   popInstance.scheduleUpdate();
+    //   $('#list-context-menu').addClass('show');
+    // });
 
 
     var permission = "2";
