@@ -9,7 +9,14 @@ class RequestAdd extends BaseEvents
     public $table_id;
     public $content;
     public $comment;
-    public $image;
+
+    /**
+     *
+     * @var string
+     * @Column(type="string", nullable=true)
+     */
+    protected $image;
+
     public $status;
     protected $createdAt;
     protected $updatedAt;
@@ -22,5 +29,21 @@ class RequestAdd extends BaseEvents
         // Defining ORM relationships and aliases
         $this->belongsTo('user_id', '\DS\Model\User', 'id', ['alias' => 'user']);
         $this->belongsTo('table_id', '\DS\Model\Tables', 'id', ['alias' => 'table']);
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setImage($image)
+    {
+        $this->image = $image;
+        return $this;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
     }
 }
