@@ -55,7 +55,7 @@
       </thead>
       <tbody>
         {% if tableContent is not empty and tableContent %}
-          {% for row in tableContent.items %}
+          {% for index, row in tableContent.items %}
           
             <tr data-id="{{ row['id'] }}" class="list-row-tr">
               <td>
@@ -75,6 +75,7 @@
               </td>
               <td>
                 <div class="re-table__list-image {{ row['image'] ? '' : 're-table__list-image--empty' }}" style="background: #f5f5f5 url({{ row['image'] }}) center / cover;">
+                  <img data-name="{{ row['content']|json_decode[0].content }}" class="{{ row['image'] ? '' : 'empty' }}"/> 
                   <div class="re-table__list-image__upload-button"></div>
                   <div class="re-table__list-image__delete-button"></div>
                 </div>
@@ -400,6 +401,8 @@
       $('#subscriptions_form').submit();
   }
   $(document).ready(function () {
+     $('.empty ').initial({height:82, width:82 });
+     $('.empty ').css('border-radius', "6px")
     function listCellInputSizing() {
       var $this = $(this);
 
@@ -428,7 +431,6 @@
     $('.cell-input-sizing').on('input', listCellInputSizing);
 
     function listCellEditableSizing() {
-      console.log('blinput');
       var $this = $(this);
 
       var len = $this.text().length;

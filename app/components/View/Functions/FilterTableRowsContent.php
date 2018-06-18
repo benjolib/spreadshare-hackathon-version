@@ -29,7 +29,7 @@ class FilterTableRowsContent extends Component
             $lastPos = ($maxPos - 3) - strlen($rawText);
             $text = substr($rawText, 0, strrpos($rawText, ' ', $lastPos)) . '...';
             $text .= '<a href="javascript:;" class="table-cell-show-more-button l-button" data-dropdown-placement="bottom">More</a>';
-            $text .= '<div class="l-dropdown dropdown table-cell-show-more-dropdown">' . $rawText . '</div>';
+            $text .= '<div class="l-dropdown sh-dropdown table-cell-show-more-dropdown">' . $rawText . '</div>';
         } else {
             $text = $rawText;
         }

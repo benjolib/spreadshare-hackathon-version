@@ -8,7 +8,7 @@
     <input id="separator" type="hidden" name="separator" value="tab" />
     <p>Paste table content here</p>
     <p id="separator-container">Separate by <span id="separator-select">tab</span><i id="separator-icon"></i></p>
-    <div class="dropdown" id="separator-popper">
+    <div class="sh-dropdown" id="separator-popper">
       <ul>
         <li class="separator-option">Tab</li>
         <li class="separator-option">Comma</li>

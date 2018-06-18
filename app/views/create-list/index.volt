@@ -63,7 +63,7 @@
         {{ hidden_field('tags', 'placeholder':"Tags", 'value': post['tags']) }}
 
       
-        <i class="dropdown icon"></i>
+        <i class="sh-dropdown icon"></i>
         <div class="default text input">Add at least 3 tags</div>
         <div class="menu">
         {% if tagsNames is defined %}
@@ -104,7 +104,7 @@
         {% set post['curators'] = implode(",", post['curators']) %}
         {% endif %}
          {{ hidden_field('curators', 'placeholder':"Curators", 'value': post['curators']) }}
-        <i class="dropdown icon"></i>
+        <i class="sh-dropdown icon"></i>
         <div class="default text"><b><u>Optional</u></b>  Add another person if yoou're curating in a team</div>
         <div class="menu">
         {% if curatorsNames is defined %}
@@ -402,7 +402,7 @@
             text = text.substr(0, Math.min(text.length, text.lastIndexOf(" "))) + '...';
             text +=
               '<a href="javascript:;" class="table-cell-show-more-button l-button" data-dropdown-placement="bottom">More</a>';
-            text += '<div class="l-dropdown dropdown table-cell-show-more-dropdown">' + rawText + '</div>';
+            text += '<div class="l-dropdown sh-dropdown table-cell-show-more-dropdown">' + rawText + '</div>';
           } else {
             text = rawText;
           }

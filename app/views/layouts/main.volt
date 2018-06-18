@@ -81,6 +81,7 @@
 <script type="text/javascript" src="/js/jquery.sticky-sidebar.min.js"></script>
 <script type="text/javascript" src="/js/infinite-scroll.min.js"></script>
 <script type="text/javascript" src="/semantic/semantic.min.js"></script>
+<script type="text/javascript" src="/js/initial.min.js"></script>
 
 {{ partial('layouts/scripts') }}
 

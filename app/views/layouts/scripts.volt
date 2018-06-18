@@ -256,7 +256,7 @@
         });
 
         $button.click(function () {
-          console.log('open dropdown');
+          console.log('open sh-dropdown');
           $('.l-dropdown').removeClass('show');
           $dropdown.addClass('show');
           if ($button.data('dropdown-active-class')) {
