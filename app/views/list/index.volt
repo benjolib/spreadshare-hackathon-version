@@ -56,6 +56,7 @@
       <tbody>
         {% if tableContent is not empty and tableContent %}
           {% for row in tableContent.items %}
+          
             <tr data-id="{{ row['id'] }}" class="list-row-tr">
               <td>
                 <a href="#" class="j_listing-vote vote-link {{ row['userHasVoted'] ? 'vote-link--upvoted' : '' }}">
@@ -586,9 +587,9 @@
 
     $('#addAListingSubmit').on('click', function (e) {
       e.preventDefault();
-
+      console.log()
       // Clone image input to the hidden form
-      var image = $('#fileUpload');
+      var image = $('#new-row-fileUpload');
       var image_clone = image.clone();
       image.after(image_clone).appendTo('#form_hidden');
 

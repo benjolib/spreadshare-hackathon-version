@@ -445,7 +445,6 @@
 
 
     function startEditList() {
-      console.log("editing")
       unlinkifyAndUnDropdownifyCells();
 
       $('.re-table th:nth-of-type(1n+4)').attr('contenteditable', 'true');
@@ -468,7 +467,7 @@
         return {
           id: $this[0]['id'],
 
-          //image: $this.find('.re-table__list-image').attr('style'),
+          image: $this.find('.re-table__list-image').attr('style'),
           content: $this.find('td:nth-of-type(1n+4) div').map(function () {
             
             return this.innerText;
@@ -483,11 +482,11 @@
         var c = {}
         c['id'] = row.id
         c['content'] = row.content
-       // console.log("Image", row.image.replace('background: #f5f5f5 url(', '').replace(') center / cover;', ''))
+        
         return {
           id: row.id,
-          row: c
-          //image: row.image.replace('background: #f5f5f5 url(', '').replace(') center / cover;', '')
+          row: c,
+          image: row.image.replace('background: #f5f5f5 url(', '').replace(') center / cover;', '')
         };
       })));
 

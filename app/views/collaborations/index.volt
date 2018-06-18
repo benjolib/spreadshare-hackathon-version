@@ -58,7 +58,7 @@
                       <td class="shadowcontaintd">
                         <div class="shadowcontain">
                           <div class="l-button" style="position: absolute;top: 0;right: 6px;pointer-events: all;cursor: pointer;"><img src="/assets/images/dotdotdot.svg" /></div>
-                          <div class="dropdown list-row-remove-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
+                          <div class="sh-dropdown list-row-remove-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
                             {% if (submission['kind'] == 'add')%}
                               <a href="submissions/add/revoke/{{submission['id']}}"><img src="/assets/images/bin.svg"> Revoke submission</a>
                             {%endif%}
@@ -167,7 +167,7 @@
                           <a class="l-button collaboration-reject" href="javascript:;" data-dropdown-placement="left-end">
                             <img src="/assets/images/cross.svg">
                           </a>
-                          <div class="dropdown collaboration-reject-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
+                          <div class="sh-dropdown collaboration-reject-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
                             <form class="u-flex collaboration-reject-dropdown__form" action={{deny_link}} method="POST">
                               <label class="collaboration-reject-dropdown__reason" >
                                 <div>REASON FOR REJECTION</div>
