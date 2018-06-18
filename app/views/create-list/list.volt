@@ -25,15 +25,19 @@
             <td class="shadowcontaintd">
               <div class="shadowcontain">
                 <div class="l-button" style="position: absolute;top: 0;right: 6px;pointer-events: all;cursor: pointer;">
-                <!--<img src="/assets/images/dotdotdot.svg" />--> ...</div>
+                <img src="/assets/images/dotdotdot.svg" /></div>
                 <div class="sh-dropdown list-row-remove-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
-<!--<a href="#"><img src="/assets/images/bin.svg" /> Remove listing</a>-->
+<a href="#"><img src="/assets/images/bin.svg" /> Remove listing</a>
                 </div>
               </div>
             </td>
             <td>
+            <div class="re-table__list-image re-table__list-image--empty" style="background: #f5f5f5 center / cover;">
+              {% if row['image'] is not empty and tableContent %}
               <div class="re-table__list-image {{ row['image'] ? '' : 're-table__list-image--empty' }}" style="background: #f5f5f5 url({{ row['image'] }}) center / cover;">
-                <div class="re-table__list-image__upload-button"></div>
+              {% else %}
+              <div class="re-table__list-image__upload-button"></div>
+              {% endif %}
                 <!--<div class="re-table__list-image__delete-button"></div>-->
               </div>
               <input type="file" name="listing-image-{{ i }}" class="re-table__list-image-fileUpload" style="display: none;" />
