@@ -27,13 +27,6 @@ class RequestAddController extends BaseController implements LoginAwareControlle
 
         $user = $this->serviceManager->getAuth()->getUser();
 
-        // Get form data
-        if ($this->request->hasFiles()) {
-            $image = $this->request->getUploadedFiles();
-            $image = $image[0];
-            $image->moveTo('assets/images/rows/' . $image->getName());
-        }
-
         $content = json_encode($this->request->get('cells'));
 
         // Clear string from quotes and brakets and commas
@@ -45,16 +38,22 @@ class RequestAddController extends BaseController implements LoginAwareControlle
             return;
         }
 
-        $image = $image->getName();
-
         $submission = new RequestAdd();
 
         $submission->table_id = $tableId;
         $submission->user_id = $user->getId();
         $submission->content = $content;
-        $submission->image = $image;
+        $submission->status = 0;
 
         $submission->save();
+        // Get form data
+        if ($this->request->hasFiles()) {
+            $image = $this->request->getUploadedFiles();
+            $image = $image[0];
+            $imagePath = '/rowimages/collab_'.$submission->getId().'.'. $image->getExtension();
+            $image->moveTo(ROOT_PATH.'public'.$imagePath);
+            $submission->setImage($imagePath)->save();
+        }
 
         $this->flash->success('Listing submitted - Your listing is pending review ');
         $this->_redirectBack();
@@ -86,6 +85,7 @@ class RequestAddController extends BaseController implements LoginAwareControlle
     public function approveAction() {
         $submissionId = $this->dispatcher->getParam('id');
 
+        /** @var RequestAdd $request */
         $request = RequestAdd::findFirst($submissionId);
 
         // Check if table exists
@@ -110,7 +110,14 @@ class RequestAddController extends BaseController implements LoginAwareControlle
         $content = json_decode($request->content);
 
         $tablecontent = new TableContent();
-        $tablecontent->addRow($request->table->id, $content);
+        $newRow = $tablecontent->addRow($request->table->id, $content);
+
+        $oldFile = ROOT_PATH.'/public'.$request->getImage();
+        $ext = pathinfo($oldFile, PATHINFO_EXTENSION);
+
+        $imagePath = '/rowimages/'.$newRow->getId().'.'.$ext;
+        rename($oldFile, ROOT_PATH.'/public'.$imagePath);
+        $newRow->setImage($imagePath)->save();
 
         $this->flash->success('Submission approved - You have approved this submission');
         $this->_redirectBack();
