@@ -13,7 +13,7 @@
         <h2 class="re-subheading re-subheading--button-below">Manage all your lists in one place.</h2>
       </div>
       <div>
-        <a href="/table/add" class="re-button">Create a List</a>
+        <a href="/create-list" class="re-button">Create a List</a>
       </div>
     </div>
 

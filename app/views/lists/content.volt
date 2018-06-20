@@ -12,9 +12,9 @@
       </div>
       <div class="sh-dropdown card-actions-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
         <a href="/list/{{ table['id'] }}/edit"><img src="/assets/images/pencil2.svg" /> Edit List</a>
-        <!--
-        <a href="/table/{{ table['id'] }}/delete" class="warning-color"><img src="/assets/images/bin2.svg" /> Delete List</a>
-          -->   
+     
+        <a href="/list/{{ table['id'] }}/delete" class="warning-color"><img src="/assets/images/bin2.svg" /> Delete List</a>
+          
         </div>
     </td>
   </tr>

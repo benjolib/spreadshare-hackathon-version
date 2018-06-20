@@ -41,8 +41,9 @@ class SubscriptionsController extends BaseController implements LoginAwareContro
                     break;
             }
         }
+        $this->flash->success('You subscribed - You successfully subscribed this Stream');
         $subscriptions = TableSubscription::findUserSubscriptions($userId);
         $this->view->setVar('subscriptions', $subscriptions);
-        $this->view->setMainView('subscriptions/index');
+        $this->response->redirect('/list/' . $this->request->get('table_id'), true);
     }
 }

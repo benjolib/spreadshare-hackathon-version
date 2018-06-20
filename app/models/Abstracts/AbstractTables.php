@@ -182,18 +182,18 @@ abstract class AbstractTables extends \DS\Model\Base
     {
         if (empty($title))
         {
-            throw new InvalidStreamTitleException('Please give a name for the table');
+            throw new InvalidStreamTitleException('Please give a title for your Stream');
         }
 
         if (strlen($title) < 4)
         {
-            throw new InvalidStreamTitleException('Please provide at least four characters for the table name.');
+            throw new InvalidStreamTitleException('Please provide at least four characters');
         }
 
         $tableCheck = self::findByFieldValue('title', $title);
         if ($tableCheck && $tableCheck->getId() != $this->getId())
         {
-            throw new InvalidStreamTitleException('A table with the exact same title already exists. Please choose another title');
+            throw new InvalidStreamTitleException('A Stream with the exact same title already exists. Please choose another title');
         }
 
         $this->title = $title;
@@ -223,7 +223,7 @@ abstract class AbstractTables extends \DS\Model\Base
     public function setDescription($description)
     {
         if (strlen($description) < 4) {
-            throw new InvalidStreamDescriptionException('Please give a description for the stream');
+            throw new InvalidStreamDescriptionException('Please give a description for your Stream');
         }
         $this->description = $description;
 
