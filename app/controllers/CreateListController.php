@@ -161,11 +161,11 @@ class CreateListController extends BaseController implements LoginAwareControlle
                 ->setDescription($description);
             return $table;
         } catch (InvalidStreamTitleException $e) {
-            throw new \Exception('Error on stream title - ' . $e->getMessage());
+            throw new \Exception('Title missing - ' . $e->getMessage());
         } catch (InvalidStreamTaglineException $e) {
-            throw new \Exception('Error on stream tagline - ' . $e->getMessage());
+            throw new \Exception('Tagline missing - ' . $e->getMessage());
         } catch (InvalidStreamDescriptionException $e) {
-            throw new \Exception('Error on stream description - ' . $e->getMessage());
+            throw new \Exception('Description missing - ' . $e->getMessage());
         } catch (\Exception $e) {
             throw new \Exception('Undetermined error on stream - '. $e->getMessage());
         }

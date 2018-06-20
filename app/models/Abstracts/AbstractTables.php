@@ -222,7 +222,7 @@ abstract class AbstractTables extends \DS\Model\Base
      */
     public function setDescription($description)
     {
-        if (empty($description)) {
+        if (strlen($description) < 4) {
             throw new InvalidStreamDescriptionException('Please give a description for the stream');
         }
         $this->description = $description;
@@ -238,8 +238,8 @@ abstract class AbstractTables extends \DS\Model\Base
      */
     public function setTagline($tagline)
     {
-        if (empty($tagline)) {
-            throw new InvalidStreamTaglineException('Please give a tagline for the stream');
+        if (strlen($tagline) < 4) {
+            throw new InvalidStreamTaglineException('Please give a a tagline for your Stream');
         }
         $this->tagline = $tagline;
 
