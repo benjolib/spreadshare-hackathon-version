@@ -24,14 +24,14 @@ class CreateListController extends BaseController implements LoginAwareControlle
         $this->view->setVar('editing', false);
         if ($this->request->isPost()) {
         // convert strings to arrays from post
-        $this->view->setVar('editing', true);
+        
         $post = $this->request->getPost();
         $post['related-lists'] = explode(",",$this->request->getPost()['related-lists']);
         $post['curators'] = explode(",", $this->request->getPost()['curators']);
         $post['tags'] = explode(",",$this->request->getPost()['tags']);
         $this->view->setVar('post', $post);
             if ($this->request->get('step') == '2') {
-                try {    
+                try { 
                     $tableId = $this->request->get('tableId');
                     $table = Tables::findFirstById($tableId);
                     $table->setOwnerUserId($user->getId())
@@ -100,7 +100,7 @@ class CreateListController extends BaseController implements LoginAwareControlle
                         $table->setImage($image)->save();
                         $this->view->setVar('tempImage', $image);
                     } else {
-                        throw new \Exception('No image received - Please select an image for your stream');
+                        throw new \Exception('Image missing - Please select an image for your Stream');
                     }
 
                     $curatorsIdsAndNames = $ss->setCurators($tableId, $this->request->get('curators'));
@@ -117,6 +117,7 @@ class CreateListController extends BaseController implements LoginAwareControlle
                     $tableContentFromCsv = $this->tableContentFromCsv($csv);
                     $this->view->setVar('tableColumns', $tableContentFromCsv[0]);
                     $this->view->setVar('tableContent', array_splice($tableContentFromCsv, 1));
+                    $this->view->setVar('editing', true);   
                 } catch (\Exception $e) {
                     $this->flash->error($e->getMessage());
                     return;
@@ -138,7 +139,8 @@ class CreateListController extends BaseController implements LoginAwareControlle
         while ($line !== false) {
             $row = explode($colSeparator, $line);
             if (count($row) !== $numColumns) {
-                throw new \Exception("Wrong number of columns - The row $rowNumber has a different number of columns");
+                //throw new \Exception("Wrong number of columns - The row $rowNumber has a different number of columns");
+                throw new \Exception("Wrong format - Please review your Stream content");
             }
             $tableContent[] = ['id' => '', 'content'=>$row];
             $line = strtok($newlineSeparator);

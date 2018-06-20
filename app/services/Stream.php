@@ -25,7 +25,7 @@ class Stream
     {
         $tagsIds = explode(',', $tagsList);
         if (count($tagsIds) < 3) {
-            throw new \Exception('Error in tags - you should add at least three tags');
+            throw new \Exception('Tag missing - Please select at least 3 tags for your Stream');
         }
         foreach ($tagsIds as $tag) {
             /** @var Tags $t */
