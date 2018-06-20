@@ -1,6 +1,9 @@
 <?php
 
 namespace DS\Model\Abstracts;
+use DS\Exceptions\InvalidStreamDescriptionException;
+use DS\Exceptions\InvalidStreamTaglineException;
+use DS\Exceptions\InvalidStreamTitleException;
 
 /**
  * AbstractTables
@@ -179,18 +182,18 @@ abstract class AbstractTables extends \DS\Model\Base
     {
         if (empty($title))
         {
-            throw new \InvalidArgumentException('Please give a name for the table');
+            throw new InvalidStreamTitleException('Please give a name for the table');
         }
 
         if (strlen($title) < 4)
         {
-            throw new \InvalidArgumentException('Please provide at least four characters for the table name.');
+            throw new InvalidStreamTitleException('Please provide at least four characters for the table name.');
         }
 
         $tableCheck = self::findByFieldValue('title', $title);
         if ($tableCheck && $tableCheck->getId() != $this->getId())
         {
-            throw new \InvalidArgumentException('A table with the exact same title already exists. Please choose another title');
+            throw new InvalidStreamTitleException('A table with the exact same title already exists. Please choose another title');
         }
 
         $this->title = $title;
@@ -219,6 +222,9 @@ abstract class AbstractTables extends \DS\Model\Base
      */
     public function setDescription($description)
     {
+        if (empty($description)) {
+            throw new InvalidStreamDescriptionException('Please give a description for the stream');
+        }
         $this->description = $description;
 
         return $this;
@@ -232,6 +238,9 @@ abstract class AbstractTables extends \DS\Model\Base
      */
     public function setTagline($tagline)
     {
+        if (empty($tagline)) {
+            throw new InvalidStreamTaglineException('Please give a tagline for the stream');
+        }
         $this->tagline = $tagline;
 
         return $this;

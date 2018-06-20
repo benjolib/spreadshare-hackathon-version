@@ -2,6 +2,8 @@
 
 namespace DS\Controller;
 
+use DS\Exceptions\InvalidStreamTaglineException;
+use DS\Exceptions\InvalidStreamTitleException;
 use DS\Interfaces\LoginAwareController;
 use DS\Model\DataSource\TableFlags;
 use DS\Model\Tables;
@@ -158,8 +160,14 @@ class CreateListController extends BaseController implements LoginAwareControlle
                 ->setTagline($tagline)
                 ->setDescription($description);
             return $table;
+        } catch (InvalidStreamTitleException $e) {
+            throw new \Exception('Error on stream title - ' . $e->getMessage());
+        } catch (InvalidStreamTaglineException $e) {
+            throw new \Exception('Error on stream tagline - ' . $e->getMessage());
+        } catch (InvalidStreamDescriptionException $e) {
+            throw new \Exception('Error on stream description - ' . $e->getMessage());
         } catch (\Exception $e) {
-            throw new \Exception('Error on table data - ' . $e->getMessage());
+            throw new \Exception('Undetermined error on stream - '. $e->getMessage());
         }
     }
 }
