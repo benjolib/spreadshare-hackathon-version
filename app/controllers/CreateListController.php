@@ -18,21 +18,20 @@ class CreateListController extends BaseController implements LoginAwareControlle
     public function indexAction()
     {
         $ss = new StreamService();
-
-        $this->view->setMainView('create-list/index');
-        $this->view->setVar('editing', true);
+        $this->view->setMainView('create-list/index');   
         $user = $this->serviceManager->getAuth()->getUser();
          
-
+        $this->view->setVar('editing', false);
         if ($this->request->isPost()) {
         // convert strings to arrays from post
+        $this->view->setVar('editing', true);
         $post = $this->request->getPost();
         $post['related-lists'] = explode(",",$this->request->getPost()['related-lists']);
         $post['curators'] = explode(",", $this->request->getPost()['curators']);
         $post['tags'] = explode(",",$this->request->getPost()['tags']);
         $this->view->setVar('post', $post);
             if ($this->request->get('step') == '2') {
-                try {
+                try {    
                     $tableId = $this->request->get('tableId');
                     $table = Tables::findFirstById($tableId);
                     $table->setOwnerUserId($user->getId())

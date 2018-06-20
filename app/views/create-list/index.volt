@@ -7,7 +7,7 @@
     <div class="re-image re-image--create-list"
       style="{{ imageStyle }}">
       <div class="re-image__upload-button"></div>
-       <!-- <div class="re-image__delete-button"></div> -->
+       <div class="re-image__delete-button" style="display:none"></div> 
     </div>
     <input type="file" name="image" id="re-image-fileUpload" style="display: none;" />
     
@@ -63,7 +63,7 @@
         {{ hidden_field('tags', 'placeholder':"Tags", 'value': post['tags']) }}
 
       
-        <i class="sh-dropdown icon"></i>
+        <i class="dropdown icon"></i>
         <div class="default text input">Add at least 3 tags</div>
         <div class="menu">
         {% if tagsNames is defined %}
@@ -144,11 +144,14 @@
  
     <div class="create-create-list-tabs">
       <div class="create-create-list-tabs__inner">
+      {% if editing %}
+       
+      {% else %}
         <div class="create-list-tab-buttons u-flex extra-small-gutter">
           <a href="#" class="re-button re-button--full-width extra-small-margin create-list-tab-button create-list-tab-button-copy">Copy Paste content from a site</a>
           <a href="#" class="re-button re-button--grey re-button--full-width extra-small-margin create-list-tab-button create-list-tab-button-import">Upload your list as a CSV file</a>
         </div>
-
+      {% endif %}
         <div class="create-list-tab-content create-list-tab-content-copy">
           {% if tableColumns is not empty %} {{ partial('create-list/list') }} {% else %}
           <div class="create-list-copy-textarea-container">
@@ -190,7 +193,9 @@
 </div>
 {% endblock %} {% block scripts %}
 <script type="text/javascript">
-  $('.ui.dropdown.tags').dropdown({
+  
+  $(document).ready(function () {
+    $('.ui.dropdown.tags').dropdown({
     allowAdditions: true,
     apiSettings: {
       // this url parses query server side and returns filtered results
@@ -226,9 +231,8 @@
       url: '/api/v2/lists/?q={query}'
     }
   });
-  $(document).ready(function () {
-
-  
+     $('.empty ').initial({height:82, width:82 });
+    $('.empty ').css('border-radius', "6px")  
     $(".search").keydown(function(event){
     if(event.keyCode == 13) {
       event.preventDefault();
@@ -303,30 +307,32 @@
     })
     document.querySelector('#re-image-fileUpload').addEventListener('change', function () {
       if (this.files && this.files[0]) {
+        
         var img = $('.re-image');
         img.attr('style', 'background: #f5f5f5 url(' + URL.createObjectURL(this.files[0]) + ') center / cover;');
+        
         //img.onload = fn;
       }
     });
     document.querySelector('.re-image__upload-button').onclick = function () {
       document.getElementById('re-image-fileUpload').click();
     };
-    // document.querySelector('.re-image__delete-button').onclick = function () {
-    //   if(document.getElementById('re-image-fileUpload').value != ""){
-    //         console.log("asdsa")
-    //         document.getElementById('re-image-fileUpload').value = "";
-    //         var img = $('.re-image');
-    //         img.attr('style', '');
-    //   }
+    document.querySelector('.re-image__delete-button').onclick = function () {
+      if(document.getElementById('re-image-fileUpload').value != ""){
+            document.getElementById('re-image-fileUpload').value = "";
+            var img = $('.re-image');
+            img.attr('style', '');
+      }
       
       
-    // };
+    };
 
     document.querySelector('#create-list-fileUpload').addEventListener('change', function () {
       $('#createListFrom').submit();
     });
     document.querySelector('#file-upload-button').onclick = function () {
       document.getElementById('create-list-fileUpload').click();
+      
     };
 
     $('.create-list-tab-button-import').on('click', function (e) {
@@ -437,6 +443,7 @@
     $('.re-table__list-image__upload-button').on('click', function () {
       $(this).parents('td').find('.re-table__list-image-fileUpload').click();
     });
+    
     $('.re-table__list-image__delete-button').on('click', function () {
       $(this).parents('td').find('.re-table__list-image-fileUpload').val('');
       var img = $(this).parents('td').find('.re-table__list-image');

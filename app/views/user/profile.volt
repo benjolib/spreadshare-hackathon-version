@@ -17,8 +17,14 @@
                 <h1 class="profile-name">{{ profile.name }}</h1>
                 <h3 class="profile-tagline">{{ profile.tagline }}</h3>
                 <div class="status">
+                 {% if currentPage == 'following' %}
+                   <a href="/user/{{ profile.handle }}/followers"><span>{{ numFollowers }}</span> FOLLOWERS</a>
+                    <a href="/user/{{ profile.handle }}/following" class="status-link-green"><span>{{ numFollowing }}</span> FOLLOWING</a>
+                 {% else %}
                     <a href="/user/{{ profile.handle }}/followers" class="status-link-green"><span>{{ numFollowers }}</span> FOLLOWERS</a>
                     <a href="/user/{{ profile.handle }}/following"><span>{{ numFollowing }}</span> FOLLOWING</a>
+                 {% endif %}
+                    
                 </div>
                 <div class="social-links">
                     {% for connection in connections %}

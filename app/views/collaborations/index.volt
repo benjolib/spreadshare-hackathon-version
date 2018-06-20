@@ -37,7 +37,7 @@
                 <thead>
                   <tr>
                     <th>
-                      VOTES
+                      <!--VOTES-->
                     </th>
                     <th class="shadowcontainth"></th>
                     <th>{# image #}</th>
@@ -49,11 +49,11 @@
                 <tbody>
                   <tr>
                     <tr data-id="{{ submission['id'] }}" class="list-row-tr">
-                      <td>
+                      <td><!--
                         <a href="#" class="vote-link">
                           <img class="vote-link__image" src="/assets/images/vote-lightning.svg" />
                           <div>0</div>
-                        </a>
+                        </a>-->
                       </td>
                       <td class="shadowcontaintd">
                         <div class="shadowcontain">
@@ -69,9 +69,14 @@
                         </div>
                       </td>
                       <td>
-                        <div class="re-table__list-image" style="background: #f5f5f5 url({{ submission['image'] }}) center / cover;"></div>
-                      </td>
-
+                <div class="re-table__list-image {{ submission['image'] ? '' : 're-table__list-image--empty' }}" style="background: #f5f5f5 url({{ submission['image'] }}) center / cover;">
+                  <img data-name="{{ submission['content']|json_decode[0] }}" class="{{ submission['image'] ? '' : 'empty' }}"/> 
+                  <div class="re-table__list-image__upload-button"></div>
+                  <!--<div class="re-table__list-image__delete-button"></div>-->
+                </div>
+                <input type="file" name="image" class="re-table__list-image-fileUpload" style="display: none;" />
+              </td>
+ 
 
                       {% if (submission['content']) %}
                       {% for cell in submission['content']|json_decode %}
@@ -134,7 +139,7 @@
               <thead>
                 <tr>
                   <th>
-                    VOTES
+                   <!-- VOTES -->
                   </th>
                   <th class="shadowcontainth"></th>
                   <th>
@@ -149,10 +154,10 @@
                 <tr>
                   <tr data-id="1" class="list-row-tr">
                     <td>
-                      <a href="#" class="vote-link">
+                     <!-- <a href="#" class="vote-link">
                         <img class="vote-link__image" src="/assets/images/vote-lightning.svg" />
                         <div>0</div>
-                      </a>
+                      </a>-->
                     </td>
 
 
@@ -181,8 +186,11 @@
                     </td>
 
                     <td>
-                      <div class="re-table__list-image" style="background: #f5f5f5 url({{ collab['image'] }}) center / cover;"></div>
+                      <div class="re-table__list-image {{ collab['image'] ? '' : 're-table__list-image--empty' }}" style="background: #f5f5f5 url({{ collab['image'] ?  collab['image'] : '' }}) center / cover;"></div>
+                    <img data-name="a" class="{{ collab['image'] ? '' : 'empty' }}"/> 
                     </td>
+
+                 
 
                     {% for cont in collab['content'] %}
                       <td style="min-width: 0px;">{{ filterTableRowsContent( cont ) }}</td>
@@ -202,6 +210,8 @@
 {% block scripts %}
 <script type="text/javascript">
   $(document).ready(function () {
+     $('.empty ').initial({height:82, width:82 });
+    $('.empty ').css('border-radius', "6px")  
     $('.collaborations-tabs-button-submitted').on('click', function (e) {
       e.preventDefault();
       $('.collaborations-tabs-button').removeClass('active');
