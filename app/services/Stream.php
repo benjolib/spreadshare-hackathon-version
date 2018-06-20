@@ -46,7 +46,8 @@ class Stream
         foreach ($curatorsIds as $curator) {
             $c = User::findFirstById($curator);
             if (empty($c)) {
-                throw new \Exception("Error in curators - Curator $curator doesn't exist. Make sure you input the correct handle");
+                //throw new \Exception("Curator unknown - Curator $curator doesn't exist. Make sure you input the correct handle");
+                throw new \Exception("Curator unknown - Please check if your team mates user name is correct");
             }
             $result[] = ['id' => $curator, 'name' => $c->getName()];
         }
@@ -61,7 +62,7 @@ class Stream
         foreach ($relLists as $listId) {
             $l = Tables::findFirstById($listId);
             if (empty($l)) {
-                throw new \Exception("Error in related lists - List with id $listId doesn't exist");
+                throw new \Exception("List unknown - List doesn't exist");
             }
             $result[] = ['id' => $listId, 'name' => $l->getTitle()];
         }
