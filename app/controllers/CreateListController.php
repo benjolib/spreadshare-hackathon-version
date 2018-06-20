@@ -166,6 +166,8 @@ class CreateListController extends BaseController implements LoginAwareControlle
             throw new \Exception('Error on stream tagline - ' . $e->getMessage());
         } catch (InvalidStreamDescriptionException $e) {
             throw new \Exception('Error on stream description - ' . $e->getMessage());
+        } catch (\Exception $e) {
+            throw new \Exception('Undetermined error on stream - '. $e->getMessage());
         }
     }
 }
