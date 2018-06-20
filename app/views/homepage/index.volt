@@ -741,7 +741,7 @@
     /* $('#closeHero').on('click', function () {
       $('.main__hero').css('display', 'none');
       createPopper();
-      createPopper($('.navbar__search__filter'), $('.dropdown--notifications'));
+      createPopper($('.navbar__search__filter'), $('.sh-dropdown--notifications'));
     }); */
 
     // Load cards for infinite scrolls

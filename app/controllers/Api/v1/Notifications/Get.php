@@ -62,9 +62,9 @@ class Get extends ActionHandler implements MethodInterface
 <div class="tableFeed__item__info">
   <a href="'. UserNotificationLinkHelper::getLink($notification) .'">
       <div class="tableFeed__item__info__text">
-          <span class="tableFeed__item__info__text__author">
+          <div class="tableFeed__item__info__text__author">
             ' . $notification['userName'] . '
-          </span>
+          </div>
         <span class="tableFeed__item__info__text__message">
             ' . $notification['text'] . '
           </span>

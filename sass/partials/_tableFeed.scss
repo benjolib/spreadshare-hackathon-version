@@ -1,10 +1,8 @@
 .container--tableFeed {
   width: 100%;
   @include rem(margin-top, 25);
-
   .container__content {
     flex-direction: column;
-
     @include desktop {
       width: 72.5%;
       margin-bottom: 0;
@@ -18,7 +16,7 @@ aside.aside {
   }
 }
 
-.dropdown .tableFeed {
+.sh-dropdown .tableFeed {
   &__item {
     &:first-child {
       margin-top: 10px;
@@ -28,7 +26,6 @@ aside.aside {
 
 .tableFeed {
   position: relative;
-
   &__title {
     position: absolute;
     top: 50px;
@@ -37,32 +34,26 @@ aside.aside {
     text-transform: uppercase;
     font-weight: 400;
     @include rem(font-size, 13);
-
     @include desktop {
       font-weight: 500;
       left: 120px;
     }
   }
-
   &__item {
     display: flex;
     color: $text-color-alternate;
     @include rem(margin-bottom, 16);
-
     &:first-child {
       margin-top: 50px;
     }
-
     &:last-child {
       margin-bottom: 0;
       .tableFeed__item__info {
         border-bottom: none;
       }
     }
-
     &__avatar {
       @include rem(margin-right, 12);
-
       img {
         border-radius: 6px;
         @include rem(width, 34);
@@ -76,14 +67,11 @@ aside.aside {
       border-bottom: 1.6px solid whitesmoke;
       word-break: break-all;
       position: relative;
-
       &__text {
         @include rem(font-size, 12);
-
         @include desktop {
           @include rem(font-size, 14);
         }
-
         &__author {
           font-weight: 400;
           color: $text-color;
@@ -94,16 +82,14 @@ aside.aside {
       }
       &__counter {
         position: absolute;
-        right:20px;
+        right: 20px;
       }
       &__time {
         @include rem(margin-top, -4);
         @include rem(margin-bottom, 8);
-
         span {
           color: lighten($text-color-alternate, 12%);
           @include rem(font-size, 10);
-
           @include desktop {
             @include rem(font-size, 12);
           }

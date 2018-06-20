@@ -1,36 +1,37 @@
 /* active classes */
+
 .sign-box-selected {
   background: #F2F2F8;
 }
+
 .settings-box-selected {
   background: #F2F2F8;
   color: #6B7D94;
   font-weight: 400 !important;
 }
+
 .table-card-upvoted {
   color: $logo-color;
-
   @include desktop {
     background: $logo-color;
     color: white;
-
     &:hover {
       background: darken($logo-color, 8%);
     }
   }
 }
+
 .link-active {
   color: $text-link-color-hover !important;
-
   a {
     color: $text-link-color-hover !important;
   }
 }
-.dropdown--filters {
+
+.sh-dropdown--filters {
   .link-active {
     a {
       color: $text-link-color-hover !important;
-
       &:after {
         content: ' (selected)';
         color: $logo-color;
@@ -42,7 +43,6 @@
 .selected {
   color: white !important;
   background: #2ead6b !important;
-
   &:hover {
     background: darken(#2ead6b, 8%) !important;
   }
@@ -58,6 +58,7 @@
     content: 'Follow';
   }
 }
+
 .following-user {
   &:after {
     content: 'Unfollow';
@@ -88,7 +89,7 @@
   }
   &--flex {
     @include mobile {
-    display: flex;
+      display: flex;
     }
     @include tablet {
       display: none;
@@ -98,6 +99,7 @@
     }
   }
 }
+
 .tablet-only {
   @include mobile {
     display: none;
@@ -110,7 +112,7 @@
   }
   &--flex {
     @include mobile {
-    display: none;
+      display: none;
     }
     @include tablet {
       display: flex;
@@ -120,6 +122,7 @@
     }
   }
 }
+
 .desktop-only {
   @include mobile {
     display: none;
@@ -132,7 +135,7 @@
   }
   &--flex {
     @include mobile {
-    display: none;
+      display: none;
     }
     @include tablet {
       display: none;

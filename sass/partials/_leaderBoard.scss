@@ -1,10 +1,8 @@
 .container--leaderBoard {
   width: 100%;
   @include rem(margin-top, 25);
-
   .container__content {
     flex-direction: column;
-
     @include desktop {
       width: 72.5%;
       margin-bottom: 0;
@@ -18,7 +16,7 @@ aside.aside {
   }
 }
 
-.dropdown .leaderBoard {
+.sh-dropdown .leaderBoard {
   &__item {
     &:first-child {
       margin-top: 10px;
@@ -28,7 +26,6 @@ aside.aside {
 
 .leaderBoard {
   position: relative;
-
   &__title {
     position: absolute;
     top: 50px;
@@ -37,38 +34,31 @@ aside.aside {
     text-transform: uppercase;
     font-weight: 400;
     @include rem(font-size, 13);
-
     @include desktop {
       font-weight: 500;
       left: 120px;
     }
   }
-
   &__item {
     display: flex;
     color: $text-color-alternate;
     @include rem(margin-bottom, 16);
-
     &:first-child {
       margin-top: 50px;
     }
-
     &:last-child {
       margin-bottom: 0;
       .leaderBoard__item__info {
         border-bottom: none;
       }
     }
-
     &__index {
       margin-right: 30px;
       padding: 25px 0 0 15px;
       font-weight: 600;
     }
-
     &__avatar {
       @include rem(margin-right, 15);
-
       img {
         border-radius: 6px;
         @include rem(width, 64);
@@ -82,29 +72,23 @@ aside.aside {
       word-break: break-all;
       position: relative;
       margin-bottom: 20px;
-
       &__text {
         margin-top: 10px;
         margin-bottom: 5px;
         @include rem(font-size, 14);
-
         @include desktop {
           @include rem(font-size, 16);
         }
-
         &__user {
           font-weight: 600;
           color: $text-color;
         }
-
         &__message {
           font-weight: 400;
-
           span.dot {
             color: lighten($text-color-alternate, 10);
           }
         }
-
       }
       &__counter {
         position: absolute;
@@ -115,11 +99,9 @@ aside.aside {
       &__time {
         @include rem(margin-top, -4);
         @include rem(margin-bottom, 8);
-
         span {
           color: lighten($text-color-alternate, 12%);
           @include rem(font-size, 10);
-
           @include desktop {
             @include rem(font-size, 12);
           }

@@ -11,21 +11,17 @@
   box-sizing: border-box;
   border-bottom: 1px solid #e4e4e4;
   @include rem(padding-top, 25);
-
   @include desktop {
     @include rem2(padding, 26, 28);
   }
-
   &--loggedOut {
     @include rem(padding-bottom, 25);
     @include rem(padding-left, 28);
     @include rem(padding-right, 28);
   }
-
   &__wrapper {
     display: flex;
     align-items: center;
-
     &--right {
       justify-content: flex-end;
     }
@@ -33,7 +29,6 @@
       display: flex;
       align-items: center;
       width: 100%;
-
       &--left {
         width: 65%;
       }
@@ -43,22 +38,17 @@
       }
     }
   }
-
   &__logo {
     @include rem(margin-right, 10);
     width: auto;
-
     @include desktop {
       @include rem(margin-right, 20);
     }
-
     &.mobile-and-tablet {
       padding-bottom: 0;
     }
-
     a {
       text-decoration: none;
-
       &:hover {
         text-decoration: none;
         color: $logo-color;
@@ -70,33 +60,27 @@
         color: $logo-color;
       }
     }
-
     img {
       border-radius: 4px;
       @include rem(width, 38);
       @include rem(height, 38);
     }
   }
-
   &__search {
     display: flex;
     border-radius: 3px;
     width: 80%;
-
     &.mobile-and-tablet {
       padding-bottom: 0;
     }
-
     @include desktop {
       width: auto;
     }
-
     &--active {
       -webkit-box-shadow: 0px 0.8px 5px 1px rgba(0, 0, 0, 0.33);
       -moz-box-shadow: 0px 0.8px 5px 1px rgba(0, 0, 0, 0.33);
       box-shadow: 0px 0.8px 5px 1px rgba(0, 0, 0, 0.33);
     }
-
     &__icon {
       display: flex;
       justify-content: center;
@@ -105,14 +89,12 @@
       border-bottom-left-radius: 3px;
       @include rem(padding-right, 4);
       @include rem(width, 38);
-
       img {
         align-self: center;
         @include rem(padding-left, 5);
         width: 20px;
       }
-    }
-    // &__field {
+    } // &__field {
     //   font-family: $primary-font;
     //   font-weight: 400;
     //   color: #6a7c94;
@@ -147,7 +129,6 @@
     //   }
     // }
   }
-
   &__controls {
     display: flex;
     align-items: center;
@@ -156,7 +137,6 @@
     @include rem(margin-bottom, 25);
     @include rem(padding-right, 28);
     @include rem(padding-left, 28);
-
     @include desktop {
       margin-right: 0;
       margin-bottom: 0;
@@ -164,21 +144,17 @@
       width: auto;
       justify-content: flex-start;
     }
-
     a#notificationButton {
       @include rem(margin-left, 25);
       position: relative;
-
       img {
         width: 18px;
         height: 18px;
-
         @include desktop {
           width: 17px;
           height: 17px;
         }
       }
-
       span {
         font-size: 8px;
         line-height: 10px;
@@ -197,27 +173,22 @@
     }
     a#profileImage {
       @include rem(margin-left, 16);
-
       @include tablet {
         @include rem(margin-left, 24);
       }
-
       @include desktop {
         @include rem(margin-left, 30);
       }
     }
-
     img {
       &:hover {
         cursor: pointer;
       }
     }
-
-    .dropdown {
+    .sh-dropdown {
       &--notifications {
         width: 360px !important;
         @include rem2(padding, 12, 16);
-
         .tableFeed__item__avatar {
           img {
             @include rem(width, 34);
@@ -226,7 +197,6 @@
         }
         .tableFeed__item__info__text {
           @include rem(font-size, 13);
-
           &__author {
             font-weight: 500;
           }
@@ -237,28 +207,22 @@
         .tableFeed__item__info__text {
           font-weight: 300;
         }
-
         .center {
           color: $text-color;
           font-weight: 500;
           @include rem(font-size, 13);
-
           a {
             color: $logo-color;
-
             &:hover {
               color: darken($logo-color, 6%);
             }
           }
-        }
-
-        // css hack for responsive notifications dropdown
+        } // css hack for responsive notifications dropdown
         .leftZero {
           left: 0 !important;
         }
       }
     }
-
     &__dropdown {
       visibility: hidden;
       position: absolute;
@@ -267,17 +231,14 @@
       box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.26);
       border-radius: 6px;
       z-index: 1;
-
       ul {
         list-style-type: none;
         width: 224px;
         padding-left: 15px;
         padding-bottom: 15px;
-
         li {
           /* width: 6em; */
           margin: 5px 0px 0px 15px;
-
           a {
             font-size: 16px;
             color: #6a7c94;
@@ -285,12 +246,10 @@
             line-height: 32px;
           }
         }
-
         li.separator {
           padding: 0;
           margin: 15px 0;
         }
-
         li:first-child {
           margin-top: 14px;
           margin-bottom: 14px;
@@ -299,7 +258,6 @@
             letter-spacing: -0.43px;
           }
         }
-
         li:last-child {
           margin-top: 14px;
           margin-bottom: 14px;
@@ -310,16 +268,13 @@
         }
       }
     }
-
     &__add {
       @include rem(width, 15);
       @include rem(height, 15);
-
       @include desktop {
         @include rem(width, 18);
         @include rem(height, 18);
       }
-
       &__create {
         display: none;
         padding: 8px 10px;
@@ -329,62 +284,50 @@
         font-weight: 600;
         color: #979797;
         @include rem(font-size, 14);
-
         &:hover {
           background: $background-color;
         }
-
         @include desktop {
           display: block;
         }
-
         img {
           vertical-align: middle;
           margin-top: -2px;
           margin-right: 3px;
         }
-
         span {
           color: $text-color;
         }
       }
-
       /*
       &__create:hover {
         border-radius: 4px;
         border: 1px solid #f2f2f8;
       }
       */
-
       &--notification {
         @include rem(margin-right, 0);
       }
-      &--menu {
-      }
+      &--menu {}
     }
-
     &__notification {
       @include rem(width, 15);
       @include rem(height, 15);
-
       @include desktop {
         @include rem(width, 20);
         @include rem(height, 20);
       }
     }
-
     &__profile {
       border-radius: 4px;
       @include rem(width, 30);
       @include rem(height, 30);
-
       @include desktop {
         @include rem(width, 32);
         @include rem(height, 32);
       }
     }
   }
-
   &__login {
     @include rem(font-size, 12);
     @include rem2(padding, 10, 16);
@@ -397,16 +340,13 @@
     font-weight: 300;
     border-radius: 3px;
     @include rem(margin-left, 10);
-
     @include desktop {
       margin-bottom: 0;
       @include rem(font-size, 14);
       @include rem2(padding, 13, 22);
     }
-
     span {
       display: none;
-
       @include desktop {
         display: block;
         text-transform: lowercase;
@@ -415,41 +355,34 @@
         @include rem2(margin, 0, 6);
       }
     }
-
     &__login {
       color: white;
       text-decoration: none;
       font-weight: 600;
-
       &::after {
         content: 'Join';
       }
-
       @include desktop {
         &::after {
           content: 'Login';
         }
       }
-
       &:hover {
         cursor: pointer;
       }
     }
     &__signup {
       display: none;
-
       @include desktop {
         display: block;
         color: white;
         text-decoration: none;
         font-weight: 600;
-
         &:hover {
           cursor: pointer;
         }
       }
     }
-
     a {
       &:hover {
         text-decoration: none;
