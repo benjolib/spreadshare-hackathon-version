@@ -2,6 +2,7 @@
 
 namespace DS\Controller;
 
+use DS\Exceptions\InvalidStreamDescriptionException;
 use DS\Exceptions\InvalidStreamTaglineException;
 use DS\Exceptions\InvalidStreamTitleException;
 use DS\Interfaces\LoginAwareController;
