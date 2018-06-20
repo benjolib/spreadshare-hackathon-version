@@ -58,8 +58,9 @@
       {% for type, messages in flashMessages %}
         {% for message in messages %}
           <div class="flash__message flash__message--{{ type }}">
-            <div class="flash__message__heading">{{ message|split(' - ')[0] }}</div>
-            <div class="flash__message__text">{{ message|split(' - ')[1] }}</div>
+            <span class="flash__message__heading">{{ message|split(' - ')[0] }}</span>
+            &nbsp;&nbsp;
+            <span class="flash__message__text">{{ message|split(' - ')[1] }}</span>
           </div>
         {% endfor %}
       {% endfor %}

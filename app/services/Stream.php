@@ -25,13 +25,13 @@ class Stream
     {
         $tagsIds = explode(',', $tagsList);
         if (count($tagsIds) < 3) {
-            throw new \Exception('Error in tags - you should add at least three tags');
+            throw new \Exception('Tag missing - Please select at least 3 tags for your Stream');
         }
         foreach ($tagsIds as $tag) {
             /** @var Tags $t */
             $t = Tags::findFirstById($tag);
             if (empty($t)) {
-                throw new \Exception("Error in tags - Tag $tag doesn't exist");
+                throw new \Exception("Tag unknown - Tag $tag doesn't exist");
             }
             $result[] = ['id' => $tag, 'name' => $t->getTitle()];
         }
@@ -46,7 +46,8 @@ class Stream
         foreach ($curatorsIds as $curator) {
             $c = User::findFirstById($curator);
             if (empty($c)) {
-                throw new \Exception("Error in curators - Curator $curator doesn't exist. Make sure you input the correct handle");
+                //throw new \Exception("Curator unknown - Curator $curator doesn't exist. Make sure you input the correct handle");
+                throw new \Exception("Curator unknown - Please check if your team mates user name is correct");
             }
             $result[] = ['id' => $curator, 'name' => $c->getName()];
         }
@@ -61,7 +62,7 @@ class Stream
         foreach ($relLists as $listId) {
             $l = Tables::findFirstById($listId);
             if (empty($l)) {
-                throw new \Exception("Error in related lists - List with id $listId doesn't exist");
+                throw new \Exception("List unknown - List doesn't exist");
             }
             $result[] = ['id' => $listId, 'name' => $l->getTitle()];
         }

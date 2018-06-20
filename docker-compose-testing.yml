@@ -72,8 +72,8 @@ services:
     environment:
         BUILD_ENVIRONMENT: 'development'
         APPLICATION_ENV: 'development'
-        HOST: 'dev.spreadshare.co:81'
-        AUTH_CALLBACK: 'http://dev.spreadshare.co:81/login'
+        HOST: 'spreadshare.javisantos.com:81'
+        AUTH_CALLBACK: 'http://spreadshare.javisantos.com:811/login'
         WALLET: 'localhost'
         MAILGUN_KEY: 'key-611a7bf686cb890b8db38ad9ce1a5bbb'
         CRYPT_KEY: 'iuh213iu78ads898213euwioadjbxhjy-jkldHJKDJ_ksahdKASGDS$AKDH32L4EJLDSACKÖÄASPOE24'

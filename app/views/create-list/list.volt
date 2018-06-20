@@ -8,7 +8,7 @@
         <th class="shadowcontainth"></th>
         <th>{# image #}</th>
         {% for column in tableColumns %}
-          <th>{{ column }}</th>
+          <th>{{ column }}</th><td></td>
         {% endfor %}
       </tr>
     </thead>
@@ -18,7 +18,6 @@
 
       {% if tableContent is not empty and tableContent %}
         {% for i, row in tableContent %}
-          {{ row['content'][0] }}
           <tr class="list-row-tr" id="{{ row['id'] }}">
             <td>
             </td>
@@ -32,17 +31,28 @@
               </div>
             </td>
             <td>
-            <div class="re-table__list-image re-table__list-image--empty" style="background: #f5f5f5 center / cover;">
-              {% if row['image'] is not empty and tableContent %}
-              <div class="re-table__list-image {{ row['image'] ? '' : 're-table__list-image--empty' }}" style="background: #f5f5f5 url({{ row['image'] }}) center / cover;">
+            <div class="re-table__list-image" style="background: #f5f5f5 center / cover;">
+            {% if row['image'] is not empty %}
+             
               {% else %}
+              <img data-name="{{ row['content'][0] }}" class="empty"/>
+              {% endif %}
+              {% if row['image'] is not empty %}
+              <div class="re-table__list-image " style="z-index:99;background: #f5f5f5 url({{ row['image'] }}) center / cover;">
+              
+              {% else %}
+              
+              
               <div class="re-table__list-image__upload-button"></div>
               {% endif %}
-                <!--<div class="re-table__list-image__delete-button"></div>-->
+              
+              <div class="re-table__list-image__upload-button"></div>
+                <div class="re-table__list-image__delete-button"></div>
               </div>
+              
               <input type="file" name="listing-image-{{ i }}" class="re-table__list-image-fileUpload" style="display: none;" />
             </td>
-            {% for cell in row['content'] %}
+            {% for index,cell in row['content'] %}
               {% set len = filterTableRowsContent(cell)|striptags|length %}
                  {% if len > 160  %}
                  {% set length = 480 %}
@@ -55,10 +65,16 @@
                  {% else %}
                  {% set length = 0 %}
                  {% endif %}
-              <td style="min-width: {{ length }}px;"><div>{{ filterTableRowsContent(cell) }}</div></td>
+              <td style="min-width: {{ length }}px; cursor: pointer;" >
+              <div onmouseover="javascript:$('#e{{i}}{{index}}').css('visibility','visible');"; onmouseout="javascript:$('#e{{i}}{{index}}').css('visibility', 'hidden');" id="d{{i}}{{index}}"  class="edit icon" style="outline: 0px solid transparent;border:0;display:flex;">{{ filterTableRowsContent(cell) }}</div>
+              </td>
+              <td>
+              <i id="e{{i}}{{index}}" class="edit icon green" style="cursor: pointer;visibility: hidden;" onclick="console.log($(this).prev().prev());javascript:$('#d{{i}}{{index}}').focus();"></i>
+              </td>
             {% endfor %}
+            
           </tr>
-          <tr class="re-table-space"></tr>
+          <tr class="re-table-space"></tr> 
         {% endfor %}
       {% else %}
         <tr><td>No listings yet</td></tr>

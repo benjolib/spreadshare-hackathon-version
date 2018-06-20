@@ -77,7 +77,7 @@
                 <div class="re-table__list-image {{ row['image'] ? '' : 're-table__list-image--empty' }}" style="background: #f5f5f5 url({{ row['image'] }}) center / cover;">
                   <img data-name="{{ row['content']|json_decode[0].content }}" class="{{ row['image'] ? '' : 'empty' }}"/> 
                   <div class="re-table__list-image__upload-button"></div>
-                  <div class="re-table__list-image__delete-button"></div>
+                  <!--<div class="re-table__list-image__delete-button"></div>-->
                 </div>
                 <input type="file" name="image" class="re-table__list-image-fileUpload" style="display: none;" />
               </td>
@@ -132,18 +132,23 @@
         <tr id="addAListingRowSpace" class="re-table-space" style="display: none;"></tr>
         <tr id="addAListingRow" class="list-row-tr list-row-tr--add-row" style="display: none;">
           <td>
-            <a href="#" class="vote-link">
-              <img class="vote-link__image" src="/assets/images/vote-lightning.svg" />
-              <div>0</div>
-            </a>
+            
           </td>
           <td class="shadowcontaintd"><div class="shadowcontain"></div></td>
           <td>
             <div class="re-table__list-image re-table__list-image--new-row" id="addRowImage"></div>
             <input type="file" name="image" id="new-row-fileUpload" style="display: none;" />
+            
           </td>
           {% for column in tableColumns %}
-            <td><textarea placeholder="{{ column.title }}" rows="1" class="cell-input-sizing"></textarea></td>
+            <td>
+            <div style="display:flex">
+            
+            <textarea placeholder="{{ column.title }}" rows="1" class="edit icon cell-input-sizing"></textarea>
+            <i class="edit icon green" style="cursor: pointer" onclick="javascript:$(this).closest('div').find('textarea').focus();"></i>
+            </div>
+            </td>
+            
           {% endfor %}
         </tr>
         <tr class="re-table-space"></tr>
@@ -151,12 +156,13 @@
     </table>
   </div>
   <div class="addAListingSubmitAndCancel" id="addAListingSubmitAndCancel" style="display: none;">
-    <a class="re-button re-button--list-add-row" href="#" id="addAListingSubmit">Submit</a>
-    <a class="re-button re-button--list-add-row re-button--grey" href="#" id="addAListingCancel">Cancel</a>
+    <a class="re-button re-button--list-add-row" href="#" id="addAListingSubmit"><img src="/assets/images/9-0/list-collaborate-button-octopus.svg" />Submit</a>
+    <a style="width:140px" class="re-button re-button--list-add-row-cancel re-button--grey small-cancel-button" href="#" id="addAListingCancel">Cancel</a>
   </div>
-  <div class="u-flex u-flexAlignItemsCenter addAListingButton" id="addAListingButton" style="margin-top: 8px;margin-bottom:64px;">
+  <div class="u-flex u-flexAlignItemsCenter addAListingButton1" id="addAListingButton" style="margin-top: 8px;margin-bottom:64px;">
     <a class="re-button re-button--list-collaborate" href="#">
       <img src="/assets/images/9-0/list-collaborate-button-octopus.svg" /> Collaborate
+
     </a>
     <span class="subscribe-button-message">Contribute and get endorsed by the curators if your post will be published.</span>
   </div>
@@ -403,6 +409,7 @@
   $(document).ready(function () {
      $('.empty ').initial({height:82, width:82 });
      $('.empty ').css('border-radius', "6px")
+     
     function listCellInputSizing() {
       var $this = $(this);
 
@@ -569,27 +576,32 @@
       document.getElementById('new-row-fileUpload').click();
     };
 
-    $('#addAListingButton').on('click', function (e) {
+    $('.addAListingButton1').on('click', function (e) {
       e.preventDefault();
-      $(this).hide();
+      $('#addAListingButton').css("visibility", "hidden")
+      //TODO hide() doesnt work ?
       $('#addAListingRow').show();
       $('#addAListingRowSpace').show();
       $('#addAListingSubmitAndCancel').show();
+
     });
 
     $('#addAListingCancel').on('click', function (e) {
       e.preventDefault();
+      $(this).show();
+      $('#addAListingButton').css("visibility", "visible")
       $('#addAListingButton').show();
       $('#addAListingRow').hide();
       $('#addAListingRowSpace').hide();
       $('#addAListingSubmitAndCancel').hide();
+      $('#addAListingButton').show();
     });
 
     // Listing submition
 
     $('#addAListingSubmit').on('click', function (e) {
       e.preventDefault();
-      console.log()
+      
       // Clone image input to the hidden form
       var image = $('#new-row-fileUpload');
       var image_clone = image.clone();
