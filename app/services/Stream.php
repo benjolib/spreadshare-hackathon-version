@@ -31,7 +31,7 @@ class Stream
             /** @var Tags $t */
             $t = Tags::findFirstById($tag);
             if (empty($t)) {
-                throw new \Exception("Error in tags - Tag $tag doesn't exist");
+                throw new \Exception("Tag unknown - Tag $tag doesn't exist");
             }
             $result[] = ['id' => $tag, 'name' => $t->getTitle()];
         }
