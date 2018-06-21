@@ -2193,6 +2193,15 @@
           padding-right: 32px;
           height: 115px;
         }
+        .empty {
+          width: 61.5px;
+          height: 61.5px;
+          @media (min-width: 768px) {
+            width: 82px;
+            height: 82px;
+            border-radius: 10px;
+          }
+        }
         .re-table__list-image {
           width: 61.5px;
           height: 61.5px;
