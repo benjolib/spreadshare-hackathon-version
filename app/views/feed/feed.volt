@@ -10,15 +10,13 @@
         <h1 class="re-heading">Activity</h1>
         <h2 class="re-subheading">You will be notified if people interact with you or your content</h2>
     </div>
-    <div class="u-flex u-flexJustifyCente ">
+    <div class="u-flex u-flexJustifyCenter u-flexCol">
         {% if notifications %}
-        <div class="elements container__content activity-box">
+        <div class="elements container__content activity-box u-flex u-flexJustifyCenter u-flexCol">
         
             {% for notification in notifications %}
-            
-
-
-            <div class="activity-box__notification u-flex u-flexAlignItemsCenter">
+    
+            <div class="notification-dropdown__notification u-flex u-flexAlignItemsCenter >
             <a href="/user/{{ notification['userHandle'] }}">
             <img class="notification-dropdown__notification__image" src="{{ notification['userImage'] }}" />
             </a>
