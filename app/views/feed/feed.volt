@@ -5,36 +5,37 @@
 
 {% block content %}
 
-<div class="tableFeed">
-    <div class="tableFeed__title">
-        <p>Your Notifications</p>
+<div class="re-page">
+    <div class="collaborations-page-space">
+        <h1 class="re-heading">Activity</h1>
+        <h2 class="re-subheading">You will be notified if people interact with you or your content</h2>
     </div>
-    <div class="container container--tableFeed">
+    <div class="u-flex u-flexJustifyCente ">
         {% if notifications %}
-        <div class="container__content">
+        <div class="elements container__content activity-box">
+        
             {% for notification in notifications %}
             <div class="tableFeed__item">
-                <div class="tableFeed__item__avatar">
-                    <a href="/user/{{ notification['userHandle'] }}">
-                        <img src="{{ notification['userImage'] }}" />
-                    </a>
-                </div>
-                <a href="{{ linkHelper.getLink(notification) }}">
-                    <div class="tableFeed__item__info">
-                        <div class="tableFeed__item__info__text">
-                            <span class="tableFeed__item__info__text__author">
-                                {{ notification['userName'] }}
-                            </span>
-                            <span class="tableFeed__item__info__text__message">
-                                {{ notification['text'] }}
-                            </span>
-                        </div>
-                        <div class="tableFeed__item__info__time">
-                            <span>{{ formatTimestamp(notification['createdAt']) }}</span>
-                        </div>
-                    </div>
-                </a>
+               
             </div>
+
+
+            <div class="notification-dropdown__notification u-flex u-flexAlignItemsCenter">
+            <a href="/user/{{ notification['userHandle'] }}">
+            <img class="notification-dropdown__notification__image" src="{{ notification['userImage'] }}" />
+            </a>
+
+            <div style="width:100%;">
+            <div class="u-flex u-flexJustifyBetween">
+            <a href="{{ linkHelper.getLink(notification) }}">
+                <span class="notification-dropdown__notification__name">{{ notification['userName'] }}</span>
+            </a>
+            <div class="notification-dropdown__notification__date"><img src="/assets/images/comment-clock.svg" />{{ formatTimestamp(notification['createdAt']) }}</div>
+            </div>
+        <p class="notification-dropdown__notification__text">
+        {{ notification['text'] }}</p>
+        </div>
+      </div>
             {% endfor %}
         </div>
         {% else %}
@@ -46,38 +47,7 @@
             <p>There are no notifications available for you, yet..</p>
         </div>
         {% endif%}
-        <aside class="aside">
-            <a href="/feed">
-                <div class="aside__item {% if type == '' %}item-selected{% endif %}">
-                    <p>All</p>
-                </div>
-            </a>
-            <a href="/feed/changes">
-                <div class="aside__item {% if type == 'changes' %}item-selected{% endif %}">
-                    <p>Changes</p>
-                </div>
-            </a>
-            <a href="/feed/comments">
-                <div class="aside__item {% if type == 'comments' %}item-selected{% endif %}">
-                    <p>Comments</p>
-                </div>
-            </a>
-            <a href="/feed/followers">
-                <div class="aside__item {% if type == 'followers' %}item-selected{% endif %}">
-                    <p>Followers</p>
-                </div>
-            </a>
-            <a href="/feed/subscribers">
-                <div class="aside__item {% if type == 'subscribers' %}item-selected{% endif %}">
-                    <p>Subscribers</p>
-                </div>
-            </a>
-            <a href="/feed/upvotes">
-                <div class="aside__item {% if type == 'upvotes' %}item-selected{% endif %}">
-                    <p>Upvotes</p>
-                </div>
-            </a>
-        </aside>
+       
     </div>
 </div>
 
