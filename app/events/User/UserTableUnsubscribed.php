@@ -38,22 +38,22 @@ class UserTableUnsubscribed extends AbstractEvent
         $user  = User::findFirstById($userId);
         $table = Tables::findFirstById($tableId);
         
-        $userNotification = new UserNotifications;
-        $userNotification
-            ->setUserId($table->getOwnerUserId())
-            ->setNotificationType(UserNotificationType::TableUnsubscribed)
-            ->setSourceUserId($userId)
-            ->setSourceTableId($tableId)
-            ->setText(sprintf('unsubscribed your table %s', $user->getName(), $table->getTitle()))
-            ->setPlaceholders(
-                json_encode(
-                    [
-                        $user->getName(),
-                        $table->getTitle(),
-                    ]
-                )
-            )
-            ->create();
+        // $userNotification = new UserNotifications;
+        // $userNotification
+        //     ->setUserId($table->getOwnerUserId())
+        //     ->setNotificationType(UserNotificationType::TableUnsubscribed)
+        //     ->setSourceUserId($userId)
+        //     ->setSourceTableId($tableId)
+        //     ->setText(sprintf('Unsubscribed of %s', $table->getTitle()))
+        //     ->setPlaceholders(
+        //         json_encode(
+        //             [
+        //                 $user->getName(),
+        //                 $table->getTitle(),
+        //             ]
+        //         )
+        //     )
+        //     ->create();
         
         $tableLog = new TableLog();
         $tableLog
