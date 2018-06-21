@@ -15,12 +15,10 @@
         <div class="elements container__content activity-box">
         
             {% for notification in notifications %}
-            <div class="tableFeed__item">
-               
-            </div>
+            
 
 
-            <div class="notification-dropdown__notification u-flex u-flexAlignItemsCenter">
+            <div class="activity-box__notification u-flex u-flexAlignItemsCenter">
             <a href="/user/{{ notification['userHandle'] }}">
             <img class="notification-dropdown__notification__image" src="{{ notification['userImage'] }}" />
             </a>
