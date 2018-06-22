@@ -121,19 +121,19 @@ block content %}
                     getFeatured: function (type) {
                         console.log(event.target.checked)
                         console.log(event.target.id)
-                        // data = [{
-                        //         id: 1,
-                        //         title: "Streaasdasdm1",
-                        //         tagline: "taglasdsadadine1",
-                        //         featured: true,
-                        //     },
-                        //     {
-                        //         id: 6,
-                        //         title: "Streasdsadam2",
-                        //         tagline: "tagliasdsadne2",
-                        //         featured: false,
-                        //     }
-                        // ]
+                        data = [{
+                                id: 1,
+                                title: "Streaasdasdm1",
+                                tagline: "taglasdsadadine1",
+                                featured: true,
+                            },
+                            {
+                                id: 6,
+                                title: "Streasdsadam2",
+                                tagline: "tagliasdsadne2",
+                                featured: false,
+                            }
+                        ]
                         // this.data[type] = data
                         // axios({
                         // method: "get",
