@@ -173,7 +173,7 @@ return [
         'methods' => ['GET', 'POST'],
     ],
     [
-        'url' => '/table/{id:[0-9]+}/delete',
+        'url' => '/list/{id:[0-9]+}/delete',
         'paths' => [
             'controller' => 'Table',
             'action' => 'delete',
@@ -325,6 +325,14 @@ return [
         'url' => '/about',
         'paths' => [
             'controller' => 'About',
+            'action' => 'index',
+        ],
+        'methods' => ['GET', 'POST'],
+    ],
+    [
+        'url' => '/admin',
+        'paths' => [
+            'controller' => 'Admin',
             'action' => 'index',
         ],
         'methods' => ['GET', 'POST'],

@@ -24,23 +24,34 @@ class SubscriptionsController extends BaseController implements LoginAwareContro
                     1 => $userId
                 ]
             ]);
+            $new = false;
             if (empty($subscription)) {
                 $subscription = new TableSubscription();
                 $subscription->setTableId($this->request->get('table_id'))
                     ->setUserId($userId);
+            $this->flash->success('You subscribed - You successfully subscribed this Stream');
+            $this->response->redirect('/list/' . $this->request->get('table_id'), true);
+            $new =true;
             }
             $freq = $this->request->get('subscription_freq');
             switch ($freq) {
                 case 'U':
+                    $this->flash->success('Unsubscribed - You have been unsubscribed from the Stream');
                     $subscription->delete();
                     break;
                 case 'D':
                 case 'W':
                 case 'M':
                     $subscription->setType($freq)->save();
+                    if (!$new) {
+                        $this->flash->success('Saved - Your frequency settings have been saved');
+                    }
+                    
                     break;
             }
+            
         }
+        
         $subscriptions = TableSubscription::findUserSubscriptions($userId);
         $this->view->setVar('subscriptions', $subscriptions);
         $this->view->setMainView('subscriptions/index');

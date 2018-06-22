@@ -53,33 +53,29 @@ class Get extends ActionHandler implements MethodInterface
                     $output = '';
                     foreach ($notificationsArray as $notification) {
                         try {
-                            $output .= '<div class="tableFeed__item">
-<div class="tableFeed__item__avatar">
+                            $output .= '
+ <div class="notification-dropdown__notification u-flex u-flexAlignItemsCenter">
   <a href="/user/' . $notification['userHandle'] . '">
-    <img src="' . $notification['userImage'] . '" />
+  <img class="notification-dropdown__notification__image" src="' . $notification['userImage'] . '" />
   </a>
-</div>
-<div class="tableFeed__item__info">
+
+<div style="width:100%;">
+<div class="u-flex u-flexJustifyBetween">
   <a href="'. UserNotificationLinkHelper::getLink($notification) .'">
-      <div class="tableFeed__item__info__text">
-          <div class="tableFeed__item__info__text__author">
-            ' . $notification['userName'] . '
-          </div>
-        <span class="tableFeed__item__info__text__message">
-            ' . $notification['text'] . '
-          </span>
-      </div>
-      <div class="tableFeed__item__info__time">
-        <span>' . StringFormat::factory()->prettyDateTimestamp($notification['createdAt']) . '</span>
-      </div>
+      <span class="notification-dropdown__notification__name">' . $notification['userName'] . '</span>
   </a>
-</div>
-</div>';
+  <div class="notification-dropdown__notification__date"><img src="/assets/images/comment-clock.svg" />' . StringFormat::factory()->prettyDateTimestamp($notification['createdAt']) . '</div>
+  </div>
+        <p class="notification-dropdown__notification__text">
+        ' . $notification['text'] . '</p>
+        </div>
+      </div>
+    ';
                         } catch (\Exception $e) {
                         }
                     }
 
-                    $output .= '<div class="tableFeed__item" style="margin-left:42%;">
+                    $output .= '<div class="notification-dropdown__notification__see-all">
     <a href="/feed">See all</a>
 </div>';
                 } else {

@@ -27,8 +27,15 @@ class UserFollowController extends BaseController implements LoginAwareControlle
 
         $follow = new UserFollower();
         $follow->toggleFollow($user, $follower);
-
-        $this->flash->success('Follow success - You are now following this user');
+        $follower = $follow->findFollower($user, $follower);
+        if ($follower)
+        {
+            $this->flash->success('Connected - You’re following this user now');
+        }else{
+            $this->flash->success('Disconnected - You’re not following this user now');
+        }
+        
+        //TODO unfollow
         $this->_redirectBack();
     }
 }

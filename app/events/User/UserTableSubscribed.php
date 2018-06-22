@@ -44,7 +44,7 @@ class UserTableSubscribed extends AbstractEvent
             ->setNotificationType(UserNotificationType::Follow)
             ->setSourceUserId($userId)
             ->setSourceTableId($tableId)
-            ->setText(sprintf('started to subscribe your table %s', $table->getTitle()))
+            ->setText(sprintf('Subscribed to %s', $table->getTitle()))
             ->setPlaceholders(
                 json_encode(
                     [
@@ -60,7 +60,7 @@ class UserTableSubscribed extends AbstractEvent
             ->setUserId($userId)
             ->setTableId($tableId)
             ->setLogType(TableLogType::Subscribed)
-            ->setText('subscribed this table.')
+            ->setText('Subscribed this Stream.')
             ->setPlaceholders(
                 json_encode(
                     [

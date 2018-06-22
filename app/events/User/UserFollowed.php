@@ -39,7 +39,7 @@ class UserFollowed extends AbstractEvent
             ->setUserId($userId)
             ->setSourceUserId($followedByUserId)
             ->setNotificationType(UserNotificationType::Follow)
-            ->setText('started following you')
+            ->setText('Started following you')
             ->setPlaceholders(
                 json_encode(
                     [
