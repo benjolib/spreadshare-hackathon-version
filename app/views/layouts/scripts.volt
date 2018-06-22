@@ -1,6 +1,5 @@
 <script type="text/javascript">
-  
-  window.initOnOffSwitches = function() {
+  window.initOnOffSwitches = function () {
     var $NoSwitch = $('.NSwitch');
     var $YesSwitch = $('.YSwitch');
 
@@ -59,7 +58,8 @@
       // foreach array
       $.each(response.data.hits.hits, function (key, val) {
         // item
-        items.push("<a href='/list/" + val._id + "'><div class='item'><div class='title'>" + val._source.title + "</div><div class='tagline'>" + val._source.tagline + "</div></div></a>");
+        items.push("<a href='/list/" + val._id + "'><div class='item'><div class='title'>" + val._source.title +
+          "</div><div class='tagline'>" + val._source.tagline + "</div></div></a>");
       });
       // append list to array
       $(searchItems).append(items.join(''));
@@ -80,37 +80,39 @@
 
       var searchEl = $(this).val();
 
-      if (searchEl !== prevSearch ) {
+      if (searchEl !== prevSearch) {
         prevSearch = searchEl;
         if (searchEl.length > 0) {
           // append href link
           $(".all-results").attr('href', '/search?query=' + searchEl + '')
-            window.clearTimeout(timer);
-            timer = window.setTimeout(function () {
-              // AJAX Query
-              $.ajax({
-                url: "/api/v1/search/",
-                method: "GET",
-                crossDomain: true,
-                dataType: "JSON",
-                data: { "query": searchEl.trim() },
-                success: function (response) {
-                  autoCompleteHandler(response)
-                }
-              });
-
-            }, delay);
-
-            onSearchPopper.addClass('show');
-
-            new Popper(searchReferenceElement, onSearchPopper, {
-              placement: 'bottom-start',
-              modifiers: {
-                offset: {
-                  offset: -26
-                }
+          window.clearTimeout(timer);
+          timer = window.setTimeout(function () {
+            // AJAX Query
+            $.ajax({
+              url: "/api/v1/search/",
+              method: "GET",
+              crossDomain: true,
+              dataType: "JSON",
+              data: {
+                "query": searchEl.trim()
+              },
+              success: function (response) {
+                autoCompleteHandler(response)
               }
             });
+
+          }, delay);
+
+          onSearchPopper.addClass('show');
+
+          new Popper(searchReferenceElement, onSearchPopper, {
+            placement: 'bottom-start',
+            modifiers: {
+              offset: {
+                offset: -26
+              }
+            }
+          });
         }
       }
     });
@@ -148,94 +150,93 @@
 
     // search bar shadow
     var $searchBar = $('.navbar__search');
-    $searchBar.on('focusin', function() {
+    $searchBar.on('focusin', function () {
       $(this).addClass('navbar__search--active');
     });
-    $searchBar.on('focusout', function() {
+    $searchBar.on('focusout', function () {
       $(this).removeClass('navbar__search--active');
     });
 
-    {% if auth.loggedIn() %}
-        /* Define API endpoints once and globally */
-        $.fn.api.settings.api = {
-          'upvote': '/api/v1/vote/{id}',
-          'subscribe': '/api/v1/subscribe/{id}',
-          'flag': '/table/{id}/flag/{flag}',
-          'follow-user': '/api/v1/follow-user/{id}',
-          'comment-upvote': '/api/v1/vote-comment/{id}',
-          'change-request': '/api/v1/change-request/{id}',
-          'staff-pick': '/api/v1/staff-pick/{id}',
+
+    /* Define API endpoints once and globally */
+    $.fn.api.settings.api = {
+      'upvote': '/api/v1/vote/{id}',
+      'subscribe': '/api/v1/subscribe/{id}',
+      'flag': '/table/{id}/flag/{flag}',
+      'follow-user': '/api/v1/follow-user/{id}',
+      'comment-upvote': '/api/v1/vote-comment/{id}',
+      'change-request': '/api/v1/change-request/{id}',
+      'staff-pick': '/api/v1/staff-pick/{id}',
+    };
+
+    $('a.comment-upvote').api({
+      method: 'POST',
+      onSuccess: function (response, button) {
+        var span = button.find('span');
+        if (response.data.voted) {
+          span.text(parseInt(parseInt(span.text()) + 1));
+        } else {
+          span.text(parseInt(parseInt(span.text()) - 1));
+        }
+      },
+    });
+
+    $('div.upvote, button.upvote').api({
+      method: 'POST',
+      onSuccess: function (response, button) {
+        var span = button.find('span');
+        if (response.data.voted) {
+          button.addClass('selected');
+          button.find('.chevronUp').find('svg').find('.fillColor').addClass('white');
+          span.text(parseInt(parseInt(span.text()) + 1));
+        } else {
+          button.removeClass('selected');
+          button.find('.chevronUp').find('svg').find('.fillColor').removeClass('white');
+          span.text(parseInt(parseInt(span.text()) - 1));
+        }
+      },
+    });
+    $('button.subscribe').api({
+      method: 'POST',
+      action: 'subscribe',
+      onSuccess: function (response, button) {
+        button.toggleClass('subscribed');
+      },
+    });
+    $('button.follow-user').api({
+      method: 'POST',
+      action: 'follow-user',
+      onSuccess: function (response, button) {
+        $(button).toggleClass('selected').toggleClass('following-user').toggleClass('not-following-user');
+      },
+    });
+    $('button.review-change-request').api({
+      method: 'POST',
+      action: 'change-request',
+      beforeSend: function (settings) {
+        settings.data = {
+          comment: $('.changelog-comment-' + $(this).data('id')).val(),
+          type: $(this).data('type')
         };
-
-        $('a.comment-upvote').api({
-          method: 'POST',
-          onSuccess: function (response, button) {
-            var span = button.find('span');
-            if (response.data.voted) {
-              span.text(parseInt(parseInt(span.text()) + 1));
-            } else {
-              span.text(parseInt(parseInt(span.text()) - 1));
-            }
-          },
-        });
-
-        $('div.upvote, button.upvote').api({
-          method: 'POST',
-          onSuccess: function (response, button) {
-            var span = button.find('span');
-            if (response.data.voted) {
-              button.addClass('selected');
-              button.find('.chevronUp').find('svg').find('.fillColor').addClass('white');
-              span.text(parseInt(parseInt(span.text()) + 1));
-            } else {
-              button.removeClass('selected');
-              button.find('.chevronUp').find('svg').find('.fillColor').removeClass('white');
-              span.text(parseInt(parseInt(span.text()) - 1));
-            }
-          },
-        });
-        $('button.subscribe').api({
-          method: 'POST',
-          action: 'subscribe',
-          onSuccess: function (response, button) {
-            button.toggleClass('subscribed');
-          },
-        });
-        $('button.follow-user').api({
-          method: 'POST',
-          action: 'follow-user',
-          onSuccess: function (response, button) {
-            $(button).toggleClass('selected').toggleClass('following-user').toggleClass('not-following-user');
-          },
-        });
-        $('button.review-change-request').api({
-          method: 'POST',
-          action: 'change-request',
-          beforeSend: function (settings) {
-            settings.data = {
-              comment: $('.changelog-comment-' + $(this).data('id')).val(),
-              type: $(this).data('type')
-            };
-            return settings;
-          },
-          onSuccess: function (response, button) {
-            location.reload();
-          },
-        });
-        $('button.staff-pick').api({
-          method: 'POST',
-          action: 'staff-pick',
-          onSuccess: function (response, button) {
-            location.reload();
-          },
-        });
-    {% endif %}
+        return settings;
+      },
+      onSuccess: function (response, button) {
+        location.reload();
+      },
+    });
+    $('button.staff-pick').api({
+      method: 'POST',
+      action: 'staff-pick',
+      onSuccess: function (response, button) {
+        location.reload();
+      },
+    });
   });
 
   $(document).ready(function () {
     // pops
 
-  
+
     window.bindPops = function () {
       $('.l-button:not(.bound)').each(function () {
         var $button = $(this);
@@ -271,21 +272,23 @@
     window.bindPops();
 
 
-    var hidePopover = function(element, e){
-      if (!$(element).is(e.target) && $(element).has(e.target).length === 0 && !$('.l-button').is(e.target) && $('.l-button').has(e.target).length === 0){
+    var hidePopover = function (element, e) {
+      if (!$(element).is(e.target) && $(element).has(e.target).length === 0 && !$('.l-button').is(e.target) && $(
+          '.l-button').has(e.target).length === 0) {
         $(element).removeClass('show');
       }
     }
 
     $('body').on('click', function (e) {
-      console.log('click anywhere close');
+
       $('.l-dropdown').each(function (index, el) {
         hidePopover(el, e);
       });
       hidePopover($('#list-context-menu'), e);
       $('.l-button').each(function (index, item) {
         var $item = $(item);
-        if (!$item.is(e.target) && $item.has(e.target).length === 0 && !$('.l-dropdown').is(e.target) && $('.l-dropdown').has(e.target).length === 0){
+        if (!$item.is(e.target) && $item.has(e.target).length === 0 && !$('.l-dropdown').is(e.target) && $(
+            '.l-dropdown').has(e.target).length === 0) {
           if ($item.data('dropdown-active-class') && $item.hasClass($item.data('dropdown-active-class'))) {
             $item.removeClass($item.data('dropdown-active-class'));
           }
@@ -327,8 +330,8 @@
 
       var $flashMessage = $(
         '<div class="flash__message flash__message--' + type + ' flash__message--hide">' +
-          '<div class="flash__message__heading">' + heading + '</div>' +
-          '<div class="flash__message__text">' + text + '</div>' +
+        '<div class="flash__message__heading">' + heading + '</div>' +
+        '<div class="flash__message__text">' + text + '</div>' +
         '</div>'
       );
 
@@ -344,7 +347,4 @@
       }, timeout);
     };
   });
-
- 
-
 </script>
