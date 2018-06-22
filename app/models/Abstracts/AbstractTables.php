@@ -94,6 +94,12 @@ abstract class AbstractTables extends \DS\Model\Base
     protected $flags;
 
     /**
+     * @var boolean
+     * @Column(type="boolean")
+     */
+    protected $featured;
+
+    /**
      *
      * @var integer
      * @Column(type="integer", length=10, nullable=true)
@@ -470,5 +476,23 @@ abstract class AbstractTables extends \DS\Model\Base
     public static function findFirst($parameters = null)
     {
         return parent::findFirst($parameters);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isFeatured(): bool
+    {
+        return $this->featured;
+    }
+
+    /**
+     * @param int $featured
+     * @return AbstractTables
+     */
+    public function setFeatured(int $featured)
+    {
+        $this->featured = $featured;
+        return $this;
     }
 }
