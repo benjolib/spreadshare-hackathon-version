@@ -440,4 +440,14 @@ class User extends UserEvents {
 
         return array_merge($add_requests, $delete_requests);
     }
+
+    public static function findByRole(int $role)
+    {
+        return self::find([
+            'conditions' => 'roles & :role: = :role:',
+            'bind' => [
+                'role' => $role
+            ]
+        ]);
+    }
 }

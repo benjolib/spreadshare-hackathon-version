@@ -2,6 +2,7 @@
 
 namespace DS\Model\Abstracts;
 
+use DS\Model\DataSource\UserRoles;
 use Phalcon\Validation;
 use Phalcon\Validation\Validator\Email as EmailValidator;
 
@@ -163,12 +164,6 @@ abstract class AbstractUser extends \DS\Model\Base
      */
     protected $createdAt;
 
-    /**
-     * Method to set the value of field id
-     *
-     * @param integer $id
-     * @return $this
-     */
     public function setId($id)
     {
         $this->id = $id;
@@ -421,6 +416,23 @@ abstract class AbstractUser extends \DS\Model\Base
         $this->roles = $roles;
 
         return $this;
+    }
+
+    public function addRole($role)
+    {
+        $this->roles |= $role;
+        return $this;
+    }
+
+    public function removeRole($role)
+    {
+        $this->roles = $this->roles & ~ $role;
+        return $this;
+    }
+
+    public function hasRole(int $role):bool
+    {
+        return $this->roles & $role == $role;
     }
 
     /**
@@ -741,4 +753,18 @@ abstract class AbstractUser extends \DS\Model\Base
         return parent::findFirst($parameters);
     }
 
+    public function isCurator(): bool
+    {
+        return $this->hasRole(UserRoles::Curator);
+    }
+
+    public function isFeaturedCurator():bool
+    {
+        return $this->hasRole(UserRoles::FeaturedCurator);
+    }
+
+    public function isAdmin():bool
+    {
+        return $this->hasRole(UserRoles::Admin);
+    }
 }

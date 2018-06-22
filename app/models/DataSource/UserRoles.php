@@ -15,33 +15,11 @@ namespace DS\Model\DataSource;
  */
 class UserRoles
 {
-    /**
-     * Administrator
-     */
-    const Admin = 32;
-    
-    /**
-     * Staff
-     */
     const User = 1;
-    
-    /**
-     * Staff
-     */
     const StaffPick = 2;
-    
-    /**
-     * Community Manager
-     */
     const CommunityManager = 4;
-    
-    /**
-     * TableEditor
-     */
-    const TableEditor = 8;
-    
-    /**
-     * CommentAdmin
-     */
+    const Curator = 8;
     const CommentAdmin = 16;
+    const Admin = 32;
+    const FeaturedCurator = 64;
 }
