@@ -34,7 +34,7 @@ class Get extends ActionHandler implements MethodInterface
     
     public function process()
     {
-        $result = new Records(Tables::findAllByFieldValue("featured", true)->toArray());
+        $result = new Records(Tables::find(['columns'=>['id', 'title','tagline','featured'],'order'=>'id ASC'])->toArray());
         return $result;
     }
     
