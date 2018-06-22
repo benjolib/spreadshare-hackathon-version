@@ -1,13 +1,13 @@
 <?php
 
-namespace DS\Controller\Api\v2\Curators;
+namespace DS\Controller\Api\v2\Users;
 
-use DS\Api\Table;
-use DS\Api\Tags;
-use DS\Api\Users;
 use DS\Controller\Api\ActionHandler;
 use DS\Controller\Api\Meta\Records;
 use DS\Controller\Api\MethodInterface;
+use DS\Model\DataSource\UserRoles;
+use DS\Model\Tables;
+use DS\Model\User;
 
 /**
  *
@@ -36,14 +36,11 @@ class Get extends ActionHandler implements MethodInterface
     
     public function process()
     {
-        $query = $this->request->get('q', null, null);
-
-        if ($query === null || strlen($query) < $this->searchMinimum)
-        {
-            throw new \InvalidArgumentException(sprintf('Give at least %d characters.', $this->searchMinimum));
+        /** @var User[] $curators */
+        $curators = User::find( );
+        foreach ($curators as $curator) {
+            $result[] = array_merge($curator->toArray(['id', 'name']), ['curator' => $curator->isCurator()]);
         }
-        $result = new Records(Users::searchByName($query, 50));
-        return $result;
+        return new Records($result);
     }
-    
 }
