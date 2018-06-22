@@ -489,7 +489,6 @@ CREATE TABLE `user` (
   `confirmed` int(1) DEFAULT NULL COMMENT 'confirmed = 1, unconfirmed = 0',
   `status` tinyint(1) DEFAULT NULL COMMENT 'deleted = 0, active = 1',
   `createdAt` int(10) DEFAULT NULL COMMENT 'timestamp',
-  `isAdmin` bool NOT NULL DEFAULT FALSE,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
