@@ -1,11 +1,13 @@
 <?php
 
-namespace DS\Controller\Api\v2\FeaturedStreams;
+namespace DS\Controller\Api\v2\FeaturedCurators;
 
 use DS\Controller\Api\ActionHandler;
 use DS\Controller\Api\Meta\Records;
 use DS\Controller\Api\MethodInterface;
+use DS\Model\DataSource\UserRoles;
 use DS\Model\Tables;
+use DS\Model\User;
 
 /**
  *
@@ -34,8 +36,11 @@ class Get extends ActionHandler implements MethodInterface
     
     public function process()
     {
-        $result = new Records(Tables::find(['columns'=>['id', 'title','tagline','featured'],'order'=>'id ASC'])->toArray());
-        return $result;
+        /** @var User[] $curators */
+        $curators = User::findByRole( UserRoles::Curator);
+        foreach ($curators as $curator) {
+            $result[] = array_merge($curator->toArray(['id', 'name']), ['curator' => $curator->isCurator()]);
+        }
+        return new Records($result);
     }
-    
 }

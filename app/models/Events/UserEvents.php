@@ -5,6 +5,7 @@ namespace DS\Model\Events;
 use DS\Events\User\UserCreated;
 use DS\Exceptions\UserValidationException;
 use DS\Model\Abstracts\AbstractUser;
+use DS\Model\DataSource\UserRoles;
 use DS\Model\DataSource\UserStatus;
 use DS\Model\User;
 use DS\Model\UserStats;
@@ -163,7 +164,7 @@ abstract class UserEvents
         
         return true;
     }
-    
+
     /**
      * Find user by handle or email
      *
