@@ -157,6 +157,12 @@ abstract class AbstractUser extends \DS\Model\Base
     protected $roles;
 
     /**
+     * @var boolean
+     * @Column(type="boolean")
+     */
+    protected $isAdmin;
+
+    /**
      *
      * @var integer
      * @Column(type="integer", length=10, nullable=true)
@@ -739,5 +745,21 @@ abstract class AbstractUser extends \DS\Model\Base
     public static function findFirst($parameters = null)
     {
         return parent::findFirst($parameters);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAdmin(): bool
+    {
+        return $this->isAdmin;
+    }
+
+    /**
+     * @param bool $isAdmin
+     */
+    public function setIsAdmin(bool $isAdmin)
+    {
+        $this->isAdmin = $isAdmin;
     }
 }
