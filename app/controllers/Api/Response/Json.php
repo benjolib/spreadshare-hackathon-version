@@ -5,6 +5,7 @@ use DS\Constants\Services;
 use DS\Controller\Api\Meta\Envelope;
 use DS\Controller\Api\Meta\EnvelopeV2;
 use DS\Controller\Api\Meta\Error;
+use DS\Controller\Api\Meta\ErrorV2;
 use DS\Controller\Api\Meta\RecordInterface;
 use DS\Controller\Api\Response;
 use Phalcon\Http\Request;
@@ -72,7 +73,13 @@ class Json extends Response
     {
         $this->error = $error;
 
-        $this->response->setJsonContent($error);
+        /** @var Router $router */
+        $router =$this->getDI()->get('router');
+        if (strpos($router->getRewriteUri(), 'v2') !== false) {
+            $this->response->setJsonContent(ErrorV2::fromErrorV1($error));
+        } else {
+            $this->response->setJsonContent($error);
+        }
 
         return $this;
     }

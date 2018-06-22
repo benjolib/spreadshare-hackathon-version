@@ -18,7 +18,7 @@ class UserRoles
     /**
      * Administrator
      */
-    const Admin = 31;
+    const Admin = 32;
     
     /**
      * Staff

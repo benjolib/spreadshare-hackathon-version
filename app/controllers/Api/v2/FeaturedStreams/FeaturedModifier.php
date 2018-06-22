@@ -9,6 +9,8 @@
 namespace DS\Controller\Api\v2\FeaturedStreams;
 
 use DS\Controller\Api\Meta\Record;
+use DS\Exceptions\InvalidParameterException;
+use DS\Model\DataSource\UserRoles;
 use DS\Model\Tables;
 
 
@@ -17,18 +19,17 @@ trait FeaturedModifier
     public function setFeatured($featured): Record
     {
         $tableId = $this->action;
-        $user = $this->getServiceManager()->getAuth()->getUser();
-        if (!$user->isAdmin()) {
-            throw new \InvalidArgumentException('Not allowed');
+        if (!$this->getServiceManager()->getAuth()->hasRole(UserRoles::Admin)) {
+            throw new InvalidParameterException('Not allowed');
         }
         if (!isset($tableId)) {
-            throw new \InvalidArgumentException('Invalid post package sent.');
+            throw new InvalidParameterException('Invalid post package sent.');
         }
 
         if ($tableId > 0) {
             $tableModel = Tables::findFirstById($tableId);
             if (!$tableModel) {
-                throw new \InvalidArgumentException('The table that you want to feature does not exist.');
+                throw new InvalidParameterException('The table that you want to feature does not exist.');
             }
 
             $ok = $tableModel->setFeatured($featured)->save();
