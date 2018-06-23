@@ -33,8 +33,13 @@ class Get extends ActionHandler implements MethodInterface
     
     public function process()
     {
-        $result = new Records(Tags::find(['columns'=>['id', 'title','featured'],'order'=>'id ASC'])->toArray());
-        return $result;
+        /** @var Tags[] $tags */
+        $tags = Tags::find(['order'=>'id ASC']);
+        foreach ($tags as $tag) {
+            $result[] = array_merge($tag->toArray(['id','title']), ['featured'=> $tag->isFeatured()]);
+        }
+
+        return new Records($result);
     }
     
 }

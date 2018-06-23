@@ -39,7 +39,7 @@ class Get extends ActionHandler implements MethodInterface
         /** @var User[] $curators */
         $curators = User::findByRole( UserRoles::Curator);
         foreach ($curators as $curator) {
-            $result[] = array_merge($curator->toArray(['id', 'name']), ['curator' => $curator->isCurator()]);
+            $result[] = array_merge($curator->toArray(['id', 'name']), ['featured' => $curator->isFeaturedCurator()]);
         }
         return new Records($result);
     }
