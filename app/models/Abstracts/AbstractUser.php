@@ -426,13 +426,13 @@ abstract class AbstractUser extends \DS\Model\Base
 
     public function removeRole($role)
     {
-        $this->roles = $this->roles & ~ $role;
+        $this->roles = ($this->roles & ~ $role);
         return $this;
     }
 
     public function hasRole(int $role):bool
     {
-        return $this->roles & $role == $role;
+        return ($this->roles & $role) == $role;
     }
 
     /**
