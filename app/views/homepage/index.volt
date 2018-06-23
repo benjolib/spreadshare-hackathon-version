@@ -1,5 +1,5 @@
 {% extends 'layouts/main.volt' %} {# page title #} {% block title %}SpreadShare - Data that matters.{% endblock %} {# page
-header #} {% block header %}{% endblock %} {# main section #} {% block content %} {{ dump(tables) }}
+header #} {% block header %}{% endblock %} {# main section #} {% block content %} 
 <div class="re-page re-page--large">
   <div class="homepage-space">
     <h1 class="re-heading">Explore</h1>
