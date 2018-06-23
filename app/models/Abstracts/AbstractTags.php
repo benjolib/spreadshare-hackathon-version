@@ -43,6 +43,12 @@ abstract class AbstractTags extends \DS\Model\Base
     protected $createdAt;
 
     /**
+     * @var boolean
+     * @Column(type="boolean")
+     */
+    protected $featured;
+
+    /**
      * Method to set the value of field id
      *
      * @param integer $id
@@ -175,6 +181,24 @@ abstract class AbstractTags extends \DS\Model\Base
     public static function findFirst($parameters = null)
     {
         return parent::findFirst($parameters);
+    }
+
+    /**
+     * @param bool $featured
+     * @return AbstractTags
+     */
+    public function setFeatured(int $featured): AbstractTags
+    {
+        $this->featured = $featured;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isFeatured(): bool
+    {
+        return $this->featured;
     }
 
 }

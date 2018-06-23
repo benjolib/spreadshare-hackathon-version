@@ -1,13 +1,12 @@
 <?php
 
-namespace DS\Controller\Api\v2\Curators;
+namespace DS\Controller\Api\v2\FeaturedTags;
 
-use DS\Api\Table;
-use DS\Api\Tags;
-use DS\Api\Users;
 use DS\Controller\Api\ActionHandler;
 use DS\Controller\Api\Meta\Records;
 use DS\Controller\Api\MethodInterface;
+use DS\Model\Tables;
+use DS\Model\Tags;
 
 /**
  *
@@ -24,8 +23,6 @@ use DS\Controller\Api\MethodInterface;
  */
 class Get extends ActionHandler implements MethodInterface
 {
-    private $searchMinimum = 2;
-    
     /**
      * @return bool
      */
@@ -36,13 +33,7 @@ class Get extends ActionHandler implements MethodInterface
     
     public function process()
     {
-        $query = $this->request->get('q', null, null);
-
-        if ($query === null || strlen($query) < $this->searchMinimum)
-        {
-            throw new \InvalidArgumentException(sprintf('Give at least %d characters.', $this->searchMinimum));
-        }
-        $result = new Records(Users::searchByName($query, 50));
+        $result = new Records(Tags::find(['columns'=>['id', 'title','featured'],'order'=>'id ASC'])->toArray());
         return $result;
     }
     
