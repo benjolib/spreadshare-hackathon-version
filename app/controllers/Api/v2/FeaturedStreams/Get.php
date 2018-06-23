@@ -34,8 +34,12 @@ class Get extends ActionHandler implements MethodInterface
     
     public function process()
     {
-        $result = new Records(Tables::find(['columns'=>['id', 'title','tagline','featured'],'order'=>'id ASC'])->toArray());
-        return $result;
+        /** @var Tables[] $streams */
+        $streams = Tables::find(['order' => 'id ASC']);
+        foreach ($streams as $stream) {
+            $result[] = array_merge($stream->toArray(['id','title', 'tagline']), ['featured'=> $stream->isFeatured()]);
+        }
+        return new Records($result);
     }
     
 }
