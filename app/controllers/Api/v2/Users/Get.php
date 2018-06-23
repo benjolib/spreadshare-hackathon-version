@@ -24,8 +24,6 @@ use DS\Model\User;
  */
 class Get extends ActionHandler implements MethodInterface
 {
-    private $searchMinimum = 2;
-    
     /**
      * @return bool
      */

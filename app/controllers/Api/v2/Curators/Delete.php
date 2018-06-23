@@ -6,7 +6,7 @@
  * Time: 15:05
  */
 
-namespace DS\Controller\Api\v2\Users;
+namespace DS\Controller\Api\v2\Curators;
 
 
 use DS\Controller\Api\ActionHandler;
