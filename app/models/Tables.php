@@ -192,6 +192,7 @@ class Tables extends TablesEvents
                                    Tables::class . '.image',
                                    Tables::class . '.description',
                                    Tables::class . '.ownerUserId',
+                                   Tables::class . '.featured',
                                    User::class . '.image as creatorImage',
                                    User::class . '.handle as creatorHandle',
                                    User::class . '.name as creator',
