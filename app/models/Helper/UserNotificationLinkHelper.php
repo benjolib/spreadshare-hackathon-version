@@ -32,23 +32,27 @@ class UserNotificationLinkHelper
         switch ($notification['notificationType'])
         {
             case UserNotificationType::Follow:
-                return '/user/' . $notification['userHandle'];
+                return '/profile/' . $notification['userHandle'];
                 break;
             case UserNotificationType::TableUpvoted:
+            case UserNotificationType::TableCreated:
+                return '/list/'.$notification['sourceTableId'];
             case UserNotificationType::TableSubscribed:
+                return '/profile/' . $notification['userHandle'];           
             case UserNotificationType::TableDownvoted:
             case UserNotificationType::Changed:
             case UserNotificationType::ChangeRequestedConfirmed:
+                return '/collaborations';
             case UserNotificationType::ChangeRequestedRejected:
                 return '/table/' . $notification['sourceTableId'];
             case UserNotificationType::Commented:
-                return '/table/' . $notification['sourceTableId'] . '/about';
+                return '/list/' . $notification['sourceTableId'] . '/#discussion';
                 break;
             case UserNotificationType::ChangeRequested:
-                return '/table/' . $notification['sourceTableId'] . '/changelog/new';
+                return '/collaborations/#received';
                 break;
         }
         
-        return '/feed';
+        return '/';
     }
 }
