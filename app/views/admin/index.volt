@@ -37,8 +37,8 @@ block content %}
 
                         <td class="right aligned  collapsing">
                             <div class="ui checkbox">
-                                <input :id='item.id' v-on:click="setFeatured('Streams', $event)" v-if="item.featured" type="checkbox" checked name="example">
-                                <input :id='item.id' v-on:click="setFeatured('Streams', $event)" v-if="!item.featured" type="checkbox" name="example">
+                                <input :id='item.id' v-on:click="setFeatured('Streams', $event)" v-if="item.featured == true" type="checkbox" checked name="example">
+                                <input :id='item.id' v-on:click="setFeatured('Streams', $event)" v-if="!item.featured == true" type="checkbox" name="example">
                                 <label></label>
                             </div>
                         </td>
@@ -64,7 +64,7 @@ block content %}
 
                             <td class="collapsing">
                                 <div class="content">
-                                    ${ item.title }
+                                    ${ item.name }
                                     <div class="sub header">
                                         ${ item.tagline }
                                     </div>
@@ -72,11 +72,12 @@ block content %}
 
                             <td class="right aligned  collapsing">
                                 <div class="ui checkbox">
-                                    <input :id='item.id' v-on:click="setFeatured('Curators', $event)" v-if="item.featured" type="checkbox" checked name="example">
-                                    <input :id='item.id' v-on:click="setFeatured('Curators', $event)" v-if="!item.featured" type="checkbox" name="example">
+                                    <input :id='item.id' v-on:click="setFeatured('Curators', $event)" v-if="item.featured == true" type="checkbox" checked name="example">
+                                    <input :id='item.id' v-on:click="setFeatured('Curators', $event)" v-if="!item.featured == true" type="checkbox" name="example">
                                     <label></label>
                                 </div>
                             </td>
+
 
                         </tr>
 
@@ -97,7 +98,7 @@ block content %}
 
                                 <td class="collapsing">
                                     <div class="content">
-                                        ${ item.title }
+                                        ${ item.name }
                                         <div class="sub header">
                                             ${ item.tagline }
                                         </div>
@@ -105,8 +106,8 @@ block content %}
 
                                 <td class="right aligned  collapsing">
                                     <div class="ui checkbox">
-                                        <input :id='item.id' v-on:click="setFeatured('Users', $event)" v-if="item.featured" type="checkbox" checked name="example">
-                                        <input :id='item.id' v-on:click="setFeatured('Users', $event)" v-if="!item.featured" type="checkbox" name="example">
+                                        <input :id='item.id' v-on:click="setFeatured('Users', $event)" v-if="item.curator == true" type="checkbox" checked name="example">
+                                        <input :id='item.id' v-on:click="setFeatured('Users', $event)" v-if="!item.curator == true" type="checkbox" name="example">
                                         <label></label>
                                     </div>
                                 </td>
@@ -138,8 +139,8 @@ block content %}
 
                                     <td class="right aligned  collapsing">
                                         <div class="ui checkbox">
-                                            <input :id='item.id' v-on:click="setFeatured('Users', $event)" v-if="item.featured" type="checkbox" checked name="example">
-                                            <input :id='item.id' v-on:click="setFeatured('Users', $event)" v-if="!item.featured" type="checkbox" name="example">
+                                            <input :id='item.id' v-on:click="setFeatured('Tags', $event)" v-if="item.featured == '1'" type="checkbox" checked name="example">
+                                            <input :id='item.id' v-on:click="setFeatured('Tags', $event)" v-if="item.featured == '0'" type="checkbox" name="example">
                                             <label></label>
                                         </div>
                                     </td>
@@ -168,6 +169,9 @@ block content %}
                         var app = new Vue({
                             delimiters: ['${', '}'],
                             el: '#app',
+                            created: function () {
+                                this.getFeatured("Streams")
+                            },
                             data() {
                                 return {
                                     tab: 0,
@@ -184,48 +188,40 @@ block content %}
                                 setFeatured: function (type, event) {
                                     console.log(event.target.checked)
                                     console.log(event.target.id)
+                                    var path = `api/v2/Featured${type}/${event.target.id}`
+                                    if (type == "Users") path =
+                                        `api/v2/Curators/${event.target.id}`
                                     axios({
                                         method: event.target.checked ? 'post' : "delete",
-                                        url: `api/v2/Featured${type}/${event.target.id}`,
+                                        url: path,
                                         data: {
                                             type,
-                                            id,
-                                            checked
+                                            id: event.target.id,
+                                            checked: event.target.checked
                                         }
                                     });
                                 },
                                 getFeatured: function (type) {
+                                    var path = `api/v2/Featured${type}`
                                     if (type == "Streams") this.tab = 0
                                     if (type == "Curators") this.tab = 1
-                                    if (type == "Users") this.tab = 2
+                                    if (type == "Users") {
+                                        this.tab = 2
+                                        path = `api/v2/${type}`
+                                    }
                                     if (type == "Tags") this.tab = 3
-
-                                    data = [{
-                                            id: 1,
-                                            title: "yeeeeeeeeeees",
-                                            tagline: "taglasdsadadine1",
-                                            featured: true,
-                                        },
-                                        {
-                                            id: 6,
-                                            title: "Streasdsadam2",
-                                            tagline: "tagliasdsadne2",
-                                            featured: false,
-                                        }
-                                    ]
-                                    console.log("data", data)
-                                    this.data[type] = data
-                                    console.log("data[" + type + "]", this.data['Streams'])
+                                    var self = this
                                     axios({
                                         method: "get",
-                                        url: `api/v2/Featured${type}`,
+                                        url: path,
                                     }).then(function (response) {
                                         console.log(response.data);
-                                        console.log(response.status);
-                                        console.log(response.statusText);
-                                        console.log(response.headers);
-                                        console.log(response.config);
-                                        this.data[type] = response.results
+                                        // console.log(response.status);
+                                        // console.log(response.statusText);
+                                        // console.log(response.headers);
+                                        // console.log(response.config);
+                                        self.data[type] = response.data.results
+
                                     });
                                 }
                             }
