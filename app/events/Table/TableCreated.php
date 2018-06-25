@@ -7,10 +7,13 @@ use DS\Model\DataSource\DefaultTokenDistribution;
 use DS\Model\DataSource\TableContributionType;
 use DS\Model\DataSource\TableLogType;
 use DS\Model\DataSource\TokenDistributionType;
+use DS\Model\DataSource\UserNotificationType;
 use DS\Model\TableContributions;
 use DS\Model\TableLog;
 use DS\Model\Tables;
 use DS\Model\TableTokens;
+use DS\Model\UserFollower;
+use DS\Model\UserNotifications;
 use DS\Modules\Bernard;
 
 /**
@@ -74,6 +77,22 @@ class TableCreated extends AbstractEvent
                     ->setType(TokenDistributionType::Owner)
                     ->setTokensEarned(DefaultTokenDistribution::TableCreation)
                     ->create();
+
+        //Create notifications for followers
+        /** @var UserFollower[] $followers */
+        $followers = UserFollower::findAllByFieldValue('userId', $userId);
+        foreach ($followers as $follower) {
+            $notif = new UserNotifications;
+            $notif
+                ->setUserId($follower->getFollowedByUserId())
+                ->setSourceUserId($userId)
+                ->setSourceTableId($table->getId())
+                ->setNotificationType(UserNotificationType::TableCreated)
+                ->setText(sprintf('Started curating %s', $table->getTitle()))
+                ->create();
+        }
+
+
     }
 
 }

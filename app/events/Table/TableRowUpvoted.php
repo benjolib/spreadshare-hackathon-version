@@ -5,9 +5,11 @@ namespace DS\Events\Table;
 use DS\Events\AbstractEvent;
 use DS\Model\DataSource\DefaultTokenDistribution;
 use DS\Model\DataSource\TokenDistributionType;
+use DS\Model\DataSource\UserNotificationType;
 use DS\Model\TableRows;
 use DS\Model\Tables;
 use DS\Model\TableTokens;
+use DS\Model\UserNotifications;
 
 /**
  * Spreadshare
@@ -30,7 +32,14 @@ class TableRowUpvoted extends AbstractEvent
     public static function after(int $userId, TableRows $row)
     {
         $table = Tables::get($row->getTableId());
-        
+        $notif = new UserNotifications;
+        $notif
+            ->setUserId($table->getOwnerUserId())
+            ->setSourceUserId($userId)
+            ->setSourceTableId($table->getId())
+            ->setNotificationType(UserNotificationType::TableUpvoted)
+            ->setText(sprintf('Spreaded a listing on %s', $table->getTitle()))
+            ->create();
         
         // Row-votes shouldnt creat tokens!
         /**

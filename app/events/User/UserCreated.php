@@ -4,7 +4,9 @@ namespace DS\Events\User;
 
 use DS\Application;
 use DS\Events\AbstractEvent;
+use DS\Model\DataSource\UserNotificationType;
 use DS\Model\User;
+use DS\Model\UserNotifications;
 use DS\Modules\Bernard;
 
 /**
@@ -30,7 +32,6 @@ class UserCreated extends AbstractEvent
      */
     public static function after(User $user)
     {
-        
         if ($user->getId())
         {
             // DataSource
@@ -48,12 +49,17 @@ class UserCreated extends AbstractEvent
                 serviceManager()->getSlack()->to(Application::instance()->getConfig()['slack']['users-channel'])->send(
                     sprintf('New User: %s, %s (http://%s/user/%s)', $user->getName(), $user->getEmail(), Application::instance()->getConfig()['domain'], $user->getHandle())
                 );
-            } catch (\Exception $e)
-            {
+            } catch (\Exception $e) {
                 // not that important..
             }
+
+            $n = new UserNotifications;
+            $n
+                ->setUserId($user->getId())
+                ->setNotificationType(UserNotificationType::UserCreated)
+                ->setText('Welcome to Spreadshare, start subscribing Streams to learn more')
+                ->create();
         }
         
     }
-    
 }

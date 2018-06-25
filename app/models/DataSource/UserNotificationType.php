@@ -64,6 +64,10 @@ class UserNotificationType
      * A user's table has been unsubscribed
      */
     const TableUnsubscribed = 10;
+
+    const UserCreated = 11;
+
+    const TableCreated = 12;
     
     /**
      * Map string to constants

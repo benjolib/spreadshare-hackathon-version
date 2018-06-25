@@ -41,7 +41,7 @@ class UserTableSubscribed extends AbstractEvent
         $userNotification = new UserNotifications;
         $userNotification
             ->setUserId($table->getOwnerUserId())
-            ->setNotificationType(UserNotificationType::Follow)
+            ->setNotificationType(UserNotificationType::TableSubscribed)
             ->setSourceUserId($userId)
             ->setSourceTableId($tableId)
             ->setText(sprintf('Subscribed to %s', $table->getTitle()))

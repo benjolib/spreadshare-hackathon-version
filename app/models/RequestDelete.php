@@ -2,7 +2,9 @@
 
 namespace DS\Model;
 
-class RequestDelete extends BaseEvents
+use DS\Model\Events\RequestDeleteEvents;
+
+class RequestDelete extends RequestDeleteEvents
 {
     public $id;
     public $user_id;

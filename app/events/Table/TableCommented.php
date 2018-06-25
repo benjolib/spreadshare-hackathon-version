@@ -4,8 +4,10 @@ namespace DS\Events\Table;
 
 use DS\Events\AbstractEvent;
 use DS\Model\DataSource\TableLogType;
+use DS\Model\DataSource\UserNotificationType;
 use DS\Model\TableLog;
 use DS\Model\Tables;
+use DS\Model\UserNotifications;
 
 /**
  * Spreadshare
@@ -31,6 +33,15 @@ class TableCommented extends AbstractEvent
      */
     public static function after(int $userId, Tables $table)
     {
+        $notif = new UserNotifications;
+        $notif
+            ->setUserId($table->getOwnerUserId())
+            ->setSourceUserId($userId)
+            ->setSourceTableId($table->getId())
+            ->setNotificationType(UserNotificationType::Commented)
+            ->setText(sprintf('Commented on %s', $table->getTitle()))
+            ->create();
+
         // Initialize table log with a table created entry
         $tableLog = new TableLog();
         $tableLog->setTableId($table->getId())

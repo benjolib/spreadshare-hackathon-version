@@ -1,6 +1,7 @@
 <?php
 namespace DS\Controller;
 
+use DS\Model\DataSource\ChangeRequestStatus;
 use DS\Model\Tables;
 use DS\Model\TableRows;
 use DS\Api\TableContent;
@@ -104,7 +105,7 @@ class RequestAddController extends BaseController implements LoginAwareControlle
 
         // Handle approval
 
-        $request->status = 1;
+        $request->status = ChangeRequestStatus::Confirmed;
         $request->save();
         
         $content = json_decode($request->content);
@@ -147,7 +148,7 @@ class RequestAddController extends BaseController implements LoginAwareControlle
 
         // Handle approval
 
-        $request->status = 2;
+        $request->status = ChangeRequestStatus::Rejected;
         $request->comment = $reason;
         $request->save();
         

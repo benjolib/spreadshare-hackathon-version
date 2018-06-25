@@ -2,7 +2,9 @@
 
 namespace DS\Model;
 
-class RequestAdd extends BaseEvents
+use DS\Model\Events\RequestAddEvents;
+
+class RequestAdd extends RequestAddEvents
 {
     public $id;
     public $user_id;
