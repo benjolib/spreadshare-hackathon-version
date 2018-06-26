@@ -6,6 +6,7 @@ use DS\Application;
 use DS\Component\PrettyDateTime;
 use DS\Constants\Paging;
 use DS\Model\DataSource\TableFlags;
+use DS\Model\DataSource\UserRoles;
 use DS\Model\DataSource\UserStatus;
 use DS\Model\Helper\DateRange;
 use DS\Model\Helper\TableFilter;
@@ -15,6 +16,7 @@ use DS\Model\TableStats;
 use DS\Model\Tags;
 use DS\Model\Topics;
 use DS\Model\Types;
+use DS\Model\User;
 use Phalcon\Exception;
 use Phalcon\Logger;
 
@@ -89,6 +91,12 @@ class IndexController extends BaseController
             }
 
             $this->view->setVar('tables', $tables);
+
+            $featuredCurators = User::findByRole(UserRoles::FeaturedCurator);
+            $this->view->setVar('featuredCurators', $featuredCurators->toArray(['id','handle','tagline','image']));
+
+            $featuredTags = Tags::findAllByFieldValue('featured', 1);
+            $this->view->setVar('featuredTags', $featuredTags->toArray(['id','title']));
 
             // Paging instead of returning the whole page
             if ($this->request->isAjax() && $this->request->has('page')) {
