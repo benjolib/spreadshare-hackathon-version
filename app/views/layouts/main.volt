@@ -2,10 +2,11 @@
 <html lang="en">
 
 <head prefix="og:http://ogp.me/ns#">
+  <title>{% block title %}{% endblock %}</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta property="og:title" content="{% block title %}{% endblock %}" />
+  <meta property="og:title" content="{% block title %}{% endblock %}" /> {# TODO: It's not taking block title the second time #}
   <meta property="og:type" content="website" />
   <meta property="og:description" content="{{ config.description }}" />
   <meta property="og:url" content="http://{{ config.domain }}" />
@@ -18,7 +19,7 @@
   <link href="/css/main.878d83e3.css" rel="stylesheet">
   <link href="/semantic/semantic.min.css" rel="stylesheet">
   <link rel="icon" type="image/png" href="/assets/images/9-0/logo.png"> {% block header %}{% endblock %}
-  <title>{% block title %}{% endblock %}</title>
+
 </head>
 
 <body>
@@ -46,6 +47,12 @@
 
   {# navbar #} {% if hideHeader is empty or not hideHeader %} {{ partial('layouts/header') }} {% endif %} {# main section #}
   <section class="main">
+
+    <div class="feedback">
+      <div class="title">Shape or product</div>
+      <div class="content">Tell us about feature ideas and bugs you found</div>
+    </div>
+
     <div class="flash">
       {% set flashMessages = flash.getMessages() %} {% if flashMessages %} {% for type, messages in flashMessages %} {% for message
       in messages %}
