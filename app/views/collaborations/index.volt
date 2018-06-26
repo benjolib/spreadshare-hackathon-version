@@ -84,7 +84,7 @@
                             {% if len > 160  %}
                             {% set length = 500 %}
                             {% elseif len > 80 %}
-                            {% set length = 200 %}
+                            {% set length = 300 %}
                             {% elseif len > 40 %}
                             {% set length = 175 %}
                             {% elseif len > 20 %}

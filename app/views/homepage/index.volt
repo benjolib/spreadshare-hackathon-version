@@ -3,7 +3,7 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
 <div class="re-page re-page--large">
   <div class="homepage-space">
     <h1 class="re-heading">Explore</h1>
-    <h2 class="re-subheading re-subheading--button-below">We hand-curate the best lists for you every day</h2>
+    <h2 class="re-subheading re-subheading--button-below">We hand-curate the best Streams for you every day</h2>
   </div>
   {#
   <div class="home-heading u-flex">
@@ -141,28 +141,19 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
     </div>  
       </div>
   </div>
+ 
   <div class="trending-topics">
     <div class="trending-topics__inner">
-      <h3>Trending Topics</h3>
+      <h3>Trending Tags</h3>
       <div class="trending-topics__items">
-        <div>UX Design</div>
-        <div>Crypto</div>
-        <div>Token Curated Registries</div>
-        <div>YCombinator</div>
-        <div>Venture Capital</div>
-        <div>Remote Jobs</div>
-        <div>Nomads</div>
-        <div>Book Recommendations</div>
-        <div>Freebies</div>
-        <div>Product Builders</div>
-        <div>Decentralisation</div>
-        <div>C-Level</div>
-        <div>Future of Work</div>
-        <div>Silicon Valley</div>
-        <div>Prototyping</div>
-        <div>Frameworks</div>
-        <div>Something Else</div>
-        <div>Religion</div>
+        {% for featuredTag in featuredTags %}
+<a href="/tag/{{ featuredTag['id'] }}">
+  <div>
+  {{ featuredTag['title'] }}
+</div>
+</a>
+        {% endfor %}
+    
       </div>
     </div>
   </div>
@@ -210,27 +201,39 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
   </div>
   <div class="featured-curators">
     <div class="featured-curators__inner">
+        
+
       <h3>Featured Curators</h3>
-      <div class="u-flex">
-        {{ partial('partials/profile-card', [ 'id': 1, 'username': 'andewcoyle', 'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
-        'name': 'Andrew Coyle', 'bio': 'Designing the future of global trade @Flexport. Curating lists at Spreadshare.',
-        'type': 4 ]) }} {{ partial('partials/profile-card', [ 'id': 1, 'username': 'andewcoyle', 'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
-        'name': 'Andrew Coyle', 'bio': 'Designing the future of global trade @Flexport. Curating lists at Spreadshare.',
-        'type': 4 ]) }} {{ partial('partials/profile-card', [ 'id': 1, 'username': 'andewcoyle', 'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
-        'name': 'Andrew Coyle', 'bio': 'Designing the future of global trade @Flexport. Curating lists at Spreadshare.',
-        'type': 4 ]) }}
-      </div>
-      <div class="u-flex">
-        {{ partial('partials/profile-card', [ 'id': 1, 'username': 'andewcoyle', 'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
-        'name': 'Andrew Coyle', 'bio': 'Designing the future of global trade @Flexport. Curating lists at Spreadshare.',
-        'type': 4 ]) }} {{ partial('partials/profile-card', [ 'id': 1, 'username': 'andewcoyle', 'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
-        'name': 'Andrew Coyle', 'bio': 'Designing the future of global trade @Flexport. Curating lists at Spreadshare.',
-        'type': 4 ]) }} {{ partial('partials/profile-card', [ 'id': 1, 'username': 'andewcoyle', 'avatar': 'https://cdn-images-1.medium.com/fit/c/100/100/1*iRHlXdQhKPpyNJ0w6f7ijw.jpeg',
-        'name': 'Andrew Coyle', 'bio': 'Designing the future of global trade @Flexport. Curating lists at Spreadshare.',
-        'type': 4 ]) }}
+      
+<div class="u-flex">
+ {% for index, featuredCurator in featuredCurators %}
+{% set index= index+1 %} 
+
+ {{ partial('partials/profile-card', [ 'id': featuredCurator['id'], 'username': featuredCurator['name'], 'avatar': featuredCurator["image"]
+, 'name': featuredCurator["name"] , 'bio': featuredCurator["tagline"] ,'type': 4 ]) }}
+
+
+
+
+{% if index % 4 == 0 %} 
+
+
+</div>
+<div class="u-flex">
+
+ 
+  {% endif %} 
+
+ 
+{% endfor %}
+
+        
       </div>
     </div>
   </div>
+
+
+
   <div class="re-page re-page--large">
     <div class="u-flex u-flexWrap homepage-gutter">
       {% set qty = 0 %}

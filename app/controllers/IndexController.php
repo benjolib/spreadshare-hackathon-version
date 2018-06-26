@@ -93,11 +93,10 @@ class IndexController extends BaseController
             $this->view->setVar('tables', $tables);
 
             $featuredCurators = User::findByRole(UserRoles::FeaturedCurator);
-            $this->view->setVar('featuredCurators', $featuredCurators->toArray(['id','handle','tagline','image']));
+            $this->view->setVar('featuredCurators', $featuredCurators->toArray(['id','name','tagline','image']));
 
             $featuredTags = Tags::findAllByFieldValue('featured', 1);
             $this->view->setVar('featuredTags', $featuredTags->toArray(['id','title']));
-
             // Paging instead of returning the whole page
             if ($this->request->isAjax() && $this->request->has('page')) {
                 if (count($tables) === 0) {
