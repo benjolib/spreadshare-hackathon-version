@@ -13,7 +13,6 @@
         {{ partial('for-you/content') }}
     </div>
     <div class="u-flex u-flexJustifyCenter">
-        
         {% if feedElements|length is 0 %}  {% else %} <a href="#" class="re-button re-button--load-more">Load More</a> {%endif%}
     </div>
 </div>

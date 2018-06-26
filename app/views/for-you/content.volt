@@ -4,6 +4,7 @@
 }} {% break %} {% case "votedListing" %} {{ partial('for-you/votedListing', ['listing': element]) }} {% break %} {% case
 "collabListing" %} {{ partial('for-you/collabListing', ['listing': element]) }} {% break %} {% endswitch %} {% endfor %}
 {% else %}
+{% if page is 0 %}
 <div class="info-box">
     <div class="info">
         <div class="heading"> Nothing here </div>
@@ -13,4 +14,5 @@
         <button onclick="window.location.href='/explore'" :> Explore Streams </button>
     </div>
 </div>
+{% endif %}
 {% endif %}

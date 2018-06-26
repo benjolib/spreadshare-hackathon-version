@@ -45,7 +45,7 @@ class Get extends ActionHandler implements MethodInterface
             if ($userId > 0) {
                 $page               = $this->request->get('p', null, 0);
                 $notifications      = new UserNotifications;
-                $notificationsArray = $notifications->findNotifications($userId, null, $page, 10);
+                $notificationsArray = $notifications->findNotifications($userId, null, $page, 5);
 
                 if (count($notificationsArray)) {
                     UserStats::decrement($userId, 'unreadNotifications', count($notificationsArray));
