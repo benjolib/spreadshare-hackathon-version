@@ -236,7 +236,9 @@
   $(document).ready(function () {
     // pops
 
-
+    var finterval = setInterval(function () {
+      $(".feedback").css("display", "none")
+    }, 5000)
     window.bindPops = function () {
       $('.l-button:not(.bound)').each(function () {
         var $button = $(this);
