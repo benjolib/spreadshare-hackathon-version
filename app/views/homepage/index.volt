@@ -102,6 +102,7 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
 
   <div class="u-flex u-flexWrap homepage-gutter home-top-margin-bottom">
     {% set qty = 0 %}
+ {% set partialindex=0 %}
     {% for index, table in tables %} 
     {% if qty < 5 %}
     {% if tables[index] is defined %} 
