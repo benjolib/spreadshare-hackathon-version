@@ -4,7 +4,7 @@
              src="{{ newList.userImage }}"/>
         <div>
             <a class="collaboration-info__user-name" href="/profile/{{ newList.userHandle }}">{{ newList.userName }}</a>
-            <span class="collaboration-info__text">subscribed to a list</span>
+            <span class="collaboration-info__text">subscribed to a Stream</span>
             <a class="collaboration-info__table-name" href="/list/{{ newList.tableId }}">{{ newList.tableName }}</a>
         </div>
     </div>
