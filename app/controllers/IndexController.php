@@ -115,7 +115,12 @@ class IndexController extends BaseController
                 }
                 $this->view->setMainView('homepage/loadmore');
             } else {
-                $this->view->setMainView('homepage/index');
+                 if (!empty($tag)) {
+                    $this->view->setMainView('homepage/tag');
+                 }else {
+                    $this->view->setMainView('homepage/index');
+                 }
+                
             }
         } catch (Exception $e) {
             Application::instance()->log($e->getMessage(), Logger::CRITICAL);

@@ -10,7 +10,10 @@
   <meta property="og:type" content="website" />
   <meta property="og:description" content="{{ config.description }}" />
   <meta property="og:url" content="http://{{ config.domain }}" />
-  <meta property="og:image" content="http://{{ config.domain }}/assets/images/icon_1024.png" />
+  <meta property="og:image" content="http://{{ config.domain }}/assets/images/logo_big.png" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+  crossorigin="anonymous">
+
   <meta property="fb:app_id" content="{{ config.hybridauth.providers.Facebook.keys.id }}"> {# TODO: remove if not needed anymore #}
   <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,800" rel="stylesheet"> {# TODO: use only needed font sizes #}
   <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet"> {# TODO: use only needed font sizes #}

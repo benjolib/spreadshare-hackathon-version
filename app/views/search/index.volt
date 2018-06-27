@@ -62,6 +62,19 @@
         {{ partial('search/content') }}
       </tbody>
     </table>
+    {% else %}
+<div class="re-page">
+</div>
+<div class="info-box">
+  <div class="info">
+    <div class="heading"> We're sorry </div>
+    <div class="subheading"> There are no results for your search. </div>
+  </div>
+  <div class="action">
+    <button onclick="window.location.href='/'" :> Back to Home </button>
+  </div>
+
+</div>
   {% endif %}
   {# <div class="u-flex u-flexJustifyCenter">
     <a href="#" class="re-button re-button--load-more" {{ moreToLoad ? '' : 'style="display:none;"' }}>Load More</a>

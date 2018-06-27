@@ -53,7 +53,7 @@ class Get extends ActionHandler implements MethodInterface
                     $output = '';
                     foreach ($notificationsArray as $notification) {
                         try {
-                            $userImage = $notification['userImage'] ? $notification['userImage'] : "/assets/images/9-0/logo.png";
+                            $userImage = $notification['userImage'] ? $notification['userImage'] : "/assets/images/logo_256.png";
                             $output .= '
  <div class="notification-dropdown__notification u-flex u-flexAlignItemsCenter">
   <a href="/user/' . $notification['userHandle'] . '">
