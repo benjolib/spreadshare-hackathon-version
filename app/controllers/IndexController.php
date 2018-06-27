@@ -36,7 +36,10 @@ class IndexController extends BaseController
     /**
      * Home
      */
-    public function indexAction($selection = 'recently-added')
+    public function indexAction(
+//        $selection = 'recently-added'
+    $tag = null
+    )
     {
         try {
             if ($this->serviceManager->getAuth()->loggedIn() && $this->serviceManager->getAuth()->getUser()->getStatus() == UserStatus::OnboardingIncomplete) {
@@ -61,12 +64,15 @@ class IndexController extends BaseController
 
 
             $tableFilter = new TableFilter();
+            if (!empty($tag)) {
+                $tableFilter->setTags([$tag]);
+            }
 
             // recently-added
             $orderBy = Tables::class . ".createdAt DESC";
             $this->view->setVar('selectionName', 'Recently Added');
 
-            $this->view->setVar('selection', $selection);
+//            $this->view->setVar('selection', $selection);
 
             $page = (int) $this->request->get('page', null, 0);
             $limit = 23;

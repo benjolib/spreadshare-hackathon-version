@@ -428,4 +428,11 @@ return [
         ],
         'methods' => ['GET', 'POST'],
     ],
+    [
+        'url' => '/tag/{tagId:[0-9]+}',
+        'paths' => [
+            'controller' => 'Index',
+            'action' => 'index',
+        ]
+    ]
 ];
