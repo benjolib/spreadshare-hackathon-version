@@ -158,7 +158,7 @@ class TableRows extends TableRowsEvents
                      ->where(TableRows::class . '.tableId = ?0', [$tableId]);
         $options = [
             'builder' => $builder,
-            'limit' => 10,
+            'limit' => 20,
             'page' => $page,
             'adapter' => 'queryBuilder',
         ];
