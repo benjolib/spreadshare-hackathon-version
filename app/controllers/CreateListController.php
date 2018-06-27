@@ -7,6 +7,7 @@ use DS\Exceptions\InvalidStreamTaglineException;
 use DS\Exceptions\InvalidStreamTitleException;
 use DS\Interfaces\LoginAwareController;
 use DS\Model\DataSource\TableFlags;
+use DS\Model\DataSource\UserRoles;
 use DS\Model\Tables;
 use DS\Services\Stream as StreamService;
 use Phalcon\Http\Request\File;
@@ -20,10 +21,15 @@ class CreateListController extends BaseController implements LoginAwareControlle
 
     public function indexAction()
     {
-        $ss = new StreamService();
-        $this->view->setMainView('create-list/index');   
         $user = $this->serviceManager->getAuth()->getUser();
-         
+        if (!$user->hasRole(UserRoles::Curator)) {
+            $this->response->redirect("/list/666", true);
+            return;
+        }
+
+        $ss = new StreamService();
+        $this->view->setMainView('create-list/index');
+
         $this->view->setVar('editing', false);
         if ($this->request->isPost()) {
         // convert strings to arrays from post
