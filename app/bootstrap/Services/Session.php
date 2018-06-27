@@ -42,7 +42,7 @@ return function (\DS\Interfaces\GeneralApplication $application, Phalcon\Di\Fact
                     'port' => $config['redis']->port,
                     //'auth' => 'foobared',
                     'persistent' => false,
-                    'lifetime' => 86400,
+                    'lifetime' => 86400*7,
                     'prefix' => 'dh.session.',
                     // 'index' => 1,
                 ]
