@@ -89,6 +89,17 @@ class CreateListController extends BaseController implements LoginAwareControlle
                     $tableId = $table->getId();
                     $this->view->setVar('tableId', $tableId);
 
+                    $image = $ss->getImagePath(
+                        $tableId,
+                        $this->request->getUploadedFiles(true)
+                    );
+                    if (!empty($image)) {
+                        $table->setImage($image)->save();
+                        $this->view->setVar('tempImage', $image);
+                    } else {
+                        throw new \Exception('Image missing - Please select an image for your Stream');
+                    }
+
                     $csv = $this->request->get('copy');
 
                     if ($this->request->hasFiles(true)) {
@@ -101,16 +112,6 @@ class CreateListController extends BaseController implements LoginAwareControlle
                         }
                     }
 
-                    $image = $ss->getImagePath(
-                        $tableId,
-                        $this->request->getUploadedFiles(true)
-                    );
-                    if (!empty($image)) {
-                        $table->setImage($image)->save();
-                        $this->view->setVar('tempImage', $image);
-                    } else {
-                        throw new \Exception('Image missing - Please select an image for your Stream');
-                    }
 
                     $curatorsIdsAndNames = $ss->setCurators($tableId, $this->request->get('curators'));
                     $relatedListsIdsAndNames = $ss->setRelatedLists($tableId, $this->request->get('related-lists'));
@@ -165,7 +166,8 @@ class CreateListController extends BaseController implements LoginAwareControlle
             $table->setOwnerUserId($userId)
                 ->setTitle($name)
                 ->setTagline($tagline)
-                ->setDescription($description);
+                ->setDescription($description)
+                ->setFeatured(0);
             return $table;
         } catch (InvalidStreamTitleException $e) {
             throw new \Exception('Title missing - ' . $e->getMessage());
