@@ -40,14 +40,8 @@ class CreateListController extends BaseController implements LoginAwareControlle
         $post['tags'] = explode(",",$this->request->getPost()['tags']);
         $this->view->setVar('post', $post);
             if ($this->request->get('step') == '2') {
-                try { 
                     $tableId = $this->request->get('tableId');
                     $table = Tables::findFirstById($tableId);
-                    $table->setOwnerUserId($user->getId())
-                        ->setTitle($this->request->get('name'))
-                        ->setTagline($this->request->get('tagline'))
-                        ->setDescription($this->request->get('description'));
-                    $table->save();
                     try {
                         $ss->setCurators($tableId, $this->request->get('curators'));
                         $ss->setRelatedLists($tableId, $this->request->get('related-lists'));
@@ -62,15 +56,25 @@ class CreateListController extends BaseController implements LoginAwareControlle
                             $table->setImage($image)->save();
                         }
                         $table->setFlags(TableFlags::Published);
-                        $table->save();
+                        try {
+                            $table
+                                ->setTitle($this->request->get('name'))
+                                ->setTagline($this->request->get('tagline'))
+                                ->setDescription($this->request->get('description'))
+                                ->save();
+                        } catch (InvalidStreamTitleException $e) {
+                            throw new \Exception('Title missing - ' . $e->getMessage());
+                        } catch (InvalidStreamTaglineException $e) {
+                            throw new \Exception('Tagline missing - ' . $e->getMessage());
+                        } catch (InvalidStreamDescriptionException $e) {
+                            throw new \Exception('Description missing - ' . $e->getMessage());
+                        } catch (\Exception $e) {
+                            throw new \Exception('Undetermined error on stream - '. $e->getMessage());
+                        }
                     } catch (\Exception $e) {
                         $this->flash->error($e->getMessage());
                         return;
                     }
-                } catch (\Exception $e) {
-                    $this->flash->error($e->getMessage());
-                    return;
-                }
                 $this->response->redirect("/list/" . $tableId, true);
 
             } else {
