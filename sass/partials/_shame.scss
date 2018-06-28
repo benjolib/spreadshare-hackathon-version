@@ -1141,6 +1141,54 @@
 .card-actions-dropdown {
   margin-top: -5px;
   margin-right: -1px;
+  width: 120px;
+  height: 87px;
+  border: 1px solid #dbdbdb;
+  border-radius: 4px;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.18);
+  padding-left: 14px;
+  text-align: left;
+  margin-right: -8px;
+  &--tall {
+    height: 120px;
+  }
+  a {
+    font-family: 'Roboto Mono', monospace;
+    font-weight: bold;
+    font-size: 11px;
+    color: #6a7c94;
+    line-height: 24px;
+    letter-spacing: -0.28px;
+    &.warning-color {
+      color: #fb7977;
+    }
+    img {
+      height: 10px;
+      margin-right: 4px;
+    }
+  }
+  @media (min-width: 768px) {
+    margin-top: -10px;
+    width: 170px;
+    height: 90px;
+    padding-left: 31px;
+    &--tall {
+      height: 152px;
+    }
+    a {
+      font-size: 14px;
+      line-height: 36px;
+      letter-spacing: -0.38px;
+    }
+    img {
+      height: auto;
+      margin-right: 8px;
+    }
+  }
+}
+.card-subscribe-dropdown {
+  margin-top: -5px;
+  margin-right: -1px;
   width: 80px;
   height: 87px;
   border: 1px solid #dbdbdb;
@@ -1186,7 +1234,6 @@
     }
   }
 }
-
 .extra-small-gutter {
   margin-left: -4px;
   margin-right: -4px;
@@ -5090,6 +5137,49 @@
       font-weight: bold;
       font-size: 16px;
       color: #2a1e3e;
+      letter-spacing: -0.5px;
+      text-align: center;
+      padding: 17px 21px 18px 22px;
+      margin: 0 12px 12px 0;
+    }
+  }
+}
+
+
+.selected-topics {
+  background: #2a1e3e;
+  padding: 23px 0 23px 0;
+  margin-bottom: 80px;
+  margin-top: -50px;
+  margin-bottom: -50px;
+  @media (min-width: 768px) {
+    margin-top: -128px;
+    margin-bottom: -108px;
+  }
+  h3 {
+    font-family: 'Lato', sans-serif;
+    font-weight: normal;
+    font-size: 24px;
+    color: #9baabf;
+    letter-spacing: -0.58px;
+    margin-bottom: 25px;
+  }
+  &__inner {
+    max-width: 1356px;
+    padding: 0 0 0 18px;
+    margin: 0 auto;
+  }
+  &__items {
+    display: flex;
+    flex-wrap: wrap;
+    div {
+      background: #2a1e3e;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
+      border-radius: 2px;
+      font-family: 'Roboto Mono', sans-serif;
+      font-weight: bold;
+      font-size: 16px;
+      color: #ffffff;
       letter-spacing: -0.5px;
       text-align: center;
       padding: 17px 21px 18px 22px;
