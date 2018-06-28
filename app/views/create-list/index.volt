@@ -331,7 +331,19 @@
       $('#createListFrom').submit();
     });
     document.querySelector('#file-upload-button').onclick = function () {
-      document.getElementById('create-list-fileUpload').click();
+      var vimage = document.querySelector(".re-image--create-list").style["background"] == "" ? false : true;
+      var vtitle = document.getElementById("name").value.length > 3 ? true : false
+      var vtagline = document.getElementById("tagline").value.length > 3 ? true : false
+      var vdescription = document.getElementById("tagline").value.length > 3 ? true : false
+      var vtags = document.getElementById("tags").value.split(",").map(Number).length >= 3 ? true : false
+      if (vimage && vtitle && vtagline && vdescription && vtags) {
+       document.getElementById('create-list-fileUpload').click();
+      } else {
+        $("html, body").animate({
+          scrollTop: 0
+        }, "slow");
+      }
+      
       
     };
 
@@ -358,7 +370,8 @@
       var vtagline = document.getElementById("tagline").value.length > 3 ? true : false
       var vdescription = document.getElementById("tagline").value.length > 3 ? true : false
       var vtags = document.getElementById("tags").value.split(",").map(Number).length >= 3 ? true : false
-      if (vimage && vtitle && vtagline && vdescription && vtags) {
+      var vcopy = document.getElementById("copy").value.length > 3 ? true : false
+      if (vimage && vtitle && vtagline && vdescription && vtags && vcopy) {
         $('#createListFrom').submit();
       } else {
         $("html, body").animate({
