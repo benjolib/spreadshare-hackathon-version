@@ -2,9 +2,10 @@
 namespace DS\Controller;
 
 use DS\Application;
+use DS\Interfaces\LoginAwareController;
+use DS\Model\DataSource\UserRoles;
 use Phalcon\Exception;
 use Phalcon\Logger;
-use Phalcon\Mvc\Controller as PhalconMvcController;
 
 /**
  * Spreadshare
@@ -18,13 +19,23 @@ use Phalcon\Mvc\Controller as PhalconMvcController;
  * @version   $Version$
  * @package   DS\Controller
  */
-class AdminController extends PhalconMvcController
+class AdminController extends BaseController implements LoginAwareController
 {
+    public function needsLogin()
+    {
+        return true;
+    }
+
     /**
      * Admin
      */
     public function indexAction($params = [])
     {
+        if (!$this->serviceManager->getAuth()->hasRole(UserRoles::Admin)) {
+            $this->response->redirect("/", true);
+            return;
+        }
+
         try {
             $this->view->setMainView('admin/index');
         } catch (Exception $e) {
