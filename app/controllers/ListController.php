@@ -206,7 +206,8 @@ class ListController extends BaseController
             }
 
             // table stats
-            // TODO $related doens't come with description
+            // TODO $related doesn't have description
+            // related-lists.volt
             $tableStats = $tableStatsModel->get($tableId, 'tableId');
             $related = TableRelations::findRelatedTables($tableId);
             foreach ($related as $key => $value) {
