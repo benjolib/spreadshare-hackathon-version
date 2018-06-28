@@ -32,9 +32,7 @@ abstract class TablesEvents
      */
     public function beforeValidationOnCreate()
     {
-        parent::beforeValidationOnCreate();
-
-        return $this->beforeValidationOnUpdate();
+        return parent::beforeValidationOnCreate();
     }
 
     /**
@@ -44,25 +42,20 @@ abstract class TablesEvents
     {
         parent::beforeValidationOnUpdate();
 
-        if (!$this->getTitle())
-        {
-            throw new \InvalidArgumentException('Please give a name for the table');
+        if (!empty($this->getTitle())) {
+
+            if (strlen($this->getTitle()) < 4) {
+                throw new \InvalidArgumentException('Please provide at least four characters for the table name.');
+            }
+
+            // Check if table with this name already exists
+            $tableCheck = Tables::findByFieldValue('title', $this->getTitle());
+            if ($tableCheck && $tableCheck->getId() != $this->getId()) {
+                throw new \InvalidArgumentException('A table with the exact same title already exists. Please choose another title');
+            }
         }
 
-        if (strlen($this->getTitle()) < 4)
-        {
-            throw new \InvalidArgumentException('Please provide at least four characters for the table name.');
-        }
-
-        // Check if table with this name already exists
-        $tableCheck = Tables::findByFieldValue('title', $this->getTitle());
-        if ($tableCheck && $tableCheck->getId() != $this->getId())
-        {
-            throw new \InvalidArgumentException('A table with the exact same title already exists. Please choose another title');
-        }
-
-        if (!$this->getTypeId())
-        {
+        if (!$this->getTypeId()) {
             $this->setTypeId(null);
         }
 
@@ -76,13 +69,11 @@ abstract class TablesEvents
 //            $this->setTopic2Id(null);
 //        }
 
-        if ($this->getTypeId() && Types::findFirstById($this->getTypeId()) === false)
-        {
+        if ($this->getTypeId() && Types::findFirstById($this->getTypeId()) === false) {
             throw new \InvalidArgumentException("Your selected type is invalid. Please select another one.");
         }
 
-        if (!$this->getFlags())
-        {
+        if (!$this->getFlags()) {
             $this->setFlags(TableFlags::Unpublished);
         }
 
@@ -98,8 +89,7 @@ abstract class TablesEvents
         $tableStats = new TableStats();
         $tableStats->setTableId($this->getId())->create();
 
-        if ($this instanceof Tables)
-        {
+        if ($this instanceof Tables) {
             TableCreated::after($this->getOwnerUserId(), $this);
         }
 
@@ -111,8 +101,7 @@ abstract class TablesEvents
      */
     public function afterSave()
     {
-        if ($this instanceof Tables)
-        {
+        if ($this instanceof Tables) {
             TableUpdated::after($this->getOwnerUserId(), $this);
         }
 

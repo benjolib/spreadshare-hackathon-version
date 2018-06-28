@@ -78,13 +78,9 @@ class CreateListController extends BaseController implements LoginAwareControlle
                     if (!empty($this->request->getPost('tableId'))) {
                         $table = Tables::findFirstById($this->request->getPost('tableId'));
                     } else {
-                        $table = $this->getTable(
-                            $user->getId(),
-                            $this->request->get('name'),
-                            $this->request->get('tagline'),
-                            $this->request->get('description')
-                        );
-                        $table->save();
+                        $table = new Tables();
+                        $table->setOwnerUserId($user->getId())
+                            ->setFeatured(0)->save();
                     }
                     $tableId = $table->getId();
                     $this->view->setVar('tableId', $tableId);
@@ -94,9 +90,9 @@ class CreateListController extends BaseController implements LoginAwareControlle
                         $this->request->getUploadedFiles(true)
                     );
                     if (!empty($image)) {
-                        $table->setImage($image)->save();
+                        $table->setTitle('temptitle'.rand(0,5000))->setImage($image)->save();
                         $this->view->setVar('tempImage', $image);
-                    } else {
+                    } elseif (empty($table->getImage())) {
                         throw new \Exception('Image missing - Please select an image for your Stream');
                     }
 
@@ -127,7 +123,22 @@ class CreateListController extends BaseController implements LoginAwareControlle
                     $tableContentFromCsv = $this->tableContentFromCsv($csv);
                     $this->view->setVar('tableColumns', $tableContentFromCsv[0]);
                     $this->view->setVar('tableContent', array_splice($tableContentFromCsv, 1));
-                    $this->view->setVar('editing', true);   
+                    $this->view->setVar('editing', true);
+                    try {
+                        $table
+                            ->setTitle($this->request->get('name'))
+                            ->setTagline($this->request->get('tagline'))
+                            ->setDescription($this->request->get('description'))
+                            ->save();
+                        } catch (InvalidStreamTitleException $e) {
+                        throw new \Exception('Title missing - ' . $e->getMessage());
+                    } catch (InvalidStreamTaglineException $e) {
+                        throw new \Exception('Tagline missing - ' . $e->getMessage());
+                    } catch (InvalidStreamDescriptionException $e) {
+                        throw new \Exception('Description missing - ' . $e->getMessage());
+                    } catch (\Exception $e) {
+                        throw new \Exception('Undetermined error on stream - '. $e->getMessage());
+                    }
                 } catch (\Exception $e) {
                     $this->flash->error($e->getMessage());
                     return;
@@ -159,24 +170,4 @@ class CreateListController extends BaseController implements LoginAwareControlle
         return $tableContent;
     }
 
-    protected function getTable($userId, $name,$tagline, $description)
-    {
-        try {
-            $table = new Tables();
-            $table->setOwnerUserId($userId)
-                ->setTitle($name)
-                ->setTagline($tagline)
-                ->setDescription($description)
-                ->setFeatured(0);
-            return $table;
-        } catch (InvalidStreamTitleException $e) {
-            throw new \Exception('Title missing - ' . $e->getMessage());
-        } catch (InvalidStreamTaglineException $e) {
-            throw new \Exception('Tagline missing - ' . $e->getMessage());
-        } catch (InvalidStreamDescriptionException $e) {
-            throw new \Exception('Description missing - ' . $e->getMessage());
-        } catch (\Exception $e) {
-            throw new \Exception('Undetermined error on stream - '. $e->getMessage());
-        }
-    }
 }
