@@ -66,6 +66,7 @@ class IndexController extends BaseController
             $tableFilter = new TableFilter();
             if (!empty($tag)) {
                 $tableFilter->setTags([$tag]);
+                
             }
 
             // recently-added
@@ -116,6 +117,7 @@ class IndexController extends BaseController
                 $this->view->setMainView('homepage/loadmore');
             } else {
                  if (!empty($tag)) {
+                     $this->view->setVar('tag', $tag);
                     $this->view->setMainView('homepage/tag');
                  }else {
                     $this->view->setMainView('homepage/index');

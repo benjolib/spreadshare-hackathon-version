@@ -3,7 +3,7 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
 <div class="re-page re-page--large">
   <div class="homepage-space">
     <h1 class="re-heading">Explore</h1>
-    <h2 class="re-subheading re-subheading--button-below">We hand-curate the best Streams for you every day</h2>
+    <h2 class="re-subheading re-subheading--button-below">We curate the best Streams for you every day</h2>
   </div>
   {#
   <div class="home-heading u-flex">
@@ -99,7 +99,17 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
       </div>
     </div>
   </div> #}
+<div class="home-heading u-flex">
+<div class="selected-topics__items">
+<a href="javascript:history.back()">
 
+ {% for featuredTag in featuredTags %} {% if featuredTag['id'] == tag %}
+<div>{{ featuredTag['title'] }} x</div>
+{% endif %} {% endfor %}
+</a>
+</div>
+  
+    </div>
   <div class="u-flex u-flexWrap homepage-gutter home-top-margin-bottom"></div>
     {% set qty = 0 %}
  {% set partialindex=0 %}
