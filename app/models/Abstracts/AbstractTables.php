@@ -495,4 +495,12 @@ abstract class AbstractTables extends \DS\Model\Base
         $this->featured = $featured;
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
 }

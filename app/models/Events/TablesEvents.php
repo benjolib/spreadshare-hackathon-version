@@ -77,6 +77,18 @@ abstract class TablesEvents
             $this->setFlags(TableFlags::Unpublished);
         }
 
+        if (!$this->getSlug() && strpos($this->getTitle(), "temptitle") === false) {
+            $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $this->getTitle())));
+            $slugCheck = Tables::findByFieldValue('slug', $slug);
+            $i = 2;
+            while ($slugCheck && $slugCheck->getId() != $this->getId()) {
+                $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $this->getTitle()))).'_'.$i;
+                $slugCheck = Tables::findByFieldValue('slug', $slug);
+                $i++;
+            }
+            $this->setSlug($slug);
+        }
+
         return true;
     }
 
