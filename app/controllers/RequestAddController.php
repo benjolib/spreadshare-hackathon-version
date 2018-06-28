@@ -105,9 +105,7 @@ class RequestAddController extends BaseController implements LoginAwareControlle
 
         // Handle approval
 
-        $request->status = ChangeRequestStatus::Confirmed;
-        $request->save();
-        
+
         $content = json_decode($request->content);
 
         $tablecontent = new TableContent();
@@ -119,6 +117,9 @@ class RequestAddController extends BaseController implements LoginAwareControlle
         $imagePath = '/rowimages/'.$newRow->getId().'.'.$ext;
         rename($oldFile, ROOT_PATH.'/public'.$imagePath);
         $newRow->setImage($imagePath)->save();
+
+        $request->status = ChangeRequestStatus::Confirmed;
+        $request->setImage($imagePath)->save();
 
         $this->flash->success('Submission approved - You have approved this submission');
         $this->_redirectBack();
