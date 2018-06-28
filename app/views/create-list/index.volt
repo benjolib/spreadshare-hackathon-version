@@ -351,10 +351,21 @@
       $('.create-list-tab-content-copy').show();
     });
 
-    $('.create-list-copy-button').on('click', function (e) {
+   $('.create-list-copy-button').on('click', function (e) {
       e.preventDefault();
+      var vimage = document.querySelector(".re-image--create-list").style["background"] == "" ? false : true;
+      var vtitle = document.getElementById("name").value.length > 3 ? true : false
+      var vtagline = document.getElementById("tagline").value.length > 3 ? true : false
+      var vdescription = document.getElementById("tagline").value.length > 3 ? true : false
+      var vtags = document.getElementById("tags").value.split(",").map(Number).length >= 3 ? true : false
+      if (vimage && vtitle && vtagline && vdescription && vtags) {
+        $('#createListFrom').submit();
+      } else {
+        $("html, body").animate({
+          scrollTop: 0
+        }, "slow");
+      }
 
-      $('#createListFrom').submit();
     });
 
     // list edit stuff
