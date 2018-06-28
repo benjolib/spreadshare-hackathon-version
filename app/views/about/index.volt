@@ -77,7 +77,7 @@
         <tr class="re-table-space"></tr>
       </tbody>
     </table>
-    <div style="margin-top: 60px;overflow-x:auto;" class="u-flex u-sm-flexWrap u-md-flexNoWrap">
+    <div style="margin-top: 60px;overflow-x:none;" class="u-flex u-sm-flexWrap u-md-flexNoWrap">
       <a href="#"><img src="/assets/images/about-social-twitter.png" /></a>
       <a href="#"><img src="/assets/images/about-social-medium.png" /></a>
       <a href="#"><img src="/assets/images/about-social-producthunt.png" /></a>
