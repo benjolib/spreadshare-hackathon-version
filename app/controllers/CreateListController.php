@@ -154,6 +154,7 @@ class CreateListController extends BaseController implements LoginAwareControlle
     protected function tableContentFromCsv($csv): array
     {
         $newlineSeparator = "\r\n";
+        $csv = str_replace("\t", ",", $csv);
         $colSeparator = ',';
         $tableColumns = explode($colSeparator, strtok($csv, $newlineSeparator));
         $numColumns = count($tableColumns);
