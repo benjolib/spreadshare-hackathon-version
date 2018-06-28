@@ -22,6 +22,7 @@
         'listingCount': table['listingCount'],
         'showCurator': false,
         'half': true,
+        'small': true,
         'large': false
       ]) }}
     {% endfor %}

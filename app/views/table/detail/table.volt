@@ -99,7 +99,7 @@
     </div>
     <div class="about-list__col">
       <div class="about-list__item">
-        <div class="about-list__item__name">CURATED BY</div>
+        <div class="about-list__item__name">CURATOR</div>
         <div class="about-list__item__content">
           {{ partial('partials/profile-card', [
             'username': 'andewcoyle',
