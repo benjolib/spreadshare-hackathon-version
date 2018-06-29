@@ -58,7 +58,7 @@
       // foreach array
       $.each(response.data.hits.hits, function (key, val) {
         // item
-        items.push("<a href='/list/" + val._id + "'><div class='item'><div class='title'>" + val._source.title +
+        items.push("<a href='/stream/" + val._id + "'><div class='item'><div class='title'>" + val._source.title +
           "</div><div class='tagline'>" + val._source.tagline + "</div></div></a>");
       });
       // append list to array
@@ -236,10 +236,10 @@
   $(document).ready(function () {
     // pops
 
-    var finterval = setInterval(function () {
-      $(".feedback").css("display", "none")
-    }, 5000)
-    
+    // var finterval = setInterval(function () {
+    //   $(".feedback").css("display", "none")
+    // }, 5000)
+
     window.bindPops = function () {
       $('.l-button:not(.bound)').each(function () {
         var $button = $(this);

@@ -16,7 +16,9 @@
         <td>
             {# {% if isAjax %}<input class="moreToLoad" type="hidden" value="{{ moreToLoad }}" />{% endif %} #}
             <div class="re-table-green">{{ subscription.numSubscribers }} SUBSCRIBERS</div>
-            <a href="/list/{{ subscription.tableId }}"><h3>{{ subscription.title }}</h3></a>
+<a href="/stream/{{ subscription.tableId }}">
+    <h3>{{ subscription.title }}</h3>
+</a>
             <p>{{ subscription.tagline }}</p>
         </td>
         <td>

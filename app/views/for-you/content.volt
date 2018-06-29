@@ -5,6 +5,7 @@
 "collabListing" %} {{ partial('for-you/collabListing', ['listing': element]) }} {% break %} {% endswitch %} {% endfor %}
 {% else %}
 {% if page is 0 %}
+
 <div class="info-box">
     <div class="info">
         <div class="heading"> Nothing here </div>

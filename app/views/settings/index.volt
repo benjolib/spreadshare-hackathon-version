@@ -55,12 +55,12 @@
                   <input id="email" class="re-field__input" type="text" name="email" placeholder="Your Email" value="{{ profile.email }}" />
               </div>
             </label>
-            <label class="re-field re-field--settings">
-              <div>
-                  <div class="re-field__label">PASSWORD <span id="showPasswordSpan" class="show-password" onclick="togglePassword('password');">Show</span></div>
-                  <input id="password" class="re-field__input" type="password" name="password" placeholder="Your Password" value="" autocomplete="new-password" />
-              </div>
-            </label>
+            <!-- <label class="re-field re-field--settings"> -->
+              <!-- <div>
+                  <div class="re-field__label">PASSWORD <span id="showPasswordSpan" class="show-password" onclick="togglePassword('password');">Show</span></div> -->
+                  <input id="password" class="re-field__input" type="hidden" name="password" placeholder="Your Password" value="" autocomplete="new-password" />
+              <!-- </div>
+            </label> -->
             <h3 class="settings-seperator-heading">Social Accounts</h3>
             <label class="re-field re-field--settings">
               <div>
@@ -113,7 +113,7 @@
                   <p>We email you summaries of your subscriptions</p>
               </div>
               <div>
-                <a href="#" class="manage-subscriptions-link">Manage Subscriptions</a>
+<a href="/subscriptions" class="manage-subscriptions-link">Manage Subscriptions</a>
               </div>
             </label>
             <label class="re-field re-field--settings">
@@ -337,7 +337,12 @@
         $('.settings-tab-content').hide();
         $('.settings-tab-content-user').show();
       });
-
+ if(window.location.href.indexOf("#emails") !== -1){
+ $('.settings-tabs-button').removeClass('active');
+        $('.settings-tabs-button-emails').addClass('active');
+        $('.settings-tab-content').hide();
+        $('.settings-tab-content-emails').show();
+ }
       $('.settings-tabs-button-emails').on('click', function (e) {
         e.preventDefault();
         $('.settings-tabs-button').removeClass('active');

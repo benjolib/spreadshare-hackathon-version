@@ -63,7 +63,7 @@
 
 
 <div class="list-page-section-label">
-  ABOUT THIS LIST
+  ABOUT THIS STREAM
 </div>
 <div class="about-list">
   <div class="about-list__inner">
@@ -130,7 +130,7 @@
 </div>
 
 <div class="list-page-section-label">
-  RELATED LISTS
+  RELATED STREAMS
 </div>
 <div class="related-lists u-flex u-flexJustifyCenter">
   <div class="related-lists__inner u-flex u-flexWrap">

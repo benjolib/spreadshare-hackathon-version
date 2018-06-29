@@ -18,9 +18,16 @@
     </h2>
     <p class="re-para">{{ table['description'] }}</p>
     <div class="u-flex u-flexAlignItemsCenter">
+ {% if !amISubscribed(table['id']) %}
       <a class="re-button re-button--list-subscribe l-button" href="javascript:;" data-dropdown-placement="right" data-dropdown-offset="6">
         <img src="/assets/images/9-0/list-subscribe-button-bird.svg" /> Subscribe
       </a>
+
+      {% else %}
+      <a class="re-button re-button--list-subscribed l-button" href="javascript:;" data-dropdown-placement="right" data-dropdown-offset="6">
+        <img src="/assets/images/9-0/list-subscribe-button-bird.svg" /> Subscribed
+      </a>
+ {% endif %}
       <div class="sh-dropdown card-subscribe-dropdown card-actions-dropdown--tall u-flex u-flexCol u-flexJustifyCenter l-dropdown"
         style="margin-left: 18px;">
         <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'D')">Daily</a>
@@ -181,7 +188,7 @@
 </div>
 <input type="text" id="related-lists-edit" class="related-lists-edit" value="" style="display:none;" /> {#
 <div class="list-page-section-label">
-  RELATED LISTS
+  RELATED STREAMS
 </div>
 <div class="related-lists u-flex u-flexJustifyCenter">
   <div class="related-lists__inner u-flex u-flexWrap">
@@ -215,7 +222,8 @@
         <div class="about-list__item__content">
           <div id="curators">
             {{ partial('partials/profile-card', [ 'username': table['creatorHandle'], 'avatar': table['creatorImage'], 'name': table['creator'],
-            'id': table['ownerUserId'], 'type': 3 ]) }}
+ 'id': table['ownerUserId'], 'bio': table['creatorBio'] , 'type': 4 ]) }}
+            
           </div>
           <input type="text" id="curators-edit" class="curators-edit" value="{{ table['creatorHandle'] }}" style="display:none;" />
         </div>
@@ -250,7 +258,7 @@
           <form method="POST" action="/list/{{ table['id'] }}">
             <input type="hidden" name="parentId" value="" />
             <div class="discussion-textarea">
-              <textarea name="comment" placeholder=" Write a response..." minlength="3" maxlength="300"></textarea>
+              <textarea id="textareac" name="comment" placeholder=" Write a response"></textarea>
               <button>Send</button>
             </div>
           </form>
@@ -285,7 +293,7 @@
         <form method="POST" action="/list/{{ table['id'] }}" style="display:none;margin-left:80px;margin-top:8px;">
           <input type="hidden" name="parentId" class="commentParentId" value="" />
           <div class="discussion-textarea">
-            <textarea name="comment" class="commentTextArea" placeholder="Write comment here..." minlength="3" maxlength="300"></textarea>
+            <textarea name="comment" class="commentTextArea" placeholder="Write a comment"></textarea>
             <button>Send</button>
           </div>
         </form>
@@ -377,6 +385,19 @@
       $('#subscriptions_form').submit();
     }
     $(document).ready(function () {
+
+      $('#textareac').keyup(function(e){
+        console.log("keyup")
+          e.target.style.height = "73px";
+          e.target.style.height = (e.target.scrollHeight)+"px";
+      })
+      
+      $('.commentTextArea').keyup(function(e){
+        console.log("keyup")
+          e.target.style.height = "73px";
+          e.target.style.height = (e.target.scrollHeight)+"px";
+      })
+
       $('.empty ').initial({
         height: 82,
         width: 82
@@ -449,7 +470,14 @@
         $('.list-tab-content').hide();
         $('.list-tab-content-about').show();
       });
-
+      
+ if(window.location.href.indexOf("#discussion") !== -1){
+        $('.list-tab-button').removeClass('active');
+        $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+        $('.list-tab-button-discussion').addClass('active');
+        $('.list-tab-content').hide();
+        $('.list-tab-content-discussion').show();
+ }
       $('.list-tab-button-discussion').on('click', function (e) {
         e.preventDefault();
         $('.list-tab-button').removeClass('active');
@@ -501,6 +529,7 @@
       $('.j_listing-vote').on('click', function (e) {
         e.preventDefault();
         var $this = $(this);
+        
 
         domUpdateVote($this, !$this.hasClass('vote-link--upvoted'));
 

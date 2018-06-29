@@ -6,6 +6,6 @@
     
     <a href="/user/follow/{{id}}" class="profile-card__follow">{% if amIFollowing(id) %}Unfollow{% else %}Follow{% endif %}</a>
     {% endif %}
-    {% if type !== 3 %}<p class="profile-card__bio">{{ truncate is not empty and truncate ? bio|truncate(type == 4 or type == 10 ? 74 : 43) : bio }}</p>{% endif %}
+    {% if type !== 3  or type !== 4 %}<p class="profile-card__bio">{{ truncate is not empty and truncate ? bio|truncate(type == 4 or type == 10 ? 74 : 43) : bio }}</p>{% endif %}
   </div>
 </div>
