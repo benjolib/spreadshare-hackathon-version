@@ -10,17 +10,29 @@ namespace DS\Component\View\Functions;
 
 
 use DS\Component\ServiceManager;
+use DS\Model\TableSubscription;
 use DS\Model\UserFollower;
 use Phalcon\Mvc\User\Component;
 
 class Following extends Component
 {
-    public static function amIFollowing($userId)
+    private static function getAuthenticatedUserId():int
     {
         $s = new self;
         $serviceManager = ServiceManager::instance($s->getDI());
-        $authId = $serviceManager->getAuth()->getUserid();
+        return $serviceManager->getAuth()->getUserid();
+
+    }
+
+    public static function amIFollowing($userId)
+    {
+        $authId = self::getAuthenticatedUserId();
         return !empty(UserFollower::findFollower($userId, $authId));
     }
 
+    public static function amISubscribed($streamId)
+    {
+        $authId = self::getAuthenticatedUserId();
+        return !empty(TableSubscription::findSubscription($authId, $streamId));
+    }
 }
