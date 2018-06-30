@@ -250,6 +250,8 @@ class ListController extends BaseController
                 'id' => $row->getId(),
                 'content' => array_column(json_decode($row->getContent(), true), 'content'),
                 'image' => $row->getImage(),
+                'createdAt' => $row->getCreatedAt(),
+                'userId' => $row->getUserId(),
             ];
         }
         return $result;
