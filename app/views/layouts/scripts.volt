@@ -267,9 +267,10 @@
           if($dropdown.hasClass("show") || $('.l-dropdown').hasClass("show")) {
 
             $('.l-dropdown').removeClass('show');
-            $dropdown.removeClass("show")
+            $dropdown.removeClass("show");
             // TODO remove number on close
-            $(".circleNumber").before('<img src="/assets/images/9-0/header-notifications.png" />')
+            $(".numberCircle").before('<img src="/assets/images/9-0/header-notifications.png" />');
+            $(".numberCircle").remove();
           }else {
             $dropdown.addClass('show');
           }
