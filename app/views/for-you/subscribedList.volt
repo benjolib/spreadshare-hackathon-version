@@ -5,7 +5,7 @@
         <div>
             <a class="collaboration-info__user-name" href="/profile/{{ newList.userHandle }}">{{ newList.userName }}</a>
             <span class="collaboration-info__text">subscribed to a Stream</span>
-<a class="collaboration-info__table-name" href="/stream/{{ newList.tableId }}">{{ newList.tableName }}</a>
+<a class="collaboration-info__table-name" href="/stream/{{ newList.tableSlug ? newList.tableSlug : newList.tableId }}">{{ newList.tableName }}</a>
         </div>
     </div>
     <div class="collaboration-clock"><img src="/assets/images/comment-clock.svg"/>{{ date('M jS H:i ',newList.getCreatedAt().getTimeStamp()) }}</div>

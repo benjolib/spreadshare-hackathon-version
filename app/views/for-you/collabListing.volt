@@ -4,7 +4,7 @@
         <div>
             <a class="collaboration-info__user-name" href="/profile/{{ listing.userHandle }}">{{ listing.userName }}</a>
             <span class="collaboration-info__text">has collaborated a listing to</span>
-<a class="collaboration-info__table-name" href="/stream/{{ listing.tableId }}">{{ listing.tableName }}</a>
+<a class="collaboration-info__table-name" href="/stream/{{ newList.tableSlug ? newList.tableSlug : newList.tableId }}">{{ listing.tableName }}</a>
         </div>
     </div>
     <div class="collaboration-clock"><img src="/assets/images/comment-clock.svg" />{{ date('M jS H:i ',listing.getCreatedAt().getTimeStamp()) }}</div>

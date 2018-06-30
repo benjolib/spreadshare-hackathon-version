@@ -56,6 +56,50 @@ $("body").mouseup(function(e){down = false;});
                         }
                     });
             });
+        
+         var domUpdateVote = function ($el, vote) {
+                    var $votesCounter = $el.find('div');
+                    var votes = Number($votesCounter.text());
+                    if (vote) {
+                        $votesCounter.text(votes + 1);
+                    } else {
+                        $votesCounter.text(votes - 1);
+                    }
+
+                    if (vote) {
+                        $el.addClass('vote-link--upvoted');
+                    } else {
+                        $el.removeClass('vote-link--upvoted');
+                    }
+                };
+
+                $('.j_listing-vote').on('click', function (e) {
+                    console.log("click upvote");
+                    e.preventDefault();
+                    var $this = $(this);
+
+
+                    domUpdateVote($this, !$this.hasClass('vote-link--upvoted'));
+
+                    // ajax
+                    var tableId = $this.parents('table').data('id');
+                    var rowId = $this.parents('tr').data('id');
+
+                    $.ajax({
+                        type: "POST",
+                        url: '/api/v1/vote-row/' + tableId,
+                        data: JSON.stringify({
+                            rowId: rowId
+                        }),
+                        success: function (res) {
+
+                        },
+                        contentType: "application/json; charset=utf-8",
+                        dataType: 'json'
+                    });
+                });
+        
+        
         });
     </script>
 {% endblock %}

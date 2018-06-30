@@ -66,10 +66,11 @@
                  {% set length = 0 %}
                  {% endif %}
               <td style="min-width: {{ length }}px; cursor: pointer;" >
-              <div onmouseover="javascript:$('#e{{i}}{{index}}').css('visibility','visible');"; onmouseout="javascript:$('#e{{i}}{{index}}').css('visibility', 'hidden');" id="d{{i}}{{index}}"  class="edit icon" style="outline: 0px solid transparent;border:0;display:flex;">{{ filterTableRowsContent(cell) }}</div>
+<div onmouseover="javascript:$('.e{{i}}{{index}}').css('visibility','visible');" ; onmouseout="javascript:$('.e{{i}}{{index}}').css('visibility', 'hidden');"
+  id="{{i}}" class="edit icon" style="outline: 0px solid transparent;border:0;display:flex;d{{i}}{{index}};">{{ filterTableRowsContent(cell) }}</div>
               </td>
               <td>
-              <i id="e{{i}}{{index}}" class="edit icon green" style="cursor: pointer;visibility: hidden;" onclick="console.log($(this).prev().prev());javascript:$('#d{{i}}{{index}}').focus();"></i>
+<i id="{{i}}" class="edit icon green e{{i}}{{index}}" style="cursor: pointer;visibility: hidden;" onclick="console.log($(this).prev().prev());javascript:$('.d{{i}}{{index}}').focus();"></i>
               </td>
             {% endfor %}
             

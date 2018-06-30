@@ -70,7 +70,7 @@ class ListController extends BaseController
                 $this->flash->error("Unexpected error -".$e->getMessage());
                 return;
             }
-            $this->response->redirect("/list/" . $tableId, true);
+            $this->response->redirect("/stream/" . $tableId, true);
         } else {
             $post['name'] = $table->getTitle();
             $post['tagline'] = $table->getTagline();

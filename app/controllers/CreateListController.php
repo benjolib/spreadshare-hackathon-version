@@ -23,7 +23,7 @@ class CreateListController extends BaseController implements LoginAwareControlle
     {
         $user = $this->serviceManager->getAuth()->getUser();
         if (!$user->hasRole(UserRoles::Curator)) {
-            $this->response->redirect("/list/666", true);
+            $this->response->redirect("/stream/666", true);
             return;
         }
 
@@ -75,7 +75,7 @@ class CreateListController extends BaseController implements LoginAwareControlle
                         $this->flash->error($e->getMessage());
                         return;
                     }
-                $this->response->redirect("/list/" . $tableId, true);
+                $this->response->redirect("/stream/" . $tableId, true);
 
             } else {
                 try {

@@ -30,7 +30,7 @@ class SubscriptionsController extends BaseController implements LoginAwareContro
                 $subscription->setTableId($this->request->get('table_id'))
                     ->setUserId($userId);
             $this->flash->success('You subscribed - You successfully subscribed this Stream');
-            $this->response->redirect('/list/' . $this->request->get('table_id'), true);
+            $this->response->redirect('/stream/' . $this->request->get('table_id'), true);
             $new =true;
             }
             $freq = $this->request->get('subscription_freq');

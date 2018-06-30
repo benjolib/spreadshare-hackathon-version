@@ -31,7 +31,7 @@ abstract class AbstractListing implements FeedDto {
             $this->userHandle = $rawListing->userHandle;
             $this->userImage = $rawListing->userImage;
             $this->createdAt = (new \DateTimeImmutable())->setTimeStamp($rawListing->createdAt);
-            $this->columns[] = new ListingColumn($columns[$key], $column->content, $column->link);
+            $this->columns[] = new ListingColumn($columns[$key], $column->content, null);
         }
     }
 

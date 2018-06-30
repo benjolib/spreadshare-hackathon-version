@@ -1,6 +1,6 @@
 {% if feedElements  %}
-{{ dump(feedElements) }}
 {% for element in feedElements %} 
+{{ dump(element) }}
 {% switch element.getType() %} 
 {% case "submittedListing"%} 
 {{ partial('for-you/submittedListing', ['listing': element]) }} 
@@ -31,5 +31,7 @@
         <button onclick="window.location.href='/'" :> Explore Streams </button>
     </div>
 </div>
+
 {% endif %}
 {% endif %}
+

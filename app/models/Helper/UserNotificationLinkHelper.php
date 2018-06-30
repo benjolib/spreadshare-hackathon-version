@@ -36,7 +36,7 @@ class UserNotificationLinkHelper
                 break;
             case UserNotificationType::TableUpvoted:
             case UserNotificationType::TableCreated:
-                return '/list/'.$notification['sourceTableId'];
+                return '/stream/'.$notification['sourceTableId'];
             case UserNotificationType::TableSubscribed:
                 return '/profile/' . $notification['userHandle'];           
             case UserNotificationType::TableDownvoted:
@@ -46,7 +46,7 @@ class UserNotificationLinkHelper
             case UserNotificationType::ChangeRequestedRejected:
                 return '/table/' . $notification['sourceTableId'];
             case UserNotificationType::Commented:
-                return '/list/' . $notification['sourceTableId'] . '/#discussion';
+                return '/stream/' . $notification['sourceTableId'] . '/#discussion';
                 break;
             case UserNotificationType::ChangeRequested:
                 return '/collaborations/#received';

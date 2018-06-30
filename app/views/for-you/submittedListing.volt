@@ -4,18 +4,18 @@
         <div>
             <a class="collaboration-info__user-name" href="/profile/{{ listing.userHandle }}">{{ listing.userName }}</a>
             <span class="collaboration-info__text">submitted a listing to</span>
-<a class="collaboration-info__table-name" href="/stream/{{ listing.tableId }}">{{ listing.tableName }}</a>
+<a class="collaboration-info__table-name" href="/stream/{{ listing.tableSlug ? listing.tableSlug : listing.tableId }}">{{ listing.tableName }}</a>
         </div>
     </div>
     <div class="collaboration-clock">
         <img src="/assets/images/comment-clock.svg" />{{ date('M jS H:i ',listing.getCreatedAt().getTimeStamp()) }}</div>
 </div>
 <div class="table-scroll table-scroll--collaborations">
-    <table class="re-table re-table--list">
+    <table class="re-table re-table--list" data-id="{{ listing.tableId }}">
         <thead>
             <tr>
                 <th>
-                    <!-- VOTES -->
+                    VOTES
                 </th>
                 <th class="shadowcontainth"></th>
                 <th>{# image #}</th>
@@ -26,12 +26,12 @@
         </thead>
         <tbody>
             <tr>
-                <tr data-id="1" class="list-row-tr">
+                <tr data-id="{{ listing.id }}" class="list-row-tr">
                     <td>
-                        <!-- <a href="#" class="vote-link">
+                        <a href="#" class="vote-link j_listing-vote">
                             <img class="vote-link__image" src="/assets/images/vote-lightning.svg" />
                             <div>{{ listing.postNumVotes }}</div>
-                        </a> -->
+                        </a>
                     </td>
                     <td class="shadowcontaintd">
                         <div class="shadowcontain">
