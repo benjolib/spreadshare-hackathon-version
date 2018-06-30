@@ -27,7 +27,7 @@
         <div class="subheading"> Subscribe Streams to active your feed. </div>
     </div>
     <div class="action">
-        <button onclick="window.location.href='/explore'" :> Explore Streams </button>
+        <button onclick="window.location.href='/'" :> Explore Streams </button>
     </div>
 </div>
 {% endif %}
