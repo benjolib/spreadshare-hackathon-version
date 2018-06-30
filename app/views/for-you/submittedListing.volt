@@ -15,7 +15,7 @@
         <thead>
             <tr>
                 <th>
-                    VOTES
+                    <!-- VOTES -->
                 </th>
                 <th class="shadowcontainth"></th>
                 <th>{# image #}</th>
@@ -28,10 +28,10 @@
             <tr>
                 <tr data-id="1" class="list-row-tr">
                     <td>
-                        <a href="#" class="vote-link">
+                        <!-- <a href="#" class="vote-link">
                             <img class="vote-link__image" src="/assets/images/vote-lightning.svg" />
                             <div>{{ listing.postNumVotes }}</div>
-                        </a>
+                        </a> -->
                     </td>
                     <td class="shadowcontaintd">
                         <div class="shadowcontain">

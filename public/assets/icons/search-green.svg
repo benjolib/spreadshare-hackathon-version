@@ -1,6 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-  <g fill="none" fill-rule="evenodd" transform="translate(1 1)">
-    <rect width="5.384" height="3.925" x="9.211" y="9.941" fill="#24AE69" transform="rotate(45 11.904 11.904)" rx="1.963"/>
-    <circle cx="5.888" cy="5.888" r="5.888" stroke="#24AE69"/>
-  </g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 6</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Desktop-HD" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-453.000000, -443.000000)" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Group-6" transform="translate(455.000000, 445.000000)" stroke="#2DAD6B" stroke-width="4.05">
+            <circle id="Oval" cx="16" cy="16" r="16"></circle>
+            <path d="M36,36 L27.3,27.3" id="Shape"></path>
+        </g>
+    </g>
 </svg>

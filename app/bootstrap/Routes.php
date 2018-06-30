@@ -173,7 +173,7 @@ return [
         'methods' => ['GET', 'POST'],
     ],
     [
-        'url' => '/list/{id:[0-9]+}/delete',
+        'url' => '/stream/{id:[0-9]+}/delete',
         'paths' => [
             'controller' => 'Table',
             'action' => 'delete',
@@ -202,7 +202,7 @@ return [
         'methods' => ['GET', 'POST'],
     ],
     [
-        'url' => '/list/{slug}',
+        'url' => '/stream/{slug}',
         'paths' => [
             'controller' => 'List',
             'action' => 'index',
@@ -210,7 +210,7 @@ return [
         'methods' => ['GET', 'POST'],
     ],
     [
-        'url' => '/list/{id}/edit',
+        'url' => '/stream/{id}/edit',
         'paths' => [
             'controller' => 'List',
             'action' => 'edit',
@@ -234,7 +234,7 @@ return [
         'methods' => ['GET', 'POST'],
     ],
     [
-        'url' => '/lists',
+        'url' => '/streams',
         'paths' => [
             'controller' => 'Lists',
             'action' => 'index',
@@ -405,7 +405,7 @@ return [
         'methods' => ['GET', 'POST'],
     ],
     [
-        'url' => '/list/subscribe/{tableId:[0-9]+}',
+        'url' => '/stream/subscribe/{tableId:[0-9]+}',
         'paths' => [
             'controller' => 'List_Subscription',
             'action' => 'subscribe',
@@ -413,7 +413,7 @@ return [
         'methods' => ['GET', 'POST'],
     ],
     [
-        'url' => '/list/comment/{tableId:[0-9]+}',
+        'url' => '/stream/comment/{tableId:[0-9]+}',
         'paths' => [
             'controller' => 'List_Subscription',
             'action' => 'subscribe',
@@ -421,7 +421,7 @@ return [
         'methods' => ['GET', 'POST'],
     ],
     [
-        'url' => '/list/flag/{tableId:[0-9]+}/{reason}',
+        'url' => '/stream/flag/{tableId:[0-9]+}/{reason}',
         'paths' => [
             'controller' => 'List_Flag',
             'action' => 'flag',

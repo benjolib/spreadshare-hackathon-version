@@ -20,6 +20,28 @@
 
 {% block scripts %}
     <script type="text/javascript">
+    var x,y,top,left,down;
+
+$(".table-scroll").mousedown(function(e){
+    e.preventDefault();
+    down = true;
+    x = e.pageX;
+    y = e.pageY;
+    top = $(this).scrollTop();
+    left = $(this).scrollLeft();
+});
+
+$("body").mousemove(function(e){
+    if(down){
+        var newX = e.pageX;
+        var newY = e.pageY;
+
+ $(".table-scroll").scrollTop(top - newY + y);
+ $(".table-scroll").scrollLeft(left - newX + x);
+    }
+});
+
+$("body").mouseup(function(e){down = false;});
         $(document).ready(function () {
             var pageNumber = {{ page }}+1;
             var feedDate = {{ feedDate }};

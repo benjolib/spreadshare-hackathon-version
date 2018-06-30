@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="41px" height="41px" viewBox="0 0 41 41" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
-    <title>Group 9</title>
+    <title>Group 10</title>
     <desc>Created with Sketch.</desc>
     <defs>
         <circle id="path-1" cx="18.5" cy="18.5" r="18.5"></circle>
@@ -11,15 +11,15 @@
             <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.18 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
         </filter>
     </defs>
-    <g id="Desktop-HD" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-421.000000, -403.000000)">
-        <g id="Group-9" transform="translate(423.000000, 404.000000)">
+    <g id="Desktop-HD" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-472.000000, -405.000000)">
+        <g id="Group-10" transform="translate(474.000000, 406.000000)">
             <g id="Oval-6">
                 <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
                 <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
             </g>
-            <g id="Group-6" transform="translate(9.000000, 9.000000)" stroke="#2DAD6B" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1375">
-                <circle id="Oval" cx="8.44444444" cy="8.44444444" r="8.44444444"></circle>
-                <path d="M19,19 L14.4083333,14.4083333" id="Shape"></path>
+            <g id="Group-2" transform="translate(9.000000, 9.000000)" stroke="#2DAD6B" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.11111111">
+                <path d="M9.5,0 L9.5,19" id="Shape"></path>
+                <path d="M0,9.5 L19,9.5" id="Shape"></path>
             </g>
         </g>
     </g>

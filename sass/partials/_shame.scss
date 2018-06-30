@@ -1819,7 +1819,6 @@
     width: 158px;
     letter-spacing: -0.2px;
     padding-right: 16px;
-    
     img {
       margin-right: 12px;
     }
@@ -1997,6 +1996,12 @@
 }
 
 .re-table {
+  cursor: move;
+  /* fallback if grab cursor is unsupported */
+
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
@@ -2076,6 +2081,7 @@
       }
     }
     tr.list-row-tr--add-row td {
+      
       height: 76px;
       padding-bottom: 0px;
       padding-top: 0px;
@@ -2679,7 +2685,7 @@
 }
 
 .table-scroll {
-  overflow-x: auto;
+  overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   &--submissions {
     margin-bottom: 18px;
@@ -3027,7 +3033,7 @@
   line-height: 16px;
   @media (min-width: 768px) {
     margin-bottom: 10px;
-    line-height: 45px;
+    line-height: 21px;
   }
   &__image {
     width: 33px;
@@ -3101,8 +3107,8 @@
   margin-bottom: 5px;
   @media (min-width: 768px) {
     order: 0;
-    margin-top: 13px;
-    margin-left: auto;
+    margin-top: 4px;
+    margin-left: 2px;
     font-size: 12px;
     letter-spacing: 0.5px;
     word-spacing: -4px;
@@ -3274,7 +3280,7 @@
         margin-right: 12px;
       }
       &.active {
-        border-bottom: 2px solid #ea612d;
+        border-bottom: 3px solid #ea612d;
       }
     }
     &.explore {
@@ -3284,7 +3290,7 @@
         margin-right: 16px;
       }
       &.active {
-        border-bottom: 2px solid #2c247f;
+        border-bottom: 3px solid #2c247f;
       }
     }
     &.collabs {
@@ -3293,7 +3299,7 @@
         margin-right: 16px;
       }
       &.active {
-        border-bottom: 2px solid #2860f5;
+        border-bottom: 3px solid #2860f5;
       }
     }
   }
@@ -3378,7 +3384,11 @@
   &__user {
     margin-top: 2px;
     margin-left: 22px;
+    padding: 5px;
     display: none;
+    width: 68px;
+    border-radius: 9999px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
     &-dropdown {
       display: none;
     }
@@ -3388,6 +3398,13 @@
         transform: translate3d(5px, 35px, 0px) !important;
         display: inline-block;
       }
+    }
+    .down {
+      width: 9px;
+      height: 6px;
+      position: relative;
+      margin-left: 42px;
+      top: 14px;
     }
     img {
       width: 32px;
@@ -5243,11 +5260,11 @@
 }
 
 .user-dropdown2 {
- // 
+  // 
   width: calc(100% - 10px);
-   @media (min-width: 768px) {
-     width: 307px;
-   }
+  @media (min-width: 768px) {
+    width: 307px;
+  }
   height: 601px;
   display: flex;
   padding: 26px 37px;

@@ -25,7 +25,7 @@
 
       {% else %}
       <a class="re-button re-button--list-subscribed l-button" href="javascript:;" data-dropdown-placement="right" data-dropdown-offset="6">
-        <img src="/assets/images/9-0/list-subscribe-button-bird.svg" /> Subscribed
+        <img src="/assets/images/9-0/bird-orange.svg" /> Subscribed
       </a>
  {% endif %}
       <div class="sh-dropdown card-subscribe-dropdown card-actions-dropdown--tall u-flex u-flexCol u-flexJustifyCenter l-dropdown"

@@ -1,10 +1,10 @@
 <header class="re-header {{ editing is not empty and editing ? 're-header--editing': '' }}">
   <div class="re-header__inner">
-    <a class="re-header__logo" href="/"><img src="/assets/images/9-0/logo.png" /></a>
+    <a class="re-header__logo" href="/"><img src="/assets/images/9-0/logo.svg" /></a>
     <a class="re-header__item feed {{ forYouActive is not empty and forYouActive ? 'active': '' }}" href="/for-you"><img src="/assets/images/9-0/header-feed-bird.svg" /> Feed</a>
     <a class="re-header__item explore {{ exploreActive is not empty and exploreActive ? 'active': '' }}" href="/"><img src="/assets/images/9-0/header-explore-whale.svg" /> Explore</a>
     <a class="re-header__item collabs {{ collabsActive is not empty and collabsActive ? 'active': '' }}" href="/collaborations"><img src="/assets/images/9-0/header-collabs-octopus.svg" /> Collabs</a>
-    <a class="re-header__search" href="#"><img class="re-header__search__img" src="/assets/images/9-0/header-search.png" /></a>
+    <a class="re-header__search" href="#"><img class="re-header__search__img" src="/assets/images/9-0/header-search.svg" /></a>
     <div class="re-header__search-open" style="{% if query is not defined %}display:none;{% endif %}">
       <img src="/assets/images/search-green.svg" />
       <input type="text" placeholder="Search" class="navbar__search__field" value="{% if query is defined %}{{ query }}{% endif %}" />
@@ -22,14 +22,14 @@
       <a href="#" class="all-results">More Results</a>
     </div>
     {% if auth.loggedIn() %}
-      <a class="re-header__add" href="/create-list"><img src="/assets/images/9-0/header-add.png" /></a>
+      <a class="re-header__add" href="/create-list"><img src="/assets/images/9-0/header-add.svg" /></a>
       <a class="re-header__bell l-button" data-dropdown-placement="bottom-end" data-dropdown-offset="74" href="javascript:;">
  {% if auth.getUser().getStats().getUnreadNotificationsCount() > 0%}
 <div class="numberCircle">
           {{ auth.getUser().getStats().getUnreadNotificationsCount() }}
         </div>
         {% else %}
-<img src="/assets/images/9-0/header-notifications.png" />
+<img src="/assets/images/9-0/header-notifications.svg" />
         {% endif %}
 
     
@@ -59,8 +59,13 @@
 
 <a class="re-header__user l-button" data-dropdown-placement="bottom-end" data-dropdown-offset="20"  href="javascript:;">
         <!-- <img src="{{ auth.getUser().getImage() }}" />  -->
-<div width="35px" height="35px" style="border-radius:9999px;width:35px;height:35px;background: url('{{ auth.getUser().getImage() }}') center / cover;">&nbsp;</div>
-      </a>
+<div width="30px" height="30px" style="border-radius:9999px;width:30px;height:30px;background: url('{{ auth.getUser().getImage() }}') center / cover;">
+<div widht="9px" height="6px" class="down" style="background: url('/assets/images/9-0/user-down.svg') center;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+</div>
+
+  
+
+</a>
 <div class="l-dropdown sh-dropdown re-header__user-dropdown2 user-dropdown2 u-flex" aria-haspopup="true" aria-expanded="false">
         <div>YOU</div>
         <a href="/profile/{{ auth.getUser().handle }}">This is your <span>profile</span></a>

@@ -1,4 +1,5 @@
 {% if feedElements  %}
+{{ dump(feedElements) }}
 {% for element in feedElements %} 
 {% switch element.getType() %} 
 {% case "submittedListing"%} 
