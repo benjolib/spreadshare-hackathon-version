@@ -129,5 +129,11 @@ class VoltAdapter extends Volt
                 return "\\DS\\Component\\View\\Functions\\UserHelper::handleFromId({$args})";
             }
         );
+        $compiler->addFunction(
+            'userHasVotedTable',
+            function ($args) {
+                return "\\DS\\Component\\View\\Functions\\UserHelper::userHasVotedTable({$args})";
+            }
+        );
     }
 }

@@ -9,6 +9,7 @@
 namespace DS\Component\View\Functions;
 
 
+use DS\Model\TableVotes;
 use DS\Model\User;
 use Phalcon\Mvc\User\Component;
 
@@ -16,7 +17,11 @@ class UserHelper extends Component
 {
     public static function handleFromId(int $userId):string
     {
-        $user = User::get($userId);
-        return $user->getHandle();
+        return User::get($userId)->getHandle();
+    }
+
+    public static function userHasVotedTable(int $userId, int $tableId):bool
+    {
+        return !empty(TableVotes::findByUserIdAndTable($userId, $tableId));
     }
 }

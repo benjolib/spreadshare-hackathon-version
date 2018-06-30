@@ -48,6 +48,5 @@ class ForYouController extends BaseController implements LoginAwareController
         $this->view->setVar('page', $initialPage);
 
         $this->view->setVar('forYouActive', true);
-
     }
 }

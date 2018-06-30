@@ -5,6 +5,7 @@ abstract class AbstractListing implements FeedDto {
 
     public $id;
     public $tableId;
+    public $tableSlug;
     public $tableName;
     public $postNumVotes;
     public $postImage;
@@ -22,6 +23,7 @@ abstract class AbstractListing implements FeedDto {
         foreach ($content as $key => $column) {
             $this->id = $rawListing->id;
             $this->tableId = $rawListing->tableId;
+            $this->tableSlug = $rawListing->tableSlug;
             $this->tableName = $rawListing->tableName;
             $this->postNumVotes = $rawListing->postNumVotes;
             $this->postImage = $rawListing->postImage;

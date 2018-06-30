@@ -24,6 +24,7 @@ class Feed extends \DS\Model\Base
           u.name as userName,
           u.handle as userHandle, 
           t.title as tableName, 
+          t.slug as tableSlug,
           u.image as userImage
         FROM ' . TableRows::class . ' tr
         INNER JOIN ' . TableSubscription::class . ' ts ON ts.tableId = tr.tableId
@@ -57,6 +58,7 @@ class Feed extends \DS\Model\Base
                   u.name as userName, 
                   u.handle as userHandle, 
                   t.id as tableId, 
+                  t.slug as tableSlug,
                   t.title as tableName, 
                   t.tagline as tableTagline, 
                   t.image as tableImage,
@@ -95,6 +97,7 @@ class Feed extends \DS\Model\Base
                   u.image as userImage,
                   u.handle as userHandle,
                   t.id as tableId,
+                  t.slug as tableSlug,
                   t.title as tableName,
                   t.tagline as tableTagline,
                   t.image as tableImage, 
@@ -133,7 +136,8 @@ class Feed extends \DS\Model\Base
                     u.name as userName,
                     u.handle as userHandle,
                     u.image as userImage,
-                    t.title as tableName
+                    t.title as tableName,
+                    t.slug as tableSlug
                 FROM '.TableRows::class.' tr
                     INNER JOIN '.User::class.' u ON u.id = tr.userId
                     INNER JOIN '.Tables::class.' t ON t.id = tr.tableId
@@ -168,7 +172,8 @@ class Feed extends \DS\Model\Base
                     u.name as userName,
                     u.handle as userHandle,
                     u.image as userImage,
-                    t.title as tableName
+                    t.title as tableName,
+                    t.slug as tableSlug
                 FROM '.TableRows::class.' tr
                     INNER JOIN '.TableRowVotes::class.' trv ON trv.rowId = tr.id
                     INNER JOIN '.User::class.' u ON u.id = trv.userId
@@ -205,7 +210,8 @@ class Feed extends \DS\Model\Base
                     u.name as userName,
                     u.handle as userHandle,
                     u.image as userImage,
-                    t.title as tableName
+                    t.title as tableName,
+                    t.slug as tableSlug
                 FROM '.TableRows::class.' tr
                     INNER JOIN '.RequestAdd::class.' ra ON ra.user_id = tr.userId AND ra.table_id = tr.tableId AND ra.content=tr.content
                     INNER JOIN '.User::class.' u ON u.id = tr.userId

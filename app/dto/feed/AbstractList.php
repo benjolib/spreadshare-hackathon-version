@@ -61,6 +61,8 @@ abstract class AbstractList implements FeedDto
      */
     public $id;
 
+    public $tableSlug;
+
     public function __construct(array $tableStats, Row $tableData)
     {
         $this->userName = $tableData->userName;
@@ -73,6 +75,7 @@ abstract class AbstractList implements FeedDto
         $this->tableImage = $tableData->tableImage;
         $this->createdAt = (new \DateTimeImmutable())->setTimestamp($tableData->createdAt);
         $this->tableId = $tableData->tableId;
+        $this->tableSlug = $tableData->tableSlug;
         $this->id = $tableData->id;
     }
 
