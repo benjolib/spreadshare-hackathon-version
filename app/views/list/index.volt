@@ -386,6 +386,35 @@
       $('[name="subscription_freq"]').val(freq);
       $('#subscriptions_form').submit();
     }
+    var x,y,top,left,down,moving;
+
+$(".table-scroll").mousedown(function(e){
+  
+    //e.preventDefault();
+    $(e.target).closest(".table-scroll").addClass("moving");
+    moving = $(e.target).closest(".table-scroll");
+    down = true;
+    x = e.pageX;
+    y = e.pageY;
+    top = $(this).scrollTop();
+    left = $(this).scrollLeft();
+});
+
+$("body").mousemove(function(e){
+    if(down){
+        
+        var newX = e.pageX;
+        var newY = e.pageY;
+
+ $(".moving").scrollTop(top - newY + y);
+ $(".moving").scrollLeft(left - newX + x);
+    }
+});
+
+$("body").mouseup(function(e){
+    down = false;
+    $(moving).removeClass("moving");
+    });
     $(document).ready(function () {
 
       $('#textareac').keyup(function(e){

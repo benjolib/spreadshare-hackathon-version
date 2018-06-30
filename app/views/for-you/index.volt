@@ -46,7 +46,6 @@ $("body").mousemove(function(e){
 
 $("body").mouseup(function(e){
     down = false;
-    console.log("remove moving from", moving)
     $(moving).removeClass("moving");
     });
 

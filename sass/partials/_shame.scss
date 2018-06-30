@@ -1998,14 +1998,13 @@
 .re-table {
   cursor: move;
   /* fallback if grab cursor is unsupported */
-
   cursor: grab;
   cursor: -moz-grab;
   cursor: -webkit-grab;
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
-  margin-top: 70px;
+  margin-top: 0px;
   thead {
     th {
       font-family: 'Roboto Mono', monospace;
@@ -2081,7 +2080,6 @@
       }
     }
     tr.list-row-tr--add-row td {
-      
       height: 76px;
       padding-bottom: 0px;
       padding-top: 0px;
@@ -3127,14 +3125,14 @@
 }
 
 .collaboration-accept {
-  background: white;
-  width: 45px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 44px;
-  border-left: 0px solid #dbdbdb;
-  border-bottom: 0px solid #dbdbdb;
+   background: white;
+   width: 45px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 44px;
+   border-left: 1px solid #dbdbdb;
+   border-bottom: 1px solid #dbdbdb;
   img {
     width: 15px;
   }
@@ -3148,13 +3146,13 @@
 }
 
 .collaboration-reject {
-  background: white;
-  width: 45px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 45px;
-  border-left: 0px solid #dbdbdb;
+   background: white;
+   width: 45px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 45px;
+   border-left: 1px solid #dbdbdb;
   img {
     width: 15px;
   }
@@ -4316,7 +4314,7 @@
   border-radius: 4px;
   margin-bottom: 30px;
   @media (min-width: 768px) {
-    margin-bottom: 64px;
+    margin-bottom: 90px;
   }
   &__image {
     height: 146px;

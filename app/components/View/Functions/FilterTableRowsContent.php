@@ -20,7 +20,7 @@ class FilterTableRowsContent extends Component
      */
     public static function parse($rawText)
     {
-        $maxPos = 161;
+        $maxPos = 120;
         $text = '';
         $linkStrippedText = preg_replace_callback('/((http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?)/', function ($matches) {
             return str_ireplace('www.', '', parse_url($matches[0])['host']);

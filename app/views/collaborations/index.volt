@@ -209,6 +209,35 @@
 
 {% block scripts %}
 <script type="text/javascript">
+var x,y,top,left,down,moving;
+
+$(".table-scroll").mousedown(function(e){
+  
+    //e.preventDefault();
+    $(e.target).closest(".table-scroll").addClass("moving");
+    moving = $(e.target).closest(".table-scroll");
+    down = true;
+    x = e.pageX;
+    y = e.pageY;
+    top = $(this).scrollTop();
+    left = $(this).scrollLeft();
+});
+
+$("body").mousemove(function(e){
+    if(down){
+        
+        var newX = e.pageX;
+        var newY = e.pageY;
+
+ $(".moving").scrollTop(top - newY + y);
+ $(".moving").scrollLeft(left - newX + x);
+    }
+});
+
+$("body").mouseup(function(e){
+    down = false;
+    $(moving).removeClass("moving");
+    });
   $(document).ready(function () {
  if(window.location.href.indexOf("#received") !== -1){
     $('.collaborations-tabs-button').removeClass('active');
