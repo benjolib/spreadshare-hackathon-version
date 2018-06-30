@@ -15,7 +15,7 @@ class Feed extends \DS\Model\Base
             $offset = $limit * $page;
             $query = '
         SELECT 
-          CONCAT("a",tr.id) as id, 
+          CONCAT(tr.id) as id, 
           tr.tableId as tableId, 
           tr.content as postContent, 
           tr.votesCount as postNumVotes, 
@@ -53,7 +53,7 @@ class Feed extends \DS\Model\Base
             $offset = $limit * $page;
             $query = '
                 SELECT 
-                  CONCAT("b",t.id) as id, 
+                  CONCAT(t.id) as id, 
                   u.image as userImage, 
                   u.name as userName, 
                   u.handle as userHandle, 
@@ -127,7 +127,7 @@ class Feed extends \DS\Model\Base
             $offset = $limit * $page;
             $query = '
                 SELECT
-                    CONCAT("d",tr.id) as id,
+                    CONCAT(tr.id) as id,
                     tr.tableId as tableId,
                     tr.content as postContent,
                     tr.votesCount as postNumVotes,
@@ -163,7 +163,7 @@ class Feed extends \DS\Model\Base
             $offset = $limit * $page;
             $query = '
                 SELECT
-                    CONCAT("e",tr.id) as id,
+                    CONCAT(tr.id) as id,
                     tr.tableId as tableId,
                     tr.content as postContent,
                     tr.votesCount as postNumVotes,
