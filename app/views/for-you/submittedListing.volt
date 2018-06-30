@@ -28,8 +28,10 @@
             <tr>
                 <tr data-id="{{ listing.id }}" class="list-row-tr">
                     <td>
-                        <a href="#" class="vote-link j_listing-vote">
-                            <img class="vote-link__image" src="/assets/images/vote-lightning.svg" />
+                        <a href="#" class="vote-link j_listing-vote {{ userHasVotedRow(listing.id, auth.getUserId()) ? 'vote-link--upvoted' : '' }}">
+                    
+<img class="vote-link__image" src="/assets/images/vote-lightning.svg" />
+<img class="vote-link__image vote-link__image--green" src="/assets/images/vote-lightning-green.svg" />
                             <div>{{ listing.postNumVotes }}</div>
                         </a>
                     </td>

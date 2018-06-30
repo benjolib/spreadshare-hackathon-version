@@ -1,6 +1,6 @@
 {% if feedElements  %}
 {% for element in feedElements %} 
-{{ dump(element) }}
+{# dump(element) #}
 {% switch element.getType() %} 
 {% case "submittedListing"%} 
 {{ partial('for-you/submittedListing', ['listing': element]) }} 

@@ -10,7 +10,7 @@
     <div class="collaboration-clock"><img src="/assets/images/comment-clock.svg" />{{ date('M jS H:i ',listing.getCreatedAt().getTimeStamp()) }}</div>
 </div>
 <div class="table-scroll table-scroll--collaborations">
-    <table class="re-table re-table--list">
+    <table class="re-table re-table--list" data-id="{{ listing.tableId }}">
         <thead>
         <tr>
             <th>
@@ -26,10 +26,12 @@
         </thead>
         <tbody>
         <tr>
-        <tr data-id="1" class="list-row-tr">
+        <tr data-id="{{ listing.id }}" class="list-row-tr">
             <td>
-                <a href="#" class="vote-link">
-                    <img class="vote-link__image" src="/assets/images/vote-lightning.svg" />
+<a href="#" class="vote-link j_listing-vote {{ userHasVotedRow(listing.id, auth.getUserId()) ? 'vote-link--upvoted' : '' }}">
+                    
+<img class="vote-link__image" src="/assets/images/vote-lightning.svg" />
+<img class="vote-link__image vote-link__image--green" src="/assets/images/vote-lightning-green.svg" />
                     <div>{{ listing.postNumVotes }}</div>
                 </a>
             </td>

@@ -20,10 +20,12 @@
 
 {% block scripts %}
     <script type="text/javascript">
-    var x,y,top,left,down;
+    var x,y,top,left,down,moving;
 
 $(".table-scroll").mousedown(function(e){
     e.preventDefault();
+    $(e.target).closest(".table-scroll").addClass("moving");
+    moving = $(e.target).closest(".table-scroll");
     down = true;
     x = e.pageX;
     y = e.pageY;
@@ -33,19 +35,24 @@ $(".table-scroll").mousedown(function(e){
 
 $("body").mousemove(function(e){
     if(down){
+        
         var newX = e.pageX;
         var newY = e.pageY;
 
- $(".table-scroll").scrollTop(top - newY + y);
- $(".table-scroll").scrollLeft(left - newX + x);
+ $(".moving").scrollTop(top - newY + y);
+ $(".moving").scrollLeft(left - newX + x);
     }
 });
 
-$("body").mouseup(function(e){down = false;});
+$("body").mouseup(function(e){
+    down = false;
+    console.log("remove moving from", moving)
+    $(moving).removeClass("moving");
+    });
+
         $(document).ready(function () {
             var pageNumber = {{ page }}+1;
             var feedDate = {{ feedDate }};
-            //TODO [improve] do not use class as element pointer
             $('.re-button--load-more').on('click', function (e) {
                 e.preventDefault();
                 $.ajax(window.location.pathname + '?page=' + pageNumber +'&date='+ feedDate)
@@ -74,7 +81,6 @@ $("body").mouseup(function(e){down = false;});
                 };
 
                 $('.j_listing-vote').on('click', function (e) {
-                    console.log("click upvote");
                     e.preventDefault();
                     var $this = $(this);
 
