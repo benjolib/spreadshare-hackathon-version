@@ -228,7 +228,7 @@
 },
     apiSettings: {
       // this url parses query server side and returns filtered results
-      url: '/api/v2/lists/?q={query}'
+ url: '/api/v2/streams/?q={query}'
     }
   });
      $('.empty ').initial({height:82, width:82 });

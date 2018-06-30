@@ -4,7 +4,7 @@
         <div>
             <a class="collaboration-info__user-name" href="/profile/{{ listing.userHandle }}">{{ listing.userName }}</a>
             <span class="collaboration-info__text">spreaded a listing from</span>
-            <a class="collaboration-info__table-name" href="/list/{{ listing.tableId }}">{{ listing.tableName }}</a>
+<a class="collaboration-info__table-name" href="/stream/{{ listing.tableId }}">{{ listing.tableName }}</a>
         </div>
     </div>
     <div class="collaboration-clock"><img src="/assets/images/comment-clock.svg" />{{ date('M jS H:i ',listing.getCreatedAt().getTimeStamp()) }}</div>

@@ -58,7 +58,7 @@
             </div>
         </div>
     </div>
-    {% if currentPage == 'following' or currentPage == 'folowers' %}
+    {% if currentPage == 'following' or currentPage == 'followers' %}
     <div class="u-flex u-flexWrap med-gutter">
         {% for user in users %}
         <div class="list-tab-content-subscribers__card">

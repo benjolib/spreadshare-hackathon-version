@@ -210,6 +210,12 @@
 {% block scripts %}
 <script type="text/javascript">
   $(document).ready(function () {
+ if(window.location.href.indexOf("#received") !== -1){
+    $('.collaborations-tabs-button').removeClass('active');
+      $('.collaborations-tabs-button-received').addClass('active');
+      $('.collaborations-tab-content').hide();
+      $('.collaborations-tab-content-received').show();
+ }
      $('.empty ').initial({height:82, width:82 });
     $('.empty ').css('border-radius', "6px")  
     $('.collaborations-tabs-button-submitted').on('click', function (e) {

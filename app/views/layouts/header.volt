@@ -13,7 +13,7 @@
     <div class="search-autocomplete search__dropdown">
       <div class="u-flex">
         <div class="description">
-          LISTS
+          STREAMS
         </div>
         <div class="result-count">
         </div>
@@ -23,10 +23,16 @@
     </div>
     {% if auth.loggedIn() %}
       <a class="re-header__add" href="/create-list"><img src="/assets/images/9-0/header-add.png" /></a>
-
       <a class="re-header__bell l-button" data-dropdown-placement="bottom-end" data-dropdown-offset="74" href="javascript:;">
-        {% if auth.getUser().getStats().getUnreadNotificationsCount() > 0 %}<span>{{ auth.getUser().getStats().getUnreadNotificationsCount() }}</span>{% endif %}
-        <img src="/assets/images/9-0/header-notifications.png" />
+        {% if auth.getUser().getStats().getUnreadNotificationsCount() > 0%}
+<div class="numberCircle">
+          {{ auth.getUser().getStats().getUnreadNotificationsCount() }}
+        </div>
+        {% else %}
+<img src="/assets/images/9-0/header-notifications.png" />
+        {% endif %}
+
+    
       </a>
       <div class="l-dropdown sh-dropdown notification-dropdown u-flex u-flexCol">
         {# {% set numbers = [1, 2, 3, 4, 5, 6] %}
@@ -51,20 +57,24 @@
         <a href="/activity" class="notification-dropdown__notification__see-all">See All</a> #}
       </div>
 
-      <a class="re-header__user l-button" data-dropdown-placement="bottom-end" data-dropdown-offset="20" href="javascript:;"><img src="{{ auth.getUser().getImage() }}" /></a>
+      <a class="re-header__user l-button" data-dropdown-placement="bottom-end" data-dropdown-offset="20" href="javascript:;">
+        <!-- <img src="{{ auth.getUser().getImage() }}" />  -->
+<div width="35px" height="35px" style="border-radius:9999px;width:35px;height:35px;background: url('{{ auth.getUser().getImage() }}') center / cover;">&nbsp;</div>
+      </a>
       <div class="l-dropdown sh-dropdown re-header__user-dropdown2 user-dropdown2 u-flex">
         <div>YOU</div>
         <a href="/profile/{{ auth.getUser().handle }}">This is your <span>profile</span></a>
-        <a href="/subscriptions">All lists your <span>subscribed</span> to</a>
-        <a href="/history" style="margin-bottom:36px">All lists you've <span>recently viewed</span></a>
+        <a href="/subscriptions">All Streams your <span>subscribed</span> to</a>
+        <a href="/history" style="margin-bottom:36px">All Streams you've <span>recently viewed</span></a>
 
         <div>SETTINGS</div>
-        <a href="/settings">Adjust your <span>email settings</span></a>
+        <a href="/settings#emails">Adjust your <span>email settings</span></a>
         <a href="/settings" style="margin-bottom:36px">Manage your <span>account</span></a>
 
         <div>FOR CURATORS</div>
-        <a href="/lists">All <span>lists</span> created by you</a>
-        <a href="/stats" style="margin-bottom:13px"><span>Stats</span> for all your lists</a>
+<a href="/streams">All
+  <span>Streams</span> created by you</a>
+        <a href="/stats" style="margin-bottom:13px"><span>Stats</span> for all your Streams</a>
 
         <div>ABOUT</div>
         <a href="/about" style="margin-bottom:22px">Blog, Jobs, <span>About</span> and more</a>
@@ -80,18 +90,18 @@
               <span>Your public profile</span>
             </div>
           </a>
-          <a href="/lists" class="user-dropdown__item">
+<a href="/streams" class="user-dropdown__item">
             <div class="user-dropdown__item__image"><img src="/assets/images/user-menu-lists.svg" /></div>
             <div class="user-dropdown__item__text">
-              <h3>Your Lists</h3>
-              <span>All lists created by you</span>
+              <h3>Your Streams</h3>
+              <span>All Streams created by you</span>
             </div>
           </a>
           <a href="/subscriptions" class="user-dropdown__item">
             <div class="user-dropdown__item__image"><img src="/assets/images/user-menu-subscriptions.svg" /></div>
             <div class="user-dropdown__item__text">
               <h3>Subscriptions</h3>
-              <span>Lists you are subscribed</span>
+              <span>Streams you are subscribed</span>
             </div>
           </a>
           <a href="/submissions" class="user-dropdown__item">
@@ -113,8 +123,8 @@
           <a href="/table/add" class="user-dropdown__item">
             <div class="user-dropdown__item__image user-dropdown__item__image--fill-highlight"><img src="/assets/images/user-menu-create.svg" /></div>
             <div class="user-dropdown__item__text">
-              <h3>Create List</h3>
-              <span>Here you can create a list</span>
+              <h3>Create Stream</h3>
+              <span>Here you can create a Stream</span>
             </div>
           </a>
           <a href="/karma" class="user-dropdown__item">
@@ -128,7 +138,7 @@
             <div class="user-dropdown__item__image"><img src="/assets/images/user-menu-history.svg" /></div>
             <div class="user-dropdown__item__text">
               <h3>History</h3>
-              <span>All lists you have seen</span>
+              <span>All Streams you have seen</span>
             </div>
           </a>
           <a href="/settings" class="user-dropdown__item">
@@ -209,18 +219,18 @@
                 <span>Your public profile</span>
               </div>
             </a>
-            <a href="/lists" class="user-dropdown__item">
+<a href="/streams" class="user-dropdown__item">
               <div class="user-dropdown__item__image"><img src="/assets/images/user-menu-lists.svg" /></div>
               <div class="user-dropdown__item__text">
-                <h3>Your Lists</h3>
-                <span>All lists created by you</span>
+                <h3>Your Streams</h3>
+                <span>All Streams created by you</span>
               </div>
             </a>
             <a href="/subscriptions" class="user-dropdown__item">
               <div class="user-dropdown__item__image"><img src="/assets/images/user-menu-subscriptions.svg" /></div>
               <div class="user-dropdown__item__text">
                 <h3>Subscriptions</h3>
-                <span>Lists you are subscribed</span>
+                <span>Streams you are subscribed</span>
               </div>
             </a>
             <a href="/submissions" class="user-dropdown__item">
@@ -242,8 +252,8 @@
             <a href="/create-list" class="user-dropdown__item">
               <div class="user-dropdown__item__image user-dropdown__item__image--fill-highlight"><img src="/assets/images/user-menu-create.svg" /></div>
               <div class="user-dropdown__item__text">
-                <h3>Create List</h3>
-                <span>Here you can create a list</span>
+                <h3>Create Stream</h3>
+                <span>Here you can create a Stream</span>
               </div>
             </a>
             <a href="/karma" class="user-dropdown__item">
@@ -257,7 +267,7 @@
               <div class="user-dropdown__item__image"><img src="/assets/images/user-menu-history.svg" /></div>
               <div class="user-dropdown__item__text">
                 <h3>History</h3>
-                <span>All lists you have seen</span>
+                <span>All Streams you have seen</span>
               </div>
             </a>
             <a href="/settings" class="user-dropdown__item">

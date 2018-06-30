@@ -1186,6 +1186,7 @@
     }
   }
 }
+
 .card-subscribe-dropdown {
   margin-top: -5px;
   margin-right: -1px;
@@ -1217,8 +1218,8 @@
   }
   @media (min-width: 768px) {
     margin-top: -10px;
-    width: 120px;
-    height: 90px;
+    width: 126px;
+    height: 130px;
     padding-left: 31px;
     &--tall {
       height: 152px;
@@ -1234,6 +1235,7 @@
     }
   }
 }
+
 .extra-small-gutter {
   margin-left: -4px;
   margin-right: -4px;
@@ -1809,6 +1811,19 @@
       margin-right: 12px;
     }
   }
+  &--list-subscribed {
+    border: 1px solid #ea612d;
+    background: #ffffff;
+    color: #ea612d;
+    margin-left: 16px;
+    width: 158px;
+    letter-spacing: -0.2px;
+    padding-right: 16px;
+    
+    img {
+      margin-right: 12px;
+    }
+  }
   &--list-collaborate {
     background: #2860f5;
     border: 1px solid #2860f5;
@@ -1897,6 +1912,11 @@
       margin-bottom: 24px;
     }
     &--list-subscribe {
+      width: 158px;
+      letter-spacing: -0.2px;
+      padding-right: 16px;
+    }
+    &--list-subscribed {
       width: 158px;
       letter-spacing: -0.2px;
       padding-right: 16px;
@@ -2715,8 +2735,7 @@
   position: relative;
   @media (min-width: 768px) {
     margin-bottom: 20px;
-  }
-  // TODO icon discussion commnet
+  } // TODO icon discussion commnet
   // :before {
   //   content: "";
   //   position: absolute;
@@ -2732,15 +2751,15 @@
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
     border-radius: 4px;
     border: none;
-    width: 100%;
-    height: 80px;
+    width: 100%; //min-height: 50px;
+    resize: vertical;
     overflow: hidden;
-    padding: 24px 30px;
+    padding: 15px 0px 10px 15px;
     font-size: 1.5em;
     letter-spacing: -0.5px;
     outline: none;
     @media (min-width: 768px) {
-      height: 64px;
+      // height: 64px;
     }
   }
   button {
@@ -3289,7 +3308,7 @@
   }
   &__search-open {
     position: absolute;
-    top: 0;
+    top: -1px;
     left: -9px;
     background: white;
     height: 87px;
@@ -5145,7 +5164,6 @@
   }
 }
 
-
 .selected-topics {
   background: #2a1e3e;
   padding: 23px 0 23px 0;
@@ -5189,7 +5207,7 @@
 }
 
 .featured-curators {
-  overflow-x: scroll;
+  overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   background: #f8f8fb;
   padding: 23px 0 23px 0;
@@ -5416,6 +5434,10 @@
 
 .feedback {
   z-index: 999;
+  display: none;
+  @media (min-width: 768px) {
+    display: block;
+  }
   position: fixed;
   bottom: 50px;
   right: 100px;
@@ -5423,7 +5445,10 @@
   padding: 15px 60px 15px 20px;
   font-size: 16px;
   line-height: 20px;
-  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.18);
+  box-shadow: 0px 1px 2px 0px rgba(0,
+  0,
+  0,
+  0.18);
   background: #f8f8fb;
   .title {
     margin-bottom: 10px;
@@ -5435,4 +5460,18 @@
     font-weight: 300;
     letter-spacing: 0.1em;
   }
+}
+
+.numberCircle {
+  border-radius: 50%;
+  behavior: url(PIE.htc);
+  /* remove if you don't care about IE8 */
+  width: 32px;
+  height: 32px;
+  padding: 7px;
+  background: #2EAC6D;
+  border: 0px solid #666;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  font: 20px Arial, sans-serif;
 }

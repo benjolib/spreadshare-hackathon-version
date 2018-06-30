@@ -88,9 +88,26 @@
       <a href="#"><img src="/assets/images/about-social-angellist.png" /></a>
       <a href="#"><img src="/assets/images/about-social-p.png" /></a>
     </div>
+<style>
+  .nobox {
+ box-shadow: 0 0px 0px 0 rgba(236, 2, 2, 0.18) !important;
+ border: 0px !important;
+ text-align: center !important;
+  }
+</style>
+<table class="re-table" >
+<tr class="nobox">
+<td class="nobox">
+<p>We thank
+  <a href="https://www.toicon.com/">to [icon]</a> for using some of their icons</p>
+  </td>
+</tr>
+
+    </table>
+    
   </div>
 {% endblock %}
-
+  
 {% block scripts %}
   <script type="text/javascript">
     $(document).ready(function () {

@@ -14,7 +14,7 @@
       <div class="wallet-stats-stat green">{{ wallet.tokens }}</div>
     </div>
     <div class="u-flex u-flexCol col2">
-      <div class="wallet-stats-label">LISTS</div>
+      <div class="wallet-stats-label">STREAMS</div>
       <div class="wallet-stats-stat">{{ tableCount }}</div>
     </div>
     <div class="u-flex u-flexCol col3">
@@ -27,7 +27,7 @@
     <table class="re-table">
       <thead>
         <tr>
-          <th class="hide-on-small">LISTS</th>
+          <th class="hide-on-small">STREAMS</th>
           <th class="hide-on-small" style="width:110px;">ROLE</th>
           <th class="hide-on-small" style="width:148px;">EARNED TOKEN</th>
           <th class="hide-on-small" style="width:90px;">YOUR STAKE</th>
