@@ -123,5 +123,11 @@ class VoltAdapter extends Volt
                 return "\\DS\\Component\\View\\Functions\\Following::amISubscribed({$args})";
             }
         );
+        $compiler->addFunction(
+            'userHandleFromId',
+            function ($args) {
+                return "\\DS\\Component\\View\\Functions\\UserHelper::handleFromId({$args})";
+            }
+        );
     }
 }

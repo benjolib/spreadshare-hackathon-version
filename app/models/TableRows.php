@@ -141,21 +141,23 @@ class TableRows extends TableRowsEvents
 
     public function paginatedDatas(int $tableId, int $userId, string $orderBy = '', int $page = 1)
     {
-        $builder = $this->modelsManager
-                    ->createBuilder()
-                    ->from(TableRows::class)
-                    ->columns(
-                         [
-                             TableRows::class . '.id',
-                             TableRows::class . '.content',
-                             TableRows::class . '.votesCount',
-                             TableRows::class . '.lineNumber',
-                             TableRows::class . '.image',
-                             '(SELECT ' . TableRowVotes::class . '.createdAt FROM ' . TableRowVotes::class . ' WHERE ' . TableRowVotes::class . '.rowId = ' . TableRows::class . '.id AND ' . TableRowVotes::class . '.userId = ' . $userId . ' LIMIT 1) as userHasVoted',
-                         ]
-                     )
-                     ->orderBy($orderBy ? $orderBy : TableRows::class . '.id ASC')
-                     ->where(TableRows::class . '.tableId = ?0', [$tableId]);
+            $builder = $this->modelsManager
+                ->createBuilder()
+                ->from(TableRows::class)
+                ->columns(
+                    [
+                        TableRows::class . '.id',
+                        TableRows::class . '.content',
+                        TableRows::class . '.votesCount',
+                        TableRows::class . '.lineNumber',
+                        TableRows::class . '.image',
+                        TableRows::class . '.createdAt',
+                        TableRows::class . '.userId',
+                        '(SELECT ' . TableRowVotes::class . '.createdAt FROM ' . TableRowVotes::class . ' WHERE ' . TableRowVotes::class . '.rowId = ' . TableRows::class . '.id AND ' . TableRowVotes::class . '.userId = ' . $userId . ' LIMIT 1) as userHasVoted',
+                    ]
+                )
+                ->orderBy($orderBy ? $orderBy : TableRows::class . '.id ASC')
+                ->where(TableRows::class . '.tableId = ?0', [$tableId]);
         $options = [
             'builder' => $builder,
             'limit' => 20,
@@ -164,6 +166,7 @@ class TableRows extends TableRowsEvents
         ];
 
         $paginator = Factory::load($options);
+
         return $paginator->getPaginate();
     }
 }
