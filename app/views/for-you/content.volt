@@ -5,8 +5,7 @@
 {{ partial('for-you/submittedListing', ['listing': element]) }} 
 {% break %} 
 {% case "newList" %} 
-{{ partial('for-you/newList',
-['newList': element]) }} 
+{{ partial('for-you/newList',['newList': element]) }} 
 {% break %} 
 {% case "subscribedList" %} 
 {{ partial('for-you/subscribedList', ['newList': element])

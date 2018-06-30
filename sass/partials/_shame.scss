@@ -3384,6 +3384,7 @@
     @media (min-width: 768px) {
       display: inline-block;
       &-dropdown {
+        transform: translate3d(5px, 35px, 0px) !important;
         display: inline-block;
       }
     }
@@ -3452,6 +3453,7 @@
   border-radius: 4px;
   padding: 32px 18px 0px 18px;
   left: 0;
+  transform: translate3d(5px, 35px, 0px) !important;
   @media (min-width: 768px) {
     width: 415px;
   }
@@ -5240,7 +5242,11 @@
 }
 
 .user-dropdown2 {
-  width: 307px;
+ // 
+  width: calc(100% - 10px);
+   @media (min-width: 768px) {
+     width: 307px;
+   }
   height: 601px;
   display: flex;
   padding: 26px 37px;
@@ -5468,10 +5474,10 @@
   /* remove if you don't care about IE8 */
   width: 32px;
   height: 32px;
-  padding: 7px;
+  padding: 6px;
   background: #2EAC6D;
   border: 0px solid #666;
   color: rgb(255, 255, 255);
   text-align: center;
-  font: 20px Arial, sans-serif;
+  font: 15px 'Lato';
 }
