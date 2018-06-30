@@ -330,6 +330,9 @@
       }
     }
     $(document).ready(function () {
+ $("#handle").on({ keydown: function(e) { if (e.which === 32) return false; }, change: function() { this.value = this.value.replace(/\s/g,
+""); } });
+
       $('.settings-tabs-button-user').on('click', function (e) {
         e.preventDefault();
         $('.settings-tabs-button').removeClass('active');

@@ -5,8 +5,7 @@
 {{ partial('for-you/submittedListing', ['listing': element]) }} 
 {% break %} 
 {% case "newList" %} 
-{{ partial('for-you/newList',
-['newList': element]) }} 
+{{ partial('for-you/newList',['newList': element]) }} 
 {% break %} 
 {% case "subscribedList" %} 
 {{ partial('for-you/subscribedList', ['newList': element])
@@ -28,7 +27,7 @@
         <div class="subheading"> Subscribe Streams to active your feed. </div>
     </div>
     <div class="action">
-        <button onclick="window.location.href='/explore'" :> Explore Streams </button>
+        <button onclick="window.location.href='/'" :> Explore Streams </button>
     </div>
 </div>
 {% endif %}

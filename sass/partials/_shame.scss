@@ -2346,13 +2346,13 @@
           border: 1px solid #6cc69d;
           padding: 4px;
           font-size: 12px;
-          line-height: 15px;
+          line-height: 26px;
           color: #6cc69d;
           border-radius: 2px;
           letter-spacing: -0.43px;
           @media (min-width: 768px) {
             font-size: 16px;
-            line-height: 19px;
+            line-height: 29px;
             letter-spacing: -0.43px;
           }
         }
@@ -3274,7 +3274,7 @@
         margin-right: 12px;
       }
       &.active {
-        border-bottom: 1px solid #ea612d;
+        border-bottom: 2px solid #ea612d;
       }
     }
     &.explore {
@@ -3284,7 +3284,7 @@
         margin-right: 16px;
       }
       &.active {
-        border-bottom: 1px solid #2c247f;
+        border-bottom: 2px solid #2c247f;
       }
     }
     &.collabs {
@@ -3293,7 +3293,7 @@
         margin-right: 16px;
       }
       &.active {
-        border-bottom: 1px solid #2860f5;
+        border-bottom: 2px solid #2860f5;
       }
     }
   }
@@ -3315,8 +3315,9 @@
     width: 100%;
     display: flex;
     @media (min-width: 768px) {
-      height: 89px;
+      height: 91px;
       width: 526px;
+      border-bottom: 1px solid #e4e4e4;
     }
     img:first-of-type {
       padding-left: 40px;
@@ -3384,6 +3385,7 @@
     @media (min-width: 768px) {
       display: inline-block;
       &-dropdown {
+        transform: translate3d(5px, 35px, 0px) !important;
         display: inline-block;
       }
     }
@@ -3452,6 +3454,7 @@
   border-radius: 4px;
   padding: 32px 18px 0px 18px;
   left: 0;
+  transform: translate3d(5px, 35px, 0px) !important;
   @media (min-width: 768px) {
     width: 415px;
   }
@@ -5240,7 +5243,11 @@
 }
 
 .user-dropdown2 {
-  width: 307px;
+ // 
+  width: calc(100% - 10px);
+   @media (min-width: 768px) {
+     width: 307px;
+   }
   height: 601px;
   display: flex;
   padding: 26px 37px;
@@ -5468,10 +5475,10 @@
   /* remove if you don't care about IE8 */
   width: 32px;
   height: 32px;
-  padding: 7px;
+  padding: 6px;
   background: #2EAC6D;
   border: 0px solid #666;
   color: rgb(255, 255, 255);
   text-align: center;
-  font: 20px Arial, sans-serif;
+  font: 15px 'Lato';
 }

@@ -255,14 +255,27 @@
           modifiers: {
             offset: {
               offset: Number($button.data('dropdown-offset')) || 0
+            },
+            flip: {
+              enabled: false
             }
           }
         });
 
         $button.click(function () {
-          console.log('open sh-dropdown');
-          $('.l-dropdown').removeClass('show');
-          $dropdown.addClass('show');
+          
+          if($dropdown.hasClass("show") || $('.l-dropdown').hasClass("show")) {
+
+            $('.l-dropdown').removeClass('show');
+            $dropdown.removeClass("show")
+            // TODO remove number on close
+            $(".circleNumber").before('<img src="/assets/images/9-0/header-notifications.png" />')
+          }else {
+            $dropdown.addClass('show');
+          }
+          
+          
+
           if ($button.data('dropdown-active-class')) {
             $button.addClass($button.data('dropdown-active-class'));
           }
