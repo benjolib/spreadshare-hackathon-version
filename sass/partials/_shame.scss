@@ -3125,14 +3125,14 @@
 }
 
 .collaboration-accept {
-   background: white;
-   width: 45px;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   height: 44px;
-   border-left: 1px solid #dbdbdb;
-   border-bottom: 1px solid #dbdbdb;
+  background: white;
+  width: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 44px;
+  border-left: 1px solid #dbdbdb;
+  border-bottom: 1px solid #dbdbdb;
   img {
     width: 15px;
   }
@@ -3146,13 +3146,13 @@
 }
 
 .collaboration-reject {
-   background: white;
-   width: 45px;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   height: 45px;
-   border-left: 1px solid #dbdbdb;
+  background: white;
+  width: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 45px;
+  border-left: 1px solid #dbdbdb;
   img {
     width: 15px;
   }
@@ -3570,6 +3570,7 @@
 }
 
 .notification-dropdown {
+  display: flex;
   width: calc(100% - 10px);
   left: 0;
   height: 510px;

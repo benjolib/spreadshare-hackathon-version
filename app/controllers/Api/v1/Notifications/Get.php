@@ -61,12 +61,16 @@ class Get extends ActionHandler implements MethodInterface
   </a>
 
 <div style="width:100%;">
-<div class="u-flex u-flexJustifyBetween">
-  <a href="'. UserNotificationLinkHelper::getLink($notification) .'">
-      <span class="notification-dropdown__notification__name">' . $notification['userName'] . '</span>
+<a href="'. UserNotificationLinkHelper::getLink($notification) .'" width="100%">
+<div class="u-flex u-flexJustifyBetween notione" width="100%">
   
-  <div class="notification-dropdown__notification__date"><img src="/assets/images/comment-clock.svg" />' . StringFormat::factory()->prettyDateTimestamp($notification['createdAt']) . '</div>
-  </div>
+                        
+                           <span class="notification-dropdown__notification__name">' . $notification['userName'] . '</span>
+  
+  <span class="notification-dropdown__notification__date"><img src="/assets/images/comment-clock.svg" />' . StringFormat::factory()->prettyDateTimestamp($notification['createdAt']) . '</span>
+  
+                        
+   </div>
         <p class="notification-dropdown__notification__text">
         ' . $notification['text'] . '</p>
         </div>

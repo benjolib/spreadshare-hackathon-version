@@ -1,4 +1,4 @@
-<div class="u-flex u-sm-flexCol u-md-flexRow">
+<div class="u-flex u-sm-flexCol u-md-flexRow u-flexJustifyBetween">
     <div class="collaboration-info u-flex">
         <img class="collaboration-info__image" src="{{ listing.userImage }}" />
         <div>
