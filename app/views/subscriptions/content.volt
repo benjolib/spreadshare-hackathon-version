@@ -15,10 +15,18 @@
     <tr>
         <td>
             {# {% if isAjax %}<input class="moreToLoad" type="hidden" value="{{ moreToLoad }}" />{% endif %} #}
-            <div class="re-table-green">{{ subscription.numSubscribers }} SUBSCRIBERS</div>
+            <!-- <div class="re-table-green">{{ subscription.numSubscribers }} SUBSCRIBERS</div> -->
+            
 <a href="/stream/{{ subscription.tableId }}">
+<span style="display: flex;">
     <h3>{{ subscription.title }}</h3>
+ &nbsp;&nbsp;&nbsp;
+<span  class="list-card__subscriberCount u-flex u-flexAlignItemsCenter">
+<img height="22px" src="/assets/images/9-0/list-card-subscriber-bird.svg"> {{ subscription.numSubscribers }}
+</span>
+</span>
 </a>
+
             <p>{{ subscription.tagline }}</p>
         </td>
         <td>

@@ -1163,7 +1163,7 @@
       color: #fb7977;
     }
     img {
-      height: 10px;
+      height: 14px;
       margin-right: 4px;
     }
   }
@@ -1455,14 +1455,14 @@
 .lists-page-space {
   margin-bottom: 33px;
   @media (min-width: 768px) {
-    margin-bottom: 90px;
+    margin-bottom: 135px;
   }
 }
 
 .submissions-page-space {
   margin-bottom: 33px;
   @media (min-width: 768px) {
-    margin-bottom: 90px;
+    margin-bottom: 135px;
   }
 }
 
@@ -1680,7 +1680,7 @@
   color: #9baabf;
   font-weight: normal;
   font-size: 22.5px;
-  line-height: 27px;
+  line-height: 0px;
   letter-spacing: -0.54px;
   margin-bottom: 8px;
   a {
@@ -1697,7 +1697,7 @@
   }
   @media (min-width: 768px) {
     font-size: 30px;
-    line-height: 36px;
+    line-height: 0px;
     letter-spacing: -0.72px;
     margin-bottom: 10px;
     &--list {
@@ -1850,6 +1850,18 @@
     width: 50px;
     margin: 12px 6px 0;
     height: 45px;
+  }
+  &--lists-curate-stream {
+    background-color: #2F267D;
+    color: white;
+    border-color: #2F267D;
+    letter-spacing: -0.33px !important;
+    margin-top: 60px;
+    @media (min-width: 768px) {
+      letter-spacing: -0.33px !important;
+      top: 20px;
+      margin-bottom: -15px !important;
+    }
   }
   &--header {
     display: inline-flex;

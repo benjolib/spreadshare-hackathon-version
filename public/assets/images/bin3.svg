@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="18px" viewBox="0 0 16 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 12</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Desktop-HD" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-485.000000, -210.000000)" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Group-12" transform="translate(486.000000, 211.000000)" stroke="#F97A7A" stroke-width="1.55555556">
+            <polyline id="Shape" points="0 3.2 1.55555556 3.2 14 3.2"></polyline>
+            <path d="M12.4444444,3.2 L12.4444444,14.4 C12.4444444,15.2836556 11.7479985,16 10.8888889,16 L3.11111111,16 C2.2520015,16 1.55555556,15.2836556 1.55555556,14.4 L1.55555556,3.2 M3.88888889,3.2 L3.88888889,1.6 C3.88888889,0.7163444 4.58533483,0 5.44444444,0 L8.55555556,0 C9.41466517,0 10.1111111,0.7163444 10.1111111,1.6 L10.1111111,3.2" id="Shape"></path>
+            <path d="M5.44444444,7.2 L5.44444444,12" id="Shape"></path>
+            <path d="M8.55555556,7.2 L8.55555556,12" id="Shape"></path>
+        </g>
+    </g>
+</svg>

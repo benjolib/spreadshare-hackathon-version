@@ -7,7 +7,7 @@ block content %}
       <h2 class="re-subheading re-subheading--button-below">Manage all your Streams in one place.</h2>
     </div>
     <div>
-      <a href="/create-list" class="re-button">Create a Stream</a>
+<a href="/create-list" class="re-button re-button--lists-curate-stream">Curate a Stream</a>
     </div>
   </div>
 
