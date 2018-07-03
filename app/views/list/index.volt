@@ -19,7 +19,7 @@
     </h2>
     <p class="re-para">{{ table['description'] }}</p>
     <div class="u-flex u-flexAlignItemsCenter">
- {% if !amISubscribed(table['id']) %}
+      {% if !amISubscribed(table['id']) %}
       <a class="re-button re-button--list-subscribe l-button" href="javascript:;" data-dropdown-placement="right" data-dropdown-offset="6">
         <img src="/assets/images/9-0/list-subscribe-button-bird.svg" /> Subscribe
       </a>
@@ -28,7 +28,7 @@
       <a class="re-button re-button--list-subscribed l-button" href="javascript:;" data-dropdown-placement="right" data-dropdown-offset="6">
         <img src="/assets/images/9-0/bird-orange.svg" /> Subscribed
       </a>
- {% endif %}
+      {% endif %}
       <div class="sh-dropdown card-subscribe-dropdown card-actions-dropdown--tall u-flex u-flexCol u-flexJustifyCenter l-dropdown"
         style="margin-left: 18px;">
         <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'D')">Daily</a>
@@ -57,7 +57,7 @@
                 <span>Popularity</span>
               </a>
 
-<a href="/stream/{{table['id']}}?orderby=date" class="warning-color">
+              <a href="/stream/{{table['id']}}?orderby=date" class="warning-color">
                 <img src="/assets/images/clock.svg" /> Sort by
                 <span>Newest</span>
               </a>
@@ -118,20 +118,20 @@
         <tr class="list-row-tr">
           <td class="pagination-td">
             <div class="pagination">
-<a href="/stream/{{ table['id'] }}?page=1&orderby={{orderby}}">
+              <a href="/stream/{{ table['id'] }}?page=1&orderby={{orderby}}">
                 <<</a>
-<a href="/stream/{{ table['id'] }}?page={{ tableContent.before }}&orderby={{orderby}}">
+                  <a href="/stream/{{ table['id'] }}?page={{ tableContent.before }}&orderby={{orderby}}">
                     <</a>
                       {% if tableContent.current + 5
                       < tableContent.total_pages %} {% set endPage=tableContent.current + 5 %} {% else %} {% set endPage=tableContent.total_pages
                         %} {% endif %} {% if tableContent.current - 5> 1 %} {% set startPage=tableContent.current - 5 %} {% else %} {% set startPage=1 %} {% endif %} {% for
                         p in startPage..endPage %} {% if p === tableContent.current %}
-<a class="active" style="color:red" href="/stream/{{ table['id'] }}?page={{ p }}&orderby={{orderby}}">{{ p }}</a>
+                        <a class="active" style="color:red" href="/stream/{{ table['id'] }}?page={{ p }}&orderby={{orderby}}">{{ p }}</a>
                         {% else %}
-<a href="/stream/{{ table['id'] }}?page={{ p }}&orderby={{orderby}}">{{ p }}</a>
+                        <a href="/stream/{{ table['id'] }}?page={{ p }}&orderby={{orderby}}">{{ p }}</a>
                         {% endif %} {% endfor %}
-<a href="/stream/{{ table['id'] }}?page={{ tableContent.next }}&orderby={{orderby}}">></a>
-<a href="/stream/{{ table['id'] }}?page={{ tableContent.last }}&orderby={{orderby}}">>></a>
+                        <a href="/stream/{{ table['id'] }}?page={{ tableContent.next }}&orderby={{orderby}}">></a>
+                        <a href="/stream/{{ table['id'] }}?page={{ tableContent.last }}&orderby={{orderby}}">>></a>
             </div>
           </td>
         </tr>
@@ -153,8 +153,8 @@
             <div style="display:flex">
 
               <textarea onmouseover="javascript:$('.e{{i}}{{index}}').css('visibility','visible');" ; onmouseout="javascript:$('.e{{i}}{{index}}').css('visibility', 'hidden');"
- id="{{i}}" placeholder="{{ column.title }}" rows="1" class="edit icon cell-input-sizing d{{i}}{{index}}"></textarea>
-<i id="{{i}}" class="edit icon green e{{i}}{{index}}" style="cursor: pointer;visibility: hidden;" onclick="console.log($(this).prev().prev());javascript:$('#d{{i}}{{index}}').focus();"></i>
+                id="{{i}}" placeholder="{{ column.title }}" rows="1" class="edit icon cell-input-sizing d{{i}}{{index}}"></textarea>
+              <i id="{{i}}" class="edit icon green e{{i}}{{index}}" style="cursor: pointer;visibility: hidden;" onclick="console.log($(this).prev().prev());javascript:$('#d{{i}}{{index}}').focus();"></i>
             </div>
           </td>
 
@@ -196,7 +196,7 @@
   <div class="related-lists__inner u-flex u-flexWrap">
     {% for relatedTable in related %}
     <div class="related-lists__item">
-<a href="/stream/{{ relatedTable['id'] }}">
+      <a href="/stream/{{ relatedTable['id'] }}">
         <div class="related-lists__item__name">{{ relatedTable['title'] }}{% if relatedTable['staffPick'] %}
           <div class="related-lists__item__staff-pick">STAFF PICK 👏</div>{% endif %}</div>
       </a>
@@ -224,8 +224,8 @@
         <div class="about-list__item__content">
           <div id="curators">
             {{ partial('partials/profile-card', [ 'username': table['creatorHandle'], 'avatar': table['creatorImage'], 'name': table['creator'],
- 'id': table['ownerUserId'], 'bio': table['creatorBio'] , 'type': 4 ]) }}
-            
+            'id': table['ownerUserId'], 'bio': table['creatorBio'] , 'type': 11 ]) }}
+
           </div>
           <input type="text" id="curators-edit" class="curators-edit" value="{{ table['creatorHandle'] }}" style="display:none;" />
         </div>
@@ -234,16 +234,17 @@
         <div class="about-list__item__name">TAGS</div>
         <div class="about-list__item__content">
           <div class="tags" id="tags">
-            {% for i, tag in tags %} {{tag['title']}}{{ i + 1 < tags|length ? ', ' : '' }} {% endfor %} </div>
+            {% for i, tag in tags %} {{tag['title']}}{{ i + 1
+            < tags|length ? ', ' : '' }} {% endfor %} </div>
           </div>
         </div>
         <div class="about-list__item">
           <div class="about-list__item__name">STATS</div>
           <div class="about-list__item__content">
             <div class="about-list__part">
-              <b>{{ table['subscriberCount'] }}</b> Subscriptions, </div>
+              <b>{{ table['subscriberCount'] }}</b> Subscriptions </div>
             <div class="about-list__part">
-              <b>{{ table['contributionCount'] }}</b> Collaborations, </div>
+              <b>{{ table['contributionCount'] }}</b> Collaborations </div>
             <div class="about-list__part">
               <b>{{ table['commentsCount'] }}</b> Comments</div>
           </div>
@@ -256,7 +257,7 @@
         {% if auth.loggedIn() %}
         <div>
           <button class="re-button re-button--full-width re-button--tall re-button--list-discussion" style="display:none;">Write a Response</button>
-<form method="POST" action="/stream/{{ table['id'] }}">
+          <form method="POST" action="/stream/{{ table['id'] }}">
             <input type="hidden" name="parentId" value="" />
             <div class="discussion-textarea">
               <textarea id="textareac" name="comment" placeholder=" Write a response"></textarea>
@@ -291,7 +292,7 @@
             <img src="/assets/images/comment-clock.svg" />{{ formatTimestamp(childComment['createdAt']) }}</div>
         </div>
         {% endfor %} {% if auth.loggedIn() %}
-<form method="POST" action="/stream/{{ table['id'] }}" style="display:none;margin-left:80px;margin-top:8px;">
+        <form method="POST" action="/stream/{{ table['id'] }}" style="display:none;margin-left:80px;margin-top:8px;">
           <input type="hidden" name="parentId" class="commentParentId" value="" />
           <div class="discussion-textarea">
             <textarea name="comment" class="commentTextArea" placeholder="Write a comment"></textarea>
@@ -362,7 +363,7 @@
 
   </form>
 
-<form method="POST" action="/stream/{{ table['id']}}/edit" enctype='multipart/form-data' id="edit-list-form">
+  <form method="POST" action="/stream/{{ table['id']}}/edit" enctype='multipart/form-data' id="edit-list-form">
     <input type="hidden" id="list-image" name="list-image" value="" />
     <input type="hidden" id="list-name" name="list-name" value="" />
     <input type="hidden" id="list-tagline" name="list-tagline" value="" />
@@ -385,47 +386,47 @@
       $('[name="subscription_freq"]').val(freq);
       $('#subscriptions_form').submit();
     }
-    var x,y,top,left,down,moving;
+    var x, y, top, left, down, moving;
 
-$(".table-scroll").mousedown(function(e){
-  
-    //e.preventDefault();
-    $(e.target).closest(".table-scroll").addClass("moving");
-    moving = $(e.target).closest(".table-scroll");
-    down = true;
-    x = e.pageX;
-    y = e.pageY;
-    top = $(this).scrollTop();
-    left = $(this).scrollLeft();
-});
+    $(".table-scroll").mousedown(function (e) {
 
-$("body").mousemove(function(e){
-    if(down){
-        
+      //e.preventDefault();
+      $(e.target).closest(".table-scroll").addClass("moving");
+      moving = $(e.target).closest(".table-scroll");
+      down = true;
+      x = e.pageX;
+      y = e.pageY;
+      top = $(this).scrollTop();
+      left = $(this).scrollLeft();
+    });
+
+    $("body").mousemove(function (e) {
+      if (down) {
+
         var newX = e.pageX;
         var newY = e.pageY;
 
- $(".moving").scrollTop(top - newY + y);
- $(".moving").scrollLeft(left - newX + x);
-    }
-});
+        $(".moving").scrollTop(top - newY + y);
+        $(".moving").scrollLeft(left - newX + x);
+      }
+    });
 
-$("body").mouseup(function(e){
-    down = false;
-    $(moving).removeClass("moving");
+    $("body").mouseup(function (e) {
+      down = false;
+      $(moving).removeClass("moving");
     });
     $(document).ready(function () {
 
-      $('#textareac').keyup(function(e){
+      $('#textareac').keyup(function (e) {
         console.log("keyup")
-          e.target.style.height = "73px";
-          e.target.style.height = (e.target.scrollHeight)+"px";
+        e.target.style.height = "73px";
+        e.target.style.height = (e.target.scrollHeight) + "px";
       })
-      
-      $('.commentTextArea').keyup(function(e){
+
+      $('.commentTextArea').keyup(function (e) {
         console.log("keyup")
-          e.target.style.height = "73px";
-          e.target.style.height = (e.target.scrollHeight)+"px";
+        e.target.style.height = "73px";
+        e.target.style.height = (e.target.scrollHeight) + "px";
       })
 
       $('.empty ').initial({
@@ -500,14 +501,16 @@ $("body").mouseup(function(e){
         $('.list-tab-content').hide();
         $('.list-tab-content-about').show();
       });
-      
- if(window.location.href.indexOf("#discussion") !== -1){
+
+      if (window.location.href.indexOf("#discussion") !== -1) {
         $('.list-tab-button').removeClass('active');
-        $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+        $("html, body").animate({
+          scrollTop: $(document).height()
+        }, "slow");
         $('.list-tab-button-discussion').addClass('active');
         $('.list-tab-content').hide();
         $('.list-tab-content-discussion').show();
- }
+      }
       $('.list-tab-button-discussion').on('click', function (e) {
         e.preventDefault();
         $('.list-tab-button').removeClass('active');
@@ -559,7 +562,7 @@ $("body").mouseup(function(e){
       $('.j_listing-vote').on('click', function (e) {
         e.preventDefault();
         var $this = $(this);
-        
+
 
         domUpdateVote($this, !$this.hasClass('vote-link--upvoted'));
 

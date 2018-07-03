@@ -1,4 +1,5 @@
-<div class="profile-card u-flex {{ type != 9 ? 'u-flexAlignItemsCenter' : '' }} {{ type == 3 ? 'profile-card--type3' : '' }} {{ type == 4 ? 'profile-card--type4' : '' }} {{ type == 9 ? 'profile-card--type9' : '' }} {{ type == 10 ? 'profile-card--type10' : '' }}">
+<div class="profile-card u-flex {{ type != 9 ? 'u-flexAlignItemsCenter' : '' }} {{ type == 3 ? 'profile-card--type3' : '' }} {{ type == 4 ? 'profile-card--type4' : '' }} {{ type == 9 ? 'profile-card--type9' : '' }} 
+{{ type == 10 ? 'profile-card--type10' : '' }} {{ type == 11 ? 'profile-card--type11' : '' }}">
   <a href="/profile/{{ username }}"><img class="profile-card__avatar" src="{{ avatar }}" onerror="this.onerror=null;this.src='http://beta.spreadshare.co/assets/images/eleven.png';" /></a>
   <div>
     <a href="/profile/{{ username }}"><span class="profile-card__name">{{ name }}</span></a> {% if type == 9 %}<a href="#" class="profile-card__follow reply {{ maincomment is not empty and maincomment ? 'reply-maincomment' : ' '}} {{ subcomment is not empty and subcomment ? 'reply-subcomment' : ''}}" data-handle="{{ username }}" data-id="{{ commentId is not empty ? commentId : '' }}">Reply</a>
