@@ -45,6 +45,28 @@ class Feed
         return $result;
     }
 
+    public function postsFromUsersIFollow(
+        int $userId,
+        int $numberOfPosts,
+        DateTimeImmutable $maxDate,
+        int $page,
+        array $postsToExclude
+    ):FeedElementCollection
+    {
+        $feed = new FeedModel();
+        $rawListings = $feed->postsFromUsersIFollow($userId, $numberOfPosts, $maxDate, $page, $postsToExclude);
+
+        $result = new FeedElementCollection();
+        foreach ($rawListings as $rawListing) {
+            if (empty($this->tableColumns[$rawListing->tableId])) {
+                $this->tableColumns[$rawListing->tableId] = $feed->columnsFromTable($rawListing->tableId);
+            }
+            $listing = new SubmittedListing($this->tableColumns[$rawListing->tableId], $rawListing);
+            $result->add($listing);
+        }
+        return $result;
+    }
+
     public function newListsFromMyFollowed(
         int $userId,
         int $numberOfPosts,
@@ -86,27 +108,6 @@ class Feed
         return $result;
     }
 
-    public function postsFromUsersIFollow(
-        int $userId,
-        int $numberOfPosts,
-        DateTimeImmutable $maxDate,
-        int $page
-    ):FeedElementCollection
-    {
-        $feed = new FeedModel();
-        $rawListings = $feed->postsFromUsersIFollow($userId, $numberOfPosts, $maxDate, $page);
-
-        $result = new FeedElementCollection();
-        foreach ($rawListings as $rawListing) {
-            if (empty($this->tableColumns[$rawListing->tableId])) {
-                $this->tableColumns[$rawListing->tableId] = $feed->columnsFromTable($rawListing->tableId);
-            }
-            $listing = new SubmittedListing($this->tableColumns[$rawListing->tableId], $rawListing);
-            $result->add($listing);
-        }
-        return $result;
-    }
-
     public function votesFromUsersIFollow(
         int $userId,
         int $numberOfPosts,
@@ -132,11 +133,12 @@ class Feed
         int $userId,
         int $numberOfPosts,
         DateTimeImmutable $maxDate,
-        int $page
+        int $page,
+        array $postsToExclude
     ):FeedElementCollection
     {
         $feed = new FeedModel();
-        $rawListings = $feed->collabsFromUsersIFollow($userId, $numberOfPosts, $maxDate, $page);
+        $rawListings = $feed->collabsFromUsersIFollow($userId, $numberOfPosts, $maxDate, $page, $postsToExclude);
 
         $result = new FeedElementCollection();
         foreach ($rawListings as $rawListing) {

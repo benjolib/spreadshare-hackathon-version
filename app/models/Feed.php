@@ -121,8 +121,9 @@ class Feed extends \DS\Model\Base
         }
     }
 
-    public function postsFromUsersIFollow(int $userId, int $limit, DateTimeImmutable $until, int $page) :Simple
+    public function postsFromUsersIFollow(int $userId, int $limit, DateTimeImmutable $until, int $page, array $postsToExclude) :Simple
     {
+        $postsToExclude = implode(',', $postsToExclude);
         try {
             $offset = $limit * $page;
             $query = '
@@ -144,6 +145,7 @@ class Feed extends \DS\Model\Base
                     INNER JOIN '.UserFollower::class.' uf ON uf.userId = u.id
                 WHERE uf.followedByUserId = :userId:
                     AND tr.createdAt < :until:
+                    AND tr.id NOT IN ('.$postsToExclude.')
                 ORDER BY tr.createdAt DESC
                 LIMIT '.$limit.' OFFSET '.$offset;
             return $this->getModelsManager()
@@ -195,8 +197,9 @@ class Feed extends \DS\Model\Base
 
     }
 
-    public function collabsFromUsersIFollow(int $userId, int $limit, DateTimeImmutable $until, int $page) :Simple
+    public function collabsFromUsersIFollow(int $userId, int $limit, DateTimeImmutable $until, int $page, array $postsToExclude) :Simple
     {
+        $postsToExclude = implode(',', $postsToExclude);
         try {
             $offset = $limit * $page;
             $query = '
@@ -220,6 +223,7 @@ class Feed extends \DS\Model\Base
                 WHERE uf.followedByUserId = :userId:
                     AND tr.createdAt < :until:
                     AND ra.status = '.ChangeRequestStatus::Confirmed.'
+                    AND tr.id NOT IN ('.$postsToExclude.')
                 ORDER BY tr.createdAt DESC
                 LIMIT '.$limit.' OFFSET '.$offset;
             return $this->getModelsManager()

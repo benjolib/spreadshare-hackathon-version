@@ -16,4 +16,13 @@ class FeedElementCollection
     {
         $this->elements[] = $element;
     }
+
+    public function getIds():array
+    {
+        $result = [];
+        foreach ($this->elements as $element) {
+            $result[] = $element->getId();
+        }
+        return $result;
+    }
 }

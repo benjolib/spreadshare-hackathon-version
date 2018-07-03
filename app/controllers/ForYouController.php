@@ -27,11 +27,13 @@ class ForYouController extends BaseController implements LoginAwareController
             $this->view->setMainView('for-you/index');
         }
         $postsInSubscribedLists = $fs->postsInMySubscribedLists($authId, $postsPerPage, $feedDate, $initialPage);
+        $postsAlreadyShown = $postsInSubscribedLists->getIds();
+        $postsFromUsersIFollow = $fs->postsFromUsersIFollow($authId, $postsPerPage, $feedDate, $initialPage, $postsAlreadyShown);
+        $postsAlreadyShown = array_merge($postsAlreadyShown, $postsFromUsersIFollow->getIds());
         $newListsFromMyFollowed = $fs->newListsFromMyFollowed($authId, $postsPerPage, $feedDate, $initialPage);
         $listsSubscribedByMyFollowed = $fs->listsSubscribedByMyFollowed($authId, $postsPerPage, $feedDate, $initialPage);
-        $postsFromUsersIFollow = $fs->postsFromUsersIFollow($authId, $postsPerPage, $feedDate, $initialPage);
         $votesFromUsersIFollow = $fs->votesFromUsersIFollow($authId, $postsPerPage, $feedDate, $initialPage);
-        $collabsFromUsersIFollow = $fs->collabsFromUsersIFollow($authId, $postsPerPage, $feedDate, $initialPage);
+        $collabsFromUsersIFollow = $fs->collabsFromUsersIFollow($authId, $postsPerPage, $feedDate, $initialPage, $postsAlreadyShown);
 
         $feedElements = $fs->getOrderedFeed(
             $postsInSubscribedLists->elements, 
