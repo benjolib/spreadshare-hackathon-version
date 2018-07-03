@@ -125,8 +125,15 @@ class Feed extends \DS\Model\Base
 
     public function postsFromUsersIFollow(int $userId, int $limit, DateTimeImmutable $until, int $page, array $postsToExclude) :Simple
     {
-        $postsToExclude = implode(',', $postsToExclude);
+        $printExluded = '';
+        if(count($postsToExclude)>0) {
+            $postsToExclude = implode(',', $postsToExclude);
+            $printExluded = 'AND tr.id NOT IN ('.$postsToExclude.')';
+        }
+        
+        
         try {
+             
             $offset = $limit * $page;
             $query = '
                 SELECT
@@ -147,7 +154,7 @@ class Feed extends \DS\Model\Base
                     INNER JOIN '.UserFollower::class.' uf ON uf.userId = u.id
                 WHERE uf.followedByUserId = :userId:
                     AND tr.createdAt < :until:
-                    AND tr.id NOT IN ('.$postsToExclude.')
+                    '. $printExluded .'
                     AND t.flags = '. TableFlags::Published.'
                 ORDER BY tr.createdAt DESC
                 LIMIT '.$limit.' OFFSET '.$offset;
