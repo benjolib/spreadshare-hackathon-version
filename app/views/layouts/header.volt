@@ -59,7 +59,7 @@
 
 <a class="re-header__user l-button" data-dropdown-placement="bottom-end" data-dropdown-offset="20"  href="javascript:;">
         <!-- <img src="{{ auth.getUser().getImage() }}" />  -->
-<div width="30px" height="30px" style="border-radius:9999px;width:30px;height:30px;background: url('{{ auth.getUser().getImage() }}') center / cover;">
+<div width="25px" height="25px" style="border-radius:9999px;width:30px;height:30px;background: url('{{ auth.getUser().getImage() }}') center / cover;">
 <div widht="9px" height="6px" class="down" style="background: url('/assets/images/9-0/user-down.svg') center;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 </div>
 

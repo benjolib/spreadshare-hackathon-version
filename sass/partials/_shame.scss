@@ -2810,7 +2810,7 @@ html {
     color:#b1bbc7;
 
     letter-spacing: -.43px;
-    line-height: 19px
+    line-height: 19px;
     @media (min-width: 768px) {
       // height: 64px;
     }
@@ -2818,7 +2818,7 @@ html {
   button {
     position: absolute;
     right: 0;
-    bottom: 0;
+    top: 0;
     border: none;
     background: none;
     font-family: 'Roboto Mono', monospace;
@@ -3431,11 +3431,17 @@ html {
   &__user {
     margin-top: 2px;
     margin-left: 22px;
-    padding: 5px;
+    padding-left: 7px;
+    padding-bottom: 6px;
+    padding-top: 6px;
     display: none;
-    width: 68px;
+    width: 70px;
     border-radius: 9999px;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
+    background: url("/assets/images/9-0/user-placeholder.png");
+    background-repeat: no-repeat;
+    background-position-x: 7px;
+    background-position-y: 6px;
+    box-shadow: 0px 0.5px 1px 0px rgba(0, 0, 0, 0.18);
     &-dropdown {
       display: none;
     }
@@ -3447,10 +3453,10 @@ html {
       }
     }
     .down {
-      width: 9px;
-      height: 6px;
+      width: 10px;
+      height: 7px;
       position: relative;
-      margin-left: 42px;
+      margin-left: 39px;
       top: 14px;
     }
     img {
