@@ -240,7 +240,7 @@ class Feed extends \DS\Model\Base
             return $this->getModelsManager()
                 ->createQuery($query)->execute([
                     'userId' => $userId,
-                    'until' => $until->getTimestamp(),
+                    'until' => $until->getTimestamp()
                 ]);
         } catch (\Exception $e) {
             var_dump($e);
