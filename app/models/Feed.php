@@ -209,7 +209,11 @@ class Feed extends \DS\Model\Base
 
     public function collabsFromUsersIFollow(int $userId, int $limit, DateTimeImmutable $until, int $page, array $postsToExclude) :Simple
     {
-        $postsToExclude = implode(',', $postsToExclude);
+        $printExluded = '';
+        if(count($postsToExclude)>0) {
+            $postsToExclude = implode(',', $postsToExclude);
+            $printExluded = 'AND tr.id NOT IN ('.$postsToExclude.')';
+        }
         try {
             $offset = $limit * $page;
             $query = '
@@ -233,7 +237,7 @@ class Feed extends \DS\Model\Base
                 WHERE uf.followedByUserId = :userId:
                     AND tr.createdAt < :until:
                     AND ra.status = '.ChangeRequestStatus::Confirmed.'
-                    AND tr.id NOT IN ('.$postsToExclude.')
+                    '. $printExluded .'
                     AND t.flags = '. TableFlags::Published.'
                 ORDER BY tr.createdAt DESC
                 LIMIT '.$limit.' OFFSET '.$offset;
