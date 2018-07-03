@@ -4,6 +4,7 @@ namespace DS\Model;
 
 use DateTimeImmutable;
 use DS\Model\DataSource\ChangeRequestStatus;
+use DS\Model\DataSource\TableFlags;
 use Phalcon\Mvc\Model\Resultset\Simple;
 
 
@@ -68,6 +69,7 @@ class Feed extends \DS\Model\Base
                     INNER JOIN '.UserFollower::class.' uf ON uf.userId = u.id
                 WHERE uf.followedByUserId = :userId:
                     AND t.createdAt < :until:
+                    AND t.flags = '. TableFlags::Published.'
                 ORDER BY t.createdAt DESC
                 LIMIT '.$limit.' OFFSET '.$offset;
             return $this->getModelsManager()
@@ -146,6 +148,7 @@ class Feed extends \DS\Model\Base
                 WHERE uf.followedByUserId = :userId:
                     AND tr.createdAt < :until:
                     AND tr.id NOT IN ('.$postsToExclude.')
+                    AND t.flags = '. TableFlags::Published.'
                 ORDER BY tr.createdAt DESC
                 LIMIT '.$limit.' OFFSET '.$offset;
             return $this->getModelsManager()
@@ -224,6 +227,7 @@ class Feed extends \DS\Model\Base
                     AND tr.createdAt < :until:
                     AND ra.status = '.ChangeRequestStatus::Confirmed.'
                     AND tr.id NOT IN ('.$postsToExclude.')
+                    AND t.flags = '. TableFlags::Published.'
                 ORDER BY tr.createdAt DESC
                 LIMIT '.$limit.' OFFSET '.$offset;
             return $this->getModelsManager()
