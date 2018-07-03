@@ -1,24 +1,28 @@
 {% if feedElements  %}
 {% for element in feedElements %} 
-{{ dump(element) }}
+
 {% if element %}
-{% switch element.getType() %} 
-{% case "submittedListing"%} 
+
+{% if element.getType() == "submittedListing" %}
 {{ partial('for-you/submittedListing', ['listing': element]) }} 
-{% break %} 
-{% case "newList" %} 
-{{ partial('for-you/newList',['newList': element]) }} 
-{% break %} 
-{% case "subscribedList" %} 
-{{ partial('for-you/subscribedList', ['newList': element])
-}} {% break %} 
-{% case "votedListing" %} 
-{{ partial('for-you/votedListing', ['listing': element]) }} 
-{% break %} 
-{% case"collabListing" %} 
-{{ partial('for-you/collabListing', ['listing': element]) }} 
-{% break %} 
-{% endswitch %}
+{% endif %}
+
+{% if element.getType() == "newList" %}
+{{ partial('for-you/newList', ['newList': element]) }}
+{% endif %}
+
+{% if element.getType() == "subscribedList" %}
+{{ partial('for-you/subscribedList', ['newList': element]) }}
+{% endif %}
+
+{% if element.getType() == "votedListing" %}
+{{ partial('for-you/votedListing', ['listing': element]) }}
+{% endif %}
+
+{% if element.getType() == "collabListing" %}
+{{ partial('for-you/collabListing', ['listing': element]) }}
+{% endif %}
+
 {% endif %}
 {% endfor %}
 {% else %}
