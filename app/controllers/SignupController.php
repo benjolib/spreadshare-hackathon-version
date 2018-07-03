@@ -2,6 +2,7 @@
 
 namespace DS\Controller;
 
+use DS\Exceptions\UserValidationException;
 use DS\Interfaces\LoginAwareController;
 use DS\Application;
 use DS\Model\DataSource\TableFlags;
@@ -25,19 +26,24 @@ class SignupController extends BaseController implements LoginAwareController
 
     public function indexAction()
     {
+        $this->view->setMainView('sign-up/index');
+
         $user = $this->serviceManager->getAuth()->getUser();
         if ($user->getStatus() == UserStatus::OnboardingIncomplete) {
             // Login request with username and password
             if ($this->request->isPost() && $this->request->getPost('username') && $this->request->getPost('email')) {
-                $user
-                    ->setHandle($this->request->getPost('username'))
-                    ->setEmail($this->request->getPost('email'))
-                    ->setStatus(UserStatus::Unconfirmed)
-                    ->save();
-                header('Location: /');
+                try {
+                    $user
+                        ->setHandle($this->request->getPost('username'))
+                        ->setEmail($this->request->getPost('email'))
+                        ->setStatus(UserStatus::Unconfirmed)
+                        ->save();
+                    header('Location: /');
+                } catch (UserValidationException $e) {
+                    $this->flash->error('error creating account - '.$e->getMessage());
+                    return;
+                }
             }
         }
-        // $this->view->setVar('hideHeader', true);
-        $this->view->setMainView('sign-up/index');
     }
 }

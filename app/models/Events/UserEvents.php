@@ -115,7 +115,24 @@ abstract class UserEvents
     public function beforeValidationOnUpdate()
     {
         parent::beforeValidationOnUpdate();
-        
+
+        if (($user = self::findFirstByHandleOrEmail($this->getHandle(), $this->getEmail()))) {
+            if ($user->getId() != $this->getId() && $user->getHandle() == $this->getHandle()) {
+                throw new UserValidationException(
+                    'A user with this username already exists.',
+                    'handle',
+                    $this->getHandle()
+                );
+            }
+            if ($user->getId() != $this->getId() && $user->getEmail() == $this->getEmail()) {
+                throw new UserValidationException(
+                    'A user with this email already exists.',
+                    'email',
+                    $this->getEmail()
+                );
+            }
+        }
+
         if (strlen($this->getEmail()) < $this->emailMinimumLength)
         {
             throw new UserValidationException(
