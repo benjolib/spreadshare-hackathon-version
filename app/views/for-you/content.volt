@@ -1,6 +1,7 @@
 {% if feedElements  %}
 {% for element in feedElements %} 
 {# dump(element) #}
+{% if element %}
 {% switch element.getType() %} 
 {% case "submittedListing"%} 
 {{ partial('for-you/submittedListing', ['listing': element]) }} 
@@ -17,7 +18,8 @@
 {% case"collabListing" %} 
 {{ partial('for-you/collabListing', ['listing': element]) }} 
 {% break %} 
-{% endswitch %} 
+{% endswitch %}
+{% endif %}
 {% endfor %}
 {% else %}
 {% if page is 0 %}
