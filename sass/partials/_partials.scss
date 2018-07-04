@@ -198,6 +198,24 @@
       }
     }
   }
+  &--type11 & {
+    &__avatar {
+      width: 33px;
+      height: 33px;
+      margin-right: 7px;
+      @media (min-width: 768px) {
+        width: 64px;
+        height: 64px;
+        margin-right: 16px;
+      }
+    }
+    &__name {}
+    &__follow {}
+    &__bio {
+      max-width: 305px;
+      color: #697c95;
+    }
+  }
 }
 
 // LIST CARD
@@ -285,7 +303,7 @@
       width: calc(33.333vw - 110px);
     }
     @media (min-width: 1375px) {
-      width: calc(458px - 110px);
+      width: calc(431px - 110px);
     }
   }
   &--large {

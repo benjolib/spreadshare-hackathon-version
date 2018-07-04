@@ -14,7 +14,7 @@
         <thead>
         <tr>
             <th>
-                VOTES
+                SPREADS
             </th>
             <th class="shadowcontainth"></th>
             <th>{# image #}</th>

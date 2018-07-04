@@ -1,11 +1,11 @@
 {% extends 'layouts/main.volt' %} {# page title #} {% block title %}SpreadShare - Data that matters.{% endblock %} {# page
 header #} {% block header %}{% endblock %} {# main section #} {% block content %} 
-<div class="re-page re-page--large">
+<div class="re-page re-page--medium">
   <div class="homepage-space">
     <h1 class="re-heading">Explore</h1>
     <h2 class="re-subheading re-subheading--button-below">We curate the best Streams for you every day</h2>
   </div>
-  {#
+  {#u-flex u-flexWrap big-gutter
   <div class="home-heading u-flex">
     <div class="home-heading__text home-heading-button clickable l-button" data-dropdown-placement="bottom-start" data-dropdown-target=".home-heading-dropdown">
       {{ selectionName }}
@@ -100,7 +100,7 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
     </div>
   </div> #}
 
-  <div class="u-flex u-flexWrap homepage-gutter home-top-margin-bottom">
+  <div class="u-flex u-flexWrap big-gutter home-top-margin-bottom" >
     {% set qty = 0 %}
  {% set partialindex=0 %}
     {% for index, table in tables %} 
@@ -116,7 +116,7 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
       'image'], 'name': tables[index][ 'title'], 'description': tables[index][ 'tagline'], 'subscriberCount': tables[index][
       'subscriberCount'], 'listingCount': tables[index][ 'listingCount'], 'showCurator': true, 'curatorHandle': tables[index][
       'creatorHandle'], 'curatorAvatar': tables[index][ 'creatorImage'], 'curatorName': tables[index][ 'creator'], 'curatorBio': tables[index][
-      'creatorBio'], 'half': false, 'large': false ]) }} 
+ 'creatorBio'], 'half': false, 'small': false, 'large': false]) }}
       
       
       {% endif %} 
@@ -141,7 +141,8 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
     </div>  
       </div>
   </div>
- 
+
+
   <div class="trending-topics">
     <div class="trending-topics__inner">
       <h3>Trending Tags</h3>
@@ -157,7 +158,7 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
       </div>
     </div>
   </div>
-  <div class="re-page re-page--large">
+  <div class="re-page re-page--medium">
     <div class="u-flex u-flexWrap homepage-gutter">
       {{ partial('partials/action-card', [ 'color': 'purple-whale', 'heading': 'Curate', 'text': 'Curate collections and publications.
       <br />
@@ -180,7 +181,7 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
     {% if tables[index][ 'featured'] is "1" %} 
     
     {% set qty= qty+1 %}
-    {% if qty <= 12 %}
+    {% if qty <= 6 %}
     {% set partialindex=index %} 
       {{ partial( 'partials/list-card', [ 'id': tables[index][ 'id'], 'slug': tables[index][ 'slug'],
       'image': tables[index][
@@ -198,7 +199,63 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
 
 
     </div>
+
+
+
+
   </div>
+  
+
+<div class="wrapdigital">
+  <div class="digital-expert">
+    <div class "inner">
+
+    </div>
+    <div class="info">
+      <div class="heading">Need help from digital experts?</div>
+      <div class="subheading">
+        Request custom stream - curated by expert, in time & budget.
+      </div>
+    </div>
+    <div class="action">
+      <button onclick="window.location.href='/'" :=""> Request a List </button>
+      <button onclick="window.location.href='/'" :=""> Earn money </button>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="re-page re-page--medium">
+    <div class="u-flex u-flexWrap homepage-gutter">
+      {% set qty = 0 %}
+    {% for index, table in tables %} 
+    {% if index > partialindex %}
+    {% if tables[index] is defined %} 
+    {% if tables[index][ 'featured'] is "1" %} 
+    
+    {% set qty= qty+1 %}
+    {% if qty <= 6 %}
+    {% set partialindex=index %} 
+      {{ partial( 'partials/list-card', [ 'id': tables[index][ 'id'], 'slug': tables[index][ 'slug'],
+      'image': tables[index][
+      'image'], 'name': tables[index][ 'title'], 'description': tables[index][ 'tagline'], 'subscriberCount': tables[index][
+      'subscriberCount'], 'listingCount': tables[index][ 'listingCount'], 'showCurator': true, 'curatorHandle': tables[index][
+      'creatorHandle'], 'curatorAvatar': tables[index][ 'creatorImage'], 'curatorName': tables[index][ 'creator'], 'curatorBio': tables[index][
+      'creatorBio'], 'half': false, 'large': false ]) }} 
+      
+      {% endif %}
+      {% endif %} 
+      {% endif %}
+      {% endif %}
+
+      {% endfor %} 
+    </div>
+  </div>
+
+
+
+
+
   <div class="featured-curators">
     <div class="featured-curators__inner">
         
@@ -234,7 +291,7 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
 
 
 
-  <div class="re-page re-page--large">
+<div class="re-page re-page--medium">
     <div class="u-flex u-flexWrap homepage-gutter">
       {% set qty = 0 %}
     {% for index, table in tables %} 
@@ -259,10 +316,10 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
 
       {% endfor %} 
     </div>
-    <div class="u-flex u-flexWrap homepage-gutter load-more-container"></div>
+    <!-- <div class="u-flex u-flexWrap homepage-gutter load-more-container"></div>
     <div class="u-flex u-flexJustifyCenter">
       <a href="#" class="re-button re-button--load-more" {{ moreToLoad ? '' : 'style="display:none;"' }}>Load More</a>
-    </div>
+    </div> -->
   </div>
 
   {#

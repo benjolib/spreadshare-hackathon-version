@@ -16,7 +16,7 @@ class Feed extends \DS\Model\Base
             $offset = $limit * $page;
             $query = '
         SELECT 
-          CONCAT(tr.id) as id, 
+          tr.id as id, 
           tr.tableId as tableId, 
           tr.content as postContent, 
           tr.votesCount as postNumVotes, 
@@ -54,7 +54,7 @@ class Feed extends \DS\Model\Base
             $offset = $limit * $page;
             $query = '
                 SELECT 
-                  CONCAT(t.id) as id, 
+                  t.id as id, 
                   u.image as userImage, 
                   u.name as userName, 
                   u.handle as userHandle, 
@@ -69,7 +69,7 @@ class Feed extends \DS\Model\Base
                     INNER JOIN '.UserFollower::class.' uf ON uf.userId = u.id
                 WHERE uf.followedByUserId = :userId:
                     AND t.createdAt < :until:
-                    AND t.flags = '. TableFlags::Published.'
+                    AND t.flags = '. TableFlags::Published .'
                 ORDER BY t.createdAt DESC
                 LIMIT '.$limit.' OFFSET '.$offset;
             return $this->getModelsManager()
@@ -125,12 +125,19 @@ class Feed extends \DS\Model\Base
 
     public function postsFromUsersIFollow(int $userId, int $limit, DateTimeImmutable $until, int $page, array $postsToExclude) :Simple
     {
-        $postsToExclude = implode(',', $postsToExclude);
+        $printExluded = '';
+        if(count($postsToExclude)>0) {
+            $postsToExclude = implode(',', $postsToExclude);
+            $printExluded = 'AND tr.id NOT IN ('.$postsToExclude.')';
+        }
+        
+        
         try {
+             
             $offset = $limit * $page;
             $query = '
                 SELECT
-                    CONCAT(tr.id) as id,
+                    tr.id as id,
                     tr.tableId as tableId,
                     tr.content as postContent,
                     tr.votesCount as postNumVotes,
@@ -147,7 +154,7 @@ class Feed extends \DS\Model\Base
                     INNER JOIN '.UserFollower::class.' uf ON uf.userId = u.id
                 WHERE uf.followedByUserId = :userId:
                     AND tr.createdAt < :until:
-                    AND tr.id NOT IN ('.$postsToExclude.')
+                    '. $printExluded .'
                     AND t.flags = '. TableFlags::Published.'
                 ORDER BY tr.createdAt DESC
                 LIMIT '.$limit.' OFFSET '.$offset;
@@ -168,7 +175,7 @@ class Feed extends \DS\Model\Base
             $offset = $limit * $page;
             $query = '
                 SELECT
-                    CONCAT(tr.id) as id,
+                    tr.id as id,
                     tr.tableId as tableId,
                     tr.content as postContent,
                     tr.votesCount as postNumVotes,
@@ -202,12 +209,16 @@ class Feed extends \DS\Model\Base
 
     public function collabsFromUsersIFollow(int $userId, int $limit, DateTimeImmutable $until, int $page, array $postsToExclude) :Simple
     {
-        $postsToExclude = implode(',', $postsToExclude);
+        $printExluded = '';
+        if(count($postsToExclude)>0) {
+            $postsToExclude = implode(',', $postsToExclude);
+            $printExluded = 'AND tr.id NOT IN ('.$postsToExclude.')';
+        }
         try {
             $offset = $limit * $page;
             $query = '
                 SELECT
-                    CONCAT("f",tr.id) as id,
+                    tr.id as id,
                     tr.tableId as tableId,
                     tr.content as postContent,
                     tr.votesCount as postNumVotes,
@@ -226,14 +237,14 @@ class Feed extends \DS\Model\Base
                 WHERE uf.followedByUserId = :userId:
                     AND tr.createdAt < :until:
                     AND ra.status = '.ChangeRequestStatus::Confirmed.'
-                    AND tr.id NOT IN ('.$postsToExclude.')
+                    '. $printExluded .'
                     AND t.flags = '. TableFlags::Published.'
                 ORDER BY tr.createdAt DESC
                 LIMIT '.$limit.' OFFSET '.$offset;
             return $this->getModelsManager()
                 ->createQuery($query)->execute([
                     'userId' => $userId,
-                    'until' => $until->getTimestamp(),
+                    'until' => $until->getTimestamp()
                 ]);
         } catch (\Exception $e) {
             var_dump($e);

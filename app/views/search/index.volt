@@ -8,7 +8,7 @@
 
 {# main section #}
 {% block content %}
-<div class="re-page re-page--search">
+<div class="re-page">
   {# <div class="search-filter ">
     <div class="search-filter__label">FILTER BY</div>
     <div class="search-filter__dropdowns">

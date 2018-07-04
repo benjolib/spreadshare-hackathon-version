@@ -196,7 +196,7 @@
   var x,y,top,left,down,moving;
 
 $(".table-scroll").mousedown(function(e){
-    e.preventDefault();
+   // e.preventDefault();
     $(e.target).closest(".table-scroll").addClass("moving");
     moving = $(e.target).closest(".table-scroll");
     down = true;
