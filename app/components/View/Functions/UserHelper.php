@@ -9,6 +9,8 @@
 namespace DS\Component\View\Functions;
 
 
+use DS\Model\DataSource\ChangeRequestStatus;
+use DS\Model\RequestAdd;
 use DS\Model\TableVotes;
 use DS\Model\TableRowVotes;
 use DS\Model\User;
@@ -28,5 +30,10 @@ class UserHelper extends Component
     public static function userHasVotedRow(int $rowId, int $userId):bool
     {
         return !empty(TableRowVotes::votedForRow($rowId, $userId));
+    }
+
+    public static function pendingReceived(int $userId):int
+    {
+        return RequestAdd::count(['status'=>ChangeRequestStatus::AwaitingApproval]);
     }
 }

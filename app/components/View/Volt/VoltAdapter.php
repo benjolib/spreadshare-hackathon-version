@@ -141,5 +141,11 @@ class VoltAdapter extends Volt
                 return "\\DS\\Component\\View\\Functions\\UserHelper::userHasVotedRow({$args})";
             }
         );
+        $compiler->addFunction(
+            'pendingReceived',
+            function ($args) {
+                return "\\DS\\Component\\View\\Functions\\UserHelper::pendingReceived({$args})";
+            }
+        );
     }
 }
