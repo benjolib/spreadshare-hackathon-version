@@ -20,22 +20,91 @@
     <p class="re-para">{{ table['description'] }}</p>
     <div class="u-flex u-flexAlignItemsCenter">
       {% if !amISubscribed(table['id']) %}
-      <a class="re-button re-button--list-subscribe l-button" href="javascript:;" data-dropdown-placement="right" data-dropdown-offset="6">
-        <img src="/assets/images/9-0/list-subscribe-button-bird.svg" /> Subscribe
+
+      <div class="list-actions">
+<div class="button-container button-container__orange l-button" data-dropdown-placement="center" data-dropdown-offset="0">
+        
+          <a class="re-button re-button--list-subscribe" href="javascript:;" >
+            <img src="/assets/images/9-0/bird-orange.svg" /> Subscribe
+          </a>
+          
+
+
+        <div class="info">
+ Keep track of new content that gets added
+        </div>
+        
+      </div> 
+<div class="sh-dropdown card-subscribe-dropdown card-actions-dropdown--tall u-flex u-flexCol u-flexJustifyCenter l-dropdown"
+  style="padding-left: -100px;">
+  <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'D')">Daily</a>
+  <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'W')">Weekly</a>
+  <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'M')">Monthly</a>
+</div>
+
+<div class="button-container button-container__blue">
+  <div class="but">
+<a class="re-button re-button--list-collaborate addAListingButton0" id="addAListingButton0" href="#">
+      <img src="/assets/images/9-0/octopus-blue.svg" /> Collaborate
+
+    </a>
+
+
+  </div>
+  <div class="info">
+    Reach the subscribers by suggesting new content
+  </div>
+</div>
+</div>
+      {% else %}
+
+
+<div class="list-actions">
+  <div class="button-container button-container__white" data-dropdown-placement="center" data-dropdown-offset="0">
+
+    <a class="re-button re-button--list-subscribe" href="javascript:;">
+      <img src="/assets/images/9-0/bird-orange.svg" /> Subscribed
+    </a>
+
+
+
+    <div class="info">
+      Manage your subscriptions
+      <u><b>
+        <a href="/subscriptions">here</a>
+      </u></b>
+    </div>
+
+  </div>
+  <div class="sh-dropdown card-subscribe-dropdown card-actions-dropdown--tall u-flex u-flexCol u-flexJustifyCenter l-dropdown"
+    style="padding-left: -100px;">
+    <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'D')">Daily</a>
+    <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'W')">Weekly</a>
+    <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'M')">Monthly</a>
+  </div>
+
+  <div class="button-container button-container__blue">
+    <div class="but">
+<a class="re-button re-button--list-collaborate addAListingButton0" id="addAListingButton0" href=" # ">
+        <img src="/assets/images/9-0/octopus-blue.svg" /> Collaborate
+
       </a>
 
-      {% else %}
-      <a class="re-button re-button--list-subscribed l-button" href="javascript:;" data-dropdown-placement="right" data-dropdown-offset="6">
-        <img src="/assets/images/9-0/bird-orange.svg" /> Subscribed
-      </a>
+
+    </div>
+    <div class="info">
+      Reach the subscribers by suggesting new content
+    </div>
+  </div>
+</div>
+
+
+
+          
       {% endif %}
-      <div class="sh-dropdown card-subscribe-dropdown card-actions-dropdown--tall u-flex u-flexCol u-flexJustifyCenter l-dropdown"
-        style="margin-left: 18px;">
-        <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'D')">Daily</a>
-        <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'W')">Weekly</a>
-        <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'M')">Monthly</a>
-      </div>
-      <span class="subscribe-button-message">Receive all updates to this publication in your feed and inbox</span>
+
+     
+     
     </div>
     {#
     <a class="re-button list-edit-button" href="#" style="margin-left:8px">
@@ -165,18 +234,104 @@
       </tbody>
     </table>
   </div>
+
   <div class="addAListingSubmitAndCancel" id="addAListingSubmitAndCancel" style="display: none;">
     <a class="re-button re-button--list-add-row" href="#" id="addAListingSubmit">
       <img src="/assets/images/9-0/list-collaborate-button-octopus.svg" />Submit</a>
     <a style="width:140px" class="re-button re-button--list-add-row-cancel re-button--grey small-cancel-button" href="#" id="addAListingCancel">Cancel</a>
   </div>
-  <div class="u-flex u-flexAlignItemsCenter addAListingButton1" id="addAListingButton" style="margin-top: 8px;margin-bottom:64px;">
-    <a class="re-button re-button--list-collaborate" href="#">
-      <img src="/assets/images/9-0/list-collaborate-button-octopus.svg" /> Collaborate
 
+
+
+
+ {% if !amISubscribed(table['id']) %}
+
+<div class="list-actions bottom">
+  <div class="button-container button-container__orange l-button" data-dropdown-placement="center" data-dropdown-offset="0">
+
+    <a class="re-button re-button--list-subscribe" href="javascript:;">
+      <img src="/assets/images/9-0/bird-orange.svg" /> Subscribe
     </a>
-    <span class="subscribe-button-message">Contribute and get endorsed by the curators if your post will be published.</span>
+
+
+
+    <div class="info">
+      Keep track of new content that gets added
+    </div>
+
   </div>
+  <div class="sh-dropdown card-subscribe-dropdown card-actions-dropdown--tall u-flex u-flexCol u-flexJustifyCenter l-dropdown"
+    style="padding-left: -100px;">
+    <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'D')">Daily</a>
+    <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'W')">Weekly</a>
+    <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'M')">Monthly</a>
+  </div>
+
+<div class="button-container button-container__blue">
+    <div class="but">
+<a class="re-button re-button--list-collaborate addAListingButton1" href=" # ">
+        <img src="/assets/images/9-0/octopus-blue.svg" /> Collaborate
+
+      </a>
+
+
+    </div>
+    <div class="info">
+      Reach the subscribers by suggesting new content
+    </div>
+  </div>
+</div>
+{% else %}
+
+
+<div class="list-actions bottom">
+  <div class="button-container button-container__white" data-dropdown-placement="center" data-dropdown-offset="0">
+
+    <a class="re-button re-button--list-subscribe" href="javascript:;">
+      <img src="/assets/images/9-0/bird-orange.svg" /> Subscribed
+    </a>
+
+
+
+    <div class="info">
+      Manage your subscriptions
+      <u>
+        <b>
+          <a href="/subscriptions">here</a>
+      </u>
+      </b>
+    </div>
+
+  </div>
+  <div class="sh-dropdown card-subscribe-dropdown card-actions-dropdown--tall u-flex u-flexCol u-flexJustifyCenter l-dropdown"
+    style="padding-left: -100px;">
+    <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'D')">Daily</a>
+    <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'W')">Weekly</a>
+    <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'M')">Monthly</a>
+  </div>
+
+  <div class="button-container button-container__blue">
+    <div class="but">
+  <a class="re-button re-button--list-collaborate addAListingButton1" id="addAListingButton1" href="#">
+        <img src="/assets/images/9-0/octopus-blue.svg" /> Collaborate
+
+      </a>
+
+
+    </div>
+    <div class="info">
+      Reach the subscribers by suggesting new content
+    </div>
+  </div>
+</div>
+
+
+
+
+{% endif %}
+
+
+
   {#
   <a id="addAListingButton" class="re-button re-button--list-collaborate" href="#">
     Collaborate
@@ -424,6 +579,34 @@
       $(moving).removeClass("moving");
     });
     $(document).ready(function () {
+      // var mouse = {
+      //   pageX: 0,
+      //   pageY: 0
+      // };
+      // var ref = {
+      //   getBoundingClientRect: () => ({
+      //     top: mouse.pageY,
+      //     right: mouse.pageX,
+      //     bottom: mouse.pageY,
+      //     left: mouse.pageX,
+      //     width: 0,
+      //     height: 0,
+      //   }),
+      //   clientWidth: 0,
+      //   clientHeight: 0,
+      // }
+
+      // var pop = $('.list-context-menu');
+
+      // var popInstance;
+      // new Popper(ref, pop, {
+      //   placement: 'right-start',
+      //   onCreate({
+      //     instance
+      //   }) {
+      //     popInstance = instance;
+      //   }
+      // });
 
       $('#textareac').keyup(function (e) {
         console.log("keyup")
@@ -630,8 +813,22 @@
         $('#addAListingRow').show();
         $('#addAListingRowSpace').show();
         $('#addAListingSubmitAndCancel').show();
+        $(".bottom").css("visibility", "hidden")
 
       });
+
+      $('.addAListingButton0').on('click', function (e) {
+        e.preventDefault();
+        $('#addAListingButton').css("visibility", "hidden")
+        //TODO hide() doesnt work ?
+        $('#addAListingRow').show();
+        $('#addAListingRowSpace').show();
+        $('#addAListingSubmitAndCancel').show();
+        $(".bottom").css("visibility", "hidden")
+         $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+      });
+
+    
 
       $('#addAListingCancel').on('click', function (e) {
         e.preventDefault();
@@ -642,6 +839,7 @@
         $('#addAListingRowSpace').hide();
         $('#addAListingSubmitAndCancel').hide();
         $('#addAListingButton').show();
+        $('.bottom').css("visibility", "visible")
       });
 
       // Listing submition
@@ -934,34 +1132,7 @@
         startEditList();
       }
 
-      var mouse = {
-        pageX: 0,
-        pageY: 0
-      };
-      var ref = {
-        getBoundingClientRect: () => ({
-          top: mouse.pageY,
-          right: mouse.pageX,
-          bottom: mouse.pageY,
-          left: mouse.pageX,
-          width: 0,
-          height: 0,
-        }),
-        clientWidth: 0,
-        clientHeight: 0,
-      }
-
-      var pop = document.getElementById('list-context-menu');
-
-      var popInstance;
-      new Popper(ref, pop, {
-        placement: 'right-start',
-        onCreate({
-          instance
-        }) {
-          popInstance = instance;
-        }
-      });
+      
 
       // $('.re-table tr').on('contextmenu', function (e) {
       //   e.preventDefault();
