@@ -2668,6 +2668,39 @@ html {
 
 .empty-discussion {
   margin: 0;
+ 
+  .nocomments {
+    display: flex;
+     max-width: 670px;
+     .image {
+       margin-top: 4px;
+     }
+    .info {
+      padding-left: 15px;
+      .header {
+        font-family: Lato;
+        font-size: 20px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: -0.5px;
+        text-align: left;
+        color: #2a1e3e;
+      }
+      .subheader {
+        font-family: Lato;
+        font-size: 15px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.33;
+        letter-spacing: -0.4px;
+        text-align: left;
+        color: #2a1e3e;
+      }
+    }
+  }
 }
 
 .list-tab-content-activity {

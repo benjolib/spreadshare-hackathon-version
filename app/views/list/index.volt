@@ -301,7 +301,15 @@
         </form>
         {% endif %} {% endfor %} {% else %}
         <div class="empty-discussion">
-          No Comments
+          <div class="nocomments">
+            <div class="image"><img src="/assets/images/9-0/cat.png"/></div>
+            <div class="info">
+                <div class="header">Nothing here yer. Pioneers wanted!</div>
+                <div class="subheader">The person who follows the crowd will usually go no further than the crowd.
+                  The person who walks alone is likely to find himself in places no one has ever seen before (A. Einstein)
+                </div>
+            </div>
+          </div>
         </div>
         {% endif %}
       </div>
