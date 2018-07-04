@@ -511,7 +511,7 @@
     </div>
   </div>
 
-  <div id="list-context-menu" class="list-context-menu">
+  <!-- <div id="list-context-menu" class="list-context-menu">
     <a href="javascript:;" class="edit-column-name">
       <img src="/assets/images/9-0/list-edit-column-name.svg" /> Edit Column Name</a>
     <a href="javascript:;" class="add-column-left">
@@ -520,7 +520,7 @@
       <img src="/assets/images/9-0/list-add-column-right.svg" /> Add Column Right</a>
     <a href="javascript:;" class="remove-column">
       <img src="/assets/images/9-0/list-remove-column.svg" /> Remove Column</a>
-  </div>
+  </div> -->
 
   <form method="POST" action="/row/{{ table['id']}}/add" enctype="multipart/form-data" id="form_hidden">
 

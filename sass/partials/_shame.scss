@@ -2287,7 +2287,7 @@ html {
           line-height: 19px;
           letter-spacing: -0.43px;
           padding-top: 16px;
-          padding-bottom: 60px;
+          padding-bottom: 36px;
           padding-right: 32px;
           height: 115px;
         }
@@ -3111,6 +3111,7 @@ html {
 .collaboration-info {
   margin-bottom: 8px;
   line-height: 16px;
+  margin-top:30px;
   @media (min-width: 768px) {
     margin-bottom: 10px;
     line-height: 21px;
@@ -5686,6 +5687,7 @@ html {
      margin-right: 10px;
     background-color: #ea612d;
     .re-button {
+      width: 260px;
       background-color: white;
       color: #ea612d;
     }
@@ -5709,8 +5711,10 @@ html {
      color: #ea612d;
       margin-right: 10px;
      .re-button {
+       width: 260px;
        background-color: white;
        color: #ea612d;
+
      }
      .info {
        color: #ea612d !important;
