@@ -551,12 +551,22 @@
           {% for subscriber in tablemodel.tableSubscription %}
           <div class="list-tab-content-subscribers__card">
             {{ partial('partials/profile-card', [ 'id': subscriber.user.id, 'username': subscriber.user.handle, 'avatar': subscriber.user.image,
-            'name': subscriber.user.name, 'bio': subscriber.user.tagline, 'type': 10, 'truncate': true ]) }}
+            'name': subscriber.user.name, 'bio': subscriber.user.tagline, 'type': 10]) }}
           </div>
           {% else %}
-          <div class="empty-subscribers">
-            No Subscribers
+          <div class="empty-discussion">
+          <div class="nocomments">
+            <div class="image">
+              <img src="/assets/images/9-0/cat.png" />
+            </div>
+            <div class="info">
+              <div class="header">Nothing here yer. Pioneers wanted!</div>
+              <div class="subheader">The person who follows the crowd will usually go no further than the crowd. The person who walks alone is likely
+                to find himself in places no one has ever seen before (A. Einstein)
+              </div>
+            </div>
           </div>
+        </div>
           {% endfor %}
         </div>
       </div>
@@ -570,8 +580,18 @@
           'name': contributor.users.name, 'bio': contributor.users.tagline, 'type': 10, 'truncate': true ]) }}
         </div>
         {% else %}
-        <div class="empty-collaborators">
-          Be the first one to collaborate on this Stream
+        <div class="empty-discussion">
+          <div class="nocomments">
+            <div class="image">
+              <img src="/assets/images/9-0/cat.png" />
+            </div>
+            <div class="info">
+              <div class="header">Nothing here yer. Pioneers wanted!</div>
+              <div class="subheader">The person who follows the crowd will usually go no further than the crowd. The person who walks alone is likely
+                to find himself in places no one has ever seen before (A. Einstein)
+              </div>
+            </div>
+          </div>
         </div>
         {% endfor %}
       </div>
@@ -579,8 +599,18 @@
 
     <div class="list-tab-content list-tab-content-activity" style="display: none;">
       <div class="list-tabs__inner-padded">
-        <div class="empty-activity">
-          No activity yet. Be the first one to collaborate
+        <div class="empty-discussion">
+          <div class="nocomments">
+            <div class="image">
+              <img src="/assets/images/9-0/cat.png" />
+            </div>
+            <div class="info">
+              <div class="header">Nothing here yer. Pioneers wanted!</div>
+              <div class="subheader">The person who follows the crowd will usually go no further than the crowd. The person who walks alone is likely
+                to find himself in places no one has ever seen before (A. Einstein)
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
