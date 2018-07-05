@@ -2,6 +2,7 @@
 
 namespace DS\Model;
 
+use DS\Model\DataSource\ChangeRequestStatus;
 use DS\Model\Events\RequestAddEvents;
 
 class RequestAdd extends RequestAddEvents
@@ -55,8 +56,8 @@ class RequestAdd extends RequestAddEvents
                 SELECT COUNT('.RequestAdd::class.'.id) as pending
                 FROM '.RequestAdd::class.' 
                 INNER JOIN '.Tables::class.' ON '.Tables::class.'.id = '.RequestAdd::class.'.table_id
-                WHERE '.Tables::class.'.ownerUserId = :userId:';
-        $row = $this->getModelsManager()->executeQuery($phql,['userId'=>$userId])->getFirst();
+                WHERE '.Tables::class.'.ownerUserId = :userId: AND '.RequestAdd::class.'.status = :status:';
+        $row = $this->getModelsManager()->executeQuery($phql,['userId'=>$userId, 'status'=>ChangeRequestStatus::AwaitingApproval])->getFirst();
         return (int)$row['pending'];
     }
 }
