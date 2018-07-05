@@ -282,6 +282,21 @@
           }
         });
 
+        $button.mouseover(function () {
+          if(!$button.hasClass("mouseover")) return;
+          if($dropdown.hasClass("show") || $('.l-dropdown').hasClass("show")) {
+
+            $('.l-dropdown').removeClass('show');
+            $dropdown.removeClass("show");
+          }else {
+            $dropdown.addClass('show');
+          }
+          
+          if ($button.data('dropdown-active-class')) {
+            $button.addClass($button.data('dropdown-active-class'));
+          }
+        });
+
         $button.addClass('bound');
       });
     };
