@@ -146,7 +146,7 @@ class ListController extends BaseController
             $tableCommentsModel = new TableComments();
             $tableStatsModel = new TableStats();
 
-            $tableId = $tableModel->id;
+            $tableId = $tableModel->getId();
 
             TableViewed::after($authId, (int) $tableId);
 

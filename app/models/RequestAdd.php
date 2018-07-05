@@ -48,4 +48,15 @@ class RequestAdd extends RequestAddEvents
     {
         return $this->image;
     }
+
+    public function countPendingRequests(int $userId) :int
+    {
+        $phql = '
+                SELECT COUNT(ra.id) as pending
+                FROM '.RequestAdd::class.' ra 
+                INNER JOIN '.Tables::class.' t ON t.id = ra.tableId
+                WHERE t.ownerUserId = :userId:';
+        $row = $this->getModelsManager()->executeQuery($phql,['userId'=>$userId]);
+        return $row['pending'];
+    }
 }

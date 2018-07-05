@@ -29,11 +29,11 @@ class UserHelper extends Component
     }
     public static function userHasVotedRow(int $rowId, int $userId):bool
     {
-        return !empty(TableRowVotes::votedForRow($rowId, $userId));
+        return !empty((new TableRowVotes)->votedForRow($rowId, $userId));
     }
 
     public static function pendingReceived(int $userId):int
     {
-        return RequestAdd::count(['status'=>ChangeRequestStatus::AwaitingApproval]);
+        return (new RequestAdd())->countPendingRequests($userId);
     }
 }
