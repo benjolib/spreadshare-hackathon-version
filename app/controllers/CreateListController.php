@@ -2,6 +2,7 @@
 
 namespace DS\Controller;
 
+use DS\Component\Text\Csv;
 use DS\Exceptions\InvalidStreamDescriptionException;
 use DS\Exceptions\InvalidStreamTaglineException;
 use DS\Exceptions\InvalidStreamTitleException;
@@ -151,28 +152,21 @@ class CreateListController extends BaseController implements LoginAwareControlle
         }
     }
 
-    protected function tableContentFromCsv($csv): array
+    protected function tableContentFromCsv($csvString): array
     {
-        $newlineSeparator = "\r\n";
-        $csv = str_replace("\t", ",", $csv);
-        $colSeparator = ',';
-        $tableColumns = explode($colSeparator, strtok($csv, $newlineSeparator));
-        $numColumns = count($tableColumns);
-
-        $line = strtok($newlineSeparator);
-        $tableContent[] = $tableColumns;
-        $rowNumber = 1;
-        while ($line !== false) {
-            $row = explode($colSeparator, $line);
-            if (count($row) !== $numColumns) {
-                //throw new \Exception("Wrong number of columns - The row $rowNumber has a different number of columns");
-                throw new \Exception("Wrong format - Please review your Stream content");
-            }
-            $tableContent[] = ['id' => '', 'content'=>$row];
-            $line = strtok($newlineSeparator);
-            $rowNumber++;
+        if (strpos($csvString, "\t")!==false) {
+            $separator = "\t";
+        } else {
+            $separator = ",";
         }
-        return $tableContent;
+        $csv = new Csv();
+        $rows = $csv->parseFromText($csvString, $separator, true, true);
+        $result = [];
+        foreach ($rows as $row) {
+            $result[] = ['id' => '', 'content'=>$row];
+        }
+        $result[0] = $rows[0];
+        return $result;
     }
 
 }
