@@ -1877,6 +1877,9 @@ html {
       top: 20px;
       margin-bottom: -15px !important;
     }
+    img {
+      margin-right:12px;
+    }
   }
   &--header {
     display: inline-flex;
@@ -5274,7 +5277,7 @@ html {
 
 .wrapdigital {
   //background-color: #fdd49a;
-  background: linear-gradient(to right, #FCDAB4, #FDD39B);
+  background: linear-gradient(to right, #FCDAB4, #FFCE80);
   width: 100%;
   background-position: center center;
   background-size: 100%;
@@ -5302,14 +5305,14 @@ html {
     color: #b77e21;
     .heading {
       font-weight: bold;
-      font-size: 2em;
+      font-size: 1.9em;
       line-height: 36px;
       letter-spacing: -0.72px;
       margin-bottom: 1px;
     }
     .subheading {
       font-weight: 400;
-      font-size: 2em;
+      font-size: 1.6em;
       line-height: 27px;
       letter-spacing: -0.54px;
       margin-bottom: 8px;
@@ -5326,10 +5329,11 @@ html {
     }
     text-align: center;
     button {
+      width: 300px;
       cursor: pointer;
       outline: none;
-      margin-left: 2em;
-      margin-right: 2.5em;
+      // margin-left: 2em;
+      // margin-right: 2.5em;
       display: flex;
       background: #ffffff;
       border: 0;
@@ -5340,7 +5344,6 @@ html {
       letter-spacing: 0.5px;
       font-size: 16px;
       line-height: 16px;
-      width: 194px;
       height: 60px;
       color: #b77e21;
       text-align: center;
@@ -5349,9 +5352,16 @@ html {
     }
     button:hover {}
     .transparent {
+      margin-left: 2em;
+      box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.082);
       background: transparent;
       color: white;
-      border: 1px white;
+       border-top: 1px solid rgba(255, 255, 255, 0.561);
+      border-right: 1px solid rgba(255, 255, 255, 0.561);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.561);
+      border-left: 1px solid rgba(255, 255, 255, 0.561);
+      text-decoration: none;
+      display: block;
     }
   }
 }

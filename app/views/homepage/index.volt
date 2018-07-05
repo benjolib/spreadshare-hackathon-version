@@ -219,7 +219,7 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
     </div>
     <div class="action">
       <button onclick="window.location.href='/'" :=""> Request a List </button>
-      <button onclick="window.location.href='/'" :=""> Earn money </button>
+      <button onclick="window.location.href='/'" :="" class="transparent"> Earn money as researcher</button>
     </div>
   </div>
 </div>
