@@ -22,89 +22,91 @@
       {% if !amISubscribed(table['id']) %}
 
       <div class="list-actions">
-<div class="button-container button-container__orange l-button" data-dropdown-placement="center" data-dropdown-offset="0">
-        
-          <a class="re-button re-button--list-subscribe" href="javascript:;" >
+        <div class="button-container button-container__orange l-button" data-dropdown-placement="center" data-dropdown-offset="0">
+
+          <a class="re-button re-button--list-subscribe" href="javascript:;">
             <img src="/assets/images/9-0/bird-orange.svg" /> Subscribe
           </a>
-          
 
 
-        <div class="info">
- Keep track of new content that gets added
+
+          <div class="info">
+            Keep track of new content that gets added
+          </div>
+
         </div>
-        
-      </div> 
-<div class="sh-dropdown card-subscribe-dropdown card-actions-dropdown--tall u-flex u-flexCol u-flexJustifyCenter l-dropdown"
-  style="padding-left: -100px;">
-  <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'D')">Daily</a>
-  <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'W')">Weekly</a>
-  <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'M')">Monthly</a>
-</div>
+        <div class="sh-dropdown card-subscribe-dropdown card-actions-dropdown--tall u-flex u-flexCol u-flexJustifyCenter l-dropdown"
+          style="padding-left: -100px;">
+          <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'D')">Daily</a>
+          <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'W')">Weekly</a>
+          <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'M')">Monthly</a>
+        </div>
 
-<div class="button-container button-container__blue">
-  <div class="but">
-<a class="re-button re-button--list-collaborate addAListingButton0" id="addAListingButton0" href="#">
-      <img src="/assets/images/9-0/octopus-blue.svg" /> Collaborate
+        <div class="button-container button-container__blue">
+          <div class="but">
+            <a class="re-button re-button--list-collaborate addAListingButton0" id="addAListingButton0" href="#">
+              <img src="/assets/images/9-0/octopus-blue.svg" /> Collaborate
 
-    </a>
+            </a>
 
 
-  </div>
-  <div class="info">
-    Reach the subscribers by suggesting new content
-  </div>
-</div>
-</div>
+          </div>
+          <div class="info">
+            Reach the subscribers by suggesting new content
+          </div>
+        </div>
+      </div>
       {% else %}
 
 
-<div class="list-actions">
-  <div class="button-container button-container__white" data-dropdown-placement="center" data-dropdown-offset="0">
+      <div class="list-actions">
+        <div class="button-container button-container__white" data-dropdown-placement="center" data-dropdown-offset="0">
 
-    <a class="re-button re-button--list-subscribe" href="javascript:;">
-      <img src="/assets/images/9-0/bird-orange.svg" /> Subscribed
-    </a>
-
-
-
-    <div class="info">
-      Manage your subscriptions
-      <u><b>
-        <a href="/subscriptions">here</a>
-      </u></b>
-    </div>
-
-  </div>
-  <div class="sh-dropdown card-subscribe-dropdown card-actions-dropdown--tall u-flex u-flexCol u-flexJustifyCenter l-dropdown"
-    style="padding-left: -100px;">
-    <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'D')">Daily</a>
-    <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'W')">Weekly</a>
-    <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'M')">Monthly</a>
-  </div>
-
-  <div class="button-container button-container__blue">
-    <div class="but">
-<a class="re-button re-button--list-collaborate addAListingButton0" id="addAListingButton0" href=" # ">
-        <img src="/assets/images/9-0/octopus-blue.svg" /> Collaborate
-
-      </a>
-
-
-    </div>
-    <div class="info">
-      Reach the subscribers by suggesting new content
-    </div>
-  </div>
-</div>
+          <a class="re-button re-button--list-subscribe" href="javascript:;">
+            <img src="/assets/images/9-0/bird-orange.svg" /> Subscribed
+          </a>
 
 
 
-          
+          <div class="info">
+            Manage your subscriptions
+            <u>
+              <b>
+                <a href="/subscriptions">here</a>
+            </u>
+            </b>
+          </div>
+
+        </div>
+        <div class="sh-dropdown card-subscribe-dropdown card-actions-dropdown--tall u-flex u-flexCol u-flexJustifyCenter l-dropdown"
+          style="padding-left: -100px;">
+          <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'D')">Daily</a>
+          <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'W')">Weekly</a>
+          <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'M')">Monthly</a>
+        </div>
+
+        <div class="button-container button-container__blue">
+          <div class="but">
+            <a class="re-button re-button--list-collaborate addAListingButton0" id="addAListingButton0" href=" # ">
+              <img src="/assets/images/9-0/octopus-blue.svg" /> Collaborate
+
+            </a>
+
+
+          </div>
+          <div class="info">
+            Reach the subscribers by suggesting new content
+          </div>
+        </div>
+      </div>
+
+
+
+
       {% endif %}
 
-     
-     
+
+
     </div>
     {#
     <a class="re-button list-edit-button" href="#" style="margin-left:8px">
@@ -142,7 +144,7 @@
       </thead>
       <tbody>
         {% if tableContent is not empty and tableContent %} {% for index, row in tableContent.items %}
-
+       
         <tr data-id="{{ row['id'] }}" class="list-row-tr">
           <td>
             <a href="#" class="j_listing-vote vote-link {{ row['userHasVoted'] ? 'vote-link--upvoted' : '' }}">
@@ -162,19 +164,83 @@
               </div>
             </div>
           </td>
+
           <td>
-            <div class="re-table__list-image {{ row['image'] ? '' : 're-table__list-image--empty' }}" style="background: #f5f5f5 url({{ row['image'] }}) center / cover;">
+            <div class="l-button mouseover re-table__list-image {{ row['image'] ? '' : 're-table__list-image--empty' }}" style="background: #f5f5f5 url({{ row['image'] }}) center / cover;">
               <img data-name="{{ row['content']|json_decode[0].content }}" class="{{ row['image'] ? '' : 'empty' }}" />
               <div class="re-table__list-image__upload-button"></div>
               <!--<div class="re-table__list-image__delete-button"></div>-->
             </div>
+            <div  class="addedby sh-dropdown  u-flex  u-flexJustifyBetween l-dropdown">
+              <div class="u-flex u-flexCol header">
+                {% if row['userId'] == null %}
+                ADDED BY
+                <div class="u-flex creator">
+
+                  <div class="content">
+                    <img src="{{ table['creatorImage'] }}" /> {{ table['creatorHandle'] }}
+                  </div>
+                </div>
+
+                {% else %}
+                ADDED BY
+                <div class="content">
+            {% if row['userId'] == table['ownerUserId'] %}
+            <img src="{{ table['creatorImage'] }}" /> 
+            {% else %}
+            <img src="/userimages/{{row['userId']}}.jpg" />
+            {% endif %}
+
+<a href="/profile/{{userHandleFromId(row['userId'])}}">{{ userHandleFromId(row[ 'userId']) }}</a>
+</div>
+                {% endif %}
+              </div>
+
+              <div class="u-flex u-flexCol header" style="margin-left:10px;">
+                DATE
+                <div class="u-flex content date" style="margin-right:10px;">
+                  {{ date('M jS H:i ',row['createdAt']) }}</div>
+              </div>
             <input type="file" name="image" class="re-table__list-image-fileUpload" style="display: none;" />
           </td>
+
+
           {% for i,cell in row['content']|json_decode %} {% set len = filterTableRowsContent(cell.content)|striptags|length %} {% if
           len > 160 %} {% set length = 480 %} {% elseif len > 80 %} {% set length = 300 %} {% elseif len > 40 %} {% set length
           = 175 %} {% elseif len > 20 %} {% set length = 150 %} {% else %} {% set length = 0 %} {% endif %}
+
           <td style="min-width: {{ length }}px;">
-            <div>{{ filterTableRowsContent(cell.content) }}</div>
+            <div class="l-button mouseover">{{ filterTableRowsContent(cell.content) }}</div>
+            <div  class="addedby sh-dropdown  u-flex  u-flexJustifyBetween l-dropdown">
+              <div class="u-flex u-flexCol header">
+                {% if row['userId'] == null %}
+                ADDED BY
+                <div class="u-flex creator">
+
+                  <div class="content">
+                    <img src="{{ table['creatorImage'] }}" /> {{ table['creatorHandle'] }}
+                  </div>
+                </div>
+
+                {% else %}
+                ADDED BY
+                <div class="content">
+            {% if row['userId'] == table['ownerUserId'] %}
+            <img src="{{ table['creatorImage'] }}" /> 
+            {% else %}
+            <img src="/userimages/{{row['userId']}}.jpg" />
+            {% endif %}
+
+                {{ userHandleFromId(row['userId']) }}</div>
+                {% endif %}
+              </div>
+
+              <div class="u-flex u-flexCol header" style="margin-left:10px;">
+                DATE
+                <div class="u-flex content date" style="margin-right:10px;">
+                  {{ date('M jS H:i ',row['createdAt']) }}</div>
+              </div>
+            </div>
           </td>
           {% endfor %}
         </tr>
@@ -244,95 +310,91 @@
 
 
 
- {% if !amISubscribed(table['id']) %}
+  {% if !amISubscribed(table['id']) %}
 
-<div class="list-actions bottom">
-  <div class="button-container button-container__orange l-button" data-dropdown-placement="center" data-dropdown-offset="0">
+  <div class="list-actions bottom">
+    <div class="button-container button-container__orange l-button" data-dropdown-placement="center" data-dropdown-offset="0">
 
-    <a class="re-button re-button--list-subscribe" href="javascript:;">
-      <img src="/assets/images/9-0/bird-orange.svg" /> Subscribe
-    </a>
-
-
-
-    <div class="info">
-      Keep track of new content that gets added
-    </div>
-
-  </div>
-  <div class="sh-dropdown card-subscribe-dropdown card-actions-dropdown--tall u-flex u-flexCol u-flexJustifyCenter l-dropdown"
-    style="padding-left: -100px;">
-    <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'D')">Daily</a>
-    <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'W')">Weekly</a>
-    <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'M')">Monthly</a>
-  </div>
-
-<div class="button-container button-container__blue">
-    <div class="but">
-<a class="re-button re-button--list-collaborate addAListingButton1" href=" # ">
-        <img src="/assets/images/9-0/octopus-blue.svg" /> Collaborate
-
+      <a class="re-button re-button--list-subscribe" href="javascript:;">
+        <img src="/assets/images/9-0/bird-orange.svg" /> Subscribe
       </a>
 
 
+
+      <div class="info">
+        Keep track of new content that gets added
+      </div>
+
     </div>
-    <div class="info">
-      Reach the subscribers by suggesting new content
-    </div>
-  </div>
-</div>
-{% else %}
-
-
-<div class="list-actions bottom">
-  <div class="button-container button-container__white" data-dropdown-placement="center" data-dropdown-offset="0">
-
-    <a class="re-button re-button--list-subscribe" href="javascript:;">
-      <img src="/assets/images/9-0/bird-orange.svg" /> Subscribed
-    </a>
-
-
-
-    <div class="info">
-      Manage your subscriptions
-      <u>
-        <b>
-          <a href="/subscriptions">here</a>
-      </u>
-      </b>
+    <div class="sh-dropdown card-subscribe-dropdown card-actions-dropdown--tall u-flex u-flexCol u-flexJustifyCenter l-dropdown"
+      style="padding-left: -100px;">
+      <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'D')">Daily</a>
+      <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'W')">Weekly</a>
+      <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'M')">Monthly</a>
     </div>
 
-  </div>
-  <div class="sh-dropdown card-subscribe-dropdown card-actions-dropdown--tall u-flex u-flexCol u-flexJustifyCenter l-dropdown"
-    style="padding-left: -100px;">
-    <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'D')">Daily</a>
-    <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'W')">Weekly</a>
-    <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'M')">Monthly</a>
-  </div>
+    <div class="button-container button-container__blue">
+      <div class="but">
+        <a class="re-button re-button--list-collaborate addAListingButton1" href=" # ">
+          <img src="/assets/images/9-0/octopus-blue.svg" /> Collaborate
 
-  <div class="button-container button-container__blue">
-    <div class="but">
-  <a class="re-button re-button--list-collaborate addAListingButton1" id="addAListingButton1" href="#">
-        <img src="/assets/images/9-0/octopus-blue.svg" /> Collaborate
+        </a>
 
+
+      </div>
+      <div class="info">
+        Reach the subscribers by suggesting new content
+      </div>
+    </div>
+  </div>
+  {% else %}
+
+
+  <div class="list-actions bottom">
+    <div class="button-container button-container__white" data-dropdown-placement="center" data-dropdown-offset="0">
+
+      <a class="re-button re-button--list-subscribe" href="javascript:;">
+        <img src="/assets/images/9-0/bird-orange.svg" /> Subscribed
       </a>
 
 
+
+      <div class="info">
+        Manage your subscriptions
+        <u>
+          <b>
+            <a href="/subscriptions">here</a>
+        </u>
+        </b>
+      </div>
+
     </div>
-    <div class="info">
-      Reach the subscribers by suggesting new content
+    <div class="sh-dropdown card-subscribe-dropdown card-actions-dropdown--tall u-flex u-flexCol u-flexJustifyCenter l-dropdown"
+      style="padding-left: -100px;">
+      <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'D')">Daily</a>
+      <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'W')">Weekly</a>
+      <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'M')">Monthly</a>
+    </div>
+
+    <div class="button-container button-container__blue">
+      <div class="but">
+        <a class="re-button re-button--list-collaborate addAListingButton1" id="addAListingButton1" href="#">
+          <img src="/assets/images/9-0/octopus-blue.svg" /> Collaborate
+
+        </a>
+
+
+      </div>
+      <div class="info">
+        Reach the subscribers by suggesting new content
+      </div>
     </div>
   </div>
-</div>
 
 
 
 
-{% endif %}
-
-
-
-  {#
+  {% endif %} {#
   <a id="addAListingButton" class="re-button re-button--list-collaborate" href="#">
     Collaborate
   </a> #}
@@ -457,12 +519,14 @@
         {% endif %} {% endfor %} {% else %}
         <div class="empty-discussion">
           <div class="nocomments">
-            <div class="image"><img src="/assets/images/9-0/cat.png"/></div>
+            <div class="image">
+              <img src="/assets/images/9-0/cat.png" />
+            </div>
             <div class="info">
-                <div class="header">Nothing here yer. Pioneers wanted!</div>
-                <div class="subheader">The person who follows the crowd will usually go no further than the crowd.
-                  The person who walks alone is likely to find himself in places no one has ever seen before (A. Einstein)
-                </div>
+              <div class="header">Nothing here yer. Pioneers wanted!</div>
+              <div class="subheader">The person who follows the crowd will usually go no further than the crowd. The person who walks alone is likely
+                to find himself in places no one has ever seen before (A. Einstein)
+              </div>
             </div>
           </div>
         </div>
@@ -578,7 +642,12 @@
       down = false;
       $(moving).removeClass("moving");
     });
+
+
     $(document).ready(function () {
+
+
+
       // var mouse = {
       //   pageX: 0,
       //   pageY: 0
@@ -657,7 +726,6 @@
         var $this = $(this);
 
         var len = $this.text().length;
-        console.log(len);
         var minWidth = 0;
         if (len > 160) {
           minWidth = 480;
@@ -825,10 +893,12 @@
         $('#addAListingRowSpace').show();
         $('#addAListingSubmitAndCancel').show();
         $(".bottom").css("visibility", "hidden")
-         $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+        $("html, body").animate({
+          scrollTop: $(document).height()
+        }, "slow");
       });
 
-    
+
 
       $('#addAListingCancel').on('click', function (e) {
         e.preventDefault();
@@ -1132,7 +1202,7 @@
         startEditList();
       }
 
-      
+
 
       // $('.re-table tr').on('contextmenu', function (e) {
       //   e.preventDefault();

@@ -3,7 +3,15 @@
     <a class="re-header__logo" href="/"><img src="/assets/images/9-0/logo.svg" /></a>
     <a class="re-header__item feed {{ forYouActive is not empty and forYouActive ? 'active': '' }}" href="/for-you"><img src="/assets/images/9-0/header-feed-bird.svg" /> Feed</a>
     <a class="re-header__item explore {{ exploreActive is not empty and exploreActive ? 'active': '' }}" href="/"><img src="/assets/images/9-0/header-explore-whale.svg" /> Explore</a>
-    <a class="re-header__item collabs {{ collabsActive is not empty and collabsActive ? 'active': '' }}" href="/collaborations"><img src="/assets/images/9-0/header-collabs-octopus.svg" /> Collabs</a>
+    <a class="re-header__item collabs {{ collabsActive is not empty and collabsActive ? 'active': '' }}" href="/collaborations"><img src="/assets/images/9-0/header-collabs-octopus.svg" /> 
+      Collabs
+      {% if pendingReceived(auth.getUser().id) > 0 %}
+      <div class="blucircle">
+           {{ pendingReceived(auth.getUser().id) }}
+      </div>
+      {% endif %}
+    </a>
+    
     <a class="re-header__search" href="#"><img class="re-header__search__img" src="/assets/images/9-0/header-search.svg" /></a>
     <div class="re-header__search-open" style="{% if query is not defined %}display:none;{% endif %}">
       <img src="/assets/images/search-green.svg" />
