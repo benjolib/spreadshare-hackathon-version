@@ -52,7 +52,7 @@ class RequestAdd extends RequestAddEvents
     public function countPendingRequests(int $userId) :int
     {
         $phql = '
-                SELECT COUNT(ra.id) as pending
+                SELECT COUNT('.RequestAdd::class.'.id) as pending
                 FROM '.RequestAdd::class.' 
                 INNER JOIN '.Tables::class.' ON '.Tables::class.'.id = '.RequestAdd::class.'.tableId
                 WHERE '.Tables::class.'.ownerUserId = :userId:';
