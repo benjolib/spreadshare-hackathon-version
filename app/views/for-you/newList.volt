@@ -7,19 +7,23 @@
             <span class="collaboration-info__text">created a new Stream</span>
 <a class="collaboration-info__table-name" href="/stream/{{ newList.tableSlug ? newList.tableSlug : newList.tableId }}">{{ newList.tableName }}</a>
         </div>
+<div class="collaboration-clock">
+    <img src="/assets/images/comment-clock.svg" />{{ date('M jS H:i ',newList.getCreatedAt().getTimeStamp()) }}</div>
     </div>
-    <div class="collaboration-clock"><img src="/assets/images/comment-clock.svg"/>{{ date('M jS H:i ',newList.getCreatedAt().getTimeStamp()) }}</div>
+   
 </div>
 <div class="for-you-table u-flex u-flexCol">
     <div class="for-you-table__image"
          style="background: #f5f5f5 url({{ newList.tableImage }}) center / cover;">
-        <div class="for-you-table__listingCount">{{ newList.tableNumRows }}</div>
+        <!-- <div class="for-you-table__listingCount">{{ newList.tableNumRows }}</div> -->
     </div>
     <div class="for-you-table__bottom u-flex u-flexJustifyBetween u-flexAlignItemsCenter">
         <div class="u-flex u-flexCol">
             <h3 class="for-you-table__heading">{{ newList.tableName }}</h3>
             <p class="for-you-table__tagline">{{ newList.tableTagline }}</p>
         </div>
-        <div class="for-you-table__subscriberCount"><img src="/assets/images/mail.svg"/>{{ newList.tableSubscriberCount }}</div>
+<a href="/stream/{{ newList.tableSlug ? newList.tableSlug : newList.tableId }}" class="list-card__subscriberCount u-flex u-flexAlignItemsCenter">
+<img src="/assets/images/9-0/list-card-subscriber-bird.svg" /> {{ newList.tableSubscriberCount }}</a>
+       
     </div>
 </div>
