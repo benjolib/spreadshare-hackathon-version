@@ -54,7 +54,7 @@ class RequestAdd extends RequestAddEvents
         $phql = '
                 SELECT COUNT('.RequestAdd::class.'.id) as pending
                 FROM '.RequestAdd::class.' 
-                INNER JOIN '.Tables::class.' ON '.Tables::class.'.id = '.RequestAdd::class.'.tableId
+                INNER JOIN '.Tables::class.' ON '.Tables::class.'.id = '.RequestAdd::class.'.table_id
                 WHERE '.Tables::class.'.ownerUserId = :userId:';
         $row = $this->getModelsManager()->executeQuery($phql,['userId'=>$userId]);
         return $row['pending'];
