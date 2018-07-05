@@ -279,7 +279,18 @@
             <div class="shadowcontain"></div>
           </td>
           <td>
+            <div class="re-table__list-image__upload-button"></div>
             <div class="re-table__list-image re-table__list-image--new-row" id="addRowImage"></div>
+
+            <!-- <div class="re-table__list-image re-table__list-image--editing" style="background: #f5f5f5 center / cover;">           
+              
+              <div class="re-table__list-image__upload-button"></div>
+                            
+              <div class="re-table__list-image__upload-button"></div>
+                <div class="re-table__list-image__delete-button"></div>
+              </div> -->
+
+
             <input type="file" name="image" id="new-row-fileUpload" style="display: none;" />
 
           </td>
@@ -289,7 +300,7 @@
 
               <textarea onmouseover="javascript:$('.e{{i}}{{index}}').css('visibility','visible');" ; onmouseout="javascript:$('.e{{i}}{{index}}').css('visibility', 'hidden');"
                 id="{{i}}" placeholder="{{ column.title }}" rows="1" class="edit icon cell-input-sizing d{{i}}{{index}}"></textarea>
-              <i id="{{i}}" class="edit icon green e{{i}}{{index}}" style="cursor: pointer;visibility: hidden;" onclick="console.log($(this).prev().prev());javascript:$('#d{{i}}{{index}}').focus();"></i>
+              <i id="{{i}}" class="pencil icon blue e{{i}}{{index}}" style="cursor: pointer;visibility: hidden;" onclick="console.log($(this).prev().prev());javascript:$('#d{{i}}{{index}}').focus();"></i>
             </div>
           </td>
 
@@ -866,6 +877,8 @@
         if (this.files && this.files[0]) {
           var img = document.querySelector('#addRowImage');
           img.style = 'background: #f5f5f5 url(' + URL.createObjectURL(this.files[0]) + ') center / cover;';
+          $('.re-table__list-image--new-row').css("height","84px")
+          $('.re-table__list-image--new-row').css("width", "84px")
           //img.onload = fn;
         }
       });
