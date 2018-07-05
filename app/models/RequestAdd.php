@@ -57,6 +57,6 @@ class RequestAdd extends RequestAddEvents
                 INNER JOIN '.Tables::class.' ON '.Tables::class.'.id = '.RequestAdd::class.'.table_id
                 WHERE '.Tables::class.'.ownerUserId = :userId:';
         $row = $this->getModelsManager()->executeQuery($phql,['userId'=>$userId]);
-        return $row['pending'];
+        return (int)$row['pending'];
     }
 }
