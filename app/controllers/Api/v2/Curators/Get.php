@@ -1,11 +1,13 @@
 <?php
 
-namespace DS\Controller\Api\v2\Tags;
+namespace DS\Controller\Api\v2\Curators;
 
-use DS\Api\Tags;
 use DS\Controller\Api\ActionHandler;
 use DS\Controller\Api\Meta\Records;
 use DS\Controller\Api\MethodInterface;
+use DS\Model\DataSource\UserRoles;
+use DS\Model\Tables;
+use DS\Model\User;
 
 /**
  *
@@ -23,26 +25,25 @@ use DS\Controller\Api\MethodInterface;
 class Get extends ActionHandler implements MethodInterface
 {
     private $searchMinimum = 2;
-    
+
     /**
      * @return bool
      */
     public function needsLogin()
     {
-        return false;
+        return true;
     }
     
     public function process()
     {
         $query = $this->request->get('q', null, null);
-        
+
         if ($query === null || strlen($query) < $this->searchMinimum)
         {
             throw new \InvalidArgumentException(sprintf('Give at least %d characters.', $this->searchMinimum));
         }
 
-        $result = new Records(Tags::newSearchByName($query, 50));
+        $result = new Records(User::searchCuratorsByName($query, 50));
         return $result;
     }
-    
 }
