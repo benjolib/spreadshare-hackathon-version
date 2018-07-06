@@ -3160,6 +3160,7 @@ html {
     font-size: 12px;
     letter-spacing: -0.32px;
     line-height: 16px;
+
     @media (min-width: 768px) {
       font-size: 16px;
       line-height: 21px;
@@ -3170,6 +3171,7 @@ html {
 
 .collaboration-clock {
   @include typography(8);
+
   order: 0;
   margin-top: 10px;
   margin-left: auto;
@@ -4445,14 +4447,9 @@ html {
     }
   }
   &__tagline {
-    font-family: 'Lato';
-    font-size: 15px;
-    letter-spacing: -0.36px;
+    @include typography(7);
+
     color: #9baabf;
-    @media (min-width: 768px) {
-      font-size: 22.5px;
-      letter-spacing: -0.54px;
-    }
   }
   &__subscriberCount {
     font-family: 'Roboto Mono', monospace;
