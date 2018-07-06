@@ -307,4 +307,16 @@ class Tables extends TablesEvents
         $query->setFetchMode(Db::FETCH_ASSOC);
         return $query->fetchAll() ?: [];
     }
+
+    public static function searchByName($name, $limit = 100)
+    {
+        $result = self::find([
+            "conditions" => "title LIKE :name:",
+            "columns" => "id as value, title as name",
+            "order" => "title ASC",
+            "limit" => $limit,
+            "bind" => ["name" => $name . '%'],
+        ]);
+        return $result->toArray();
+    }
 }
