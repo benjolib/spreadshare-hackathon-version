@@ -47,7 +47,7 @@
               {% endif %}
               
               <div class="re-table__list-image__upload-button"></div>
-                <div class="re-table__list-image__delete-button"></div>
+                <!-- <div class="re-table__list-image__delete-button"></div> -->
               </div>
               
               <input type="file" name="listing-image-{{ i }}" class="re-table__list-image-fileUpload" style="display: none;" />
