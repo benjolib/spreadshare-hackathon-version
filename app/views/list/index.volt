@@ -911,7 +911,8 @@
           $('.re-table__list-image--new-row').css("width", "84px")
           //img.onload = fn;
         }
-      });
+      });r
+      
 
       document.getElementById('addRowImage').onclick = function () {
         document.getElementById('new-row-fileUpload').click();
@@ -1073,6 +1074,7 @@
         document.getElementById('re-image-fileUpload').click();
       };
       document.querySelector('.re-image__delete-button').onclick = function () {
+        
         document.getElementById('re-image-fileUpload').value = "";
         var img = $('.re-image');
         img.attr('style', 'background: #f5f5f5 url() center / cover;');
@@ -1084,8 +1086,20 @@
           img.removeClass('re-table__list-image--empty');
           img.attr('style', 'background: #f5f5f5 url(' + URL.createObjectURL(this.files[0]) +
             ') center / cover;');
+            
           //img.onload = fn;
         }
+      });
+
+      $('.re-table__list-image--editing').on('change', function () {
+        // if (this.files && this.files[0]) {
+        //   var img = $(this).parents('td').find('.re-table__list-image');
+        //   img.removeClass('re-table__list-image--empty');
+        //   img.attr('style', 'background: #f5f5f5 url(' + URL.createObjectURL(this.files[0]) +
+        //     ') center / cover;');
+            
+        //   //img.onload = fn;
+        // }
       });
       $('.re-table__list-image__upload-button').on('click', function () {
         $(this).parents('td').find('.re-table__list-image-fileUpload').click();
