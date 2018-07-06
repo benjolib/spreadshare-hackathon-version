@@ -105,7 +105,7 @@
         {% endif %}
          {{ hidden_field('curators', 'placeholder':"Curators", 'value': post['curators']) }}
         <i class="sh-dropdown icon"></i>
-        <div class="default text"><b><u>Optional</u></b>  Add another person if yoou're curating in a team</div>
+        <div class="default text"><b><u>Optional</u></b>  Add another person if you're curating in a team</div>
         <div class="menu">
         {% if curatorsNames is defined %}
         {% for index, curator in curatorsNames %}
