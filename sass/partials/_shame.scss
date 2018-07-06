@@ -1867,7 +1867,9 @@ html {
       margin-right:12px;
     }
   }
-  &--header {
+  &--header.re-button {
+    @include typography(9);
+
     display: inline-flex;
     margin-left: 22px;
     margin-bottom: 0;
@@ -1875,9 +1877,6 @@ html {
     margin-right: 4px;
     margin-top: 0;
     height: 56px;
-    font-size: 16px;
-    line-height: 19px;
-    letter-spacing: 0.67px;
     background: #2dad6b;
     border-radius: 2px;
     box-shadow: none;
@@ -1957,7 +1956,6 @@ html {
       display: inline-flex;
       margin-left: 22px;
       margin-bottom: 0;
-      letter-spacing: -0.2px;
       width: 222px;
       margin-right: 0;
       margin-top: 0;
