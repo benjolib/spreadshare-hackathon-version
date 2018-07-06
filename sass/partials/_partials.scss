@@ -282,22 +282,19 @@
   //   }
   // }
   &__name {
-    font-size: 22.5px;
-    color: #2a1e3e;
-    line-height: 27px;
-    letter-spacing: -0.54px;
-    margin-bottom: 14px;
-    margin-left: 8px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: calc(100vw - 100px);
-    @media (min-width: 768px) {
-      margin-left: 0;
-      font-size: 30px;
-      line-height: 36px;
-      letter-spacing: -0.72px;
-      width: calc(50vw - 110px);
+    @include typography(5);
+
+    margin-left: 0;
+    width: calc(50vw - 110px);
+
+    @media (max-width: 767px) {
+      color: #2a1e3e;
+      margin-bottom: 14px;
+      margin-left: 8px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: calc(100vw - 100px);
     }
     @media (min-width: 1024px) {
       width: calc(33.333vw - 110px);
@@ -348,21 +345,19 @@
     }
   }
   &__description {
-    font-size: 15px;
-    color: #9baabf;
-    letter-spacing: -0.36px;
-    margin-top: 1px;
-    margin-bottom: 20px;
-    margin-left: 8px;
+    @include typography(7);
+
+    margin-top: 10px;
+    margin-left: 0;
+    margin-bottom: 24px;
     a {
       color: #2dad6b;
     }
-    @media (min-width: 768px) {
-      margin-top: 10px;
-      margin-left: 0;
-      letter-spacing: -0.48px;
-      font-size: 20px;
-      margin-bottom: 24px;
+    @media (max-width: 767px) {
+      color: #9baabf;
+      margin-top: 1px;
+      margin-bottom: 20px;
+      margin-left: 8px;
     }
   }
   .profile-card {
