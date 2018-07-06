@@ -3169,6 +3169,7 @@ html {
 }
 
 .collaboration-clock {
+  @include typography(8);
   order: 0;
   margin-top: 10px;
   margin-left: auto;
