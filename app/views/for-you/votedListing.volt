@@ -6,8 +6,10 @@
             <span class="collaboration-info__text">spreaded a listing from</span>
 <a class="collaboration-info__table-name" href="/stream/{{ listing.tableSlug ? listing.tableSlug : listing.tableId }}">{{ listing.tableName }}</a>
         </div>
+<div class="collaboration-clock">
+    <img src="/assets/images/comment-clock.svg" />{{ date('M jS H:i ',listing.getCreatedAt().getTimeStamp()) }}</div>
     </div>
-    <div class="collaboration-clock"><img src="/assets/images/comment-clock.svg" />{{ date('M jS H:i ',listing.getCreatedAt().getTimeStamp()) }}</div>
+    
 </div>
 <div class="table-scroll table-scroll--collaborations">
     <table class="re-table re-table--list" data-id="{{ listing.tableId }}">

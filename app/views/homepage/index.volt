@@ -267,7 +267,7 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
 {% set index= index+1 %} 
 
  {{ partial('partials/profile-card', [ 'id': featuredCurator['id'], 'username': featuredCurator['name'], 'avatar': featuredCurator["image"]
-, 'name': featuredCurator["name"] , 'bio': featuredCurator["tagline"] ,'type': 4 ]) }}
+, 'name': featuredCurator["name"] , 'bio': featuredCurator["tagline"] ,'type': 4, 'truncate':true ]) }}
 
 
 

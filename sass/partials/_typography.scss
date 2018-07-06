@@ -1,0 +1,151 @@
+.-Headline-Big-Style {
+  font-family: Lato;
+  font-size: 40px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: -1px;
+  text-align: left;
+  color: #2a1e3e;
+
+  @media (max-width: 767px) {
+    letter-spacing: calc(-4px / 3);
+    font-size: calc(40px * 3 / 4);
+  }
+}
+
+.-Subline-Big-Style {
+  font-family: Lato;
+  font-size: 30px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: -0.7px;
+  text-align: left;
+  color: #9baabf;
+
+  @media (max-width: 767px) {
+    letter-spacing: calc(-0.7px * 4 / 3);
+    font-size: calc(30px * 3 / 4);
+  }
+}
+
+.-Headline-Medium-Style {
+  font-family: Lato;
+  font-size: 30px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: -0.7px;
+  text-align: left;
+  color: #2a1e3e;
+
+  @media (max-width: 767px) {
+    letter-spacing: calc(-0.7px * 4 / 3);
+    font-size: calc(30px * 3 / 4);
+  }
+}
+
+.-Subline-Medium-Style {
+  font-family: Lato;
+  font-size: 22.5px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: -0.5px;
+  text-align: left;
+  color: #9baabf;
+
+  @media (max-width: 767px) {
+    letter-spacing: calc(-0.5px * 4 / 3);
+    font-size: calc(22.5px * 3 / 4);
+  }
+}
+
+.-Headline-Small-Style {
+  font-family: Lato;
+  font-size: 20px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: -0.5px;
+  text-align: left;
+  color: #2a1e3e;
+
+  @media (max-width: 767px) {
+    letter-spacing: calc(-0.5px * 4 / 3);
+    font-size: calc(20px * 3 / 4);
+  }
+}
+
+.-Bold-Text-Style {
+  font-family: Lato;
+  font-size: 15px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.33;
+  letter-spacing: -0.4px;
+  text-align: left;
+  color: #2a1e3e;
+
+  @media (max-width: 767px) {
+    letter-spacing: calc(-0.4px * 4 / 3);
+    font-size: calc(15px * 3 / 4);
+  }
+}
+
+.-Text-Style {
+  font-family: Lato;
+  font-size: 15px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.33;
+  letter-spacing: -0.4px;
+  text-align: left;
+  color: #9baabf;
+
+  @media (max-width: 767px) {
+    letter-spacing: calc(-0.4px * 4 / 3);
+    font-size: calc(15px * 3 / 4);
+  }
+}
+
+.-HEADER-Style {
+  font-family: Roboto Mono;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: -0.5px;
+  text-align: left;
+  color: #2a1e3e;
+
+  @media (max-width: 767px) {
+    letter-spacing: calc(-0.5px * 4 / 3);
+    font-size: calc(12px * 3 / 4);
+  }
+}
+
+.-Button-Style {
+  font-family: Roboto Mono;
+  font-size: 16px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #2a1e3e;
+
+  @media (max-width: 767px) {
+    font-size: calc(16px * 3 / 4);
+  }
+}
