@@ -1635,26 +1635,24 @@ html {
 }
 
 .re-heading {
-  color: #2a1e3e;
-  font-weight: bold;
-  font-size: 30px;
-  line-height: 36px;
-  letter-spacing: -0.72px;
-  margin-bottom: 1px;
-  &--list {
-    font-size: 22.5px;
-    line-height: 27px;
-    letter-spacing: -0.54px;
-    margin-bottom: 8px;
-  }
-  @media (min-width: 768px) {
-    font-size: 40px;
-    line-height: 48px;
-    letter-spacing: -0.96px;
-    margin-bottom: 2px;
+  @include typography(1);
+  @media (max-width: 767px) {
+    color: #2a1e3e;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 36px;
+    letter-spacing: -0.72px;
+    margin-bottom: 1px;
     &--list {
+      font-size: 22.5px;
+      line-height: 27px;
+      letter-spacing: -0.54px;
       margin-bottom: 8px;
     }
+  }
+  margin-bottom: 2px;
+  &--list {
+    margin-bottom: 8px;
   }
 }
 
