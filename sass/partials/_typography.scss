@@ -8,6 +8,11 @@
   letter-spacing: -1px;
   text-align: left;
   color: #2a1e3e;
+
+  @media (max-width: 767px) {
+    letter-spacing: calc(-4 / 3) px;
+    font-size: calc(40 * 3 / 4) px;
+  }
 }
 
 .-Subline-Big-Style {
@@ -20,6 +25,11 @@
   letter-spacing: -0.7px;
   text-align: left;
   color: #9baabf;
+
+  @media (max-width: 767px) {
+    letter-spacing: calc(-0.7 * 4 / 3) px;
+    font-size: calc(30 * 3 / 4) px;
+  }
 }
 
 .-Headline-Medium-Style {
@@ -32,6 +42,11 @@
   letter-spacing: -0.7px;
   text-align: left;
   color: #2a1e3e;
+
+  @media (max-width: 767px) {
+    letter-spacing: calc(-0.7 * 4 / 3) px;
+    font-size: calc(30 * 3 / 4) px;
+  }
 }
 
 .-Subline-Medium-Style {
@@ -44,6 +59,11 @@
   letter-spacing: -0.5px;
   text-align: left;
   color: #9baabf;
+
+  @media (max-width: 767px) {
+    letter-spacing: calc(-0.5 * 4 / 3) px;
+    font-size: calc(22.5 * 3 / 4) px;
+  }
 }
 
 .-Headline-Small-Style {
@@ -56,6 +76,11 @@
   letter-spacing: -0.5px;
   text-align: left;
   color: #2a1e3e;
+
+  @media (max-width: 767px) {
+    letter-spacing: calc(-0.5 * 4 / 3) px;
+    font-size: calc(20 * 3 / 4) px;
+  }
 }
 
 .-Bold-Text-Style {
@@ -68,6 +93,11 @@
   letter-spacing: -0.4px;
   text-align: left;
   color: #2a1e3e;
+
+  @media (max-width: 767px) {
+    letter-spacing: calc(-0.4 * 4 / 3) px;
+    font-size: calc(15 * 3 / 4) px;
+  }
 }
 
 .-Text-Style {
@@ -80,6 +110,11 @@
   letter-spacing: -0.4px;
   text-align: left;
   color: #9baabf;
+
+  @media (max-width: 767px) {
+    letter-spacing: calc(-0.4 * 4 / 3) px;
+    font-size: calc(15 * 3 / 4) px;
+  }
 }
 
 .-HEADER-Style {
@@ -92,6 +127,11 @@
   letter-spacing: -0.5px;
   text-align: left;
   color: #2a1e3e;
+
+  @media (max-width: 767px) {
+    letter-spacing: calc(-0.5 * 4 / 3) px;
+    font-size: calc(12 * 3 / 4) px;
+  }
 }
 
 .-Button-Style {
@@ -104,4 +144,8 @@
   letter-spacing: normal;
   text-align: left;
   color: #2a1e3e;
+
+  @media (max-width: 767px) {
+    font-size: calc(16 * 3 / 4) px;
+  }
 }
