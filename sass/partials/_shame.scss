@@ -3686,10 +3686,9 @@ html {
       }
     }
     &__date {
-      font-family: 'Roboto Mono', monospace;
-      font-size: 12px;
+      @include typography(8);
+
       color: #dee0e7;
-      letter-spacing: 0.5px;
       margin-top: 1px;
       img {
         margin-right: 2px;
@@ -3697,11 +3696,9 @@ html {
       }
     }
     &__see-all {
-      font-family: 'Roboto Mono', monospace;
-      font-weight: bold;
-      font-size: 16px;
+      @include typography(9);
+
       color: #6cc69d;
-      letter-spacing: -0.34px;
       text-align: center;
       margin-right: 10px;
       margin-top: auto;
