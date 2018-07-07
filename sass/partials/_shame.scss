@@ -3411,12 +3411,13 @@ html {
       }
     }
     input {
+      @include typography(7);
+
       width: 100%;
       border: none;
       padding: 0px 34px;
       margin-top: 4px;
       outline: none;
-      letter-spacing: -0.39px;
       z-index: 100;
       @media (min-width: 768px) {
         padding: 0 40px;
