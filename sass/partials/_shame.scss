@@ -1756,14 +1756,11 @@ html {
 }
 
 .re-button {
+  @include typography(9);
+
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Roboto Mono', monospace;
-  font-weight: bold;
-  letter-spacing: 0.5px;
-  font-size: 12px;
-  line-height: 16px;
   width: 174px;
   height: 42px;
   color: #6cc69d;
@@ -2182,32 +2179,21 @@ html {
         }
       }
       h3 {
-        font-family: 'Lato', sans-serif;
+        @include typography(3);
+
         color: #2a1e3e;
-        font-weight: 700;
-        font-size: 18px;
-        line-height: 22px;
-        letter-spacing: -0.43px;
         margin-bottom: 2px;
         @media (min-width: 768px) {
-          font-size: 24px;
-          line-height: 29px;
-          letter-spacing: -0.58px;
           margin-bottom: 3px;
         }
       }
       p {
-        font-family: 'Lato', sans-serif;
-        font-size: 12px;
-        line-height: 15px;
-        letter-spacing: -0.29px;
+        @include typography(4);
+
         word-spacing: 0.5px;
         margin-bottom: 1px;
         color: #9baabf;
         @media (min-width: 768px) {
-          font-size: 16px;
-          line-height: 19px;
-          letter-spacing: -0.39px;
           margin-bottom: 4px;
         }
       }
