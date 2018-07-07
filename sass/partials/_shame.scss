@@ -5098,14 +5098,11 @@ html {
 
 .settings-tabs-button,
 .collaborations-tabs-button {
-  font-family: 'Lato';
-  font-weight: normal;
-  font-size: 20px;
+  @include typography(4);
+
   color: #e1e1e1;
-  letter-spacing: -0.58px;
   margin-right: 25px;
   @media (min-width: 768px) {
-    font-size: 24px;
     margin-right: 30px;
   }
   &.active {
