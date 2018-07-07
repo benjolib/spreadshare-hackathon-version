@@ -5421,17 +5421,15 @@ html {
   @media (min-width: 768px) {
     width: 307px;
   }
-  height: 601px;
+  height: auto; //601px;
   display: flex;
   padding: 26px 37px;
   flex-direction: column;
   margin-top: 29px;
   div {
-    font-family: 'Roboto Mono', monospace;
-    font-size: 12px;
+    @include typography(8);
+
     color: #9baabf;
-    letter-spacing: -0.5px;
-    line-height: 32px;
     margin-bottom: -4px;
   }
   a {
@@ -5449,11 +5447,9 @@ html {
     }
   }
   .logout {
-    font-family: 'Lato', sans-serif;
-    font-size: 16px;
+    @include typography(7);
+
     color: #9baabf;
-    letter-spacing: 0.5px;
-    line-height: 32px;
   }
 }
 
