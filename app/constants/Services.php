@@ -131,6 +131,13 @@ class Services
     const ELASTICSEARCH = 'elasticSearch';
 
     /**
+     * Algolia service
+     *
+     * @definition bootstrap/Services/Algolia.php
+     */
+    const ALGOLIA = 'algolia';
+
+    /**
      * Wallet service
      *
      * @definition bootstrap/Services/Wallet.php
