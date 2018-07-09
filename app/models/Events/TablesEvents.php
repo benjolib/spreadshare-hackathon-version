@@ -35,7 +35,7 @@ abstract class TablesEvents extends AbstractTables {
             'objectID' => $this->getId(),
             'title' => $this->getTitle(),
             'tagline' => $this->getTagline(),
-            'description' => $this->getDescription() ? $this->getDescription() : "",
+            'description' => $this->getDescription(),
         ]]);
     }
 
