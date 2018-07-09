@@ -3893,11 +3893,8 @@ html {
   justify-content: space-between;
   user-select: none;
   p {
-    font-family: 'Lato';
-    font-size: 12px;
+    @include typography(7);
     color: #2a1e3e;
-    letter-spacing: -0.6px;
-    line-height: 24px;
   }
   &>div:first-of-type {
     width: 100%;
@@ -3932,12 +3929,10 @@ html {
 }
 
 .re-field__label {
+  @include typography(8);
+
   color: #697c94;
-  font-family: 'Roboto Mono', monospace;
-  font-size: 9px;
   margin-top: 6px;
-  letter-spacing: 0.38px;
-  line-height: 11px;
 }
 
 .re-field__image {
@@ -3975,13 +3970,11 @@ html {
 }
 
 .re-field__input {
+  @include typography(7);
+
   border: none;
   outline: none;
-  font-family: 'Lato', sans-serif;
   color: #2a1d3e;
-  font-weight: normal;
-  font-size: 12px;
-  letter-spacing: -0.45px;
   padding: 0px;
 }
 
@@ -4008,11 +4001,8 @@ html {
     margin-right: 15px;
   }
   .re-field__label {
-    font-size: 12px;
     margin-top: 10px;
     margin-bottom: 3px;
-    letter-spacing: 0.5px;
-    line-height: 18px;
   }
   .re-field__input {
     font-size: 16px;
@@ -5102,14 +5092,9 @@ html {
     cursor: pointer;
     white-space: nowrap;
     span {
-      font-family: 'Roboto Mono', sans-serif;
-      font-weight: bold;
-      font-size: 12px;
-      letter-spacing: -0.17px;
+      @include typography(9);
+
       padding: 5px;
-      @media (min-width: 768px) {
-        font-size: 14px;
-      }
     }
     .on {
       color: #dee0e7;
@@ -5129,15 +5114,10 @@ html {
 }
 
 .manage-subscriptions-link {
-  font-family: 'Roboto Mono', sans-serif;
-  font-weight: bold;
-  font-size: 12px;
+  @include typography(9);
+
   color: #2dad6b;
-  letter-spacing: -0.17px;
   white-space: nowrap;
-  @media (min-width: 768px) {
-    font-size: 14px;
-  }
 }
 
 .show-password {
