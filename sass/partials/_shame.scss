@@ -4489,17 +4489,12 @@ html {
 // PROFILE
 .profile-info {
   h1 {
-    font-family: 'Lato', sans-serif;
+    @include typography(1);
+
     color: #2a1e3e;
     margin: 0px 0px 16px 0px;
-    font-weight: 700;
-    font-size: 30px;
-    letter-spacing: -0.72px;
     @media (min-width: 768px) {
       margin: -2px 0 12px -2px;
-      letter-spacing: -1.5px;
-      word-spacing: 0.5px;
-      font-size: 40px;
     }
   }
   h2 {
@@ -4509,18 +4504,14 @@ html {
     letter-spacing: -0.35px;
   }
   h3 {
-    font-family: 'Lato', sans-serif;
-    font-weight: normal;
+    @include typography(2);
+
     color: #9baabf;
     max-width: 600px;
     margin-top: 0;
     margin-bottom: 20px;
-    font-size: 16px;
-    letter-spacing: -0.39px;
     min-height: 19px;
     @media (min-width: 768px) {
-      font-size: 24px;
-      letter-spacing: -0.6px;
       min-height: 29px;
     }
   }
@@ -4547,22 +4538,17 @@ html {
   }
   .status a,
   .social-links a {
+    @include typography(7);
+
     display: inline-block;
     text-decoration: none;
     text-transform: uppercase;
-    font-size: 9px;
-    letter-spacing: 0.38px;
-    @media (min-width: 768px) {
-      font-size: 12px;
-      letter-spacing: 0.5px;
-    }
   }
   .status a {
     margin: 0 12px 12px 0;
     &.status-link-green {
       color: #6cc69d;
     }
-    @media (min-width: 768px) {}
   }
   .status a span {
     font-weight: 700;
@@ -4574,7 +4560,6 @@ html {
     }
   }
   .social-links a {
-    letter-spacing: 0px;
     margin-right: 16px;
     &.social-link-green {
       color: #6cc69d;
@@ -4690,6 +4675,8 @@ html {
     }
   }
   .save-button {
+    @include typography(9);
+
     display: none;
     flex-direction: column;
     justify-content: center;
@@ -4702,8 +4689,6 @@ html {
     text-decoration: none;
     text-align: center;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
-    font-family: 'Roboto Mono', monospace;
-    font-weight: bold;
     @media (min-width: 768px) {
       display: flex;
     }
@@ -4720,6 +4705,8 @@ html {
     }
   }
   .cancel-button {
+    @include typography(9);
+
     display: none;
     flex-direction: column;
     justify-content: center;
@@ -4732,8 +4719,6 @@ html {
     text-decoration: none;
     text-align: center;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
-    font-family: 'Roboto Mono', monospace;
-    font-weight: bold;
     @media (min-width: 768px) {
       display: flex;
     }
@@ -5528,6 +5513,8 @@ html {
     }
     text-align: center;
     button {
+      @include typography(9);
+
       cursor: pointer;
       outline: none;
       margin-left: 2em;
@@ -5537,7 +5524,6 @@ html {
       border: 0;
       justify-content: center;
       align-items: center;
-      @include typography(9);
       width: 194px;
       height: 60px;
       padding: 0px 4px;
