@@ -23,9 +23,29 @@ use DS\Model\Types;
  * @version   $Version$
  * @package   DS\Model
  */
-abstract class TablesEvents
-    extends AbstractTables
-{
+abstract class TablesEvents extends AbstractTables {
+    const ALGOLIA_INDEX = 'stream';
+
+    private function pushToAlgolia()
+    {
+        $algoliaClient = $this->getDI()->get(\DS\Constants\Services::ALGOLIA);
+        $index = $algoliaClient->initIndex(self::ALGOLIA_INDEX);
+
+        $index->addObjects([[
+            'objectID' => $this->getId(),
+            'title' => $this->getTitle(),
+            'tagline' => $this->getTagline(),
+            'description' => $this->getDescription() ? $this->getDescription() : "",
+        ]]);
+    }
+
+    private function removeFromAlgolia()
+    {
+        $algoliaClient = $this->getDI()->get(\DS\Constants\Services::ALGOLIA);
+        $index = $algoliaClient->initIndex(self::ALGOLIA_INDEX);
+
+        $index->deleteObject($this->getId());
+    }
 
     /**
      * @return bool
@@ -115,8 +135,21 @@ abstract class TablesEvents
     {
         if ($this instanceof Tables) {
             TableUpdated::after($this->getOwnerUserId(), $this);
+
+            if ($this->getFlags() === TableFlags::Published) {
+                $this->pushToAlgolia();
+            }
+
+            if ($this->getFlags() === TableFlags::Unpublished) {
+                $this->removeFromAlgolia();
+            }
         }
 
         return true;
+    }
+
+    public function afterDelete()
+    {
+        $this->removeFromAlgolia();
     }
 }
