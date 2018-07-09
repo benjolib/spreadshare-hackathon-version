@@ -1661,11 +1661,9 @@ html {
     height: 23px;
   }
   input {
-    font-family: 'Lato';
+    @include typography(1);
+
     color: #2a1e3e;
-    font-weight: bold;
-    font-size: 40px;
-    letter-spacing: -0.96px;
     border: none !important;
     padding: 0 !important;
     width: 100%;
@@ -1721,11 +1719,9 @@ html {
     height: 23px;
   }
   input {
-    font-family: 'Lato';
-    font-weight: normal;
     color: #2a1e3e;
-    font-size: 20px;
-    letter-spacing: -0.9px;
+    @include typography(2);
+
     border: none !important;
     padding: 0 !important;
     width: 100%;
@@ -1994,12 +1990,9 @@ html {
     height: 23px;
   }
   input {
-    font-family: 'Lato';
-    font-weight: normal;
-    font-size: 16px;
+    @include typography(7);
+
     color: #dee0e7;
-    letter-spacing: -0.39px;
-    color: #2a1e3e;
     border: none !important;
     padding: 0 !important;
     width: 100%;
@@ -4949,6 +4942,9 @@ html {
       margin-left: 14px;
     }
   }
+  .dropdown.tags > .text.input {
+    @include typography(7);
+  }
 }
 
 .create-list-has-thumbnails {
@@ -5005,6 +5001,9 @@ html {
       margin-left: 14px;
     }
   }
+  .selection.dropdown > .default.text {
+    @include typography(7);
+  }
 }
 
 .create-list-add-related {
@@ -5030,6 +5029,9 @@ html {
       letter-spacing: -0.17px;
       margin-left: 14px;
     }
+  }
+  .selection.dropdown > .default.text {
+    @include typography(7);
   }
 }
 
@@ -5487,6 +5489,8 @@ html {
 }
 
 .create-list-copy-button {
+  @include typography(9);
+
   position: absolute;
   top: 15px;
   right: 6px;
