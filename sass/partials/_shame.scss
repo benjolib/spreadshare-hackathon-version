@@ -4278,51 +4278,33 @@ html {
       }
     }
     &__name {
-      font-family: 'Roboto Mono', monospace;
-      font-weight: bold;
+      @include typography(9);
+
       color: #252442;
-      font-size: 12px;
-      letter-spacing: -0.32px;
-      @media (min-width: 768px) {
-        letter-spacing: -0.43px;
-        font-size: 16px;
-      }
     }
     &__follow {
-      font-family: 'Roboto Mono', monospace;
-      font-weight: bold;
+      @include typography(9);
+
       color: #6cc69d;
-      font-size: 12px;
-      letter-spacing: 0.4px;
-      line-height: 16px;
       margin-right: auto;
       margin-left: 10px;
       margin-top: 3px;
       @media (min-width: 768px) {
-        font-size: 16px;
-        letter-spacing: 0.5px;
-        line-height: 21px;
         margin-top: 0;
       }
     }
     &__text {
-      font-family: 'Lato', sans-serif;
+      @include typography(7);
+
       color: #b1bbc7;
-      font-size: 12px;
-      letter-spacing: -0.32px;
-      @media (min-width: 768px) {
-        font-size: 16px;
-        letter-spacing: -0.43px;
-      }
       a {
         color: #68c79c;
       }
     }
     &__date {
-      font-family: 'Roboto Mono', monospace;
-      font-size: 12px;
+      @include typography(8);
+
       color: #dee0e7;
-      letter-spacing: 0.5px;
       margin-top: 1px;
       word-spacing: -2px;
       text-transform: uppercase;
