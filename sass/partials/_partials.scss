@@ -13,44 +13,24 @@
     }
   }
   &__name {
-    font-family: 'Roboto Mono', monospace;
-    font-weight: bold;
+    @include typography(6);
+
     color: #252442;
-    line-height: 16px;
-    font-size: 12px;
     margin-right: 10px;
-    letter-spacing: -0.33px;
     @media (min-width: 768px) {
-      font-size: 16px;
-      letter-spacing: -0.43px;
       margin-right: 14px;
-      line-height: 21px;
     }
   }
   &__follow {
-    font-family: 'Roboto Mono', monospace;
-    font-weight: bold;
+    @include typography(9);
+
     color: #6cc69d;
-    font-size: 12px;
-    letter-spacing: 0.4px;
-    line-height: 16px;
-    @media (min-width: 768px) {
-      font-size: 16px;
-      letter-spacing: 0.5px;
-      line-height: 21px;
-    }
   }
   &__bio {
+    @include typography(7);
+
     color: #b1bbc7;
-    line-height: 14px;
-    font-size: 12px;
     margin-top: 1px;
-    letter-spacing: -0.33px;
-    @media (min-width: 768px) {
-      font-size: 16px;
-      letter-spacing: -0.43px;
-      line-height: 19px;
-    }
   }
   &--type3 & {
     &__avatar {

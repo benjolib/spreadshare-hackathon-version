@@ -1759,7 +1759,7 @@ html {
   align-items: center;
   width: 174px;
   height: 42px;
-  color: #6cc69d !important;
+  color: #6cc69d;
   border: 1px solid #6cc69d;
   text-align: center;
   border-radius: 2px;
@@ -1796,10 +1796,9 @@ html {
   &--list-subscribe {
     background: #ea612d;
     border: 1px solid #ea612d;
-    color: #ffffff !important;
+    color: #ffffff;
     margin-left: 16px;
     width: 158px;
-    letter-spacing: -0.2px;
     padding-right: 16px;
     img {
       margin-right: 12px;
@@ -1811,7 +1810,6 @@ html {
     color: #ea612d !important;
     margin-left: 16px;
     width: 158px;
-    letter-spacing: -0.2px;
     padding-right: 16px;
     img {
       margin-right: 12px;
@@ -1820,7 +1818,7 @@ html {
   &--list-collaborate {
     background: #2860f5;
     border: 1px solid #2860f5;
-    color: #ffffff !important;
+    color: #ffffff;
     margin-left: 16px;
     width: 180px;
     letter-spacing: -0.2px;
@@ -1884,9 +1882,6 @@ html {
     }
   }
   @media (min-width: 768px) {
-    font-size: 16px;
-    line-height: 19px;
-    letter-spacing: 0.67px;
     width: 232px;
     height: 56px;
     margin-bottom: 12px;
@@ -1920,17 +1915,14 @@ html {
     }
     &--list-subscribe {
       width: 158px;
-      letter-spacing: -0.2px;
       padding-right: 16px;
     }
     &--list-subscribed {
       width: 158px;
-      letter-spacing: -0.2px;
-      padding-right: 16px;
+            padding-right: 16px;
     }
     &--list-collaborate {
       width: 180px;
-      letter-spacing: -0.2px;
       padding-right: 16px;
     }
     &--list-add-row {
@@ -2011,7 +2003,7 @@ html {
   margin-top: 0px;
   thead {
     th {
-      @include typography(7);
+      @include typography(8);
 
       color: #6a7c94;
       text-transform: uppercase;
@@ -2119,12 +2111,9 @@ html {
           line-height: 18px;
         }
         a {
+          @include typography(8);
           padding: 0 6px;
           color: #9baabf;
-          font-family: 'Roboto Mono', monospace;
-          font-weight: bold;
-          font-size: 9px;
-          letter-spacing: -0.22px;
           &.active {
             color: #2a1e3e !important;
           }
@@ -2439,15 +2428,11 @@ html {
       padding: 16px 0 10px 0;
     }
     &__name {
-      font-family: 'Roboto Mono', monospace;
+      @include typography(8);
       color: #6a7c94;
       margin-bottom: 7px;
-      font-size: 9px;
-      letter-spacing: 0.38px;
       @media (min-width: 768px) {
         margin-bottom: 6px;
-        font-size: 12px;
-        letter-spacing: 0.5px;
       }
     }
     &__content {
@@ -2574,16 +2559,14 @@ html {
 }
 
 .list-tab-button {
-  font-family: 'Lato', sans-serif;
+  @include typography(4);
+
   color: #e1e1e1;
-  letter-spacing: -0.58px;
   text-align: center;
-  line-height: 16px;
   padding: 20px 10px 14px 10px;
-  font-size: 16px;
   @media (min-width: 768px) {
     padding: 20px 16px;
-    font-size: 24px;
+
   }
   &.active {
     color: #2a1e3e;
@@ -4011,26 +3994,19 @@ html {
 
 // SIGN IN / SIGN UP
 .sign-in-up-pretext {
+  @include typography(3);
+
   color: #6cc69c;
-  font-family: 'Roboto Mono', monospace;
-  text-align: center;
-  font-weight: normal;
-  font-size: 10.5px; // margin-top: 75px;
-  font-weight: normal;
-  letter-spacing: 0.375px;
+
   margin-bottom: 10px;
   margin-top: calc(50vh - 200px);
 }
 
 .sign-in-up-heading {
+  @include typography(4);
+
   color: #2a1e3f;
-  font-family: 'Lato', sans-serif;
-  text-align: center;
-  font-weight: bold;
-  font-size: 21px;
   margin-bottom: 31px;
-  font-weight: bold;
-  letter-spacing: -0.506471px;
 }
 
 .sign-in-up-text {
@@ -4081,17 +4057,15 @@ html {
 }
 
 .sign-in-button {
+  @include typography(9);
+
   border-radius: 2px;
   background: #ffffff;
-  font-family: 'Roboto Mono', monospace;
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.18);
   outline: none;
   width: 232px;
   height: 42px;
-  font-size: 12px;
-  font-weight: bold;
   margin-bottom: 12px;
-  letter-spacing: 0.375px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -4134,10 +4108,9 @@ html {
 }
 
 .sign-in-privacy {
-  font-family: 'Roboto Mono', monospace;
-  font-size: 9px;
+  @include typography(7);
+
   color: #9baabf;
-  letter-spacing: 0.28px;
   text-align: center;
   margin-top: 8px;
   width: 266px;
@@ -4183,22 +4156,19 @@ html {
 }
 
 .sign-up-form-submit {
+  @include typography(9);
+
   background: #fff;
   border: 1px solid #6cc69d;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
   border-radius: 2px;
-  font-family: 'Roboto Mono', monospace;
-  font-weight: bold;
   color: #6cc69d;
-  letter-spacing: 0.5px;
   text-align: center;
   outline: none;
   width: 160px;
   height: 42px;
-  font-size: 12px;
   margin-top: 15px;
   margin-bottom: 19px;
-  letter-spacing: 0.38px;
   cursor: pointer;
 }
 
@@ -5611,17 +5581,12 @@ html {
      }
    }
   .info {
+    @include typography(7);
+
     padding-left: 20px;
-    font-family: Lato;
-    font-size: 16px;
-    font-weight: normal;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: -0.5px;
     text-align: left;
     color:white;
-     margin-top: -10px;
+    margin-top: -10px;
 
   }
 }
