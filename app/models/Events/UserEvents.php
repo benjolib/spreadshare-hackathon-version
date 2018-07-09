@@ -25,56 +25,83 @@ use Phalcon\Mvc\Model;
  * @version   $Version$
  * @package   DS\Model
  */
-abstract class UserEvents
-    extends AbstractUser
-{
-    
+abstract class UserEvents extends AbstractUser {
+    const ALGOLIA_INDEX = 'users';
+
     private $emailMinimumLength = 5;
-    
+
+    private function pushToAlgolia()
+    {
+        $algoliaClient = $this->getDI()->get(\DS\Constants\Services::ALGOLIA);
+
+        $index = $algoliaClient->initIndex(self::ALGOLIA_INDEX);
+        $index->addObjects([[
+            'objectID' => $this->getId(),
+            'name' => $this->getName(),
+            'tagline' => $this->getTagline(),
+        ]]);
+    }
+
+    private function removeFromAlgolia()
+    {
+        $algoliaClient = $this->getDI()->get(\DS\Constants\Services::ALGOLIA);
+        $index = $algoliaClient->initIndex(self::ALGOLIA_INDEX);
+
+        $index->deleteObject($this->getId());
+    }
+
     /**
      * Before create
      */
     public function beforeCreate()
     {
         $this->emailConfirmationToken = preg_replace('/[^a-zA-Z0-9]/', '', base64_encode(openssl_random_pseudo_bytes(24)));
-        
+
         $this->setConfirmed(0);
-        
+
         if (!$this->getStatus())
         {
             $this->setStatus(UserStatus::Unconfirmed);
         }
     }
-    
+
     /**
      * After create
      */
     public function afterCreate()
     {
-        
+
         (new Wallet())->setUserId($this->getId())
                       ->setTokens(0)
                       ->setContractAddress('')
                       ->setData('')
                       ->create();
-        
+
         // Create users wallet using queue
         if ($this instanceof User)
         {
             UserCreated::after($this);
         }
-        
+
         (new UserStats())->setUserId($this->getId())
                          ->create();
     }
-    
+
+    /**
+     * After save
+    */
+    public function afterSave()
+    {
+        $this->pushToAlgolia();
+    }
+
     /**
      * @return bool
      */
     public function beforeValidationOnCreate()
     {
         parent::beforeValidationOnCreate();
-        
+
         // Check if user with hande or email address already exists
         if (($user = self::findFirstByHandleOrEmail($this->getHandle(), $this->getEmail())))
         {
@@ -97,18 +124,18 @@ abstract class UserEvents
                     );
                 }
             }
-            
+
             throw new UserValidationException(
                 'Error. Please select another email address or username.',
                 'email',
                 $this->getHandle()
             );
-            
+
         }
-        
+
         return $this->beforeValidationOnUpdate();
     }
-    
+
     /**
      * @return bool
      */
@@ -142,7 +169,7 @@ abstract class UserEvents
                 'Provide a valid email address'
             );
         }
-        
+
         if (!strlen($this->getName()))
         {
             throw new UserValidationException(
@@ -152,7 +179,7 @@ abstract class UserEvents
                 'Name is empty. Provide one.'
             );
         }
-        
+
         $urlPattern = "/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i";
         if ($this->getWebsite() && !preg_match(
                 $urlPattern,
@@ -166,19 +193,19 @@ abstract class UserEvents
                 'Please provide a valid website in the following format: [http://]www.example.com'
             );
         }
-        
+
         // Check if username is given
         if (!$this->getHandle())
         {
             return false;
         }
-        
+
         // Check if email is given
         if (!$this->getEmail())
         {
             return false;
         }
-        
+
         return true;
     }
 
@@ -199,5 +226,10 @@ abstract class UserEvents
                 "bind" => [$handle, $email],
             ]
         );
+    }
+
+    public function afterDelete()
+    {
+        $this->removeFromAlgolia();
     }
 }
