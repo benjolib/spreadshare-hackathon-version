@@ -1759,7 +1759,7 @@ html {
   align-items: center;
   width: 174px;
   height: 42px;
-  color: #6cc69d;
+  color: #6cc69d !important;
   border: 1px solid #6cc69d;
   text-align: center;
   border-radius: 2px;
@@ -1787,16 +1787,16 @@ html {
   }
   &--grey {
     border: 1px solid #acb8ca;
-    color: #9baabf;
+    color: #9baabf !important;
   }
   &--light-grey {
     border: 1px solid #dee0e7;
-    color: #dee0e7;
+    color: #dee0e7 !important;
   }
   &--list-subscribe {
     background: #ea612d;
     border: 1px solid #ea612d;
-    color: #ffffff;
+    color: #ffffff !important;
     margin-left: 16px;
     width: 158px;
     letter-spacing: -0.2px;
@@ -1808,7 +1808,7 @@ html {
   &--list-subscribed {
     border: 1px solid #ea612d;
     background: #ffffff;
-    color: #ea612d;
+    color: #ea612d !important;
     margin-left: 16px;
     width: 158px;
     letter-spacing: -0.2px;
@@ -1820,7 +1820,7 @@ html {
   &--list-collaborate {
     background: #2860f5;
     border: 1px solid #2860f5;
-    color: #ffffff;
+    color: #ffffff !important;
     margin-left: 16px;
     width: 180px;
     letter-spacing: -0.2px;
@@ -1835,7 +1835,7 @@ html {
     height: 45px;
     background: #2860f5;
     border: 1px solid #2860f5;
-    color: white;
+    color: white !important;
     img {
       margin-right: 12px;
     }
@@ -1847,7 +1847,7 @@ html {
   }
   &--lists-curate-stream {
     background-color: #2F267D;
-    color: white;
+    color: white !important;
     border-color: #2F267D;
     letter-spacing: -0.33px !important;
     margin-top: 60px;
@@ -1874,7 +1874,7 @@ html {
     border-radius: 2px;
     box-shadow: none;
     border: none;
-    color: #ffffff;
+    color: #ffffff !important;
     span {
       margin-right: 16px;
       margin-left: 4px;
@@ -2011,13 +2011,10 @@ html {
   margin-top: 0px;
   thead {
     th {
-      font-family: 'Roboto Mono', monospace;
+      @include typography(7);
+
       color: #6a7c94;
       text-transform: uppercase;
-      font-weight: normal;
-      font-size: 9px;
-      letter-spacing: 0.38px;
-      line-height: 11px;
       text-align: center;
       white-space: nowrap;
       padding: 10px 6px 20px 6px;
@@ -2025,9 +2022,6 @@ html {
         display: none;
       }
       @media (min-width: 768px) {
-        font-size: 12px;
-        line-height: 16px;
-        letter-spacing: 0.5px;
         &.hide-on-small {
           display: table-cell;
         }
@@ -2052,12 +2046,9 @@ html {
       }
     }
     td {
-      font-family: 'Lato', sans-serif;
-      font-size: 16px;
-      line-height: 19px;
+      @include typography(7);
+
       color: #6a7c94;
-      font-weight: normal;
-      letter-spacing: 0.5px;
       border: 1px solid #f8f8fb;
       border-width: 1px 0 1px 0;
       padding: 19px 6px 19px 6px;
@@ -2237,21 +2228,16 @@ html {
     }
     tbody {
       td {
+        @include typography(7);
+
         height: 86px;
-        font-family: 'Lato', sans-serif;
         color: #2a1e3e;
         padding-top: 8px;
         padding-bottom: 8px;
         padding-left: 0;
         padding-right: 24px;
         text-align: left;
-        font-size: 12px;
-        line-height: 15px;
-        letter-spacing: -0.32px;
         @media (min-width: 768px) {
-          font-size: 16px;
-          line-height: 19px;
-          letter-spacing: -0.43px;
           padding-top: 16px;
           padding-bottom: 36px;
           padding-right: 32px;
@@ -3504,6 +3490,8 @@ html {
       position: relative;
       justify-content: flex-end;
       .re-button {
+        @include typography(9);
+
         width: 152px;
         margin-bottom: 0;
         margin-left: 18px;
