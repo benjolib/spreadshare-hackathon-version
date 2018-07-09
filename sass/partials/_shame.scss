@@ -1114,16 +1114,12 @@ html {
   margin-left: auto;
   position: relative;
   &__text {
+    @include typography(9);
+
     position: absolute;
-    font-family: 'Roboto Mono';
-    font-weight: bold;
-    font-size: 14px;
     color: #50bc93;
-    letter-spacing: -0.38px;
     text-align: right;
     right: 35px;
-    line-height: 32px;
-    font-size: 12px;
   }
   @media (min-width: 768px) {
     width: 60px;
@@ -1157,12 +1153,9 @@ html {
     height: 120px;
   }
   a {
-    font-family: 'Roboto Mono', monospace;
-    font-weight: bold;
-    font-size: 11px;
+    @include typography(9);
+
     color: #6a7c94;
-    line-height: 24px;
-    letter-spacing: -0.28px;
     &.warning-color {
       color: #fb7977;
     }
@@ -1178,11 +1171,6 @@ html {
     padding-left: 31px;
     &--tall {
       height: 152px;
-    }
-    a {
-      font-size: 14px;
-      line-height: 36px;
-      letter-spacing: -0.38px;
     }
     img {
       height: auto;
