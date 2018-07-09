@@ -6,10 +6,10 @@
 /**
  * Container
  */
+
 html {
   zoom: 85%;
 }
-
 
 .u-flex {
   display: flex !important;
@@ -1635,27 +1635,19 @@ html {
 }
 
 .re-heading {
-  color: #2a1e3e;
-  font-weight: bold;
-  font-size: 30px;
-  line-height: 36px;
-  letter-spacing: -0.72px;
-  margin-bottom: 1px;
-  &--list {
-    font-size: 22.5px;
-    line-height: 27px;
-    letter-spacing: -0.54px;
-    margin-bottom: 8px;
-  }
-  @media (min-width: 768px) {
-    font-size: 40px;
-    line-height: 48px;
-    letter-spacing: -0.96px;
-    margin-bottom: 2px;
+  @include typography(1);
+  @media (max-width: 767px) {
+    color: #2a1e3e;
+    line-height: 36px;
+    margin-bottom: 1px;
     &--list {
+      font-size: 22.5px;
+      line-height: 27px;
+      letter-spacing: -0.54px;
       margin-bottom: 8px;
     }
   }
+  margin-bottom: 2px;
 }
 
 .re-heading-input {
@@ -1692,35 +1684,29 @@ html {
 }
 
 .re-subheading {
-  color: #9baabf;
-  font-weight: normal;
-  font-size: 22.5px;
-  line-height: 0px;
-  letter-spacing: -0.54px;
-  margin-bottom: 8px;
+  @include typography(2);
+  @media (max-width: 767px) {
+    color: #9baabf;
+    margin-bottom: 8px;
+    &--list {
+      font-size: 15px;
+      line-height: 18px;
+      letter-spacing: -0.36px;
+      margin-bottom: 15px;
+    }
+  }
   a {
     color: #2dad6b;
   }
+  margin-bottom: 10px;
   &--list {
-    font-size: 15px;
-    line-height: 18px;
-    letter-spacing: -0.36px;
-    margin-bottom: 15px;
+    font-size: 24px;
+    line-height: 29px;
+    letter-spacing: -0.56px;
+    margin-bottom: 17px;
   }
   &--button-below {
-    margin-bottom: 23px;
-  }
-  @media (min-width: 768px) {
-    font-size: 30px;
-    line-height: 0px;
-    letter-spacing: -0.72px;
-    margin-bottom: 10px;
-    &--list {
-      font-size: 24px;
-      line-height: 29px;
-      letter-spacing: -0.56px;
-      margin-bottom: 17px;
-    }
+    margin-bottom: 22px;
   }
 }
 
@@ -1878,10 +1864,11 @@ html {
       margin-bottom: -15px !important;
     }
     img {
-      margin-right:12px;
+      margin-right: 12px;
     }
   }
-  &--header {
+  &--header.re-button {
+    @include typography(9);
     display: inline-flex;
     margin-left: 22px;
     margin-bottom: 0;
@@ -1889,9 +1876,6 @@ html {
     margin-right: 4px;
     margin-top: 0;
     height: 56px;
-    font-size: 16px;
-    line-height: 19px;
-    letter-spacing: 0.67px;
     background: #2dad6b;
     border-radius: 2px;
     box-shadow: none;
@@ -1971,7 +1955,6 @@ html {
       display: inline-flex;
       margin-left: 22px;
       margin-bottom: 0;
-      letter-spacing: -0.2px;
       width: 222px;
       margin-right: 0;
       margin-top: 0;
@@ -2318,10 +2301,10 @@ html {
             border: 0px solid #ced3da;
             border-radius: 4px;
             cursor: pointer;
-            width:24px;
-            height:24px;
-              box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .18);
-              margin-top:15px;
+            width: 24px;
+            height: 24px;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .18);
+            margin-top: 15px;
           }
           &--new-row-type2 {
             border: none;
@@ -2675,13 +2658,12 @@ html {
 
 .empty-discussion {
   margin: 0;
- 
   .nocomments {
     display: flex;
-     max-width: 670px;
-     .image {
-       margin-top: 4px;
-     }
+    max-width: 670px;
+    .image {
+      margin-top: 4px;
+    }
     .info {
       padding-left: 15px;
       .header {
@@ -2754,7 +2736,6 @@ html {
   background: white;
   background-color: white;
   display: none;
-
   /* optional: just make scrollbar invisible */
 }
 
@@ -2847,8 +2828,7 @@ html {
     font-size: 16px;
     letter-spacing: -0.5px;
     outline: none;
-    color:#b1bbc7;
-
+    color: #b1bbc7;
     letter-spacing: -.43px;
     line-height: 19px;
     @media (min-width: 768px) {
@@ -2888,10 +2868,8 @@ html {
     display: none;
   }
   div {
-    font-family: 'Lato', monospace;
-    color: #b1bbc7;
-    letter-spacing: -0.29px;
-    line-height: 16px;
+    @include typography(6);
+    color: #b1bbc7; // TODO: ask if this should be deleted -> new color is kinda purple
   }
   &--discussion {
     min-width: 24px;
@@ -3118,7 +3096,7 @@ html {
 .collaboration-info {
   margin-bottom: 8px;
   line-height: 16px;
-  margin-top:30px;
+  margin-top: 30px;
   width: 100%;
   @media (min-width: 768px) {
     margin-bottom: 10px;
@@ -3140,18 +3118,17 @@ html {
     }
   }
   &__user-name {
-
     font-family: 'Lato';
     font-weight: bold;
     color: #252442;
     margin-right: 4px;
     font-size: 12px;
     letter-spacing: -0.32px;
-   line-height: 28px;
+    line-height: 28px;
     @media (min-width: 768px) {
       margin-right: 7px;
       font-size: 16px;
-       line-height: 36px;
+      line-height: 36px;
       letter-spacing: -0.43px;
     }
   }
@@ -3185,24 +3162,19 @@ html {
 }
 
 .collaboration-clock {
-  font-family: 'Roboto Mono', monospace;
-  font-size: 10px;
+  @include typography(8);
+  order: 0;
+  margin-top: 10px;
+  margin-left: auto;
+  word-spacing: -4px;
+  margin-bottom: 0;
   color: #dee0e7;
-  letter-spacing: -0.2px;
-  line-height: 16px;
   white-space: nowrap;
   text-transform: uppercase;
-  word-spacing: -3px;
-  margin-right: 3px;
-  order: -1;
-  margin-bottom: 0px;
-  @media (min-width: 768px) {
-    order: 0;
-    margin-top: 10px;
-    margin-left: auto;
-    font-size: 12px;
-    letter-spacing: 0.5px;
-    word-spacing: -4px;
+  @media (max-width: 767px) {
+    word-spacing: -3px;
+    margin-right: 3px;
+    order: -1;
     margin-bottom: 0;
   }
   img {
@@ -3352,11 +3324,8 @@ html {
   }
   &__item {
     display: none;
-    font-family: 'Roboto Mono', monospace;
-    font-weight: bold;
-    font-size: 16px;
+    @include typography(9);
     color: #697c95;
-    letter-spacing: -0.98px;
     padding: 24px 6px 20px 6px;
     margin-right: 32px;
     align-items: center;
@@ -4467,14 +4436,8 @@ html {
     }
   }
   &__tagline {
-    font-family: 'Lato';
-    font-size: 15px;
-    letter-spacing: -0.36px;
+    @include typography(7);
     color: #9baabf;
-    @media (min-width: 768px) {
-      font-size: 22.5px;
-      letter-spacing: -0.54px;
-    }
   }
   &__subscriberCount {
     font-family: 'Roboto Mono', monospace;
@@ -5338,8 +5301,7 @@ html {
     button {
       width: 300px;
       cursor: pointer;
-      outline: none;
-      // margin-left: 2em;
+      outline: none; // margin-left: 2em;
       // margin-right: 2.5em;
       display: flex;
       background: #ffffff;
@@ -5363,7 +5325,7 @@ html {
       box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.082);
       background: transparent;
       color: white;
-       border-top: 1px solid rgba(255, 255, 255, 0.561);
+      border-top: 1px solid rgba(255, 255, 255, 0.561);
       border-right: 1px solid rgba(255, 255, 255, 0.561);
       border-bottom: 1px solid rgba(255, 255, 255, 0.561);
       border-left: 1px solid rgba(255, 255, 255, 0.561);
@@ -5449,7 +5411,7 @@ html {
 }
 
 .user-dropdown2 {
-  // 
+  //
   width: calc(100% - 10px);
   @media (min-width: 768px) {
     width: 307px;
@@ -5593,17 +5555,11 @@ html {
     justify-content: center;
     color: #9013fe;
     .heading {
-      font-weight: bold;
-      font-size: 30px;
-      line-height: 36px;
-      letter-spacing: -0.72px;
+      @include typography(3);
       margin-bottom: 1px;
     }
     .subheading {
-      font-weight: 400;
-      font-size: 22.5px;
-      line-height: 27px;
-      letter-spacing: -0.54px;
+      @include typography(4);
       margin-bottom: 8px;
     }
   }
@@ -5627,15 +5583,9 @@ html {
       border: 0;
       justify-content: center;
       align-items: center;
-      font-family: 'Roboto Mono', monospace;
-      font-weight: bold;
-      letter-spacing: 0.5px;
-      font-size: 16px;
-      line-height: 16px;
+      @include typography(9);
       width: 194px;
       height: 60px;
-      color: #9722ff;
-      text-align: center;
       padding: 0px 4px;
       box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.18);
     }
@@ -5688,20 +5638,20 @@ html {
   text-align: center;
   font: 15px 'Lato';
 }
+
 .button-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top:15px;
+  padding-top: 15px;
   padding-bottom: 5px;
   padding-left: 5px;
   padding-right: 25px;
- 
   width: 100%;
-   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .18);
-   border-radius: 4px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .18);
+  border-radius: 4px;
   &__orange {
-     margin-right: 10px;
+    margin-right: 10px;
     background-color: #ea612d;
     .re-button {
       width: 260px;
@@ -5719,27 +5669,25 @@ html {
       color: #2C60EF;
     }
     .info a {
-        color: white !important;
-      }
-    
+      color: white !important;
+    }
   }
-   &__white {
-     background-color: white;
-     color: #ea612d;
-      margin-right: 10px;
-     .re-button {
-       width: 260px;
-       background-color: white;
-       color: #ea612d;
-
-     }
-     .info {
-       color: #ea612d !important;
-       a {
-         color: #ea612d !important;
-       }
-     }
-   }
+  &__white {
+    background-color: white;
+    color: #ea612d;
+    margin-right: 10px;
+    .re-button {
+      width: 260px;
+      background-color: white;
+      color: #ea612d;
+    }
+    .info {
+      color: #ea612d !important;
+      a {
+        color: #ea612d !important;
+      }
+    }
+  }
   .info {
     padding-left: 20px;
     font-family: Lato;
@@ -5750,25 +5698,27 @@ html {
     line-height: normal;
     letter-spacing: -0.5px;
     text-align: left;
-    color:white;
-     margin-top: -10px;
-    
+    color: white;
+    margin-top: -10px;
   }
 }
-.list-actions{
+
+.list-actions {
   display: flex;
-  justify-content: space-between;
- // margin: 10px;
+  justify-content: space-between; // margin: 10px;
 }
-.bottom{
+
+.bottom {
   margin-bottom: 100px;
 }
 
 .addedby {
-  min-width:350px !important;
-  min-height: 100px !important;
-  padding-top:14px;
-  padding-left:20px;
+  position: absolute;
+  min-width: 350px !important;
+  min-height: 250px !important;
+  padding-top: 25px;
+  background: white;
+  top: -140px;
   .header {
     font-family: Lato;
     font-size: 15px;
@@ -5779,39 +5729,60 @@ html {
     letter-spacing: -0.4px;
     text-align: left;
     color: #9baabf;
+    background: white;
   }
   .date {
-    margin-top: 5px;
+    margin-bottom: 25px;
+  }
+  .request-remove {
+    font-family: Roboto Mono;
+    font-size: 16px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #2a1e3e;
+    position:absolute;
+    left: 0;
+    top: 200px;
+    height: 50px;
+    width: 100%;
+   
+    background: #F87A7B;
+    padding-left:70px;
+    padding-top:10px;
+    a {
+      color: white;
+    }
   }
   .content {
-    padding-top:16px;
-    
-    a{
-     font-family: Lato;
-     font-size: 15px;
-     font-weight: bold;
-     font-style: normal;
-     font-stretch: normal;
-     line-height: 1.33;
-     letter-spacing: -0.4px;
-     text-align: left;
-     color: #2a1e3e;
+    padding-top: 10px;
+    a {
+      font-family: Lato;
+      font-size: 15px;
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.33;
+      letter-spacing: -0.4px;
+      text-align: left;
+      color: #2a1e3e;
     }
-     font-family: Lato;
-     font-size: 15px;
-     font-weight: bold;
-     font-style: normal;
-     font-stretch: normal;
-     line-height: 1.33;
-     letter-spacing: -0.4px;
-     text-align: left;
-     color: #2a1e3e;
-    
-    img{
-      width:35px;
-      height:35px;
+    font-family: Lato;
+    font-size: 15px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.33;
+    letter-spacing: -0.4px;
+    text-align: left;
+    color: #2a1e3e;
+    img {
+      width: 35px;
+      height: 35px;
       border-radius: 50%;
-      margin-right:5px;
+      margin-right: 5px;
     }
   }
 }
