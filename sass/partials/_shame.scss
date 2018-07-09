@@ -5593,13 +5593,8 @@ html {
   padding-top:14px;
   padding-left:20px;
   .header {
-    font-family: Lato;
-    font-size: 15px;
-    font-weight: normal;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: 1.33;
-    letter-spacing: -0.4px;
+    @include typography(8);
+
     text-align: left;
     color: #9baabf;
   }
@@ -5609,24 +5604,11 @@ html {
   .content {
     padding-top:16px;
 
-    a{
-     font-family: Lato;
-     font-size: 15px;
-     font-weight: bold;
-     font-style: normal;
-     font-stretch: normal;
-     line-height: 1.33;
-     letter-spacing: -0.4px;
-     text-align: left;
-     color: #2a1e3e;
+    a {
+      @include typography(7);
+      text-align: left;
+      color: #2a1e3e;
     }
-     font-family: Lato;
-     font-size: 15px;
-     font-weight: bold;
-     font-style: normal;
-     font-stretch: normal;
-     line-height: 1.33;
-     letter-spacing: -0.4px;
      text-align: left;
      color: #2a1e3e;
 
