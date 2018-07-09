@@ -7,7 +7,7 @@
 
 {% block content %}
   <div class="re-page">
-    <div class="u-flex u-sm-flexCol u-md-flexRow u-flexJustifyBetween u-md-flexAlignItemsEnd lists-page-space">
+    <div class="u-flex u-sm-flexCol u-md-flexRow u-flexJustifyBetween lists-page-space">
       <div>
         <h1 class="re-heading">About</h1>
         <h2 class="re-subheading re-subheading--button-below">All things Spreadshare.</h2>
@@ -104,10 +104,10 @@
 </tr>
 
     </table>
-    
+
   </div>
 {% endblock %}
-  
+
 {% block scripts %}
   <script type="text/javascript">
     $(document).ready(function () {

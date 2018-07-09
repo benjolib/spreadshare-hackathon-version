@@ -7,7 +7,7 @@
     <div class="re-image re-image--create-list"
       style="{{ imageStyle }}">
       <div class="re-image__upload-button"></div>
-       <div class="re-image__delete-button" style="display:none"></div> 
+       <!-- <div class="re-image__delete-button" style="display:none"></div>  -->
     </div>
     <input type="file" name="image" id="re-image-fileUpload" style="display: none;" />
     
@@ -105,7 +105,7 @@
         {% endif %}
          {{ hidden_field('curators', 'placeholder':"Curators", 'value': post['curators']) }}
         <i class="sh-dropdown icon"></i>
-        <div class="default text"><b><u>Optional</u></b>  Add another person if yoou're curating in a team</div>
+        <div class="default text"><b><u>Optional</u></b>  Add another person if you're curating in a team</div>
         <div class="menu">
         {% if curatorsNames is defined %}
         {% for index, curator in curatorsNames %}
@@ -344,15 +344,15 @@ $("body").mouseup(function(e){
     document.querySelector('.re-image__upload-button').onclick = function () {
       document.getElementById('re-image-fileUpload').click();
     };
-    document.querySelector('.re-image__delete-button').onclick = function () {
-      if(document.getElementById('re-image-fileUpload').value != ""){
-            document.getElementById('re-image-fileUpload').value = "";
-            var img = $('.re-image');
-            img.attr('style', '');
-      }
+    // document.querySelector('.re-image__delete-button').onclick = function () {
+    //   if(document.getElementById('re-image-fileUpload').value != ""){
+    //         document.getElementById('re-image-fileUpload').value = "";
+    //         var img = $('.re-image');
+    //         img.attr('style', '');
+    //   }
       
       
-    };
+    // };
 
     document.querySelector('#create-list-fileUpload').addEventListener('change', function () {
       $('#createListFrom').submit();
@@ -485,9 +485,12 @@ $("body").mouseup(function(e){
 
     $('.re-table__list-image-fileUpload').on('change', function () {
       if (this.files && this.files[0]) {
+        
         var img = $(this).parents('td').find('.re-table__list-image');
         img.removeClass('re-table__list-image--empty');
         img.attr('style', 'background: #f5f5f5 url(' + URL.createObjectURL(this.files[0]) + ') center / cover;');
+        console.log("where", img.find('img'))
+        img.find('img')[0].setAttribute("style", "visibility:hidden;");
         //img.onload = fn;
       }
     });

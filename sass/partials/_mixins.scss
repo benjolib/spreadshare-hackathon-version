@@ -35,3 +35,24 @@
   }
 }
 
+@mixin typography($type) {
+  @if $type == 1 {
+    @extend .-Headline-Big-Style;
+  } @else if $type == 2 {
+    @extend .-Subline-Big-Style;
+  } @else if $type == 3 {
+    @extend .-Headline-Medium-Style;
+  } @else if $type == 4 {
+    @extend .-Subline-Medium-Style;
+  } @else if $type == 5 {
+    @extend .-Headline-Small-Style;
+  } @else if $type == 6 {
+    @extend .-Bold-Text-Style;
+  } @else if $type == 7 {
+    @extend .-Text-Style;
+  } @else if $type == 8 {
+    @extend .-HEADER-Style;
+  } @else if $type == 9 {
+    @extend .-Button-Style;
+  }
+}

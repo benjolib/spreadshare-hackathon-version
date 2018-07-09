@@ -279,7 +279,18 @@
             <div class="shadowcontain"></div>
           </td>
           <td>
+            <div class="re-table__list-image__upload-button"></div>
             <div class="re-table__list-image re-table__list-image--new-row" id="addRowImage"></div>
+
+            <!-- <div class="re-table__list-image re-table__list-image--editing" style="background: #f5f5f5 center / cover;">           
+              
+              <div class="re-table__list-image__upload-button"></div>
+                            
+              <div class="re-table__list-image__upload-button"></div>
+                <div class="re-table__list-image__delete-button"></div>
+              </div> -->
+
+
             <input type="file" name="image" id="new-row-fileUpload" style="display: none;" />
 
           </td>
@@ -289,7 +300,7 @@
 
               <textarea onmouseover="javascript:$('.e{{i}}{{index}}').css('visibility','visible');" ; onmouseout="javascript:$('.e{{i}}{{index}}').css('visibility', 'hidden');"
                 id="{{i}}" placeholder="{{ column.title }}" rows="1" class="edit icon cell-input-sizing d{{i}}{{index}}"></textarea>
-              <i id="{{i}}" class="edit icon green e{{i}}{{index}}" style="cursor: pointer;visibility: hidden;" onclick="console.log($(this).prev().prev());javascript:$('#d{{i}}{{index}}').focus();"></i>
+              <i id="{{i}}" class="pencil icon blue e{{i}}{{index}}" style="cursor: pointer;visibility: hidden;" onclick="console.log($(this).prev().prev());javascript:$('#d{{i}}{{index}}').focus();"></i>
             </div>
           </td>
 
@@ -540,12 +551,22 @@
           {% for subscriber in tablemodel.tableSubscription %}
           <div class="list-tab-content-subscribers__card">
             {{ partial('partials/profile-card', [ 'id': subscriber.user.id, 'username': subscriber.user.handle, 'avatar': subscriber.user.image,
-            'name': subscriber.user.name, 'bio': subscriber.user.tagline, 'type': 10, 'truncate': true ]) }}
+            'name': subscriber.user.name, 'bio': subscriber.user.tagline, 'type': 10]) }}
           </div>
           {% else %}
-          <div class="empty-subscribers">
-            No Subscribers
+          <div class="empty-discussion">
+          <div class="nocomments">
+            <div class="image">
+              <img src="/assets/images/9-0/cat.png" />
+            </div>
+            <div class="info">
+              <div class="header">Nothing here yer. Pioneers wanted!</div>
+              <div class="subheader">The person who follows the crowd will usually go no further than the crowd. The person who walks alone is likely
+                to find himself in places no one has ever seen before (A. Einstein)
+              </div>
+            </div>
           </div>
+        </div>
           {% endfor %}
         </div>
       </div>
@@ -559,8 +580,18 @@
           'name': contributor.users.name, 'bio': contributor.users.tagline, 'type': 10, 'truncate': true ]) }}
         </div>
         {% else %}
-        <div class="empty-collaborators">
-          Be the first one to collaborate on this Stream
+        <div class="empty-discussion">
+          <div class="nocomments">
+            <div class="image">
+              <img src="/assets/images/9-0/cat.png" />
+            </div>
+            <div class="info">
+              <div class="header">Nothing here yer. Pioneers wanted!</div>
+              <div class="subheader">The person who follows the crowd will usually go no further than the crowd. The person who walks alone is likely
+                to find himself in places no one has ever seen before (A. Einstein)
+              </div>
+            </div>
+          </div>
         </div>
         {% endfor %}
       </div>
@@ -568,8 +599,18 @@
 
     <div class="list-tab-content list-tab-content-activity" style="display: none;">
       <div class="list-tabs__inner-padded">
-        <div class="empty-activity">
-          No activity yet. Be the first one to collaborate
+        <div class="empty-discussion">
+          <div class="nocomments">
+            <div class="image">
+              <img src="/assets/images/9-0/cat.png" />
+            </div>
+            <div class="info">
+              <div class="header">Nothing here yer. Pioneers wanted!</div>
+              <div class="subheader">The person who follows the crowd will usually go no further than the crowd. The person who walks alone is likely
+                to find himself in places no one has ever seen before (A. Einstein)
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -866,9 +907,12 @@
         if (this.files && this.files[0]) {
           var img = document.querySelector('#addRowImage');
           img.style = 'background: #f5f5f5 url(' + URL.createObjectURL(this.files[0]) + ') center / cover;';
+          $('.re-table__list-image--new-row').css("height","84px")
+          $('.re-table__list-image--new-row').css("width", "84px")
           //img.onload = fn;
         }
-      });
+      });r
+      
 
       document.getElementById('addRowImage').onclick = function () {
         document.getElementById('new-row-fileUpload').click();
@@ -1030,6 +1074,7 @@
         document.getElementById('re-image-fileUpload').click();
       };
       document.querySelector('.re-image__delete-button').onclick = function () {
+        
         document.getElementById('re-image-fileUpload').value = "";
         var img = $('.re-image');
         img.attr('style', 'background: #f5f5f5 url() center / cover;');
@@ -1041,8 +1086,20 @@
           img.removeClass('re-table__list-image--empty');
           img.attr('style', 'background: #f5f5f5 url(' + URL.createObjectURL(this.files[0]) +
             ') center / cover;');
+            
           //img.onload = fn;
         }
+      });
+
+      $('.re-table__list-image--editing').on('change', function () {
+        // if (this.files && this.files[0]) {
+        //   var img = $(this).parents('td').find('.re-table__list-image');
+        //   img.removeClass('re-table__list-image--empty');
+        //   img.attr('style', 'background: #f5f5f5 url(' + URL.createObjectURL(this.files[0]) +
+        //     ') center / cover;');
+            
+        //   //img.onload = fn;
+        // }
       });
       $('.re-table__list-image__upload-button').on('click', function () {
         $(this).parents('td').find('.re-table__list-image-fileUpload').click();

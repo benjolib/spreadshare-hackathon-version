@@ -1,6 +1,7 @@
 <?php
 namespace DS\Model;
 
+use DS\Model\DataSource\UserRoles;
 use Phalcon\Db;
 use DS\Constants\Paging;
 use Phalcon\Mvc\Model\Query;
@@ -449,5 +450,16 @@ class User extends UserEvents {
                 'role' => $role
             ]
         ]);
+    }
+
+    public static function searchCuratorsByName($name, $limit = 100)
+    {
+        return self::find([
+            "conditions" => "name like :name: AND roles & :role: = :role:",
+            "columns" => "id as value, name",
+            "order" => "name ASC",
+            "limit" => $limit,
+            "bind" => ["name"=>$name."%", "role"=>UserRoles::Curator],
+        ])->toArray();
     }
 }
