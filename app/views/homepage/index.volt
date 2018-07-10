@@ -217,7 +217,7 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
         Request custom stream - curated by expert, in time & budget.
       </div>
     </div>
-    <div class="action">
+    <div class="action u-sm-flexWrap u-sm-flexCol u-md-flexRow u-sm-flexGrow2 u-flexAlignItemsCenter">
       <button onclick="window.location.href='/'" :=""> Request a List </button>
       <button onclick="window.location.href='/'" :="" class="transparent"> Earn money as researcher</button>
     </div>
