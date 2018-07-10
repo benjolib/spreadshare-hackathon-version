@@ -1,17 +1,13 @@
 {% for subscription in subscriptions %}
-    {% switch subscription.type %}
-    {% case 'D' %}
+    {% if subscription.type == 'D' %}
         {% set type='Daily' %}
-    {% break %}
-    {% case 'W' %}
-        {% set type='Weekly' %}
-    {% break %}
-    {% case 'M' %}
+    {% endif %}
+    {% if subscription.type == 'W' %}
+            {% set type='Weekly' %}
+    {% endif %}
+    {% if subscription.type == 'M' %}
         {% set type='Monthly' %}
-    {% break %}
-    {% default %}
-        {% set type=subscription.type %}
-    {% endswitch %}
+    {% endif %}
     <tr>
         <td>
             {# {% if isAjax %}<input class="moreToLoad" type="hidden" value="{{ moreToLoad }}" />{% endif %} #}
