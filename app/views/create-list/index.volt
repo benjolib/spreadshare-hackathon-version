@@ -149,7 +149,7 @@
       {% else %}
         <div class="create-list-tab-buttons u-flex extra-small-gutter">
           <a href="#" class="re-button re-button--full-width extra-small-margin create-list-tab-button create-list-tab-button-copy">Copy Paste content from a site</a>
-          <a href="#" class="re-button re-button--grey re-button--full-width extra-small-margin create-list-tab-button create-list-tab-button-import">Upload your list as a CSV file</a>
+          <a href="#" class="re-button re-button--grey re-button--full-width extra-small-margin create-list-tab-button create-list-tab-button-import">Upload your list from a CSV file</a>
         </div>
       {% endif %}
         <div class="create-list-tab-content create-list-tab-content-copy">
