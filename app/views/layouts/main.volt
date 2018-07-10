@@ -52,7 +52,7 @@
   <section class="main">
 
     <div class="feedback">
-      <div class="title">Shape or product</div>
+      <div class="title">Shape our product</div>
       <div class="content">Tell us about feature ideas and bugs you found</div>
     </div>
 
@@ -76,7 +76,6 @@
   {#
   <a class="button green found-a-bug" href="https://betterresearch.typeform.com/to/o3W0BI" target="_blank">Report a Bug 🐞</a> #}
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
   <script type="text/javascript" src="/js/api.js"></script>
   <script type="text/javascript" src="/js/jquery.sticky-sidebar.min.js"></script>

@@ -64,7 +64,7 @@
 
       
         <i class="dropdown icon"></i>
-        <div class="default text input">Add at least 3 tags</div>
+        <div class="default text input">Add at least 1 tag</div>
         <div class="menu">
         {% if tagsNames is defined %}
         {% for index, tag in tagsNames %}
@@ -149,7 +149,7 @@
       {% else %}
         <div class="create-list-tab-buttons u-flex extra-small-gutter">
           <a href="#" class="re-button re-button--full-width extra-small-margin create-list-tab-button create-list-tab-button-copy">Copy Paste content from a site</a>
-          <a href="#" class="re-button re-button--grey re-button--full-width extra-small-margin create-list-tab-button create-list-tab-button-import">Upload your list as a CSV file</a>
+          <a href="#" class="re-button re-button--grey re-button--full-width extra-small-margin create-list-tab-button create-list-tab-button-import">Upload your list from a CSV file</a>
         </div>
       {% endif %}
         <div class="create-list-tab-content create-list-tab-content-copy">
@@ -266,10 +266,14 @@ $("body").mouseup(function(e){
       return false;
     }
     })
-
-     if(tags.value.split(",").map(Number).length >= 3) {
+    
+    console.log(tags.value.split(",").map(Number).length)
+ if(tags.value.split(",").map(Number).length > 0 && tags.value) {
        $('.tagschecked').show()
             $('.tagsdisabled').hide()
+     }else {
+       $('.tagschecked').hide()
+             $('.tagsdisabled').show()
      }
    
      if(document.getElementById("name").value.length > 3) {
@@ -284,10 +288,7 @@ $("body").mouseup(function(e){
        $('.descchecked').show()
             $('.descdisabled').hide()
      }
-     if(tags.value.split(",").map(Number).length >= 3) {
-       $('.tagschecked').show()
-            $('.tagsdisabled').hide()
-     }
+    
 
     $('.ui.input input').on('input', function(e) { 
       console.log(e.target.name, e.target.value.length)
@@ -324,7 +325,7 @@ $("body").mouseup(function(e){
      });
     $('.ui.multiple').on('change', function(e) { 
       console.log("tag",tags.value.split(",").map(Number).length)
-        if(tags.value.split(",").map(Number).length >=3){
+        if(tags.value.split(",").map(Number).length > 0){
             $('.tagschecked').show()
             $('.tagsdisabled').hide()
         }else {
@@ -362,7 +363,7 @@ $("body").mouseup(function(e){
       var vtitle = document.getElementById("name").value.length > 3 ? true : false
       var vtagline = document.getElementById("tagline").value.length > 3 ? true : false
       var vdescription = document.getElementById("tagline").value.length > 3 ? true : false
-      var vtags = document.getElementById("tags").value.split(",").map(Number).length >= 3 ? true : false
+      var vtags = document.getElementById("tags").value.split(",").map(Number).length > 0 ? true : false
       if (vimage && vtitle && vtagline && vdescription && vtags) {
        document.getElementById('create-list-fileUpload').click();
       } else {
@@ -396,7 +397,7 @@ $("body").mouseup(function(e){
       var vtitle = document.getElementById("name").value.length > 3 ? true : false
       var vtagline = document.getElementById("tagline").value.length > 3 ? true : false
       var vdescription = document.getElementById("tagline").value.length > 3 ? true : false
-      var vtags = document.getElementById("tags").value.split(",").map(Number).length >= 3 ? true : false
+      var vtags = document.getElementById("tags").value.split(",").map(Number).length > 0 ? true : false
       var vcopy = document.getElementById("copy").value.length > 3 ? true : false
       if (vimage && vtitle && vtagline && vdescription && vtags && vcopy) {
         $('#createListFrom').submit();
