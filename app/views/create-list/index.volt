@@ -267,7 +267,7 @@ $("body").mouseup(function(e){
     }
     })
 
-     if(tags.value.split(",").map(Number).length >= 3) {
+     if(tags.value.split(",").map(Number).length >= 1) {
        $('.tagschecked').show()
             $('.tagsdisabled').hide()
      }
@@ -284,7 +284,7 @@ $("body").mouseup(function(e){
        $('.descchecked').show()
             $('.descdisabled').hide()
      }
-     if(tags.value.split(",").map(Number).length >= 3) {
+     if(tags.value.split(",").map(Number).length >= 1) {
        $('.tagschecked').show()
             $('.tagsdisabled').hide()
      }
