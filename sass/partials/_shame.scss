@@ -10,7 +10,6 @@ html {
   zoom: 85%;
 }
 
-
 .u-flex {
   display: flex !important;
 }
@@ -2427,7 +2426,6 @@ html {
     }
     &__content {
       display: flex;
-      white-space: nowrap;
       color: #697c95;
       font-size: 12px;
       letter-spacing: -0.32px;
@@ -2720,7 +2718,7 @@ html {
   border-radius: 4px;
   transform: translateX(-38px);
   pointer-events: none;
-  width: calc(100vw - 40px);
+  width: calc(100% - 40px);
   max-width: 894px;
   height: 86px;
   &--no-votes {
@@ -5223,7 +5221,7 @@ html {
       box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.082);
       background: transparent;
       color: white;
-       border-top: 1px solid rgba(255, 255, 255, 0.561);
+      border-top: 1px solid rgba(255, 255, 255, 0.561);
       border-right: 1px solid rgba(255, 255, 255, 0.561);
       border-bottom: 1px solid rgba(255, 255, 255, 0.561);
       border-left: 1px solid rgba(255, 255, 255, 0.561);
@@ -5603,9 +5601,27 @@ html {
   display: flex;
   justify-content: space-between;
  // margin: 10px;
+ width: auto;
+ margin-left: -20px;
+ margin-right: -20px;
+ @media (min-width: 768px) {
+   width: auto;
+   margin-left: 0;
+ }
+ .button-container {
+   width: auto;
+   &__orange {
+     @media (max-width: 768px) {
+       margin-right: 0;
+     }
+   }
+ }
 }
 .bottom{
-  margin-bottom: 100px;
+  margin-bottom: 50px;
+  @media (min-width: 768px) {
+    margin-bottom: 100px;
+  }
 }
 
 .addedby {

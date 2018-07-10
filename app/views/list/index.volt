@@ -21,7 +21,7 @@
     <div class="u-flex u-flexAlignItemsCenter">
       {% if !amISubscribed(table['id']) %}
 
-      <div class="list-actions">
+      <div class="list-actions u-sm-flexCol u-md-flexRow">
         <div class="button-container button-container__orange l-button" data-dropdown-placement="center" data-dropdown-offset="0">
 
           <a class="re-button re-button--list-subscribe" href="javascript:;">
@@ -59,7 +59,7 @@
       {% else %}
 
 
-      <div class="list-actions">
+      <div class="list-actions u-sm-flexCol u-sm-flexAlignItemsCenter">
         <div class="button-container button-container__white" data-dropdown-placement="center" data-dropdown-offset="0">
 
           <a class="re-button re-button--list-subscribe" href="javascript:;">
@@ -144,7 +144,7 @@
       </thead>
       <tbody>
         {% if tableContent is not empty and tableContent %} {% for index, row in tableContent.items %}
-       
+
         <tr data-id="{{ row['id'] }}" class="list-row-tr">
           <td>
             <a href="#" class="j_listing-vote vote-link {{ row['userHasVoted'] ? 'vote-link--upvoted' : '' }}">
@@ -186,7 +186,7 @@
                 ADDED BY
                 <div class="content">
             {% if row['userId'] == table['ownerUserId'] %}
-            <img src="{{ table['creatorImage'] }}" /> 
+            <img src="{{ table['creatorImage'] }}" />
             {% else %}
             <img src="/userimages/{{row['userId']}}.jpg" />
             {% endif %}
@@ -226,7 +226,7 @@
                 ADDED BY
                 <div class="content">
             {% if row['userId'] == table['ownerUserId'] %}
-            <img src="{{ table['creatorImage'] }}" /> 
+            <img src="{{ table['creatorImage'] }}" />
             {% else %}
             <img src="/userimages/{{row['userId']}}.jpg" />
             {% endif %}
@@ -282,10 +282,10 @@
             <div class="re-table__list-image__upload-button"></div>
             <div class="re-table__list-image re-table__list-image--new-row" id="addRowImage"></div>
 
-            <!-- <div class="re-table__list-image re-table__list-image--editing" style="background: #f5f5f5 center / cover;">           
-              
+            <!-- <div class="re-table__list-image re-table__list-image--editing" style="background: #f5f5f5 center / cover;">
+
               <div class="re-table__list-image__upload-button"></div>
-                            
+
               <div class="re-table__list-image__upload-button"></div>
                 <div class="re-table__list-image__delete-button"></div>
               </div> -->
@@ -323,7 +323,7 @@
 
   {% if !amISubscribed(table['id']) %}
 
-  <div class="list-actions bottom">
+  <div class="list-actions bottom u-sm-flexCol u-md-flexRow">
     <div class="button-container button-container__orange l-button" data-dropdown-placement="center" data-dropdown-offset="0">
 
       <a class="re-button re-button--list-subscribe" href="javascript:;">
@@ -361,7 +361,7 @@
   {% else %}
 
 
-  <div class="list-actions bottom">
+  <div class="list-actions bottom u-sm-flexCol u-sm-flexAlignItemsCenter">
     <div class="button-container button-container__white" data-dropdown-placement="center" data-dropdown-offset="0">
 
       <a class="re-button re-button--list-subscribe" href="javascript:;">
@@ -912,7 +912,7 @@
           //img.onload = fn;
         }
       });r
-      
+
 
       document.getElementById('addRowImage').onclick = function () {
         document.getElementById('new-row-fileUpload').click();
@@ -1074,7 +1074,7 @@
         document.getElementById('re-image-fileUpload').click();
       };
       document.querySelector('.re-image__delete-button').onclick = function () {
-        
+
         document.getElementById('re-image-fileUpload').value = "";
         var img = $('.re-image');
         img.attr('style', 'background: #f5f5f5 url() center / cover;');
@@ -1086,7 +1086,7 @@
           img.removeClass('re-table__list-image--empty');
           img.attr('style', 'background: #f5f5f5 url(' + URL.createObjectURL(this.files[0]) +
             ') center / cover;');
-            
+
           //img.onload = fn;
         }
       });
@@ -1097,7 +1097,7 @@
         //   img.removeClass('re-table__list-image--empty');
         //   img.attr('style', 'background: #f5f5f5 url(' + URL.createObjectURL(this.files[0]) +
         //     ') center / cover;');
-            
+
         //   //img.onload = fn;
         // }
       });
