@@ -52,7 +52,7 @@
   <section class="main">
 
     <div class="feedback">
-      <div class="title">Shape or product</div>
+      <div class="title">Shape our product</div>
       <div class="content">Tell us about feature ideas and bugs you found</div>
     </div>
 
