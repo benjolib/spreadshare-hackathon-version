@@ -1,5 +1,5 @@
 {% extends 'layouts/main.volt' %} {# page title #} {% block title %}SpreadShare - Data that matters.{% endblock %} {# page
-header #} {% block header %}{% endblock %} {# main section #} {% block content %} 
+header #} {% block header %}{% endblock %} {# main section #} {% block content %}
 <div class="re-page re-page--large">
   <div class="homepage-space">
     <h1 class="re-heading">Explore</h1>
@@ -108,50 +108,50 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
 {% endif %} {% endfor %}
 </a>
 </div>
-  
+
     </div>
   <div class="u-flex u-flexWrap homepage-gutter home-top-margin-bottom"></div>
     {% set qty = 0 %}
  {% set partialindex=0 %}
-    {% for index, table in tables %} 
+    {% for index, table in tables %}
     {% if qty < 5 %}
-    {% if tables[index] is defined %} 
-    
+    {% if tables[index] is defined %}
 
 
-{% set qty= qty+1 %} 
-{% set partialindex=index %} 
+
+{% set qty= qty+1 %}
+{% set partialindex=index %}
 {{ partial( 'partials/list-card', [ 'id': tables[index][ 'id'], 'slug': tables[index][ 'slug'],
   'image': tables[index][
       'image'], 'name': tables[index][ 'title'], 'description': tables[index][ 'tagline'], 'subscriberCount': tables[index][
       'subscriberCount'], 'listingCount': tables[index][ 'listingCount'], 'showCurator': true, 'curatorHandle': tables[index][
       'creatorHandle'], 'curatorAvatar': tables[index][ 'creatorImage'], 'curatorName': tables[index][ 'creator'], 'curatorBio': tables[index][
-      'creatorBio'], 'half': false, 'large': false ]) }} 
-      
-      
-      
+      'creatorBio'], 'half': false, 'large': false ]) }}
+
+
+
       {% endif %}
-      
+
       {% if subcribedbox is not defined %}
       {% if qty == 3 %}
-      {% set subcribedbox=1 %} 
+      {% set subcribedbox=1 %}
     <div class="u-flex u-flexWrap homepage-gutter">
         {{ partial('partials/action-card', [ 'color': 'orange-bird', 'heading': 'Subscribe', 'text': 'Subscribe to your favorite
         topics and collections.
         <br />
         <br />Because you want to keep track of relevant updates', 'action': '/subscriptions', 'buttonText': 'Manage Subscriptions'
-        ]) }} 
+        ]) }}
         {% endif %}
          {% endif %}
       {% endif %}
 
-      {% endfor %} 
-    
-    
-    </div>  
+      {% endfor %}
+
+
+    </div>
       </div>
   </div>
- 
+
   <div class="trending-topics">
     <div class="trending-topics__inner">
       <h3>Trending Tags</h3>
@@ -163,7 +163,7 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
 </div>
 </a>
         {% endfor %}
-    
+
       </div>
     </div>
   </div>
@@ -180,44 +180,44 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
       content with your followers.
       <br />
       <br />Because you want your peers to be as informed as you are.', 'action': '/subscriptions', 'buttonText': 'Manage Subscriptions'
-      ]) }} 
+      ]) }}
 
 
     {% set qty = 0 %}
-    {% for index, table in tables %} 
+    {% for index, table in tables %}
     {% if index > partialindex %}
-    {% if tables[index] is defined %} 
+    {% if tables[index] is defined %}
 
-    
+
     {% set qty= qty+1 %}
     {% if qty <= 12 %}
-    {% set partialindex=index %} 
+    {% set partialindex=index %}
       {{ partial( 'partials/list-card', [ 'id': tables[index][ 'id'], 'slug': tables[index][ 'slug'],
       'image': tables[index][
       'image'], 'name': tables[index][ 'title'], 'description': tables[index][ 'tagline'], 'subscriberCount': tables[index][
       'subscriberCount'], 'listingCount': tables[index][ 'listingCount'], 'showCurator': true, 'curatorHandle': tables[index][
       'creatorHandle'], 'curatorAvatar': tables[index][ 'creatorImage'], 'curatorName': tables[index][ 'creator'], 'curatorBio': tables[index][
-      'creatorBio'], 'half': false, 'large': false ]) }} 
-      
-      
-      {% endif %} 
+      'creatorBio'], 'half': false, 'large': false ]) }}
+
+
+      {% endif %}
       {% endif %}
       {% endif %}
 
-      {% endfor %} 
+      {% endfor %}
 
 
     </div>
   </div>
   <div class="featured-curators">
     <div class="featured-curators__inner">
-        
+
 
       <h3>Featured Curators</h3>
-      
-<div class="u-flex">
+
+<div class="u-flex u-sm-flexWrap">
  {% for index, featuredCurator in featuredCurators %}
-{% set index= index+1 %} 
+{% set index= index+1 %}
 
  {{ partial('partials/profile-card', [ 'id': featuredCurator['id'], 'username': featuredCurator['name'], 'avatar': featuredCurator["image"]
 , 'name': featuredCurator["name"] , 'bio': featuredCurator["tagline"] ,'type': 4 ]) }}
@@ -225,19 +225,19 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
 
 
 
-{% if index % 4 == 0 %} 
+{% if index % 4 == 0 %}
 
 
 </div>
 <div class="u-flex">
 
- 
-  {% endif %} 
 
- 
+  {% endif %}
+
+
 {% endfor %}
 
-        
+
       </div>
     </div>
   </div>
@@ -247,27 +247,27 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
   <div class="re-page re-page--large">
     <div class="u-flex u-flexWrap homepage-gutter">
       {% set qty = 0 %}
-    {% for index, table in tables %} 
+    {% for index, table in tables %}
     {% if index > partialindex %}
-    {% if tables[index] is defined %} 
-    
-    
+    {% if tables[index] is defined %}
+
+
     {% set qty= qty+1 %}
     {% if qty <= 12 %}
-    {% set partialindex=index %} 
+    {% set partialindex=index %}
       {{ partial( 'partials/list-card', [ 'id': tables[index][ 'id'], 'slug': tables[index][ 'slug'],
       'image': tables[index][
       'image'], 'name': tables[index][ 'title'], 'description': tables[index][ 'tagline'], 'subscriberCount': tables[index][
       'subscriberCount'], 'listingCount': tables[index][ 'listingCount'], 'showCurator': true, 'curatorHandle': tables[index][
       'creatorHandle'], 'curatorAvatar': tables[index][ 'creatorImage'], 'curatorName': tables[index][ 'creator'], 'curatorBio': tables[index][
-      'creatorBio'], 'half': false, 'large': false ]) }} 
-      
-      
-      {% endif %} 
+      'creatorBio'], 'half': false, 'large': false ]) }}
+
+
+      {% endif %}
       {% endif %}
       {% endif %}
 
-      {% endfor %} 
+      {% endfor %}
     </div>
     <div class="u-flex u-flexWrap homepage-gutter load-more-container"></div>
     <div class="u-flex u-flexJustifyCenter">
