@@ -3323,7 +3323,7 @@ html {
     left: -9px;
     background: white;
     height: 87px;
-    width: 100%;
+    width: auto;
     display: flex;
     @media (min-width: 768px) {
       height: 91px;
@@ -3339,17 +3339,23 @@ html {
       }
     }
     img:last-of-type {
-      padding: 0 16px;
+      padding: 0;
       margin-top: 2px;
+      margin-left: -20px;
       cursor: pointer;
+      z-index: 999;
+      @media (min-width: 320px) {
+        padding: 0 10px;
+      }
       @media (min-width: 768px) {
         padding: 0 20px;
+        margin-left: 0px;
       }
     }
     input {
       @include typography(7);
 
-      width: 100%;
+      width: auto;
       border: none;
       padding: 0px 34px;
       margin-top: 4px;
@@ -3370,7 +3376,7 @@ html {
   }
   &__bell {
     margin-top: 0px;
-    margin-left: 20px;
+    margin-left: 10px;
     position: relative;
     @media (min-width: 768px) {
       margin-top: 4px;
@@ -3440,9 +3446,10 @@ html {
   // }
   &__hamburger {
     padding: 12px;
-    margin-left: 20px;
+    margin-left: 10px;
     @media (min-width: 768px) {
       display: none;
+      margin-left: 10px;
     }
   }
   &__editing {
