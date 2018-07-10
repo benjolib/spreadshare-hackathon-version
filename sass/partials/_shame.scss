@@ -6,7 +6,6 @@
 /**
  * Container
  */
-
 html {
   zoom: 85%;
 }
@@ -1845,11 +1844,12 @@ html {
       margin-bottom: -15px !important;
     }
     img {
-      margin-right: 12px;
+      margin-right:12px;
     }
   }
   &--header.re-button {
     @include typography(9);
+
     display: inline-flex;
     margin-left: 22px;
     margin-bottom: 0;
@@ -2245,10 +2245,10 @@ html {
             border: 0px solid #ced3da;
             border-radius: 4px;
             cursor: pointer;
-            width: 24px;
-            height: 24px;
-            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .18);
-            margin-top: 15px;
+            width:24px;
+            height:24px;
+              box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .18);
+              margin-top:15px;
           }
           &--new-row-type2 {
             border: none;
@@ -2595,12 +2595,13 @@ html {
 
 .empty-discussion {
   margin: 0;
+
   .nocomments {
     display: flex;
-    max-width: 670px;
-    .image {
-      margin-top: 4px;
-    }
+     max-width: 670px;
+     .image {
+       margin-top: 4px;
+     }
     .info {
       padding-left: 15px;
       .header {
@@ -2673,6 +2674,7 @@ html {
   background: white;
   background-color: white;
   display: none;
+
   /* optional: just make scrollbar invisible */
 }
 
@@ -2765,7 +2767,8 @@ html {
     font-size: 16px;
     letter-spacing: -0.5px;
     outline: none;
-    color: #b1bbc7;
+    color:#b1bbc7;
+
     letter-spacing: -.43px;
     line-height: 19px;
     @media (min-width: 768px) {
@@ -3033,7 +3036,7 @@ html {
 .collaboration-info {
   margin-bottom: 8px;
   line-height: 16px;
-  margin-top: 30px;
+  margin-top:30px;
   width: 100%;
   @media (min-width: 768px) {
     margin-bottom: 10px;
@@ -3055,17 +3058,18 @@ html {
     }
   }
   &__user-name {
+
     font-family: 'Lato';
     font-weight: bold;
     color: #252442;
     margin-right: 4px;
     font-size: 12px;
     letter-spacing: -0.32px;
-    line-height: 28px;
+   line-height: 28px;
     @media (min-width: 768px) {
       margin-right: 7px;
       font-size: 16px;
-      line-height: 36px;
+       line-height: 36px;
       letter-spacing: -0.43px;
     }
   }
@@ -3090,6 +3094,7 @@ html {
     font-size: 12px;
     letter-spacing: -0.32px;
     line-height: 16px;
+
     @media (min-width: 768px) {
       font-size: 16px;
       line-height: 21px;
@@ -3100,6 +3105,7 @@ html {
 
 .collaboration-clock {
   @include typography(8);
+
   order: 0;
   margin-top: 10px;
   margin-left: auto;
@@ -3108,12 +3114,14 @@ html {
   color: #dee0e7;
   white-space: nowrap;
   text-transform: uppercase;
+
   @media (max-width: 767px) {
     word-spacing: -3px;
     margin-right: 3px;
     order: -1;
     margin-bottom: 0;
   }
+
   img {
     margin-right: 3px;
     margin-top: -1px;
@@ -3231,7 +3239,7 @@ html {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100% ;
   z-index: 100;
   background: white;
   display: flex;
@@ -4342,6 +4350,7 @@ html {
   }
   &__tagline {
     @include typography(7);
+
     color: #9baabf;
   }
   &__subscriberCount {
@@ -5183,7 +5192,8 @@ html {
     button {
       width: 300px;
       cursor: pointer;
-      outline: none; // margin-left: 2em;
+      outline: none;
+      // margin-left: 2em;
       // margin-right: 2.5em;
       display: flex;
       background: #ffffff;
@@ -5525,20 +5535,20 @@ html {
   text-align: center;
   font: 15px 'Lato';
 }
-
 .button-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 15px;
+  padding-top:15px;
   padding-bottom: 5px;
   padding-left: 5px;
   padding-right: 25px;
+
   width: 100%;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .18);
-  border-radius: 4px;
+   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .18);
+   border-radius: 4px;
   &__orange {
-    margin-right: 10px;
+     margin-right: 10px;
     background-color: #ea612d;
     .re-button {
       width: 260px;
@@ -5556,25 +5566,27 @@ html {
       color: #2C60EF;
     }
     .info a {
-      color: white !important;
-    }
-  }
-  &__white {
-    background-color: white;
-    color: #ea612d;
-    margin-right: 10px;
-    .re-button {
-      width: 260px;
-      background-color: white;
-      color: #ea612d;
-    }
-    .info {
-      color: #ea612d !important;
-      a {
-        color: #ea612d !important;
+        color: white !important;
       }
-    }
+
   }
+   &__white {
+     background-color: white;
+     color: #ea612d;
+      margin-right: 10px;
+     .re-button {
+       width: 260px;
+       background-color: white;
+       color: #ea612d;
+
+     }
+     .info {
+       color: #ea612d !important;
+       a {
+         color: #ea612d !important;
+       }
+     }
+   }
   .info {
     @include typography(7);
 
@@ -5585,8 +5597,7 @@ html {
 
   }
 }
-
-.list-actions {
+.list-actions{
   display: flex;
   justify-content: space-between;
  // margin: 10px;
@@ -5614,43 +5625,18 @@ html {
 }
 
 .addedby {
-  position: absolute;
-  min-width: 350px !important;
-  min-height: 250px !important;
-  padding-top: 25px;
-  background: white;
-  top: -140px;
+  min-width:350px !important;
+  min-height: 100px !important;
+  padding-top:14px;
+  padding-left:20px;
   .header {
     @include typography(8);
 
     text-align: left;
     color: #9baabf;
-    background: white;
   }
   .date {
-    margin-bottom: 25px;
-  }
-  .request-remove {
-    font-family: Roboto Mono;
-    font-size: 16px;
-    font-weight: bold;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    color: #2a1e3e;
-    position:absolute;
-    left: 0;
-    top: 200px;
-    height: 50px;
-    width: 100%;
-   
-    background: #F87A7B;
-    padding-left:70px;
-    padding-top:10px;
-    a {
-      color: white;
-    }
+    margin-top: 5px;
   }
   .content {
     padding-top:16px;
@@ -5667,7 +5653,7 @@ html {
       width:35px;
       height:35px;
       border-radius: 50%;
-      margin-right: 5px;
+      margin-right:5px;
     }
   }
 }
