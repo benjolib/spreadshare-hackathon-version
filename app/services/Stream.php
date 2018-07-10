@@ -21,10 +21,12 @@ use Phalcon\Http\Request\FileInterface;
 
 class Stream
 {
+    const NumberOfRequiredTags = 1;
+
     public function getTagsIdsAndNames($tagsList): array
     {
         $tagsIds = explode(',', $tagsList);
-        if (count($tagsIds) < 3) {
+        if (count($tagsIds) < self::NumberOfRequiredTags) {
             throw new \Exception('Tag missing - Please select at least 3 tags for your Stream');
         }
         foreach ($tagsIds as $tag) {
