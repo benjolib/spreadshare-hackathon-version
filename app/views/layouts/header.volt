@@ -85,7 +85,7 @@
 <div class="l-dropdown sh-dropdown re-header__user-dropdown2 user-dropdown2 u-flex" aria-haspopup="true" aria-expanded="false">
         <div>YOU</div>
         <a href="/profile/{{ auth.getUser().handle }}">This is your <span>profile</span></a>
-        <a href="/subscriptions">All Streams your <span>subscribed</span> to</a>
+        <a href="/subscriptions">All Streams you've <span>subscribed</span> to</a>
         <a href="/history" style="margin-bottom:36px">All Streams you've <span>recently viewed</span></a>
 
         <div>SETTINGS</div>
@@ -359,7 +359,7 @@
       <div class="l-dropdown sh-dropdown re-header__user-dropdown2 user-dropdown2 u-flex">
         <div>YOU</div>
         <a href="/profile/{{ auth.getUser().handle }}">This is your <span>profile</span></a>
-        <a href="/subscriptions">All Streams your <span>subscribed</span> to</a>
+        <a href="/subscriptions">All Streams you've <span>subscribed</span> to</a>
         <a href="/history" style="margin-bottom:36px">All Streams you've <span>recently viewed</span></a>
 
         <div>SETTINGS</div>
