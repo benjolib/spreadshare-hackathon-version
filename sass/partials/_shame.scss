@@ -5305,15 +5305,18 @@ html {
 
 .user-dropdown2 {
   //
-  width: calc(100% - 10px);
+  width: 100%;
   @media (min-width: 768px) {
     width: 307px;
+    margin-top: 29px;
+    margin-left: 0;
   }
   height: auto; //601px;
   display: flex;
   padding: 26px 37px;
   flex-direction: column;
-  margin-top: 29px;
+  margin-top: 24px;
+  margin-left: -5px;
   div {
     @include typography(8);
 
