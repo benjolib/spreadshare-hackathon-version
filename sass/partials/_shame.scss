@@ -3256,8 +3256,11 @@ html {
     align-items: center;
     width: 100%;
     max-width: 1432px;
-    padding: 0 24px;
+    padding: 0 12px;
     position: relative;
+    @media (min-width: 768px) {
+      padding: 0 24px;
+    }
   }
   &__logo {
     display: none;
