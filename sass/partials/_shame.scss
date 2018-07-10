@@ -3869,12 +3869,13 @@ html {
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
   width: 246px;
   height: 61px;
-  padding: 10px 13px;
+  padding: 10px 13px;;
   margin-bottom: 11px;
   justify-content: space-between;
   user-select: none;
   p {
     @include typography(7);
+
     color: #2a1e3e;
   }
   &>div:first-of-type {
@@ -3890,8 +3891,17 @@ html {
 .re-field--settings {
   width: 100%;
   border: 1px solid #f8f8fb;
+  height: auto;
+  min-height: 61px;
   .re-field__input {
     width: 100%;
+  }
+  p {
+    margin-bottom: .5rem !important;
+  }
+  &:first-child > div:first-of-type {
+    min-width: 50%;
+    max-width: 50%;
   }
 }
 
@@ -3914,6 +3924,10 @@ html {
 
   color: #697c94;
   margin-top: 6px;
+  margin-bottom: 6px;
+  @media (min-width: 768px) {
+    margin-bottom: 0;
+  }
 }
 
 .re-field__image {
