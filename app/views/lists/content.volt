@@ -22,7 +22,7 @@
     <div class="u-flex u-flexJustifyCenter u-flexAlignItemsCenter card-actions-button l-button">
       <img src="/assets/images/arrow-down.svg" />
     </div>
-    <div class="sh-dropdown card-actions-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
+    <div class="sh-dropdown card-actions-dropdown u-flex u-flexCol l-dropdown">
       <a href="/stream/{{ table['id'] }}/edit">
         <img src="/assets/images/pencil2.svg" /> Edit List</a>
 

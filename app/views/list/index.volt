@@ -35,7 +35,7 @@
           </div>
 
         </div>
-        <div class="sh-dropdown card-subscribe-dropdown card-actions-dropdown--tall u-flex u-flexCol u-flexJustifyCenter l-dropdown"
+        <div class="sh-dropdown card-subscribe-dropdown card-actions-dropdown--tall u-flex u-flexCol l-dropdown"
           style="padding-left: -100px;">
           <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'D')">Daily</a>
           <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'W')">Weekly</a>
@@ -78,7 +78,7 @@
           </div>
 
         </div>
-        <div class="sh-dropdown card-subscribe-dropdown card-actions-dropdown--tall u-flex u-flexCol u-flexJustifyCenter l-dropdown"
+        <div class="sh-dropdown card-subscribe-dropdown card-actions-dropdown--tall u-flex u-flexCol l-dropdown"
           style="padding-left: -100px;">
           <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'D')">Daily</a>
           <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'W')">Weekly</a>
@@ -165,9 +165,9 @@
 
 
                 <div class="u-flex u-flexCol header">
-                  {% if row['userId'] == null %} 
-                  
-                  ADDED BY 
+                  {% if row['userId'] == null %}
+
+                  ADDED BY
                   <div class="u-flex u-flexCol content">
 
                     <div class="content">
@@ -175,7 +175,7 @@
                     </div>
                   </div>
 
-                  {% else %} 
+                  {% else %}
                   ADDED BY
                 <div class="u-flex u-flexCol content">
                     {% if row['userId'] == table['ownerUserId'] %}
@@ -193,8 +193,8 @@
                     {{ date('M jS H:i ',row['createdAt']) }}
                   </div>
 
-                  
-                    
+
+
 
                   </div>
 
@@ -205,7 +205,7 @@
                     </a>
                   </div>
           </div>
-        
+
           </div>
           </td>
 
@@ -371,7 +371,7 @@
         </div>
 
       </div>
-      <div class="sh-dropdown card-subscribe-dropdown card-actions-dropdown--tall u-flex u-flexCol u-flexJustifyCenter l-dropdown"
+      <div class="sh-dropdown card-subscribe-dropdown card-actions-dropdown--tall u-flex u-flexCol l-dropdown"
         style="padding-left: -100px;">
         <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'D')">Daily</a>
         <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'W')">Weekly</a>
@@ -414,7 +414,7 @@
         </div>
 
       </div>
-      <div class="sh-dropdown card-subscribe-dropdown card-actions-dropdown--tall u-flex u-flexCol u-flexJustifyCenter l-dropdown"
+      <div class="sh-dropdown card-subscribe-dropdown card-actions-dropdown--tall u-flex u-flexCol l-dropdown"
         style="padding-left: -100px;">
         <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'D')">Daily</a>
         <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'W')">Weekly</a>
