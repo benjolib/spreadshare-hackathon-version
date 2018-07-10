@@ -21,30 +21,26 @@
     }
 
     .all-results {
+      @include typography(9);
+
       margin-top: auto;
-      font-family: 'Roboto Mono', monospace;
-      font-weight: bold;
-      font-size: 16px;
       color: #6cc69d;
-      letter-spacing: -0.39px;
       text-align: center;
       padding-top: 12px;
     }
 
     .description {
-      font-family: 'Roboto Mono', monospace;
+      @include typography(7);
+
       display: inline-block;
-      font-size: 14px;
       color: #dee0e7;
-      letter-spacing: -0.34px;
     }
 
     .result-count {
+      @include typography(8);
+
       display: inline-block;
-      font-family: 'Roboto Mono', monospace;
-      font-size: 14px;
       color: #6a7c94;
-      letter-spacing: -0.38px;
       margin-left: 8px;
       margin-bottom: 19px;
     }
@@ -57,11 +53,9 @@
       line-height: 22px;
 
       .title {
-        font-family: 'Lato', sans-serif;
-        font-size: 16px;
+        @include typography(5);
+
         color: #252442;
-        letter-spacing: -0.39px;
-        line-height: 19px;
         mark {
           color: $text-color;
           background: #ffffff;
@@ -69,11 +63,9 @@
       }
 
       .tagline {
-        font-family: 'Lato', sans-serif;
-        font-size: 14px;
+        @include typography(7);
+
         color: #9baabf;
-        letter-spacing: -0.34px;
-        line-height: 17px;
       }
     }
   }

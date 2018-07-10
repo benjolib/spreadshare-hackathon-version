@@ -8,7 +8,7 @@
 <a href="/stream/{{ slug ? slug : id }}">
   <h3 class="list-card__name">{{ name }}</h3>
 </a>
-<a href="/stream/{{ slug ? slug : id }}" class="list-card__subscriberCount u-flex u-flexAlignItemsCenter">
+<a href="/stream/{{ slug ? slug : id }}" class="list-card__subscriberCount u-flex u-flexAlignItemsStart">
   <img src="/assets/images/9-0/list-card-subscriber-bird.svg" /> {{ subscriberCount }}</a>
   </div>
   <p class="list-card__description">{{ description }}{% if showCurator %}, curated by <a href="/profile/{{ curatorHandle }}">{{ curatorName }}</a>{% endif %}</p>

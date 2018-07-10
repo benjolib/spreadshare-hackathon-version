@@ -13,44 +13,24 @@
     }
   }
   &__name {
-    font-family: 'Roboto Mono', monospace;
-    font-weight: bold;
+    @include typography(6);
+
     color: #252442;
-    line-height: 16px;
-    font-size: 12px;
     margin-right: 10px;
-    letter-spacing: -0.33px;
     @media (min-width: 768px) {
-      font-size: 16px;
-      letter-spacing: -0.43px;
       margin-right: 14px;
-      line-height: 21px;
     }
   }
   &__follow {
-    font-family: 'Roboto Mono', monospace;
-    font-weight: bold;
+    @include typography(9);
+
     color: #6cc69d;
-    font-size: 12px;
-    letter-spacing: 0.4px;
-    line-height: 16px;
-    @media (min-width: 768px) {
-      font-size: 16px;
-      letter-spacing: 0.5px;
-      line-height: 21px;
-    }
   }
   &__bio {
+    @include typography(7);
+
     color: #b1bbc7;
-    line-height: 14px;
-    font-size: 12px;
     margin-top: 1px;
-    letter-spacing: -0.33px;
-    @media (min-width: 768px) {
-      font-size: 16px;
-      letter-spacing: -0.43px;
-      line-height: 19px;
-    }
   }
   &--type3 & {
     &__avatar {
@@ -282,22 +262,19 @@
   //   }
   // }
   &__name {
-    font-size: 22.5px;
-    color: #2a1e3e;
-    line-height: 27px;
-    letter-spacing: -0.54px;
-    margin-bottom: 14px;
-    margin-left: 8px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: calc(100vw - 100px);
-    @media (min-width: 768px) {
-      margin-left: 0;
-      font-size: 30px;
-      line-height: 36px;
-      letter-spacing: -0.72px;
-      width: calc(50vw - 110px);
+    @include typography(5);
+
+    margin-left: 0;
+    width: calc(50vw - 110px);
+
+    @media (max-width: 767px) {
+      color: #2a1e3e;
+      margin-bottom: 14px;
+      margin-left: 8px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: calc(100vw - 100px);
     }
     @media (min-width: 1024px) {
       width: calc(33.333vw - 110px);
@@ -327,13 +304,10 @@
     }
   }
   &__subscriberCount {
-    font-family: 'Lato', sans-serif;
-    font-weight: bold;
+    @include typography(5);
+
     color: #ea612d;
-    letter-spacing: -0.67px;
-    margin-right: 5px;
-    font-size: 18px;
-    margin-top: -11px;
+    margin-top: -2px;
     @media (min-width: 768px) {
       font-size: 24px;
       margin-right: 2px;
@@ -341,6 +315,7 @@
     img {
       width: 14px;
       margin-right: 4px;
+      margin-top: 2px;
       @media (min-width: 768px) {
         margin-right: 6px;
         width: auto;
@@ -348,21 +323,19 @@
     }
   }
   &__description {
-    font-size: 15px;
-    color: #9baabf;
-    letter-spacing: -0.36px;
-    margin-top: 1px;
-    margin-bottom: 20px;
-    margin-left: 8px;
+    @include typography(7);
+
+    margin-top: 10px;
+    margin-left: 0;
+    margin-bottom: 24px;
     a {
       color: #2dad6b;
     }
-    @media (min-width: 768px) {
-      margin-top: 10px;
-      margin-left: 0;
-      letter-spacing: -0.48px;
-      font-size: 20px;
-      margin-bottom: 24px;
+    @media (max-width: 767px) {
+      color: #9baabf;
+      margin-top: 1px;
+      margin-bottom: 20px;
+      margin-left: 8px;
     }
   }
   .profile-card {
@@ -393,7 +366,7 @@
     }
     .list-card__subscriberCount {
       font-size: 17px;
-      margin-top: 0;
+      margin-top: 4px;
       img {
         margin-right: 3px;
         width: 16px;
@@ -437,31 +410,24 @@
     }
   }
   &__heading {
-    font-size: 27px;
-    line-height: 33px;
-    letter-spacing: -0.72px;
-    margin-bottom: 16px;
-    margin-left: 4px;
-    @media (min-width: 768px) {
-      font-size: 40px;
-      line-height: 48px;
-      letter-spacing: -1.07px;
-      margin-bottom: 34px;
+    @include typography(5);
+
+    margin-bottom: 34px;
+
+    @media (max-width: 767px) {
+      margin-bottom: 16px;
+      margin-left: 4px;
     }
   }
   &__text {
-    font-family: 'Roboto Mono', monospace;
-    font-size: 12px;
-    letter-spacing: -0.32px;
-    line-height: 16px;
-    margin-left: 4px;
-    margin-bottom: 26px;
-    @media (min-width: 768px) {
-      font-size: 16px;
-      line-height: 21px;
-      letter-spacing: -0.5px;
-      margin-bottom: 32px;
-      margin-right: -10px;
+    @include typography(7);
+
+    margin-bottom: 32px;
+    margin-right: -10px;
+
+    @media (max-width: 767px) {
+      margin-left: 4px;
+      margin-bottom: 26px;
     }
   }
   &__link {
@@ -471,21 +437,18 @@
     color: inherit;
   }
   &__button {
-    font-family: 'Roboto Mono', monospace;
-    font-weight: bold;
-    font-size: 12px;
+    @include typography(9);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 56px;
     margin-top: auto;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
     border-radius: 2px;
-    text-align: center;
-    height: 42px;
-    line-height: 42px;
-    letter-spacing: -0.3px;
-    @media (min-width: 768px) {
-      font-size: 16px;
-      height: 56px;
-      line-height: 56px;
-      letter-spacing: -0.5px;
+
+    @media (max-width: 767px) {
+      height: 42px;
     }
   }
   &--orange-bird & {
