@@ -1254,8 +1254,10 @@ html {
 }
 
 .homepage-gutter {
-  margin-left: -23px;
-  margin-right: -30px;
+  @media (min-width: 768px) {
+    margin-left: -23px;
+    margin-right: -30px;
+  }
 }
 
 .gutter {
