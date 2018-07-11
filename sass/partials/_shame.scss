@@ -3057,12 +3057,19 @@ html {
 
 .submission-comment {
   font-family: 'Roboto Mono', monospace;
-  font-style: italic;
   font-size: 12px;
   color: #9baabf;
   letter-spacing: 0.5px;
   margin-top: 8px;
   margin-left: 12px;
+  a {
+    @include typography(7);
+    color: #27c280;
+  }
+  .comment {
+    @include typography(7);
+    color: rgba(0, 0, 0, .87);
+  }
 }
 
 .submission-clock {
