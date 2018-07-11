@@ -19,7 +19,7 @@
         <img src="/assets/images/9-0/header-collabs-octopus.svg" /> Collabs
       {% endif %}
     </a>
-     
+
     <a class="re-header__search" href="#"><img class="re-header__search__img" src="/assets/images/9-0/header-search.svg" /></a>
     <div class="re-header__search-open" style="{% if query is not defined %}display:none;{% endif %}">
       <img src="/assets/images/search-green.svg" />
@@ -48,7 +48,7 @@
 <img src="/assets/images/9-0/header-notifications.svg" />
         {% endif %}
 
-    
+
       </a>
       <div class="l-dropdown sh-dropdown notification-dropdown u-flex u-flexCol">
         {# {% set numbers = [1, 2, 3, 4, 5, 6] %}
@@ -65,7 +65,7 @@
                 </a>
                 <div class="notification-dropdown__notification__date"><img src="/assets/images/comment-clock.svg" />TODAY</div>
               </div>
-              <p class="notification-dropdown__notification__text">Created a new list <a href="#">Design Tools</a></p>
+                <p class="notification-dropdown__notification__text">Created a new list <a href="#">Design Tools</a></p>
             </div>
           </div>
         {% endfor %}
@@ -79,27 +79,30 @@
 <div widht="9px" height="6px" class="down" style="background: url('/assets/images/9-0/user-down.svg') center;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 </div>
 
-  
+
 
 </a>
 <div class="l-dropdown sh-dropdown re-header__user-dropdown2 user-dropdown2 u-flex" aria-haspopup="true" aria-expanded="false">
-        <div>YOU</div>
-        <a href="/profile/{{ auth.getUser().handle }}">This is your <span>profile</span></a>
-        <a href="/subscriptions">All Streams you've <span>subscribed</span> to</a>
-        <a href="/history" style="margin-bottom:36px">All Streams you've <span>recently viewed</span></a>
-
-        <div>SETTINGS</div>
-        <a href="/settings#emails">Adjust your <span>email settings</span></a>
-        <a href="/settings" style="margin-bottom:36px">Manage your <span>account</span></a>
-
-        <div>FOR CURATORS</div>
-<a href="/streams">All
-  <span>Streams</span> created by you</a>
-        <!-- <a href="/stats" style="margin-bottom:13px"><span>Stats</span> for all your Streams</a> -->
-
-        <div>ABOUT</div>
-        <a href="/about" style="margin-bottom:22px">Blog, Jobs, <span>About</span> and more</a>
-
+        <section>
+          <div>YOU</div>
+          <a href="/profile/{{ auth.getUser().handle }}">This is your <span>profile</span></a>
+          <a href="/subscriptions">All Streams you've <span>subscribed</span> to</a>
+          <a href="/history">All Streams you've <span>recently viewed</span></a>
+        </section>
+        <section>
+          <div>SETTINGS</div>
+          <a href="/settings#emails">Adjust your <span>email settings</span></a>
+          <a href="/settings">Manage your <span>account</span></a>
+        </section>
+        <section>
+          <div>FOR CURATORS</div>
+          <a href="/streams">All<span>Streams</span> created by you</a>
+          <!-- <a href="/stats" style="margin-bottom:13px"><span>Stats</span> for all your Streams</a> -->
+        </section>
+        <section>
+          <div>ABOUT</div>
+          <a href="/about">Blog, Jobs, <span>About</span> and more</a>
+        </section>
         <a href="/logout" class="logout">Logout</a>
       </div>
       {# <div class="l-dropdown dropdown re-header__user-dropdown user-dropdown u-flex">
@@ -357,23 +360,26 @@
         </div>
       </div> -->
       <div class="l-dropdown sh-dropdown re-header__user-dropdown2 user-dropdown2 u-flex">
-        <div>YOU</div>
-        <a href="/profile/{{ auth.getUser().handle }}">This is your <span>profile</span></a>
-        <a href="/subscriptions">All Streams you've <span>subscribed</span> to</a>
-        <a href="/history" style="margin-bottom:36px">All Streams you've <span>recently viewed</span></a>
-
-        <div>SETTINGS</div>
-        <a href="/settings#emails">Adjust your <span>email settings</span></a>
-        <a href="/settings" style="margin-bottom:36px">Manage your <span>account</span></a>
-
-        <div>FOR CURATORS</div>
-<a href="/streams">All
-  <span>Streams</span> created by you</a>
-        <a href="/stats" style="margin-bottom:13px"><span>Stats</span> for all your Streams</a>
-
-        <div>ABOUT</div>
-        <a href="/about" style="margin-bottom:22px">Blog, Jobs, <span>About</span> and more</a>
-
+        <section>
+          <div>YOU</div>
+          <a href="/profile/{{ auth.getUser().handle }}">This is your <span>profile</span></a>
+          <a href="/subscriptions">All Streams you've <span>subscribed</span> to</a>
+          <a href="/history">All Streams you've <span>recently viewed</span></a>
+        </section>
+        <section>
+          <div>SETTINGS</div>
+          <a href="/settings#emails">Adjust your <span>email settings</span></a>
+          <a href="/settings">Manage your <span>account</span></a>
+        </section>
+        <section>
+          <div>FOR CURATORS</div>
+          <a href="/streams">All<span>Streams</span> created by you</a>
+          <a href="/stats"><span>Stats</span> for all your Streams</a>
+        </section>
+        <section>
+          <div>ABOUT</div>
+          <a href="/about">Blog, Jobs, <span>About</span> and more</a>
+        </section>
         <a href="/logout" class="logout">Logout</a>
       </div>
     {% else %}
