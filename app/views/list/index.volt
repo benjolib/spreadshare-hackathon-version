@@ -946,7 +946,6 @@
               //img.onload = fn;
             }
           });
-          r
 
 
           document.getElementById('addRowImage').onclick = function () {

@@ -210,22 +210,6 @@ class User extends UserEvents {
             }
 
             $user->create();
-        } else {
-            $user->setEmail($email)
-                 ->setName($name)
-                 ->setImage($profileImage)
-                 ->setAuthProvider($provider)
-                 ->setAuthUid($authUid)
-                 ->setHandle($handle)
-                 ->setLocation($city)
-                 ->setDescription($description)
-                 ->setTagline($tagline);
-
-            if ($website && preg_match($urlPattern, $website)) {
-                $user->setWebsite($website);
-            }
-
-            $user->save();
         }
 
         return $user;
