@@ -2911,8 +2911,10 @@ html {
   pointer-events: all;
   margin-left: 0;
   margin-top: 0;
+  min-width: inherit;
   width: 218px;
-  height: 74px;
+  min-height: 74px;
+  height: auto;
   border-radius: 4px;
   border: none;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
@@ -2933,6 +2935,14 @@ html {
   img {
     margin-right: 8px;
     width: 14px;
+  }
+  .header > .content.date {
+    padding-top: 0;
+  }
+  .request-remove {
+    margin-top: 1rem;
+    margin-bottom: .33rem;
+    text-align: center;
   }
 }
 

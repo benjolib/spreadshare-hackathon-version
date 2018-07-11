@@ -177,7 +177,7 @@
 
                   {% else %}
                   ADDED BY
-                <div class="u-flex u-flexCol content">
+                <div class="u-flex u-sm-flexCol u-md-flexRow u-md-flexAlignItemsCenter content">
                     {% if row['userId'] == table['ownerUserId'] %}
                     <img src="{{ table['creatorImage'] }}" /> {% else %}
                     <img src="/userimages/{{row['userId']}}.jpg" /> {% endif %}
