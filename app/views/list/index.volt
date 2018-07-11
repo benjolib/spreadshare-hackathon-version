@@ -395,7 +395,7 @@
     {% else %}
 
 
-  <div class="list-actions bottom u-sm-flexCol u-sm-flexAlignItemsCenter">
+  <div class="list-actions bottom u-sm-flexCol u-md-flexRow u-sm-flexAlignItemsCenter">
     <div class="button-container button-container__white" data-dropdown-placement="center" data-dropdown-offset="0">
 
         <a class="re-button re-button--list-subscribe" href="javascript:;">
