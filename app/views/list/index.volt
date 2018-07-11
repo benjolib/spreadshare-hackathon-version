@@ -59,7 +59,7 @@
       {% else %}
 
 
-      <div class="list-actions u-sm-flexCol u-sm-flexAlignItemsCenter">
+      <div class="list-actions u-sm-flexCol u-md-flexRow u-sm-flexAlignItemsCenter">
         <div class="button-container button-container__white" data-dropdown-placement="center" data-dropdown-offset="0">
 
           <a class="re-button re-button--list-subscribe" href="javascript:;">
@@ -357,7 +357,7 @@
 
     {% if !amISubscribed(table['id']) %}
 
-  <div class="list-actions bottom u-sm-flexCol u-md-flexRow">
+  <div class="list-actions bottom u-sm-flexCol u-md-flexRow u-md-flexRow">
     <div class="button-container button-container__orange l-button" data-dropdown-placement="center" data-dropdown-offset="0">
 
         <a class="re-button re-button--list-subscribe" href="javascript:;">
