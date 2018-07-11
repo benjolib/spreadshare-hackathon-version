@@ -324,7 +324,6 @@ $("body").mouseup(function(e){
       
      });
     $('.ui.multiple').on('change', function(e) { 
-      console.log("tag",tags.value.split(",").map(Number).length)
         if(tags.value.split(",").map(Number).length > 0 && tags.value){
             $('.tagschecked').show()
             $('.tagsdisabled').hide()
