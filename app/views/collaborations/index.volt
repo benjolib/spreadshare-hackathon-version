@@ -28,8 +28,8 @@
                 <div class="submission-status submission-status--confirmed">CONFIRMED</div>
               {% elseif submission['status'] === '2' %}
                 <div class="submission-status submission-status--rejected">REJECTED</div>
-              {% endif %}
-              <div class="submission-comment">{{ submission['comment'] }}</div>
+              {% endif %} 
+              <div class="submission-comment">on <a href="/stream/{{ submission['table_id'] }}">{{ submission['title'] }}</a>{%if submission['comment'] %} COMMENT: <span class="comment">{{ submission['comment'] }}</span>{%endif%}</div> 
               <div class="submission-clock"><img src="/assets/images/comment-clock.svg" />{{ formatTimestamp(submission['createdAt']) }}</div>
             </div>
             <div class="table-scroll table-scroll--submissions">
