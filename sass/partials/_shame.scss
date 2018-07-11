@@ -1139,19 +1139,21 @@ html {
 
 .card-actions-dropdown {
   margin-top: -5px;
-  margin-right: -1px;
-  width: 130px;
-  height: 77px;
+  min-width: 130px;
+  width: auto;
+  min-height: 77px;
+  height: auto;
   border: 1px solid #dbdbdb;
   border-radius: 4px;
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.18);
-  padding-left: 14px;
+  padding: 18px;
   text-align: left;
-  margin-right: -7px;
   justify-content: space-evenly;
+  margin-right: -6px;
+
   &--tall {
     height: 120px;
-    padding: 5px 14px0;
+    padding: 5px 14px;
   }
   a {
     @include typography(9);
@@ -1167,9 +1169,8 @@ html {
   }
   @media (min-width: 768px) {
     margin-top: -10px;
-    width: 170px;
-    height: 90px;
-    padding-left: 31px;
+    min-width: 170px;
+    min-height: 90px;
     &--tall {
       height: 152px;
     }
