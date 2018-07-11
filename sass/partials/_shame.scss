@@ -4584,6 +4584,8 @@ html {
     }
   }
   .edit-button {
+    @include typography(9);
+
     display: none;
     flex-direction: column;
     justify-content: center;
@@ -4596,8 +4598,6 @@ html {
     text-decoration: none;
     text-align: center;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
-    font-family: 'Roboto Mono', monospace;
-    font-weight: bold;
     @media (min-width: 768px) {
       display: flex;
     }
