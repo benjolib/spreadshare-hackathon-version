@@ -258,13 +258,11 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
 
   <div class="featured-curators">
     <div class="featured-curators__inner">
-
-
       <h3>Featured Curators</h3>
 
-<div class="u-flex u-sm-flexWrap">
+<div class="u-flex u-sm-flexWrap u-flexJustifyEvenly">
  {% for index, featuredCurator in featuredCurators %}
-{% set index= index+1 %} 
+{% set index= index+1 %}
  {{ partial('partials/profile-card', [ 'id': featuredCurator['id'], 'username': featuredCurator['handle'], 'avatar': featuredCurator["image"]
 , 'name': featuredCurator["name"] , 'bio': featuredCurator["tagline"] ,'type': 4, 'truncate':true ]) }}
 
