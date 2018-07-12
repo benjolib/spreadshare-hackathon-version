@@ -3301,8 +3301,7 @@ html {
     @include typography(9);
 
     color: #697c95;
-    padding: 24px 6px 5px 6px;
-    margin-bottom: 15px;
+    padding: 24px 6px 20px 6px;
     margin-right: 32px;
     align-items: center;
     height: 91px;
@@ -3640,12 +3639,15 @@ html {
     margin-top: 26px;
   }
   &__notification {
-    margin-bottom: 28px;
+    margin-bottom: 1rem;
+    padding-bottom: .5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, .03);
     &__image {
       width: 44px;
       height: 44px;
       border-radius: 9999px;
       margin-right: 10px;
+      box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.67);
     }
     &__name {
       font-family: 'Roboto Mono', monospace;
