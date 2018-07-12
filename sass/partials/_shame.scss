@@ -3299,6 +3299,7 @@ html {
   &__item {
     display: none;
     @include typography(9);
+
     color: #697c95;
     padding: 24px 6px 5px 6px;
     margin-bottom: 15px;
@@ -3353,8 +3354,10 @@ html {
     left: -9px;
     background: white;
     height: 87px;
+    min-width: 75%;
     width: auto;
     display: flex;
+
     @media (min-width: 768px) {
       height: 91px;
       width: 526px;
