@@ -1416,6 +1416,12 @@ html {
       margin-right: 125px;
     }
   }
+   .col3 {
+     margin-right: 72px;
+     @media (min-width: 768px) {
+       margin-right: 125px;
+     }
+   }
   &-label {
     font-family: 'Roboto Mono', monospace;
     color: #6a7c94;
@@ -5714,4 +5720,17 @@ html {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
+}
+.simpletext {
+  h2 {
+    @include typography(5);
+  }
+  p{
+    @include typography(7);
+    color: #3A314A;
+  }
+
+  b{
+    @include typography(6);
+  }
 }
