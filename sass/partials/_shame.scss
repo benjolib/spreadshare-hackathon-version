@@ -1124,7 +1124,6 @@ html {
     width: 60px;
     height: 60px;
     &__text {
-      font-size: 14px;
       right: 45px;
     }
   }
@@ -2155,13 +2154,22 @@ html {
           margin-bottom: 2px;
         }
       }
+      & > div:first-child {
+        margin-top: 15px;
+        margin-bottom: -20px;
+      }
       h3 {
-        @include typography(3);
+        @include typography(5);
 
-        color: #2a1e3e;
+        color: $text-color-black;
         margin-bottom: 2px;
         @media (min-width: 768px) {
-          margin-bottom: 3px;
+          margin-top: 24px;
+          margin-bottom: 8px;
+        }
+
+        img {
+          width: 16px;
         }
       }
       p {
@@ -2169,9 +2177,9 @@ html {
 
         word-spacing: 0.5px;
         margin-bottom: 1px;
-        color: #9baabf;
+        color: $text-color-gray;
         @media (min-width: 768px) {
-          margin-bottom: 4px;
+          margin-bottom: 21px;
         }
       }
     }
@@ -3366,7 +3374,6 @@ html {
     left: -9px;
     background: white;
     height: 87px;
-    min-width: 75%;
     width: auto;
     display: flex;
 
@@ -4432,7 +4439,7 @@ html {
       margin-right: 4px;
       width: 12px;
       @media (min-width: 768px) {
-        width: auto;
+        width: 16px;
       }
     }
   }
@@ -5502,10 +5509,13 @@ html {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  align-items: center;
   @media (min-width: 768px) {
+    background-image: url("/assets/images/9-0/bees.png");
+    background-repeat: repeat-x;
     flex-direction: row;
   }
-  background: #eddffc;
+  background: #8f2cfa;
   padding-top: 2.5em;
   padding-bottom: 2.5em;
   margin: 0 auto;
@@ -5515,14 +5525,16 @@ html {
     margin-left: 2.5em;
     flex-direction: column;
     justify-content: center;
-    color: #9013fe;
+    color: #ffffff;
     .heading {
       @include typography(3);
-      margin-bottom: 1px;
+      margin-bottom: 10px;
+      color: #ffffff;
     }
     .subheading {
       @include typography(4);
       margin-bottom: 8px;
+      color: #ffffff;
     }
   }
   .action {
@@ -5538,6 +5550,7 @@ html {
     button {
       @include typography(9);
 
+      color: #9013FE;
       cursor: pointer;
       outline: none;
       margin-left: 2em;
@@ -5547,7 +5560,7 @@ html {
       border: 0;
       justify-content: center;
       align-items: center;
-      width: 194px;
+      width: 192px;
       height: 60px;
       padding: 0px 4px;
       box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.18);
