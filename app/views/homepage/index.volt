@@ -125,7 +125,7 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
       {% if subcribedbox is not defined %}
       {% if qty == 3 %}
       {% set subcribedbox=1 %}
-    <div class="u-flex u-flexWrap homepage-gutter">
+    
         {{ partial('partials/action-card', [ 'color': 'orange-bird', 'heading': 'Subscribe', 'text': 'Subscribe to your favorite
         topics and collections.
         <br />
@@ -138,7 +138,7 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
       {% endfor %}
 
 
-    </div>
+   
       </div>
   </div>
 
