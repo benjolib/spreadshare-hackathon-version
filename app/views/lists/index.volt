@@ -1,4 +1,4 @@
-{% extends 'layouts/main.volt' %} {% block title %}SpreadShare - Lists{% endblock %} {% block header %} {% endblock %} {%
+{% extends 'layouts/main.volt' %} {% block title %}SpreadShare - Streams{% endblock %} {% block header %} {% endblock %} {%
 block content %}
 <div class="re-page">
   <div class="u-flex u-sm-flexCol u-md-flexRow u-flexJustifyBetween u-md-flexAlignItemsEnd lists-page-space">
