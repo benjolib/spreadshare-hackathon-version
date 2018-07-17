@@ -271,14 +271,7 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
 
 
 
-{% if index % 4 == 0 %}
 
-
-</div>
-<div class="u-flex">
-
-
-  {% endif %}
 
 
 {% endfor %}
