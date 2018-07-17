@@ -15,6 +15,10 @@ return [
         'host' => 'elasticsearch',
         'port' => '9200',
     ],
+    'algolia' => [
+        'application_id' => 'JDVCECO7A6',
+        'admin_api_key' => '9b974cc48b2043752f8ff7245972bd7a',
+    ],
     'read-database' => [
         'adapter' => 'Mysql',
         'host' => 'mysql1',
@@ -108,14 +112,14 @@ return [
         'DS\Services' => ROOT_PATH . '/app/services/',
     ],
     'mode' => '_ENVIRONMENT_',
-    
+
     'hybridauth' => [
         "debug_mode" => '_AUTH_DEBUG_',
         "debug_file" => ROOT_PATH . "/system/log/hybridauth",
-        
+
         //Location where to redirect users once they authenticate with a provider
         'callback' => '_AUTH_CALLBACK_',
-        
+
         //Providers specifics
         'providers' => [
             'Twitter' => [

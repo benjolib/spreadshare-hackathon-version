@@ -37,7 +37,8 @@
     "league/csv": "^9.0",
     "mailgun/mailgun-php": "^2.3",
     "bernard/bernard": "^1.0@dev",
-    "maknz/slack": "^1.7"
+    "maknz/slack": "^1.7",
+    "algolia/algoliasearch-client-php": "dev-master"
   },
   "require-dev": {
     "phalcon/devtools": "dev-master",
