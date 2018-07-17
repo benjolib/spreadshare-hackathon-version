@@ -50,16 +50,19 @@
       var searchItems = $('#search-items');
       // hits object
       // Insert total results value
-      $('.result-count').html(response.data.hits.total + " RESULTS");
+      //$('.result-count').html(response.data.hits.total + " RESULTS");
+      $('.result-count').html(response.length + " RESULTS");
       // create item array
       var items = [];
       // empty the existing list
       $(searchItems).empty();
       // foreach array
-      $.each(response.data.hits.hits, function (key, val) {
+      $.each(response, function (key, val) {
         // item
-        items.push("<a href='/stream/" + val._id + "'><div class='item'><div class='title'>" + val._source.title +
-          "</div><div class='tagline'>" + val._source.tagline + "</div></div></a>");
+        // items.push("<a href='/stream/" + val._id + "'><div class='item'><div class='title'>" + val._source.title +
+        //   "</div><div class='tagline'>" + val._source.tagline + "</div></div></a>");
+        items.push("<a href='/stream/" + val.objectID + "'><div class='item'><div class='title'>" + val.title +
+          "</div><div class='tagline'>" + val.tagline + "</div></div></a>");
       });
       // append list to array
       $(searchItems).append(items.join(''));
@@ -84,23 +87,26 @@
         prevSearch = searchEl;
         if (searchEl.length > 0) {
           // append href link
-          $(".all-results").attr('href', '/search?query=' + searchEl + '')
+          //$(".all-results").attr('href', '/search?query=' + searchEl + '')
           window.clearTimeout(timer);
           timer = window.setTimeout(function () {
+          
             // AJAX Query
-            $.ajax({
-              url: "/api/v1/search/",
-              method: "GET",
-              crossDomain: true,
-              dataType: "JSON",
-              data: {
-                "query": searchEl.trim()
-              },
-              success: function (response) {
-                autoCompleteHandler(response)
-              }
+            // $.ajax({
+            //   url: "/api/v1/search/",
+            //   method: "GET",
+            //   crossDomain: true,
+            //   dataType: "JSON",
+            //   data: {
+            //     "query": searchEl.trim()
+            //   },
+            //   success: function (response) {
+            //     autoCompleteHandler(response)
+            //   }
+            // });
+            document.searchstream.search(searchEl, function(err, content) { 
+             autoCompleteHandler(content.hits)
             });
-
           }, delay);
 
           onSearchPopper.addClass('show');
