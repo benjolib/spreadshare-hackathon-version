@@ -198,19 +198,14 @@
 
                   </div>
 
-          <div class="request-remove">
-                    <a href="/row/{{ row['id']}}/delete">
-
-                      <img src="/assets/images/bin.svg" /> Request to remove
-                    </a>
-                  </div>
+                <a href="#" class="action-button">Request to remove</a>
           </div>
 
           </div>
           </td>
 
           <td>
-            <div class="l-button mouseover re-table__list-image {{ row['image'] ? '' : 're-table__list-image--empty' }}" style="background: #f5f5f5 url({{ row['image'] }}) center / cover;">
+            <div class="l-button re-table__list-image {{ row['image'] ? '' : 're-table__list-image--empty' }}" style="background: #f5f5f5 url({{ row['image'] }}) center / cover;">
               <img data-name="{{ row['content']|json_decode[0].content }}" class="{{ row['image'] ? '' : 'empty' }}" />
               <div class="re-table__list-image__upload-button"></div>
               <!--<div class="re-table__list-image__delete-button"></div>-->
@@ -242,6 +237,7 @@
                   {{ date('M jS H:i ',row['createdAt']) }}</div>
               </div>
               <input type="file" name="image" class="re-table__list-image-fileUpload" style="display: none;" />
+              <a href="#" class="action-button">Request to remove</a>
           </td>
 
 
@@ -250,31 +246,8 @@
           = 175 %} {% elseif len > 20 %} {% set length = 150 %} {% else %} {% set length = 0 %} {% endif %}
 
           <td style="min-width: {{ length }}px;">
-            <div class="l-button mouseover">{{ filterTableRowsContent(cell.content) }}</div>
-            <div class="addedby sh-dropdown  u-flex  u-flexJustifyBetween l-dropdown">
-              <div class="u-flex u-flexCol header">
-                {% if row['userId'] == null %} ADDED BY
-                <div class="u-flex creator">
-
-                  <div class="content">
-                    <img src="{{ table['creatorImage'] }}" /> {{ table['creatorHandle'] }}
-                  </div>
-                </div>
-
-                {% else %} ADDED BY
-                <div class="content">
-                  {% if row['userId'] == table['ownerUserId'] %}
-                  <img src="{{ table['creatorImage'] }}" /> {% else %}
-                  <img src="/userimages/{{row['userId']}}.jpg" /> {% endif %} {{ userHandleFromId(row['userId']) }}</div>
-                {% endif %}
-              </div>
-
-              <div class="u-flex u-flexCol header" style="margin-left:10px;">
-                DATE
-                <div class="u-flex content date" style="margin-right:10px;">
-                  {{ date('M jS H:i ',row['createdAt']) }}</div>
-              </div>
-            </div>
+            {{ filterTableRowsContent(cell.content) }}
+          
           </td>
           {% endfor %}
         </tr>
@@ -691,7 +664,12 @@
         var x, y, top, left, down, moving;
 
         $(".table-scroll").mousedown(function (e) {
-
+        if(e.target.className == "table-cell-show-more-button l-button"){
+          console.log("yes")
+          $('.table-cell-show-more-button').click()
+          return
+        }
+           // console.log("Target", e)
           //e.preventDefault();
           $(e.target).closest(".table-scroll").addClass("moving");
           moving = $(e.target).closest(".table-scroll");
@@ -702,8 +680,8 @@
           left = $(this).scrollLeft();
         });
 
-        $("body").mousemove(function (e) {
-          if (down) {
+        $(".table-scroll").mousemove(function (e) {
+          if (down ) {
 
             var newX = e.pageX;
             var newY = e.pageY;
@@ -713,7 +691,7 @@
           }
         });
 
-        $("body").mouseup(function (e) {
+        $(".table-scroll").mouseup(function (e) {
           down = false;
           $(moving).removeClass("moving");
         });
@@ -1044,6 +1022,7 @@
           // list edit stuff
 
           function linkifyAndDropdownifyCells() {
+            console.log("asdsad")
             $('.re-table tr.list-row-tr:not(.list-row-tr--add-row)').each(function () {
               $(this).find('td:nth-of-type(1n+4) div').each(function () {
                 var $this = $(this);
@@ -1060,7 +1039,7 @@
                   text = rawText.substr(0, lastPos);
                   text = text.substr(0, Math.min(text.length, text.lastIndexOf(" "))) + '...';
                   text +=
-                    '<a href="javascript:;" class="table-cell-show-more-button l-button" data-dropdown-placement="bottom">More</a>';
+                    '<a href="javascript:;" class="table-cell-show-more-button l-button" data-dropdown-placement="bottom">More!</a>';
                   text += '<div class="l-dropdown sh-dropdown table-cell-show-more-dropdown">' + rawText +
                     '</div>';
                 } else {

@@ -5741,35 +5741,32 @@ html {
     margin-top: 5px;
     flex-direction: column;
   }
+  a {
+    @include typography(7);
+    text-align: left;
+    color: $text-color-black;
+    &.action-button {
+      @include typography(9);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 52px;
+      margin-top: auto;
+      border-radius: 2px;
+      background-color: #F97a7a;
+      color: #ffffff;
+    }
+  }
   .content {
     padding-top: 16px;
     @include typography(7);
 
     text-align: left;
     color: $text-color-black;
-
-    a {
-      @include typography(7);
-      text-align: left;
-      color: $text-color-black;
-
-      &.action-button {
-        @include typography(9);
-
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        height: 52px;
-        margin-top: auto;
-        border-radius: 2px;
-        background-color: #F97a7a;
-        color: #ffffff;
-      }
-    }
 
     img{
       width: 24px;
