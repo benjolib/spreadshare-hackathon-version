@@ -204,7 +204,14 @@
   margin-bottom: 34px;
   padding-bottom: 10px;
 
-  a { min-width: 0; }
+  a {
+    min-width: 0;
+
+    /* stop title from growing over counter */
+    & + .list-card__subscriberCount {
+      flex: 1 11%;
+    }
+  }
   h3 { width: auto; }
 
   @media (min-width: 768px) {
@@ -300,7 +307,7 @@
   &__subscriberCount {
     @include typography(5);
     justify-content: flex-end;
-    align-self: flex-end;
+    align-self: baseline;
     margin-bottom: 10px;
     color: #ea612d;
     margin-right: 8px;
@@ -408,6 +415,7 @@
     position: relative;
     @media (min-width: 768px) {
       padding: 35px;
+      padding-bottom: 64px;
     }
   }
   &__heading {
