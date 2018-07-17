@@ -1145,19 +1145,25 @@ html {
   border: 1px solid #dbdbdb;
   border-radius: 4px;
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.18);
-  padding: 18px;
+  padding: 30px;
   text-align: left;
   justify-content: space-evenly;
   margin-right: -6px;
 
   &--tall {
-    height: 120px;
-    padding: 5px 14px;
+    a:first-child {
+      color: $text-color-green;
+    }
   }
   a {
     @include typography(9);
 
     color: #6a7c94;
+    padding-top: 20px;
+    &:first-child {
+      padding-top: 0;
+    }
+
     &.warning-color {
       color: #fb7977;
     }
@@ -1170,9 +1176,7 @@ html {
     margin-top: -10px;
     min-width: 170px;
     min-height: 90px;
-    &--tall {
-      height: 152px;
-    }
+
     img {
       height: auto;
       margin-right: 8px;
@@ -1540,6 +1544,10 @@ html {
     @media (min-width: 768px) {
       padding: 186px 20px 125px 20px;
     }
+
+    .action-card {
+      min-height: auto;
+    }
   }
 }
 
@@ -1655,7 +1663,6 @@ html {
 .re-heading-input {
   display: flex;
   align-items: center;
-  margin-left: -46px;
   margin-bottom: 8px;
   img {
     margin-right: 22px;
@@ -1714,7 +1721,6 @@ html {
 .re-subheading-input {
   display: flex;
   align-items: center;
-  margin-left: -46px;
   margin-bottom: 16px;
   img {
     margin-right: 22px;
@@ -1977,7 +1983,6 @@ html {
 .re-para-input {
   display: flex;
   align-items: center;
-  margin-left: -46px;
   margin-bottom: 16px;
   img {
     margin-right: 22px;
@@ -2055,6 +2060,10 @@ html {
         &.hide-on-small {
           display: table-cell;
         }
+      }
+
+      .list-card__subscriberCount {
+        margin-top: 6px;
       }
     }
     td:nth-of-type(1n + 4)>div {
@@ -2642,7 +2651,7 @@ html {
       .subheader {
         font-family: Lato;
         font-size: 20px;
-        font-weight: bold;
+        font-weight: normal;
         font-style: normal;
         font-stretch: normal;
         line-height: 1.33;
@@ -2803,7 +2812,9 @@ html {
     @include typography(7);
     font-size: 16px;
     color: $text-color-gray;
-    padding-top: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    position: relative;
   }
   button {
     position: absolute;
@@ -3370,12 +3381,11 @@ html {
     }
   }
   &__search-open {
-    top: -1px;
-    left: -9px;
     background: white;
     height: 87px;
     width: auto;
     display: flex;
+    align-items: center;
 
     @media (min-width: 768px) {
       height: 57px;
@@ -3385,16 +3395,12 @@ html {
       box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.18);
     }
     img:first-of-type {
+      max-height: 16px;
       padding-left: 40px;
-      margin-top: 4px;
       margin-left: -8px;
-      @media (min-width: 768px) {
-        margin-top: 8px;
-      }
     }
     img:last-of-type {
       padding: 0;
-      margin-top: 2px;
       margin-left: -20px;
       cursor: pointer;
       z-index: 999;
@@ -3403,7 +3409,7 @@ html {
       }
       @media (min-width: 768px) {
         padding: 0 20px;
-        margin-left: 0px;
+        margin-left: 0;
       }
     }
     input {
@@ -3411,8 +3417,7 @@ html {
 
       width: 100%;
       border: none;
-      padding: 0px 34px;
-      margin-top: 4px;
+      padding: 0 34px;
       outline: none;
       z-index: 100;
       @media (min-width: 768px) {
@@ -3445,6 +3450,9 @@ html {
       position: absolute;
       top: -7px;
       left: 18px;
+    }
+    & .numberCircle {
+      box-shadow: 0 0.5px 1px 0 rgba(0,0,0,.18);
     }
   }
   &__user {
@@ -4062,9 +4070,9 @@ html {
 .sign-in-up-pretext {
   @include typography(3);
 
-  color: #6cc69c;
+  color: $text-color-black;
 
-  margin-bottom: 10px;
+  margin-bottom: 7px;
   margin-top: calc(50vh - 200px);
   text-align: center;
 }
@@ -4072,8 +4080,9 @@ html {
 .sign-in-up-heading {
   @include typography(4);
 
-  color: #2a1e3f;
-  margin-bottom: 31px;
+  color: $text-color-gray;
+  margin-top: 7px;
+  margin-bottom: 30px;
   text-align: center;
 }
 
@@ -4094,14 +4103,12 @@ html {
 
 @media (min-width: 768px) {
   .sign-in-up-pretext {
-    font-size: 14px;
-    margin-bottom: 12px;
+    margin-bottom: 7px;
     letter-spacing: 0.5px;
   }
   .sign-in-up-heading {
     font-weight: 700;
-    font-size: 28px;
-    margin-bottom: 42px;
+    margin-bottom: 30px;
     letter-spacing: -0.675294px;
   }
   .sign-in-up-text {
@@ -4178,7 +4185,7 @@ html {
 .sign-in-privacy {
   @include typography(7);
 
-  color: #9baabf;
+  color: $text-color-gray;
   text-align: center;
   margin-top: 8px;
   width: 266px;
@@ -4208,9 +4215,9 @@ html {
     }
   }
   .sign-in-privacy {
-    font-size: 12px;
+    font-size: 15px;
     letter-spacing: 0.38px;
-    margin-top: 21px;
+    margin-top: 25px;
     width: 350px;
   }
 }
@@ -4442,6 +4449,9 @@ html {
         width: 16px;
       }
     }
+  }
+  .list-card__subscriberCount {
+    margin-top: 6px;
   }
 }
 
@@ -4906,7 +4916,6 @@ html {
 .create-list-add-tags {
   display: flex;
   align-items: center;
-  margin-left: -46px;
   margin-bottom: 8px;
   img {
     margin-right: 22px;
@@ -5216,8 +5225,6 @@ html {
 }
 
 .digital-expert {
-  background-image: url("/assets/images/9-0/bees.png");
-  background-repeat: repeat-x; //background:  #fdd49a;
   max-width: 1356px;
   margin: 0 auto;
   display: flex;
@@ -5365,10 +5372,22 @@ html {
     max-width: 1356px;
     padding: 0 0 0 18px;
     margin: 0 auto;
+
+    & .u-flex {
+      justify-content: space-evenly;
+      align-items: flex-start;
+    }
   }
   .profile-card {
     font-size: 16px;
-    padding: 15px 12px 10px 0px;
+    padding: 15px 12px 10px 0;
+
+    &.u-flex {
+      margin-right: 0;
+      padding: 15px 0 10px 0;
+      flex: 1 30%;
+      align-items: flex-start !important;
+    }
   }
   &:-webkit-scrollbar {
     display: none;
@@ -5703,33 +5722,58 @@ html {
 }
 
 .addedby {
-  min-width:350px !important;
+  min-width: 230px !important;
   min-height: 100px !important;
-  padding-top:14px;
-  padding-left:20px;
+  flex-direction: column;
+  padding: 20px;
+  padding-bottom: 52px;
+  overflow-y: visible;
   .header {
     @include typography(8);
 
     text-align: left;
-    color: #9baabf;
+    color: $text-color-gray;
+    flex-direction: column;
+    margin-left: 0 !important;
+    padding-bottom: 20px;
   }
   .date {
     margin-top: 5px;
+    flex-direction: column;
   }
   .content {
-    padding-top:16px;
+    padding-top: 16px;
+    @include typography(7);
+
+    text-align: left;
+    color: $text-color-black;
 
     a {
       @include typography(7);
       text-align: left;
-      color: #2a1e3e;
+      color: $text-color-black;
+
+      &.action-button {
+        @include typography(9);
+
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 52px;
+        margin-top: auto;
+        border-radius: 2px;
+        background-color: #F97a7a;
+        color: #ffffff;
+      }
     }
-     text-align: left;
-     color: #2a1e3e;
 
     img{
-      width:35px;
-      height:35px;
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
       margin-right:5px;
     }
@@ -5741,11 +5785,12 @@ html {
   background-color: #2c60ef;
   color: white;
   margin-left: 10px;
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
+  font-size: 10px;
 }
 .simpletext {
   h2 {
