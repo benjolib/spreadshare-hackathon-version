@@ -198,7 +198,7 @@
 
                   </div>
 
-                <a href="#" class="action-button">Request to remove</a>
+                <a href="/row/{{ row['id']}}/delete" class="action-button">Request to remove</a>
           </div>
 
           </div>
