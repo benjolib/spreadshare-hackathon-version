@@ -258,6 +258,14 @@ return [
         'methods' => ['GET', 'POST'],
     ],
     [
+        'url' => '/stats',
+        'paths' => [
+            'controller' => 'Karma',
+            'action' => 'index',
+        ],
+        'methods' => ['GET', 'POST'],
+    ],
+    [
         'url' => '/settings',
         'paths' => [
             'controller' => 'Settings',

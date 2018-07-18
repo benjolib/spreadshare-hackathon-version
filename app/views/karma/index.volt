@@ -12,19 +12,22 @@
   <div class="wallet-stats u-flex">
     <div class="u-flex u-flexCol col1">
       <div class="wallet-stats-label">TOTAL SUBSCRIBERS</div>
-      <div class="wallet-stats-stat green">643,723</div>
+      {% set subscribers = userSubscribers(auth.getUserId()) %}
+      <div class="wallet-stats-stat green">{{ subscribers }}</div>
     </div>
     <div class="u-flex u-flexCol col2">
       <div class="wallet-stats-label">PLATFORM SHARE</div>
-      <div class="wallet-stats-stat">0.045%*</div>
+      {% set subsriberspercentage = (userSubscribers(auth.getUserId()) / totalSubscriptions() ) * 100 %}
+      {% set rounded = round(subsriberspercentage) %}
+      <div class="wallet-stats-stat">{{rounded}} %* </div>
     </div>
     <div class="u-flex u-flexCol col3">
       <div class="wallet-stats-label">PLATFORM VALUE</div>
-      <div class="wallet-stats-stat">$1,2MN</div>
+      <div class="wallet-stats-stat">$1.2MN {# totalSubscriptions() #}</div>
     </div>
     <div class="u-flex u-flexCol col4">
       <div class="wallet-stats-label">YOUR VALUE</div>
-      <div class="wallet-stats-stat">$53,291</div>
+      <div class="wallet-stats-stat">{{ round(( 1200000 * rounded )/ 100  ) }} €</div>
     </div>
   </div>
 

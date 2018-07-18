@@ -165,5 +165,11 @@ class VoltAdapter extends Volt
                 return "\\DS\\Component\\View\\Functions\\StatsHelper::userSubscribers({$args})";
             }
         );
+        $compiler->addFunction(
+            'round',
+            function ($args) {
+                return "\\DS\\Component\\View\\Functions\\StatsHelper::round({$args})";
+            }
+        );
     }
 }

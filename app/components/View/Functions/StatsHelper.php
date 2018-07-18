@@ -18,12 +18,16 @@ class StatsHelper extends Component
     {
         return User::count();
     }
-    public static function usersSubscribers(int $userId):int
+    public static function userSubscribers(int $userId):int
     {
         $tableIds = array_column(Tables::findAllByFieldValue('ownerUserId', $userId)->toArray(['id']),'id');
 
         return TableSubscription::count([
             "tableId IN (".implode(",", $tableIds).")"
         ]);
+    }
+    public static function round(float $number):float
+    {
+        return round($number,2);
     }
 }

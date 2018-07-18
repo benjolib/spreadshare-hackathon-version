@@ -97,7 +97,7 @@
         <section>
           <div>FOR CURATORS</div>
           <a href="/streams">All <span>Streams</span> created by you</a>
-          <!-- <a href="/stats" style="margin-bottom:13px"><span>Stats</span> for all your Streams</a> -->
+          <a href="/stats" style="margin-bottom:13px"><span>Stats</span> for all your Streams</a>
         </section>
         <section>
           <div>ABOUT</div>
