@@ -5814,3 +5814,16 @@ html {
     @include typography(6);
   }
 }
+.addAListingRow {
+  td {
+    textarea {
+
+      @media (min-width: 768px) {
+        min-width: 100px !important;
+      }
+      
+    }
+  }
+  
+  
+}

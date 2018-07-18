@@ -277,48 +277,55 @@
             </div>
           </td>
         </tr>
-        <tr id="addAListingRowSpace" class="re-table-space" style="display: none;"></tr>
-        <tr id="addAListingRow" class="list-row-tr list-row-tr--add-row" style="display: none;">
-          <td>
-
-          </td>
-          <td class="shadowcontaintd">
-            <div class="shadowcontain"></div>
-          </td>
-          <td>
-            <div class="re-table__list-image__upload-button"></div>
-            <div class="re-table__list-image re-table__list-image--new-row" id="addRowImage"></div>
-
-            <!-- <div class="re-table__list-image re-table__list-image--editing" style="background: #f5f5f5 center / cover;">
-
-              <div class="re-table__list-image__upload-button"></div>
-
-              <div class="re-table__list-image__upload-button"></div>
-                <div class="re-table__list-image__delete-button"></div>
-              </div> -->
-
-
-            <input type="file" name="image" id="new-row-fileUpload" style="display: none;" />
-
-          </td>
-          {% for index,column in tableColumns %}
-          <td>
-            <div style="display:flex">
-
-              <textarea onmouseover="javascript:$('.e{{i}}{{index}}').css('visibility','visible');" ; onmouseout="javascript:$('.e{{i}}{{index}}').css('visibility', 'hidden');"
-                id="{{i}}" placeholder="{{ column.title }}" rows="1" class="edit icon cell-input-sizing d{{i}}{{index}}"></textarea>
-              <i id="{{i}}" class="pencil icon blue e{{i}}{{index}}" style="cursor: pointer;visibility: hidden;" onclick="console.log($(this).prev().prev());javascript:$('#d{{i}}{{index}}').focus();"></i>
-            </div>
-          </td>
-
-          {% endfor %}
-        </tr>
+       
         <tr class="re-table-space"></tr>
         <tr class="re-table-space"></tr>
       </tbody>
     </table>
+    <table class="re-table re-table--list addAListingRow"  style="margin-left:21px;width:100%;">
+      <tr id="addAListingRowSpace" class="re-table-space" style="display: none;"></tr>
+      <tr id="addAListingRow" class="list-row-tr list-row-tr--add-row" style="display: none;">
+        <td>
+
+        </td>
+        <td class="shadowcontaintd">
+          <div class="shadowcontain"></div>
+        </td>
+        <td>
+          <div class="re-table__list-image__upload-button"></div>
+          <div class="re-table__list-image re-table__list-image--new-row" id="addRowImage"></div>
+
+          <!-- <div class="re-table__list-image re-table__list-image--editing" style="background: #f5f5f5 center / cover;">
+
+            <div class="re-table__list-image__upload-button"></div>
+
+            <div class="re-table__list-image__upload-button"></div>
+              <div class="re-table__list-image__delete-button"></div>
+            </div> -->
+
+
+          <input type="file" name="image" id="new-row-fileUpload" style="display: none;" />
+
+        </td>
+        {% for index,column in tableColumns %}
+        <td>
+          <div style="display:flex;">
+
+            <textarea onmouseover="javascript:$('.e{{i}}{{index}}').css('visibility','visible');" ; onmouseout="javascript:$('.e{{i}}{{index}}').css('visibility', 'hidden');"
+              id="{{i}}" placeholder="{{ column.title }}" rows="1" class="edit icon cell-input-sizing d{{i}}{{index}}"></textarea>
+            <i id="{{i}}" class="pencil icon blue e{{i}}{{index}}" style="cursor: pointer;visibility: hidden;" onclick="console.log($(this).prev().prev());javascript:$('#d{{i}}{{index}}').focus();"></i>
+          </div>
+        </td>
+
+        {% endfor %}
+      </tr>
+      <tr class="re-table-space"></tr>
+        <tr class="re-table-space"></tr>
+    </table>
     </div>
 
+
+   
     <div class="addAListingSubmitAndCancel" id="addAListingSubmitAndCancel" style="display: none;">
       <a class="re-button re-button--list-add-row" href="#" id="addAListingSubmit">
         <img src="/assets/images/9-0/list-collaborate-button-octopus.svg" />Submit</a>
@@ -768,6 +775,8 @@
               minWidth = 175;
             } else if (len > 20) {
               minWidth = 150;
+            } else if (len <= 20) {
+              minWidth = 100;
             }
 
             $this.parents('td').attr('style', 'min-width:' + minWidth + 'px;');
@@ -786,8 +795,8 @@
               minWidth = 300;
             } else if (len > 40) {
               minWidth = 175;
-            } else if (len > 20) {
-              minWidth = 150;
+            } else if (len <= 20) {
+              minWidth = 100;
             }
 
             $this.parents('td').attr('style', 'min-width:' + minWidth + 'px;');
