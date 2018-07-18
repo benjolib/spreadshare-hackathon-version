@@ -48,7 +48,7 @@ class RequestAddController extends BaseController implements LoginAwareControlle
 
         $submission->save();
         // Get form data
-        if ($this->request->hasFiles()) {
+        if ($this->request->hasFiles(true)) {
             $image = $this->request->getUploadedFiles();
             $image = $image[0];
             $imagePath = '/rowimages/collab_'.$submission->getId().'.'. $image->getExtension();
