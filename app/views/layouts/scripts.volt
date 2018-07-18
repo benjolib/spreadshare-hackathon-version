@@ -90,7 +90,7 @@
           //$(".all-results").attr('href', '/search?query=' + searchEl + '')
           window.clearTimeout(timer);
           timer = window.setTimeout(function () {
-          
+
             // AJAX Query
             // $.ajax({
             //   url: "/api/v1/search/",
@@ -104,7 +104,7 @@
             //     autoCompleteHandler(response)
             //   }
             // });
-            document.searchstream.search(searchEl, function(err, content) { 
+            document.searchstream.search(searchEl, function(err, content) {
              autoCompleteHandler(content.hits)
             });
           }, delay);
@@ -112,7 +112,7 @@
           onSearchPopper.addClass('show');
 
           new Popper(searchReferenceElement, onSearchPopper, {
-            placement: 'bottom-start',
+            placement: 'bottom',
             modifiers: {
               offset: {
                 offset: -26
@@ -269,7 +269,7 @@
         });
 
         $button.click(function () {
-          
+
           if($dropdown.hasClass("show") || $('.l-dropdown').hasClass("show")) {
 
             $('.l-dropdown').removeClass('show');
@@ -280,8 +280,8 @@
           }else {
             $dropdown.addClass('show');
           }
-          
-          
+
+
 
           if ($button.data('dropdown-active-class')) {
             $button.addClass($button.data('dropdown-active-class'));
@@ -297,7 +297,7 @@
         //   }else {
         //     $dropdown.addClass('show');
         //   }
-          
+
         //   if ($button.data('dropdown-active-class')) {
         //     $button.addClass($button.data('dropdown-active-class'));
         //   }

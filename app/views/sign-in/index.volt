@@ -4,9 +4,8 @@
 {% endblock %}
 
 {% block content %}
-<p class="sign-in-up-pretext">WELCOME</p>
-<h3 class="sign-in-up-heading">Start subscribing and curating lists</h3>
-<p class="sign-in-up-text sign-in-up-text--large">Please sign in</p>
+<p class="sign-in-up-pretext">Welcome</p>
+<h3 class="sign-in-up-heading">How do you want to create an account?</h3>
 <div class="sign-in-options">
   <button class="sign-in-button sign-in-facebook" onclick="location.href='/login/facebook';" >
     <img class="img-fb" src="/assets/images/sign-in-facebook.svg" />

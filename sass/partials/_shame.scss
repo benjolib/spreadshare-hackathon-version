@@ -1851,6 +1851,7 @@ html {
     width: 50px;
     margin: 12px 6px 0;
     height: 45px;
+    border: 0;
   }
   &--lists-curate-stream {
     background-color: #2F267D;
@@ -2064,6 +2065,10 @@ html {
 
       .list-card__subscriberCount {
         margin-top: 6px;
+      }
+
+      & h3 + .list-card__subscriberCount {
+        align-self: flex-end;
       }
     }
     td:nth-of-type(1n + 4)>div {
@@ -4107,7 +4112,7 @@ html {
     letter-spacing: 0.5px;
   }
   .sign-in-up-heading {
-    font-weight: 700;
+    font-weight: 400;
     margin-bottom: 30px;
     letter-spacing: -0.675294px;
   }
@@ -4216,9 +4221,8 @@ html {
   }
   .sign-in-privacy {
     font-size: 15px;
-    letter-spacing: 0.38px;
     margin-top: 25px;
-    width: 350px;
+    width: 307px;
   }
 }
 
@@ -4228,6 +4232,14 @@ html {
   justify-content: center;
   flex-direction: column;
   align-items: center;
+
+  & label.re-field {
+    border: 0;
+
+    .re-field__label {
+      color: #6a7C94;
+    }
+  }
 }
 
 .sign-up-form-submit {
@@ -5374,8 +5386,8 @@ html {
     margin: 0 auto;
 
     & .u-flex {
-      justify-content: space-evenly;
       align-items: flex-start;
+      align-content: flex-start;
     }
   }
   .profile-card {
@@ -5385,7 +5397,7 @@ html {
     &.u-flex {
       margin-right: 0;
       padding: 15px 0 10px 0;
-      flex: 1 30%;
+      width:  33.3%;
       align-items: flex-start !important;
     }
   }

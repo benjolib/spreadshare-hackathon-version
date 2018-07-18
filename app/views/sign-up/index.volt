@@ -4,9 +4,8 @@
 {% endblock %}
 
 {% block content %}
-<p class="sign-in-up-pretext">CONTRIBUTE</p>
-<h3 class="sign-in-up-heading">Almost there</h3>
-<p class="sign-in-up-text">Finish creating your account</p>
+<p class="sign-in-up-pretext">Almost there</p>
+<h3 class="sign-in-up-heading">Finish creating your account</h3>
 <form class="sign-up-form" action="/signup" method="post">
   <label class="re-field">
     <img class="re-field__image re-field__image-default" src="/assets/images/circle-default.svg" />
