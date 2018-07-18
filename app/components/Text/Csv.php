@@ -45,12 +45,12 @@ class Csv
             },
             $enc
         );
-        $lines = preg_split($skipEmptyLines ? ($trimFields ? '/( *\R)+/s' : '/\R+/s') : '/\R/s', $enc);
-        
-        return array_map(
+        $lines = preg_split($skipEmptyLines ? ($trimFields ? '/( *\R)+/s' : '/\R+/s') : '/\R/s', trim($enc));
+        $trimmedLines = array_map('trim', $lines);
+        $result = array_map(
             function ($line) use ($delimiter, $trimFields) {
                 $fields = $trimFields ? array_map('trim', explode($delimiter, $line)) : explode($delimiter, $line);
-                
+
                 return array_map(
                     function ($field) {
                         return str_replace('!!Q!!', '"', urldecode($field));
@@ -58,8 +58,9 @@ class Csv
                     $fields
                 );
             },
-            $lines
+            $trimmedLines
         );
+        return $result;
     }
     
 }

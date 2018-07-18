@@ -11,7 +11,6 @@ use DS\Model\DataSource\TableFlags;
 use DS\Model\DataSource\UserRoles;
 use DS\Model\Tables;
 use DS\Services\Stream as StreamService;
-use Phalcon\Http\Request\File;
 
 class CreateListController extends BaseController implements LoginAwareController
 {
