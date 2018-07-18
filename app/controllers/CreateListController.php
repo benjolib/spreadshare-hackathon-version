@@ -75,7 +75,7 @@ class CreateListController extends BaseController implements LoginAwareControlle
                         $this->flash->error($e->getMessage());
                         return;
                     }
-                $this->response->redirect("/stream/" . $tableId, true);
+                $this->response->redirect("/stream/" . $table->getSlug(), true);
 
             } else {
                 try {
