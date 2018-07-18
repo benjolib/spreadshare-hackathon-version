@@ -805,4 +805,5 @@ ALTER TABLE row_delete_request ADD `createdAt` INT(10) unsigned DEFAULT NULL;
 ALTER TABLE row_delete_request ADD `updateddAt` INT(10) unsigned DEFAULT NULL;
 
 
-
+ALTER TABLE `tableViews` ADD INDEX (`tableId`);
+ALTER TABLE `tableViews` ADD CONSTRAINT `tableViewsTableId` FOREIGN KEY (`tableId`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
