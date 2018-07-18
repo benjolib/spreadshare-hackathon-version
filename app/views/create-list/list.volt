@@ -53,6 +53,7 @@
               <input type="file" name="listing-image-{{ i }}" class="re-table__list-image-fileUpload" style="display: none;" />
             </td>
             {% for index,cell in row['content'] %}
+
               {% set len = filterTableRowsContent(cell)|striptags|length %}
                  {% if len > 160  %}
                  {% set length = 480 %}
@@ -67,7 +68,7 @@
                  {% endif %}
               <td style="min-width: {{ length }}px; cursor: pointer;" >
 <div onmouseover="javascript:$('.e{{i}}{{index}}').css('visibility','visible');" ; onmouseout="javascript:$('.e{{i}}{{index}}').css('visibility', 'hidden');"
-  id="{{i}}" class="edit icon" style="outline: 0px solid transparent;border:0;display:flex;d{{i}}{{index}};">{{ filterTableRowsContent(cell) }}</div>
+  id="{{i}}" class="edit icon" style="outline: 0px solid transparent;border:0;display:flex;d{{i}}{{index}};">{{cell}}</div>
               </td>
               <td>
 <i id="{{i}}" class="edit icon green e{{i}}{{index}}" style="cursor: pointer;visibility: hidden;" onclick="console.log($(this).prev().prev());javascript:$('.d{{i}}{{index}}').focus();"></i>
