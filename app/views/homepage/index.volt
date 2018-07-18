@@ -265,7 +265,7 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
 <div class="u-flex u-sm-flexWrap">
  {% for index, featuredCurator in featuredCurators %}
 {% set index= index+1 %} 
-{% if index < 9 %}
+{% if index <= 9 %}
  {{ partial('partials/profile-card', [ 'id': featuredCurator['id'], 'username': featuredCurator['handle'], 'avatar': featuredCurator["image"]
 , 'name': featuredCurator["name"] , 'bio': featuredCurator["tagline"] ,'type': 4, 'truncate':true ]) }}
 
