@@ -54,7 +54,7 @@
       <img class="re-heading-input__tick-green tagschecked" src="/assets/images/input-tick-green.svg" />
    
       <div class="ui fluid multiple search selection dropdown tags">
-      
+        
         {% if post['tags'] is not defined %}
         {% set post['tags'] = "" %}
         {% else %}
@@ -67,6 +67,7 @@
         <div class="default text input">Add at least 1 tag</div>
         <div class="menu">
         {% if tagsNames is defined %}
+        
         {% for index, tag in tagsNames %}
           <div class="item" data-value='{{ post['tags'][index] }}'>{{ tag }}</div>
         {%  endfor %}
@@ -223,7 +224,8 @@ $("body").mouseup(function(e){
     });
   $(document).ready(function () {
     $('.ui.dropdown.tags').dropdown({
-    allowAdditions: true,
+      saveRemoteData : true,
+    allowAdditions: false,
     apiSettings: {
       // this url parses query server side and returns filtered results
       url: '/api/v2/tags/?q={query}'
@@ -231,11 +233,13 @@ $("body").mouseup(function(e){
     label: {
   transition : 'horizontal flip',
   duration   : 200,
-  variation  : false
+  variation  : false,
+  
 },
   });
   $('.ui.dropdown.curators').dropdown({
-    allowAdditions: true,
+    saveRemoteData : true,
+    allowAdditions: false,
     apiSettings: {
       // this url parses query server side and returns filtered results
       url: '/api/v2/curators/?q={query}'
@@ -247,7 +251,8 @@ $("body").mouseup(function(e){
 },
   });
   $('.ui.dropdown.related').dropdown({
-    allowAdditions: true,
+    saveRemoteData : true,
+    allowAdditions: false,
     label: {
   transition : 'horizontal flip',
   duration   : 200,
