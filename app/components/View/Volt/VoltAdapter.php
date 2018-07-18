@@ -147,5 +147,23 @@ class VoltAdapter extends Volt
                 return "\\DS\\Component\\View\\Functions\\UserHelper::pendingReceived({$args})";
             }
         );
+        $compiler->addFunction(
+            'totalSubscriptions',
+            function ($args) {
+                return "\\DS\\Component\\View\\Functions\\StatsHelper::totalSubscriptions({$args})";
+            }
+        );
+        $compiler->addFunction(
+            'totalUsers',
+            function ($args) {
+                return "\\DS\\Component\\View\\Functions\\StatsHelper::totalUsers({$args})";
+            }
+        );
+        $compiler->addFunction(
+            'userSubscribers',
+            function ($args) {
+                return "\\DS\\Component\\View\\Functions\\StatsHelper::userSubscribers({$args})";
+            }
+        );
     }
 }

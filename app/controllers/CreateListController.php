@@ -11,7 +11,6 @@ use DS\Model\DataSource\TableFlags;
 use DS\Model\DataSource\UserRoles;
 use DS\Model\Tables;
 use DS\Services\Stream as StreamService;
-use Phalcon\Http\Request\File;
 
 class CreateListController extends BaseController implements LoginAwareController
 {
@@ -76,7 +75,7 @@ class CreateListController extends BaseController implements LoginAwareControlle
                         $this->flash->error($e->getMessage());
                         return;
                     }
-                $this->response->redirect("/stream/" . $tableId, true);
+                $this->response->redirect("/stream/" . $table->getSlug(), true);
 
             } else {
                 try {

@@ -3,19 +3,12 @@
 namespace DS\Controller;
 
 use DS\Application;
-use DS\Component\PrettyDateTime;
-use DS\Constants\Paging;
 use DS\Model\DataSource\TableFlags;
 use DS\Model\DataSource\UserRoles;
 use DS\Model\DataSource\UserStatus;
-use DS\Model\Helper\DateRange;
 use DS\Model\Helper\TableFilter;
-use DS\Model\Locations;
 use DS\Model\Tables;
-use DS\Model\TableStats;
 use DS\Model\Tags;
-use DS\Model\Topics;
-use DS\Model\Types;
 use DS\Model\User;
 use Phalcon\Exception;
 use Phalcon\Logger;
