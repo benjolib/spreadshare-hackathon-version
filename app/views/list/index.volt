@@ -477,7 +477,9 @@
             <div class="about-list__item__name">TAGS</div>
             <div class="about-list__item__content">
               <div class="tags" id="tags">
-                {% for i, tag in tags %} {{tag['title']}}{{ i + 1
+                {% for i, tag in tags %} 
+                 <a style="color:#2a1e3e" href="/tag/{{tag['id']}}">{{tag['title']}}</a> 
+                {{ i + 1
                 < tags|length ? ', ' : '' }} {% endfor %} </div>
               </div>
             </div>
