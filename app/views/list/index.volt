@@ -205,6 +205,7 @@
           </td>
 
           <td>
+             
             <div class="l-button re-table__list-image {{ row['image'] ? '' : 're-table__list-image--empty' }}" style="background: #f5f5f5 url({{ row['image'] }}) center / cover;">
               <img data-name="{{ row['content']|json_decode[0].content }}" class="{{ row['image'] ? '' : 'empty' }}" />
               <div class="re-table__list-image__upload-button"></div>
@@ -260,20 +261,20 @@
         <tr class="list-row-tr">
           <td class="pagination-td">
             <div class="pagination">
-              <a href="/stream/{{ table['id'] }}?page=1&orderby={{orderby}}">
+              <a href="?page=1&orderby={{orderby}}">
                 <<</a>
-                  <a href="/stream/{{ table['id'] }}?page={{ tableContent.before }}&orderby={{orderby}}">
+                  <a href="?page={{ tableContent.before }}&orderby={{orderby}}">
                     <</a>
                       {% if tableContent.current + 5
                       < tableContent.total_pages %} {% set endPage=tableContent.current + 5 %} {% else %} {% set endPage=tableContent.total_pages
                         %} {% endif %} {% if tableContent.current - 5> 1 %} {% set startPage=tableContent.current - 5 %} {% else %} {% set startPage=1 %} {% endif %} {% for
                         p in startPage..endPage %} {% if p === tableContent.current %}
-                        <a class="active" style="color:red" href="/stream/{{ table['id'] }}?page={{ p }}&orderby={{orderby}}">{{ p }}</a>
+                        <a class="active" style="color:red" href="?page={{ p }}&orderby={{orderby}}">{{ p }}</a>
                         {% else %}
-                        <a href="/stream/{{ table['id'] }}?page={{ p }}&orderby={{orderby}}">{{ p }}</a>
+                        <a href="?page={{ p }}&orderby={{orderby}}">{{ p }}</a>
                         {% endif %} {% endfor %}
-                        <a href="/stream/{{ table['id'] }}?page={{ tableContent.next }}&orderby={{orderby}}">></a>
-                        <a href="/stream/{{ table['id'] }}?page={{ tableContent.last }}&orderby={{orderby}}">>></a>
+                        <a href="?page={{ tableContent.next }}&orderby={{orderby}}">></a>
+                        <a href="?page={{ tableContent.last }}&orderby={{orderby}}">>></a>
             </div>
           </td>
         </tr>
