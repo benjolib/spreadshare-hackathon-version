@@ -1281,8 +1281,8 @@ html {
 }
 
 .home-heading {
-  margin-bottom: 30px;
-  @media (min-width: 768px) {
+  margin-bottom: 0;
+  @include media-query(tablet) {
     margin-bottom: 34px;
   }
   &__text {
@@ -1464,34 +1464,40 @@ html {
 
 .lists-page-space {
   margin-bottom: 33px;
-  @media (min-width: 768px) {
+  @include media-query(tablet) {
     margin-bottom: 135px;
   }
 }
 
 .submissions-page-space {
   margin-bottom: 33px;
-  @media (min-width: 768px) {
+  @include media-query(tablet) {
     margin-bottom: 135px;
   }
 }
 
 .list-page-space {
   margin-bottom: 61px;
-  @media (min-width: 768px) {
+  @include media-query(tablet) {
     margin-bottom: 71px;
   }
 }
 
 .homepage-space {
-  margin-bottom: 110px;
-  @media (min-width: 768px) {
+  margin-bottom: 20px;
+  & ~ div[class*=gutter] {
+    margin-top: 150px;
+    @include media-query(tablet) {
+      margin-top: 0;
+    }
+  }
+  @include media-query(tablet) {
     margin-bottom: 38px;
   }
 }
 
 .home-top-margin-bottom {
-  @media (min-width: 768px) {
+  @include media-query(tablet) {
     margin-bottom: 38px;
   }
 }
@@ -1504,13 +1510,13 @@ html {
   margin: 0 auto;
   max-width: 934px;
   padding: 129px 20px 60px 20px;
-  @media (min-width: 768px) {
+  @include media-query(tablet) {
     padding: 195px 20px 125px 20px;
   }
   &--list {
     padding-top: 142px;
     padding-bottom: 28px;
-    @media (min-width: 768px) {
+    @include media-query(tablet) {
       padding-bottom: 0px;
     }
   }
@@ -1519,7 +1525,7 @@ html {
   }
   &--search {
     padding-top: 24px;
-    @media (min-width: 768px) {
+    @include media-query(tablet) {
       padding-top: 73px;
     }
   }
@@ -1530,7 +1536,7 @@ html {
     margin: 0 auto;
     max-width: 1356px;
     padding: 109px 20px 60px 20px;
-    @media (min-width: 768px) {
+    @include media-query(tablet) {
       padding: 186px 20px 125px 20px;
     }
   }
@@ -1541,7 +1547,7 @@ html {
     margin: 0 auto;
     max-width: 1150px;
     padding: 109px 20px 60px 20px;
-    @media (min-width: 768px) {
+    @include media-query(tablet) {
       padding: 186px 20px 125px 20px;
     }
 
@@ -1693,6 +1699,16 @@ html {
 .re-subheading {
   @include typography(2);
 
+  margin: 10px 0;
+  &--list {
+    font-size: 30px;
+    line-height: 35px;
+    letter-spacing: -0.56px;
+    margin-bottom: 22px;
+  }
+  &--button-below {
+    margin-bottom: 22px;
+  }
   @media (max-width: 768px) {
     color: #9baabf;
     margin-bottom: 8px;
@@ -1705,16 +1721,6 @@ html {
   }
   a {
     color: #2dad6b;
-  }
-  margin: 10px 0;
-  &--list {
-    font-size: 30px;
-    line-height: 35px;
-    letter-spacing: -0.56px;
-    margin-bottom: 22px;
-  }
-  &--button-below {
-    margin-bottom: 22px;
   }
 }
 
@@ -1862,11 +1868,13 @@ html {
     @media (min-width: 768px) {
       letter-spacing: -0.33px !important;
       top: 20px;
-      margin-bottom: -15px !important;
     }
     img {
       margin-right:12px;
     }
+  }
+  &--lists-curate-stream.re-button {
+    margin-bottom: 0;
   }
   &--header.re-button {
     @include typography(9);
@@ -2064,12 +2072,16 @@ html {
       }
 
       .list-card__subscriberCount {
-        margin-top: 6px;
+        @include media-query(tablet) {
+          margin-top: 6px;
+        }
       }
 
       & h3 + .list-card__subscriberCount {
         align-self: flex-start;
-        margin-top: 23px;
+        @include media-query(tablet) {
+          margin-top: 23px;
+        }
       }
     }
     td:nth-of-type(1n + 4)>div {
@@ -2472,6 +2484,11 @@ html {
         font-size: 16px;
         letter-spacing: -0.43px;
       }
+    }
+    & .profile-card--type11 .profile-card__avatar {
+      width: 24px;
+      height: 24px;
+      margin-right: 16px;
     }
   }
   &__action {
@@ -3335,9 +3352,9 @@ html {
     img {
       width: 26px;
       height: auto;
-      margin-top: 2px;
 
       @include media-query(tablet) {
+        margin-top: 2px;
         width: 100%;
       }
     }
@@ -3368,7 +3385,9 @@ html {
         }
       }
       &.active {
-        border-bottom: 3px solid #ea612d;
+        @include media-query(tablet) {
+          border-bottom: 3px solid #ea612d;
+        }
       }
     }
     &.explore {
@@ -3383,7 +3402,9 @@ html {
       }
       @include media-query(tablet) {
         &.active {
-          border-bottom: 3px solid #2c247f;
+          @include media-query(tablet) {
+            border-bottom: 3px solid #2c247f;
+          }
         }
       }
     }
@@ -3395,7 +3416,9 @@ html {
         }
       }
       &.active {
-        border-bottom: 3px solid #2860f5;
+        @include media-query(tablet) {
+          border-bottom: 3px solid #2860f5;
+        }
       }
     }
   }
@@ -5442,7 +5465,10 @@ html {
     &.u-flex {
       margin-right: 0;
       padding: 15px 0 10px 0;
-      width:  33.3%;
+      width: 100%;
+      @include media-query(tablet) {
+        width: 33.3%;
+      }
       align-items: flex-start !important;
     }
   }
@@ -5882,10 +5908,7 @@ html {
         min-width: 100px !important;
         margin-top:10px;
       }
-      
+
     }
   }
-
-  
-  
 }
