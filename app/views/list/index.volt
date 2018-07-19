@@ -311,8 +311,8 @@
         {% for index,column in tableColumns %}
         <td>
           <div style="display:flex;">
-
-            <textarea onmouseover="javascript:$('.e{{i}}{{index}}').css('visibility','visible');" ; onmouseout="javascript:$('.e{{i}}{{index}}').css('visibility', 'hidden');"
+           
+            <textarea style="min-width: {{ column.title|length*16 }}px !important;" onmouseover="javascript:$('.e{{i}}{{index}}').css('visibility','visible');" ; onmouseout="javascript:$('.e{{i}}{{index}}').css('visibility', 'hidden');"
               id="{{i}}" placeholder="{{ column.title }}" rows="1" class="edit icon cell-input-sizing d{{i}}{{index}}"></textarea>
             <i id="{{i}}" class="pencil icon blue e{{i}}{{index}}" style="cursor: pointer;visibility: hidden;" onclick="console.log($(this).prev().prev());javascript:$('#d{{i}}{{index}}').focus();"></i>
           </div>
@@ -758,26 +758,20 @@
 
           function listCellInputSizing() {
             var $this = $(this);
-
             $this.height(5);
-            var height = $this.prop('scrollHeight');
-            if (height > 76) {
-              height = 76;
-            }
-            $this.height(height);
-
             var len = $this.val().length;
+
+            
             var minWidth = 0;
-            if (len > 160) {
+            if (len > 0) {
+              height = 38
+            } 
+            $this.height(height);
+            if (len > 28) {
               minWidth = 480;
-            } else if (len > 80) {
-              minWidth = 300;
-            } else if (len > 40) {
-              minWidth = 175;
-            } else if (len > 20) {
-              minWidth = 150;
-            } else if (len <= 20) {
-              minWidth = 100;
+            } 
+            if(len > 60 ){
+
             }
 
             $this.parents('td').attr('style', 'min-width:' + minWidth + 'px;');
