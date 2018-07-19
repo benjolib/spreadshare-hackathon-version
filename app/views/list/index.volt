@@ -124,7 +124,7 @@
             </div>
             <div class="sh-dropdown sort-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
               <a href="{{table['id']}}">
-                <img src="/assets/images/lightning.svg" /> Sort by
+                <img src="/assets/images/vote-lightning-green.svg" /> Sort by
                 <span>Popularity</span>
               </a>
 
