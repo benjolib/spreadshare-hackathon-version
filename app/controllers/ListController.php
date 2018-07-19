@@ -140,6 +140,12 @@ class ListController extends BaseController
             // If not, get by id
             if (!$tableModel) {
                 $tableModel = Tables::findFirstById($slug);
+                $slug = $tableModel->getSlug();
+                if (empty($slug)) {
+                    $tableModel->save();
+                }
+
+                $this->response->redirect("/stream/" . $tableModel->getSlug(), true);
             }
 
             $tableContentModel = new TableContent();
