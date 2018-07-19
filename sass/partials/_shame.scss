@@ -1192,7 +1192,7 @@ html {
   border: 1px solid #dbdbdb;
   border-radius: 4px;
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.18);
-  padding-left: 14px;
+  padding: 14px;
   text-align: left;
   margin-right: -8px;
   &--tall {
@@ -1215,16 +1215,16 @@ html {
   }
   @media (min-width: 768px) {
     margin-top: -10px;
-    width: 126px;
-    height: 130px;
-    padding-left: 31px;
+    width: auto;
+    height: auto;
+    padding: 20px 25px;
     &--tall {
       height: 152px;
     }
     a {
       font-size: 14px;
       line-height: 36px;
-      letter-spacing: -0.38px;
+      letter-spacing: 0.4px;
     }
     img {
       height: auto;
@@ -1709,7 +1709,7 @@ html {
   margin: 10px 0;
   &--list {
     font-size: 30px;
-    line-height: 29px;
+    line-height: 35px;
     letter-spacing: -0.56px;
     margin-bottom: 22px;
   }
@@ -1974,7 +1974,7 @@ html {
   @media (min-width: 768px) {
     font-size: 20px;
     letter-spacing: -0.39px;
-    line-height: 24px;
+    line-height: 28px;
     margin-left: 2px;
     padding-right: 60px;
     margin-bottom: 50px;
@@ -2068,7 +2068,8 @@ html {
       }
 
       & h3 + .list-card__subscriberCount {
-        align-self: flex-end;
+        align-self: flex-start;
+        margin-top: 23px;
       }
     }
     td:nth-of-type(1n + 4)>div {
@@ -2926,24 +2927,24 @@ html {
 
 .sort-dropdown {
   margin-left: -5px;
-  width: 240px;
+  width: auto;
   height: 113px;
   margin-top: 15px;
   border-radius: 4px;
   border: none;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
-  padding-left: 20px;
+  padding: 0 20px;
   a {
-    text-transform: none;
+    @include typography(9);
+
     padding: 2px 0;
-    font-family: 'Roboto Mono', monospace;
-    font-weight: bold;
-    font-size: 14px;
-    color: #6a7c94;
+    text-transform: none;
     letter-spacing: 0.5px;
     line-height: 32px;
-    span {
-      color: #2a1e3e;
+    color: $text-color-gray;
+
+    &:first-child {
+      color: $text-color-green;
     }
   }
   img {
@@ -3310,7 +3311,8 @@ html {
   justify-content: center;
   height: 88px;
   border-bottom: 1px solid #e4e4e4;
-  @media (min-width: 768px) {
+
+  @include media-query(tablet) {
     height: 90px;
   }
   &__inner {
@@ -3320,37 +3322,50 @@ html {
     max-width: 1432px;
     padding: 0 12px;
     position: relative;
-    @media (min-width: 768px) {
+
+    @include media-query(tablet) {
       padding: 0 24px;
     }
   }
   &__logo {
-    display: none;
-    margin-right: 36px;
     @media (min-width: 768px) {
+      margin-right: 36px;
       display: inline-block;
     }
     img {
+      width: 26px;
+      height: auto;
       margin-top: 2px;
+
+      @include media-query(tablet) {
+        width: 100%;
+      }
     }
   }
   &__item {
-    display: none;
-    @include typography(9);
+    font-size: 0;
+    margin: 0 10px;
 
-    color: #697c95;
-    padding: 24px 6px 20px 6px;
-    margin-right: 32px;
-    align-items: center;
-    height: 91px;
-    @media (min-width: 768px) {
+    @include typography(9);
+    @include responsive-header-icon;
+    @include media-query(tablet) {
+      color: #697c95;
+      padding: 24px 6px 20px 6px;
+      margin: 0 32px 0 0;
+      align-items: center;
+      height: 91px;
       display: inline-flex;
+      font-size: 16px;
     }
     &.feed {
       color: #ea612d;
-      margin-right: 29px;
+      @include media-query(tablet) {
+        margin-right: 29px;
+      }
       img {
-        margin-right: 12px;
+        @include media-query(tablet) {
+          margin-right: 12px;
+        }
       }
       &.active {
         border-bottom: 3px solid #ea612d;
@@ -3358,18 +3373,26 @@ html {
     }
     &.explore {
       color: #2c247f;
-      margin-right: 29px;
-      img {
-        margin-right: 16px;
+      @include media-query(tablet) {
+        margin-right: 29px;
       }
-      &.active {
-        border-bottom: 3px solid #2c247f;
+      img {
+        @include media-query(tablet) {
+          margin-right: 16px;
+        }
+      }
+      @include media-query(tablet) {
+        &.active {
+          border-bottom: 3px solid #2c247f;
+        }
       }
     }
     &.collabs {
       color: #2860f5;
       img {
-        margin-right: 16px;
+        @include media-query(tablet) {
+          margin-right: 16px;
+        }
       }
       &.active {
         border-bottom: 3px solid #2860f5;
@@ -3377,10 +3400,12 @@ html {
     }
   }
   &__search {
-    padding: 4px;
     margin-left: auto;
+    @include media-query(tablet) {
+      padding: 4px;
+    }
     &__img {
-      @media (min-width: 768px) {
+      @include media-query(tablet) {
         margin-top: 2px;
       }
     }
@@ -3392,7 +3417,7 @@ html {
     display: flex;
     align-items: center;
 
-    @media (min-width: 768px) {
+    @include media-query(tablet) {
       height: 57px;
       width: 546px;
       border: 1px solid #f8f8fb;
@@ -3409,10 +3434,10 @@ html {
       margin-left: -20px;
       cursor: pointer;
       z-index: 999;
-      @media (min-width: 320px) {
+      @include media-query(phone) {
         padding: 0 10px;
       }
-      @media (min-width: 768px) {
+      @include media-query(tablet) {
         padding: 0 20px;
         margin-left: 0;
       }
@@ -3434,7 +3459,7 @@ html {
     margin-left: 16px;
     margin-top: 2px;
     display: none;
-    @media (min-width: 768px) {
+    @include media-query(tablet) {
       display: inline-block;
     }
   }
@@ -3442,7 +3467,7 @@ html {
     margin-top: 0px;
     margin-left: 10px;
     position: relative;
-    @media (min-width: 768px) {
+    @include media-query(tablet) {
       margin-top: 4px;
       margin-left: 20px;
     }
@@ -3458,6 +3483,20 @@ html {
     }
     & .numberCircle {
       box-shadow: 0 0.5px 1px 0 rgba(0,0,0,.18);
+    }
+  }
+  &__search,
+  &__add,
+  &__bell,
+  &__hamburger {
+    @include responsive-header-icon(30px, 30px);
+  }
+  &__add,
+  &__bell,
+  &__hamburger {
+    margin-left: 10px;
+    @include media-query(tablet) {
+      margin: 0;
     }
   }
   &__user {
@@ -3477,7 +3516,7 @@ html {
     &-dropdown {
       display: none;
     }
-    @media (min-width: 768px) {
+    @include media-query(tablet) {
       display: inline-block;
       &-dropdown {
         transform: translate3d(5px, 35px, 0px) !important;
@@ -3512,9 +3551,8 @@ html {
   //   }
   // }
   &__hamburger {
-    padding: 12px;
-    margin-left: 10px;
-    @media (min-width: 768px) {
+    @include media-query(tablet) {
+      padding: 12px;
       display: none;
       margin-left: 10px;
     }
@@ -3537,6 +3575,7 @@ html {
       .re-button {
         @include typography(9);
 
+        color: $text-color-green;
         width: 152px;
         margin-bottom: 0;
         margin-left: 18px;
@@ -5255,7 +5294,10 @@ html {
     color: #ffffff;
     .heading {
       font-weight: bold;
-      font-size: 1.9em;
+      font-size: 22.5px;
+      @media (min-width: 768px) {
+        font-size: 1.9em;
+      }
       line-height: 36px;
       letter-spacing: -0.72px;
       margin-bottom: 1px;
@@ -5263,7 +5305,10 @@ html {
     .subheading {
       color: $text-color-gray;
       font-weight: 400;
-      font-size: 1.6em;
+      font-size: 16px;
+      @media (min-width: 768px) {
+        font-size: 1.6em;
+      }
       line-height: 27px;
       letter-spacing: -0.54px;
       margin-bottom: 8px;

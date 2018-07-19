@@ -232,7 +232,7 @@
         </div>
       </div> #}
 
-      <a class="re-header__hamburger l-button" data-dropdown-placement="bottom-end" href="javascript:;"><img src="/assets/images/hamburger.svg" /></a>
+      <a class="re-header__hamburger l-button" data-dropdown-placement="bottom-end" href="javascript:;"><img src="/assets/images/9-0/header-menu-hamburger.svg" /></a>
       <!-- <div class="l-dropdown sh-dropdown user-dropdown u-flex u-flexCol user-dropdown--no-margin">
         <div class="u-flex user-dropdown__white-section">
           <div class="user-dropdown__column">
