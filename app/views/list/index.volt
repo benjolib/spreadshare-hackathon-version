@@ -314,7 +314,7 @@
            
             <textarea style="min-width: {{ column.title|length*16 }}px !important;" onmouseover="javascript:$('.e{{i}}{{index}}').css('visibility','visible');" ; onmouseout="javascript:$('.e{{i}}{{index}}').css('visibility', 'hidden');"
               id="{{i}}" placeholder="{{ column.title }}" rows="1" class="edit icon cell-input-sizing d{{i}}{{index}}"></textarea>
-            <i id="{{i}}" class="pencil icon blue e{{i}}{{index}}" style="cursor: pointer;visibility: hidden;" onclick="console.log($(this).prev().prev());javascript:$('#d{{i}}{{index}}').focus();"></i>
+            <i id="{{i}}" class="pencil icon blue e{{i}}{{index}}" style="margin-top:38px;cursor: pointer;visibility: hidden;" onclick="console.log($(this).prev().prev());javascript:$('#d{{i}}{{index}}').focus();"></i>
           </div>
         </td>
 
@@ -773,20 +773,24 @@
             $this.height(5);
             var len = $this.val().length;
 
-            
+            var prevHeight = prevHeight ? prevHeight : $this.height;
+            var prevWidth = prevWidth ? prevWidth : $this.width;
+
             var minWidth = 0;
             if (len > 0) {
-              height = 38
-            } 
-            $this.height(height);
-            if (len > 28) {
+              height = 39
               minWidth = 480;
-            } 
-            if(len > 60 ){
-
+              $this.attr('style', 'margin-top: 14px !important;');
+              $this.next().attr('style', 'margin-top: 14px !important;');
+              
+            } else {
+              $this.attr('style', 'margin-top: 37px !important;');
+              $this.next().attr('style', 'margin-top: 38px !important;');
             }
+            $this.height(height);
+            
 
-            $this.parents('td').attr('style', 'min-width:' + minWidth + 'px;');
+            $this.parents('td').attr('style', 'min-width:' + minWidth + 'px !important;');
           }
 
           $('.cell-input-sizing').on('input', listCellInputSizing);

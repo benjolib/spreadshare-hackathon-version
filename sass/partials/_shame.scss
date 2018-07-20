@@ -5902,12 +5902,14 @@ html {
     font-style: normal;
     font-stretch: normal;
     line-height: 1.33 !important;
+    min-height:39px !important;
     letter-spacing: -.4px !important;
       width: 100% !important;
-      margin-top:8px;
+      margin-top:37px;
       @media (min-width: 768px) {
+        min-height:39px !important;
         min-width: 100px !important;
-        margin-top:10px;
+        margin-top:37px;
       }
 
     }
