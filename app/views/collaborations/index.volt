@@ -69,7 +69,10 @@
                         </div>
                       </td>
                       <td>
+                       
+                {% if submission['image'] %}
                 <div class="re-table__list-image {{ submission['image'] ? '' : 're-table__list-image--empty' }}" style="background: #f5f5f5 url({{ submission['image'] }}) center / cover;">
+                  {% endif %}
                   <img data-name="{{ submission['content']|json_decode[0] }}" class="{{ submission['image'] ? '' : 'empty' }}"/> 
                   <div class="re-table__list-image__upload-button"></div>
                   <!--<div class="re-table__list-image__delete-button"></div>-->
@@ -186,8 +189,10 @@
                     </td>
 
                     <td>
+                        {% if collab['image'] %}
                       <div class="re-table__list-image {{ collab['image'] ? '' : 're-table__list-image--empty' }}" style="background: #f5f5f5 url({{ collab['image'] ?  collab['image'] : '' }}) center / cover;"></div>
-                    <img data-name="a" class="{{ collab['image'] ? '' : 'empty' }}"/> 
+                      {% endif %}
+                      <img data-name="a" class="{{ collab['image'] ? '' : 'empty' }}"/> 
                     </td>
 
                  
