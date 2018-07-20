@@ -14,10 +14,10 @@
     </div> #}
     <h1 class="re-heading re-heading--list">{{ table['title'] }}</h1>
     <h2 class="re-subheading re-subheading--list">
-      <span class="actual-tagline">{{ table['tagline'] }}</span>, curated by
+      <span class="actual-tagline parselinks">{{ table['tagline'] }}</span>, curated by
       <a href="/profile/{{ table['creatorHandle'] }}">{{ table['creator'] }}</a>
     </h2>
-    <p class="re-para">{{ table['description'] }}</p>
+    <p class="re-para parselinks">{{ table['description'] }}</p>
     <div class="u-flex u-flexAlignItemsCenter">
       {% if !amISubscribed(table['id']) %}
 
@@ -588,10 +588,11 @@
             </div>
           </div>
         </div>
-
+        
         <div class="list-tab-content list-tab-content-collaborators" style="display: none;">
           <div class="list-tabs__inner-padded">
             {% for contributor in tablemodel.contributors %}
+            
             <div class="list-tab-content-collaborators__card">
               {{ partial('partials/profile-card', [ 'id': contributor.users.id, 'username': contributor.users.handle, 'avatar': contributor.users.image,
               'name': contributor.users.name, 'bio': contributor.users.tagline, 'type': 10, 'truncate': true ]) }}
@@ -709,7 +710,16 @@
 
         $(document).ready(function () {
 
-
+            $('.parselinks').each(function(){
+              // Get the content
+              var str = $(this).html();
+              // Set the regex string
+              var regex = /(https?:\/\/[^\s]+)/g
+              // Replace plain text links by hyperlinks
+              var replaced_text = str.replace(regex, "<a href='$1' target='_blank'>$1</a>");
+              // Echo link
+              $(this).html(replaced_text);
+          });
 
           // var mouse = {
           //   pageX: 0,
