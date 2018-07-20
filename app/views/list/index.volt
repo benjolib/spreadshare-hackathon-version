@@ -308,7 +308,6 @@
           <input type="file" name="image" id="new-row-fileUpload" style="display: none;" />
 
         </td>
-        {{ dump(tableColumns)}}
         {% for index,column in tableColumns %}
         <td>
           <div style="display:flex;">
