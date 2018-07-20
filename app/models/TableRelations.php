@@ -58,6 +58,7 @@ class TableRelations extends TableRelationsEvents
                         Tables::class . ".tagline as slug",
                         Tables::class . ".image",
                         Tables::class . ".description",
+                        Tables::class . ".tagline",
                         TableRelations::class . ".createdAt",
                         '(SELECT ' . TableStaffPicks::class . '.createdAt FROM ' . TableStaffPicks::class . ' WHERE ' . TableStaffPicks::class . '.tableId = ' . Tables::class . '.id) as staffPick',
                         User::class . ".handle as curatorHandle",

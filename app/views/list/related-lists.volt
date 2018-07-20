@@ -5,6 +5,7 @@
     'image': relatedTable['image'],
     'name': relatedTable['name'],
     'description': relatedTable['description'],
+    'tagline': relatedTable['tagline'],
     'subscriberCount': relatedTable['subscriberCount'],
     'showCurator': true,
     'curatorHandle': relatedTable['curatorHandle'],
