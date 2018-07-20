@@ -43,7 +43,7 @@
         {% set post['description'] = "" %}
         {% endif %}
         {{ text_field('description', 'placeholder':"Write a short description text", 'autocomplete':"off", 'value':post['description']) }} {#
-        <input type="text" placeholder="Write a short desciption text" name="description" style="border:0px" />#}
+        <textarea type="text" placeholder="Write a short desciption text" name="description" style="border:0px" />#}
       </div>
     </div>
 
