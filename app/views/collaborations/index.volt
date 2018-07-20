@@ -57,15 +57,20 @@
                       </td>
                       <td class="shadowcontaintd">
                         <div class="shadowcontain">
-                          <div class="l-button" style="position: absolute;top: 0;right: 6px;pointer-events: all;cursor: pointer;"><img src="/assets/images/dotdotdot.svg" /></div>
+                          {% if submission['status'] === '0' %}
+                          <div class="l-button" style="position: absolute;top: 0;right: 6px;pointer-events: all;cursor: pointer;">
+                            <img src="/assets/images/9-0/listing-info.svg" />
+                          </div>
                           <div class="sh-dropdown list-row-remove-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
-                            {% if (submission['kind'] == 'add')%}
+                            
+                            {% if (submission['kind'] == 'add') %}
                               <a href="submissions/add/revoke/{{submission['id']}}"><img src="/assets/images/bin.svg"> Revoke submission</a>
                             {%endif%}
                             {% if (submission['kind'] == 'delete')%}
                               <a href="submissions/delete/revoke/{{submission['id']}}"><img src="/assets/images/bin.svg"> Revoke submission</a>
                             {%endif%}
                           </div>
+                          {% endif %}
                         </div>
                       </td>
                       <td>
