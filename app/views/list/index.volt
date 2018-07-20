@@ -958,7 +958,6 @@
           });
 
           $('.addAListingButton0').on('click', function (e) {
-           
             e.preventDefault();
             $('#addAListingButton').css("visibility", "hidden")
             //TODO hide() doesnt work ?
@@ -968,7 +967,7 @@
             $('#addAListingSubmitAndCancel').show();
             $(".bottom").css("visibility", "hidden")
             $("html, body").animate({
-              scrollTop: $("#addAListingRowSpace").offset().top
+              scrollTop: ($(".addAListingRow").offset().top-600)
             }, "slow");
           });
 
