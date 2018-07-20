@@ -64,10 +64,10 @@
                           <div class="sh-dropdown list-row-remove-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
                             
                             {% if (submission['kind'] == 'add') %}
-                              <a href="submissions/add/revoke/{{submission['id']}}"><img src="/assets/images/bin.svg"> Revoke submission</a>
+                              <a href="submissions/add/revoke/{{submission['id']}}"><img src="/assets/images/bin3.svg"> Revoke submission</a>
                             {%endif%}
                             {% if (submission['kind'] == 'delete')%}
-                              <a href="submissions/delete/revoke/{{submission['id']}}"><img src="/assets/images/bin.svg"> Revoke submission</a>
+                              <a href="submissions/delete/revoke/{{submission['id']}}"><img src="/assets/images/bin3.svg"> Revoke submission</a>
                             {%endif%}
                           </div>
                           {% endif %}
