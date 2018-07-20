@@ -68,4 +68,14 @@ class Tools
 
         return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
     }
+
+    /**
+     * @param string $string
+     *
+     * @return string $str
+     */
+    public function ucfirst($string)
+    {
+        return ucfirst(strtolower($string));
+    }
 }

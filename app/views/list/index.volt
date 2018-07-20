@@ -308,12 +308,13 @@
           <input type="file" name="image" id="new-row-fileUpload" style="display: none;" />
 
         </td>
+        {{ dump(tableColumns)}}
         {% for index,column in tableColumns %}
         <td>
           <div style="display:flex;">
            
             <textarea style="min-width: {{ column.title|length*16 }}px !important;" onmouseover="javascript:$('.e{{i}}{{index}}').css('visibility','visible');" ; onmouseout="javascript:$('.e{{i}}{{index}}').css('visibility', 'hidden');"
-              id="{{i}}" placeholder="{{ column.title }}" rows="1" class="edit icon cell-input-sizing d{{i}}{{index}}"></textarea>
+              id="{{i}}" placeholder="{{ column.title|ucfirst }}" rows="1" class="edit icon cell-input-sizing d{{i}}{{index}}"></textarea>
             <i id="{{i}}" class="pencil icon blue e{{i}}{{index}}" style="margin-top:38px;cursor: pointer;visibility: hidden;" onclick="console.log($(this).prev().prev());javascript:$('#d{{i}}{{index}}').focus();"></i>
           </div>
         </td>
