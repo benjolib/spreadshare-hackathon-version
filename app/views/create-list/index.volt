@@ -349,6 +349,9 @@ $("body").mouseup(function(e){
     document.querySelector('.re-image__upload-button').onclick = function () {
       document.getElementById('re-image-fileUpload').click();
     };
+    document.querySelector('.re-image--create-list').onclick = function () {
+      document.getElementById('re-image-fileUpload').click();
+    };
     // document.querySelector('.re-image__delete-button').onclick = function () {
     //   if(document.getElementById('re-image-fileUpload').value != ""){
     //         document.getElementById('re-image-fileUpload').value = "";
