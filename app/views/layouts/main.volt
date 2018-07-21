@@ -82,14 +82,12 @@
   <script type="text/javascript" src="/js/infinite-scroll.min.js"></script>
   <script type="text/javascript" src="/semantic/semantic.min.js"></script>
   <script type="text/javascript" src="/js/initial.min.js"></script>
-<script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
-<script>
- var client = algoliasearch('JDVCECO7A6', '28c6bf6b2fe08438d90d317552ea849e');
- document.searchstream = client.initIndex('stream');
- document.searchusers = client.initIndex('users');
-
-
-</script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
+  <script type="text/javascript">
+    var client = algoliasearch("{{ config['algolia']['app-id'] }}", "{{ config['algolia']['api-key'] }}");
+    document.searchstream = client.initIndex('spreadshare-stream-{{ config["mode"] }}');
+    document.searchusers = client.initIndex('spreadshare-users-{{ config["mode"] }}');
+  </script>
 
 
   {{ partial('layouts/scripts') }} {#
