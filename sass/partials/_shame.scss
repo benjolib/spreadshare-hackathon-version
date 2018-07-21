@@ -2703,10 +2703,14 @@ html {
 
   .nocomments {
     display: flex;
-     max-width: 670px;
-     .image {
-       margin-top: 4px;
-     }
+    max-width: 670px;
+    margin-top: 60px;
+    @include media-query(tablet) {
+      margin-top: 0;
+    }
+    .image {
+    margin-top: 4px;
+    }
     .info {
       padding-left: 15px;
       .header {
