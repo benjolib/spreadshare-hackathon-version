@@ -384,7 +384,7 @@
       </div>
     {% else %}
       <a class="re-button re-button--header" href="/login">
-        <span>Join us via</span>
+        <span>Join us<span> via</span></span>
         <img src="/assets/images/join-button-facebook.svg" />
         <img src="/assets/images/join-button-twitter.svg" />
         <img src="/assets/images/join-button-google.svg" />

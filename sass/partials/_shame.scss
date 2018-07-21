@@ -1187,8 +1187,8 @@ html {
 .card-subscribe-dropdown {
   margin-top: -5px;
   margin-right: -1px;
-  width: 80px;
-  height: 87px;
+  width: auto;
+  height: auto;
   border: 1px solid #dbdbdb;
   border-radius: 4px;
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.18);
@@ -1201,10 +1201,10 @@ html {
   a {
     font-family: 'Roboto Mono', monospace;
     font-weight: bold;
-    font-size: 11px;
     color: #6a7c94;
-    line-height: 24px;
     letter-spacing: -0.28px;
+    font-size: 14px;
+    line-height: 30px;
     &.warning-color {
       color: #fb7977;
     }
@@ -1822,7 +1822,6 @@ html {
   &--list-subscribe,
   &--list-subscribed,
   &--list-collaborate {
-    padding-right: 16px;
     margin-left: 0;
     @include media-query(tablet) {
       margin-left: 16px;
@@ -1852,7 +1851,7 @@ html {
     letter-spacing: -0.2px;
   }
   &--list-add-row {
-    width: 100px;
+    width: 132px;
     margin: 12px 6px 0;
     height: 45px;
     background: #2860f5;
@@ -1885,33 +1884,52 @@ html {
   &--lists-curate-stream.re-button {
     margin-bottom: 0;
     @include media-query('max-width: 767px') {
-      width: 184px;
+      width: 194px;
     }
   }
   &--header.re-button {
     @include typography(9);
 
     display: inline-flex;
-    margin-left: 22px;
+    margin-left: 12px;
     margin-bottom: 0;
-    width: 222px;
+    width: 110px;
+    height: 30px;
     margin-right: 4px;
     margin-top: 0;
-    height: 56px;
-    background: #2dad6b;
+    background: #2b60f5;
     border-radius: 2px;
     box-shadow: none;
     border: none;
     color: #ffffff !important;
+    @include media-query(tablet) {
+      width: 222px;
+      height: 56px;
+      margin-left: 22px;
+    }
     span {
-      margin-right: 16px;
-      margin-left: 4px;
+      @include media-query(tablet) {
+        margin-right: 16px;
+        margin-left: 4px;
+      }
+
+      span {
+        display: none;
+        @include media-query(tablet) {
+          display: inline;
+          margin: 0;
+        }
+      }
     }
     img {
-      margin-right: 8px;
+      display: none;
+      @include media-query(tablet) {
+        display: initial;
+        margin-right: 8px;
+      }
     }
   }
-  @media (min-width: 768px) {
+  @include media-query(tablet) {
     width: 232px;
     height: 56px;
     margin-bottom: 12px;
@@ -2154,6 +2172,7 @@ html {
         line-height: 15px;
         color: #2a1e3e;
         resize: none;
+        overflow-y: hidden;
         @media (min-width: 768px) {
           font-size: 16px;
           line-height: 14px;
@@ -2414,7 +2433,10 @@ html {
         }
       }
       td:first-of-type {
-        padding-left: 17px;
+        padding-left: 7px;
+        @include media-query(tablet) {
+          padding-left: 17px;
+        }
         padding-right: 0px;
         font-family: 'Roboto Mono', monospace;
         font-weight: bold;
@@ -2786,16 +2808,17 @@ html {
 
 .table-scroll {
   -webkit-overflow-scrolling: touch;
-  overflow: scroll;
+  overflow-x: scroll;
+  overflow-y: hidden;
   &--submissions {
     margin-bottom: 18px;
-    @media (min-width: 768px) {
+    @include media-query(tablet) {
       margin-bottom: 36px;
     }
   }
   &--collaborations {
     margin-bottom: 13px;
-    @media (min-width: 768px) {
+    @include media-query(tablet) {
       margin-bottom: 52px;
     }
   }
@@ -2828,6 +2851,22 @@ html {
     height: 114px;
     &--no-votes {
       transform: translateX(-0px);
+    }
+  }
+  .addedby {
+    width: 250px;
+    flex-direction: row!important;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 10px 20px 40px;
+    @include media-query(tablet) {
+      width: 310px;
+    }
+    .header:first-child {
+      margin-right: 5px;
+    }
+    .header {
+      margin-top: 0!important;
     }
   }
 }
@@ -3133,8 +3172,11 @@ html {
   font-size: 12px;
   color: #9baabf;
   letter-spacing: 0.5px;
-  margin-top: 8px;
   margin-left: 12px;
+  margin-top: 3px;
+  @include media-query(tablet) {
+    margin-top: 8px;
+  }
   a {
     @include typography(7);
     color: #27c280;
@@ -3564,7 +3606,7 @@ html {
       left: 18px;
     }
     & .numberCircle {
-      box-shadow: 0 0.5px 1px 0 rgba(0,0,0,.18);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);;
     }
   }
   &__search,
@@ -3583,7 +3625,7 @@ html {
   }
   &__user {
     margin-top: 2px;
-    margin-left: 22px;
+    margin-left: 10px;
     padding-left: 7px;
     padding-bottom: 6px;
     padding-top: 6px;
@@ -3967,29 +4009,45 @@ html {
 
 .flash {
   position: fixed;
-  top: 40;
+  top: 0;
   left: 0;
   min-width: 100% !important;
-  padding: 90px 0px 0px 0px;
   z-index: 999999;
   overflow: hidden;
   pointer-events: none;
+  padding: 80px 0px 0px 0px;
+  @include media-query(tablet) {
+    padding: 90px 0px 0px 0px;
+  }
   &__message {
-    border: 0px solid #f8f8fb;
-    box-shadow: 0 0.2px 0px 0 rgba(0, 0, 0, 0.18);
+    border: 0px solid #979797;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
     border-radius: 0px;
     width: 100%;
     padding: 15px 18px 14px 0px;
-    margin-bottom: 9px;
     transition: opacity 0.4s ease-in-out;
     opacity: 1;
     pointer-events: all;
     text-align: center;
+    margin-bottom: 5px;
+    @include media-query(tablet) {
+      margin-bottom: 9px;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: center;
+    }
     &__heading {
       @include typography(5);
 
+      text-align: center;
       color: #2a1e3e;
       margin-bottom: 2px;
+      font-size: 15px;
+      @include media-query(tablet) {
+        font-size: 20px;
+        text-align: left;
+        margin-right: 10px;
+      }
     }
     &__text {
       @include typography(5);
@@ -3997,6 +4055,10 @@ html {
       font-weight: normal;
       color: #bbbbbb;
       text-align: center;
+      font-size: 15px;
+      @include media-query(tablet) {
+        font-size: 20px;
+      }
     }
     &--hide {
       transform: opacity 0.4s ease-in-out;
@@ -4004,25 +4066,25 @@ html {
     }
     &--success & {
       &__text {
-        color: #6cc69d;
+        color: $text-color-green;
       }
       &__heading {
-        color: #63c293;
+        color: $text-color-green;
       }
     }
     &--success {
-      background: #D4EDE1;
+      background: #D5eee1;
     }
     &--warning & {
       &__text {
-        color: #DC8686;
+        color: #dc8686;
       }
       &__heading {
         color: #d63131;
       }
     }
     &--warning {
-      background: #F3D4D4;
+      background: #f3d4d4;
     }
     &--notice & {
       &__text {
@@ -4033,18 +4095,18 @@ html {
       }
     }
     &--notice {
-      background: #D4EDE1;
+      background: #d4ede1;
     }
     &--error & {
       &__text {
-        color: #DC8686;
+        color: #c2292b;
       }
       &__heading {
-        color: #d63131;
+        color: #c2292b;
       }
     }
     &--error {
-      background: #F3D4D4;
+      background: #f3d5d5;
     }
   }
 }
@@ -4196,11 +4258,13 @@ html {
 .sign-in-up-pretext {
   @include typography(3);
 
-  color: $text-color-black;
-
   margin-bottom: 7px;
-  margin-top: calc(50vh - 200px);
+  margin-top: calc(50vh - 160px);
+  color: $text-color-black;
   text-align: center;
+  @include media-query(tablet) {
+    margin-top: calc(50vh - 200px);
+  }
 }
 
 .sign-in-up-heading {
@@ -4264,7 +4328,6 @@ html {
   background: #ffffff;
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.18);
   outline: none;
-  width: 232px;
   height: 42px;
   margin-bottom: 12px;
   display: flex;
@@ -4275,6 +4338,10 @@ html {
   padding-bottom: 1px;
   cursor: pointer;
   position: relative;
+  width: 280px;
+  @include media-query(tablet) {
+    width: 232px;
+  }
 }
 
 .sign-in-button img {
@@ -4356,6 +4423,10 @@ html {
 
   & label.re-field {
     border: 0;
+    height: 74px;
+    @include media-query(tablet) {
+      height: 80px;
+    }
 
     .re-field__label {
       color: #6a7C94;
@@ -4904,6 +4975,10 @@ html {
       display: none;
     }
   }
+  & + .big-gutter .list-card--small {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
 }
 
 .create-list {
@@ -5219,6 +5294,9 @@ html {
 .settings-tab-content-emails {
   .re-field--settings:first-child {
     flex-flow: column;
+    @include media-query(tablet) {
+      flex-flow: row;
+    }
   }
 }
 
@@ -5376,12 +5454,12 @@ html {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  @include media-query(tablet) {
-    flex-direction: row;
-  }
   padding-top: 2.5em;
   padding-bottom: 2.5em;
   width: 100%;
+  @include media-query(tablet) {
+    flex-direction: row;
+  }
   .info {
     margin: 0 2.5em;
     flex-direction: column;
@@ -5411,6 +5489,7 @@ html {
     }
   }
   .action {
+    text-align: center;
     display: flex;
     justify-content: left;
     flex-direction: row;
@@ -5418,8 +5497,11 @@ html {
     @include media-query(tablet) {
       flex-direction: row;
       padding-top: 0;
+      margin-right: 2.5em;
     }
-    text-align: center;
+    @include media-query(desktop) {
+      margin-right: 0;
+    }
     button {
       width: 300px;
       cursor: pointer;
@@ -5616,6 +5698,10 @@ html {
   color: #9baabf;
   letter-spacing: -0.58px;
   margin-bottom: 25px;
+  margin-top: 25px;
+  @include media-query(tablet) {
+    margin-top: 0px;
+  }
 }
 
 .related-lists-edit {
@@ -5780,14 +5866,20 @@ html {
   border-radius: 50%;
   behavior: url(PIE.htc);
   /* remove if you don't care about IE8 */
-  width: 32px;
-  height: 32px;
-  padding: 6px;
   background: #2EAC6D;
   border: 0px solid #666;
   color: rgb(255, 255, 255);
   text-align: center;
-  font: 15px 'Lato';
+  font: 14px 'Lato';
+  width: 27px;
+  height: 27px;
+  padding: 4px;
+  @include media-query(tablet) {
+    width: 32px;
+    height: 32px;
+    padding: 6px;
+    font: 15px 'Lato';
+  }
 }
 .button-container {
   display: flex;
@@ -5803,10 +5895,13 @@ html {
     margin-bottom: 0;
   }
   &__orange {
-     margin-right: 10px;
+    margin-right: 10px;
     background-color: #ea612d;
     .re-button {
-      width: 260px;
+      width: 300px;
+      @include media-query(tablet) {
+        width: 260px;
+      }
       background-color: white;
       color: #ea612d;
     }
