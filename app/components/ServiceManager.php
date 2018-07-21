@@ -2,6 +2,7 @@
 
 namespace DS\Component;
 
+use AlgoliaSearch\Client;
 use DS\Component\Elasticsearch\ElasticaClient;
 use DS\Interfaces\GeneralApplication;
 use Phalcon\Config;
@@ -55,6 +56,7 @@ use Phalcon\Security;
  * @method Cookies getCookies();
  * @method \Maknz\Slack\Client getSlack();
  * @method \DS\Component\Wallet\WalletApi getWalletApi();
+ * @method Client getAlgolia();
  */
 class ServiceManager
 {

@@ -15,23 +15,23 @@ use Phalcon\Loader;
 
 try
 {
-    // Environment
-    define('ENV', 'production');
-    
     // Directories
     define('APP_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR);
     define('ROOT_PATH', dirname(APP_PATH) . DIRECTORY_SEPARATOR);
-    
+
     if (!class_exists('Phalcon\Config'))
     {
         throw new ErrorException('Phalcon is not installed!');
     }
-    
+
     // Initialize configuration
     $config = new Config(
         include_once APP_PATH . 'config/Config.php'
     );
-    
+
+    // Environment
+    define('ENV', isset($config['mode']) ? $config['mode'] : 'production');
+
     /**
      * Initialize DI Container
      *
