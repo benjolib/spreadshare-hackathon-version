@@ -108,8 +108,8 @@
   }
   &--type9 & {
     &__avatar {
-      width: 48px;
-      height: 48px;
+      width: 24px;
+      height: 24px;
       margin-right: 12px;
       @include media-query(tablet) {
         width: 64px;
@@ -126,8 +126,12 @@
     &__follow {
     }
     &__bio {
-      margin-top: 4px;
-      margin-right: 32px;
+      margin-top: 30px;
+      margin-right: 0;
+      @include media-query(tablet) {
+        margin-top: 4px;
+        margin-right: 32px;
+      }
     }
   }
   &--type10 {

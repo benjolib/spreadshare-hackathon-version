@@ -1406,30 +1406,39 @@ html {
 .wallet-stats {
   margin-top: 32px;
   margin-bottom: 35px;
-  @media (min-width: 768px) {
+  flex-wrap: wrap;
+  justify-content: center;
+  @include media-query(tablet) {
     margin-top: 73px;
     margin-bottom: 59px;
+    flex-wrap: initial;
   }
   .col1 {
-    margin-right: 55px;
-    margin-left: 1px;
-    @media (min-width: 768px) {
+    @include media-query(tablet) {
       margin-left: 0;
       margin-right: 115px;
     }
   }
   .col2 {
-    margin-right: 72px;
-    @media (min-width: 768px) {
+    @include media-query(tablet) {
       margin-right: 125px;
     }
   }
-   .col3 {
-     margin-right: 72px;
-     @media (min-width: 768px) {
+  .col3 {
+     @include media-query(tablet) {
        margin-right: 125px;
      }
-   }
+  }
+  .u-flexCol {
+    width: 45%;
+    margin-top: 15px;
+    text-align: center;
+    @include media-query(tablet) {
+      width: auto;
+      margin-top: 0;
+      text-align: left;
+    }
+  }
   &-label {
     font-family: 'Roboto Mono', monospace;
     color: #6a7c94;
@@ -1782,6 +1791,7 @@ html {
   padding: 0px 4px;
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.18);
   cursor: pointer;
+  background: #ffffff;
   &--double-line {
     width: 157px;
     line-height: 21px;
@@ -1809,39 +1819,37 @@ html {
     border: 1px solid #dee0e7;
     color: #dee0e7 !important;
   }
+  &--list-subscribe,
+  &--list-subscribed,
+  &--list-collaborate {
+    padding-right: 16px;
+    margin-left: 0;
+    @include media-query(tablet) {
+      margin-left: 16px;
+    }
+    img {
+      margin-right: 12px;
+    }
+  }
   &--list-subscribe {
     background: #ea612d;
     border: 1px solid #ea612d;
     color: #ffffff;
-    margin-left: 16px;
     width: 158px;
-    padding-right: 16px;
-    img {
-      margin-right: 12px;
-    }
   }
   &--list-subscribed {
     border: 1px solid #ea612d;
     background: #ffffff;
     color: #ea612d !important;
-    margin-left: 16px;
     width: 158px;
-    padding-right: 16px;
-    img {
-      margin-right: 12px;
-    }
+
   }
   &--list-collaborate {
     background: #2860f5;
     border: 1px solid #2860f5;
     color: #ffffff;
-    margin-left: 16px;
     width: 180px;
     letter-spacing: -0.2px;
-    padding-right: 16px;
-    img {
-      margin-right: 12px;
-    }
   }
   &--list-add-row {
     width: 100px;
@@ -1866,7 +1874,7 @@ html {
     border-color: #2F267D;
     letter-spacing: -0.33px !important;
     margin-top: 60px;
-    @media (min-width: 768px) {
+    @include media-query(tablet) {
       letter-spacing: -0.33px !important;
       top: 20px;
     }
@@ -1876,6 +1884,9 @@ html {
   }
   &--lists-curate-stream.re-button {
     margin-bottom: 0;
+    @include media-query('max-width: 767px') {
+      width: 184px;
+    }
   }
   &--header.re-button {
     @include typography(9);
@@ -1972,6 +1983,12 @@ html {
       }
     }
   }
+  &.get-in-touch {
+    margin-top: 20px;
+    @include media-query(tablet) {
+      margin-top: 0;
+    }
+  }
 }
 
 .re-para {
@@ -2006,6 +2023,29 @@ html {
     border: none !important;
     padding: 0 !important;
     width: 100%;
+  }
+}
+
+#subscriptions_form .re-table {
+  & td:first-of-type {
+    width: 73%;
+    @include media-query(tablet) {
+      width: auto;
+    }
+  }
+  & td:last-of-type {
+    padding-top: 8px;
+    vertical-align: top;
+    @include media-query(tablet) {
+      padding-top: 0;
+      vertical-align: middle;
+    }
+  }
+  td > a > span {
+    justify-content: space-between;
+    @include media-query(tablet) {
+      justify-content: normal;
+    }
   }
 }
 
@@ -2135,10 +2175,11 @@ html {
       }
       .pagination {
         position: absolute;
-        width: calc(100vw - 40px);
+        width: 100vw;
         max-width: 894px;
-        line-height: 0px;
-        @media (min-width: 768px) {
+        line-height: 0;
+        @include media-query(tablet) {
+          width: calc(100vw - 40px);
           line-height: 18px;
         }
         a {
@@ -2585,6 +2626,11 @@ html {
   &__inner {
     max-width: 934px;
     width: 100%;
+    display: flex;
+    justify-content: space-around;
+    @include media-query(tablet) {
+      display: block;
+    }
   }
   &__inner-padded {
     max-width: 934px;
@@ -2597,8 +2643,9 @@ html {
   width: 100%;
   display: flex;
   justify-content: center;
-  padding: 8px;
+  padding: 8px 0 0;
   @media (min-width: 768px) {
+    padding: 8px;
     margin-bottom: 13px;
   }
 }
@@ -2608,7 +2655,7 @@ html {
 
   color: #e1e1e1;
   text-align: center;
-  padding: 20px 10px 14px 10px;
+  padding: 20px 0 14px;
   @media (min-width: 768px) {
     padding: 20px 16px;
 
@@ -2620,6 +2667,7 @@ html {
 
 .list-tab-content {
   width: 100%;
+  min-height: 200px;
   display: flex;
   justify-content: center;
   background: #f8f8fb;
@@ -2662,25 +2710,15 @@ html {
     .info {
       padding-left: 15px;
       .header {
-        font-family: Lato;
-        font-size: 20px;
-        font-weight: bold;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: -0.5px;
-        text-align: left;
-        color: #2a1e3e;
+        @include typography(6);
+        color: $text-color-black;
+        margin-bottom: 10px;
+        @include media-query(tablet) {
+          margin-bottom: 0;
+        }
       }
       .subheader {
-        font-family: Lato;
-        font-size: 20px;
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: 1.33;
-        letter-spacing: -0.4px;
-        text-align: left;
+        @include typography(7);
         color: $text-color-gray;
       }
     }
@@ -2831,14 +2869,24 @@ html {
     @media (min-width: 768px) {
       // height: 64px;
     }
-  }
-  textarea::placeholder {
-    @include typography(7);
-    font-size: 16px;
-    color: $text-color-gray;
-    top: 50%;
-    transform: translateY(-50%);
-    position: relative;
+    &::placeholder {
+      @include typography(7);
+      font-size: 16px;
+      color: $text-color-gray;
+      transform: translate3d(10px, 6px, 0);
+      &:before {
+        display: block;
+        width: 14px;
+        height: 14px;
+        content: ' ';
+        visibility: visible;
+        background-image: url("/assets/images/9-0/comment.svg");
+        background-repeat: no-repeat;
+        background-position-x: 0;
+        background-position-y: 0;
+        background-size: contain;
+      }
+    }
   }
   button {
     position: absolute;
@@ -2876,6 +2924,7 @@ html {
   div {
     @include typography(6);
     color: #b1bbc7; // TODO: ask if this should be deleted -> new color is kinda purple
+    text-align: center;
   }
   &--discussion {
     min-width: 24px;
@@ -2907,12 +2956,16 @@ html {
 
 .comment {
   position: relative;
+  .comment-clock {
+    top: 25px;
+    left: 60px;
+  }
 }
 
 .comment-clock {
   font-family: 'Roboto Mono', monospace;
   font-size: 12px;
-  color: #dee0e7;
+  color: #e4e4e6;
   letter-spacing: 0.5px;
   line-height: 16px;
   margin-left: auto;
@@ -3425,9 +3478,6 @@ html {
   }
   &__search {
     margin-left: auto;
-    @include media-query(tablet) {
-      padding: 4px;
-    }
     &__img {
       @include media-query(tablet) {
         margin-top: 2px;
@@ -3435,10 +3485,11 @@ html {
     }
   }
   &__search-open {
-    background: white;
+    background: #ffffff;
     height: 87px;
     width: auto;
     display: flex;
+    position: absolute;
     align-items: center;
 
     @include media-query(tablet) {
@@ -3447,6 +3498,9 @@ html {
       border: 1px solid #f8f8fb;
       border-radius: 4px;
       box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.18);
+    }
+    @include media-query(desktop) {
+      position: relative;
     }
     img:first-of-type {
       max-height: 16px;
@@ -3520,7 +3574,7 @@ html {
   &__hamburger {
     margin-left: 10px;
     @include media-query(tablet) {
-      margin: 0;
+      //margin: 0;
     }
   }
   &__user {
@@ -5158,6 +5212,12 @@ html {
   }
 }
 
+.settings-tab-content-emails {
+  .re-field--settings:first-child {
+    flex-flow: column;
+  }
+}
+
 .settings-tabs-buttons {
   margin-top: 70px;
   margin-bottom: 23px;
@@ -5254,12 +5314,15 @@ html {
 }
 
 .trending-topics {
+  width: 100%;
   background: #f8f8fb;
   padding: 23px 0 23px 0;
   margin-bottom: 80px;
   margin-top: -50px;
   margin-bottom: -50px;
-  @media (min-width: 768px) {
+  overflow-x: auto;
+  overflow-y: hidden;
+  @include media-query(tablet) {
     margin-top: -128px;
     margin-bottom: -108px;
   }
@@ -5270,9 +5333,13 @@ html {
     margin-bottom: 25px;
   }
   &__inner {
-    max-width: 1356px;
+    width: 3000px;
     padding: 0 0 0 18px;
     margin: 0 auto;
+    @include media-query(desktop) {
+      width: auto;
+      max-width: 1356px;
+    }
   }
   &__items {
     display: flex;
@@ -5305,7 +5372,7 @@ html {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  @media (min-width: 768px) {
+  @include media-query(tablet) {
     flex-direction: row;
   }
   padding-top: 2.5em;
@@ -5316,6 +5383,7 @@ html {
     flex-direction: column;
     justify-content: center;
     color: #ffffff;
+    display: flex;
     .heading {
       font-weight: bold;
       font-size: 22.5px;
@@ -5343,7 +5411,7 @@ html {
     justify-content: left;
     flex-direction: row;
     padding-top: 20px;
-    @media (min-width: 768px) {
+    @include media-query(tablet) {
       flex-direction: row;
       padding-top: 0;
     }
@@ -5371,7 +5439,7 @@ html {
     button:hover {}
     .transparent {
       margin-top: 2em;
-      @media (min-width: 768px) {
+      @include media-query(desktop) {
         margin-top: 0;
         margin-left: 2em;
       }
@@ -5721,14 +5789,15 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top:15px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 25px;
-
   width: 100%;
-   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .18);
-   border-radius: 4px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .18);
+  border-radius: 4px;
+  padding: 15px 10px;
+  margin-bottom: 5px;
+  @include media-query(tablet) {
+    padding: 15px 25px 5px 5px;
+    margin-bottom: 0;
+  }
   &__orange {
      margin-right: 10px;
     background-color: #ea612d;
@@ -5753,11 +5822,16 @@ html {
 
   }
    &__white {
-     background-color: white;
-     color: #ea612d;
-      margin-right: 10px;
+      background-color: white;
+      color: #ea612d;
+      @include media-query(tablet) {
+        margin-right: 10px;
+      }
      .re-button {
-       width: 260px;
+       width: 180px;
+       @include media-query(tablet) {
+         width: 260px;
+       }
        background-color: white;
        color: #ea612d;
 
@@ -5782,25 +5856,29 @@ html {
 .list-actions{
   display: flex;
   justify-content: space-between;
- // margin: 10px;
- width: calc(100% + 40px);
- margin-left: -20px;
- @media (min-width: 768px) {
-   width: auto;
-   margin-left: 0;
- }
- .button-container {
-   width: auto;
-   &__orange {
-     @media (max-width: 768px) {
-       margin-right: 0;
-     }
-   }
- }
+  // margin: 10px;
+  width: calc(100% + 40px);
+  margin-left: -20px;
+  margin-right: -20px;
+  @include media-query(tablet) {
+    width: auto;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .button-container {
+    width: 99%;
+    @include media-query(tablet) {
+      width: auto;
+    }
+    &__orange {
+      @media (max-width: 768px) {
+        margin-right: 0;
+      }
+    }
+  }
 }
-.bottom{
-  margin-bottom: 50px;
-  @media (min-width: 768px) {
+.bottom {
+  @include media-query(tablet) {
     margin-bottom: 100px;
   }
 }
@@ -5880,6 +5958,10 @@ html {
   p{
     @include typography(7);
     color: #2a1e3e;
+    line-height: 20px;
+    @include media-query(tablet) {
+      line-height: inherit;
+    }
   }
 
   b{

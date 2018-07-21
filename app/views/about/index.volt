@@ -13,7 +13,7 @@
         <h2 class="re-subheading re-subheading--button-below">All things Spreadshare.</h2>
       </div>
       <div>
-        <a href="/table/add" class="re-button">Get in touch</a>
+        <a href="/table/add" class="re-button get-in-touch">Get in touch</a>
       </div>
     </div>
 
