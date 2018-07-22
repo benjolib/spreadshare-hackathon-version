@@ -52,8 +52,7 @@
   <section class="main">
 
     <div class="feedback">
-      <div class="title">Shape our product</div>
-      <div class="content">Tell us about feature ideas and bugs you found</div>
+      <span>How it works</span>
     </div>
 
     <div class="flash">
