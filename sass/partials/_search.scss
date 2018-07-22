@@ -15,7 +15,7 @@
     display: flex;
     flex-direction: column;
     left: 0;
-    @media (min-width: 768px) {
+    @include media-query(tablet) {
       width: 546px;
       margin-top: 1px;
     }
@@ -26,28 +26,40 @@
       margin-top: auto;
       color: #6cc69d;
       text-align: center;
-      padding-top: 12px;
+      padding-top: 10px;
     }
 
     .description {
+      font-size: 12px;
+      @include media-query(tablet) {
+        font-size: 15px;
+      }
       @include typography(7);
 
       display: inline-block;
-      color: #dee0e7;
+      color: $text-color-gray;
     }
 
     .result-count {
       @include typography(8);
 
       display: inline-block;
-      color: #6a7c94;
+      color: #132466;
       margin-left: 8px;
-      margin-bottom: 19px;
+      line-height: 1.33;
+      @include media-query(tablet) {
+        line-height: 20px;
+      }
+    }
+
+    #search-items {
+      margin-top: 30px;
+      margin-bottom: 30px;
     }
 
     .item {
       display: block;
-      padding-bottom: 12px;
+      padding-bottom: 20px;
       padding-left: 0;
       letter-spacing: -0.58px;
       line-height: 22px;
