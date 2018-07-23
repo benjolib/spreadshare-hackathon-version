@@ -302,11 +302,11 @@
 
         </div>
       </div>
-      <div class="u-flex u-flex u-flexJustifyCenter small-gutter" style="margin-top: 60px;">
+      <div class="u-flex u-flex u-flexJustifyCenter small-gutter" style="margin-top: 30px;">
         <input type="reset" value="Cancel" class="re-button re-button--grey small-margin" /> <input type="submit" value="Save" class="re-button small-margin" />
       </div>
-      <div class="u-flex u-flexCol u-flexAlignItemsCenter" style="margin-top: 80px;">
-        <a href="/logout" class="re-button re-button--light-grey">Logout</a>
+      <div class="u-flex u-flexCol u-flexAlignItemsCenter" style="margin-top: 40px;">
+        <a href="/logout" class="re-button re-button--light-grey re-button-logout">Logout</a>
         <a href="#" class="settings-delete-account-button">Delete Account</a>
       </div>
     </form>

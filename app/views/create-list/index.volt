@@ -10,9 +10,9 @@
        <!-- <div class="re-image__delete-button" style="display:none"></div>  -->
     </div>
     <input type="file" name="image" id="re-image-fileUpload" style="display: none;" />
-    
-    
-    
+
+
+
     <div class="re-heading-input">
       <img class="re-heading-input__tick titledisabled" src="/assets/images/input-tick.svg" />
       <img id="titlechecked" class="re-heading-input__tick-green titlechecked" src="/assets/images/input-tick-green.svg" />
@@ -42,7 +42,8 @@
        {% if post['description'] is not defined %}
         {% set post['description'] = "" %}
         {% endif %}
-        {{ text_field('description', 'placeholder':"Write a short description text", 'autocomplete':"off", 'value':post['description']) }} {#
+        {#{ text_field('description', 'placeholder':"Write a short description text", 'autocomplete':"off", 'value':post['description']) }#}
+        {{ text_area('description', 'placeholder':'Write a short description text', 'autocomplete':"off", 'value':post['description'], 'class':'short-description-textarea') }} {#
         <textarea type="text" placeholder="Write a short desciption text" name="description" style="border:0px" />#}
       </div>
     </div>
@@ -52,9 +53,9 @@
     <div class="create-list-add-tags">
       <img class="re-heading-input__tick tagsdisabled" src="/assets/images/input-tick.svg" />
       <img class="re-heading-input__tick-green tagschecked" src="/assets/images/input-tick-green.svg" />
-   
+
       <div class="ui fluid multiple search selection dropdown tags">
-        
+
         {% if post['tags'] is not defined %}
         {% set post['tags'] = "" %}
         {% else %}
@@ -62,18 +63,18 @@
         {% endif %}
         {{ hidden_field('tags', 'placeholder':"Tags", 'value': post['tags']) }}
 
-      
+
         <i class="dropdown icon"></i>
         <div class="default text input">Add at least 1 tag</div>
         <div class="menu">
         {% if tagsNames is defined %}
-        
+
         {% for index, tag in tagsNames %}
           <div class="item" data-value='{{ post['tags'][index] }}'>{{ tag }}</div>
         {%  endfor %}
         {% endif %}
 
-              
+
         </div>
       </div>
     </div>
@@ -97,7 +98,7 @@
       </div>-->
 
     <div class="create-list-add-curators">
-        
+
       <div class="ui fluid curators multiple search selection dropdown">
        {% if post['curators'] is not defined %}
         {% set post['curators'] = "" %}
@@ -120,7 +121,7 @@
     <div class="create-list-add-related">
 
       <div class="ui fluid multiple search selection dropdown related">
-        
+
         {% if post['related-lists'] is not defined %}
         {% set post['related-lists'] = "" %}
         {% else %}
@@ -141,16 +142,17 @@
     </div></div>
 
 
-    
- 
+
+
     <div class="create-create-list-tabs">
       <div class="create-create-list-tabs__inner">
       {% if editing %}
-       
+
       {% else %}
         <div class="create-list-tab-buttons u-flex extra-small-gutter">
-          <a href="#" class="re-button re-button--full-width extra-small-margin create-list-tab-button create-list-tab-button-copy">Copy Paste content from a site</a>
-          <a href="#" class="re-button re-button--grey re-button--full-width extra-small-margin create-list-tab-button create-list-tab-button-import">Upload your list from a CSV file</a>
+          <a href="#" class="re-button re-button--grey extra-small-margin create-list-tab-button create-list-tab-button-copy"><img src="/assets/icons/copy-and-paste.svg" />Copy & Paste</a>
+          <a href="#" class="re-button re-button--grey extra-small-margin create-list-tab-button create-list-tab-button-import"><img src="/assets/icons/upload-via-csv.svg" />Upload via CSV</a>
+          <div class="tooltip"><span>e.g. Google Sheet, Airtable, Excel or a website</span></div>
         </div>
       {% endif %}
         <div class="create-list-tab-content create-list-tab-content-copy">
@@ -158,7 +160,7 @@
           <div class="create-list-copy-textarea-container">
             {{ text_area('copy', 'placeholder':'Paste here','class':'create-list-copy-textarea') }} {#
             <textarea class="create-list-copy-textarea" placeholder="Paste here" name="copy"></textarea>#}
-            <button class="re-button create-list-copy-button">Format to List</button>
+            <button class="re-button create-list-copy-button">Format to Stream</button>
           </div>
           {% endif %}
           <!--<div class="l-button create-list-copy-seperator-chooser" data-dropdown-placement="bottom-start">
@@ -209,7 +211,7 @@ $(".table-scroll").mousedown(function(e){
 
 $("body").mousemove(function(e){
     if(down){
-        
+
         var newX = e.pageX;
         var newY = e.pageY;
 
@@ -234,7 +236,7 @@ $("body").mouseup(function(e){
   transition : 'horizontal flip',
   duration   : 200,
   variation  : false,
-  
+
 },
   });
   $('.ui.dropdown.curators').dropdown({
@@ -264,14 +266,14 @@ $("body").mouseup(function(e){
     }
   });
      $('.empty ').initial({height:82, width:82 });
-    $('.empty ').css('border-radius', "6px")  
+    $('.empty ').css('border-radius', "6px")
     $(".search").keydown(function(event){
     if(event.keyCode == 13) {
       event.preventDefault();
       return false;
     }
     })
-    
+
     console.log(tags.value.split(",").map(Number).length)
  if(tags.value.split(",").map(Number).length > 0 && tags.value) {
        $('.tagschecked').show()
@@ -280,7 +282,7 @@ $("body").mouseup(function(e){
        $('.tagschecked').hide()
              $('.tagsdisabled').show()
      }
-   
+
      if(document.getElementById("name").value.length > 3) {
        $('.titlechecked').show()
             $('.titledisabled').hide()
@@ -293,9 +295,9 @@ $("body").mouseup(function(e){
        $('.descchecked').show()
             $('.descdisabled').hide()
      }
-    
 
-    $('.ui.input input').on('input', function(e) { 
+
+    $('.ui.input input').on('input', function(e) {
       console.log(e.target.name, e.target.value.length)
       if(e.target.name ==='name'){
         if(e.target.value.length > 3){
@@ -316,7 +318,7 @@ $("body").mouseup(function(e){
              $('.taglinedisabled').show()
         }
       }
-      
+
       if(e.target.name ==='description'){
         if(e.target.value.length > 3){
             $('.descchecked').show()
@@ -326,9 +328,9 @@ $("body").mouseup(function(e){
              $('.descdisabled').show()
         }
       }
-      
+
      });
-    $('.ui.multiple').on('change', function(e) { 
+    $('.ui.multiple').on('change', function(e) {
         if(tags.value.split(",").map(Number).length > 0 && tags.value){
             $('.tagschecked').show()
             $('.tagsdisabled').hide()
@@ -339,10 +341,10 @@ $("body").mouseup(function(e){
     })
     document.querySelector('#re-image-fileUpload').addEventListener('change', function () {
       if (this.files && this.files[0]) {
-        
+
         var img = $('.re-image');
         img.attr('style', 'background: #f5f5f5 url(' + URL.createObjectURL(this.files[0]) + ') center / cover;');
-        
+
         //img.onload = fn;
       }
     });
@@ -358,8 +360,8 @@ $("body").mouseup(function(e){
     //         var img = $('.re-image');
     //         img.attr('style', '');
     //   }
-      
-      
+
+
     // };
 
     document.querySelector('#create-list-fileUpload').addEventListener('change', function () {
@@ -378,8 +380,8 @@ $("body").mouseup(function(e){
           scrollTop: 0
         }, "slow");
       }
-      
-      
+
+
     };
 
     $('.create-list-tab-button-import').on('click', function (e) {
@@ -493,7 +495,7 @@ $("body").mouseup(function(e){
 
     $('.re-table__list-image-fileUpload').on('change', function () {
       if (this.files && this.files[0]) {
-        
+
         var img = $(this).parents('td').find('.re-table__list-image');
         img.removeClass('re-table__list-image--empty');
         img.attr('style', 'background: #f5f5f5 url(' + URL.createObjectURL(this.files[0]) + ') center / cover;');
@@ -505,7 +507,7 @@ $("body").mouseup(function(e){
     $('.re-table__list-image__upload-button').on('click', function () {
       $(this).parents('td').find('.re-table__list-image-fileUpload').click();
     });
-    
+
     $('.re-table__list-image__delete-button').on('click', function () {
       $(this).parents('td').find('.re-table__list-image-fileUpload').val('');
       var img = $(this).parents('td').find('.re-table__list-image');
@@ -539,7 +541,7 @@ $("body").mouseup(function(e){
 
           image: $this.find('.re-table__list-image').attr('style'),
           content: $this.find('td:nth-of-type(1n+4) div').map(function () {
-            
+
             return this.innerText;
           }).get(),
         }
@@ -547,12 +549,12 @@ $("body").mouseup(function(e){
 
       $('#create-list-step').val('2');
       $('#list-columns').val(JSON.stringify(listColumns.get()));
-      
+
       $('#list-rows').val(JSON.stringify(listRows.get().map(function (row, index) {
         var c = {}
         c['id'] = row.id
         c['content'] = row.content
-        
+
         return {
           id: row.id,
           row: c,
@@ -567,6 +569,11 @@ $("body").mouseup(function(e){
 
 
   });
+
+  $('.short-description-textarea').keyup(function (e) {
+      e.target.style.height = "73px";
+      e.target.style.height = (e.target.scrollHeight) + "px";
+  })
 </script>
 
 {% endblock %}

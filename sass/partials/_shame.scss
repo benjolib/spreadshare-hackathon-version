@@ -1412,6 +1412,7 @@ html {
     margin-top: 73px;
     margin-bottom: 59px;
     flex-wrap: initial;
+    justify-content: left;
   }
   .col1 {
     @include media-query(tablet) {
@@ -1486,10 +1487,7 @@ html {
 }
 
 .list-page-space {
-  margin-bottom: 61px;
-  @include media-query(tablet) {
-    margin-bottom: 71px;
-  }
+  margin-bottom: 60px;
 }
 
 .homepage-space {
@@ -1500,8 +1498,16 @@ html {
       margin-top: 0;
     }
   }
+  & + .home-heading {
+    @include media-query(tablet) {
+      margin-top: -80px;
+    }
+  }
   @include media-query(tablet) {
-    margin-bottom: 38px;
+    margin-bottom: 100px;
+  }
+  @include media-query(desktop) {
+    margin-bottom: 100px;
   }
 }
 
@@ -1556,8 +1562,15 @@ html {
     margin: 0 auto;
     max-width: 1150px;
     padding: 109px 20px 60px 20px;
+    & + .re-page--medium {
+      padding-top: 0;
+      margin-top: -35px;
+      @include media-query(tablet) {
+        margin-top: -155px;
+      }
+    }
     @include media-query(tablet) {
-      padding: 186px 20px 125px 20px;
+      padding: 218px 20px 125px 20px;
     }
 
     .action-card {
@@ -1714,7 +1727,11 @@ html {
     font-size: 30px;
     line-height: 35px;
     letter-spacing: -0.56px;
+    margin-top: 10px;
     margin-bottom: 22px;
+    @include media-query(desktop) {
+      margin-top: 20px;
+    }
   }
   &--button-below {
     margin-bottom: 22px;
@@ -1873,6 +1890,7 @@ html {
     border-color: #2F267D;
     letter-spacing: -0.33px !important;
     margin-top: 60px;
+    max-width: 213px;
     @include media-query(tablet) {
       letter-spacing: -0.33px !important;
       top: 20px;
@@ -1903,9 +1921,12 @@ html {
     border: none;
     color: #ffffff !important;
     @include media-query(tablet) {
+      margin-left: 22px;
       width: 222px;
       height: 56px;
-      margin-left: 22px;
+    }
+    @include media-query(desktop) {
+      margin-left: 40px;
     }
     span {
       @include media-query(tablet) {
@@ -2002,9 +2023,32 @@ html {
     }
   }
   &.get-in-touch {
+    color: #ffffff;
+    background-color: $text-color-green;
     margin-top: 20px;
     @include media-query(tablet) {
       margin-top: 0;
+    }
+  }
+  &.re-button-logout {
+    @include typography(9);
+    color: #ffffff !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.184018);
+    background-color: #e4e4e6;
+  }
+}
+
+.about-page .re-table {
+  td:first-of-type {
+    h3 {
+      @include typography(3);
+    }
+    p {
+      @include typography(4);
+    }
+    &.nobox p {
+      @include typography(11);
+      text-align: center;
     }
   }
 }
@@ -2042,6 +2086,11 @@ html {
     padding: 0 !important;
     width: 100%;
   }
+  .short-description-textarea {
+    @include typography(7);
+    overflow-y: hidden;
+    width: 100%;
+  }
 }
 
 #subscriptions_form .re-table {
@@ -2050,12 +2099,16 @@ html {
     @include media-query(tablet) {
       width: auto;
     }
+    p {
+      @include typography(7);
+      margin-bottom: 15px;
+    }
   }
   & td:last-of-type {
     padding-top: 8px;
     vertical-align: top;
     @include media-query(tablet) {
-      padding-top: 0;
+      padding: 0;
       vertical-align: middle;
     }
   }
@@ -2261,7 +2314,7 @@ html {
         }
       }
       p {
-        @include typography(4);
+        @include typography(7);
 
         word-spacing: 0.5px;
         margin-bottom: 1px;
@@ -2529,7 +2582,7 @@ html {
   &__item {
     padding: 7px 0 7px 0;
     @media (min-width: 768px) {
-      padding: 16px 0 10px 0;
+      padding: 16px 20px 10px;
     }
     &__name {
       @include typography(8);
@@ -2657,7 +2710,7 @@ html {
   &__inner-padded {
     max-width: 934px;
     width: 100%;
-    padding: 20px;
+    padding: 20px 0;
   }
 }
 
@@ -2778,13 +2831,39 @@ html {
     margin-bottom: 8px;
     flex-grow: 1;
     width: calc(100% - 16px);
-    @media (min-width: 768px) {
+    @include media-query(tablet) {
       width: calc(50% - 16px);
       max-width: calc(50% - 16px);
-      padding: 0px 6px 6px 11px;
-      margin-left: 8px;
+      padding: 0px 6px 6px 5px;
+      margin-left: 0px;
       margin-right: 8px;
       margin-bottom: 16px;
+    }
+  }
+}
+
+.list-tab-content-subscribers {
+  &__card {
+    margin: 0;
+    @include media-query(tablet) {
+      margin-top: -1px;
+      margin-left: 0;
+      margin-right: 8px;
+      margin-bottom: 16px;
+    }
+    .profile-card {
+      margin-right: 0;
+      align-items: flex-start !important;
+      box-sizing: border-box;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
+      border: 0 solid #f8f8fB;
+      border-radius: 4px;
+      &__avatar {
+        margin-left: 12px;
+        @include media-query(tablet) {
+          margin-left: 0;
+        }
+      }
     }
   }
 }
@@ -2820,13 +2899,16 @@ html {
     }
   }
   &--collaborations {
-    margin-bottom: 13px;
+    margin-bottom: 12px;
     @include media-query(tablet) {
-      margin-bottom: 52px;
+      margin-bottom: 20px;
     }
     .shadowcontain {
       width: calc(100% - 35px);
       transform: translateX(-55px);
+    }
+    .re-table thead {
+      display: none;
     }
   }
 }
@@ -2978,7 +3060,7 @@ html {
   }
   &--discussion {
     min-width: 24px;
-    margin-top: 14px;
+    margin-top: 8px;
     @media (min-width: 768px) {
       min-width: 40px;
       margin-top: 24px;
@@ -3195,8 +3277,7 @@ html {
 }
 
 .submission-clock {
-  font-family: 'Roboto Mono', monospace;
-  font-size: 12px;
+  @include typography(8);
   color: #dee0e7;
   letter-spacing: 0.5px;
   line-height: 16px;
@@ -3247,48 +3328,30 @@ html {
     }
   }
   &__user-name {
-
-    font-family: 'Lato';
-    font-weight: bold;
+    @include typography(7);
     color: #252442;
     margin-right: 4px;
-    font-size: 12px;
     letter-spacing: -0.32px;
-   line-height: 28px;
+    line-height: 28px;
     @media (min-width: 768px) {
       margin-right: 7px;
-      font-size: 16px;
-       line-height: 36px;
-      letter-spacing: -0.43px;
     }
   }
   &__text {
-    font-family: 'Lato';
+    @include typography(7);
     color: #9BAABF;
     margin-right: 3px;
-    font-size: 12px;
     letter-spacing: -0.32px;
     line-height: 16px;
     @media (min-width: 768px) {
       margin-right: 6px;
-      font-size: 16px;
-      line-height: 21px;
-      letter-spacing: -0.43px;
     }
   }
   &__table-name {
-    font-family: 'Roboto Mono', monospace;
-    font-weight: bold;
+    @include typography(7);
     color: #6cc69d;
-    font-size: 12px;
     letter-spacing: -0.32px;
     line-height: 16px;
-
-    @media (min-width: 768px) {
-      font-size: 16px;
-      line-height: 21px;
-      letter-spacing: -0.43px;
-    }
   }
 }
 
@@ -3839,44 +3902,54 @@ html {
   height: 510px;
   margin-top: 40px;
   border: 1px solid #f8f8fb;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.18);
   border-radius: 4px;
   padding: 18px 10px 18px 20px;
   @media (min-width: 768px) {
-    width: 332px;
+    width: 388px;
     margin-top: 26px;
+  }
+  &:before {
+    content: '';
+    display: block;
+    width: 7px;
+    height: 147px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    border-radius: 4px 0 0 0;
+    background-color: $text-color-green;
   }
   &__notification {
     margin-bottom: 1rem;
     padding-bottom: .5rem;
-    border-bottom: 1px solid rgba(0, 0, 0, .03);
     &__image {
       width: 44px;
       height: 44px;
-      border-radius: 9999px;
+      border-radius: 50%;
       margin-right: 10px;
-      box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.67);
     }
     &__name {
-      font-family: 'Roboto Mono', monospace;
-      font-weight: bold;
+      font-family: Lato, sans-serif;
+      font-weight: 700;
       font-size: 16px;
       color: #252442;
       letter-spacing: -0.43px;
     }
     &__text {
-      font-family: 'Lato', sans-serif;
-      font-size: 16px;
-      color: #b1bbc7;
-      letter-spacing: -0.43px;
+      @include typography(7);
+      font-size: 15px;
+      color: $text-color-gray;
+      margin-top: 5px;
       a {
-        color: #68c79c;
+        color: $text-color-green;
       }
     }
     &__date {
       @include typography(8);
 
-      color: #dee0e7;
+      color: #e4e4e6;
       margin-top: 1px;
       img {
         margin-right: 2px;
@@ -3886,7 +3959,7 @@ html {
     &__see-all {
       @include typography(9);
 
-      color: #6cc69d;
+      color: $text-color-green;
       text-align: center;
       margin-right: 10px;
       margin-top: auto;
@@ -4150,9 +4223,10 @@ html {
 
 .re-field--settings {
   width: 100%;
-  border: 1px solid #f8f8fb;
+  border: 0 solid #f8f8fb;
   height: auto;
   min-height: 61px;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.18);;
   .re-field__input {
     width: 100%;
   }
@@ -4505,10 +4579,10 @@ html {
 
 .activity-box {
   @media (min-width: 768px) {
-    border: 1px solid #f8f8fb;
+    border: 0px solid #f8f8fb;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
     border-radius: 4px;
-    padding: 25px 35px 5px 25px;
+    padding: 40px 25px 20px 25px;
   }
   &__notification {
     margin-bottom: 15px;
@@ -4758,7 +4832,7 @@ html {
     @include typography(2);
 
     color: #9baabf;
-    max-width: 600px;
+    max-width: 650px;
     margin-top: 0;
     margin-bottom: 20px;
     min-height: 19px;
@@ -4896,22 +4970,33 @@ html {
     }
   }
   .follow-button {
+    @include typography(9);
+
     display: none;
     flex-direction: column;
     justify-content: center;
     margin: 32px 16px 132px 0;
     width: 133px;
     height: 56px;
-    color: #2dad6b;
-    border: 1px solid #2dad6b;
+    color: #ffffff;
     border-radius: 2px;
     text-decoration: none;
     text-align: center;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
-    font-family: 'Roboto Mono', monospace;
-    font-weight: bold;
+    background: #ea612d;
     @media (min-width: 768px) {
       display: flex;
+      align-items: center;
+      flex-direction: row;
+    }
+    img {
+      width: 16px;
+      display: inline;
+      margin-right: 10px;
+    }
+    &.unfollow {
+      background-color: #ffffff;
+      color: $text-color-gray;
     }
   }
   .small-follow-button {
@@ -4988,6 +5073,25 @@ html {
   & + .big-gutter .list-card--small {
     padding-left: 5px;
     padding-right: 5px;
+
+    .list-card__name {
+      @include typography(5);
+    }
+
+    .list-card__image {
+      margin-bottom: 40px;
+    }
+
+    .list-card__description {
+      @include typography(11);
+    }
+
+    .list-card__subscriberCount {
+      margin-top: 2px;
+      @include media-query(tablet) {
+        margin-top: 4px;
+      }
+    }
   }
 }
 
@@ -5109,11 +5213,28 @@ html {
 
 // create list page
 .create-create-list-tabs {
-  margin-top: 50px;
+  margin-top: 35px;
 }
 
 .create-list-tab-buttons {
-  margin-bottom: 28px;
+  margin-bottom: 100px;
+  flex-wrap: wrap;
+  .re-button {
+    border: 0;
+    img {
+      margin-right: 10px;
+    }
+  }
+  .tooltip {
+    @include typography(8);
+    color: #e4e4e6;
+    margin-left: 4px;
+    flex: 1 100%;
+    span {
+      display: block;
+      width: 232px;
+    }
+  }
 }
 
 .create-list-copy-textarea {
@@ -5422,7 +5543,7 @@ html {
     @include typography(4);
 
     color: #9baabf;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
   }
   &__inner {
     width: 3000px;
@@ -5480,7 +5601,7 @@ html {
       font-weight: bold;
       font-size: 22.5px;
       @media (min-width: 768px) {
-        font-size: 1.9em;
+        font-size: 30px;
       }
       line-height: 36px;
       letter-spacing: -0.72px;
@@ -5490,12 +5611,14 @@ html {
       color: $text-color-gray;
       font-weight: 400;
       font-size: 16px;
-      @media (min-width: 768px) {
-        font-size: 1.6em;
-      }
       line-height: 27px;
       letter-spacing: -0.54px;
+      margin-top: 5px;
       margin-bottom: 8px;
+      @media (min-width: 768px) {
+        margin-top: 14px;
+        font-size: 1.6em;
+      }
     }
   }
   .action {
@@ -5511,6 +5634,8 @@ html {
     }
     @include media-query(desktop) {
       margin-right: 0;
+      margin-bottom: 2px;
+      justify-content: flex-end;
     }
     button {
       width: 300px;
@@ -5597,7 +5722,7 @@ html {
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   background: #f8f8fb;
-  padding: 30px 0;
+  padding: 30px 0 20px;
   margin-bottom: 80px;
   margin-top: -50px;
   margin-bottom: -50px;
@@ -5606,12 +5731,9 @@ html {
     margin-bottom: -108px;
   }
   h3 {
-    font-family: 'Lato', sans-serif;
-    font-weight: normal;
-    font-size: 22px;
+    @include typography(4);
     color: #9baabf;
-    letter-spacing: -0.58px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
   }
   &__inner {
     max-width: 1356px;
@@ -5702,11 +5824,8 @@ html {
 }
 
 .related-lists-new-heading {
-  font-family: 'Lato', sans-serif;
-  font-weight: normal;
-  font-size: 24px;
+  @include typography(4);
   color: #9baabf;
-  letter-spacing: -0.58px;
   margin-bottom: 25px;
   margin-top: 25px;
   @include media-query(tablet) {
@@ -6085,9 +6204,6 @@ html {
     @include typography(7);
     color: #2a1e3e;
     line-height: 20px;
-    @include media-query(tablet) {
-      line-height: inherit;
-    }
   }
 
   b{
@@ -6121,5 +6237,25 @@ html {
       }
 
     }
+  }
+}
+
+.thanks-to {
+  margin: 80px auto 40px;
+  justify-content: center;
+  a {
+    margin-left: 15px;
+    margin-bottom: 5px;
+    &:first-child {
+      @include media-query(tablet) {
+        margin-left: 0;
+        margin-bottom: 0;
+      }
+    }
+  }
+  img {
+    width: 60px;
+    height: 60px;
+    border-radius: 6px;
   }
 }

@@ -31,7 +31,7 @@
             </div>
             <div class="profile-buttons">
                 {% if auth.loggedIn() and auth.getUserId() != profile.id %}
-                <a class="follow-button" href="/user/follow/{{ profile.id }}">{% if amIFollowing(profile.id) %}Unfollow{% else %}Follow{% endif %}</a>
+                <a class="follow-button{% if amIFollowing(profile.id) %} unfollow{% endif %}" href="/user/follow/{{ profile.id }}">{% if amIFollowing(profile.id) %}Unfollow{% else %}<img src="/assets/icons/follow.svg" /> <span>Follow</span>{% endif %}</a>
                 {% endif %} {% if auth.loggedIn() and auth.getUserId() == profile.id %}
                 <a class="edit-button" href="#">Edit</a>
                 <div class="save-and-cancel">
@@ -47,7 +47,7 @@
             </div>
             <div class="profile-buttons">
                 {% if auth.loggedIn() and auth.getUserId() != profile.id %}
-                <a class="follow-button small-follow-button" href="#">{% if amIFollowing(profile.id) %}Unfollow{% else %}Follow{% endif %}</a>
+                <a class="follow-button small-follow-button{% if not amIFollowing(profile.id) %} unfollow{% endif %}" href="#">{% if amIFollowing(profile.id) %}Unfollow{% else %}<img src="/assets/icons/follow.svg" /> <span>Follow</span>{% endif %}</a>
                 {% endif %} {% if auth.loggedIn() and auth.getUserId() == profile.id %}
                 <a class="edit-button small-edit-button" href="#">Edit</a>
                 <div class="save-and-cancel">
