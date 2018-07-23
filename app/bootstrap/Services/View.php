@@ -36,6 +36,13 @@ return function (\DS\Interfaces\GeneralApplication $application, Phalcon\Di\Fact
                                     return 'DS\Model\Tools::round(' . $number . ')';
                                 }
                             );
+                            
+                            $compiler->addFilter(
+                                'ucfirst',
+                                function ($string) {
+                                    return 'DS\Model\Tools::ucfirst(' . $string . ')';
+                                }
+                            );
 
                             $compiler->addFilter(
                                 'split',

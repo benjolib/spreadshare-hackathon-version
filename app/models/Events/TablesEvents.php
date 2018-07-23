@@ -2,6 +2,7 @@
 
 namespace DS\Model\Events;
 
+use AlgoliaSearch\AlgoliaException;
 use DS\Events\Table\TableCreated;
 use DS\Events\Table\TableUpdated;
 use DS\Model\Abstracts\AbstractTables;
@@ -23,30 +24,54 @@ use DS\Model\Types;
  * @version   $Version$
  * @package   DS\Model
  */
-abstract class TablesEvents extends AbstractTables {
-    const ALGOLIA_INDEX = 'stream';
-
+abstract class TablesEvents extends AbstractTables
+{
+    /**
+     * Algolia index name. Environment is appended
+     */
+    const ALGOLIA_INDEX = 'spreadshare-stream';
+    
+    /**
+     * Push current instance to algola
+     */
     private function pushToAlgolia()
     {
-        $algoliaClient = $this->getDI()->get(\DS\Constants\Services::ALGOLIA);
-        $index = $algoliaClient->initIndex(self::ALGOLIA_INDEX);
-
-        $index->addObjects([[
-            'objectID' => $this->getId(),
-            'title' => $this->getTitle(),
-            'tagline' => $this->getTagline(),
-            'description' => $this->getDescription(),
-        ]]);
+        try
+        {
+            $index = $this->serviceManager->getAlgolia()->initIndex(self::ALGOLIA_INDEX . '-' . ENV);
+            $index->addObjects(
+                [
+                    [
+                        'objectID' => $this->getId(),
+                        'title' => $this->getTitle(),
+                        'tagline' => $this->getTagline(),
+                        'description' => $this->getDescription(),
+                    ],
+                ]
+            );
+        }
+        catch (AlgoliaException $e)
+        {
+            $this->serviceManager->getRavenClient()->captureException($e);
+        }
     }
-
+    
+    /**
+     * Remove object from algolia index
+     */
     private function removeFromAlgolia()
     {
-        $algoliaClient = $this->getDI()->get(\DS\Constants\Services::ALGOLIA);
-        $index = $algoliaClient->initIndex(self::ALGOLIA_INDEX);
-
-        $index->deleteObject($this->getId());
+        try
+        {
+            $index = $this->serviceManager->getAlgolia()->initIndex(self::ALGOLIA_INDEX . '-' . ENV);
+            $index->deleteObject($this->getId());
+        }
+        catch (\Exception $e)
+        {
+            $this->serviceManager->getRavenClient()->captureException($e);
+        }
     }
-
+    
     /**
      * @return bool
      */
@@ -54,28 +79,32 @@ abstract class TablesEvents extends AbstractTables {
     {
         return parent::beforeValidationOnCreate();
     }
-
+    
     /**
      * @return bool
      */
     public function beforeValidationOnUpdate()
     {
         parent::beforeValidationOnUpdate();
-
-        if (!empty($this->getTitle())) {
-
-            if (strlen($this->getTitle()) < 4) {
+        
+        if (!empty($this->getTitle()))
+        {
+            
+            if (strlen($this->getTitle()) < 4)
+            {
                 throw new \InvalidArgumentException('Please provide at least four characters for the table name.');
             }
-
+            
             // Check if table with this name already exists
             $tableCheck = Tables::findByFieldValue('title', $this->getTitle());
-            if ($tableCheck && $tableCheck->getId() != $this->getId()) {
+            if ($tableCheck && $tableCheck->getId() != $this->getId())
+            {
                 throw new \InvalidArgumentException('A table with the exact same title already exists. Please choose another title');
             }
         }
-
-        if (!$this->getTypeId()) {
+        
+        if (!$this->getTypeId())
+        {
             $this->setTypeId(null);
         }
 
@@ -88,30 +117,34 @@ abstract class TablesEvents extends AbstractTables {
 //        {
 //            $this->setTopic2Id(null);
 //        }
-
-        if ($this->getTypeId() && Types::findFirstById($this->getTypeId()) === false) {
+        
+        if ($this->getTypeId() && Types::findFirstById($this->getTypeId()) === false)
+        {
             throw new \InvalidArgumentException("Your selected type is invalid. Please select another one.");
         }
-
-        if (!$this->getFlags()) {
+        
+        if (!$this->getFlags())
+        {
             $this->setFlags(TableFlags::Unpublished);
         }
-
-        if (!$this->getSlug() && strpos($this->getTitle(), "temptitle") === false) {
-            $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $this->getTitle())));
+        
+        if (!$this->getSlug() && strpos($this->getTitle(), "temptitle") === false)
+        {
+            $slug      = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $this->getTitle())));
             $slugCheck = Tables::findByFieldValue('slug', $slug);
-            $i = 2;
-            while ($slugCheck && $slugCheck->getId() != $this->getId()) {
-                $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $this->getTitle()))).'_'.$i;
+            $i         = 2;
+            while ($slugCheck && $slugCheck->getId() != $this->getId())
+            {
+                $slug      = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $this->getTitle()))) . '_' . $i;
                 $slugCheck = Tables::findByFieldValue('slug', $slug);
                 $i++;
             }
             $this->setSlug($slug);
         }
-
+        
         return true;
     }
-
+    
     /**
      * @return bool
      */
@@ -120,34 +153,38 @@ abstract class TablesEvents extends AbstractTables {
         // Initialize table stats
         $tableStats = new TableStats();
         $tableStats->setTableId($this->getId())->create();
-
-        if ($this instanceof Tables) {
+        
+        if ($this instanceof Tables)
+        {
             TableCreated::after($this->getOwnerUserId(), $this);
         }
-
+        
         return true;
     }
-
+    
     /**
      * @return bool
      */
     public function afterSave()
     {
-        if ($this instanceof Tables) {
+        if ($this instanceof Tables)
+        {
             TableUpdated::after($this->getOwnerUserId(), $this);
-
-            if ($this->getFlags() === TableFlags::Published) {
+            
+            if ($this->getFlags() === TableFlags::Published)
+            {
                 $this->pushToAlgolia();
             }
-
-            if ($this->getFlags() === TableFlags::Unpublished) {
+            
+            if ($this->getFlags() === TableFlags::Unpublished)
+            {
                 $this->removeFromAlgolia();
             }
         }
-
+        
         return true;
     }
-
+    
     public function afterDelete()
     {
         $this->removeFromAlgolia();

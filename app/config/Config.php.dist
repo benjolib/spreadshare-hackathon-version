@@ -16,8 +16,8 @@ return [
         'port' => '9200',
     ],
     'algolia' => [
-        'application_id' => 'JDVCECO7A6',
-        'admin_api_key' => '9b974cc48b2043752f8ff7245972bd7a',
+        'app-id' => 'JDVCECO7A6',
+        'api-key' => '9b974cc48b2043752f8ff7245972bd7a',
     ],
     'read-database' => [
         'adapter' => 'Mysql',

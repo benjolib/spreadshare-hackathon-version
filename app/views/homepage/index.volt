@@ -5,6 +5,16 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
     <h1 class="re-heading">Explore</h1>
     <h2 class="re-subheading re-subheading--button-below">We curate the best Streams for you every day</h2>
   </div>
+  {% if tag is defined %}
+  <div class="home-heading u-flex">
+      <div class="selected-topics__items">
+      <a href="javascript:history.back()">
+      
+      <div>{{ tag }} x</div>
+      </a>
+      </div>
+      </div>
+{% endif %}
   {#u-flex u-flexWrap big-gutter
   <div class="home-heading u-flex">
     <div class="home-heading__text home-heading-button clickable l-button" data-dropdown-placement="bottom-start" data-dropdown-target=".home-heading-dropdown">
@@ -99,6 +109,7 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
       </div>
     </div>
   </div> #}
+
 
   <div class="u-flex u-flexWrap big-gutter home-top-margin-bottom" >
     {% set qty = 0 %}

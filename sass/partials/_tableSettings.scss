@@ -13,7 +13,10 @@
 
     .addTable__content__main__options {
       width: 100%;
-      @include rem2(padding, 10, 16);
+      padding: 0;
+      @include media-query(tablet) {
+        @include rem2(padding, 10, 16);
+      }
 
       form {
         .addTableEmpty__content__main__options__item {

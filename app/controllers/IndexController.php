@@ -111,7 +111,7 @@ class IndexController extends BaseController
             } else {
                  if (!empty($tag)) {
                      $this->view->setVar('tag', $tag);
-                    $this->view->setMainView('homepage/tag');
+                    $this->view->setMainView('homepage/index');
                  }else {
                     $this->view->setMainView('homepage/index');
                  }

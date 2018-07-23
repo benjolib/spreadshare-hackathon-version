@@ -19,10 +19,9 @@ return function (\DS\Interfaces\GeneralApplication $application, Phalcon\Di\Fact
         \DS\Constants\Services::ALGOLIA,
         function () use ($application, $di)
         {
-            $config = $application->getConfig();
-            $algoliaConfig = $config['algolia'];
+            $algoliaConfig = $application->getConfig()['algolia'];
 
-            $client = new \AlgoliaSearch\Client($algoliaConfig['application_id'], $algoliaConfig['admin_api_key']);
+            $client = new \AlgoliaSearch\Client($algoliaConfig['app-id'], $algoliaConfig['api-key']);
 
             return $client;
         },

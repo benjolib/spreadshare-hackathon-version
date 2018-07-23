@@ -122,7 +122,7 @@ class RequestAddController extends BaseController implements LoginAwareControlle
         $request->setImage($imagePath)->save();
 
         $this->flash->success('Submission approved - You have approved this submission');
-        $this->_redirectBack();
+        $this->response->redirect("/collaborations/#received", true);
     }
 
     public function denyAction() {
@@ -155,6 +155,6 @@ class RequestAddController extends BaseController implements LoginAwareControlle
         
 
         $this->flash->success('Submission was declined - You have declined this submission');
-        $this->_redirectBack();
+        $this->response->redirect("/collaborations/#received", true);
     }
 }

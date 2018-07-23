@@ -57,19 +57,27 @@
                       </td>
                       <td class="shadowcontaintd">
                         <div class="shadowcontain">
-                          <div class="l-button" style="position: absolute;top: 0;right: 6px;pointer-events: all;cursor: pointer;"><img src="/assets/images/dotdotdot.svg" /></div>
+                          {% if submission['status'] === '0' %}
+                          <div class="l-button" style="position: absolute;top: 0;right: 6px;pointer-events: all;cursor: pointer;">
+                            <img src="/assets/images/9-0/listing-info.svg" />
+                          </div>
                           <div class="sh-dropdown list-row-remove-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
-                            {% if (submission['kind'] == 'add')%}
-                              <a href="submissions/add/revoke/{{submission['id']}}"><img src="/assets/images/bin.svg"> Revoke submission</a>
+                            
+                            {% if (submission['kind'] == 'add') %}
+                              <a href="submissions/add/revoke/{{submission['id']}}"><img src="/assets/images/bin3.svg"> Revoke submission</a>
                             {%endif%}
                             {% if (submission['kind'] == 'delete')%}
-                              <a href="submissions/delete/revoke/{{submission['id']}}"><img src="/assets/images/bin.svg"> Revoke submission</a>
+                              <a href="submissions/delete/revoke/{{submission['id']}}"><img src="/assets/images/bin3.svg"> Revoke submission</a>
                             {%endif%}
                           </div>
+                          {% endif %}
                         </div>
                       </td>
                       <td>
+                       
+                {% if submission['image'] %}
                 <div class="re-table__list-image {{ submission['image'] ? '' : 're-table__list-image--empty' }}" style="background: #f5f5f5 url({{ submission['image'] }}) center / cover;">
+                  {% endif %}
                   <img data-name="{{ submission['content']|json_decode[0] }}" class="{{ submission['image'] ? '' : 'empty' }}"/> 
                   <div class="re-table__list-image__upload-button"></div>
                   <!--<div class="re-table__list-image__delete-button"></div>-->
@@ -186,8 +194,10 @@
                     </td>
 
                     <td>
+                        {% if collab['image'] %}
                       <div class="re-table__list-image {{ collab['image'] ? '' : 're-table__list-image--empty' }}" style="background: #f5f5f5 url({{ collab['image'] ?  collab['image'] : '' }}) center / cover;"></div>
-                    <img data-name="a" class="{{ collab['image'] ? '' : 'empty' }}"/> 
+                      {% endif %}
+                      <img data-name="a" class="{{ collab['image'] ? '' : 'empty' }}"/> 
                     </td>
 
                  

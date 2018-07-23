@@ -190,7 +190,7 @@
             p:first-child {
               font-size: 1rem;
               font-weight: 500;
-              color: $text-color;
+              color: $text-color-gray;
               text-transform: none;
             }
             p:last-child {
@@ -246,7 +246,9 @@
         width: 100%;
         display: flex;
         flex-direction: column;
-        @include rem2(padding, 25, 30);
+        @include tablet {
+          @include rem2(padding, 25, 30);
+        }
 
         &__item {
           display: flex;
@@ -259,7 +261,7 @@
 
             p {
               &:first-child {
-                color: $text-color-alternate;
+                color: $text-color-gray;
                 font-weight: 300;
                 text-transform: uppercase;
                 margin: 0;
@@ -271,15 +273,17 @@
                 color: $text-color;
               }
               &:nth-child(3){
-                display: flex;
+                @include tablet {
+                  display: flex;
+                }
                 align-items: center;
                 margin: 0;
-                color: $text-color-alternate;
+                color: $text-color-gray;
                 @include rem(font-size, 12);
                 @include rem(margin-top, 10);
 
                 span {
-                  color: $text-color;
+                    color: $text-color;
                 }
                 img {
                   width: 1rem;

@@ -14,10 +14,10 @@
     </div> #}
     <h1 class="re-heading re-heading--list">{{ table['title'] }}</h1>
     <h2 class="re-subheading re-subheading--list">
-      <span class="actual-tagline">{{ table['tagline'] }}</span>, curated by
+      <span class="actual-tagline parselinks">{{ table['tagline'] }}</span>, curated by
       <a href="/profile/{{ table['creatorHandle'] }}">{{ table['creator'] }}</a>
     </h2>
-    <p class="re-para">{{ table['description'] }}</p>
+    <p class="re-para parselinks">{{ table['description'] }}</p>
     <div class="u-flex u-flexAlignItemsCenter">
       {% if !amISubscribed(table['id']) %}
 
@@ -124,7 +124,7 @@
             </div>
             <div class="sh-dropdown sort-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
               <a href="{{table['id']}}">
-                <img src="/assets/images/lightning.svg" /> Sort by
+                <img src="/assets/images/vote-lightning-green.svg" /> Sort by
                 <span>Popularity</span>
               </a>
 
@@ -205,6 +205,7 @@
           </td>
 
           <td>
+             
             <div class="l-button re-table__list-image {{ row['image'] ? '' : 're-table__list-image--empty' }}" style="background: #f5f5f5 url({{ row['image'] }}) center / cover;">
               <img data-name="{{ row['content']|json_decode[0].content }}" class="{{ row['image'] ? '' : 'empty' }}" />
               <div class="re-table__list-image__upload-button"></div>
@@ -260,20 +261,20 @@
         <tr class="list-row-tr">
           <td class="pagination-td">
             <div class="pagination">
-              <a href="/stream/{{ table['id'] }}?page=1&orderby={{orderby}}">
+              <a href="?page=1&orderby={{orderby}}">
                 <<</a>
-                  <a href="/stream/{{ table['id'] }}?page={{ tableContent.before }}&orderby={{orderby}}">
+                  <a href="?page={{ tableContent.before }}&orderby={{orderby}}">
                     <</a>
                       {% if tableContent.current + 5
                       < tableContent.total_pages %} {% set endPage=tableContent.current + 5 %} {% else %} {% set endPage=tableContent.total_pages
                         %} {% endif %} {% if tableContent.current - 5> 1 %} {% set startPage=tableContent.current - 5 %} {% else %} {% set startPage=1 %} {% endif %} {% for
                         p in startPage..endPage %} {% if p === tableContent.current %}
-                        <a class="active" style="color:red" href="/stream/{{ table['id'] }}?page={{ p }}&orderby={{orderby}}">{{ p }}</a>
+                        <a class="active" style="color:red" href="?page={{ p }}&orderby={{orderby}}">{{ p }}</a>
                         {% else %}
-                        <a href="/stream/{{ table['id'] }}?page={{ p }}&orderby={{orderby}}">{{ p }}</a>
+                        <a href="?page={{ p }}&orderby={{orderby}}">{{ p }}</a>
                         {% endif %} {% endfor %}
-                        <a href="/stream/{{ table['id'] }}?page={{ tableContent.next }}&orderby={{orderby}}">></a>
-                        <a href="/stream/{{ table['id'] }}?page={{ tableContent.last }}&orderby={{orderby}}">>></a>
+                        <a href="?page={{ tableContent.next }}&orderby={{orderby}}">></a>
+                        <a href="?page={{ tableContent.last }}&orderby={{orderby}}">>></a>
             </div>
           </td>
         </tr>
@@ -310,10 +311,10 @@
         {% for index,column in tableColumns %}
         <td>
           <div style="display:flex;">
-
-            <textarea onmouseover="javascript:$('.e{{i}}{{index}}').css('visibility','visible');" ; onmouseout="javascript:$('.e{{i}}{{index}}').css('visibility', 'hidden');"
-              id="{{i}}" placeholder="{{ column.title }}" rows="1" class="edit icon cell-input-sizing d{{i}}{{index}}"></textarea>
-            <i id="{{i}}" class="pencil icon blue e{{i}}{{index}}" style="cursor: pointer;visibility: hidden;" onclick="console.log($(this).prev().prev());javascript:$('#d{{i}}{{index}}').focus();"></i>
+           
+            <textarea style="min-width: {{ column.title|length*16 }}px !important;" onmouseover="javascript:$('.e{{i}}{{index}}').css('visibility','visible');" ; onmouseout="javascript:$('.e{{i}}{{index}}').css('visibility', 'hidden');"
+              id="{{i}}" placeholder="{{ column.title|ucfirst }}" rows="1" class="edit icon cell-input-sizing d{{i}}{{index}}"></textarea>
+            <i id="{{i}}" class="pencil icon blue e{{i}}{{index}}" style="margin-top:38px;cursor: pointer;visibility: hidden;" onclick="console.log($(this).prev().prev());javascript:$('#d{{i}}{{index}}').focus();"></i>
           </div>
         </td>
 
@@ -476,7 +477,9 @@
             <div class="about-list__item__name">TAGS</div>
             <div class="about-list__item__content">
               <div class="tags" id="tags">
-                {% for i, tag in tags %} {{tag['title']}}{{ i + 1
+                {% for i, tag in tags %} 
+                 <a style="color:#2a1e3e" href="/tag/{{tag['id']}}">{{tag['title']}}</a> 
+                {{ i + 1
                 < tags|length ? ', ' : '' }} {% endfor %} </div>
               </div>
             </div>
@@ -585,10 +588,11 @@
             </div>
           </div>
         </div>
-
+        
         <div class="list-tab-content list-tab-content-collaborators" style="display: none;">
           <div class="list-tabs__inner-padded">
             {% for contributor in tablemodel.contributors %}
+            
             <div class="list-tab-content-collaborators__card">
               {{ partial('partials/profile-card', [ 'id': contributor.users.id, 'username': contributor.users.handle, 'avatar': contributor.users.image,
               'name': contributor.users.name, 'bio': contributor.users.tagline, 'type': 10, 'truncate': true ]) }}
@@ -706,7 +710,16 @@
 
         $(document).ready(function () {
 
-
+            $('.parselinks').each(function(){
+              // Get the content
+              var str = $(this).html();
+              // Set the regex string
+              var regex = /(https?:\/\/[^\s]+)/g
+              // Replace plain text links by hyperlinks
+              var replaced_text = str.replace(regex, "<a href='$1' target='_blank'>$1</a>");
+              // Echo link
+              $(this).html(replaced_text);
+          });
 
           // var mouse = {
           //   pageX: 0,
@@ -757,29 +770,27 @@
 
           function listCellInputSizing() {
             var $this = $(this);
-
             $this.height(5);
-            var height = $this.prop('scrollHeight');
-            if (height > 76) {
-              height = 76;
+            var len = $this.val().length;
+
+            var prevHeight = prevHeight ? prevHeight : $this.height;
+            var prevWidth = prevWidth ? prevWidth : $this.width;
+
+            var minWidth = 0;
+            if (len > 0) {
+              height = 39
+              minWidth = 480;
+              $this.attr('style', 'margin-top: 14px !important;');
+              $this.next().attr('style', 'margin-top: 14px !important;');
+              
+            } else {
+              $this.attr('style', 'margin-top: 37px !important;');
+              $this.next().attr('style', 'margin-top: 38px !important;');
             }
             $this.height(height);
+            
 
-            var len = $this.val().length;
-            var minWidth = 0;
-            if (len > 160) {
-              minWidth = 480;
-            } else if (len > 80) {
-              minWidth = 300;
-            } else if (len > 40) {
-              minWidth = 175;
-            } else if (len > 20) {
-              minWidth = 150;
-            } else if (len <= 20) {
-              minWidth = 100;
-            }
-
-            $this.parents('td').attr('style', 'min-width:' + minWidth + 'px;');
+            $this.parents('td').attr('style', 'min-width:' + minWidth + 'px !important;');
           }
 
           $('.cell-input-sizing').on('input', listCellInputSizing);
@@ -955,11 +966,12 @@
             $('#addAListingButton').css("visibility", "hidden")
             //TODO hide() doesnt work ?
             $('#addAListingRow').show();
+            
             $('#addAListingRowSpace').show();
             $('#addAListingSubmitAndCancel').show();
             $(".bottom").css("visibility", "hidden")
             $("html, body").animate({
-              scrollTop: $(document).height()
+              scrollTop: ($(".addAListingRow").offset().top-600)
             }, "slow");
           });
 
