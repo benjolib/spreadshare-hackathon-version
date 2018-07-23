@@ -3536,6 +3536,9 @@ html {
         margin-top: 2px;
       }
     }
+    &.hidden {
+      opacity: 0;
+    }
   }
   &__search-open {
     background: #ffffff;
