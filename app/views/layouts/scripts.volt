@@ -263,7 +263,8 @@
               offset: Number($button.data('dropdown-offset')) || 0
             },
             flip: {
-              enabled: false
+              enabled: false,
+              behavior: ['bottom', 'top', 'bottom']
             }
           }
         });
