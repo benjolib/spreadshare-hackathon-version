@@ -90,6 +90,7 @@ class TableCreated extends AbstractEvent
                 ->setNotificationType(UserNotificationType::TableCreated)
                 ->setText(sprintf('Started curating %s', $table->getTitle()))
                 ->create();
+
         }
 
 
