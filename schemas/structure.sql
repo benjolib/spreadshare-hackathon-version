@@ -422,6 +422,7 @@ CREATE TABLE `tags` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `userId` int(11) unsigned NULL COMMENT 'user.id',
   `title` varchar(100) DEFAULT NULL COMMENT 'tag name',
+  `slug` varchar(100) DEFAULT NULL COMMENT 'slug',
   `createdAt` int(10) DEFAULT NULL COMMENT 'timestamp',
   `featured` bool NOT NULL DEFAULT FALSE,
   PRIMARY KEY (`id`),

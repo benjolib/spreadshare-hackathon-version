@@ -58,8 +58,15 @@ class IndexController extends BaseController
 
             $tableFilter = new TableFilter();
             if (!empty($tag)) {
-                $tableFilter->setTags([$tag]);
-                
+                $t = Tags::findByFieldValue('slug', $tag);
+                if (empty($t)) {
+                    /** @var Tags $t */
+                    $t = Tags::findFirstById($tag);
+                    $t->save();
+                    $this->response->redirect("/tag/" . $t->getSlug(), true);
+                    return;
+                }
+                $tableFilter->setTags([$t->getId()]);
             }
 
             // recently-added
