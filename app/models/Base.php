@@ -315,9 +315,13 @@ abstract class Base
     }
     
     /**
-     * Initialize all models
+     * Initialize some variables for all instances
+     *
+     * Using onConstruct instead of initialize here since these initializations should be valid for all instances of this model.
+     *
+     * @see https://docs.phalconphp.com/en/3.3/db-models -> onCustruct
      */
-    public function initialize()
+    public final function onConstruct()
     {
         $this->setConnectionService('write-database');
         $this->setReadConnectionService('read-database');
@@ -325,6 +329,13 @@ abstract class Base
         
         $this->serviceManager = ServiceManager::instance($this->getDI());
         $this->defaultUserId  = $this->serviceManager->getAuth()->getUserId();
-        
+    }
+    
+    /**
+     * Initialize method for this model
+     */
+    public function initialize()
+    {
+    
     }
 }
