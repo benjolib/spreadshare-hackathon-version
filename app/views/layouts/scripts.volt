@@ -57,10 +57,13 @@
       // empty the existing list
       $(searchItems).empty();
       // foreach array
+      let i= 0
       $.each(response, function (key, val) {
+        i++
         // item
         // items.push("<a href='/stream/" + val._id + "'><div class='item'><div class='title'>" + val._source.title +
         //   "</div><div class='tagline'>" + val._source.tagline + "</div></div></a>");
+        if(i>5) return
         items.push("<a href='/stream/" + val.objectID + "'><div class='item'><div class='title'>" + val.title +
           "</div><div class='tagline'>" + val.tagline + "</div></div></a>");
       });
@@ -87,7 +90,7 @@
         prevSearch = searchEl;
         if (searchEl.length > 0) {
           // append href link
-          //$(".all-results").attr('href', '/search?query=' + searchEl + '')
+          $(".all-results").attr('href', '/search?query=' + searchEl + '')
           window.clearTimeout(timer);
           timer = window.setTimeout(function () {
 
@@ -104,7 +107,11 @@
             //     autoCompleteHandler(response)
             //   }
             // });
-            document.searchstream.search(searchEl, function(err, content) {
+            document.searchstream.search({query: searchEl, hitsPerPage: 500}, function(err, content) {
+             autoCompleteHandler(content.hits)
+            });
+
+            document.searchstream.search({query: searchEl, hitsPerPage: 500}, function(err, content) {
              autoCompleteHandler(content.hits)
             });
           }, delay);

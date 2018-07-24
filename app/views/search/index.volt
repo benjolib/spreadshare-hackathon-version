@@ -1,106 +1,106 @@
-{% extends 'layouts/main.volt' %}
+{% extends 'layouts/main.volt' %} {# page title #} {% block title %}SpreadShare - Community curated Tables{% endblock %}
+{# page header #} {% block header %}{% endblock %} {# main section #} {% block content %}
 
-{# page title #}
-{% block title %}SpreadShare - Community curated Tables{% endblock %}
-
-{# page header #}
-{% block header %}{% endblock %}
-
-{# main section #}
-{% block content %}
 <div class="re-page">
-  {# <div class="search-filter ">
-    <div class="search-filter__label">FILTER BY</div>
-    <div class="search-filter__dropdowns">
-      <div class="search-filter__dropdown-button l-button"  data-dropdown-placement="bottom-start" data-dropdown-active-class="search-filter__dropdown-button--active">
-        Topics<img src="/assets/images/dropdown-arrow-up.svg" />
-      </div>
-      <div class="search-filter__dropdown dropdown l-dropdown">
-        <div class="search-filter__dropdown-inner">Topics<img src="/assets/images/dropdown-arrow-down.svg" /></div>
-        <div class="search-filter__dropdown-menu u-flex">
-          <div class="u-flex u-flexCol search-filter__dropdown-menu__col1">
-            <a href="/explore/ai" class="{% if '' is 'ai' %}active{% endif %}">AI</a>
-            <a href="/explore/blockchain" class="{% if '' is 'blockchain' %}active{% endif %}">Blockchain</a>
-            <a href="/explore/bots" class="{% if '' is 'bots' %}active{% endif %}">Bots</a>
-            <a href="/explore/business" class="{% if '' is 'business' %}active{% endif %}">Business</a>
-            <a href="/explore/crypto" class="{% if '' is 'crypto' %}active{% endif %}">Crypto</a>
-            <a href="/explore/culture" class="{% if '' is 'culture' %}active{% endif %}">Culture</a>
-            <a href="/explore/design" class="{% if '' is 'design' %}active{% endif %}">Design</a>
-            <a href="/explore/engineering" class="{% if '' is 'engineering' %}active{% endif %}">Engineering</a>
-            <a href="/explore/finance" class="{% if '' is 'finance' %}active{% endif %}">Finance</a>
-            <a href="/explore/fundraising" class="{% if '' is 'fundraising' %}active{% endif %}">Fundraising</a>
-            <a href="/explore/growth" class="{% if '' is 'growth' %}active{% endif %}">Growth</a>
-          </div>
-          <div class="u-flex u-flexCol search-filter__dropdown-menu__col2">
-            <a href="/explore/hiring" class="{% if '' is 'hiring' %}active{% endif %}">Hiring</a>
-            <a href="/explore/marketing" class="{% if '' is 'marketing' %}active{% endif %}">Marketing</a>
-            <a href="/explore/media" class="{% if '' is 'media' %}active{% endif %}">Media</a>
-            <a href="/explore/operations" class="{% if '' is 'operations' %}active{% endif %}">Operations</a>
-            <a href="/explore/people" class="{% if '' is 'people' %}active{% endif %}">People</a>
-            <a href="/explore/press" class="{% if '' is 'press' %}active{% endif %}">Press</a>
-            <a href="/explore/product" class="{% if '' is 'product' %}active{% endif %}">Product</a>
-            <a href="/explore/research" class="{% if '' is 'research' %}active{% endif %}">Research</a>
-            <a href="/explore/tech" class="{% if '' is 'tech' %}active{% endif %}">Tech</a>
-            <a href="/explore/everything-else" class="{% if '' is 'everything-else' %}active{% endif %}">Everything else</a>
-          </div>
-        </div>
-      </div>
+    <input type="hidden" id="search" value="{{query}}"/>
+  <table class="re-table">
+    <tbody id="hits-container">
 
-      <div class="search-filter__dropdown-button l-button" data-dropdown-placement="bottom" data-dropdown-active-class="search-filter__dropdown-button--active">
-        Tags<img src="/assets/images/dropdown-arrow-up.svg" />
-      </div>
-      <div class="search-filter__dropdown dropdown l-dropdown">
-        <div class="search-filter__dropdown-inner">Tags<img src="/assets/images/dropdown-arrow-down.svg" /></div>
-        <div class="search-filter__dropdown-menu"></div>
-      </div>
-    </div>
-  </div> #}
 
-  {% if tables is defined AND tables %}
-    <table class="re-table">
-      <tbody>
-        {{ partial('search/content') }}
-      </tbody>
-    </table>
-    {% else %}
-<div class="re-page">
+
+    </tbody>
+  </table>
 </div>
-<div class="info-box">
-  <div class="info">
-    <div class="heading"> We're sorry </div>
-    <div class="subheading"> There are no results for your search. </div>
-  </div>
-  <div class="action">
-    <button onclick="window.location.href='/'" :> Back to Home </button>
-  </div>
-
-</div>
-  {% endif %}
-  {# <div class="u-flex u-flexJustifyCenter">
-    <a href="#" class="re-button re-button--load-more" {{ moreToLoad ? '' : 'style="display:none;"' }}>Load More</a>
-  </div> #}
-</div>
-{% endblock %}
-
-{% block scripts %}
+{% endblock %} {% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3/dist/instantsearch.min.js">
+</script>
 <script type="text/javascript">
-  $(document).ready(function () {
-    var pageNumber = 1;
-
-    $('.re-button--load-more').on('click', function (e) {
-      e.preventDefault();
-      $.ajax(window.location.pathname + '?page=' + pageNumber)
-        .done(function (response) {
-          if (response) {
-            $('.re-table tbody').append(response);
-            pageNumber += 1;
-            if (!$('<div>' + response + '</div>').find('.moreToLoad').val()) {
-              $('.re-button--load-more').hide();
-            }
-            window.bindPops();
-          }
-        });
-    });
+  const search = instantsearch({
+    appId: '{{ config["algolia"]["app-id"] }}',
+    apiKey: '{{ config["algolia"]["api-key"] }}',
+    indexName: 'spreadshare-stream-{{ config["mode"] }}',
+    routing: true,
+    paginationLimitedTo: 0
   });
+
+ 
+  var readyToFetchMore = true;
+
+  var hitsContainer = $('#hits-container');
+  search.addWidget(
+    instantsearch.widgets.searchBox({
+      container: '#search'
+    })
+  );
+  search.addWidget({
+    init: function (params) {
+      params.helper.setQueryParameter('hitsPerPage', 10);
+
+      function scrollhandler() {
+
+        var isAtBottomOfPage = $(window).scrollTop() + $(window).height() >
+          $(document).height() - 500;
+
+        if (readyToFetchMore && isAtBottomOfPage) {
+          readyToFetchMore = false;
+          params.helper.nextPage().search();
+        }
+      }
+
+      $(window).bind("scroll", scrollhandler);
+    },
+
+    render: function (params) {
+
+      readyToFetchMore = true;
+
+      var hits = params.results.hits;
+
+
+      if (params.state.page === 0) { 
+        hitsContainer.html('');
+      }
+
+      var html = '';
+
+      if (params.results.nbHits > 0) {
+
+        html = hits.map(function (hit) {
+
+          return `<tr>
+                  <td>
+                  
+                <a class="" href="/stream/${ hit.objectId }">
+                      <h3>${hit.title} &nbsp;&nbsp;
+                <img src="/assets/images/9-0/list-card-subscriber-bird.svg">
+                <span class="list-card__subscriberCount">${ hit.subscribers } </span>
+                </h3>
+                      <p>${ hit.tagline } </p>
+                  </td>
+                </tr>
+                <tr class="re-table-space"></tr>`
+
+        });
+
+      } else {
+        html = [`<div class="re-page">
+                  </div>
+                  <div class="info-box">
+                    <div class="info">
+                      <div class="heading"> We're sorry </div>
+                      <div class="subheading"> There are no results for your search. </div>
+                    </div>
+                    <div class="action">
+                      <button onclick="window.location.href='/'" :> Back to Home </button>
+                    </div>
+
+                  </div>`];
+      }
+
+      hitsContainer.append(html.join(''));
+    }
+  });
+
+  search.start();
 </script>
 {% endblock %}
