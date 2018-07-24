@@ -18,6 +18,7 @@
   <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,800" rel="stylesheet"> {# TODO: use only needed font sizes #}
   <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet"> {# TODO: use only needed font sizes #}
   <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:100,100i,300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/css/modal-video.min.css">
   <link rel="stylesheet" href="/css/styles.css">
   <link href="/css/main.878d83e3.css" rel="stylesheet">
   <link href="/semantic/semantic.min.css" rel="stylesheet">
@@ -51,7 +52,7 @@
   {# navbar #} {% if hideHeader is empty or not hideHeader %} {{ partial('layouts/header') }} {% endif %} {# main section #}
   <section class="main">
 
-    <div class="feedback">
+    <div class="feedback" data-video-id="-iPhWDNaNUc">
       <span>How it works</span>
     </div>
 
@@ -81,6 +82,8 @@
   <script type="text/javascript" src="/js/infinite-scroll.min.js"></script>
   <script type="text/javascript" src="/semantic/semantic.min.js"></script>
   <script type="text/javascript" src="/js/initial.min.js"></script>
+  
+  <script type="text/javascript" src="/js/modal-video.min.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
   <script type="text/javascript">
     var client = algoliasearch("{{ config['algolia']['app-id'] }}", "{{ config['algolia']['api-key'] }}");
@@ -103,7 +106,7 @@
     gtag('js', new Date());
 
     gtag('config', 'UA-110506889-1');
+    
   </script>
 </body>
-
 </html>
