@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-  <div class="re-page">
+  <div class="re-page about-page">
     <div class="u-flex u-sm-flexCol u-md-flexRow u-flexJustifyBetween lists-page-space">
       <div>
         <h1 class="re-heading">About</h1>
@@ -77,7 +77,7 @@
         <tr class="re-table-space"></tr>
       </tbody>
     </table>
-    <div style="margin-top: 60px;overflow-x:none;" class="u-flex u-sm-flexWrap u-md-flexNoWrap">
+    <div style="margin-top: 80px;overflow-x:none;" class="u-flex u-sm-flexWrap u-md-flexNoWrap thanks-to">
       <a href="#"><img src="/assets/images/about-social-twitter.png" /></a>
       <a href="#"><img src="/assets/images/about-social-medium.png" /></a>
       <a href="#"><img src="/assets/images/about-social-producthunt.png" /></a>

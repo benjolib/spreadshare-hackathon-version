@@ -13,7 +13,7 @@
     }
   }
   &__name {
-    @include typography(6);
+    @include typography(10);
 
     color: #252442;
     margin-right: 10px;
@@ -215,7 +215,7 @@
     & + .list-card__subscriberCount {
       flex: 1 15%;
       @include media-query(tablet) {
-        flex: 1 11%;
+        flex: 1 40%;
       }
     }
   }
@@ -224,7 +224,7 @@
   @include media-query(tablet) {
     padding-left: 20px;
     padding-right: 20px;
-    margin-bottom: 61px;
+    margin-bottom: 70px;
     width: 50%;
   }
   @include media-query(desktop) {
@@ -249,7 +249,7 @@
   &__image {
     position: relative;
     height: 146px;
-    border-radius: 4px;
+    border-radius: 2.69px;
     margin-bottom: 13px;
     @media (min-width: 768px) {
       margin-bottom: 19px;
@@ -343,7 +343,7 @@
     }
   }
   &__description {
-    @include typography(7);
+    @include typography(11);
 
     font-size: 16px;
     margin-top: 14px;
@@ -377,19 +377,20 @@
     }
     .list-card__image {
       height: 175px;
-      margin-bottom: 6px;
     }
     .list-card__name {
+      @include typography(5);
       width: auto;
-      font-size: 21px;
       margin-bottom: 0px;
     }
     .list-card__description {
-      font-size: 14px;
+      @include typography(7);
     }
     .list-card__subscriberCount {
+      @include typography(5);
+      color: #ea612d;
       margin-top: 4px;
-      font-size: 17px;
+      font-size: 18px;
       @include media-query(tablet) {
         font-size: 20px;
       }

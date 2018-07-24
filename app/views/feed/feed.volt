@@ -41,7 +41,7 @@
             <p>There are no notifications available for you, yet..</p>
         </div>
         {% endif%}
-       
+
     </div>
 </div>
 

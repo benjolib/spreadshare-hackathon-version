@@ -72,6 +72,10 @@
     @extend .-HEADER-Style;
   } @else if $type == 9 {
     @extend .-Button-Style;
+  } @else if $type == 10 {
+    @extend .-Text-Style-Card;
+  } @else if $type == 11 {
+    @extend .-Text-Style-Card-Normal;
   }
 }
 

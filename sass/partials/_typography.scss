@@ -117,6 +117,40 @@
   }
 }
 
+.-Text-Style-Card {
+  font-family: Lato;
+  font-size: 16px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.33;
+  letter-spacing: -0.4px;
+  text-align: left;
+  color: #2a1e3e;
+
+  @media (max-width: 767px) {
+    letter-spacing: calc(-0.4px * 4 / 3);
+    font-size: calc(16px * 3 / 3);
+  }
+}
+
+.-Text-Style-Card-Normal {
+  font-family: Lato;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.33;
+  letter-spacing: -0.4px;
+  text-align: left;
+  color: #9baabf;
+
+  @media (max-width: 767px) {
+    letter-spacing: calc(-0.4px * 4 / 3);
+    font-size: calc(16px * 3 / 3);
+  }
+}
+
 .-HEADER-Style {
   font-family: Roboto Mono;
   font-size: 12px;
