@@ -2923,6 +2923,7 @@ html {
 }
 
 .shadowcontain {
+  display: none;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
   border: 1px solid #f8f8fb;
   border-radius: 4px;
@@ -2935,7 +2936,8 @@ html {
   &--no-votes {
     transform: translateX(-0px);
   }
- @include media-query(tablet) {
+  @include media-query(tablet) {
+    display: block;
     transform: translateX(-52px);
     height: 114px;
     &--no-votes {
