@@ -2868,6 +2868,12 @@ html {
   }
 }
 
+.list-tab-content-discussion + .list-tab-content-subscribers {
+  .profile-card {
+    box-shadow: none;
+  }
+}
+
 .table-scroll::-webkit-scrollbar {
   width: 0px;
   /* remove scrollbar space */
