@@ -27,13 +27,6 @@ abstract class Base
     extends BaseEvents
 {
     /**
-     * The default user id to look for. Usually the current user that is logged in.
-     *
-     * @var int
-     */
-    private $defaultUserId;
-    
-    /**
      * @var ServiceManager
      */
     protected $serviceManager;
@@ -50,21 +43,7 @@ abstract class Base
      */
     public function getDefaultUserId()
     {
-        return $this->defaultUserId;
-    }
-    
-    /**
-     * Set the user id that is checked for every user-related database entries.
-     *
-     * @param int $defaultUserId
-     *
-     * @return $this
-     */
-    public function setDefaultUserId($defaultUserId)
-    {
-        $this->defaultUserId = $defaultUserId;
-        
-        return $this;
+        return $this->serviceManager->getAuth()->getUserId();
     }
     
     /**
@@ -123,7 +102,7 @@ abstract class Base
         
         throw new \InvalidArgumentException('Invalid field name provided. This field is not available in this model.');
     }
-
+    
     /**
      * Allows to query this model by the given sql field name and it's value
      *
@@ -328,7 +307,6 @@ abstract class Base
         $this->setWriteConnectionService('write-database');
         
         $this->serviceManager = ServiceManager::instance($this->getDI());
-        $this->defaultUserId  = $this->serviceManager->getAuth()->getUserId();
     }
     
     /**

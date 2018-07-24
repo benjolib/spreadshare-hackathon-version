@@ -76,7 +76,7 @@ services:
         AUTH_CALLBACK: 'http://spreadshare.javisantos.com:811/login'
         WALLET: 'localhost'
         MAILGUN_KEY: 'key-611a7bf686cb890b8db38ad9ce1a5bbb'
-        CRYPT_KEY: 'iuh213iu78ads898213euwioadjbxhjy-jkldHJKDJ_ksahdKASGDS$AKDH32L4EJLDSACKÖÄASPOE24'
+        CRYPT_KEY: "iuh213iu78ads898213euwioadjbxhjy-jkldHJKDJ_ksahdKASGDS\$AKDH32L4EJLDSACKÖÄASPOE24"
         SENTRY_KEY: 'https://fcdde304c3344126b70b8f8365df7650:1ef8823d9153412a9f77250fa9d45235@sentry.io/240812'
         SLACK_WEBHOOK: 'https://hooks.slack.com/services/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'
         FILES_SERVICE: 'local'
