@@ -47,11 +47,11 @@
     function autoCompleteHandler(response) {
 
       // search item list selector
-      var searchItems = $('#search-items');
+      var searchItems = $('#streams-search-items');
       // hits object
       // Insert total results value
       //$('.result-count').html(response.data.hits.total + " RESULTS");
-      $('.result-count').html(response.length + " RESULTS");
+      $('.streams-result-count').html(response.length + " RESULTS");
       // create item array
       var items = [];
       // empty the existing list
@@ -71,7 +71,34 @@
       $(searchItems).append(items.join(''));
 
     }
+    
+    function autoCompleteHandlerUsers(response) {
 
+      // search item list selector
+      var searchItems = $('#users-search-items');
+      // hits object
+      // Insert total results value
+      //$('.result-count').html(response.data.hits.total + " RESULTS");
+      $('.users-result-count').html(response.length + " RESULTS");
+      // create item array
+      var items = [];
+      // empty the existing list
+      $(searchItems).empty();
+      // foreach array
+      let i= 0
+      $.each(response, function (key, val) {
+        i++
+        // item
+        // items.push("<a href='/stream/" + val._id + "'><div class='item'><div class='title'>" + val._source.title +
+        //   "</div><div class='tagline'>" + val._source.tagline + "</div></div></a>");
+        if(i>5) return
+        items.push("<a href='/profile/" + val.handle + "'><div class='item'><div class='title'>" + val.name +
+          "</div><div class='tagline'>" + val.tagline + "</div></div></a>");
+      });
+      // append list to array
+      $(searchItems).append(items.join(''));
+
+      }
     var searchFieldEl = $("input.navbar__search__field");
     var onSearchPopper = $('.search-autocomplete');
     // On change of the field
@@ -111,8 +138,8 @@
              autoCompleteHandler(content.hits)
             });
 
-            document.searchstream.search({query: searchEl, hitsPerPage: 500}, function(err, content) {
-             autoCompleteHandler(content.hits)
+            document.searchusers.search({query: searchEl, hitsPerPage: 500}, function(err, content) {
+             autoCompleteHandlerUsers(content.hits)
             });
           }, delay);
 
@@ -392,5 +419,11 @@
         }, 500);
       }, timeout);
     };
+
+
+    new ModalVideo($(".feedback"))
+    
   });
+
+
 </script>

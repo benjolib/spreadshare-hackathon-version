@@ -34,11 +34,19 @@
         <div class="description">
           STREAMS
         </div>
-        <div class="result-count">
+        <div class="streams-result-count">
         </div>
       </div>
-      <div id="search-items"></div>
-      <a href="#" class="all-results">More Results</a>
+      <div id="streams-search-items"></div>
+      <div class="u-flex">
+          <div class="description">
+            USERS
+          </div>
+          <div class="users-result-count">
+          </div>
+        </div>
+        <div id="users-search-items"></div>
+      <!-- <a href="#" class="all-results">More Results</a> -->
     </div>
     {% if auth.loggedIn() %}
       <a class="re-header__add" href="/create-list"><img src="/assets/images/9-0/header-add.svg" /></a>

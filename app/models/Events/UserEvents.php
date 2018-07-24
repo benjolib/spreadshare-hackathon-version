@@ -51,6 +51,7 @@ abstract class UserEvents extends AbstractUser
                         'objectID' => $this->getId(),
                         'name' => $this->getName(),
                         'tagline' => $this->getTagline(),
+                        'handle' => $this->getHandle(),
                     ],
                 ]
             );
