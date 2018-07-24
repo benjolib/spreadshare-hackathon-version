@@ -22,6 +22,10 @@ class StatsHelper extends Component
     {
         $tableIds = array_column(Tables::findAllByFieldValue('ownerUserId', $userId)->toArray(['id']),'id');
 
+        if(empty($tableIds)) {
+            return 0;
+        }
+
         return TableSubscription::count([
             "tableId IN (".implode(",", $tableIds).")"
         ]);
