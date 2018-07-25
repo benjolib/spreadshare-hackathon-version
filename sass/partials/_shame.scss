@@ -1493,7 +1493,7 @@ html {
 .homepage-space {
   margin-bottom: 20px;
   & ~ div[class*=gutter] {
-    margin-top: 150px;
+    margin-top: 75px;
     @include media-query(tablet) {
       margin-top: 0;
     }
@@ -2090,6 +2090,8 @@ html {
     @include typography(7);
     overflow-y: hidden;
     width: 100%;
+    resize: none;
+    outline: none;
   }
 }
 
@@ -2341,15 +2343,23 @@ html {
         @media (min-width: 768px) {
           padding: 10px 32px 14px 0;
         }
+        .l-button {
+          position: relative;
+          @include media-query(tablet) {
+            position: static;
+          }
+        }
         .updown {
           position: absolute;
-          top: 9.5px;
-          right: -5px;
-          width: 5px;
-          @media (min-width: 768px) {
+          top: 50%;
+          transform: translateY(-50%);
+          right: -22px;
+          width: 7px;
+          @include media-query(tablet) {
             right: -4px;
             top: 14px;
             width: auto;
+            transform: none;
           }
         }
       }
@@ -2731,9 +2741,12 @@ html {
   color: #e1e1e1;
   text-align: center;
   padding: 20px 0 14px;
-  @media (min-width: 768px) {
+  @include media-query(tablet) {
     padding: 20px 16px;
 
+  }
+  @include media-query('max-width: 767px') {
+    font-size: 15px;
   }
   &.active {
     color: #2a1e3e;
@@ -3959,6 +3972,7 @@ html {
 
       color: #e4e4e6;
       margin-top: 1px;
+      text-transform: uppercase;
       img {
         margin-right: 2px;
         margin-top: -1px;
@@ -5014,6 +5028,8 @@ html {
     height: 42px;
     font-size: 12px;
     letter-spacing: 0.5px;
+    flex-direction: row;
+    align-items: center;
     @media (min-width: 768px) {
       display: none;
     }
@@ -5790,14 +5806,14 @@ html {
     @include typography(8);
 
     color: #9baabf;
-    margin-bottom: 4px;
+    margin-bottom: 20px;
   }
   a {
     @include typography(7);
 
     display: block;
     color: #2a1e3e;
-    margin-bottom: 8px;
+    margin-bottom: 20px;
     span {
       @include typography(6);
 
@@ -5806,7 +5822,7 @@ html {
   }
   section a {
     &:last-of-type {
-      margin-bottom: 36px;
+      margin-bottom: 70px;
     }
   }
   .logout {
