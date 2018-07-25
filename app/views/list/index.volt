@@ -123,15 +123,33 @@
               <img src="/assets/images/updown.svg" class="updown" />
             </div>
             <div class="sh-dropdown sort-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
-              <a href="{{table['id']}}">
-                <img src="/assets/images/vote-lightning-green.svg" /> Sort by
-                <span>Popularity</span>
-              </a>
+              
 
-              <a href="/stream/{{table['id']}}?orderby=date" class="warning-color">
-                <img src="/assets/images/clock.svg" /> Sort by
-                <span>Newest</span>
-              </a>
+                {%if (orderby) ==="date"%}
+                <a href="?orderby=date" class="sort-selected">
+                  <img src="/assets/images/clock-green.svg" /> 
+                  {%else%}
+                  <a href="?orderby=date">
+                      <img src="/assets/images/clock.svg" />
+                  {%endif%}
+                  Sort by
+                  <span>Newest</span>
+                </a>
+
+                  {%if (orderby) ==="popularity"%}
+                  <a href="?orderby=popularity" class="sort-selected">
+                  <img src="/assets/images/vote-lightning-green.svg" />
+                  {%else%}
+                  <a href="?orderby=popularity" > 
+                  <img src="/assets/images/vote-lightning.svg" />
+                  {%endif%}
+                Sort by
+                <span>Popularity</span>
+                </a>
+              
+               
+
+
             </div>
           </th>
           <th class="shadowcontainth"></th>

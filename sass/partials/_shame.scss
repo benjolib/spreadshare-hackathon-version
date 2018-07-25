@@ -3167,9 +3167,11 @@ html {
     line-height: 32px;
     color: $text-color-gray;
 
-    &:first-child {
-      color: $text-color-green;
-    }
+    
+    
+  }
+  .sort-selected {
+    color: $text-color-green;
   }
   img {
     margin-right: 8px;

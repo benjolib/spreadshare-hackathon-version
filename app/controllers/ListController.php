@@ -114,7 +114,7 @@ class ListController extends BaseController
     {
         try {
             $page = $this->request->getQuery('page', 'int', 1);
-            $orderby = $this->request->getQuery('orderby', null, 'popularity');
+            $orderby = $this->request->getQuery('orderby', null, 'date');
 
             if ($orderby == 'date') {
                 $orderbyquery = 'createdAt DESC';
