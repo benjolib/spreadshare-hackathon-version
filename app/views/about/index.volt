@@ -13,7 +13,7 @@
         <h2 class="re-subheading re-subheading--button-below">All things Spreadshare.</h2>
       </div>
       <div>
-        <a href="/table/add" class="re-button get-in-touch">Get in touch</a>
+        <a href="mailto:hi@spreadshare.co" class="re-button get-in-touch">Get in touch</a>
       </div>
     </div>
 
@@ -21,7 +21,7 @@
       <tbody>
         <tr>
           <td>
-            <a href="#"><h3>Jobs</h3></a>
+            <a href="/stream/work-with-us"><h3>Jobs</h3></a>
             <p>Jobs, mini tasks, remote work & voluntary support options</p>
           </td>
           <td></td>
@@ -29,39 +29,26 @@
         <tr class="re-table-space"></tr>
         <tr>
           <td>
-            <a href="#"><h3>Crew</h3></a>
+            <a href="/stream/our-team"><h3>Crew</h3></a>
             <p>Co-workers / Team / Community Members</p>
           </td>
           <td></td>
         </tr>
         <tr class="re-table-space"></tr>
-        <tr>
-          <td>
-            <a href="#"><h3>Path</h3></a>
-            <p>Milestones, successes & roadmap</p>
-          </td>
-          <td></td>
-        </tr>
+    
         <tr class="re-table-space"></tr>
         <tr>
           <td>
-            <a href="#"><h3>Thoughts</h3></a>
+            <a href="/stream/blog"><h3>Thoughts</h3></a>
             <p>Blog posts and other recourses we value</p>
           </td>
           <td></td>
         </tr>
         <tr class="re-table-space"></tr>
-        <tr>
-          <td>
-            <a href="#"><h3>Partners</h3></a>
-            <p>Supporters, investors & other partners</p>
-          </td>
-          <td></td>
-        </tr>
         <tr class="re-table-space"></tr>
         <tr>
           <td>
-            <a href="#"><h3>FAQ</h3></a>
+            <a href="/stream/frequently-asked"><h3>FAQ</h3></a>
             <p>Frequently asked questions answered</p>
           </td>
           <td></td>
@@ -78,15 +65,15 @@
       </tbody>
     </table>
     <div style="margin-top: 80px;overflow-x:none;" class="u-flex u-sm-flexWrap u-md-flexNoWrap thanks-to">
-      <a href="#"><img src="/assets/images/about-social-twitter.png" /></a>
-      <a href="#"><img src="/assets/images/about-social-medium.png" /></a>
-      <a href="#"><img src="/assets/images/about-social-producthunt.png" /></a>
-      <a href="#"><img src="/assets/images/about-social-slack.png" /></a>
-      <a href="#"><img src="/assets/images/about-social-facebook.png" /></a>
-      <a href="#"><img src="/assets/images/about-social-github.png" /></a>
-      <a href="#"><img src="/assets/images/about-social-linkedin.png" /></a>
-      <a href="#"><img src="/assets/images/about-social-angellist.png" /></a>
-      <a href="#"><img src="/assets/images/about-social-p.png" /></a>
+      <a href="https://twitter.com/spreadshareco" target="_blank"><img src="/assets/images/about-social-twitter.png" /></a>
+      <a href="https://medium.com/spreadshare" target="_blank"><img src="/assets/images/about-social-medium.png" /></a>
+      <a href="https://www.producthunt.com/posts/spreadshare" target="_blank"><img src="/assets/images/about-social-producthunt.png" /></a>
+      <a href="https://join.slack.com/t/spreadshare-community/shared_invite/enQtMzcwMjE1MDI4ODAyLTJjZjE5NTQ5ZGMwY2M0ZGZkYjA3YmQ4NmI1NTg5Y2E0YWFmYTNlMmM5ODJjZWY4OTNhYWMyMzkxNDI4MWYxY2M" target="_blank"><img src="/assets/images/about-social-slack.png" /></a>
+      <a href="https://www.facebook.com/groups/403500643362775/" target="_blank"><img src="/assets/images/about-social-facebook.png" /></a>
+      <!-- <a href="#"><img src="/assets/images/about-social-github.png" /></a> -->
+      <a href="https://www.linkedin.com/company/spreadshare-inc/" target="_blank"><img src="/assets/images/about-social-linkedin.png" /></a>
+      <a href="https://angel.co/spreadshare" target="_blank"><img src="/assets/images/about-social-angellist.png" /></a>
+      <!-- <a href="#"><img src="/assets/images/about-social-p.png" /></a> -->
     </div>
 <style>
   .nobox {
