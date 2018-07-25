@@ -47,7 +47,7 @@
             </div>
             <div class="profile-buttons">
                 {% if auth.loggedIn() and auth.getUserId() != profile.id %}
-                <a class="follow-button small-follow-button{% if not amIFollowing(profile.id) %} unfollow{% endif %}" href="#">{% if amIFollowing(profile.id) %}Unfollow{% else %}<img src="/assets/icons/follow.svg" /> <span>Follow</span>{% endif %}</a>
+                <a class="follow-button small-follow-button{% if amIFollowing(profile.id) %} unfollow{% endif %}" href="#">{% if amIFollowing(profile.id) %}Unfollow{% else %}<img src="/assets/icons/follow.svg" /> <span>Follow</span>{% endif %}</a>
                 {% endif %} {% if auth.loggedIn() and auth.getUserId() == profile.id %}
                 <a class="edit-button small-edit-button" href="#">Edit</a>
                 <div class="save-and-cancel">
