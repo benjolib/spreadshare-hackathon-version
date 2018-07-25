@@ -171,18 +171,13 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
   </div>
   <div class="re-page re-page--medium">
     <div class="u-flex u-flexWrap homepage-gutter">
-      {{ partial('partials/action-card', [ 'color': 'purple-whale', 'heading': 'Curate', 'text': 'Curate collections and publications.
-      <br />
-      <br />Because you want your curation to spread.', 'action': '/subscriptions', 'buttonText': 'Manage Subscriptions' ]) }}
-      {{ partial('partials/action-card', [ 'color': 'blue-octopus', 'heading': 'Collaborate', 'text': 'Collaborate with your
-      favorite curators.
-      <br />
-      <br />Because you want to get endorsed by trusted experts.', 'action': '/subscriptions', 'buttonText': 'Manage Subscriptions'
-      ]) }} {{ partial('partials/action-card', [ 'color': 'green-lightning', 'heading': 'Spread', 'text': 'Spread the best
-      content with your followers.
-      <br />
-      <br />Because you want your peers to be as informed as you are.', 'action': '/subscriptions', 'buttonText': 'Manage Subscriptions'
-      ]) }}
+      
+
+
+     
+
+
+      
 
 
     {% set qty = 0 %}
@@ -192,14 +187,38 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
     {% if tables[index][ 'featured'] is "1" %}
 
     {% set qty= qty+1 %}
-    {% if qty <= 6 %}
+    {% if qty <= 9 %}
     {% set partialindex=index %}
-      {{ partial( 'partials/list-card', [ 'id': tables[index][ 'id'], 'slug': tables[index][ 'slug'],
+      
+    {% if qty == 2 %}
+    
+    {{ partial('partials/action-card', [ 'color': 'blue-octopus', 'heading': 'Collaborate', 'text': 'Collaborate with your
+    favorite curators.
+    <br />
+    <br />Because you want to get endorsed by trusted experts.', 'action': '/subscriptions', 'buttonText': 'Manage Subscriptions']) }} 
+    {%endif%}
+
+    {% if qty == 5 %}
+    {{ partial('partials/action-card', [ 'color': 'purple-whale', 'heading': 'Curate', 'text': 'Curate collections and publications.
+    <br />
+    <br />Because you want your curation to spread.', 'action': '/subscriptions', 'buttonText': 'Manage Subscriptions' ]) }}
+    {%endif%}
+
+    {% if qty == 8 %}
+    {{ partial('partials/action-card', [ 'color': 'green-lightning', 'heading': 'Spread', 'text': 'Spread the best
+    content with your followers.
+    <br />
+    <br />Because you want your peers to be as informed as you are.', 'action': '/subscriptions', 'buttonText': 'Manage Subscriptions']) }}
+      {%endif%}
+
+    {{ partial( 'partials/list-card', [ 'id': tables[index][ 'id'], 'slug': tables[index][ 'slug'],
       'image': tables[index][
       'image'], 'name': tables[index][ 'title'], 'description': tables[index][ 'tagline'], 'subscriberCount': tables[index][
       'subscriberCount'], 'listingCount': tables[index][ 'listingCount'], 'showCurator': true, 'curatorHandle': tables[index][
       'creatorHandle'], 'curatorAvatar': tables[index][ 'creatorImage'], 'curatorName': tables[index][ 'creator'], 'curatorBio': tables[index][
       'creatorBio'], 'half': false, 'large': false ]) }}
+
+
 
       {% endif %}
       {% endif %}
