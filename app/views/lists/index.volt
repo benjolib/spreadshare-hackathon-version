@@ -29,7 +29,7 @@ block content %}
     <div class="subheading"> No Streams created yet. Apply to become a curator. </div>
   </div>
   <div class="action">
-    <button onclick="window.location.href='/getcurator'" :> Get Curator Pass </button>
+    <button onclick="window.location.href='/stream/become-a-curator'" :> Get Curator Pass </button>
   </div>
 </div>
 {% endif %} {% endblock %} {% block scripts %}

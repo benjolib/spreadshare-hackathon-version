@@ -77,7 +77,7 @@
                 <div class="subheading"> No Streams created yet. Apply to become a curator. </div>
             </div>
             <div class="action">
-                <button onclick="window.location.href='/getcurator'" :> Get Curator Pass </button>
+                <button onclick="window.location.href='/stream/become-a-curator'" :> Get Curator Pass </button>
             </div>
         </div>
         {% endif %} {% if auth.loggedIn() and auth.getUserId() != profile.id %}
@@ -87,7 +87,7 @@
                 <div class="subheading"> {{ profile.name }} is not curating any Streams yet. </div>
             </div>
             <div class="action">
-                <button onclick="window.location.href='/getcurator'" :> Get Curator Pass </button>
+                <button onclick="window.location.href='/stream/become-a-curator'" :> Get Curator Pass </button>
             </div>
         </div>
         {% endif %} {% endif %} {% for createdList in createdLists %} {{ partial('partials/list-card', [ 'id': createdList['id'],
