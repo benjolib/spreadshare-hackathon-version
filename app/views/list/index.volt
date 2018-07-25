@@ -24,7 +24,7 @@
       <div class="list-actions u-sm-flexCol u-md-flexRow">
         <div class="button-container button-container__orange l-button" data-dropdown-placement="center" data-dropdown-offset="0">
 
-          <a class="re-button re-button--list-subscribe" href="javascript:;">
+          <a class="re-button re-button--list-subscribe" href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'W')">
             <img src="/assets/images/9-0/bird-orange.svg" /> Subscribe
           </a>
 
@@ -35,12 +35,12 @@
           </div>
 
         </div>
-        <div class="sh-dropdown card-subscribe-dropdown card-actions-dropdown--tall u-flex u-flexCol l-dropdown"
+        <!-- <div class="sh-dropdown card-subscribe-dropdown card-actions-dropdown--tall u-flex u-flexCol l-dropdown"
           style="padding-left: -100px;">
           <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'D')">Daily</a>
           <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'W')">Weekly</a>
           <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'M')">Monthly</a>
-        </div>
+        </div> -->
 
         <div class="button-container button-container__blue">
           <div class="but">
