@@ -20,7 +20,8 @@
     apiKey: '{{ config["algolia"]["api-key"] }}',
     indexName: 'spreadshare-stream-{{ config["mode"] }}',
     routing: true,
-    paginationLimitedTo: 0
+    paginationLimitedTo: 0,
+    query: '{{query}}'
   });
 
  

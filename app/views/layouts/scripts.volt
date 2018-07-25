@@ -53,6 +53,7 @@
       //$('.result-count').html(response.data.hits.total + " RESULTS");
       $('.streams-result-count').html(response.length + " RESULTS");
       // create item array
+     
       var items = [];
       // empty the existing list
       $(searchItems).empty();
@@ -70,6 +71,15 @@
       // append list to array
       $(searchItems).append(items.join(''));
 
+       if(response.length === 0) {
+        $('.all-results').css("display", "none")
+      }else {
+        if(response.length > 5) {
+          $('.all-results').css("display", "block")
+        }else {
+          $('.all-results').css("display", "none")
+        }
+      }
     }
     
     function autoCompleteHandlerUsers(response) {

@@ -30,15 +30,18 @@
       <img class="search-close" src="/assets/images/search-cross.svg" />
     </div>
     <div class="search-autocomplete search__dropdown">
-      <div class="u-flex">
+      <div class="u-flex streams-section">
         <div class="description">
           STREAMS
         </div>
         <div class="streams-result-count">
         </div>
       </div>
+      
       <div id="streams-search-items"></div>
-      <div class="u-flex">
+      <a href="#" class="all-results">More Results</a> 
+
+      <div class="u-flex users-section">
           <div class="description">
             USERS
           </div>
@@ -46,7 +49,7 @@
           </div>
         </div>
         <div id="users-search-items"></div>
-      <!-- <a href="#" class="all-results">More Results</a> -->
+      
     </div>
     {% if auth.loggedIn() %}
       <a class="re-header__add" href="/create-list"><img src="/assets/images/9-0/header-add.svg" /></a>
