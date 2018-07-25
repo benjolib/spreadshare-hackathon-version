@@ -20,6 +20,10 @@
       margin-top: 1px;
     }
 
+    .u-flex {
+      align-items: center;
+    }
+
     .all-results {
       @include typography(9);
 
@@ -30,17 +34,15 @@
     }
 
     .description {
-      font-size: 12px;
-      @include media-query(tablet) {
-        font-size: 15px;
-      }
-      @include typography(7);
+      @include typography(8);
 
       display: inline-block;
       color: $text-color-gray;
     }
 
-    .result-count {
+    .result-count,
+    .streams-result-count,
+    .users-result-count {
       @include typography(8);
 
       display: inline-block;
@@ -57,17 +59,22 @@
       margin-bottom: 30px;
     }
 
+    #streams-search-items,
+    #users-search-items {
+      margin-top: 25px;
+      margin-bottom: 25px;
+    }
+
     .item {
       display: block;
-      padding-bottom: 20px;
-      padding-left: 0;
       letter-spacing: -0.58px;
       line-height: 22px;
+      margin-bottom: 25px;
 
       .title {
         @include typography(5);
-
-        color: #252442;
+        color: #2a1e3e;
+        margin-bottom: 5px;
         mark {
           color: $text-color;
           background: #ffffff;
@@ -76,7 +83,6 @@
 
       .tagline {
         @include typography(7);
-
         color: #9baabf;
       }
     }
