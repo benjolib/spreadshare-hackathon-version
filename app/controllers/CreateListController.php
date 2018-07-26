@@ -34,21 +34,20 @@ class CreateListController extends BaseController implements LoginAwareControlle
         $this->view->setVar('editing', false);
         if ($this->request->isPost()) {
         // convert strings to arrays from post
-        
-        $post = $this->request->getPost();
-        $post['related-lists'] = explode(",",$this->request->getPost('related-lists','string'));
-        $post['curators'] = explode(",", $this->request->getPost('curators', 'string'));
-        $post['tags'] = explode(",",$this->request->getPost('tags', 'string'));
-        $this->view->setVar('post', $post);
+            $post = $this->request->getPost();
+            $post['related-lists'] = explode(",",$this->request->getPost('related-lists','string'));
+            $post['curators'] = explode(",", $this->request->getPost('curators', 'string'));
+            $post['tags'] = explode(",",$this->request->getPost('tags', 'string'));
+            $this->view->setVar('post', $post);
             if ($this->request->get('step') == '2') {
-                    $tableId = $this->request->get('tableId');
-                    $table = Tables::findFirstById($tableId);
-                    try {
-                        $ss->setCurators($tableId, $this->request->get('curators','string'));
-                        $ss->setRelatedLists($tableId, $this->request->get('related-lists','string'));
-                        $ss->setTags($tableId, $this->request->get('tags','string'));
-                        $ss->setColumns($tableId, $this->request->get('list-columns','string'));
-                        $ss->setRows($tableId, $this->request->get('list-rows','string'), $this->request->getUploadedFiles(true));
+                $tableId = $this->request->get('tableId');
+                $table = Tables::findFirstById($tableId);
+                try {
+                    $ss->setCurators($tableId, $this->request->get('curators','string'));
+                    $ss->setRelatedLists($tableId, $this->request->get('related-lists','string'));
+                    $ss->setTags($tableId, $this->request->get('tags','string'));
+                    $ss->setColumns($tableId, $this->request->get('list-columns','striptags'));
+                    $ss->setRows($tableId, $this->request->get('list-rows','striptags'), $this->request->getUploadedFiles(true));
                         $image = $ss->getImagePath(
                             $tableId,
                             $this->request->getUploadedFiles(true)
@@ -113,7 +112,7 @@ class CreateListController extends BaseController implements LoginAwareControlle
                         }
                     }
 
-                    $csv = (new Filter())->sanitize($csv, 'striptags');
+                    $csv = (new Filter())->sanitize($csv, 'string');
 
                     $curatorsIdsAndNames = $ss->setCurators($tableId, $this->request->get('curators','string'));
                     $relatedListsIdsAndNames = $ss->setRelatedLists($tableId, $this->request->get('related-lists','string'));
