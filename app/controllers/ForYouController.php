@@ -29,6 +29,7 @@ class ForYouController extends BaseController implements LoginAwareController
         $postsInSubscribedLists = $fs->postsInMySubscribedLists($authId, $postsPerPage, $feedDate, $initialPage);
         $postsAlreadyShown = $postsInSubscribedLists->getIds();
         $postsFromUsersIFollow = $fs->postsFromUsersIFollow($authId, $postsPerPage, $feedDate, $initialPage, $postsAlreadyShown);
+        var_dump($postsFromUsersIFollow);die();
         $postsAlreadyShown = array_merge($postsAlreadyShown, $postsFromUsersIFollow->getIds());
         $newListsFromMyFollowed = $fs->newListsFromMyFollowed($authId, $postsPerPage, $feedDate, $initialPage);
         $listsSubscribedByMyFollowed = $fs->listsSubscribedByMyFollowed($authId, $postsPerPage, $feedDate, $initialPage);
