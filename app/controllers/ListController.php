@@ -43,20 +43,19 @@ class ListController extends BaseController
             try{
                 // convert strings to arrays from post
                 $post = $this->request->getPost();
-                $post['related-lists'] = explode(",",$this->request->getPost()['related-lists']);
-                $post['curators'] = explode(",", $this->request->getPost()['curators']);
-                $post['tags'] = explode(",",$this->request->getPost()['tags']);
+                $post['related-lists'] = explode(",",$this->request->getPost('related-lists','string'));
+                $post['curators'] = explode(",", $this->request->getPost('curators', 'string'));
+                $post['tags'] = explode(",",$this->request->getPost('tags', 'string'));
                 $this->view->setVar('post', $post);
-
-                $table->setTitle($this->request->getPost('name'))
-                    ->setTagLIne($this->request->getPost('tagline'))
-                    ->setDescription($this->request->getPost('description'));
+                $table->setTitle($this->request->getPost('name', 'string'))
+                    ->setTagLIne($this->request->getPost('tagline', 'string'))
+                    ->setDescription($this->request->getPost('description','string'));
                 $table->save();
-                $ss->setCurators($tableId, $this->request->get('curators'));
-                $ss->setRelatedLists($tableId, $this->request->get('related-lists'));
-                $ss->setTags($tableId, $this->request->get('tags'));
-                $ss->setColumns($tableId, $this->request->get('list-columns'));
-                $ss->setRows($tableId, $this->request->get('list-rows'), $this->request->getUploadedFiles(true));
+                $ss->setCurators($tableId, $this->request->get('curators','string'));
+                $ss->setRelatedLists($tableId, $this->request->get('related-lists','string'));
+                $ss->setTags($tableId, $this->request->get('tags','string'));
+                $ss->setColumns($tableId, $this->request->get('list-columns','striptags'));
+                $ss->setRows($tableId, $this->request->get('list-rows', 'striptags'), $this->request->getUploadedFiles(true));
                 $image = $ss->getImagePath(
                     $tableId,
                     $this->request->getUploadedFiles(true)

@@ -152,7 +152,7 @@ class Stream
             $contentToInsert = '[';
             $rowId = $decodedRow->row->id;
             foreach ($decodedRow->row->content as $content) {
-                $contentToInsert .= '{"content":"' . $content . '"},';
+                $contentToInsert .= '{"content":"' . trim(strtok($content,"\n")) . '"},';
             }
             $contentToInsert = rtrim($contentToInsert, ',');
             $contentToInsert .= ']';
