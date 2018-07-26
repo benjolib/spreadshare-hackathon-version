@@ -91,7 +91,7 @@
             </div>
         </div>
         {% endif %} {% endif %} {% for createdList in createdLists %} {{ partial('partials/list-card', [ 'id': createdList['id'],
-        'slug': createdList['slug'], 'image': createdList['image'], 'name': createdList['title'], 'description': createdList['description'],
+        'slug': createdList['slug'], 'image': createdList['image'], 'name': createdList['title'], 'description': createdList['tagline'],
         'subscriberCount': createdList['subscriberCount'], 'listingCount': createdList['listingCount'], 'showCurator': false,
         'small': true, 'half': false, 'large': false ]) }} {% endfor %}
     </div>
