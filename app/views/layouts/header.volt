@@ -19,11 +19,11 @@
         <img src="/assets/images/9-0/header-collabs-octopus.svg" /> Collabs
       {% endif %}
     </a>
-    
+
     <a class="re-header__search {% if query is defined %}hidden{% endif %}" href="#">
       <img class="re-header__search__img" src="/assets/images/9-0/header-search.svg" />
     </a>
-    
+
     <div class="re-header__search-open" style="{% if query is not defined %}display:none;{% endif %}">
       <img src="/assets/images/search-green.svg" />
       <input type="text" placeholder="Search" class="navbar__search__field" value="{% if query is defined %}{{ query }}{% endif %}" />
@@ -111,7 +111,7 @@
         <section>
           <div>FOR CURATORS</div>
           <a href="/streams">All <span>Streams</span> created by you</a>
-          <a href="/stats" style="margin-bottom:13px"><span>Stats</span> for all your Streams</a>
+          <a href="/stats"><span>Stats</span> for all your Streams</a>
         </section>
         <section>
           <div>ABOUT</div>

@@ -13,14 +13,14 @@
             <div class="status">
                 {% if currentPage == 'following' %}
                 <a href="/user/{{ profile.handle }}/followers">
-                    <span>{{ numFollowers }}</span> FOLLOWERS</a>
+                    <span>{{ numFollowers }}</span> Followers</a>
                 <a href="/user/{{ profile.handle }}/following" class="status-link-green">
-                    <span>{{ numFollowing }}</span> FOLLOWING</a>
+                    <span>{{ numFollowing }}</span> Following</a>
                 {% else %}
                 <a href="/user/{{ profile.handle }}/followers" class="status-link-green">
-                    <span>{{ numFollowers }}</span> FOLLOWERS</a>
+                    <span>{{ numFollowers }}</span> Followers</a>
                 <a href="/user/{{ profile.handle }}/following">
-                    <span>{{ numFollowing }}</span> FOLLOWING</a>
+                    <span>{{ numFollowing }}</span> Following</a>
                 {% endif %}
 
             </div>
@@ -91,7 +91,7 @@
             </div>
         </div>
         {% endif %} {% endif %} {% for createdList in createdLists %} {{ partial('partials/list-card', [ 'id': createdList['id'],
-        'slug': createdList['slug'], 'image': createdList['image'], 'name': createdList['title'], 'description': createdList['description'],
+        'slug': createdList['slug'], 'image': createdList['image'], 'name': createdList['title'], 'description': createdList['tagline'],
         'subscriberCount': createdList['subscriberCount'], 'listingCount': createdList['listingCount'], 'showCurator': false,
         'small': true, 'half': false, 'large': false ]) }} {% endfor %}
     </div>

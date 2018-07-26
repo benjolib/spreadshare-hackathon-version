@@ -9,8 +9,8 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
   <div class="home-heading u-flex">
         <div class="selected-topics__items">
         <a href="javascript:history.back()">
-        
-        {% for featuredTag in featuredTags %} 
+
+        {% for featuredTag in featuredTags %}
         {% if featuredTag['id'] == tag %}
         <div>{{ featuredTag['title'] }} x</div>
         {% endif %} {% endfor %}
@@ -161,6 +161,7 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
   <div class="trending-topics">
     <div class="trending-topics__inner">
       <h3>Trending Tags</h3>
+        {% if featuredTags %}
       <div class="trending-topics__items">
         {% for featuredTag in featuredTags %}
 <a href="/tag/{{ featuredTag['id'] }}">
@@ -171,6 +172,7 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
         {% endfor %}
 
       </div>
+        {% endif %}
     </div>
   </div>
   <div class="re-page re-page--large">

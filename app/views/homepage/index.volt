@@ -9,7 +9,7 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
   <div class="home-heading u-flex">
       <div class="selected-topics__items">
       <a href="javascript:history.back()">
-      
+
       <div>{{ tag }} x</div>
       </a>
       </div>
@@ -136,7 +136,7 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
       {% if subcribedbox is not defined %}
       {% if qty == 3 %}
       {% set subcribedbox=1 %}
-    
+
         {{ partial('partials/action-card', [ 'color': 'orange-bird', 'heading': 'Subscribe', 'text': 'Subscribe to your favorite
         topics and collections.
         <br />
@@ -149,7 +149,7 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
       {% endfor %}
 
 
-   
+
       </div>
   </div>
 
@@ -157,6 +157,7 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
   <div class="trending-topics">
     <div class="trending-topics__inner">
       <h3>Trending Tags</h3>
+        {% if featuredTags %}
       <div class="trending-topics__items">
         {% for featuredTag in featuredTags %}
 <a href="/tag/{{ featuredTag['id'] }}">
@@ -167,6 +168,7 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
         {% endfor %}
 
       </div>
+        {% endif %}
     </div>
   </div>
   <div class="re-page re-page--medium">
@@ -294,7 +296,7 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
 
 <div class="u-flex u-sm-flexWrap">
  {% for index, featuredCurator in featuredCurators %}
-{% set index= index+1 %} 
+{% set index= index+1 %}
 {% if index <= 9 %}
  {{ partial('partials/profile-card', [ 'id': featuredCurator['id'], 'username': featuredCurator['handle'], 'avatar': featuredCurator["image"]
 , 'name': featuredCurator["name"] , 'bio': featuredCurator["tagline"] ,'type': 4, 'truncate':true ]) }}
