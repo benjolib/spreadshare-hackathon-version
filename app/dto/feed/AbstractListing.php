@@ -42,7 +42,7 @@ abstract class AbstractListing implements FeedDto {
         return $this->createdAt;
     }
 
-    public function getId(): string
+    public function getId()
     {
         return $this->id;
     }
