@@ -158,7 +158,7 @@ class Feed extends \DS\Model\Base
                     AND t.flags = '. TableFlags::Published.'
                 ORDER BY tr.createdAt DESC
                 LIMIT '.$limit.' OFFSET '.$offset;
-            var_dump($query);die();
+            echo $query;die();
             return $this->getModelsManager()
                 ->createQuery($query)->execute([
                     'userId' => $userId,
