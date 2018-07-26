@@ -2913,9 +2913,29 @@ html {
 }
 
 .table-scroll {
-  -webkit-overflow-scrolling: touch;
-  overflow-x: scroll;
-  overflow-y: hidden;
+  overflow-x: hidden;
+  position: relative;
+  .scroll-wrapper {
+    width: auto;
+    position: relative;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+      width: 0px;
+      /* remove scrollbar space */
+      background: white;
+      background-color: white;
+      display: none;
+
+      /* optional: just make scrollbar invisible */
+    }
+    &::-webkit-scrollbar-thumb {
+      background: rgb(255, 255, 255);
+      display: none;
+    }
+  }
   &--submissions {
     margin-top: 10px;
     margin-bottom: 36px;
@@ -2923,8 +2943,8 @@ html {
       margin-top: 0;
     }
     .shadowcontain {
-      display: block;
-      transform: translateX(-40px);
+      //display: block;
+      //transform: translateX(-40px);
     }
   }
   &--collaborations {
@@ -2933,13 +2953,29 @@ html {
       margin-bottom: 20px;
     }
     .shadowcontain {
-      display: block;
-      width: calc(100% - 35px);
-      transform: translateX(-55px);
+      top: 0;
+      //display: block;
+      //width: calc(100% - 35px);
+      //transform: translateX(-55px);
     }
-    .re-table thead {
-      display: none;
+    .re-table {
+      thead {
+        display: none;
+      }
     }
+  }
+  .re-table {
+    div.shadowcontain {
+      display: none ;
+    }
+  }
+  .collaboration-actions {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    pointer-events: all;
+    cursor: pointer;
   }
 }
 
@@ -2953,25 +2989,24 @@ html {
 }
 
 .shadowcontain {
-  display: none;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
   border: 1px solid #f8f8fb;
   border-radius: 4px;
   pointer-events: none;
-  position: absolute;
-  max-width: 894px;
-  width: calc(100% - 40px);
-  transform: translateX(-42px);
+  width: calc(100% - 2px);
   height: 86px;
+  position: absolute;
+  z-index: 1;
+  top: 33px;
+  left: 1px;
   &--no-votes {
     transform: translateX(-0px);
   }
   @include media-query(tablet) {
+    top: 38px;
     display: block;
-    transform: translateX(-52px);
     height: 114px;
     &--no-votes {
-      transform: translateX(-0px);
     }
   }
   .addedby {
@@ -2989,6 +3024,14 @@ html {
     .header {
       margin-top: 0!important;
     }
+  }
+  .info-card {
+    position: absolute;
+    z-index: 2;
+    right: 6px;
+    top: 0;
+    pointer-events: all;
+    cursor: pointer;
   }
 }
 
@@ -5495,6 +5538,27 @@ html {
       margin-bottom: 0;
       @include media-query(tablet) {
         margin-bottom: 16px;
+      }
+    }
+  }
+}
+
+.collaborations-tab-content-received {
+  .u-flex {
+    align-items: center;
+    margin-bottom: 10px;
+    @include media-query(tablet) {
+      margin-bottom: 10px;
+    }
+  }
+  .re-table {
+    @include mobile {
+      td:first-of-type {
+        padding: 0 10px;
+      }
+      .re-table__list-image {
+        top: 50%;
+        transform: translateY(-50%);
       }
     }
   }
