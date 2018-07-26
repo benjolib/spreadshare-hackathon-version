@@ -21,7 +21,9 @@ class FeedElementCollection
     {
         $result = [];
         foreach ($this->elements as $element) {
-            if (!empty($element->getId())) $result[] = $element->getId();
+            if (!empty($element->getId())) {
+                $result[] = $element->getId();
+            }
         }
         return $result;
     }

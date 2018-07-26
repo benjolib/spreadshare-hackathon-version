@@ -42,6 +42,7 @@ class Feed
             $listing = new SubmittedListing($this->tableColumns[$rawListing->tableId], $rawListing);
             $result->add($listing);
         }
+        var_dump($result);die();
         return $result;
     }
 
