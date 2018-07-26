@@ -7,12 +7,12 @@ block content %}
       <h2 class="re-subheading re-subheading--button-below">Manage all your Streams in one place.</h2>
     </div>
     <div>
-<a href="/create-list" class="re-button re-button--lists-curate-stream">Curate a Stream</a>
+<a href="/create-list" class="re-button re-button--lists-curate-stream"><img src="/assets/images/9-0/whale-white.svg">Curate a Stream</a>
     </div>
   </div>
 
   {% if tables is defined AND tables %}
-  <table class="re-table">
+  <table class="re-table curate-stream-list">
     <tbody>
       {{ partial('lists/content') }}
     </tbody>

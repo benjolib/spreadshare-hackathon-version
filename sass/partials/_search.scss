@@ -48,10 +48,6 @@
       display: inline-block;
       color: #132466;
       margin-left: 8px;
-      line-height: 1.33;
-      @include media-query(tablet) {
-        line-height: 20px;
-      }
     }
 
     #search-items {

@@ -13,14 +13,14 @@
             <div class="status">
                 {% if currentPage == 'following' %}
                 <a href="/user/{{ profile.handle }}/followers">
-                    <span>{{ numFollowers }}</span> FOLLOWERS</a>
+                    <span>{{ numFollowers }}</span> Followers</a>
                 <a href="/user/{{ profile.handle }}/following" class="status-link-green">
-                    <span>{{ numFollowing }}</span> FOLLOWING</a>
+                    <span>{{ numFollowing }}</span> Following</a>
                 {% else %}
                 <a href="/user/{{ profile.handle }}/followers" class="status-link-green">
-                    <span>{{ numFollowers }}</span> FOLLOWERS</a>
+                    <span>{{ numFollowers }}</span> Followers</a>
                 <a href="/user/{{ profile.handle }}/following">
-                    <span>{{ numFollowing }}</span> FOLLOWING</a>
+                    <span>{{ numFollowing }}</span> Following</a>
                 {% endif %}
 
             </div>

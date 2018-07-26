@@ -115,6 +115,43 @@
   </div>
 
   <div class="table-scroll">
+    <div class="shadowcontain dropright">
+      <div class="l-button info-card" data-dropdown-placement="top-start" data-dropdown-offset="0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <img src="/assets/images/9-0/listing-info.svg" />
+      </div>
+      <div class="sh-dropdown list-row-remove-dropdown u-flex u-flexCol  l-dropdown addedby">
+        <div class="u-flex u-flexCol header">
+            {% if row['userId'] == null %}
+
+              ADDED BY
+              <div class="u-flex u-flexCol content">
+
+                <div class="content">
+                  <img src="{{ table['creatorImage'] }}" /> {{ table['creatorHandle'] }}
+                </div>
+              </div>
+
+            {% else %}
+              ADDED BY
+              <div class="u-flex u-sm-flexCol u-md-flexRow u-md-flexAlignItemsCenter content">
+                  {% if row['userId'] == table['ownerUserId'] %}
+                    <img src="{{ table['creatorImage'] }}" /> {% else %}
+                    <img src="/userimages/{{row['userId']}}.jpg" /> {% endif %}
+
+                <a href="/profile/{{userHandleFromId(row['userId'])}}">{{ userHandleFromId(row[ 'userId']) }}</a>
+              </div>
+            {% endif %}
+        </div>
+        <div class="u-flex u-flexCol header" style="margin-top:15px">
+          DATE
+          <div class="u-flex content date">
+              {{ date('M jS H:i ',row['createdAt']) }}
+          </div>
+        </div>
+        <a href="/row/{{ row['id']}}/delete" class="action-button">Request to remove</a>
+      </div>
+    </div>
+    <div class="scroll-wrapper">
     <table class="re-table re-table--list" data-id="{{ table['id'] }}">
       <thead>
         <tr>
@@ -123,11 +160,11 @@
               <img src="/assets/images/updown.svg" class="updown" />
             </div>
             <div class="sh-dropdown sort-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
-              
+
 
                 {%if (orderby) ==="date"%}
                 <a href="?orderby=date" class="sort-selected">
-                  <img src="/assets/images/clock-green.svg" /> 
+                  <img src="/assets/images/clock-green.svg" />
                   {%else%}
                   <a href="?orderby=date">
                       <img src="/assets/images/clock.svg" />
@@ -140,14 +177,14 @@
                   <a href="?orderby=popularity" class="sort-selected">
                   <img src="/assets/images/vote-lightning-green.svg" />
                   {%else%}
-                  <a href="?orderby=popularity" > 
+                  <a href="?orderby=popularity" >
                   <img src="/assets/images/vote-lightning.svg" />
                   {%endif%}
                 Sort by
                 <span>Popularity</span>
                 </a>
-              
-               
+
+
 
 
             </div>
@@ -172,58 +209,11 @@
             </a>
           </td>
           <td class="shadowcontaintd">
-          <div class="shadowcontain dropright">
-              <div class="l-button" style="position: absolute;top: 0px;right: 6px;pointer-events: all;cursor: pointer;" data-dropdown-placement="top-start" data-dropdown-offset="0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                <img src="/assets/images/9-0/listing-info.svg" />
-              </div>
-          <div class="sh-dropdown list-row-remove-dropdown u-flex u-flexCol  l-dropdown addedby " >
-
-
-
-
-
-                <div class="u-flex u-flexCol header">
-                  {% if row['userId'] == null %}
-
-                  ADDED BY
-                  <div class="u-flex u-flexCol content">
-
-                    <div class="content">
-                      <img src="{{ table['creatorImage'] }}" /> {{ table['creatorHandle'] }}
-                    </div>
-                  </div>
-
-                  {% else %}
-                  ADDED BY
-                <div class="u-flex u-sm-flexCol u-md-flexRow u-md-flexAlignItemsCenter content">
-                    {% if row['userId'] == table['ownerUserId'] %}
-                    <img src="{{ table['creatorImage'] }}" /> {% else %}
-                    <img src="/userimages/{{row['userId']}}.jpg" /> {% endif %}
-
-                    <a href="/profile/{{userHandleFromId(row['userId'])}}">{{ userHandleFromId(row[ 'userId']) }}</a>
-                </div>
-                  {% endif %}
-                </div>
-
-                <div class="u-flex u-flexCol header" style="margin-top:15px">
-                  DATE
-                  <div class="u-flex content date">
-                    {{ date('M jS H:i ',row['createdAt']) }}
-                  </div>
-
-
-
-
-                  </div>
-
-                <a href="/row/{{ row['id']}}/delete" class="action-button">Request to remove</a>
-          </div>
-
-          </div>
+          <div class="shadowcontain"></div>
           </td>
 
           <td>
-             
+
             <div class="l-button re-table__list-image {{ row['image'] ? '' : 're-table__list-image--empty' }}" style="background: #f5f5f5 url({{ row['image'] }}) center / cover;">
               <img data-name="{{ row['content']|json_decode[0].content }}" class="{{ row['image'] ? '' : 'empty' }}" />
               <div class="re-table__list-image__upload-button"></div>
@@ -266,7 +256,7 @@
 
           <td style="min-width: {{ length }}px;">
             {{ filterTableRowsContent(cell.content) }}
-          
+
           </td>
           {% endfor %}
         </tr>
@@ -296,55 +286,61 @@
             </div>
           </td>
         </tr>
-       
+
         <tr class="re-table-space"></tr>
         <tr class="re-table-space"></tr>
       </tbody>
     </table>
-    <table class="re-table re-table--list addAListingRow"  style="margin-left:21px;width:100%;">
-      <tr id="addAListingRowSpace" class="re-table-space" style="display: none;"></tr>
-      <tr id="addAListingRow" class="list-row-tr list-row-tr--add-row" style="display: none;">
-        <td>
+    </div>
+    <div class="add-new-row">
+      <div class="shadowcontain"></div>
+        <div class="scroll-wrapper">
+          <table class="re-table re-table--list addAListingRow"  style="margin-left:21px;width:100%;">
+            <tr id="addAListingRowSpace" class="re-table-space" style="display: none;"></tr>
+            <tr id="addAListingRow" class="list-row-tr list-row-tr--add-row" style="display: none;">
+              <td>
 
-        </td>
-        <td class="shadowcontaintd">
-          <div class="shadowcontain"></div>
-        </td>
-        <td>
-          <div class="re-table__list-image__upload-button"></div>
-          <div class="re-table__list-image re-table__list-image--new-row" id="addRowImage"></div>
+              </td>
+              <td class="shadowcontaintd">
+                <div class="shadowcontain"></div>
+              </td>
+              <td>
+                <div class="re-table__list-image__upload-button"></div>
+                <div class="re-table__list-image re-table__list-image--new-row" id="addRowImage"></div>
 
-          <!-- <div class="re-table__list-image re-table__list-image--editing" style="background: #f5f5f5 center / cover;">
+                <!-- <div class="re-table__list-image re-table__list-image--editing" style="background: #f5f5f5 center / cover;">
 
-            <div class="re-table__list-image__upload-button"></div>
+                  <div class="re-table__list-image__upload-button"></div>
 
-            <div class="re-table__list-image__upload-button"></div>
-              <div class="re-table__list-image__delete-button"></div>
-            </div> -->
+                  <div class="re-table__list-image__upload-button"></div>
+                    <div class="re-table__list-image__delete-button"></div>
+                  </div> -->
 
 
-          <input type="file" name="image" id="new-row-fileUpload" style="display: none;" />
+                <input type="file" name="image" id="new-row-fileUpload" style="display: none;" />
 
-        </td>
-        {% for index,column in tableColumns %}
-        <td>
-          <div style="display:flex;">
-           
-            <textarea style="min-width: {{ column.title|length*16 }}px !important;" onmouseover="javascript:$('.e{{i}}{{index}}').css('visibility','visible');" ; onmouseout="javascript:$('.e{{i}}{{index}}').css('visibility', 'hidden');"
-              id="{{i}}" placeholder="{{ column.title|ucfirst }}" rows="1" class="edit icon cell-input-sizing d{{i}}{{index}}"></textarea>
-            <i id="{{i}}" class="pencil icon blue e{{i}}{{index}}" style="margin-top:38px;cursor: pointer;visibility: hidden;" onclick="console.log($(this).prev().prev());javascript:$('#d{{i}}{{index}}').focus();"></i>
-          </div>
-        </td>
+              </td>
+              {% for index,column in tableColumns %}
+              <td>
+                <div style="display:flex;">
 
-        {% endfor %}
-      </tr>
-      <tr class="re-table-space"></tr>
-        <tr class="re-table-space"></tr>
-    </table>
+                  <textarea style="min-width: {{ column.title|length*16 }}px !important;" onmouseover="javascript:$('.e{{i}}{{index}}').css('visibility','visible');" ; onmouseout="javascript:$('.e{{i}}{{index}}').css('visibility', 'hidden');"
+                    id="{{i}}" placeholder="{{ column.title|ucfirst }}" rows="1" class="edit icon cell-input-sizing d{{i}}{{index}}"></textarea>
+                  <i id="{{i}}" class="pencil icon blue e{{i}}{{index}}" style="margin-top:38px;cursor: pointer;visibility: hidden;" onclick="console.log($(this).prev().prev());javascript:$('#d{{i}}{{index}}').focus();"></i>
+                </div>
+              </td>
+
+              {% endfor %}
+            </tr>
+            <tr class="re-table-space"></tr>
+              <tr class="re-table-space"></tr>
+          </table>
+        </div>
+      </div>
     </div>
 
 
-   
+
     <div class="addAListingSubmitAndCancel" id="addAListingSubmitAndCancel" style="display: none;">
       <a class="re-button re-button--list-add-row" href="#" id="addAListingSubmit">
         <img src="/assets/images/9-0/list-collaborate-button-octopus.svg" />Submit</a>
@@ -495,8 +491,8 @@
             <div class="about-list__item__name">TAGS</div>
             <div class="about-list__item__content">
               <div class="tags" id="tags">
-                {% for i, tag in tags %} 
-                 <a style="color:#2a1e3e" href="/tag/{{tag['id']}}">{{tag['title']}}</a> 
+                {% for i, tag in tags %}
+                 <a style="color:#2a1e3e" href="/tag/{{tag['id']}}">{{tag['title']}}</a>
                 {{ i + 1
                 < tags|length ? ', ' : '' }} {% endfor %} </div>
               </div>
@@ -606,11 +602,11 @@
             </div>
           </div>
         </div>
-        
+
         <div class="list-tab-content list-tab-content-collaborators" style="display: none;">
           <div class="list-tabs__inner-padded">
             {% for contributor in tablemodel.contributors %}
-            
+
             <div class="list-tab-content-collaborators__card">
               {{ partial('partials/profile-card', [ 'id': contributor.users.id, 'username': contributor.users.handle, 'avatar': contributor.users.image,
               'name': contributor.users.name, 'bio': contributor.users.tagline, 'type': 10, 'truncate': true ]) }}
@@ -800,13 +796,13 @@
               minWidth = 480;
               $this.attr('style', 'margin-top: 14px !important;');
               $this.next().attr('style', 'margin-top: 14px !important;');
-              
+
             } else {
               $this.attr('style', 'margin-top: 37px !important;');
               $this.next().attr('style', 'margin-top: 38px !important;');
             }
             $this.height(height);
-            
+
 
             $this.parents('td').attr('style', 'min-width:' + minWidth + 'px !important;');
           }
@@ -984,7 +980,7 @@
             $('#addAListingButton').css("visibility", "hidden")
             //TODO hide() doesnt work ?
             $('#addAListingRow').show();
-            
+
             $('#addAListingRowSpace').show();
             $('#addAListingSubmitAndCancel').show();
             $(".bottom").css("visibility", "hidden")
