@@ -11,6 +11,7 @@ use DS\Model\DataSource\TableFlags;
 use DS\Model\DataSource\UserRoles;
 use DS\Model\Tables;
 use DS\Services\Stream as StreamService;
+use Phalcon\Filter;
 
 class CreateListController extends BaseController implements LoginAwareController
 {
@@ -35,19 +36,19 @@ class CreateListController extends BaseController implements LoginAwareControlle
         // convert strings to arrays from post
         
         $post = $this->request->getPost();
-        $post['related-lists'] = explode(",",$this->request->getPost()['related-lists']);
-        $post['curators'] = explode(",", $this->request->getPost()['curators']);
-        $post['tags'] = explode(",",$this->request->getPost()['tags']);
+        $post['related-lists'] = explode(",",$this->request->getPost('related-lists','string'));
+        $post['curators'] = explode(",", $this->request->getPost('curators', 'string'));
+        $post['tags'] = explode(",",$this->request->getPost('tags', 'string'));
         $this->view->setVar('post', $post);
             if ($this->request->get('step') == '2') {
                     $tableId = $this->request->get('tableId');
                     $table = Tables::findFirstById($tableId);
                     try {
-                        $ss->setCurators($tableId, $this->request->get('curators'));
-                        $ss->setRelatedLists($tableId, $this->request->get('related-lists'));
-                        $ss->setTags($tableId, $this->request->get('tags'));
-                        $ss->setColumns($tableId, $this->request->get('list-columns'));
-                        $ss->setRows($tableId, $this->request->get('list-rows'), $this->request->getUploadedFiles(true));
+                        $ss->setCurators($tableId, $this->request->get('curators','string'));
+                        $ss->setRelatedLists($tableId, $this->request->get('related-lists','string'));
+                        $ss->setTags($tableId, $this->request->get('tags','string'));
+                        $ss->setColumns($tableId, $this->request->get('list-columns','string'));
+                        $ss->setRows($tableId, $this->request->get('list-rows','string'), $this->request->getUploadedFiles(true));
                         $image = $ss->getImagePath(
                             $tableId,
                             $this->request->getUploadedFiles(true)
@@ -58,9 +59,9 @@ class CreateListController extends BaseController implements LoginAwareControlle
                         $table->setFlags(TableFlags::Published);
                         try {
                             $table
-                                ->setTitle($this->request->get('name'))
-                                ->setTagline($this->request->get('tagline'))
-                                ->setDescription($this->request->get('description'))
+                                ->setTitle($this->request->get('name', 'string'))
+                                ->setTagline($this->request->get('tagline', 'string'))
+                                ->setDescription($this->request->get('description', 'string'))
                                 ->save();
                         } catch (InvalidStreamTitleException $e) {
                             throw new \Exception('Title missing - ' . $e->getMessage());
@@ -79,8 +80,8 @@ class CreateListController extends BaseController implements LoginAwareControlle
 
             } else {
                 try {
-                    if (!empty($this->request->getPost('tableId'))) {
-                        $table = Tables::findFirstById($this->request->getPost('tableId'));
+                    if (!empty($this->request->getPost('tableId','int'))) {
+                        $table = Tables::findFirstById($this->request->getPost('tableId','int'));
                     } else {
                         $table = new Tables();
                         $table->setOwnerUserId($user->getId())
@@ -100,7 +101,7 @@ class CreateListController extends BaseController implements LoginAwareControlle
                         throw new \Exception('Image missing - Please select an image for your Stream');
                     }
 
-                    $csv = $this->request->get('copy');
+                    $csv = $this->request->get('copy','string');
 
                     if ($this->request->hasFiles(true)) {
                         foreach ($this->request->getUploadedFiles(true) as $key => $uploadedFile) {
@@ -112,10 +113,11 @@ class CreateListController extends BaseController implements LoginAwareControlle
                         }
                     }
 
+                    $csv = (new Filter())->sanitize($csv, 'striptags');
 
-                    $curatorsIdsAndNames = $ss->setCurators($tableId, $this->request->get('curators'));
-                    $relatedListsIdsAndNames = $ss->setRelatedLists($tableId, $this->request->get('related-lists'));
-                    $tagsIdsAndNames = $ss->setTags($tableId, $this->request->get('tags'));
+                    $curatorsIdsAndNames = $ss->setCurators($tableId, $this->request->get('curators','string'));
+                    $relatedListsIdsAndNames = $ss->setRelatedLists($tableId, $this->request->get('related-lists','string'));
+                    $tagsIdsAndNames = $ss->setTags($tableId, $this->request->get('tags','string'));
 
                     $this->view->setVar('tags', empty($tagsIdsAndNames)?[]:array_column($tagsIdsAndNames, 'id'));
                     $this->view->setVar('tagsNames', empty($tagsIdsAndNames)?[]:array_column($tagsIdsAndNames, 'name'));
@@ -130,9 +132,9 @@ class CreateListController extends BaseController implements LoginAwareControlle
                     $this->view->setVar('editing', true);
                     try {
                         $table
-                            ->setTitle($this->request->get('name'))
-                            ->setTagline($this->request->get('tagline'))
-                            ->setDescription($this->request->get('description'))
+                            ->setTitle($this->request->get('name','string'))
+                            ->setTagline($this->request->get('tagline','string'))
+                            ->setDescription($this->request->get('description','string'))
                             ->save();
                         } catch (InvalidStreamTitleException $e) {
                         throw new \Exception('Title missing - ' . $e->getMessage());

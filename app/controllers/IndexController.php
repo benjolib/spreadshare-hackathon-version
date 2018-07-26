@@ -64,7 +64,6 @@ class IndexController extends BaseController
                     $t = Tags::findFirstById($tag);
                     $t->save();
                     $this->response->redirect("/tag/" . $t->getSlug(), true);
-                    return;
                 }
                 $tableFilter->setTags([$t->getId()]);
             }
