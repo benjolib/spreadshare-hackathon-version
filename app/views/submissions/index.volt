@@ -27,18 +27,6 @@
         <div class="submission-clock"><img src="/assets/images/comment-clock.svg" />{{ formatTimestamp(submission['createdAt']) }}</div>
       </div>
       <div class="table-scroll table-scroll--submissions">
-        <div class="shadowcontain">
-            <div class="l-button" style="position: absolute;top: 0;right: 6px;pointer-events: all;cursor: pointer;"><img src="/assets/images/dotdotdot.svg" /></div>
-            <div class="sh-dropdown list-row-remove-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
-                {% if (submission['kind'] == 'add')%}
-                    <a href="submissions/add/revoke/{{submission['id']}}"><img src="/assets/images/bin.svg"> Revoke submission</a>
-                {%endif%}
-                {% if (submission['kind'] == 'delete')%}
-                    <a href="submissions/delete/revoke/{{submission['id']}}"><img src="/assets/images/bin.svg"> Revoke submission</a>
-                {%endif%}
-            </div>
-        </div>
-        <div class="scroll-wrapper">
         <table class="re-table re-table--list">
           <thead>
             <tr>
@@ -62,7 +50,17 @@
                   </a>
                 </td>
                 <td class="shadowcontaintd">
-                  <div class="shadowcontain"></div>
+                  <div class="shadowcontain">
+                    <div class="l-button" style="position: absolute;top: 0;right: 6px;pointer-events: all;cursor: pointer;"><img src="/assets/images/dotdotdot.svg" /></div>
+                    <div class="sh-dropdown list-row-remove-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
+                      {% if (submission['kind'] == 'add')%}
+                        <a href="submissions/add/revoke/{{submission['id']}}"><img src="/assets/images/bin.svg"> Revoke submission</a>
+                      {%endif%}
+                      {% if (submission['kind'] == 'delete')%}
+                        <a href="submissions/delete/revoke/{{submission['id']}}"><img src="/assets/images/bin.svg"> Revoke submission</a>
+                      {%endif%}
+                    </div>
+                  </div>
                 </td>
                 <td>
                   <div class="re-table__list-image" style="background: #f5f5f5 url(/assets/images/rows/{{ submission['image'] }}) center / cover;"></div>
@@ -92,8 +90,7 @@
             <tr class="re-table-space"></tr>
           </tbody>
         </table>
-    </div>
-  </div>
+      </div>
     {% endfor %}
   {% endif %}
 </div>

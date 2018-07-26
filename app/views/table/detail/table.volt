@@ -21,43 +21,39 @@
   </div>
 
   <div class="table-scroll">
-      <div class="shadowcontain"><!-- o --></div>
-      <div class="scroll-wrapper">
-        <table class="re-table re-table--list" data-id="{{ table['id'] }}">
-          <thead>
-            <tr>
-              <th style="width: 52px;padding-right: 7px;">VOTES</th>
-              <th class="shadowcontainth"></th>
-              <th>{# image #}</th>
-              {% for column in tableContent['columns'] %}
-                <th>{{ column['title'] }}</th>
-              {% endfor %}
-            </tr>
-          </thead>
-          <tbody>
-            {% for row in tableRows %}
-              <tr data-id="{{ row['id'] }}">
-                <td>
-                  <a href="#" class="vote-link {{ row['upvoted'] ? 'vote-link--upvoted' : '' }}">
-                    <img class="vote-link__image" src="/assets/images/vote-lightning.svg" />
-                    <img class="vote-link__image vote-link__image--green" src="/assets/images/vote-lightning-green.svg" />
-                    <div>{{ row['votes'] }}</div>
-                  </a>
-                </td>
-                <td class="shadowcontaintd"><div class="shadowcontain"></div></td>
-                <td>
-                  <div class="re-table__list-image" style="background: #f5f5f5 url(https://cdn.worldvectorlogo.com/logos/invision.svg) center / cover;"></div>
-                </td>
-                {% for cell in row['content'] %}
-                  <td style="min-width: {{ cell['minWidth'] }}px;">{{ cell['content'] }}</td>
-                {% endfor %}
-              </tr>
-              <tr class="re-table-space"></tr>
+    <table class="re-table re-table--list" data-id="{{ table['id'] }}">
+      <thead>
+        <tr>
+          <th style="width: 52px;padding-right: 7px;">VOTES</th>
+          <th class="shadowcontainth"></th>
+          <th>{# image #}</th>
+          {% for column in tableContent['columns'] %}
+            <th>{{ column['title'] }}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in tableRows %}
+          <tr data-id="{{ row['id'] }}">
+            <td>
+              <a href="#" class="vote-link {{ row['upvoted'] ? 'vote-link--upvoted' : '' }}">
+                <img class="vote-link__image" src="/assets/images/vote-lightning.svg" />
+                <img class="vote-link__image vote-link__image--green" src="/assets/images/vote-lightning-green.svg" />
+                <div>{{ row['votes'] }}</div>
+              </a>
+            </td>
+            <td class="shadowcontaintd"><div class="shadowcontain"></div></td>
+            <td>
+              <div class="re-table__list-image" style="background: #f5f5f5 url(https://cdn.worldvectorlogo.com/logos/invision.svg) center / cover;"></div>
+            </td>
+            {% for cell in row['content'] %}
+              <td style="min-width: {{ cell['minWidth'] }}px;">{{ cell['content'] }}</td>
             {% endfor %}
-          </tbody>
-        </table>
-      </div>
-    </div>
+          </tr>
+          <tr class="re-table-space"></tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </div>
   <a class="re-button re-button--double-line re-button--full-width re-button--tall re-button--grey" href="#">
     Add a Listing
