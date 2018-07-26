@@ -42,6 +42,8 @@ class Feed
             $listing = new SubmittedListing($this->tableColumns[$rawListing->tableId], $rawListing);
             $result->add($listing);
         }
+
+        return $result;
     }
 
     public function postsFromUsersIFollow(
@@ -148,7 +150,7 @@ class Feed
             $result->add($listing);
         }
         return $result;
-        
+
     }
 
     /**
