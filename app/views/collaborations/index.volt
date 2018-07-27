@@ -28,87 +28,90 @@
                 <div class="submission-status submission-status--confirmed">CONFIRMED</div>
               {% elseif submission['status'] === '2' %}
                 <div class="submission-status submission-status--rejected">REJECTED</div>
-              {% endif %} 
-              <div class="submission-comment">on <a href="/stream/{{ submission['table_id'] }}">{{ submission['title'] }}</a>{%if submission['comment'] %} COMMENT: <span class="comment">{{ submission['comment'] }}</span>{%endif%}</div> 
+              {% endif %}
+              <div class="submission-comment">on <a href="/stream/{{ submission['table_id'] }}">{{ submission['title'] }}</a>{%if submission['comment'] %} COMMENT: <span class="comment">{{ submission['comment'] }}</span>{%endif%}</div>
               <div class="submission-clock"><img src="/assets/images/comment-clock.svg" />{{ formatTimestamp(submission['createdAt']) }}</div>
             </div>
             <div class="table-scroll table-scroll--submissions">
-              <table class="re-table re-table--list">
-                <thead>
-                  <tr>
-                    <th>
-                      <!--VOTES-->
-                    </th>
-                    <th class="shadowcontainth"></th>
-                    <th>{# image #}</th>
-                    {% for column in submission['columns'] %}
-                      <th>{{ column }}</th>
-                    {% endfor %}
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <tr data-id="{{ submission['id'] }}" class="list-row-tr">
-                      <td><!--
-                        <a href="#" class="vote-link">
-                          <img class="vote-link__image" src="/assets/images/vote-lightning.svg" />
-                          <div>0</div>
-                        </a>-->
-                      </td>
-                      <td class="shadowcontaintd">
-                        <div class="shadowcontain">
-                          {% if submission['status'] === '0' %}
-                          <div class="l-button" style="position: absolute;top: 0;right: 6px;pointer-events: all;cursor: pointer;">
+                <div class="shadowcontain">
+                    {% if submission['status'] === '0' %}
+                        <div class="l-button" style="position: absolute;top: 0;right: 6px;pointer-events: all;cursor: pointer;">
                             <img src="/assets/images/9-0/listing-info.svg" />
-                          </div>
-                          <div class="sh-dropdown list-row-remove-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
-                            
+                        </div>
+                        <div class="sh-dropdown list-row-remove-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
+
                             {% if (submission['kind'] == 'add') %}
-                              <a href="submissions/add/revoke/{{submission['id']}}"><img src="/assets/images/bin3.svg"> Revoke submission</a>
+                                <a href="submissions/add/revoke/{{submission['id']}}"><img src="/assets/images/bin3.svg"> Revoke submission</a>
                             {%endif%}
                             {% if (submission['kind'] == 'delete')%}
-                              <a href="submissions/delete/revoke/{{submission['id']}}"><img src="/assets/images/bin3.svg"> Revoke submission</a>
+                                <a href="submissions/delete/revoke/{{submission['id']}}"><img src="/assets/images/bin3.svg"> Revoke submission</a>
                             {%endif%}
-                          </div>
-                          {% endif %}
                         </div>
-                      </td>
-                      <td>
-                       
-                {% if submission['image'] %}
-                <div class="re-table__list-image {{ submission['image'] ? '' : 're-table__list-image--empty' }}" style="background: #f5f5f5 url({{ submission['image'] }}) center / cover;">
-                  {% endif %}
-                  <img data-name="{{ submission['content']|json_decode[0] }}" class="{{ submission['image'] ? '' : 'empty' }}"/> 
-                  <div class="re-table__list-image__upload-button"></div>
-                  <!--<div class="re-table__list-image__delete-button"></div>-->
+                    {% endif %}
                 </div>
-                <input type="file" name="image" class="re-table__list-image-fileUpload" style="display: none;" />
-              </td>
- 
+                <div class="scroll-wrapper">
+                  <table class="re-table re-table--list">
+                    <thead>
+                      <tr>
+                        <th>
+                          <!--VOTES-->
+                        </th>
+                        <th class="shadowcontainth"></th>
+                        <th>{# image #}</th>
+                        {% for column in submission['columns'] %}
+                          <th>{{ column }}</th>
+                        {% endfor %}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <tr data-id="{{ submission['id'] }}" class="list-row-tr">
+                          <td><!--
+                            <a href="#" class="vote-link">
+                              <img class="vote-link__image" src="/assets/images/vote-lightning.svg" />
+                              <div>0</div>
+                            </a>-->
+                          </td>
+                          <td class="shadowcontaintd">
+                            <div class="shadowcontain">
+                            </div>
+                          </td>
+                          <td>
+
+                    {% if submission['image'] %}
+                    <div class="re-table__list-image {{ submission['image'] ? '' : 're-table__list-image--empty' }}" style="background: #f5f5f5 url({{ submission['image'] }}) center / cover;">
+                      {% endif %}
+                      <img data-name="{{ submission['content']|json_decode[0] }}" class="{{ submission['image'] ? '' : 'empty' }}"/>
+                      <div class="re-table__list-image__upload-button"></div>
+                      <!--<div class="re-table__list-image__delete-button"></div>-->
+                    </div>
+                    <input type="file" name="image" class="re-table__list-image-fileUpload" style="display: none;" />
+                  </td>
 
                       {% if (submission['content']) %}
-                      {% for cell in submission['content']|json_decode %}
-                          {% set len = filterTableRowsContent(cell)|striptags|length %}
-                            {% if len > 160  %}
-                            {% set length = 500 %}
-                            {% elseif len > 80 %}
-                            {% set length = 300 %}
-                            {% elseif len > 40 %}
-                            {% set length = 175 %}
-                            {% elseif len > 20 %}
-                            {% set length = 150 %}
-                            {% else %}
-                            {% set length = 0 %}
-                            {% endif %}
-                          <td style="min-width: {{ length }}px;">
-                            {{ filterTableRowsContent(cell) }}
-                          </td>
-                        {% endfor %}
-                      {% endif %}
-                  </tr>
-                  <tr class="re-table-space"></tr>
-                </tbody>
-              </table>
+                          {% for cell in submission['content']|json_decode %}
+                              {% set len = filterTableRowsContent(cell)|striptags|length %}
+                                {% if len > 160  %}
+                                {% set length = 500 %}
+                                {% elseif len > 80 %}
+                                {% set length = 300 %}
+                                {% elseif len > 40 %}
+                                {% set length = 175 %}
+                                {% elseif len > 20 %}
+                                {% set length = 150 %}
+                                {% else %}
+                                {% set length = 0 %}
+                                {% endif %}
+                              <td style="min-width: {{ length }}px;">
+                                {{ filterTableRowsContent(cell) }}
+                              </td>
+                            {% endfor %}
+                          {% endif %}
+                      </tr>
+                      <tr class="re-table-space"></tr>
+                    </tbody>
+                  </table>
+                </div>
             </div>
           {% endfor %}
         {% endif %}
@@ -116,7 +119,6 @@
 
       <div class="collaborations-tab-content collaborations-tab-content-received" style="display: none;">
         {% for collab in collaborations %}
-
 
           {% if collab['kind'] == 'add' %}
             {% set approve_link = "/collaborations/add/approve/" ~ collab['id'] %}
@@ -127,9 +129,6 @@
             {%  set deny_link = "/collaborations/delete/deny/" ~  collab['id'] %}
             {% set action = 'requested to delete a listing on' %}
           {% endif %}
-
-
-
 
           <div class="u-flex u-sm-flexCol u-md-flexRow">
             <div class="collaboration-info u-flex">
@@ -143,72 +142,59 @@
             <div class="collaboration-clock"><img src="/assets/images/comment-clock.svg" />{{ formatTimestamp(collab['createdAt']) }}</div>
           </div>
           <div class="table-scroll table-scroll--collaborations">
-            <table class="re-table re-table--list">
-              <thead>
-                <tr>
-                  <th>
-                   <!-- VOTES -->
-                  </th>
-                  <th class="shadowcontainth"></th>
-                  <th>
-                    {#image#}
-                  </th>
-                  {% for column in collab['columns']%}
-                    <th>{{column}}</th>
-                  {% endfor %}
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <tr data-id="1" class="list-row-tr">
-                    <td>
-                     <!-- <a href="#" class="vote-link">
-                        <img class="vote-link__image" src="/assets/images/vote-lightning.svg" />
-                        <div>0</div>
-                      </a>-->
-                    </td>
-
-
-
-
-                    <td class="shadowcontaintd">
-                      <div class="shadowcontain">
-                        <div class="u-flex u-flexCol" style="position: absolute;top: 0;right: 0px;pointer-events: all;cursor: pointer;">
-                          <a class="collaboration-accept" href={{approve_link}}>
-                            <img src="/assets/images/check.svg">
-                          </a>
-                          <a class="l-button collaboration-reject" href="javascript:;" data-dropdown-placement="left-end">
-                            <img src="/assets/images/cross.svg">
-                          </a>
-                          <div class="sh-dropdown collaboration-reject-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
-                            <form class="u-flex collaboration-reject-dropdown__form" action={{deny_link}} method="POST">
+              <div class="shadowcontain">
+                  <div class="u-flex u-flexCol collaboration-actions">
+                      <a class="collaboration-accept" href={{approve_link}}>
+                          <img src="/assets/images/check.svg">
+                      </a>
+                      <a class="l-button collaboration-reject" href="javascript:;" data-dropdown-placement="left-end">
+                          <img src="/assets/images/cross.svg">
+                      </a>
+                      <div class="sh-dropdown collaboration-reject-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
+                          <form class="u-flex collaboration-reject-dropdown__form" action={{deny_link}} method="POST">
                               <label class="collaboration-reject-dropdown__reason" >
-                                <div>REASON FOR REJECTION</div>
-                                <input type="text" name="reason" placeholder="Reason here..." />
+                                  <div>REASON FOR REJECTION</div>
+                                  <input type="text" name="reason" placeholder="Reason here..." />
                               </label>
                               <button class="collaboration-reject-dropdown__send-button">Send</button>
-                            </form>
-                          </div>
-                        </div>
+                          </form>
                       </div>
-                    </td>
+                  </div>
+              </div>
+              <div class="scroll-wrapper">
+                <table class="re-table re-table--list">
 
-                    <td>
-                        {% if collab['image'] %}
-                      <div class="re-table__list-image {{ collab['image'] ? '' : 're-table__list-image--empty' }}" style="background: #f5f5f5 url({{ collab['image'] ?  collab['image'] : '' }}) center / cover;"></div>
-                      {% endif %}
-                      <img data-name="a" class="{{ collab['image'] ? '' : 'empty' }}"/> 
-                    </td>
+                  <tbody>
+                    <tr>
+                      <tr data-id="1" class="list-row-tr">
+                        <td>
+                         <!-- <a href="#" class="vote-link">
+                            <img class="vote-link__image" src="/assets/images/vote-lightning.svg" />
+                            <div>0</div>
+                          </a>-->
+                        </td>
+                        <td class="shadowcontaintd">
+                          <div class="shadowcontain">
+                          </div>
+                        </td>
 
-                 
+                        <td>
+                            {% if collab['image'] %}
+                          <div class="re-table__list-image {{ collab['image'] ? '' : 're-table__list-image--empty' }}" style="background: #f5f5f5 url({{ collab['image'] ?  collab['image'] : '' }}) center / cover;"></div>
+                          {% endif %}
+                          <img data-name="a" class="{{ collab['image'] ? '' : 'empty' }}"/>
+                        </td>
 
-                    {% for cont in collab['content'] %}
-                      <td style="min-width: 0px;">{{ filterTableRowsContent( cont ) }}</td>
-                    {% endfor %}
-                </tr>
-                <tr class="re-table-space"></tr>
-              </tbody>
-            </table>
+
+
+                        {% for cont in collab['content'] %}
+                          <td class="resize-me" style="min-width: 0px;">{{ filterTableRowsContent( cont ) }}</td>
+                        {% endfor %}
+                    </tr>
+                    <tr class="re-table-space"></tr>
+                  </tbody>
+                </table>
+              </div>
           </div>
         {% endfor %}
       </div>
@@ -219,10 +205,9 @@
 
 {% block scripts %}
 <script type="text/javascript">
-var x,y,top,left,down,moving;
+/*var x,y,top,left,down,moving;
 
-$(".table-scroll").mousedown(function(e){
-  
+$(".scroll-wrapper").mousedown(function(e){
     //e.preventDefault();
     $(e.target).closest(".table-scroll").addClass("moving");
     moving = $(e.target).closest(".table-scroll");
@@ -235,20 +220,22 @@ $(".table-scroll").mousedown(function(e){
 
 $("body").mousemove(function(e){
     if(down){
-        
         var newX = e.pageX;
         var newY = e.pageY;
 
- $(".moving").scrollTop(top - newY + y);
- $(".moving").scrollLeft(left - newX + x);
+        $(".moving").scrollTop(top - newY + y);
+        $(".moving").scrollLeft(left - newX + x);
     }
 });
 
 $("body").mouseup(function(e){
     down = false;
     $(moving).removeClass("moving");
-    });
-  $(document).ready(function () {
+});*/
+
+$('.table-scroll')
+
+$(document).ready(function () {
  if(window.location.href.indexOf("#received") !== -1){
     $('.collaborations-tabs-button').removeClass('active');
       $('.collaborations-tabs-button-received').addClass('active');
@@ -256,7 +243,7 @@ $("body").mouseup(function(e){
       $('.collaborations-tab-content-received').show();
  }
      $('.empty ').initial({height:82, width:82 });
-    $('.empty ').css('border-radius', "6px")  
+    $('.empty ').css('border-radius', "6px")
     $('.collaborations-tabs-button-submitted').on('click', function (e) {
       e.preventDefault();
       $('.collaborations-tabs-button').removeClass('active');

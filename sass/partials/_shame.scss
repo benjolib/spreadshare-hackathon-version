@@ -1120,7 +1120,11 @@ html {
     text-align: right;
     right: 35px;
   }
-  @media (min-width: 768px) {
+  @include tablet {
+    flex-flow: column;
+    align-items: baseline;
+  }
+  @include media-query(tablet) {
     width: 60px;
     height: 60px;
     &__text {
@@ -1527,6 +1531,7 @@ html {
     padding: 195px 20px 125px 20px;
   }
   &--list {
+    overflow-x: hidden;
     padding-top: 142px;
     padding-bottom: 28px;
     @include media-query(tablet) {
@@ -1900,7 +1905,7 @@ html {
   &--lists-curate-stream.re-button {
     margin-bottom: 0;
     @include media-query('max-width: 767px') {
-      width: 194px;
+      width: 250px;
     }
   }
   &--header.re-button {
@@ -2104,7 +2109,7 @@ html {
       @include typography(7);
       margin-bottom: 15px;
     }
-    &span span.list-card__subscriberCount {
+    & span span.list-card__subscriberCount {
       display: none !important;
       @include media-query(tablet) {
         display: flex !important;
@@ -2913,9 +2918,33 @@ html {
 }
 
 .table-scroll {
-  -webkit-overflow-scrolling: touch;
-  overflow-x: scroll;
-  overflow-y: hidden;
+  overflow-x: hidden;
+  position: relative;
+  .scroll-wrapper {
+    left: 1px;
+    width: calc(100% - 2px);
+    position: relative;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+    @include media-query(tablet) {
+      left: auto;
+    }
+    &::-webkit-scrollbar {
+      width: 0px;
+      /* remove scrollbar space */
+      background: white;
+      background-color: white;
+      display: none;
+
+      /* optional: just make scrollbar invisible */
+    }
+    &::-webkit-scrollbar-thumb {
+      background: rgb(255, 255, 255);
+      display: none;
+    }
+  }
   &--submissions {
     margin-top: 10px;
     margin-bottom: 36px;
@@ -2923,8 +2952,8 @@ html {
       margin-top: 0;
     }
     .shadowcontain {
-      display: block;
-      transform: translateX(-40px);
+      //display: block;
+      //transform: translateX(-40px);
     }
   }
   &--collaborations {
@@ -2933,13 +2962,30 @@ html {
       margin-bottom: 20px;
     }
     .shadowcontain {
-      display: block;
-      width: calc(100% - 35px);
-      transform: translateX(-55px);
+      top: 0;
+      //display: block;
+      //width: calc(100% - 35px);
+      //transform: translateX(-55px);
     }
-    .re-table thead {
-      display: none;
+    .re-table {
+      thead {
+        display: none;
+      }
     }
+  }
+  .re-table {
+    div.shadowcontain {
+      display: none ;
+    }
+  }
+  .collaboration-actions {
+    margin-bottom: 0;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    pointer-events: all;
+    cursor: pointer;
   }
 }
 
@@ -2953,25 +2999,24 @@ html {
 }
 
 .shadowcontain {
-  display: none;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
   border: 1px solid #f8f8fb;
   border-radius: 4px;
   pointer-events: none;
-  position: absolute;
-  max-width: 894px;
-  width: calc(100% - 40px);
-  transform: translateX(-42px);
+  width: calc(100% - 2px);
   height: 86px;
+  position: absolute;
+  z-index: 1;
+  left: 1px;
+  top: 33px;
   &--no-votes {
     transform: translateX(-0px);
   }
   @include media-query(tablet) {
+    top: 38px;
     display: block;
-    transform: translateX(-52px);
     height: 114px;
     &--no-votes {
-      transform: translateX(-0px);
     }
   }
   .addedby {
@@ -2989,6 +3034,14 @@ html {
     .header {
       margin-top: 0!important;
     }
+  }
+  .info-card {
+    position: absolute;
+    z-index: 2;
+    right: 6px;
+    top: 0;
+    pointer-events: all;
+    cursor: pointer;
   }
 }
 
@@ -3447,7 +3500,7 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 45px;
+  height: 41px;
   border-left: 1px solid #dbdbdb;
   img {
     width: 15px;
@@ -3559,7 +3612,7 @@ html {
 
       @include media-query(tablet) {
         margin-top: 2px;
-        width: 100%;
+        width: 31px;
       }
     }
   }
@@ -4467,6 +4520,9 @@ html {
   @include media-query(tablet) {
     width: 232px;
   }
+  @include retina-display {
+    width: 320px;
+  }
 }
 
 .sign-in-button img {
@@ -4774,7 +4830,7 @@ html {
     img {
       margin-right: 4px;
       width: 12px;
-      @media (min-width: 768px) {
+      @include media-query(tablet) {
         width: 16px;
       }
     }
@@ -5500,6 +5556,33 @@ html {
   }
 }
 
+.collaborations-tab-content-received {
+  & > .u-flex {
+    align-items: center;
+    margin-bottom: 10px;
+    @include media-query(tablet) {
+      margin-bottom: 20px;
+    }
+
+    & > .collaboration-info {
+      margin-top: 0;
+      margin-bottom: 0;
+      align-items: center;
+    }
+  }
+  .re-table {
+    @include mobile {
+      td:first-of-type {
+        padding: 0 10px;
+      }
+      .re-table__list-image {
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+  }
+}
+
 .settings-tabs-button,
 .collaborations-tabs-button {
   @include typography(4);
@@ -5704,9 +5787,9 @@ html {
       width: 300px;
       cursor: pointer;
       outline: none;
-      display: flex;
       background: #ffffff;
       border: 0;
+      //display: flex;
       justify-content: center;
       align-items: center;
       font-family: 'Roboto Mono', monospace;
@@ -6049,6 +6132,12 @@ html {
   &:hover {
     width: 192px;
     border-radius: 23px;
+    @include media-query(tablet) {
+      width: 220px;
+    }
+    @include media-query(desktop) {
+      width: 192px;
+    }
     span {
       display: inline;
     }
@@ -6107,7 +6196,7 @@ html {
     margin-right: 10px;
     background-color: #ea612d;
     .re-button {
-      width: 300px;
+      width: 180px;
       @include media-query(tablet) {
         width: 260px;
       }
@@ -6169,21 +6258,21 @@ html {
   justify-content: space-between;
   // margin: 10px;
   width: calc(100% + 40px);
-  margin-left: -20px;
-  margin-right: -20px;
+  margin-left: -15px;
+  margin-right: -15px;
   @include media-query(tablet) {
     width: auto;
     margin-left: 0;
     margin-right: 0;
   }
   .button-container {
-    width: 99%;
+    width: 100%;
     @include media-query(tablet) {
       width: auto;
     }
     &__orange {
-      @media (max-width: 768px) {
-        margin-right: 0;
+      @include media-query(tablet) {
+        margin-right: 10px;
       }
     }
   }
@@ -6347,6 +6436,41 @@ html {
     }
     & tbody td:last-of-type {
       display: none;
+    }
+  }
+}
+
+.table-list-container {
+  position: relative;
+}
+.table-scroll.absolute-containers {
+  -webkit-overflow-scrolling: touch;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  position: relative;
+  width: 100%;
+  .re-table {
+    div.shadowcontain {
+      top: unset;
+      left: 50%;
+      transform: translateX(-50%);
+      display: block;
+      //max-width: 840px;
+      //transform: translateX(-45px);
+      @include media-query(tablet) {
+        //max-width: 853px;
+        //transform: translateX(-51px);
+      }
+      @include media-query(desktop) {
+        //max-width: 894px;
+        //transform: translateX(-52px);
+      }
+      &.dropright .l-button {
+        display: none;
+        @include media-query(tablet) {
+          display: block;
+        }
+      }
     }
   }
 }

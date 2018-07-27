@@ -35,12 +35,12 @@
           </div>
 
         </div>
-        <!-- <div class="sh-dropdown card-subscribe-dropdown card-actions-dropdown--tall u-flex u-flexCol l-dropdown"
+        <div class="sh-dropdown card-subscribe-dropdown card-actions-dropdown--tall u-flex u-flexCol l-dropdown"
           style="padding-left: -100px;">
           <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'D')">Daily</a>
           <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'W')">Weekly</a>
           <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'M')">Monthly</a>
-        </div> -->
+        </div>
 
         <div class="button-container button-container__blue">
           <div class="but">
@@ -114,7 +114,8 @@
     </a> #}
   </div>
 
-  <div class="table-scroll">
+  <div class="table-list-container">
+  <div class="table-scroll absolute-containers">
     <table class="re-table re-table--list" data-id="{{ table['id'] }}">
       <thead>
         <tr>
@@ -123,11 +124,11 @@
               <img src="/assets/images/updown.svg" class="updown" />
             </div>
             <div class="sh-dropdown sort-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
-              
+
 
                 {%if (orderby) ==="date"%}
                 <a href="?orderby=date" class="sort-selected">
-                  <img src="/assets/images/clock-green.svg" /> 
+                  <img src="/assets/images/clock-green.svg" />
                   {%else%}
                   <a href="?orderby=date">
                       <img src="/assets/images/clock.svg" />
@@ -140,14 +141,14 @@
                   <a href="?orderby=popularity" class="sort-selected">
                   <img src="/assets/images/vote-lightning-green.svg" />
                   {%else%}
-                  <a href="?orderby=popularity" > 
+                  <a href="?orderby=popularity" >
                   <img src="/assets/images/vote-lightning.svg" />
                   {%endif%}
                 Sort by
                 <span>Popularity</span>
                 </a>
-              
-               
+
+
 
 
             </div>
@@ -223,7 +224,7 @@
           </td>
 
           <td>
-             
+
             <div class="l-button re-table__list-image {{ row['image'] ? '' : 're-table__list-image--empty' }}" style="background: #f5f5f5 url({{ row['image'] }}) center / cover;">
               <img data-name="{{ row['content']|json_decode[0].content }}" class="{{ row['image'] ? '' : 'empty' }}" />
               <div class="re-table__list-image__upload-button"></div>
@@ -266,7 +267,7 @@
 
           <td style="min-width: {{ length }}px;">
             {{ filterTableRowsContent(cell.content) }}
-          
+
           </td>
           {% endfor %}
         </tr>
@@ -296,7 +297,7 @@
             </div>
           </td>
         </tr>
-       
+
         <tr class="re-table-space"></tr>
         <tr class="re-table-space"></tr>
       </tbody>
@@ -329,7 +330,7 @@
         {% for index,column in tableColumns %}
         <td>
           <div style="display:flex;">
-           
+
             <textarea style="min-width: {{ column.title|length*16 }}px !important;" onmouseover="javascript:$('.e{{i}}{{index}}').css('visibility','visible');" ; onmouseout="javascript:$('.e{{i}}{{index}}').css('visibility', 'hidden');"
               id="{{i}}" placeholder="{{ column.title|ucfirst }}" rows="1" class="edit icon cell-input-sizing d{{i}}{{index}}"></textarea>
             <i id="{{i}}" class="pencil icon blue e{{i}}{{index}}" style="margin-top:38px;cursor: pointer;visibility: hidden;" onclick="console.log($(this).prev().prev());javascript:$('#d{{i}}{{index}}').focus();"></i>
@@ -344,7 +345,7 @@
     </div>
 
 
-   
+
     <div class="addAListingSubmitAndCancel" id="addAListingSubmitAndCancel" style="display: none;">
       <a class="re-button re-button--list-add-row" href="#" id="addAListingSubmit">
         <img src="/assets/images/9-0/list-collaborate-button-octopus.svg" />Submit</a>
@@ -449,6 +450,7 @@
       {{ partial('list/related-lists') }}
     </div>
     </div>
+  </div>
     <input type="text" id="related-lists-edit" class="related-lists-edit" value="" style="display:none;" /> {#
     <div class="list-page-section-label">
       RELATED STREAMS
@@ -495,8 +497,8 @@
             <div class="about-list__item__name">TAGS</div>
             <div class="about-list__item__content">
               <div class="tags" id="tags">
-                {% for i, tag in tags %} 
-                 <a style="color:#2a1e3e" href="/tag/{{tag['id']}}">{{tag['title']}}</a> 
+                {% for i, tag in tags %}
+                 <a style="color:#2a1e3e" href="/tag/{{tag['id']}}">{{tag['title']}}</a>
                 {{ i + 1
                 < tags|length ? ', ' : '' }} {% endfor %} </div>
               </div>
@@ -606,11 +608,11 @@
             </div>
           </div>
         </div>
-        
+
         <div class="list-tab-content list-tab-content-collaborators" style="display: none;">
           <div class="list-tabs__inner-padded">
             {% for contributor in tablemodel.contributors %}
-            
+
             <div class="list-tab-content-collaborators__card">
               {{ partial('partials/profile-card', [ 'id': contributor.users.id, 'username': contributor.users.handle, 'avatar': contributor.users.image,
               'name': contributor.users.name, 'bio': contributor.users.tagline, 'type': 10, 'truncate': true ]) }}
@@ -691,13 +693,14 @@
           $('#subscriptions_form').submit();
         }
         var x, y, top, left, down, moving;
+        var $tableScrolls = $(".table-scroll .re-table--list:not('.addAListingRow')")
 
-        $(".table-scroll").mousedown(function (e) {
-        if(e.target.className == "table-cell-show-more-button l-button"){
-          console.log("yes")
-          $('.table-cell-show-more-button').click()
-          return
-        }
+        $tableScrolls.on('mousedown touchstart', function (e) {
+          if(e.target.className == "table-cell-show-more-button l-button"){
+            console.log("yes")
+            $('.table-cell-show-more-button').click();
+            return
+          }
            // console.log("Target", e)
           //e.preventDefault();
           $(e.target).closest(".table-scroll").addClass("moving");
@@ -709,8 +712,8 @@
           left = $(this).scrollLeft();
         });
 
-        $(".table-scroll").mousemove(function (e) {
-          if (down ) {
+        $tableScrolls.on('mousemove touchmove', function (e) {
+          if (down) {
 
             var newX = e.pageX;
             var newY = e.pageY;
@@ -720,9 +723,9 @@
           }
         });
 
-        $(".table-scroll").mouseup(function (e) {
-          down = false;
-          $(moving).removeClass("moving");
+        $tableScrolls.on('mouseup touchend', function (e) {
+            down = false;
+            $(moving).removeClass("moving");
         });
 
 
@@ -800,13 +803,13 @@
               minWidth = 480;
               $this.attr('style', 'margin-top: 14px !important;');
               $this.next().attr('style', 'margin-top: 14px !important;');
-              
+
             } else {
               $this.attr('style', 'margin-top: 37px !important;');
               $this.next().attr('style', 'margin-top: 38px !important;');
             }
             $this.height(height);
-            
+
 
             $this.parents('td').attr('style', 'min-width:' + minWidth + 'px !important;');
           }
@@ -984,7 +987,7 @@
             $('#addAListingButton').css("visibility", "hidden")
             //TODO hide() doesnt work ?
             $('#addAListingRow').show();
-            
+
             $('#addAListingRowSpace').show();
             $('#addAListingSubmitAndCancel').show();
             $(".bottom").css("visibility", "hidden")
@@ -1381,6 +1384,23 @@
           $('.remove-column').on('click', function () {
 
           });
+
+          var tableShadowElementsContainer = $('.absolute-containers');
+          var tableShadowElements = tableShadowElementsContainer.find('.re-table:not(.addAListingRow) tbody .shadowcontain');
+          if (tableShadowElements.length > 0) {
+              $.each(tableShadowElements, function(i, element) {
+                  $element = $(element);
+                  var offset = $element.position();
+                  var mirrorContent = $element.html();
+                  var newElement = $('<div/>')
+                      .addClass('shadowcontain cloned-item')
+                      .html(mirrorContent)
+                      .offset(offset);
+
+                  $('.table-list-container').append(newElement);
+                  $element.hide();
+              });
+          }
         });
 
 
