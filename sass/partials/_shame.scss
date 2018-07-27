@@ -6132,6 +6132,12 @@ html {
   &:hover {
     width: 192px;
     border-radius: 23px;
+    @include media-query(tablet) {
+      width: 220px;
+    }
+    @include media-query(desktop) {
+      width: 192px;
+    }
     span {
       display: inline;
     }
