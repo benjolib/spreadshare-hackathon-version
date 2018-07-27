@@ -35,8 +35,6 @@ class LoginController extends BaseController
      */
     public function indexAction($params = [])
     {
-      $user = User::get(55);
-      $this->serviceManager->getAuth()->storeSession($user);
         try {
             // Email confirmation request
             if ($this->request->get('token')) {
