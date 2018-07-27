@@ -20,7 +20,7 @@
       {% endif %}
     </a>
 
-    <a class="re-header__search {% if query is defined %}hidden{% endif %}" href="#">
+    <a class="re-header__search {% if query is defined %}hidden{% endif %}" href="javascript:;">
       <img class="re-header__search__img" src="/assets/images/9-0/header-search.svg" />
     </a>
 
@@ -37,9 +37,9 @@
         <div class="streams-result-count">
         </div>
       </div>
-      
+
       <div id="streams-search-items"></div>
-      <a href="#" class="all-results">More Results</a> 
+      <a href="#" class="all-results">More Results</a>
 
       <div class="u-flex users-section">
           <div class="description">
@@ -49,7 +49,7 @@
           </div>
         </div>
         <div id="users-search-items"></div>
-      
+
     </div>
     {% if auth.loggedIn() %}
       <a class="re-header__add" href="/create-list"><img src="/assets/images/9-0/header-add.svg" /></a>

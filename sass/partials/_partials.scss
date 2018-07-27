@@ -327,8 +327,13 @@
       margin-right: 4px;
       margin-top: 2px;
       @include media-query(tablet) {
+        margin-top: 2px;
         margin-right: 6px;
         width: 16px;
+      }
+      @include retina-display {
+        margin-top: 3px;
+        width: 18px;
       }
     }
   }
@@ -396,10 +401,13 @@
       }
       img {
         margin-right: 3px;
-        width: 14px;
+        width: 18px;
         @include media-query(tablet) {
-          width: 16px;
+          width: 20px;
           margin-top: 4px;
+        }
+        @include media-query(desktop) {
+          widows: 16px;
         }
       }
     }
@@ -554,5 +562,14 @@
       background: #ffffff;
       color: #2dad6b;
     }
+  }
+}
+
+.turn-scroll-off {
+  position: fixed;
+  overflow: hidden;
+  @include media-query(desktop) {
+    position: initial;
+    overflow: initial;
   }
 }

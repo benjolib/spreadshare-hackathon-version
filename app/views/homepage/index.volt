@@ -173,13 +173,13 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
   </div>
   <div class="re-page re-page--medium">
     <div class="u-flex u-flexWrap homepage-gutter">
-      
 
 
-     
 
 
-      
+
+
+
 
 
     {% set qty = 0 %}
@@ -191,13 +191,13 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
     {% set qty= qty+1 %}
     {% if qty <= 9 %}
     {% set partialindex=index %}
-      
+
     {% if qty == 2 %}
-    
+
     {{ partial('partials/action-card', [ 'color': 'blue-octopus', 'heading': 'Collaborate', 'text': 'Collaborate with your
     favorite curators.
     <br />
-    <br />Because you want to get endorsed by trusted experts.', 'action': '/subscriptions', 'buttonText': 'Manage Subscriptions']) }} 
+    <br />Because you want to get endorsed by trusted experts.', 'action': '/subscriptions', 'buttonText': 'Manage Subscriptions']) }}
     {%endif%}
 
     {% if qty == 5 %}
@@ -250,8 +250,8 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
       </div>
     </div>
     <div class="action u-sm-flexWrap u-sm-flexCol u-md-flexRow u-sm-flexGrow2 u-flexAlignItemsCenter">
-      <button onclick="window.location.href='/stream/get-a-task-done'" :=""> Request a List </button>
-      <button onclick="window.location.href='/stream/become-a-researcher'" :="" class="transparent"> Earn money as researcher</button>
+      <button onclick="window.location.href='/stream/get-a-task-done'">Request a List</button>
+      <button onclick="window.location.href='/stream/become-a-researcher'" class="transparent">Earn money as researcher</button>
     </div>
   </div>
 </div>

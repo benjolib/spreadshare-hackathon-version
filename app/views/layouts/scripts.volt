@@ -1,4 +1,28 @@
 <script type="text/javascript">
+    var dropdownSelectors = [
+        '.notification-dropdown',
+        '.user-dropdown2',
+        '.search__dropdown'
+    ];
+    function haltScroll() {
+        haveVisible = dropdownSelectors.filter(element => isVisible(element)).length > 0;
+
+        if(haveVisible) {
+            $('body').addClass("turn-scroll-off");
+        }
+        else {
+            $('body').removeClass("turn-scroll-off");
+        }
+    }
+
+    haltScroll();
+
+    // check if visible
+    function isVisible(element) {
+        var element = $(element);
+        return (element.css('display') !== 'none' && element.css('visibility') !== 'hidden' && element.css('opacity') !== 0);
+    }
+
   window.initOnOffSwitches = function () {
     var $NoSwitch = $('.NSwitch');
     var $YesSwitch = $('.YSwitch');
@@ -53,7 +77,7 @@
       //$('.result-count').html(response.data.hits.total + " RESULTS");
       $('.streams-result-count').html(response.length + " RESULTS");
       // create item array
-     
+
       var items = [];
       // empty the existing list
       $(searchItems).empty();
@@ -81,7 +105,7 @@
         }
       }
     }
-    
+
     function autoCompleteHandlerUsers(response) {
 
       // search item list selector
@@ -117,6 +141,7 @@
 
     $(searchFieldEl).on("change keyup paste", function () {
 
+      haltScroll();
 
       /* Popper */
       var searchReferenceElement = $(this);
@@ -158,9 +183,12 @@
           new Popper(searchReferenceElement, onSearchPopper, {
             placement: 'bottom',
             modifiers: {
-              offset: {
-                offset: -26
-              }
+                offset: {
+                    offset: '0 20'
+                },
+                flip: {
+                    enabled: false
+                }
             }
           });
         }
@@ -171,6 +199,7 @@
 
     $('.re-header__bell').click(function (ev) {
       $.get("/api/v1/notifications?p=" + 0, function (data) {
+        haltScroll();
         $('.notification-dropdown').html(data);
       });
     });
@@ -431,8 +460,19 @@
     };
 
 
-    new ModalVideo($(".feedback"))
-    
+    new ModalVideo($(".feedback"));
+
+    $('.re-header__user').click(function (ev) {
+        haltScroll();
+    });
+
+    $('html').click(function(e) {
+      //if clicked element is not your element and parents aren't your div
+      if (e.target.id.indexOf(dropdownSelectors) === -1 && $(e.target).parents(dropdownSelectors.join(',')).length == 0) {
+          haltScroll();
+      }
+    });
+
   });
 
 
