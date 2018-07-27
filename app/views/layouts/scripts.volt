@@ -4,8 +4,9 @@
         '.user-dropdown2',
         '.search__dropdown'
     ];
+
     function haltScroll() {
-        haveVisible = dropdownSelectors.filter(element => isVisible(element)).length > 0;
+        haveVisible = dropdownSelectors.filter(element => isVisible(element) == true).length > 0;
 
         if(haveVisible) {
             $('body').addClass("turn-scroll-off");
@@ -20,7 +21,7 @@
     // check if visible
     function isVisible(element) {
         var element = $(element);
-        return (element.css('display') !== 'none' && element.css('visibility') !== 'hidden' && element.css('opacity') !== 0);
+        return (element.length > 0 && element.css('display') !== 'none' && element.css('visibility') !== 'hidden' && element.css('opacity') !== 0);
     }
 
   window.initOnOffSwitches = function () {
@@ -141,7 +142,7 @@
 
     $(searchFieldEl).on("change keyup paste", function () {
 
-      haltScroll();
+      setTimeout(function () { haltScroll(); }, 10);
 
       /* Popper */
       var searchReferenceElement = $(this);
@@ -462,14 +463,14 @@
 
     new ModalVideo($(".feedback"));
 
-    $('.re-header__user').click(function (ev) {
-        haltScroll();
+    $('.re-header__user').click(function () {
+        setTimeout(function () { haltScroll(); }, 10);
     });
 
     $('html').click(function(e) {
       //if clicked element is not your element and parents aren't your div
       if (e.target.id.indexOf(dropdownSelectors) === -1 && $(e.target).parents(dropdownSelectors.join(',')).length == 0) {
-          haltScroll();
+          $('body').removeClass("turn-scroll-off");
       }
     });
 
