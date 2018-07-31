@@ -1,6 +1,8 @@
 <?php
+
 namespace DS\Model;
 
+use DS\Component\ServiceManager;
 use DS\Model\DataSource\UserRoles;
 use Phalcon\Db;
 use DS\Constants\Paging;
@@ -24,30 +26,34 @@ use function GuzzleHttp\json_decode;
  *
  * @method static User findFirstById(int $id)
  */
-class User extends UserEvents {
+class User extends UserEvents
+{
     /**
      * @return string
      */
-    public function getImage(): string {
+    public function getImage(): string
+    {
         return str_replace('http://', '//', parent::getImage());
     }
 
     /**
      * @return UserStats
      */
-    public function getStats() {
+    public function getStats()
+    {
         return UserStats::get($this->id, 'userId');
     }
 
     /**
-     * @param int  $tableId
+     * @param int $tableId
      * @param bool $upvoters
      * @param bool $subscribers
      * @param bool $contributors
      *
      * @return array
      */
-    public function getTableUsers(int $tableId, bool $upvoters = false, bool $subscribers = false, bool $contributors = false, bool $admins = false): array {
+    public function getTableUsers(int $tableId, bool $upvoters = false, bool $subscribers = false, bool $contributors = false, bool $admins = false): array
+    {
         $columns = [
             User::class . '.id',
             User::class . '.image',
@@ -60,9 +66,9 @@ class User extends UserEvents {
         ];
 
         $query = self::query()
-                     ->where(Tables::class . '.id = :tableId:', ['tableId' => $tableId])
-                     ->groupBy(User::class . '.id')
-                     ->limit(Paging::endlessScrollPortions);
+            ->where(Tables::class . '.id = :tableId:', ['tableId' => $tableId])
+            ->groupBy(User::class . '.id')
+            ->limit(Paging::endlessScrollPortions);
 
         if ($subscribers) {
             $query->innerJoin(TableSubscription::class, TableSubscription::class . '.userId = ' . User::class . '.id');
@@ -81,8 +87,8 @@ class User extends UserEvents {
 
         if ($contributors) {
             $query->innerJoin(TableCells::class, TableCells::class . '.userId = ' . User::class . '.id')
-                  ->innerJoin(TableRows::class, TableCells::class . '.rowId = ' . TableRows::class . '.id')
-                  ->innerJoin(Tables::class, TableRows::class . '.tableId = ' . Tables::class . '.id');
+                ->innerJoin(TableRows::class, TableCells::class . '.rowId = ' . TableRows::class . '.id')
+                ->innerJoin(Tables::class, TableRows::class . '.tableId = ' . Tables::class . '.id');
         } else {
             $query->leftJoin(TableCells::class, TableCells::class . '.userId = ' . User::class . '.id');
         }
@@ -101,7 +107,8 @@ class User extends UserEvents {
      *
      * @return Abstracts\AbstractUser|\Phalcon\Mvc\Model\ResultInterface
      */
-    public static function findFirstByUsernameOrEmail($usernameOrEmail) {
+    public static function findFirstByUsernameOrEmail($usernameOrEmail)
+    {
         return parent::findFirst(
             [
                 'conditions' => 'handle = ?0 OR email = ?1',
@@ -119,13 +126,14 @@ class User extends UserEvents {
      *
      * @return $this
      */
-    public function saveCredentials(string $email, string $unhashedPassword) {
+    public function saveCredentials(string $email, string $unhashedPassword)
+    {
         if ($unhashedPassword) {
             $this->setSecuritySalt(serviceManager()->getSecurity()->hash($unhashedPassword));
         }
 
         $this->setEmail($email)
-             ->save();
+            ->save();
 
         return $this;
     }
@@ -138,19 +146,20 @@ class User extends UserEvents {
      *
      * @return User
      */
-    public function addUserFromSignup($name, $handle, $email, $unhashedPassword) {
+    public function addUserFromSignup($name, $handle, $email, $unhashedPassword)
+    {
         $user = new User();
         $user->setName($name)
-             ->setHandle($handle)
-             ->setEmail($email)
-             ->setImage(RandomUserImage::get())
-             ->setSecuritySalt(serviceManager()->getSecurity()->hash($unhashedPassword))
-             ->create();
+            ->setHandle($handle)
+            ->setEmail($email)
+            ->setImage(RandomUserImage::get())
+            ->setSecuritySalt(serviceManager()->getSecurity()->hash($unhashedPassword))
+            ->create();
 
         // Send mail
         SignupMail::factory($this->getDI())
-                  ->prepare($user)
-                  ->send();
+            ->prepare($user)
+            ->send();
 
         return $user;
     }
@@ -169,7 +178,8 @@ class User extends UserEvents {
      *
      * @return User|\Phalcon\Mvc\Model\ResultInterface
      */
-    public static function addUserFromAuthService($name, $handle, $email, $description, $tagline, $authUid, $profileImage, $city, $website = '', $provider = 'Facebook') {
+    public static function addUserFromAuthService($name, $handle, $email, $description, $tagline, $authUid, $profileImage, $city, $website = '', $provider = 'Facebook')
+    {
         $email = $email ? $email : "{$authUid}@" . strtolower($provider) . '.com';
         $user = User::findFirst(
             [
@@ -194,16 +204,16 @@ class User extends UserEvents {
             $user = new self();
 
             $user->setEmail($email)
-                 ->setName($name)
-                 ->setImage($profileImage)
-                 ->setAuthProvider($provider)
-                 ->setAuthUid($authUid)
-                 ->setHandle($handle)
-                 ->setLocation($city)
-                 ->setDescription($description)
-                 ->setTagline($tagline)
-                 ->setStatus(UserStatus::OnboardingIncomplete)
-                 ->setLastLogin(time());
+                ->setName($name)
+                ->setImage($profileImage)
+                ->setAuthProvider($provider)
+                ->setAuthUid($authUid)
+                ->setHandle($handle)
+                ->setLocation($city)
+                ->setDescription($description)
+                ->setTagline($tagline)
+                ->setStatus(UserStatus::OnboardingIncomplete)
+                ->setLastLogin(time());
 
             if ($website && preg_match($urlPattern, $website)) {
                 $user->setWebsite($website);
@@ -215,7 +225,20 @@ class User extends UserEvents {
         return $user;
     }
 
-    public function getRequests() {
+    public function markOnboardingComplete(String $handle, String $email)
+    {
+        if ($this->getStatus() == UserStatus::OnboardingIncomplete) {
+            $this
+                ->setHandle($handle)
+                ->setEmail($email)
+                ->setStatus(UserStatus::Unconfirmed)
+                ->save();
+            ServiceManager::instance($this->getDI())->getMailService()->sendWelcomeEmail($email, $this->name);
+        }
+    }
+
+    public function getRequests()
+    {
         $query = $this->readQuery("
              SELECT 
                 changeRequests.id, 
@@ -242,7 +265,8 @@ class User extends UserEvents {
     }
 
     // Get all user's submissions
-    public function getSubmissions() {
+    public function getSubmissions()
+    {
         $query = $this->readQuery("
             SELECT 
                 row_add_request.id, 
@@ -320,12 +344,13 @@ class User extends UserEvents {
     }
 
     // Get all collaborations to user's listings
-    public function getCollaborations() {
+    public function getCollaborations()
+    {
         // Get the ids of all tables created by the user
         $query = $this->readQuery("SELECT id FROM tables WHERE ownerUserId = $this->id");
         $query->setFetchMode(Db::FETCH_ASSOC);
-        $user_tables = $query->fetchAll() ? : [];
-        
+        $user_tables = $query->fetchAll() ?: [];
+
         // Flatten array
         $user_tables = array_map(function ($element) {
             return intval($element['id']);
@@ -353,18 +378,18 @@ class User extends UserEvents {
             JOIN user
                 ON row_add_request.user_id = user.id
             WHERE
-                row_add_request.table_id IN ('".$user_tables."')
+                row_add_request.table_id IN ('" . $user_tables . "')
                 AND
                 row_add_request.status = 0
         ");
 
         $query->setFetchMode(Db::FETCH_ASSOC);
-        $add_requests = $query->fetchAll() ? : [];
+        $add_requests = $query->fetchAll() ?: [];
 
         foreach ($add_requests as $id => $submission) {
             $table = Tables::findFirstById($submission['table_id']);
 
-            $add_requests[$id]['content']  = json_decode($submission['content']);
+            $add_requests[$id]['content'] = json_decode($submission['content']);
 
             foreach ($table->tableColumns as $column) {
                 $add_requests[$id]['columns'][] = $column->title;
@@ -403,7 +428,7 @@ class User extends UserEvents {
         ");
 
         $query->setFetchMode(Db::FETCH_ASSOC);
-        $delete_requests = $query->fetchAll() ? : [];
+        $delete_requests = $query->fetchAll() ?: [];
         foreach ($delete_requests as $id => $submission) {
             $table = Tables::findFirstById($submission['table_id']);
             $content = '[';
@@ -443,7 +468,7 @@ class User extends UserEvents {
             "columns" => "id as value, name",
             "order" => "name ASC",
             "limit" => $limit,
-            "bind" => ["name"=>$name."%", "role"=>UserRoles::Curator],
+            "bind" => ["name" => $name . "%", "role" => UserRoles::Curator],
         ])->toArray();
     }
 }

@@ -54,6 +54,7 @@ use Phalcon\Security;
  * @method \League\Flysystem\Filesystem getFiles();
  * @method Security getSecurity();
  * @method Cookies getCookies();
+ * @method \DS\Component\Mailer\Mailer getMailService();
  * @method \Maknz\Slack\Client getSlack();
  * @method \DS\Component\Wallet\WalletApi getWalletApi();
  * @method Client getAlgolia();
