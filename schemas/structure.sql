@@ -1,20 +1,4 @@
-CREATE DATABASE IF NOT EXISTS spreadshare;
-USE spreadshare;
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
-
-# Export von Tabelle changeRequests
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `changeRequests`;
-
+-- Create syntax for TABLE 'changeRequests'
 CREATE TABLE `changeRequests` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `userId` int(11) unsigned DEFAULT NULL,
@@ -29,14 +13,9 @@ CREATE TABLE `changeRequests` (
   KEY `cellId` (`cellId`),
   CONSTRAINT `changeRequestsCellId` FOREIGN KEY (`cellId`) REFERENCES `tableCells` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `changeRequestsUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=134 DEFAULT CHARSET=utf8;
 
-
-# Export von Tabelle cities
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `cities`;
-
+-- Create syntax for TABLE 'cities'
 CREATE TABLE `cities` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `city` varchar(200) DEFAULT NULL,
@@ -46,15 +25,9 @@ CREATE TABLE `cities` (
   `lat` float unsigned DEFAULT NULL,
   `lng` float unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7323 DEFAULT CHARSET=utf8;
 
-
-
-# Export von Tabelle locations
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `locations`;
-
+-- Create syntax for TABLE 'locations'
 CREATE TABLE `locations` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `cityId` int(11) unsigned DEFAULT NULL,
@@ -66,43 +39,65 @@ CREATE TABLE `locations` (
   KEY `cityId` (`cityId`),
   KEY `locationName` (`locationName`),
   CONSTRAINT `locationsCityId` FOREIGN KEY (`cityId`) REFERENCES `cities` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8252 DEFAULT CHARSET=utf8;
 
+-- Create syntax for TABLE 'row_add_request'
+CREATE TABLE `row_add_request` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) unsigned NOT NULL,
+  `table_id` int(11) unsigned NOT NULL,
+  `content` longtext NOT NULL,
+  `comment` text,
+  `image` varchar(100) DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `createdAt` int(10) unsigned DEFAULT NULL,
+  `updateddAt` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `table_id` (`table_id`),
+  CONSTRAINT `row_add_request_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `row_add_request_ibfk_2` FOREIGN KEY (`table_id`) REFERENCES `tables` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
 
+-- Create syntax for TABLE 'row_delete_request'
+CREATE TABLE `row_delete_request` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) unsigned NOT NULL,
+  `row_id` int(11) unsigned NOT NULL,
+  `comment` text,
+  `status` tinyint(4) NOT NULL DEFAULT '0',
+  `createdAt` int(10) unsigned DEFAULT NULL,
+  `updateddAt` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `row_id` (`row_id`),
+  CONSTRAINT `row_delete_request_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `row_delete_request_ibfk_2` FOREIGN KEY (`row_id`) REFERENCES `tableRows` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
-# Export von Tabelle tableCells
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `tableCells`;
-
+-- Create syntax for TABLE 'tableCells'
 CREATE TABLE `tableCells` (
-  `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `userId` INT(11) UNSIGNED NOT NULL COMMENT 'author (user id)',
-  `columnId` INT(11) UNSIGNED DEFAULT NULL COMMENT 'associated column (tableColumns.id)',
-  `rowId` INT(11) UNSIGNED DEFAULT NULL,
-  `content` TEXT DEFAULT NULL COMMENT 'text content of row',
-  `link` VARCHAR(255) DEFAULT NULL COMMENT 'optional link (http://..)',
-  `updatedById` INT(11) UNSIGNED NOT NULL COMMENT 'last edited (user id)',
-  `updatedAt` INT(11) UNSIGNED NOT NULL COMMENT 'timestamp',
-  `createdAt` INT(10) DEFAULT NULL COMMENT 'timestamp',
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `userId` int(11) unsigned NOT NULL COMMENT 'author (user id)',
+  `columnId` int(11) unsigned DEFAULT NULL COMMENT 'associated column (tableColumns.id)',
+  `rowId` int(11) unsigned DEFAULT NULL,
+  `content` text COMMENT 'text content of row',
+  `link` varchar(255) DEFAULT NULL COMMENT 'optional link (http://..)',
+  `updatedById` int(11) unsigned NOT NULL COMMENT 'last edited (user id)',
+  `updatedAt` int(11) unsigned NOT NULL COMMENT 'timestamp',
+  `createdAt` int(10) DEFAULT NULL COMMENT 'timestamp',
   PRIMARY KEY (`id`),
   KEY `userId` (`userId`),
   KEY `updatedById` (`updatedById`),
   KEY `columnId` (`columnId`),
   KEY `rowId` (`rowId`),
   CONSTRAINT `tableCellsColumnId` FOREIGN KEY (`columnId`) REFERENCES `tableColumns` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `tableCellsUpdatedById` FOREIGN KEY (`updatedById`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tableCellsRowId` FOREIGN KEY (`rowId`) REFERENCES `tableRows` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `tableCellsUpdatedById` FOREIGN KEY (`updatedById`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tableCellsUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=263098 DEFAULT CHARSET=utf8;
 
-
-
-# Export von Tabelle tableColumns
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `tableColumns`;
-
+-- Create syntax for TABLE 'tableColumns'
 CREATE TABLE `tableColumns` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `userId` int(11) unsigned DEFAULT NULL COMMENT 'auther (user.id)',
@@ -117,15 +112,9 @@ CREATE TABLE `tableColumns` (
   KEY `position` (`position`),
   CONSTRAINT `tableColumnsTableId` FOREIGN KEY (`tableId`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tableColumnsUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=569 DEFAULT CHARSET=utf8;
 
-
-
-# Export von Tabelle tableComments
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `tableComments`;
-
+-- Create syntax for TABLE 'tableComments'
 CREATE TABLE `tableComments` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `parentId` int(11) unsigned DEFAULT NULL COMMENT 'parent tabelComment.id',
@@ -141,15 +130,9 @@ CREATE TABLE `tableComments` (
   CONSTRAINT `tableCommentsParentId` FOREIGN KEY (`parentId`) REFERENCES `tableComments` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tableCommentsTabelId` FOREIGN KEY (`tableId`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tableCommentsUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
 
-
-
-# Export von Tabelle tableCommentVotes
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `tableCommentVotes`;
-
+-- Create syntax for TABLE 'tableCommentVotes'
 CREATE TABLE `tableCommentVotes` (
   `commentId` int(11) unsigned NOT NULL COMMENT 'tableComments.id',
   `userId` int(11) unsigned NOT NULL COMMENT 'user that created the comment (user.id)',
@@ -160,13 +143,33 @@ CREATE TABLE `tableCommentVotes` (
   CONSTRAINT `tableCommentVotesUserid` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- Create syntax for TABLE 'tableContributors'
+CREATE TABLE `tableContributors` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `tableId` int(11) unsigned DEFAULT NULL COMMENT 'table.id',
+  `userId` int(11) unsigned DEFAULT NULL COMMENT 'contributor user.id',
+  `type` tinyint(1) unsigned DEFAULT NULL COMMENT 'contribution type',
+  `tableOwnership` float DEFAULT NULL,
+  `createdAt` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
 
+-- Create syntax for TABLE 'tableFlags'
+CREATE TABLE `tableFlags` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `tableId` int(11) unsigned NOT NULL,
+  `userId` int(11) unsigned DEFAULT NULL,
+  `flag` varchar(25) DEFAULT NULL,
+  `text` varchar(200) DEFAULT '',
+  `createdAt` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `userId` (`userId`),
+  KEY `tableId` (`tableId`),
+  CONSTRAINT `tableFlagsTableId` FOREIGN KEY (`tableId`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `tableFlagsUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Export von Tabelle tableLocations
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `tableLocations`;
-
+-- Create syntax for TABLE 'tableLocations'
 CREATE TABLE `tableLocations` (
   `tableId` int(11) unsigned NOT NULL COMMENT 'tables.id',
   `locationId` int(11) unsigned NOT NULL COMMENT 'locations.id',
@@ -176,13 +179,7 @@ CREATE TABLE `tableLocations` (
   CONSTRAINT `tableLocationsTableId` FOREIGN KEY (`tableId`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Export von Tabelle tableLog
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `tableLog`;
-
+-- Create syntax for TABLE 'tableLog'
 CREATE TABLE `tableLog` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `tableId` int(11) unsigned DEFAULT NULL COMMENT 'tables.id',
@@ -198,15 +195,18 @@ CREATE TABLE `tableLog` (
   KEY `userId` (`userId`),
   CONSTRAINT `tableLogTableId` FOREIGN KEY (`tableId`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tableLogUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=264374 DEFAULT CHARSET=utf8;
+
+-- Create syntax for TABLE 'tableProperties'
+CREATE TABLE `tableProperties` (
+  `tableId` int(11) unsigned NOT NULL,
+  `fixedRowsTop` mediumint(9) DEFAULT NULL,
+  `fixedColumnsLeft` mediumint(9) DEFAULT NULL,
+  PRIMARY KEY (`tableId`),
+  CONSTRAINT `tablePropertiesTableId` FOREIGN KEY (`tableId`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Export von Tabelle tableRelations
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `tableRelations`;
-
+-- Create syntax for TABLE 'tableRelations'
 CREATE TABLE `tableRelations` (
   `tableId` int(11) unsigned NOT NULL COMMENT 'tables.id',
   `relatedTableId` int(11) unsigned NOT NULL COMMENT 'relation to another table (tables.id)',
@@ -218,13 +218,7 @@ CREATE TABLE `tableRelations` (
   CONSTRAINT `tableRelationsTableId` FOREIGN KEY (`tableId`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Export von Tabelle tableRows
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `tableRows`;
-
+-- Create syntax for TABLE 'tableRows'
 CREATE TABLE `tableRows` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `userId` int(11) unsigned DEFAULT NULL COMMENT 'user that created the row',
@@ -233,6 +227,7 @@ CREATE TABLE `tableRows` (
   `lineNumber` int(11) DEFAULT NULL,
   `votesCount` int(11) DEFAULT NULL COMMENT 'total votes cache',
   `commentsCount` int(11) DEFAULT NULL COMMENT 'total comments cache',
+  `image` varchar(255) DEFAULT NULL COMMENT 'image url',
   `updatedAt` int(10) unsigned DEFAULT NULL COMMENT 'timestamp',
   `createdAt` int(10) unsigned DEFAULT NULL COMMENT 'timestamp',
   PRIMARY KEY (`id`),
@@ -240,15 +235,9 @@ CREATE TABLE `tableRows` (
   KEY `tableId` (`tableId`),
   CONSTRAINT `tableRowsTableId` FOREIGN KEY (`tableId`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tableRowsUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26488 DEFAULT CHARSET=utf8;
 
-
-
-# Export von Tabelle tableRowVotes
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `tableRowVotes`;
-
+-- Create syntax for TABLE 'tableRowVotes'
 CREATE TABLE `tableRowVotes` (
   `rowId` int(11) unsigned NOT NULL COMMENT 'tableRows.id',
   `userId` int(11) unsigned NOT NULL COMMENT 'user.id',
@@ -259,13 +248,7 @@ CREATE TABLE `tableRowVotes` (
   CONSTRAINT `tableRowVotesUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Export von Tabelle tables
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `tables`;
-
+-- Create syntax for TABLE 'tables'
 CREATE TABLE `tables` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `ownerUserId` int(11) unsigned NOT NULL COMMENT 'author',
@@ -276,8 +259,9 @@ CREATE TABLE `tables` (
   `slug` varchar(100) DEFAULT NULL COMMENT 'slug',
   `tagline` varchar(140) DEFAULT '' COMMENT 'description',
   `image` varchar(255) DEFAULT NULL COMMENT 'image url',
-  `flags` tinyint,
-  `featured` bool NOT NULL DEFAULT FALSE,
+  `description` text,
+  `flags` tinyint(4) DEFAULT NULL,
+  `featured` tinyint(1) NOT NULL DEFAULT '0',
   `updatedAt` int(10) unsigned DEFAULT NULL COMMENT 'timestamp',
   `createdAt` int(10) unsigned DEFAULT NULL COMMENT 'timestamp',
   PRIMARY KEY (`id`),
@@ -290,15 +274,20 @@ CREATE TABLE `tables` (
   CONSTRAINT `tablesTopic1Id` FOREIGN KEY (`topic1Id`) REFERENCES `topics` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `tablesTopic2Id` FOREIGN KEY (`topic2Id`) REFERENCES `topics` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `tablesTypeId` FOREIGN KEY (`typeId`) REFERENCES `types` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
+
+-- Create syntax for TABLE 'tableStaffPicks'
+CREATE TABLE `tableStaffPicks` (
+  `tableId` int(11) unsigned NOT NULL COMMENT 'table.id',
+  `userId` int(11) unsigned NOT NULL COMMENT 'admin user.id',
+  `createdAt` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`tableId`,`userId`),
+  KEY `tableStaffPicsUserId` (`userId`),
+  CONSTRAINT `tableStaffPicsTableId` FOREIGN KEY (`tableId`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `tableStaffPicsUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Export von Tabelle tableStats
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `tableStats`;
-
+-- Create syntax for TABLE 'tableStats'
 CREATE TABLE `tableStats` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `tableId` int(11) unsigned NOT NULL COMMENT 'tables.id',
@@ -313,14 +302,9 @@ CREATE TABLE `tableStats` (
   PRIMARY KEY (`id`),
   KEY `tableId` (`tableId`),
   CONSTRAINT `tableStatsTableId` FOREIGN KEY (`tableId`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
 
-
-# Export von Tabelle tableSubscription
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `tableSubscription`;
-
+-- Create syntax for TABLE 'tableSubscription'
 CREATE TABLE `tableSubscription` (
   `tableId` int(11) unsigned NOT NULL,
   `userId` int(11) unsigned NOT NULL,
@@ -332,13 +316,7 @@ CREATE TABLE `tableSubscription` (
   CONSTRAINT `tableSubscriptionUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Export von Tabelle tableTags
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `tableTags`;
-
+-- Create syntax for TABLE 'tableTags'
 CREATE TABLE `tableTags` (
   `tableId` int(11) unsigned NOT NULL,
   `tagId` int(11) unsigned NOT NULL,
@@ -348,13 +326,7 @@ CREATE TABLE `tableTags` (
   CONSTRAINT `tableTagsTagId` FOREIGN KEY (`tagId`) REFERENCES `tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Export von Tabelle tableTokens
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `tableTokens`;
-
+-- Create syntax for TABLE 'tableTokens'
 CREATE TABLE `tableTokens` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `tableId` int(11) unsigned NOT NULL,
@@ -375,13 +347,9 @@ CREATE TABLE `tableTokens` (
   CONSTRAINT `tableTokensRowId` FOREIGN KEY (`rowId`) REFERENCES `tableRows` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tableTokensTableId` FOREIGN KEY (`tableId`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tableTokensUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=286 DEFAULT CHARSET=utf8;
 
-# Export von Tabelle tableViews
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `tableViews`;
-
+-- Create syntax for TABLE 'tableViews'
 CREATE TABLE `tableViews` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `tableId` int(11) unsigned NOT NULL COMMENT 'tables.id',
@@ -390,16 +358,12 @@ CREATE TABLE `tableViews` (
   PRIMARY KEY (`id`),
   KEY `createdAt` (`createdAt`),
   KEY `tableViewsUserId` (`userId`),
+  KEY `tableId` (`tableId`),
+  CONSTRAINT `tableViewsTableId` FOREIGN KEY (`tableId`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tableViewsUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2951 DEFAULT CHARSET=utf8;
 
-
-
-# Export von Tabelle tableVotes
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `tableVotes`;
-
+-- Create syntax for TABLE 'tableVotes'
 CREATE TABLE `tableVotes` (
   `tableId` int(11) unsigned NOT NULL COMMENT 'tables.id',
   `userId` int(11) unsigned NOT NULL COMMENT 'user.id',
@@ -411,33 +375,21 @@ CREATE TABLE `tableVotes` (
   CONSTRAINT `tableVotesUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Export von Tabelle tags
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `tags`;
-
+-- Create syntax for TABLE 'tags'
 CREATE TABLE `tags` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `userId` int(11) unsigned NULL COMMENT 'user.id',
+  `userId` int(11) unsigned DEFAULT NULL COMMENT 'user.id',
   `title` varchar(100) DEFAULT NULL COMMENT 'tag name',
-  `slug` varchar(100) DEFAULT NULL COMMENT 'slug',
   `createdAt` int(10) DEFAULT NULL COMMENT 'timestamp',
-  `featured` bool NOT NULL DEFAULT FALSE,
+  `featured` tinyint(1) NOT NULL DEFAULT '0',
+  `slug` varchar(100) DEFAULT NULL COMMENT 'slug',
   PRIMARY KEY (`id`),
   KEY `userId` (`userId`),
   KEY `title` (`title`),
   CONSTRAINT `tableTagsUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17212 DEFAULT CHARSET=utf8;
 
-
-
-# Export von Tabelle topics
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `topics`;
-
+-- Create syntax for TABLE 'topics'
 CREATE TABLE `topics` (
   `id` tinyint(1) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(200) DEFAULT NULL,
@@ -445,15 +397,9 @@ CREATE TABLE `topics` (
   `color` varchar(6) DEFAULT NULL COMMENT 'hex color',
   `description` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
-
-
-# Export von Tabelle types
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `types`;
-
+-- Create syntax for TABLE 'types'
 CREATE TABLE `types` (
   `id` tinyint(1) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(200) DEFAULT NULL,
@@ -461,15 +407,9 @@ CREATE TABLE `types` (
   `color` varchar(6) DEFAULT NULL COMMENT 'hex color',
   `description` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
-
-
-# Export von Tabelle user
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `user`;
-
+-- Create syntax for TABLE 'user'
 CREATE TABLE `user` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `handle` varchar(100) DEFAULT NULL COMMENT 'usernama',
@@ -490,17 +430,12 @@ CREATE TABLE `user` (
   `lastLogin` int(10) DEFAULT NULL COMMENT 'timestamp',
   `confirmed` int(1) DEFAULT NULL COMMENT 'confirmed = 1, unconfirmed = 0',
   `status` tinyint(1) DEFAULT NULL COMMENT 'deleted = 0, active = 1',
+  `roles` mediumint(8) unsigned DEFAULT '1',
   `createdAt` int(10) DEFAULT NULL COMMENT 'timestamp',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=utf8;
 
-
-
-# Export von Tabelle userConnections
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `userConnections`;
-
+-- Create syntax for TABLE 'userConnections'
 CREATE TABLE `userConnections` (
   `userId` int(11) unsigned NOT NULL,
   `twitter` varchar(200) DEFAULT NULL,
@@ -533,27 +468,14 @@ CREATE TABLE `userConnections` (
   `twitch` varchar(200) DEFAULT NULL,
   `patreon` varchar(200) DEFAULT NULL,
   `youtube` varchar(200) DEFAULT NULL,
+  `deviantart` varchar(200) DEFAULT NULL,
+  `bloglovin` varchar(200) DEFAULT NULL,
+  `bandcamp` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`userId`),
   CONSTRAINT `userConnectionsUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `userTopics`;
-
-CREATE TABLE `userTopics` (
-  `userId` int(11) unsigned NOT NULL,
-  `topicId` tinyint(1) unsigned NOT NULL,
-  PRIMARY KEY (`userId`,`topicId`),
-  KEY `userTopicsTopicId` (`topicId`),
-  CONSTRAINT `userTopicsTopicId` FOREIGN KEY (`topicId`) REFERENCES `topics` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `userTopicsUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-# Export von Tabelle userFollower
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `userFollower`;
-
+-- Create syntax for TABLE 'userFollower'
 CREATE TABLE `userFollower` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `userId` int(11) unsigned DEFAULT NULL COMMENT 'user.id',
@@ -564,15 +486,9 @@ CREATE TABLE `userFollower` (
   KEY `followedByUserId` (`followedByUserId`),
   CONSTRAINT `userFollowerFollowedByUserId` FOREIGN KEY (`followedByUserId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `userFollowerUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=291 DEFAULT CHARSET=utf8;
 
-
-
-# Export von Tabelle userLocations
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `userLocations`;
-
+-- Create syntax for TABLE 'userLocations'
 CREATE TABLE `userLocations` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `userId` int(11) unsigned DEFAULT NULL,
@@ -582,15 +498,9 @@ CREATE TABLE `userLocations` (
   KEY `userLocationsLocationId` (`locationId`),
   CONSTRAINT `userLocationsLocationId` FOREIGN KEY (`locationId`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `userLocationsUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8;
 
-
-
-# Export von Tabelle userNotifications
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `userNotifications`;
-
+-- Create syntax for TABLE 'userNotifications'
 CREATE TABLE `userNotifications` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `userId` int(11) unsigned DEFAULT NULL,
@@ -609,15 +519,9 @@ CREATE TABLE `userNotifications` (
   CONSTRAINT `userNotifcationsSourceTableId` FOREIGN KEY (`sourceTableId`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `userNotifcationsSourceUserId` FOREIGN KEY (`sourceUserId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `userNotificationsUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1931 DEFAULT CHARSET=utf8;
 
-
-
-# Export von Tabelle userResetPassword
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `userResetPassword`;
-
+-- Create syntax for TABLE 'userResetPassword'
 CREATE TABLE `userResetPassword` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `userId` int(11) unsigned DEFAULT NULL COMMENT 'user.id',
@@ -631,13 +535,7 @@ CREATE TABLE `userResetPassword` (
   CONSTRAINT `userResetPasswordUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Export von Tabelle userSettings
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `userSettings`;
-
+-- Create syntax for TABLE 'userSettings'
 CREATE TABLE `userSettings` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `userId` int(11) unsigned DEFAULT NULL COMMENT 'user.id',
@@ -645,18 +543,13 @@ CREATE TABLE `userSettings` (
   `topicDigest` tinyint(1) unsigned DEFAULT NULL,
   `newProductAnnouncements` tinyint(1) unsigned DEFAULT NULL,
   `showTokensOnProfilePage` tinyint(1) unsigned DEFAULT NULL,
+  `hideHeroOnHomepage` tinyint(1) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `userSettingsUserId` (`userId`),
   CONSTRAINT `userSettingsUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
-
-
-# Export von Tabelle userStats
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `userStats`;
-
+-- Create syntax for TABLE 'userStats'
 CREATE TABLE `userStats` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `userId` int(11) unsigned DEFAULT NULL,
@@ -668,22 +561,27 @@ CREATE TABLE `userStats` (
   `rejectedChangeRequestsCount` int(10) unsigned DEFAULT '0',
   `approvedChangeRequestsCount` int(10) unsigned DEFAULT '0',
   `visitedAddTablePage` tinyint(1) unsigned DEFAULT '0',
+  `followerCount` int(10) unsigned DEFAULT NULL,
+  `upvotesCount` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `userStatsUserId` (`userId`),
+  KEY `contributionsCount` (`contributionsCount`),
+  KEY `upvotesCount` (`upvotesCount`),
+  KEY `followerCount` (`followerCount`),
   CONSTRAINT `userStatsUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=165 DEFAULT CHARSET=utf8;
 
+-- Create syntax for TABLE 'userTopics'
+CREATE TABLE `userTopics` (
+  `userId` int(11) unsigned NOT NULL,
+  `topicId` tinyint(1) unsigned NOT NULL,
+  PRIMARY KEY (`userId`,`topicId`),
+  KEY `userTopicsTopicId` (`topicId`),
+  CONSTRAINT `userTopicsTopicId` FOREIGN KEY (`topicId`) REFERENCES `topics` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `userTopicsUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-ALTER TABLE `userConnections` ADD `deviantart` VARCHAR(200)  NULL  DEFAULT NULL  AFTER `youtube`;
-ALTER TABLE `userConnections` ADD `bloglovin` VARCHAR(200)  NULL  DEFAULT NULL  AFTER `deviantart`;
-ALTER TABLE `userConnections` ADD `bandcamp` VARCHAR(200)  NULL  DEFAULT NULL  AFTER `bloglovin`;
-
-
-# Export von Tabelle wallet
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `wallet`;
-
+-- Create syntax for TABLE 'wallet'
 CREATE TABLE `wallet` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `userId` int(11) unsigned DEFAULT NULL,
@@ -693,118 +591,6 @@ CREATE TABLE `wallet` (
   PRIMARY KEY (`id`),
   KEY `userId` (`userId`),
   KEY `contractAddress` (`contractAddress`),
+  KEY `tokens` (`tokens`),
   CONSTRAINT `walletUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-DROP TABLE IF EXISTS `tableFlags`;
-CREATE TABLE `tableFlags` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `tableId` int(11) unsigned NOT NULL,
-  `userId` int(11) unsigned DEFAULT NULL,
-  `flag` varchar(25) DEFAULT NULL,
-  `text` varchar(200) DEFAULT '',
-  `createdAt` int(10) unsigned DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `userId` (`userId`),
-  KEY `tableId` (`tableId`),
-  CONSTRAINT `tableFlagsTableId` FOREIGN KEY (`tableId`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `tableFlagsUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
-
-DROP TABLE IF EXISTS `tableContributors`;
-CREATE TABLE `tableContributors` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `tableId` int(11) unsigned DEFAULT NULL COMMENT 'table.id',
-  `userId` int(11) unsigned DEFAULT NULL COMMENT 'contributor user.id',
-  `type` tinyint(1) unsigned DEFAULT NULL COMMENT 'contribution type',
-  `tableOwnership` float DEFAULT NULL,
-  `createdAt` int(10) unsigned DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-DROP TABLE IF EXISTS `tableProperties`;
-CREATE TABLE `tableProperties` (
-  `tableId` int(11) unsigned NOT NULL,
-  `fixedRowsTop` mediumint(9) DEFAULT NULL,
-  `fixedColumnsLeft` mediumint(9) DEFAULT NULL,
-  PRIMARY KEY (`tableId`),
-  CONSTRAINT `tablePropertiesTableId` FOREIGN KEY (`tableId`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-DROP TABLE IF EXISTS `tableStaffPicks`;
-CREATE TABLE `tableStaffPicks` (
-  `tableId` int(11) unsigned NOT NULL COMMENT 'table.id',
-  `userId` int(11) unsigned NOT NULL COMMENT 'admin user.id',
-  `createdAt` int(10) unsigned DEFAULT NULL,
-  PRIMARY KEY (`tableId`,`userId`),
-  KEY `tableStaffPicsUserId` (`userId`),
-  CONSTRAINT `tableStaffPicsTableId` FOREIGN KEY (`tableId`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `tableStaffPicsUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-ALTER TABLE `user` ADD `roles` MEDIUMINT  UNSIGNED  NULL  DEFAULT '1'  AFTER `status`;
-
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-
-ALTER TABLE `wallet` ADD INDEX (`tokens`);
-ALTER TABLE `userStats` ADD INDEX (`contributionsCount`);
-ALTER TABLE `userStats` ADD `followerCount` INT(10)  UNSIGNED  NULL  DEFAULT NULL  AFTER `visitedAddTablePage`;
-ALTER TABLE `userStats` ADD `upvotesCount` INT(10)  NULL  DEFAULT NULL  AFTER `followerCount`;
-ALTER TABLE `userStats` CHANGE `upvotesCount` `upvotesCount` INT(10)  UNSIGNED  NULL  DEFAULT NULL;
-ALTER TABLE `userStats` ADD INDEX (`upvotesCount`);
-ALTER TABLE `userStats` ADD INDEX (`followerCount`);
-
-ALTER TABLE `userSettings` ADD `hideHeroOnHomepage` TINYINT(1)  UNSIGNED  NULL  DEFAULT NULL  AFTER `showTokensOnProfilePage`;
-
-
-DROP TABLE IF EXISTS `row_add_request`;
-CREATE TABLE `row_add_request` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) unsigned NOT NULL,
-  `table_id` int(11) unsigned NOT NULL,
-  `content` longtext NOT NULL,
-  `comment` text,
-  `image` varchar(100) DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  KEY `table_id` (`table_id`),
-  CONSTRAINT `row_add_request_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `row_add_request_ibfk_2` FOREIGN KEY (`table_id`) REFERENCES `tables` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `row_delete_request`;
-CREATE TABLE `row_delete_request` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) unsigned NOT NULL,
-  `row_id` int(11) unsigned NOT NULL,
-  `comment` text,
-  `status` tinyint(4) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  KEY `row_id` (`row_id`),
-  CONSTRAINT `row_delete_request_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `row_delete_request_ibfk_2` FOREIGN KEY (`row_id`) REFERENCES `tableRows` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
-
-ALTER TABLE tableRows ADD `image` varchar(255) DEFAULT NULL COMMENT 'image url' AFTER commentsCount;
-ALTER TABLE tables ADD `description` TEXT DEFAULT NULL  AFTER `image`;
-ALTER TABLE row_add_request ADD `createdAt` INT(10) unsigned DEFAULT NULL;
-ALTER TABLE row_add_request ADD `updateddAt` INT(10) unsigned DEFAULT NULL;
-ALTER TABLE row_delete_request ADD `createdAt` INT(10) unsigned DEFAULT NULL;
-ALTER TABLE row_delete_request ADD `updateddAt` INT(10) unsigned DEFAULT NULL;
-
-
-ALTER TABLE `tableViews` ADD INDEX (`tableId`);
-ALTER TABLE `tableViews` ADD CONSTRAINT `tableViewsTableId` FOREIGN KEY (`tableId`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=utf8;
