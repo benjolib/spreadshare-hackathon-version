@@ -63,4 +63,15 @@ return function (\DS\Interfaces\GeneralApplication $application, Phalcon\Di\Fact
         }
     );
 
+    $di->set(
+        \DS\Constants\Services::MAIL_SERVICE,
+        function () use ($application) {
+            return new \DS\Component\Mailer\SpreadshareEmailService(
+                $application->getConfig()['mail-dispatcher']['url'],
+                $application->getConfig()['mail-dispatcher']['apiKey']
+            );
+        }
+    );
+
 };
+

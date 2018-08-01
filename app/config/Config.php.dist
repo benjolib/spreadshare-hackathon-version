@@ -67,6 +67,10 @@ return [
             'url' => 'api.mailgun.net/v3/spreadshare.co',
         ],
     ],
+    'mail-dispatcher' => [
+        'url' => '_MAIL_DISPATCHER_URL_',
+        'apiKey' => '_MAIL_DISPATCHER_API_KEY_'
+    ],
     'sentry' => [
         'key' => '_SENTRY_KEY_',
     ],

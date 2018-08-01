@@ -1,0 +1,73 @@
+version: '3.6'
+
+services:
+
+  mysql1:
+    container_name: spreadshare-mysql-testing
+    build: docker-testing/mysql
+    restart: always
+    hostname: mysql1
+    expose:
+      - "3306"
+    ports:
+      - "3308:3306"
+    volumes:
+      - ./docker-testing/mysql/config/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
+      - ./schemas/structure.sql:/docker-entrypoint-initdb.d/01_structure.sql
+    env_file:
+        - docker-testing/variables.env
+
+  redis:
+    container_name: spreadshare-redis-testing
+    restart: always
+    hostname: redis
+    image: redis:4.0
+    ports:
+      - "6380:6379"
+    volumes:
+      - redis:/data
+
+  app:
+    build: docker-testing/app
+    container_name: spreadshare-backend-testing
+    restart: always
+    hostname: spreadshare
+    working_dir: /application
+    ports:
+      - "81:80"
+      - "445:443"
+    volumes:
+      - .:/application
+      - ./docker-testing/conf/php/cli.ini:/etc/php/7.0/cli/conf.d/100-custom.ini
+      - ./docker-testing/conf/php/fpm.ini:/etc/php/7.0/fpm/conf.d/100-custom.ini
+      - ./docker-testing/apache2:/etc/apache2/spreadshare
+    depends_on:
+      - mysql1
+      - redis
+    env_file:
+      - docker-testing/variables.env
+    environment:
+      BUILD_ENVIRONMENT: 'development'
+      APPLICATION_ENV: 'development'
+      HOST: 'dev.spreadshare.co:81'
+      AUTH_CALLBACK: 'http://dev.spreadshare.co:81/login'
+      WALLET: 'localhost'
+      MAILGUN_KEY: 'key-611a7bf686cb890b8db38ad9ce1a5bbb'
+      CRYPT_KEY: 'iuh213iu78ads898213euwioadjbxhjy-jkldHJKDJ_ksahdKASGDSAKDH32L4EJLDSACKÖÄASPOE24'
+      SENTRY_KEY: 'https://fcdde304c3344126b70b8f8365df7650:1ef8823d9153412a9f77250fa9d45235@sentry.io/240812'
+      SLACK_WEBHOOK: 'https://hooks.slack.com/services/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'
+      FILES_SERVICE: 'local'
+      AUTH_DEBUG: '1'
+      TWITTER_ID: '764738293347024896'
+      TWITTER_KEY: 'Fv0eIOgtYNlMcAb81F6Q64Scq'
+      TWITTER_SECRET: 'dIFZafw3ictdyREl5mva0WLHchaEUrdl0kZisPb6OCEfCSknCj'
+      GOOGLE_ID: '102427747011-eakc8maf0t3apkfrrv196i12rf0f1edg.apps.googleusercontent.com'
+      GOOGLE_SECRET: '8jLEm_zY8VnuNs4zAQ0SJiUX'
+      FACEBOOK_ID: '153117502101937'
+      FACEBOOK_SECRET: 'f1c03b95bfc5c671085147b31b0474ef'
+      MAIL_DISPATCHER_URL: 'https://mrm6uc8yla.execute-api.eu-central-1.amazonaws.com/dev'
+      MAIL_DISPATCHER_API_KEY: 'AYsjjVU0KC4mmc4VUG7wV4EvxOFksHhq5BXXh9hN'
+
+volumes:
+  redis:
+    driver: local

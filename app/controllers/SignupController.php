@@ -29,20 +29,19 @@ class SignupController extends BaseController implements LoginAwareController
         $this->view->setMainView('sign-up/index');
 
         $user = $this->serviceManager->getAuth()->getUser();
-        if ($user->getStatus() == UserStatus::OnboardingIncomplete) {
-            // Login request with username and password
-            if ($this->request->isPost() && $this->request->getPost('username') && $this->request->getPost('email')) {
-                try {
-                    $user
-                        ->setHandle($this->request->getPost('username'))
-                        ->setEmail($this->request->getPost('email'))
-                        ->setStatus(UserStatus::Unconfirmed)
-                        ->save();
-                    header('Location: /');
-                } catch (UserValidationException $e) {
-                    $this->flash->error('error creating account - '.$e->getMessage());
-                    return;
-                }
+        if (!$user) {
+            return;
+        }
+
+        if ($this->request->isPost() && $this->request->getPost('username') && $this->request->getPost('email')) {
+            try {
+                $user->markOnboardingComplete(
+                    $this->request->getPost('username'),
+                    $this->request->getPost('email'));
+                header('Location: /');
+            } catch (UserValidationException $e) {
+                $this->flash->error('error creating account - ' . $e->getMessage());
+                return;
             }
         }
     }

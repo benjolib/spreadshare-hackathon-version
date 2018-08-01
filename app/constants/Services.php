@@ -150,4 +150,11 @@ class Services
      * @definition bootstrap/Services/RavenClient.php
      */
     const RAVENCLIENT = 'ravenClient';
+
+    /**
+     * Mail Dispatcher service
+     *
+     * @definition bootstrap/Services/Mailer.php
+     */
+    const MAIL_SERVICE = 'mailService';
 }
