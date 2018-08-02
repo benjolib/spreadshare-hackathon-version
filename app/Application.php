@@ -142,6 +142,17 @@ final class Application
         return self::$instance;
     }
 
+    public static function initializeForTest(DiInterface $di, Logger\AdapterInterface $logger)
+    {
+        if (!self::$instance)
+        {
+            self::$instance = new Application($di);
+            self::$instance->logger = $logger;
+        }
+
+        return self::$instance;
+    }
+
     /**
      * @return $this
      */
