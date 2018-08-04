@@ -157,4 +157,11 @@ class Services
      * @definition bootstrap/Services/Mailer.php
      */
     const MAIL_SERVICE = 'mailService';
+
+    /**
+     * Subscriptions Api
+     *
+     * @definition bootstrap/Services/Subscriptions.php
+     */
+    const SUBSCRIPTIONS_SERVICE = 'subscriptionsService';
 }

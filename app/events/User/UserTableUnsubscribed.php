@@ -2,59 +2,33 @@
 
 namespace DS\Events\User;
 
+use DS\Component\ServiceManager;
 use DS\Events\AbstractEvent;
 use DS\Model\DataSource\TableLogType;
-use DS\Model\DataSource\UserNotificationType;
 use DS\Model\TableLog;
-use DS\Model\Tables;
 use DS\Model\TableStats;
 use DS\Model\User;
-use DS\Model\UserNotifications;
 
-/**
- * Spreadshare
- *
- * Table events like views or contributions
- *
- * @author    Dennis Stücken
- * @license   proprietary
- * @copyright Spreadshare
- * @link      https://www.spreadshare.co
- *
- * @version   $Version$
- * @package   DS\Events\Table
- */
 class UserTableUnsubscribed extends AbstractEvent
 {
     
-    /**
-     * Issued after a has been followed by another user
-     *
-     * @param int $userId
-     * @param int $followedByUserId
-     */
     public static function after(int $userId, int $tableId)
     {
         $user  = User::findFirstById($userId);
-        $table = Tables::findFirstById($tableId);
-        
-        // $userNotification = new UserNotifications;
-        // $userNotification
-        //     ->setUserId($table->getOwnerUserId())
-        //     ->setNotificationType(UserNotificationType::TableUnsubscribed)
-        //     ->setSourceUserId($userId)
-        //     ->setSourceTableId($tableId)
-        //     ->setText(sprintf('Unsubscribed of %s', $table->getTitle()))
-        //     ->setPlaceholders(
-        //         json_encode(
-        //             [
-        //                 $user->getName(),
-        //                 $table->getTitle(),
-        //             ]
-        //         )
-        //     )
-        //     ->create();
-        
+        self::changeTableLog($userId, $tableId, $user);
+        self::changeTableStats($tableId);
+        self::unsubscribeFromEmailNotifications($userId, $tableId);
+    }
+
+    private static function unsubscribeFromEmailNotifications(int $userId, int $tableId)
+    {
+        ServiceManager::instance(self::getDI())
+            ->getSubscriptionsService()
+            ->unsubscribeFromEmailNotifications($userId, $tableId);
+    }
+
+    public static function changeTableLog(int $userId, int $tableId, User $user)
+    {
         $tableLog = new TableLog();
         $tableLog
             ->setUserId($userId)
@@ -70,13 +44,15 @@ class UserTableUnsubscribed extends AbstractEvent
                 )
             )
             ->create();
-        
+    }
+
+    public static function changeTableStats(int $tableId)
+    {
         $tableStats = TableStats::findByFieldValue('tableId', $tableId);
-        if (!$tableStats)
-        {
+        if (!$tableStats) {
             $tableStats = new TableStats;
         }
         $tableStats->setSubscriberCount($tableStats->getSubscriberCount() - 1)->save();
     }
-    
+
 }

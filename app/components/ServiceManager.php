@@ -55,6 +55,7 @@ use Phalcon\Security;
  * @method Security getSecurity();
  * @method Cookies getCookies();
  * @method \DS\Component\Mailer\Mailer getMailService();
+ * @method \DS\Component\Subscriptions\SubscriptionsService getSubscriptionsService();
  * @method \Maknz\Slack\Client getSlack();
  * @method \DS\Component\Wallet\WalletApi getWalletApi();
  * @method Client getAlgolia();

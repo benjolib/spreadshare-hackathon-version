@@ -3,7 +3,7 @@
 namespace DS\Events\User;
 
 use DS\Application;
-use DS\Component\Mailer\dto\UserMetaEmailDto;
+use DS\Component\Mailer\dto\UserEmailDto;
 use DS\Component\ServiceManager;
 use DS\Events\AbstractEvent;
 use DS\Model\DataSource\UserNotificationType;
@@ -63,7 +63,7 @@ class UserFollowed extends AbstractEvent
         $domain = ServiceManager::instance(self::getDi())->getConfig()['domain'];
         $baseUri = "https://$domain";
 
-        $followedByMeta = new UserMetaEmailDto($baseUri);
+        $followedByMeta = new UserEmailDto($baseUri);
         $followedByMeta->withHandle($followedByUser->getHandle())
             ->setName($followedByUser->getName())
             ->setImageLink($followedByUser->getImage())

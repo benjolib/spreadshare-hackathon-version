@@ -35,7 +35,7 @@ class GuzzleRequestTest
     public function assertMethod($methodName){
         foreach ($this->container as $transaction) {
             $request = $transaction['request'];
-            $this->testCase->assertEquals($request->getMethod(), $methodName);
+            $this->testCase->assertEquals($methodName, $request->getMethod());
         }
         return $this;
     }
@@ -45,9 +45,9 @@ class GuzzleRequestTest
             $request = $transaction['request'];
             $uri = $request->getUri();
 
-            $this->testCase->assertEquals($uri->getScheme(), $schema);
-            $this->testCase->assertEquals($uri->getHost(), $host);
-            $this->testCase->assertEquals($uri->getPath(), $path);
+            $this->testCase->assertEquals($schema, $uri->getScheme());
+            $this->testCase->assertEquals($host, $uri->getHost());
+            $this->testCase->assertEquals($path, $uri->getPath());
         }
         return $this;
     }
@@ -63,7 +63,7 @@ class GuzzleRequestTest
         foreach ($this->container as $transaction) {
             $request = $transaction['request'];
             $headers = $request->getHeaders();
-            $this->testCase->assertEquals($headers[$key][0], $value);
+            $this->testCase->assertEquals($value, $headers[$key][0]);
         }
         return $this;
     }
@@ -71,7 +71,7 @@ class GuzzleRequestTest
     public function assertBody(String $body){
         foreach ($this->container as $transaction) {
             $request = $transaction['request'];
-            $this->testCase->assertEquals($request->getBody()->__toString(), $body);
+            $this->testCase->assertEquals($body, $request->getBody()->__toString());
         }
         return $this;
     }
