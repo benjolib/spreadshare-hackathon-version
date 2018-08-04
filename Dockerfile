@@ -88,8 +88,9 @@ RUN composer install --classmap-authoritative
 ## ---- Test ----
 FROM dependencies AS test
 COPY . .
-RUN ./vendor/phpunit/phpunit/phpunit  app/tests
-#RUN  npm run test
+RUN pwd
+RUN ls ./vendor/composer
+RUN ./vendor/phpunit/phpunit/phpunit  --configuration ./phpunit.xml ./app/tests --teamcity
 
 # COPY . /project
 # RUN composer --working-dir=/project/ install --classmap-authoritative
