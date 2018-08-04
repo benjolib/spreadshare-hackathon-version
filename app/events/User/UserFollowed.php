@@ -2,7 +2,9 @@
 
 namespace DS\Events\User;
 
-use DS\Component\Mail\Events\NewFollowerMail;
+use DS\Application;
+use DS\Component\Mailer\dto\UserMetaEmailDto;
+use DS\Component\ServiceManager;
 use DS\Events\AbstractEvent;
 use DS\Model\DataSource\UserNotificationType;
 use DS\Model\User;
@@ -23,7 +25,7 @@ use DS\Model\UserStats;
  */
 class UserFollowed extends AbstractEvent
 {
-    
+
     /**
      * Issued after a has been followed by another user
      *
@@ -32,8 +34,9 @@ class UserFollowed extends AbstractEvent
      */
     public static function after(int $userId, int $followedByUserId)
     {
-        $user = User::findFirstById($followedByUserId);
-        
+        $user = User::findFirstById($userId);
+        $followedByUser = User::findFirstById($followedByUserId);
+
         $userNotification = new UserNotifications;
         $userNotification
             ->setUserId($userId)
@@ -43,17 +46,32 @@ class UserFollowed extends AbstractEvent
             ->setPlaceholders(
                 json_encode(
                     [
-                        $user->getName(),
+                        $followedByUser->getName(),
                     ]
                 )
             )
             ->create();
-        
-        NewFollowerMail::factory(self::getDI())
-                       ->prepare(User::get($userId), User::get($followedByUserId))
-                       ->send();
-        
+
         UserStats::increment($userId, 'follower');
+
+        self::sendNewFollowerEmail($user, $followedByUser);
+
     }
-    
+
+    private static function sendNewFollowerEmail(User $user, User $followedByUser)
+    {
+        $domain = ServiceManager::instance(self::getDi())->getConfig()['domain'];
+        $baseUri = "https://$domain";
+
+        $followedByMeta = new UserMetaEmailDto($baseUri);
+        $followedByMeta->withHandle($followedByUser->getHandle())
+            ->setName($followedByUser->getName())
+            ->setImageLink($followedByUser->getImage())
+            ->setTagLine($followedByUser->getTagline());
+
+        ServiceManager::instance(self::getDI())
+            ->getMailService()
+            ->sendNewFollowerEmail($user->getEmail(), $followedByMeta);
+    }
+
 }

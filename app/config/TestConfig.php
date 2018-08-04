@@ -1,0 +1,26 @@
+<?php
+return [
+    'domain' => 'test.spreadshare.co',
+    'dirs' => [
+        'DS' => ROOT_PATH . '/app/',
+        'DS\Controller' => ROOT_PATH . '/app/controllers/',
+        'DS\Model' => ROOT_PATH . '/app/models/',
+        'DS\ViewModel' => ROOT_PATH . '/app/viewmodels/',
+        'DS\Component' => ROOT_PATH . '/app/components/',
+        'DS\Modules' => ROOT_PATH . '/app/modules/',
+        'DS\Traits' => ROOT_PATH . '/app/traits/',
+        'DS\Interfaces' => ROOT_PATH . '/app/interfaces/',
+        'DS\Task' => ROOT_PATH . '/app/tasks/',
+        'DS\Cli' => ROOT_PATH . '/app/cli/',
+        'DS\Constants' => ROOT_PATH . '/app/constants/',
+        'DS\Tests' => ROOT_PATH . '/app/tests/',
+        'DS\Api' => ROOT_PATH . '/app/api/',
+        'DS\Events' => ROOT_PATH . '/app/events/',
+        'DS\Listeners' => ROOT_PATH. '/app/listeners',
+        'DS\Exceptions' => ROOT_PATH . '/app/exceptions/',
+        'DS\Dto' => ROOT_PATH . '/app/dto/',
+        'DS\Dto\Feed' => ROOT_PATH . '/app/dto/feed/',
+        'DS\Services' => ROOT_PATH . '/app/services/',
+        'DS\Tests' => ROOT_PATH . '/app/tests/',
+    ],
+];
