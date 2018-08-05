@@ -36,8 +36,9 @@ block content %}
 <script type="text/javascript">
   $(document).ready(function () {
     var pageNumber = 1;
-
+    
     $('.re-button--load-more').on('click', function (e) {
+      window.bindPops();
       e.preventDefault();
       $.ajax(window.location.pathname + '?page=' + pageNumber)
         .done(function (response) {
@@ -47,7 +48,7 @@ block content %}
             if (!$('<div>' + response + '</div>').find('.moreToLoad').val()) {
               $('.re-button--load-more').hide();
             }
-            window.bindPops();
+           window.bindPops();
           }
         });
     });
