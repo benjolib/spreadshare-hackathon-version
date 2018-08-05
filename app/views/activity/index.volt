@@ -6,7 +6,7 @@
 {% block content %}
 <div class="re-page">
   <h1 class="re-heading">Activity</h1>
-  <h2 class="re-subheading">You will be notified if people interact with you or your content</h2>
+  <h2 class="re-subheading">All your notifications in one place.</h2>
   <div class="activity-box">
     {% for notification in notifications %}
       <div class="activity-box__notification u-flex u-flexAlignItemsCenter">

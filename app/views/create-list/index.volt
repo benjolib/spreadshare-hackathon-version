@@ -20,8 +20,8 @@
         {% if post['name'] is not defined %}
         {% set post['name'] = "" %}
         {% endif %}
-        {{ text_field('name', 'placeholder':"Your publication's title", 'autocomplete':"off", 'value':post['name']) }} {#
-        <input type="text" placeholder="Your publication's title" name="name" style="border:0px" />#}
+        {{ text_field('name', 'placeholder':"Title", 'autocomplete':"off", 'value':post['name']) }} {#
+        <input type="text" placeholder="Ttitle" name="name" style="border:0px" />#}
       </div>
     </div>
     <div class="re-subheading-input">
@@ -31,8 +31,8 @@
        {% if post['tagline'] is not defined %}
         {% set post['tagline'] = "" %}
         {% endif %}
-        {{ text_field('tagline', 'placeholder':"Write a tagline for your publication", 'autocomplete':"off", 'value':post['tagline']) }} {#
-        <input type="text" placeholder="Write a tagline for your publication" name="tagline" style="border:0px" />#}
+        {{ text_field('tagline', 'placeholder':"Tagline", 'autocomplete':"off", 'value':post['tagline']) }} {#
+        <input type="text" placeholder="Tagline" name="tagline" style="border:0px" />#}
       </div>
     </div>
     <div class="re-para-input">
@@ -42,9 +42,9 @@
        {% if post['description'] is not defined %}
         {% set post['description'] = "" %}
         {% endif %}
-        {#{ text_field('description', 'placeholder':"Write a short description text", 'autocomplete':"off", 'value':post['description']) }#}
-        {{ text_area('description', 'placeholder':'Write a short description text', 'autocomplete':"off", 'value':post['description'], 'class':'short-description-textarea') }} {#
-        <textarea type="text" placeholder="Write a short desciption text" name="description" style="border:0px" />#}
+        {#{ text_field('description', 'placeholder':"Description text", 'autocomplete':"off", 'value':post['description']) }#}
+        {{ text_area('description', 'placeholder':'Description text', 'autocomplete':"off", 'value':post['description'], 'class':'short-description-textarea') }} {#
+        <textarea type="text" placeholder="Description text" name="description" style="border:0px" />#}
       </div>
     </div>
 
@@ -107,7 +107,7 @@
         {% endif %}
          {{ hidden_field('curators', 'placeholder':"Curators", 'value': post['curators']) }}
         <i class="sh-dropdown icon"></i>
-        <div class="default text"><b><u>Optional</u></b>  Add another person if you're curating in a team</div>
+        <div class="default text"><b><u>Team</u></b>  Add another curator if you're curating in a team (Optional)</div>
         <div class="menu">
         {% if curatorsNames is defined %}
         {% for index, curator in curatorsNames %}
@@ -130,7 +130,7 @@
 
         {{ hidden_field('related-lists', 'placeholder':"Related Lists", 'value':post['related-lists']) }}
         <i class="dropdown icon"></i>
-        <div class="default text"><u>Optional</u></b> Recommend related lists to your subscribers</div>
+        <div class="default text"><u>Recommend Streams</u></b> Recommend related Streams to your subscribers (Optional)</div>
         <div class="menu">
         {% if relatedListsNames is defined %}
         {% for index, related in relatedListsNames %}
