@@ -1,8 +1,8 @@
 <header class="re-header {{ editing is not empty and editing ? 're-header--editing': '' }}">
   <div class="re-header__inner">
     <a class="re-header__logo" href="/"><img src="/assets/images/9-0/logo.svg" /></a>
-    <a class="re-header__item feed {{ forYouActive is not empty and forYouActive ? 'active': '' }}" href="/for-you"><img src="/assets/images/9-0/header-feed-bird.svg" /> Feed</a>
-    <a class="re-header__item explore {{ exploreActive is not empty and exploreActive ? 'active': '' }}" href="/"><img src="/assets/images/9-0/header-explore-whale.svg" /> Explore</a>
+    <a class="re-header__item feed {{ forYouActive is not empty and forYouActive ? 'active': '' }}" href="/for-you"><img src="/assets/images/9-0/header-feed-bird.svg" /> Community</a>
+    <a class="re-header__item explore {{ exploreActive is not empty and exploreActive ? 'active': '' }}" href="/"><img src="/assets/images/9-0/header-explore-whale.svg" /> Streams</a>
       {% if auth.loggedIn() %}
           {% if pendingReceived(auth.getUser().id) > 0 %}
           <a class="re-header__item collabs {{ collabsActive is not empty and collabsActive ? 'active': '' }}" href="/collaborations#received">
