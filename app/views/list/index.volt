@@ -35,12 +35,12 @@
           </div>
 
         </div>
-        <div class="sh-dropdown card-subscribe-dropdown card-actions-dropdown--tall u-flex u-flexCol l-dropdown"
+        <!-- <div class="sh-dropdown card-subscribe-dropdown card-actions-dropdown--tall u-flex u-flexCol l-dropdown"
           style="padding-left: -100px;">
           <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'D')">Daily</a>
           <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'W')">Weekly</a>
           <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'M')">Monthly</a>
-        </div>
+        </div> -->
 
         <div class="button-container button-container__blue">
           <div class="but">
