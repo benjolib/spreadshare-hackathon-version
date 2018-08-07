@@ -14,6 +14,7 @@ services:
     volumes:
       - ./docker-testing/mysql/config/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
       - ./schemas/structure.sql:/docker-entrypoint-initdb.d/01_structure.sql
+      - ./schemas/data.sql:/docker-entrypoint-initdb.d/02_data.sql
     env_file:
         - docker-testing/variables.env
 
@@ -67,6 +68,8 @@ services:
       FACEBOOK_SECRET: 'f1c03b95bfc5c671085147b31b0474ef'
       MAIL_DISPATCHER_URL: 'https://mrm6uc8yla.execute-api.eu-central-1.amazonaws.com/dev'
       MAIL_DISPATCHER_API_KEY: 'AYsjjVU0KC4mmc4VUG7wV4EvxOFksHhq5BXXh9hN'
+      SUBSCRIPTION_SERVICE_URL: 'https://3s6docisl0.execute-api.eu-central-1.amazonaws.com/dev'
+      SUBSCRIPTION_SERVICE_API_KEY: 'mV3gWQnj3a4M9Hb36yKWJ8XMYOMbvxR6ahYWSdY6'
 
 volumes:
   redis:
