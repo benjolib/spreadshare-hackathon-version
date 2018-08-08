@@ -2,6 +2,14 @@
 <html lang="en">
 
 <head prefix="og:http://ogp.me/ns#">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121373296-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'UA-121373296-1');
+  </script>
   <title>{% block title %}{% endblock %}</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -96,17 +104,6 @@
 
   <script type="text/javascript" src="/js/react/main.3bd21672.js"></script>#} {% block scripts %}{% endblock %}
 
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110506889-1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-
-    gtag('config', 'UA-110506889-1');
-    
-  </script>
+ 
 </body>
 </html>
