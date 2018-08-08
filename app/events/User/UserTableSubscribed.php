@@ -2,6 +2,11 @@
 
 namespace DS\Events\User;
 
+use DS\Component\Mailer\dto\NewSubscriberEmailDto;
+use DS\Component\Mailer\dto\StreamEmailDto;
+use DS\Component\Mailer\dto\UserEmailDto;
+use DS\Component\ServiceManager;
+use DS\Component\Subscriptions\dto\SubscriptionFrequency;
 use DS\Events\AbstractEvent;
 use DS\Model\DataSource\TableLogType;
 use DS\Model\DataSource\UserNotificationType;
@@ -11,33 +16,57 @@ use DS\Model\TableStats;
 use DS\Model\User;
 use DS\Model\UserNotifications;
 
-/**
- * Spreadshare
- *
- * Table events like views or contributions
- *
- * @author    Dennis Stücken
- * @license   proprietary
- * @copyright Spreadshare
- * @link      https://www.spreadshare.co
- *
- * @version   $Version$
- * @package   DS\Events\Table
- */
+
 class UserTableSubscribed extends AbstractEvent
 {
-    
-    /**
-     * Issued after a has been followed by another user
-     *
-     * @param int $userId
-     * @param int $followedByUserId
-     */
-    public static function after(int $userId, int $tableId)
+
+    public static function after(int $userId, int $tableId, String $type)
     {
-        $user  = User::findFirstById($userId);
+        $user = User::findFirstById($userId);
         $table = Tables::findFirstById($tableId);
-        
+
+        self::createUserNotification($userId, $tableId, $table, $user);
+        self::createTableLog($userId, $tableId, $user);
+        self::changeTableStats($tableId);
+        self::subscribeForEmailNotifications($user, $tableId, $type);
+        self::sendNewSubscriberEmail($user, $table);
+    }
+
+    private static function subscribeForEmailNotifications(User $subscriber, int $tableId, String $type)
+    {
+        ServiceManager::instance(self::getDI())
+            ->getSubscriptionsService()
+            ->subscribeForEmailNotifications($subscriber->getId(),
+                $tableId, $subscriber->getEmail(),
+                SubscriptionFrequency::fromType($type));
+    }
+
+    private static function sendNewSubscriberEmail(User $subscriber, Tables $table)
+    {
+        $tableOwner = User::findFirstById($table->getOwnerUserId());
+        $domain = ServiceManager::instance(self::getDi())->getConfig()['domain'];
+        $baseUri = "https://$domain";
+
+        $subscriberDto = new UserEmailDto($baseUri);
+        $subscriberDto->withHandle($subscriber->getHandle())
+            ->setName($subscriber->getName())
+            ->setImageLink($subscriber->getImage())
+            ->setTagLine($subscriber->getTagline());
+
+        $stream = new StreamEmailDto($baseUri);
+        $stream
+            ->setName($table->getTitle())
+            ->withSlug($table->getSlug());
+
+        $dto = new NewSubscriberEmailDto($subscriberDto, $stream);
+
+        ServiceManager::instance(self::getDI())
+            ->getMailService()
+            ->sendNewSubscriberEmail($tableOwner->getEmail(), $dto);
+    }
+
+    public static function createUserNotification(int $userId, int $tableId, Tables $table, User $user)
+    {
         $userNotification = new UserNotifications;
         $userNotification
             ->setUserId($table->getOwnerUserId())
@@ -54,7 +83,10 @@ class UserTableSubscribed extends AbstractEvent
                 )
             )
             ->create();
-        
+    }
+
+    public static function createTableLog(int $userId, int $tableId, User $user)
+    {
         $tableLog = new TableLog();
         $tableLog
             ->setUserId($userId)
@@ -70,13 +102,15 @@ class UserTableSubscribed extends AbstractEvent
                 )
             )
             ->create();
-        
+    }
+
+    public static function changeTableStats(int $tableId)
+    {
         $tableStats = TableStats::findByFieldValue('tableId', $tableId);
-        if (!$tableStats)
-        {
+        if (!$tableStats) {
             $tableStats = new TableStats;
         }
         $tableStats->setSubscriberCount($tableStats->getSubscriberCount() + 1)->save();
     }
-    
+
 }

@@ -5,7 +5,7 @@ namespace DS\Component\Mailer\dto;
 use InvalidArgumentException;
 use JsonSerializable;
 
-class UserMetaEmailDto extends BaseEmailDto implements JsonSerializable
+class UserEmailDto extends BaseEmailDto implements JsonSerializable
 {
     const DEFAULT_TAGLINE = 'A Spreadshare member';
     private $name;

@@ -25,6 +25,8 @@ FACEBOOK_ID=$(sed 's/[&/\]/\\&/g' <<< "${FACEBOOK_ID}")
 FACEBOOK_SECRET=$(sed 's/[&/\]/\\&/g' <<< "${FACEBOOK_SECRET}")
 MAIL_DISPATCHER_URL=$(sed 's/[&/\]/\\&/g' <<< "${MAIL_DISPATCHER_URL}")
 MAIL_DISPATCHER_API_KEY=$(sed 's/[&/\]/\\&/g' <<< "${MAIL_DISPATCHER_API_KEY}")
+SUBSCRIPTION_SERVICE_URL=$(sed 's/[&/\]/\\&/g' <<< "${SUBSCRIPTION_SERVICE_URL}")
+SUBSCRIPTION_SERVICE_API_KEY=$(sed 's/[&/\]/\\&/g' <<< "${SUBSCRIPTION_SERVICE_API_KEY}")
 
 sed -i -e "s/_HOST_/${HOST}/g" /application/app/config/Config.php
 sed -i -e "s/_AUTH_CALLBACK_/${AUTH_CALLBACK}/g" /application/app/config/Config.php
@@ -45,5 +47,7 @@ sed -i -e "s/_FACEBOOK_ID_/${FACEBOOK_ID}/g" /application/app/config/Config.php
 sed -i -e "s/_FACEBOOK_SECRET_/${FACEBOOK_SECRET}/g" /application/app/config/Config.php
 sed -i -e "s/_MAIL_DISPATCHER_URL_/${MAIL_DISPATCHER_URL}/g" /application/app/config/Config.php
 sed -i -e "s/_MAIL_DISPATCHER_API_KEY_/${MAIL_DISPATCHER_API_KEY}/g" /application/app/config/Config.php
+sed -i -e "s/_SUBSCRIPTION_SERVICE_URL_/${SUBSCRIPTION_SERVICE_URL}/g" /application/app/config/Config.php
+sed -i -e "s/_SUBSCRIPTION_SERVICE_API_KEY_/${SUBSCRIPTION_SERVICE_API_KEY}/g" /application/app/config/Config.php
 
 echo "Done."
