@@ -2,14 +2,17 @@
 <html lang="en">
 
 <head prefix="og:http://ogp.me/ns#">
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121373296-1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+  {% if env == 'production' %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121373296-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'UA-121373296-1');
+    </script>
+  {%endif%}
   
-    gtag('config', 'UA-121373296-1');
-  </script>
   <title>{% block title %}{% endblock %}</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,7 +37,7 @@
 
 </head>
 
-<body>
+<body> 
   <script>
     window.fbAsyncInit = function () {
       FB.init({
