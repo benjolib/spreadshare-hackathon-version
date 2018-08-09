@@ -47,7 +47,7 @@ class UserCreated extends AbstractEvent
             try
             {
                 serviceManager()->getSlack()->to(Application::instance()->getConfig()['slack']['users-channel'])->send(
-                    sprintf('New User: %s, %s (http://%s/user/%s)', $user->getName(), $user->getEmail(), Application::instance()->getConfig()['domain'], $user->getHandle())
+                    sprintf('New User: %s, %s (http://%s/profile/%s)', $user->getName(), $user->getEmail(), Application::instance()->getConfig()['domain'], $user->getHandle())
                 );
             } catch (\Exception $e) {
                 // not that important..
