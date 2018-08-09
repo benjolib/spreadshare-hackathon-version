@@ -17,11 +17,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <!-- <meta property="og:title" content="{% block title %}{% endblock %}" /> {# TODO: It's not taking block title the second time #}
-  <meta property="og:type" content="website" />
-  <meta property="og:description" content="{{ config.description }}" />
-  <meta property="og:url" content="http://{{ config.domain }}" />
-  <meta property="og:image" content="http://{{ config.domain }}/assets/images/logo_big.png" /> -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
   crossorigin="anonymous">
 
@@ -34,6 +29,11 @@
   <link href="/css/main.878d83e3.css" rel="stylesheet">
   <link href="/semantic/semantic.min.css" rel="stylesheet">
   <link rel="icon" type="image/png" href="/assets/images/9-0/logo.png"> {% block header %}{% endblock %}
+  <meta property="og:title" content="{% block title %}{% endblock %}" /> {# TODO: It's not taking block title the second time #}
+  <meta property="og:type" content="website" />
+  <meta property="og:description" content="{{ config.description }}" />
+  <meta property="og:url" content="http://{{ config.domain }}" />
+  <meta property="og:image" content="http://{{ config.domain }}/assets/images/logo_big.png" />
 
 </head>
 
