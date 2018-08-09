@@ -1,4 +1,18 @@
-{% extends 'layouts/main.volt' %} {% block title %}SpreadShare {% endblock %} {% block content %}
+{% extends 'layouts/main.volt' %} 
+
+
+{% block title %}{{ table['title'] }}{% endblock %}
+
+{% block header %}
+<meta property="og:title" content="{{ table['title'] }} " /> {# TODO: It's not taking block title the second time #}
+<meta property="og:type" content="website" />
+<meta property="og:description" content="{{ table['tagline'] }}" />
+<meta property="og:url" content="http://{{ config.domain }}/stream/{{ table['slug'] }}" />
+<meta property="og:image" content="{% if table['image'] %} table['image'] {% else %} http://{{ config.domain }}/assets/images/logo_big.png {% endif %}" />
+
+{% endblock %}
+
+{% block content %}
 
 <div class="re-page re-page--list">
   <div class="list-page-space">
