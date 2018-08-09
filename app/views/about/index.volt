@@ -21,25 +21,34 @@
       <tbody>
         <tr>
           <td>
-            <a href="/stream/work-with-us"><h3>Jobs</h3></a>
+            <a href="/stream/our-team"><h3>Team</h3></a>
+            <p>Co-workers / Team / Community Members</p>
+          </td>
+
+          <td></td>
+        </tr>
+        <tr class="re-table-space"></tr>
+        <tr>
+          
+          <td>
+            <a href="/stream/work-with-us"><h3>Work</h3></a>
             <p>Jobs, mini tasks, remote work & voluntary support options</p>
           </td>
           <td></td>
         </tr>
         <tr class="re-table-space"></tr>
+        
+        <td>
+          <a href="/stream/our-curators"><h3>Suggest a Curators</h3></a>
+          <p>Have someone in mind who should curate a Stream here? </p>
+        </td>
+        <td></td>
+      </tr>
+
+        <tr class="re-table-space"></tr>
         <tr>
           <td>
-            <a href="/stream/our-team"><h3>Crew</h3></a>
-            <p>Co-workers / Team / Community Members</p>
-          </td>
-          <td></td>
-        </tr>
-        <tr class="re-table-space"></tr>
-    
-        <tr class="re-table-space"></tr>
-        <tr>
-          <td>
-            <a href="/stream/blog"><h3>Thoughts</h3></a>
+            <a href="/stream/blog"><h3>Blog</h3></a>
             <p>Blog posts and other recourses we value</p>
           </td>
           <td></td>
@@ -54,14 +63,24 @@
           <td></td>
         </tr>
         <tr class="re-table-space"></tr>
+
         <tr>
           <td>
-            <a href="#"><h3>Terms</h3></a>
-            <p>Terms & Conditions, Privacy Policy, Cookie Policy & Disclaimer</p>
+            <a href="/stream/terms-of-service"><h3>Terms</h3></a>
+            <p>Terms & Conditions</p>
           </td>
           <td></td>
         </tr>
         <tr class="re-table-space"></tr>
+        <tr>
+          <td>
+            <a href="/stream/privacy-policy"><h3>Privacy</h3></a>
+            <p>Privacy Policy, Cookie Policy & Disclaimer</p>
+          </td>
+          <td></td>
+        </tr>
+        <tr class="re-table-space"></tr>
+
       </tbody>
     </table>
     <div style="margin-top: 80px;overflow-x:none;" class="u-flex u-sm-flexWrap u-md-flexNoWrap thanks-to">
