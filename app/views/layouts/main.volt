@@ -17,11 +17,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta property="og:title" content="{% block title %}{% endblock %}" /> {# TODO: It's not taking block title the second time #}
+  <!-- <meta property="og:title" content="{% block title %}{% endblock %}" /> {# TODO: It's not taking block title the second time #}
   <meta property="og:type" content="website" />
   <meta property="og:description" content="{{ config.description }}" />
   <meta property="og:url" content="http://{{ config.domain }}" />
-  <meta property="og:image" content="http://{{ config.domain }}/assets/images/logo_big.png" />
+  <meta property="og:image" content="http://{{ config.domain }}/assets/images/logo_big.png" /> -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
   crossorigin="anonymous">
 
