@@ -2,15 +2,21 @@
 <html lang="en">
 
 <head prefix="og:http://ogp.me/ns#">
+  {% if env == 'production' %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121373296-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'UA-121373296-1');
+    </script>
+  {%endif%}
+  
   <title>{% block title %}{% endblock %}</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta property="og:title" content="{% block title %}{% endblock %}" /> {# TODO: It's not taking block title the second time #}
-  <meta property="og:type" content="website" />
-  <meta property="og:description" content="{{ config.description }}" />
-  <meta property="og:url" content="http://{{ config.domain }}" />
-  <meta property="og:image" content="http://{{ config.domain }}/assets/images/logo_big.png" />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
   crossorigin="anonymous">
 
@@ -23,10 +29,17 @@
   <link href="/css/main.878d83e3.css" rel="stylesheet">
   <link href="/semantic/semantic.min.css" rel="stylesheet">
   <link rel="icon" type="image/png" href="/assets/images/9-0/logo.png"> {% block header %}{% endblock %}
+  <meta property="og:title" content="{% block title %}{% endblock %}" /> {# TODO: It's not taking block title the second time #}
+  <meta property="og:type" content="website" />
+  <meta property="og:description" content="{{ config.description }}" />
+  <meta property="og:url" content="http://{{ config.domain }}" />
+  <meta property="og:image" content="http://{{ config.domain }}/assets/images/logo_big.png" />
+  <meta property="og:image:width" content="724px" />
+  <meta property="og:image:height" content="724px" />
 
 </head>
 
-<body>
+<body> 
   <script>
     window.fbAsyncInit = function () {
       FB.init({
@@ -96,17 +109,6 @@
 
   <script type="text/javascript" src="/js/react/main.3bd21672.js"></script>#} {% block scripts %}{% endblock %}
 
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110506889-1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-
-    gtag('config', 'UA-110506889-1');
-    
-  </script>
+ 
 </body>
 </html>

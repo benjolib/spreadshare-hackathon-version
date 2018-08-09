@@ -3,10 +3,11 @@
 namespace DS\Component\Mailer;
 
 use DS\Application;
+use DS\Component\Mailer\dto\NewSubscriberEmailDto;
 use GuzzleHttp\Client;
 use Phalcon\Logger;
 use Phalcon\Mvc\User\Component;
-use DS\Component\Mailer\dto\UserMetaEmailDto;
+use DS\Component\Mailer\dto\UserEmailDto;
 
 class SpreadshareEmailService extends Component implements Mailer
 {
@@ -27,9 +28,13 @@ class SpreadshareEmailService extends Component implements Mailer
         $this->sendEmail("welcome", ['email' => $email, 'name' => $userName]);
     }
 
-    public function sendNewFollowerEmail(String $email, UserMetaEmailDto $userMeta)
+    public function sendNewFollowerEmail(String $email, UserEmailDto $userMeta)
     {
         $this->sendEmail("new-follower", ['emails' => $email, 'person' => $userMeta]);
+    }
+
+    public function sendNewSubscriberEmail(String $email, NewSubscriberEmailDto $dto){
+        $this->sendEmail("new-subscriber", ['emails' => $email, 'subscription' => $dto]);
     }
 
 

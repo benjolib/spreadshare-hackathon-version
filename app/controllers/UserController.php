@@ -119,8 +119,8 @@ class UserController
                 $file->moveTo($path.$user->getId().'.'.$file->getExtension());
                 $user->setImage('/userimages/'.$user->getId().'.'.$file->getExtension());
             }
-            $user->setName($this->request->get('name'))
-                ->setTagline($this->request->get('tagline'))
+            $user->setName($this->request->getPost('name', 'string'))
+                ->setTagline($this->request->getPost('tagline', 'string'))
                 ->save();
             $this->response->redirect('/profile/'.$user->getHandle(),true);
         }

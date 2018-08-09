@@ -49,6 +49,7 @@ abstract class BaseController extends PhalconMvcController
      */
     public function initialize()
     {
+        $this->view->setVar('env', ENV);
         if (!$this->serviceManager) {
             $this->serviceManager = ServiceManager::instance($this->di);
         }

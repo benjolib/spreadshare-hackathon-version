@@ -1,3 +1,7 @@
+
+-- Do not check foreign keys while creating tables in arbitrary order
+SET foreign_key_checks=0;
+
 -- Create syntax for TABLE 'changeRequests'
 CREATE TABLE `changeRequests` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -594,3 +598,6 @@ CREATE TABLE `wallet` (
   KEY `tokens` (`tokens`),
   CONSTRAINT `walletUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=utf8;
+
+-- Enable foreign keys check when all tables are in place
+SET foreign_key_checks=1;
