@@ -43,16 +43,6 @@ class UserCreated extends AbstractEvent
             // Send Table Creation Event To ES Queue
             Bernard::produce('newWallet', $datasource);
             
-            // Send new user notification
-            try
-            {
-                serviceManager()->getSlack()->to(Application::instance()->getConfig()['slack']['users-channel'])->send(
-                    sprintf('New User: %s, %s (http://%s/user/%s)', $user->getName(), $user->getEmail(), Application::instance()->getConfig()['domain'], $user->getHandle())
-                );
-            } catch (\Exception $e) {
-                // not that important..
-            }
-
             $n = new UserNotifications;
             $n
                 ->setUserId($user->getId())
