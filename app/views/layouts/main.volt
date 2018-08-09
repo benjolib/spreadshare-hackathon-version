@@ -34,6 +34,8 @@
   <meta property="og:description" content="{{ config.description }}" />
   <meta property="og:url" content="http://{{ config.domain }}" />
   <meta property="og:image" content="http://{{ config.domain }}/assets/images/logo_big.png" />
+  <meta property="og:image:width" content="724px" />
+  <meta property="og:image:height" content="724px" />
 
 </head>
 
