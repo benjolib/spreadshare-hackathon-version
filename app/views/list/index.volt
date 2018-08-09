@@ -8,10 +8,9 @@
 <meta property="og:type" content="website" />
 <meta property="og:description" content="{{ table['tagline'] }}" />
 <meta property="og:url" content="https://{{ config.domain }}/stream/{{ table['slug'] }}" />
-<meta property="og:image" content="{% if table['image'] %} https://{{ config.domain }}/{{table['image']}} {% else %} http://{{ config.domain }}/assets/images/logo_big.png {% endif %}" />
+<meta property="og:image" content="{% if table['image'] %} https://{{ config.domain }}{{table['image']}} {% else %} http://{{ config.domain }}/assets/images/logo_big.png {% endif %}" />
 <meta property="og:image:width" content="894px" />
 <meta property="og:image:height" content="258px" />
-
 {% endblock %}
 
 {% block content %}
