@@ -1,14 +1,5 @@
 <?php
 
-/**
- * Spreadshare
- *
- * Mailer Initialization
- *
- * @package DS
- * @version $Version$
- */
-
 use GuzzleHttp\Client;
 
 return function (\DS\Interfaces\GeneralApplication $application, Phalcon\Di\FactoryDefault $di)

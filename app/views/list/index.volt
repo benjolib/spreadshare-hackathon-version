@@ -1,4 +1,19 @@
-{% extends 'layouts/main.volt' %} {% block title %}SpreadShare {% endblock %} {% block content %}
+{% extends 'layouts/main.volt' %} 
+
+
+{% block title %}{{ table['title'] }}{% endblock %}
+
+{% block header %}
+<meta property="og:title" content="{{ table['title'] }} " /> {# TODO: It's not taking block title the second time #}
+<meta property="og:type" content="website" />
+<meta property="og:description" content="{{ table['tagline'] }}" />
+<meta property="og:url" content="https://{{ config.domain }}/stream/{{ table['slug'] }}" />
+<meta property="og:image" content="{% if table['image'] %} https://{{ config.domain }}{{table['image']}} {% else %} http://{{ config.domain }}/assets/images/logo_big.png {% endif %}" />
+<meta property="og:image:width" content="894px" />
+<meta property="og:image:height" content="258px" />
+{% endblock %}
+
+{% block content %}
 
 <div class="re-page re-page--list">
   <div class="list-page-space">
@@ -36,7 +51,7 @@
 
         </div>
         <div class="sh-dropdown card-subscribe-dropdown card-actions-dropdown--tall u-flex u-flexCol l-dropdown"
-          style="padding-left: -100px;">
+          style="padding-left: -100px;display:none;visibility: hidden">
           <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'D')">Daily</a>
           <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'W')">Weekly</a>
           <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'M')">Monthly</a>
@@ -79,7 +94,7 @@
 
         </div>
         <div class="sh-dropdown card-subscribe-dropdown card-actions-dropdown--tall u-flex u-flexCol l-dropdown"
-          style="padding-left: -100px;">
+          style="padding-left: -100px;display:none;visibility: hidden">
           <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'D')">Daily</a>
           <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'W')">Weekly</a>
           <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'M')">Monthly</a>
@@ -360,7 +375,7 @@
   <div class="list-actions bottom u-sm-flexCol u-md-flexRow u-md-flexRow">
     <div class="button-container button-container__orange l-button" data-dropdown-placement="center" data-dropdown-offset="0">
 
-        <a class="re-button re-button--list-subscribe" href="javascript:;">
+        <a class="re-button re-button--list-subscribe" href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'W')">
           <img src="/assets/images/9-0/bird-orange.svg" /> Subscribe
         </a>
 
@@ -372,7 +387,7 @@
 
       </div>
       <div class="sh-dropdown card-subscribe-dropdown card-actions-dropdown--tall u-flex u-flexCol l-dropdown"
-        style="padding-left: -100px;">
+        style="padding-left: -100px;display:none;visibility: hidden">
         <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'D')">Daily</a>
         <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'W')">Weekly</a>
         <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'M')">Monthly</a>
@@ -415,7 +430,7 @@
 
       </div>
       <div class="sh-dropdown card-subscribe-dropdown card-actions-dropdown--tall u-flex u-flexCol l-dropdown"
-        style="padding-left: -100px;">
+        style="padding-left: -100px;display:none;visibility: hidden">
         <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'D')">Daily</a>
         <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'W')">Weekly</a>
         <a href="javascript:;" onclick="subsFreqOnClick({{ table['id'] }}, 'M')">Monthly</a>

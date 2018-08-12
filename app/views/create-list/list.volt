@@ -1,11 +1,12 @@
 <div class="table-scroll">
     <div class="shadowcontain">
-        <div class="l-button" style="position: absolute;top: 0;right: 6px;pointer-events: all;cursor: pointer;">
+      <!-- TODO need controller to remove 1 listing -->
+        <!-- <div class="l-button" style="position: absolute;top: 0;right: 6px;pointer-events: all;cursor: pointer;">
             <img src="/assets/images/dotdotdot.svg" />
         </div>
         <div class="sh-dropdown list-row-remove-dropdown u-flex u-flexCol u-flexJustifyCenter l-dropdown">
             <a href="#"><img src="/assets/images/bin.svg" /> Remove listing</a>
-        </div>
+        </div> -->
     </div>
     <div class="scroll-wrapper">
       <table class="re-table re-table--list">

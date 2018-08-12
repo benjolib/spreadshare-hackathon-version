@@ -137,10 +137,9 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
       {% if qty == 3 %}
       {% set subcribedbox=1 %}
 
-        {{ partial('partials/action-card', [ 'color': 'orange-bird', 'heading': 'Subscribe', 'text': 'Subscribe to your favorite
-        topics and collections.
+        {{ partial('partials/action-card', [ 'color': 'orange-bird', 'heading': 'Follow topics, not people', 'text': 'Keep track of your favorite topics.
         <br />
-        <br />Because you want to keep track of relevant updates', 'action': '/subscriptions', 'buttonText': 'Manage Subscriptions'
+        <br />Our curators and the community will feed you with updates. In your feed and as summaries to your inbox.', 'action': '/subscriptions', 'buttonText': 'Manage Subscriptions'
         ]) }}
         {% endif %}
          {% endif %}
@@ -194,23 +193,25 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
 
     {% if qty == 2 %}
 
-    {{ partial('partials/action-card', [ 'color': 'blue-octopus', 'heading': 'Collaborate', 'text': 'Collaborate with your
-    favorite curators.
+    {{ partial('partials/action-card', [ 'color': 'blue-octopus', 'heading': 'Suggest a Curator', 'text': 'Have someone in mind who should curate a Stream here?
+
     <br />
-    <br />Because you want to get endorsed by trusted experts.', 'action': '/subscriptions', 'buttonText': 'Manage Subscriptions']) }}
+    <br />Please let us know.', 'action': '/stream/our-curators', 'buttonText': 'Recommend Someone']) }}
     {%endif%}
 
     {% if qty == 5 %}
-    {{ partial('partials/action-card', [ 'color': 'purple-whale', 'heading': 'Curate', 'text': 'Curate collections and publications.
+    {{ partial('partials/action-card', [ 'color': 'purple-whale', 'heading': 'Become a Curator', 'text': 'Start curating a Stream.
+
     <br />
-    <br />Because you want your curation to spread.', 'action': '/subscriptions', 'buttonText': 'Manage Subscriptions' ]) }}
+    <br />And shape the way your subscribers are being informed.', 'action': '/stream/become-a-curator', 'buttonText': 'Claim Curator Pass' ]) }}
     {%endif%}
 
     {% if qty == 8 %}
-    {{ partial('partials/action-card', [ 'color': 'green-lightning', 'heading': 'Spread', 'text': 'Spread the best
-    content with your followers.
+    {{ partial('partials/action-card', [ 'color': 'green-lightning', 'heading': 'Work with us', 'text': 'Engineering, design, content or community. Reach out to us if you want to join our journey.
+
+ 
     <br />
-    <br />Because you want your peers to be as informed as you are.', 'action': '/subscriptions', 'buttonText': 'Manage Subscriptions']) }}
+    <br />PS: We work remotely.', 'action': 'mailto:hi@spreadshare.co', 'buttonText': 'Write us']) }}
       {%endif%}
 
     {{ partial( 'partials/list-card', [ 'id': tables[index][ 'id'], 'slug': tables[index][ 'slug'],
@@ -244,14 +245,14 @@ header #} {% block header %}{% endblock %} {# main section #} {% block content %
 
     </div>
     <div class="info">
-      <div class="heading">Need help from digital experts?</div>
+      <div class="heading">Research as a Service</div>
       <div class="subheading">
-        Request custom stream - curated by expert, in time & budget.
+          Need help from digital experts? Get your research tasks done.
       </div>
     </div>
     <div class="action u-sm-flexWrap u-sm-flexCol u-md-flexRow u-sm-flexGrow2 u-flexAlignItemsCenter">
-      <button onclick="window.location.href='/stream/get-a-task-done'">Request a List</button>
-      <button onclick="window.location.href='/stream/become-a-researcher'" class="transparent">Earn money as researcher</button>
+      <button onclick="window.location.href='/stream/get-a-task-done'">Request Task</button>
+      <button onclick="window.location.href='/stream/become-a-researcher'" class="transparent">Earn money as a Researcher</button>
     </div>
   </div>
 </div>

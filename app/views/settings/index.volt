@@ -330,13 +330,13 @@
       }
     }
     $(document).ready(function () {
-      $('input[type=text]').each(function(){
-        $(this).blur(function() {   
+      // $('input[type=text]').each(function(){
+      //   $(this).blur(function() {   
 
-        $(".re-button").click()
+      //   $(".re-button").click()
 
-        });
-      })
+      //   });
+      // })
 
        
 

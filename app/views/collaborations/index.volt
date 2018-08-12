@@ -8,7 +8,7 @@
 <div class="re-page">
   <div class="collaborations-page-space">
     <h1 class="re-heading">Collaborations</h1>
-    <h2 class="re-subheading">Manage all collaborations in one place.</h2>
+    <h2 class="re-subheading">All your collaborations in one place.</h2>
   </div>
 
   <div class="collaborations-tabs">

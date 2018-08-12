@@ -7,7 +7,7 @@
 <div class="re-page">
   <div class="collaborations-page-space">
     <h1 class="re-heading">History</h1>
-    <h2 class="re-subheading">Lists you have recently viewed.</h2>
+    <h2 class="re-subheading">Streams you recently viewed.</h2>
   </div>
 
   <div class="u-flex u-flexWrap big-gutter">

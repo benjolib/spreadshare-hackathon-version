@@ -4,7 +4,7 @@ block content %}
   <div class="u-flex u-sm-flexCol u-md-flexRow u-flexJustifyBetween u-md-flexAlignItemsEnd lists-page-space">
     <div>
       <h1 class="re-heading">Streams</h1>
-      <h2 class="re-subheading re-subheading--button-below">Manage all your Streams in one place.</h2>
+      <h2 class="re-subheading re-subheading--button-below">All your Streams in one place.</h2>
     </div>
     <div>
 <a href="/create-list" class="re-button re-button--lists-curate-stream"><img src="/assets/images/9-0/whale-white.svg">Curate a Stream</a>
@@ -36,8 +36,9 @@ block content %}
 <script type="text/javascript">
   $(document).ready(function () {
     var pageNumber = 1;
-
+    
     $('.re-button--load-more').on('click', function (e) {
+      window.bindPops();
       e.preventDefault();
       $.ajax(window.location.pathname + '?page=' + pageNumber)
         .done(function (response) {
@@ -47,7 +48,7 @@ block content %}
             if (!$('<div>' + response + '</div>').find('.moreToLoad').val()) {
               $('.re-button--load-more').hide();
             }
-            window.bindPops();
+           window.bindPops();
           }
         });
     });

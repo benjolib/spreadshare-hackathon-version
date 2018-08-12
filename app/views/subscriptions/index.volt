@@ -3,7 +3,7 @@
 <div class="re-page">
   <div class="lists-page-space">
     <h1 class="re-heading">Subscriptions</h1>
-    <h2 class="re-subheading re-subheading--button-below">Manage all your subscriptions in one place.</h2>
+    <h2 class="re-subheading re-subheading--button-below">All your subscriptions in one place.</h2>
   </div>
 
   {# {% if tables is defined AND tables %} #}
