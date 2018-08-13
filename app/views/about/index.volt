@@ -1,6 +1,6 @@
 {% extends 'layouts/main.volt' %}
 
-{% block title %}SpreadShare - Streams{% endblock %}
+{% block title %}SpreadShare - About{% endblock %}
 
 {% block header %}
 {% endblock %}

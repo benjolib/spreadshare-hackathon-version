@@ -1,5 +1,6 @@
 {% extends 'layouts/main.volt' %}
 
+{% block title %}SpreadShare - Community{% endblock %}
 {% block header %}
 {% endblock %}
 

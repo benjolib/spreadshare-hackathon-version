@@ -1,6 +1,6 @@
 {% extends 'layouts/main.volt' %}
 
-{% block title %}Spreadshare{% endblock %}
+{% block title %}Spreadshare - 500{% endblock %}
 
 {% block content %}
 

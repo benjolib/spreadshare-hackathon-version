@@ -1,5 +1,5 @@
 {% extends 'layouts/main.volt' %}
-
+{% block title %}SpreadShare - History{% endblock %}
 {% block header %}
 {% endblock %}
 

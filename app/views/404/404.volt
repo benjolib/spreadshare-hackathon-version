@@ -1,4 +1,4 @@
-{% extends 'layouts/main.volt' %} {% block title %}Spreadshare{% endblock %} {% block content %}
+{% extends 'layouts/main.volt' %} {% block title %}Spreadshare - 404{% endblock %} {% block content %}
 <div class="re-page">
 </div>
 <div class="info-box">

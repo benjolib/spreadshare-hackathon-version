@@ -1,5 +1,5 @@
 {% extends 'layouts/main.volt' %}
-
+{% block title %}SpreadShare - Activity{% endblock %}
 {% block header %}
 {% endblock %}
 

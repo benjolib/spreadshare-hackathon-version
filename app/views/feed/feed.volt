@@ -1,4 +1,4 @@
-{% extends 'layouts/main.volt' %} {# page title #} {% block title %}SpreadShare - Feed - Data that matters.{% endblock %}
+{% extends 'layouts/main.volt' %} {# page title #} {% block title %}SpreadShare - Community - Data that matters.{% endblock %}
 {% block content %}
 
 <div class="re-page">

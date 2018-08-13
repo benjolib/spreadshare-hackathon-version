@@ -1,6 +1,6 @@
 {% extends 'layouts/main.volt' %}
 
-
+{% block title %}SpreadShare - Collaborations{% endblock %}
 {% block header %}
 {% endblock %}
 

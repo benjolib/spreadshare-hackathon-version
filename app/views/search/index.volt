@@ -1,4 +1,4 @@
-{% extends 'layouts/main.volt' %} {# page title #} {% block title %}SpreadShare - Community curated Tables{% endblock %}
+{% extends 'layouts/main.volt' %} {# page title #} {% block title %}SpreadShare - Search{% endblock %}
 {# page header #} {% block header %}{% endblock %} {# main section #} {% block content %}
 
 <div class="re-page">
