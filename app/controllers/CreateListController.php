@@ -12,6 +12,7 @@ use DS\Model\DataSource\UserRoles;
 use DS\Model\Tables;
 use DS\Services\Stream as StreamService;
 use Phalcon\Filter;
+use Symfony\Component\VarDumper\VarDumper;
 
 class CreateListController extends BaseController implements LoginAwareController
 {
@@ -126,8 +127,12 @@ class CreateListController extends BaseController implements LoginAwareControlle
                     $this->view->setVar('relatedListsNames', empty($relatedListsIdsAndNames)?[]:array_column($relatedListsIdsAndNames, 'name'));
 
                     $tableContentFromCsv = $this->tableContentFromCsv($csv);
-                    $this->view->setVar('tableColumns', $tableContentFromCsv[0]);
-                    $this->view->setVar('tableContent', array_splice($tableContentFromCsv, 1));
+                    $this->view->setVar('tableColumns', [
+                        'Name',
+                        'Description',
+                        'Link'
+                    ]);
+                    $this->view->setVar('tableContent', $tableContentFromCsv);
                     $this->view->setVar('editing', true);
                     try {
                         $table

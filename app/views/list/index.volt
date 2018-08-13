@@ -1,4 +1,4 @@
-{% extends 'layouts/main.volt' %} 
+{% extends 'layouts/main.volt' %}
 
 
 {% block title %}{{ table['title'] }}{% endblock %}
@@ -171,12 +171,6 @@
 
             </div>
           </th>
-          <th class="shadowcontainth"></th>
-          <th>{# image #}</th>
-          {% for column in tableColumns %}
-
-          <th>{{ column.title }}</th>
-          {% endfor %}
         </tr>
       </thead>
       <tbody>
@@ -278,16 +272,19 @@
               <a href="#" class="action-button">Request to remove</a>
           </td>
 
+            {% set row = row['content']|json_decode %}
 
-          {% for i,cell in row['content']|json_decode %} {% set len = filterTableRowsContent(cell.content)|striptags|length %} {% if
-          len > 160 %} {% set length = 480 %} {% elseif len > 80 %} {% set length = 300 %} {% elseif len > 40 %} {% set length
-          = 175 %} {% elseif len > 20 %} {% set length = 150 %} {% else %} {% set length = 0 %} {% endif %}
-
-          <td style="min-width: {{ length }}px;">
-            {{ filterTableRowsContent(cell.content) }}
-
-          </td>
-          {% endfor %}
+            <td style="text-align:left;width:85%;">
+                <strong>{{ row[0].content }}</strong>
+                <p>{{ row[1].content }}</p>
+                <p>
+                {% if row[2].link is defined %}
+                    <a class="re-table-link" target="_blank" href="{{ row[2].link }}">{{ row[2].content }}</a>
+                {% else %}
+                    <a class="re-table-link" target="_blank" href="{{ row[2].content }}">{{ row[2].content }}</a>
+                {% endif %}
+                </p>
+            </td>
         </tr>
         <tr class="re-table-space"></tr>
         {% endfor %} {% else %}

@@ -28,6 +28,7 @@
 
           {% if tableContent is not empty and tableContent %}
             {% for i, row in tableContent %}
+              {% if row['id'] is not defined %}{% continue %}{% endif %}
               <tr class="list-row-tr" id="{{ row['id'] }}">
                 <td>
                 </td>

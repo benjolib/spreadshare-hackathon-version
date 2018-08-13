@@ -51,6 +51,7 @@ class VoltAdapter extends Volt
         'strtotime',
         'explode',
         'implode',
+        'var_dump',
     ];
 
     /**

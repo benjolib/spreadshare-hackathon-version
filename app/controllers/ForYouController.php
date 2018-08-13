@@ -4,6 +4,7 @@ namespace DS\Controller;
 
 use DS\Interfaces\LoginAwareController;
 use DS\Services\Feed as FeedService;
+use Symfony\Component\VarDumper\VarDumper;
 
 class ForYouController extends BaseController implements LoginAwareController
 {
@@ -11,44 +12,46 @@ class ForYouController extends BaseController implements LoginAwareController
     {
         return true;
     }
-
+    
     public function indexAction()
     {
-        $fs = new FeedService();
-        $authId = $this->serviceManager->getAuth()->getUserId();
+        $fs           = new FeedService();
+        $authId       = $this->serviceManager->getAuth()->getUserId();
         $postsPerPage = 10;
-        if ($this->request->isAjax() && $this->request->has('page') && $this->request->has('date')) {
-            $initialPage = (int)$this->request->get('page', 'int');
-            $feedDate = (new \DateTimeImmutable())->setTimestamp($this->request->get('date','int'));
+        if ($this->request->isAjax() && $this->request->has('page') && $this->request->has('date'))
+        {
+            $initialPage = (int) $this->request->get('page', 'int');
+            $feedDate    = (new \DateTimeImmutable())->setTimestamp($this->request->get('date', 'int'));
             $this->view->setMainView('for-you/content');
-        } else {
+        }
+        else
+        {
             $initialPage = 0;
-            $feedDate = new \DateTimeImmutable();
+            $feedDate    = new \DateTimeImmutable();
             $this->view->setMainView('for-you/index');
         }
-        $postsInSubscribedLists = $fs->postsInMySubscribedLists($authId, $postsPerPage, $feedDate, $initialPage);
-        $postsAlreadyShown = $postsInSubscribedLists->getIds();
-        $postsFromUsersIFollow = $fs->postsFromUsersIFollow($authId, $postsPerPage, $feedDate, $initialPage, $postsAlreadyShown);
-        $postsAlreadyShown = array_merge($postsAlreadyShown, $postsFromUsersIFollow->getIds());
-        $newListsFromMyFollowed = $fs->newListsFromMyFollowed($authId, $postsPerPage, $feedDate, $initialPage);
+        $postsInSubscribedLists      = $fs->postsInMySubscribedLists($authId, $postsPerPage, $feedDate, $initialPage);
+        $postsAlreadyShown           = $postsInSubscribedLists->getIds();
+        $postsFromUsersIFollow       = $fs->postsFromUsersIFollow($authId, $postsPerPage, $feedDate, $initialPage, $postsAlreadyShown);
+        $postsAlreadyShown           = array_merge($postsAlreadyShown, $postsFromUsersIFollow->getIds());
+        $newListsFromMyFollowed      = $fs->newListsFromMyFollowed($authId, $postsPerPage, $feedDate, $initialPage);
         $listsSubscribedByMyFollowed = $fs->listsSubscribedByMyFollowed($authId, $postsPerPage, $feedDate, $initialPage);
-        $votesFromUsersIFollow = $fs->votesFromUsersIFollow($authId, $postsPerPage, $feedDate, $initialPage);
-        $collabsFromUsersIFollow = $fs->collabsFromUsersIFollow($authId, $postsPerPage, $feedDate, $initialPage, $postsAlreadyShown);
-
+        $votesFromUsersIFollow       = $fs->votesFromUsersIFollow($authId, $postsPerPage, $feedDate, $initialPage);
+        $collabsFromUsersIFollow     = $fs->collabsFromUsersIFollow($authId, $postsPerPage, $feedDate, $initialPage, $postsAlreadyShown);
+        
         $feedElements = $fs->getOrderedFeed(
-            $postsInSubscribedLists->elements, 
+            $postsInSubscribedLists->elements,
             $newListsFromMyFollowed->elements,
             $listsSubscribedByMyFollowed->elements,
             $postsFromUsersIFollow->elements,
             $votesFromUsersIFollow->elements,
             $collabsFromUsersIFollow->elements
         );
-
-
+        
         $this->view->setVar('feedElements', $feedElements);
         $this->view->setVar('feedDate', $feedDate->getTimestamp());
         $this->view->setVar('page', $initialPage);
-
+        
         $this->view->setVar('forYouActive', true);
     }
 }

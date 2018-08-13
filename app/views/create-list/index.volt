@@ -140,7 +140,7 @@
         {% endif %}
       </div>
 
-    </div></div>
+    </div></div>Subscriptions
 
 
 
@@ -159,8 +159,9 @@
         <div class="create-list-tab-content create-list-tab-content-copy">
           {% if tableColumns is not empty %} {{ partial('create-list/list') }} {% else %}
           <div class="create-list-copy-textarea-container">
-            {{ text_area('copy', 'placeholder':'Paste here','class':'create-list-copy-textarea') }} {#
-            <textarea class="create-list-copy-textarea" placeholder="Paste here" name="copy"></textarea>#}
+            {{ text_area('copy', 'placeholder':"Title 1, Description 1, Link 1
+Title 2, Description 2, Link 2",'class':'create-list-copy-textarea') }} {#
+            <textarea class="create-list-copy-textarea" placeholder="Title, Description, Link\nTitle 2, Description 2, Link 2" name="copy"></textarea>#}
             <button class="re-button create-list-copy-button">Format to Stream</button>
           </div>
           {% endif %}
