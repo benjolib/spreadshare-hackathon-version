@@ -66,7 +66,6 @@ RUN curl -s -f -L -o /tmp/installer.php https://raw.githubusercontent.com/compos
     && composer --ansi --version --no-interaction \
     && rm -rf /tmp/* /tmp/.htaccess
 
-RUN mkdir -p  /etc/apache2/spreadshare
 RUN echo "" >> /etc/apache2/apache2.conf \
     && echo "# Include spreadshare configurations from host machine" >> /etc/apache2/apache2.conf \
     && echo "IncludeOptional spreadshare/*.conf" >> /etc/apache2/apache2.conf
@@ -80,17 +79,20 @@ WORKDIR /project
 RUN composer install --classmap-authoritative --no-dev
 # copy production packages for later use
 RUN cp -R vendor ../prod_vendor
-# RUN ls /project
-# RUN ls .
 # install ALL packages, including 'dev dependencies' for testing purpose
 RUN composer install --classmap-authoritative
 
 ## ---- Test ----
 FROM dependencies AS test
 COPY . .
-RUN pwd
 RUN ls ./vendor/composer
-RUN ./vendor/phpunit/phpunit/phpunit  --configuration ./phpunit.xml ./app/tests --teamcity
+RUN ls .
+RUN ./vendor/phpunit/phpunit/phpunit  --configuration ./phpunit.xml ./app/tests
 
-# COPY . /project
-# RUN composer --working-dir=/project/ install --classmap-authoritative
+
+# ---- Release ----
+FROM base AS release
+COPY . .
+COPY ./docker/apache2 /etc/apache2/spreadshare
+COPY --from=dependencies /prod_vendor ./vendor
+ENTRYPOINT ["./dockerEntrypoint.sh"]

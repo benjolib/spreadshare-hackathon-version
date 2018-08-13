@@ -1,4 +1,7 @@
 **
+!docker
 !composer.json
 !app
+!phpunit.xml
+!dockerEntrypoint.sh
 

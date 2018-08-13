@@ -29,18 +29,24 @@ services:
       - redis:/data
 
   app:
-    image: spreadshare-server:latest
-    container_name: spreadshare-server
+    build: docker-testing/app
+    container_name: spreadshare-backend-testing
     restart: always
     hostname: spreadshare
+    working_dir: /application
     ports:
       - "81:80"
       - "445:443"
+    volumes:
+      - .:/application
+      - ./docker-testing/conf/php/cli.ini:/etc/php/7.0/cli/conf.d/100-custom.ini
+      - ./docker-testing/conf/php/fpm.ini:/etc/php/7.0/fpm/conf.d/100-custom.ini
+      - ./docker-testing/apache2:/etc/apache2/spreadshare
     depends_on:
       - mysql1
       - redis
     env_file:
-      - docker/variables.env
+      - docker-testing/variables.env
     environment:
       BUILD_ENVIRONMENT: 'development'
       APPLICATION_ENV: 'development'
