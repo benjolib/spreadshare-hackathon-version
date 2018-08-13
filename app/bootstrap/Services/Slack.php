@@ -20,15 +20,6 @@ return function (\DS\Interfaces\GeneralApplication $application, Phalcon\Di\Fact
         'slack',
         function () use ($application) {
             return new DS\Services\Slack();
-/*
-            return new Maknz\Slack\Client(
-                $application->getConfig()['slack']['webhook-url'], [
-                    'username' => 'Spreadshare',
-                    'channel' => '#users',
-                    'link_names' => true,
-                ]
-            );
-*/
         }
     );
     
