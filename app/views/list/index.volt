@@ -11,6 +11,9 @@
 <meta property="og:image" content="{% if table['image'] %} https://{{ config.domain }}{{table['image']}} {% else %} http://{{ config.domain }}/assets/images/logo_big.png {% endif %}" />
 <meta property="og:image:width" content="894px" />
 <meta property="og:image:height" content="258px" />
+<meta name="twitter:title" content="{{ table['title'] }}">
+  <meta name="twitter:description" content="{{ table['tagline'] }}">
+  <meta name="twitter:image" content="{% if table['image'] %} https://{{ config.domain }}{{table['image']}} {% else %} http://{{ config.domain }}/assets/images/logo_big.png {% endif %}">
 {% endblock %}
 
 {% block content %}
