@@ -8,6 +8,7 @@
 
 namespace DS\Services;
 
+use DS\Application;
 use DS\Model\TableColumns;
 use DS\Model\TableContributions;
 use DS\Model\TableRelations;
@@ -23,12 +24,18 @@ class Stream
 {
     const NumberOfRequiredTags = 1;
 
+    /**
+     * @param $tagsList
+     * @return array
+     * @throws \Exception
+     */
     public function getTagsIdsAndNames($tagsList): array
     {
         $tagsIds = explode(',', $tagsList);
         if (count($tagsIds) < self::NumberOfRequiredTags) {
-            throw new \Exception('Tag missing - Please select at least 3 tags for your Stream');
+            throw new \Exception('Tag missing - Please select at least ' . self::NumberOfRequiredTags . ' tags for your Stream');
         }
+
         foreach ($tagsIds as $tag) {
             /** @var Tags $t */
             $t = Tags::findFirstById($tag);
@@ -40,6 +47,11 @@ class Stream
         return $result;
     }
 
+    /**
+     * @param $curatorsList
+     * @return array
+     * @throws \Exception
+     */
     public function getCuratorsIdsAndNames($curatorsList): array
     {
         if (empty($curatorsList)) return [];
@@ -56,6 +68,11 @@ class Stream
         return $result;
     }
 
+    /**
+     * @param $relatedLists
+     * @return array
+     * @throws \Exception
+     */
     public function getRelatedListsIdsAndTitles($relatedLists): array
     {
         if (empty($relatedLists)) return [];
@@ -71,6 +88,11 @@ class Stream
         return $result;
     }
 
+    /**
+     * @param $tableId
+     * @param $tagsList
+     * @return array
+     */
     public function setTags($tableId, $tagsList): array
     {
         $oldTags = TableTags::findAllByFieldValue('tableId', $tableId) ?: [];
@@ -87,6 +109,11 @@ class Stream
         return $tagsIds;
     }
 
+    /**
+     * @param $tableId
+     * @param $curatorsList
+     * @return array
+     */
     public function setCurators($tableId, $curatorsList): array
     {
         $oldCurators = TableContributions::findAllByFieldValue('tableId', $tableId) ?: [];
@@ -95,16 +122,26 @@ class Stream
             $curator->delete();
         }
 
-        if (empty($curatorsList)) return [];
+        if (empty($curatorsList)) {
+            return [];
+        }
 
         $ids = $this->getCuratorsIdsAndNames($curatorsList);
         foreach ($ids as $id) {
             $tc = new TableContributions();
-            $tc->setTableId($tableId)->setUserId($id['id'])->save();
+            $tc
+                ->setTableId($tableId)
+                ->setUserId($id['id'])
+                ->save();
         }
         return $ids;
     }
 
+    /**
+     * @param $tableId
+     * @param $relatedLists
+     * @return array
+     */
     public function setRelatedLists($tableId, $relatedLists): array
     {
         $oldRelatedLists = TableRelations::findAllByFieldValue('tableId', $tableId) ?: [];
@@ -113,16 +150,25 @@ class Stream
             $relatedList->delete();
         }
 
-        if (empty($relatedLists)) return [];
+        if (empty($relatedLists)) {
+            return [];
+        }
 
         $ids = $this->getRelatedListsIdsAndTitles($relatedLists);
         foreach ($ids as $id) {
             $rt = new TableRelations();
-            $rt->setTableId($tableId)->setRelatedTableId($id['id'])->save();
+            $rt
+                ->setTableId($tableId)
+                ->setRelatedTableId($id['id'])
+                ->save();
         }
         return $ids;
     }
 
+    /**
+     * @param $tableId
+     * @param $columns
+     */
     public function setColumns($tableId, $columns)
     {
         $oldColumns = TableColumns::findAllByFieldValue('tableId', $tableId) ?: [];
@@ -138,6 +184,11 @@ class Stream
         }
     }
 
+    /**
+     * @param $tableId
+     * @param $rows
+     * @param $uploadedFiles
+     */
     public function setRows($tableId, $rows, $uploadedFiles)
     {
         $images = [];
@@ -147,6 +198,7 @@ class Stream
                 $images[$file->getKey()] = $file;
             }
         }
+
         $decodedRows = json_decode($rows);
         foreach ($decodedRows as $key => $decodedRow) {
             $contentToInsert = '[';
@@ -172,6 +224,10 @@ class Stream
         }
     }
 
+    /**
+     * @param int $tableId
+     * @return array
+     */
     public function getCuratorIdsFromTable(int $tableId):array
     {
         /** @var TableContributions[] $curators */
@@ -183,6 +239,10 @@ class Stream
         return $result;
     }
 
+    /**
+     * @param int $tableId
+     * @return array
+     */
     public function getRelatedListsIdsFromTable(int $tableId):array
     {
         /** @var TableRelations[] $relatedLists */
@@ -193,6 +253,11 @@ class Stream
         }
         return $result;
     }
+
+    /**
+     * @param int $tableId
+     * @return array
+     */
     public function getTagsIdsFromTable(int $tableId):array
     {
         /** @var TableTags[] $tags */
@@ -204,16 +269,40 @@ class Stream
         return $result;
     }
 
-    public function getImagePath($tableId, $uploadedfiles)
+    /**
+     * @param $tableId
+     * @param $uploadedFiles
+     * @return string
+     */
+    public function getImagePath($tableId, $uploadedFiles)
     {
         /** @var File $file */
-        foreach($uploadedfiles as $file) {
-            if ($file->getKey() =='image') {
+        foreach ($uploadedFiles as $file) {
+            if ($file->getKey() == 'image') {
                 $imagePath = '/tableimages/'.$tableId.'.'.$file->getExtension();
                 $file->moveTo(ROOT_PATH.'public'.$imagePath);
                 return $imagePath;
             }
         }
         return "";
+    }
+
+    /**
+     * @param Tables $table
+     */
+    public function sendSlackNotification(Tables $table)
+    {
+        try {
+            $config = Application::instance()->getConfig();
+            $channel = $config['slack']['streams-channel'];
+            $msg = sprintf('New Stream %s (http://%s/stream/%s)',
+                $table->getTitle(),
+                $config['domain'],
+                $table->getSlug()
+            );
+            serviceManager()->getSlack()->to($channel)->send($msg);
+        } catch (\Exception $e) {
+            // not that important..
+        }
     }
 }
