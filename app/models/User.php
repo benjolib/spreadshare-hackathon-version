@@ -2,15 +2,15 @@
 
 namespace DS\Model;
 
-use DS\Component\ServiceManager;
-use DS\Model\DataSource\UserRoles;
-use Phalcon\Db;
-use DS\Constants\Paging;
-use Phalcon\Mvc\Model\Query;
-use DS\Model\Events\UserEvents;
-use DS\Model\DataSource\UserStatus;
-use DS\Model\Helper\RandomUserImage;
+use DS\Application;
 use DS\Component\Mail\Events\SignupMail;
+use DS\Component\ServiceManager;
+use DS\Constants\Paging;
+use DS\Model\DataSource\UserRoles;
+use DS\Model\DataSource\UserStatus;
+use DS\Model\Events\UserEvents;
+use DS\Model\Helper\RandomUserImage;
+use Phalcon\Db;
 use function GuzzleHttp\json_decode;
 
 /**
@@ -233,7 +233,9 @@ class User extends UserEvents
                 ->setEmail($email)
                 ->setStatus(UserStatus::Unconfirmed)
                 ->save();
-            ServiceManager::instance($this->getDI())->getMailService()->sendWelcomeEmail($email, $this->name);
+
+            $this->sendWelcomeEmail();
+            $this->sendSlackNotification();
         }
     }
 
@@ -470,5 +472,25 @@ class User extends UserEvents
             "limit" => $limit,
             "bind" => ["name" => $name . "%", "role" => UserRoles::Curator],
         ])->toArray();
+    }
+
+    private function sendWelcomeEmail()
+    {
+        ServiceManager::instance($this->getDI())->getMailService()
+            ->sendWelcomeEmail($this->email, $this->name);
+    }
+
+    private function sendSlackNotification()
+    {
+        try {
+            $config = Application::instance()->getConfig();
+            $channel = $config['slack']['users-channel'];
+            $msg = sprintf('New User: %s, %s (http://%s/profile/%s)',
+                $this->getName(), $this->getEmail(), $config['domain'], $this->getHandle());
+
+            serviceManager()->getSlack()->to($channel)->send($msg);
+        } catch (\Exception $e) {
+            // not that important..
+        }
     }
 }
