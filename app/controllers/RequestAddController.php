@@ -88,7 +88,6 @@ class RequestAddController extends BaseController implements LoginAwareControlle
 
         /** @var RequestAdd $request */
         $request = RequestAdd::findFirst($submissionId);
-
         // Check if table exists
         if (!$request or $request->count() === 0) {
             $this->flash->error('Submission not found - The submission you are trying to edit does not exist');
@@ -111,15 +110,18 @@ class RequestAddController extends BaseController implements LoginAwareControlle
         $tablecontent = new TableContent();
         $newRow = $tablecontent->addRow($request->table->id, $content);
 
-        $oldFile = ROOT_PATH.'/public'.$request->getImage();
-        $ext = pathinfo($oldFile, PATHINFO_EXTENSION);
+        if (!empty($request->getImage())) {
+            $oldFile = ROOT_PATH.'public'.$request->getImage();
+            $ext = pathinfo($oldFile, PATHINFO_EXTENSION);
 
-        $imagePath = '/rowimages/'.$newRow->getId().'.'.$ext;
-        rename($oldFile, ROOT_PATH.'/public'.$imagePath);
-        $newRow->setImage($imagePath)->save();
+            $imagePath = '/rowimages/'.$newRow->getId().'.'.$ext;
+            rename($oldFile, ROOT_PATH.'/public'.$imagePath);
+            $newRow->setImage($imagePath)->save();
+            $request->setImage($imagePath);
+        }
 
         $request->status = ChangeRequestStatus::Confirmed;
-        $request->setImage($imagePath)->save();
+        $request->save();
 
         $this->flash->success('Submission approved - You have approved this submission');
         $this->response->redirect("/collaborations/#received", true);
