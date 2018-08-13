@@ -79,9 +79,21 @@ return [
         'key' => '_SENTRY_KEY_',
     ],
     'slack' => [
-        'webhook-url' => '_SLACK_WEBHOOK_',
-        'tables-channel' => '#tables',
-        'users-channel' => '#users',
+        'tables-channel' => [
+            'webhook-url' => '_SLACK_WEBHOOK_TABLES_',
+            'username' => 'Spreadshare',
+            'channel' => '#tables',
+        ],
+        'users-channel' => [
+            'webhook-url' => '_SLACK_WEBHOOK_USERS_',
+            'username' => 'Spreadshare',
+            'channel' => '#users',
+        ],
+        'streams-channel' => [
+            'webhook-url' => '_SLACK_WEBHOOK_STREAMS_',
+            'username' => 'Spreadshare',
+            'channel' => '#streams',
+        ],
     ],
     'files' => [
         'service' => '_FILES_SERVICE_',

@@ -12,7 +12,9 @@ BUILD_ENVIRONMENT=$(sed 's/[&/\]/\\&/g' <<< "${BUILD_ENVIRONMENT}")
 MAILGUN_KEY=$(sed 's/[&/\]/\\&/g' <<< "${MAILGUN_KEY}")
 CRYPT_KEY=$(sed 's/[&/\]/\\&/g' <<< "${CRYPT_KEY}")
 SENTRY_KEY=$(sed 's/[&/\]/\\&/g' <<< "${SENTRY_KEY}")
-SLACK_WEBHOOK=$(sed 's/[&/\]/\\&/g' <<< "${SLACK_WEBHOOK}")
+SLACK_WEBHOOK_TABLES=$(sed 's/[&/\]/\\&/g' <<< "${SLACK_WEBHOOK_TABLES}")
+SLACK_WEBHOOK_USERS=$(sed 's/[&/\]/\\&/g' <<< "${SLACK_WEBHOOK_USERS}")
+SLACK_WEBHOOK_STREAMS=$(sed 's/[&/\]/\\&/g' <<< "${SLACK_WEBHOOK_STREAMS}")
 FILES_SERVICE=$(sed 's/[&/\]/\\&/g' <<< "${FILES_SERVICE}")
 AUTH_DEBUG=$(sed 's/[&/\]/\\&/g' <<< "${AUTH_DEBUG}")
 TWITTER_ID=$(sed 's/[&/\]/\\&/g' <<< "${TWITTER_ID}")
@@ -35,7 +37,9 @@ sed -i -e "s/_ENVIRONMENT_/${BUILD_ENVIRONMENT}/g" /application/app/config/Confi
 sed -i -e "s/_MAILGUN_KEY_/${MAILGUN_KEY}/g" /application/app/config/Config.php
 sed -i -e "s/_CRYPT_KEY_/${CRYPT_KEY}/g" /application/app/config/Config.php
 sed -i -e "s/_SENTRY_KEY_/${SENTRY_KEY}/g" /application/app/config/Config.php
-sed -i -e "s/_SLACK_WEBHOOK_/${SLACK_WEBHOOK}/g" /application/app/config/Config.php
+sed -i -e "s/_SLACK_WEBHOOK_TABLES_/${SLACK_WEBHOOK_TABLES}/g" /application/app/config/Config.php
+sed -i -e "s/_SLACK_WEBHOOK_USERS_/${SLACK_WEBHOOK_USERS}/g" /application/app/config/Config.php
+sed -i -e "s/_SLACK_WEBHOOK_STREAMS_/${SLACK_WEBHOOK_STREAMS}/g" /application/app/config/Config.php
 sed -i -e "s/_FILES_SERVICE_/${FILES_SERVICE}/g" /application/app/config/Config.php
 sed -i -e "s/_AUTH_DEBUG_/${AUTH_DEBUG}/g" /application/app/config/Config.php
 sed -i -e "s/_TWITTER_ID_/${TWITTER_ID}/g" /application/app/config/Config.php

@@ -19,6 +19,8 @@ return function (\DS\Interfaces\GeneralApplication $application, Phalcon\Di\Fact
     $di->set(
         'slack',
         function () use ($application) {
+            return new DS\Services\Slack();
+/*
             return new Maknz\Slack\Client(
                 $application->getConfig()['slack']['webhook-url'], [
                     'username' => 'Spreadshare',
@@ -26,6 +28,7 @@ return function (\DS\Interfaces\GeneralApplication $application, Phalcon\Di\Fact
                     'link_names' => true,
                 ]
             );
+*/
         }
     );
     
