@@ -179,7 +179,7 @@ class VoltAdapter extends Volt
                 $text   = $values[0];
                 $num    = isset($values[1]) ? $values[1] : 0;
                 
-                return "\\DS\\Component\\View\\Functions\\StringFormat::factory()->truncate({$text}, {$num})";
+                return "\\DS\\Component\\UserComponent\\StringFormat::factory()->truncate({$text}, {$num})";
             }
         );
     }
