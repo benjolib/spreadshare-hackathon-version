@@ -51,9 +51,8 @@ class VoltAdapter extends Volt
         'strtotime',
         'explode',
         'implode',
-        'var_dump',
     ];
-
+    
     /**
      * Constructor.
      *
@@ -63,7 +62,7 @@ class VoltAdapter extends Volt
     public function __construct(ViewBaseInterface $view, DiInterface $di = null, Application $application)
     {
         parent::__construct($view, $di);
-
+        
         $this->setOptions(
             [
                 'compiledSeparator' => '_',
@@ -72,34 +71,35 @@ class VoltAdapter extends Volt
                 'compileAlways' => true,
             ]
         );
-
+        
         //$view->cache();
-
+        
         /**
          * Add some functions to the volt compiler
          *
          * @var $compiler Volt\Compiler
          */
         $compiler = $this->getCompiler();
-
-        foreach ($this->functions as $func) {
+        
+        foreach ($this->functions as $func)
+        {
             $compiler->addFunction($func, $func);
         }
-
+        
         $compiler->addFunction(
             'formatTimestamp',
             function ($key) {
                 return "\\DS\\Component\\UserComponent\\StringFormat::factory()->prettyDateTimestamp({$key})";
             }
         );
-
+        
         $compiler->addFunction(
             'parseUser',
             function ($key) {
                 return "\\DS\\Component\\View\\Functions\\UserToProfileUrl::parse({$key})";
             }
         );
-
+        
         $compiler->addFunction(
             'reactArray',
             function ($key) {
@@ -170,6 +170,16 @@ class VoltAdapter extends Volt
             'round',
             function ($args) {
                 return "\\DS\\Component\\View\\Functions\\StatsHelper::round({$args})";
+            }
+        );
+        $compiler->addFunction(
+            'truncate',
+            function ($key) {
+                $values = explode(',', $key);
+                $text   = $values[0];
+                $num    = isset($values[1]) ? $values[1] : 0;
+                
+                return "\\DS\\Component\\View\\Functions\\StringFormat::factory()->truncate({$text}, {$num})";
             }
         );
     }

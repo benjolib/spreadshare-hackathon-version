@@ -1114,7 +1114,6 @@ html {
   position: relative;
   &__text {
     @include typography(9);
-
     position: absolute;
     color: #50bc93;
     text-align: right;
@@ -1161,7 +1160,6 @@ html {
   }
   a {
     @include typography(9);
-
     color: #6a7c94;
     padding-top: 20px;
     &:first-child {
@@ -1428,9 +1426,9 @@ html {
     }
   }
   .col3 {
-     @include media-query(tablet) {
-       margin-right: 125px;
-     }
+    @include media-query(tablet) {
+      margin-right: 125px;
+    }
   }
   .u-flexCol {
     width: 45%;
@@ -1592,7 +1590,7 @@ html {
   &__upload-button {
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.18);
     border-radius: 8px;
-    background: #ffffff url(/assets/images/re-image-upload.svg) center no-repeat;
+    background: #fff url(/assets/images/re-image-upload.svg) center no-repeat;
     width: 48px;
     height: 48px;
     position: absolute;
@@ -1604,7 +1602,7 @@ html {
   &__delete-button {
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.18);
     border-radius: 8px;
-    background: #ffffff url(/assets/images/re-image-delete.svg) center no-repeat;
+    background: #fff url(/assets/images/re-image-delete.svg) center no-repeat;
     width: 48px;
     height: 48px;
     position: absolute;
@@ -1648,7 +1646,7 @@ html {
 
 .re-pre-heading-info {
   display: flex;
-  >div {
+  > div {
     font-family: 'Roboto Mono', monospace;
     font-size: 9px;
     line-height: 11px;
@@ -1703,7 +1701,6 @@ html {
   }
   input {
     @include typography(1);
-
     color: #2a1e3e;
     border: none !important;
     padding: 0 !important;
@@ -1724,7 +1721,6 @@ html {
 
 .re-subheading {
   @include typography(2);
-
   margin: 10px 0;
   &--list {
     font-size: 30px;
@@ -1766,7 +1762,6 @@ html {
   input {
     color: #2a1e3e;
     @include typography(2);
-
     border: none !important;
     padding: 0 !important;
     width: 100%;
@@ -1798,7 +1793,6 @@ html {
 
 .re-button {
   @include typography(9);
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1811,7 +1805,7 @@ html {
   padding: 0px 4px;
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.18);
   cursor: pointer;
-  background: #ffffff;
+  background: #fff;
   &--double-line {
     width: 157px;
     line-height: 21px;
@@ -1853,20 +1847,19 @@ html {
   &--list-subscribe {
     background: #ea612d;
     border: 1px solid #ea612d;
-    color: #ffffff;
+    color: #fff;
     width: 158px;
   }
   &--list-subscribed {
     border: 1px solid #ea612d;
-    background: #ffffff;
+    background: #fff;
     color: #ea612d !important;
     width: 158px;
-
   }
   &--list-collaborate {
     background: #2860f5;
     border: 1px solid #2860f5;
-    color: #ffffff;
+    color: #fff;
     width: 180px;
     letter-spacing: -0.2px;
   }
@@ -1888,9 +1881,9 @@ html {
     border: 0;
   }
   &--lists-curate-stream {
-    background-color: #2F267D;
+    background-color: #2f267d;
     color: white !important;
-    border-color: #2F267D;
+    border-color: #2f267d;
     letter-spacing: -0.33px !important;
     margin-top: 60px;
     max-width: 213px;
@@ -1899,7 +1892,7 @@ html {
       top: 20px;
     }
     img {
-      margin-right:12px;
+      margin-right: 12px;
     }
   }
   &--lists-curate-stream.re-button {
@@ -1910,7 +1903,6 @@ html {
   }
   &--header.re-button {
     @include typography(9);
-
     display: inline-flex;
     margin-left: 12px;
     margin-bottom: 0;
@@ -1922,7 +1914,7 @@ html {
     border-radius: 2px;
     box-shadow: none;
     border: none;
-    color: #ffffff !important;
+    color: #fff !important;
     @include media-query(tablet) {
       margin-left: 22px;
       width: 222px;
@@ -1991,7 +1983,7 @@ html {
     }
     &--list-subscribed {
       width: 158px;
-            padding-right: 16px;
+      padding-right: 16px;
     }
     &--list-collaborate {
       width: 180px;
@@ -2026,7 +2018,7 @@ html {
     }
   }
   &.get-in-touch {
-    color: #ffffff;
+    color: #fff;
     background-color: $text-color-green;
     margin-top: 20px;
     @include media-query(tablet) {
@@ -2035,7 +2027,7 @@ html {
   }
   &.re-button-logout {
     @include typography(9);
-    color: #ffffff !important;
+    color: #fff !important;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.184018);
     background-color: #e4e4e6;
   }
@@ -2083,7 +2075,6 @@ html {
   }
   input {
     @include typography(7);
-
     color: #dee0e7;
     border: none !important;
     padding: 0 !important;
@@ -2145,7 +2136,6 @@ html {
   thead {
     th {
       @include typography(8);
-
       color: #6a7c94;
       text-transform: uppercase;
       text-align: center;
@@ -2180,7 +2170,6 @@ html {
     }
     td {
       @include typography(7);
-
       color: #6a7c94;
       border: 1px solid #f8f8fb;
       border-width: 1px 0 1px 0;
@@ -2208,7 +2197,7 @@ html {
         }
       }
     }
-    td:nth-of-type(1n + 4)>div {
+    td:nth-of-type(1n + 4) > div {
       max-height: 76px; // overflow-x: hidden;
       overflow-y: auto;
       min-height: 39px;
@@ -2244,7 +2233,8 @@ html {
           letter-spacing: -0.43px;
           min-height: 30px;
         }
-      } // .shadowcontain {
+      }
+      // .shadowcontain {
       //   height: 76px !important;
       //   @media (min-width: 768px) {
       //     height: 102px !important;
@@ -2316,7 +2306,6 @@ html {
       }
       h3 {
         @include typography(5);
-
         color: $text-color-black;
         margin-bottom: 2px;
         @media (min-width: 768px) {
@@ -2330,7 +2319,6 @@ html {
       }
       p {
         @include typography(7);
-
         word-spacing: 0.5px;
         margin-bottom: 1px;
         color: $text-color-gray;
@@ -2394,7 +2382,6 @@ html {
     tbody {
       td {
         @include typography(7);
-
         height: 86px;
         color: #2a1e3e;
         padding-top: 8px;
@@ -2428,14 +2415,14 @@ html {
             border-radius: 10px;
           }
           &--new-row {
-            background: #ffffff url(/assets/images/re-image-upload.svg) center / 15px no-repeat;
+            background: #fff url(/assets/images/re-image-upload.svg) center / 15px no-repeat;
             border: 0px solid #ced3da;
             border-radius: 4px;
             cursor: pointer;
-            width:24px;
-            height:24px;
-              box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .18);
-              margin-top:15px;
+            width: 24px;
+            height: 24px;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .18);
+            margin-top: 15px;
           }
           &--new-row-type2 {
             border: none;
@@ -2451,7 +2438,7 @@ html {
           &__upload-button {
             box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.18);
             border-radius: 4px;
-            background: #ffffff url(/assets/images/re-image-upload.svg) center no-repeat;
+            background: #fff url(/assets/images/re-image-upload.svg) center no-repeat;
             width: 24px;
             height: 24px;
             position: absolute;
@@ -2467,7 +2454,7 @@ html {
           &__delete-button {
             box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.18);
             border-radius: 4px;
-            background: #ffffff url(/assets/images/create-list-thumbnail-delete.svg) center no-repeat;
+            background: #fff url(/assets/images/create-list-thumbnail-delete.svg) center no-repeat;
             width: 24px;
             height: 24px;
             position: absolute;
@@ -2501,6 +2488,11 @@ html {
           color: #6cc69d;
           border-radius: 2px;
           letter-spacing: -0.43px;
+          display: block;
+          max-width: 50%;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
           @media (min-width: 768px) {
             font-size: 16px;
             line-height: 29px;
@@ -2750,13 +2742,11 @@ html {
 
 .list-tab-button {
   @include typography(4);
-
   color: #e1e1e1;
   text-align: center;
   padding: 20px 0 14px;
   @include media-query(tablet) {
     padding: 20px 16px;
-
   }
   @include media-query('max-width: 767px') {
     font-size: 15px;
@@ -2810,7 +2800,7 @@ html {
       margin-top: 0;
     }
     .image {
-    margin-top: 4px;
+      margin-top: 4px;
     }
     .info {
       padding-left: 15px;
@@ -2882,7 +2872,7 @@ html {
       align-items: flex-start !important;
       box-sizing: border-box;
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
-      border: 0 solid #f8f8fB;
+      border: 0 solid #f8f8fb;
       border-radius: 4px;
       &__avatar {
         margin-left: 12px;
@@ -2975,7 +2965,7 @@ html {
   }
   .re-table {
     div.shadowcontain {
-      display: none ;
+      display: none;
     }
   }
   .collaboration-actions {
@@ -3021,7 +3011,7 @@ html {
   }
   .addedby {
     width: 250px;
-    flex-direction: row!important;
+    flex-direction: row !important;
     justify-content: space-between;
     align-items: baseline;
     padding: 10px 20px 40px;
@@ -3032,7 +3022,7 @@ html {
       margin-right: 5px;
     }
     .header {
-      margin-top: 0!important;
+      margin-top: 0 !important;
     }
   }
   .info-card {
@@ -3055,7 +3045,8 @@ html {
   font-family: 'Lato';
   @media (min-width: 768px) {
     margin-bottom: 20px;
-  } // TODO icon discussion commnet
+  }
+  // TODO icon discussion commnet
   // :before {
   //   content: "";
   //   position: absolute;
@@ -3068,7 +3059,7 @@ html {
   // }
   textarea {
     font-family: 'Lato';
-    background: #ffffff;
+    background: #fff;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
     border-radius: 8px;
     border: none;
@@ -3079,8 +3070,7 @@ html {
     font-size: 16px;
     letter-spacing: -0.5px;
     outline: none;
-    color:#b1bbc7;
-
+    color: #b1bbc7;
     letter-spacing: -.43px;
     line-height: 19px;
     @media (min-width: 768px) {
@@ -3220,15 +3210,11 @@ html {
   padding: 0 20px;
   a {
     @include typography(9);
-
     padding: 2px 0;
     text-transform: none;
     letter-spacing: 0.5px;
     line-height: 32px;
     color: $text-color-gray;
-
-
-
   }
   .sort-selected {
     color: $text-color-green;
@@ -3288,7 +3274,7 @@ html {
   border: none;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
   padding-left: 20px;
-  background: #ffffff;
+  background: #fff;
   border: 1px solid #dbdbdb;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
   border-radius: 4px;
@@ -3389,7 +3375,7 @@ html {
 .collaboration-info {
   margin-bottom: 8px;
   line-height: 16px;
-  margin-top:30px;
+  margin-top: 30px;
   width: 100%;
   align-items: center;
   @include media-query(tablet) {
@@ -3423,7 +3409,7 @@ html {
   }
   &__text {
     @include typography(7);
-    color: #9BAABF;
+    color: #9baabf;
     margin-right: 3px;
     letter-spacing: -0.32px;
     line-height: 16px;
@@ -3441,7 +3427,6 @@ html {
 
 .collaboration-clock {
   @include typography(8);
-
   display: none;
   order: 0;
   margin-top: 0;
@@ -3578,7 +3563,7 @@ html {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100% ;
+  width: 100%;
   z-index: 100;
   background: white;
   display: flex;
@@ -3619,7 +3604,6 @@ html {
   &__item {
     font-size: 0;
     margin: 0 10px;
-
     @include typography(9);
     @include responsive-header-icon;
     @include media-query(tablet) {
@@ -3697,7 +3681,7 @@ html {
     }
   }
   &__search-open {
-    background: #ffffff;
+    background: #fff;
     height: 87px;
     width: auto;
     display: flex;
@@ -3734,7 +3718,6 @@ html {
     }
     input {
       @include typography(7);
-
       width: 100%;
       border: none;
       padding: 0 34px;
@@ -3825,7 +3808,8 @@ html {
       height: 32px;
       border-radius: 9999px;
     }
-  } // &__dotdotdot {
+  }
+  // &__dotdotdot {
   //   margin-right: 0px;
   //   margin-top: 10px;
   //   margin-left: 21px;
@@ -3864,7 +3848,6 @@ html {
       justify-content: flex-end;
       .re-button {
         @include typography(9);
-
         color: $text-color-green;
         width: 152px;
         margin-bottom: 0;
@@ -4041,7 +4024,6 @@ html {
     }
     &__date {
       @include typography(8);
-
       color: #e4e4e6;
       margin-top: 1px;
       text-transform: uppercase;
@@ -4052,7 +4034,6 @@ html {
     }
     &__see-all {
       @include typography(9);
-
       color: $text-color-green;
       text-align: center;
       margin-right: 10px;
@@ -4081,7 +4062,7 @@ html {
     }
   }
   &__dropdown-button {
-    background: #ffffff;
+    background: #fff;
     border: 1px solid #6cc69d;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
     border-radius: 2px;
@@ -4118,7 +4099,7 @@ html {
     }
   }
   &__dropdown {
-    background: #ffffff;
+    background: #fff;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
     border-radius: 2px;
     letter-spacing: -0.39px;
@@ -4215,7 +4196,6 @@ html {
     }
     &__heading {
       @include typography(5);
-
       text-align: center;
       color: #2a1e3e;
       margin-bottom: 2px;
@@ -4228,9 +4208,8 @@ html {
     }
     &__text {
       @include typography(5);
-
       font-weight: normal;
-      color: #bbbbbb;
+      color: #bbb;
       text-align: center;
       font-size: 15px;
       @include media-query(tablet) {
@@ -4250,7 +4229,7 @@ html {
       }
     }
     &--success {
-      background: #D5eee1;
+      background: #d5eee1;
     }
     &--warning & {
       &__text {
@@ -4302,14 +4281,13 @@ html {
   user-select: none;
   p {
     @include typography(7);
-
     color: #2a1e3e;
   }
-  &>div:first-of-type {
+  & > div:first-of-type {
     width: 100%;
     min-width: 60%;
   }
-  &>div:nth-of-type(2) {
+  & > div:nth-of-type(2) {
     display: flex;
     align-items: center;
   }
@@ -4349,7 +4327,6 @@ html {
 
 .re-field__label {
   @include typography(8);
-
   color: #697c94;
   margin-top: 6px;
   margin-bottom: 6px;
@@ -4394,7 +4371,6 @@ html {
 
 .re-field__input {
   @include typography(7);
-
   border: none;
   outline: none;
   color: #2a1d3e;
@@ -4435,7 +4411,6 @@ html {
 // SIGN IN / SIGN UP
 .sign-in-up-pretext {
   @include typography(3);
-
   margin-bottom: 7px;
   margin-top: calc(50vh - 160px);
   color: $text-color-black;
@@ -4447,7 +4422,6 @@ html {
 
 .sign-in-up-heading {
   @include typography(4);
-
   color: $text-color-gray;
   margin-top: 7px;
   margin-bottom: 30px;
@@ -4501,9 +4475,8 @@ html {
 
 .sign-in-button {
   @include typography(9);
-
   border-radius: 2px;
-  background: #ffffff;
+  background: #fff;
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.18);
   outline: none;
   height: 42px;
@@ -4558,7 +4531,6 @@ html {
 
 .sign-in-privacy {
   @include typography(7);
-
   color: $text-color-gray;
   text-align: center;
   margin-top: 8px;
@@ -4610,14 +4582,13 @@ html {
     }
 
     .re-field__label {
-      color: #6a7C94;
+      color: #6a7c94;
     }
   }
 }
 
 .sign-up-form-submit {
   @include typography(9);
-
   background: #fff;
   border: 1px solid #6cc69d;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
@@ -4699,12 +4670,10 @@ html {
     }
     &__name {
       @include typography(9);
-
       color: #252442;
     }
     &__follow {
       @include typography(9);
-
       color: #6cc69d;
       margin-right: auto;
       margin-left: 10px;
@@ -4715,7 +4684,6 @@ html {
     }
     &__text {
       @include typography(7);
-
       color: #b1bbc7;
       a {
         color: #68c79c;
@@ -4723,7 +4691,6 @@ html {
     }
     &__date {
       @include typography(8);
-
       color: #dee0e7;
       margin-top: 1px;
       word-spacing: -2px;
@@ -4809,7 +4776,6 @@ html {
   }
   &__tagline {
     @include typography(7);
-
     color: #9baabf;
   }
   &__subscriberCount {
@@ -4912,7 +4878,6 @@ html {
 .profile-info {
   h1 {
     @include typography(1);
-
     color: #2a1e3e;
     margin: 0px 0px 16px 0px;
     @media (min-width: 768px) {
@@ -4927,7 +4892,6 @@ html {
   }
   h3 {
     @include typography(2);
-
     color: #9baabf;
     max-width: 650px;
     margin-top: 0;
@@ -4961,7 +4925,6 @@ html {
   .status a,
   .social-links a {
     @include typography(7);
-
     display: inline-block;
     text-decoration: none;
   }
@@ -5012,7 +4975,6 @@ html {
   }
   .edit-button {
     @include typography(9);
-
     display: none;
     flex-direction: column;
     justify-content: center;
@@ -5069,14 +5031,13 @@ html {
   }
   .follow-button {
     @include typography(9);
-
     display: none;
     flex-direction: column;
     justify-content: center;
     margin: 32px 16px 132px 0;
     width: 133px;
     height: 56px;
-    color: #ffffff;
+    color: #fff;
     border-radius: 2px;
     text-decoration: none;
     text-align: center;
@@ -5093,7 +5054,7 @@ html {
       margin-right: 10px;
     }
     &.unfollow {
-      background-color: #ffffff;
+      background-color: #fff;
       color: $text-color-gray;
     }
   }
@@ -5112,7 +5073,6 @@ html {
   }
   .save-button {
     @include typography(9);
-
     display: none;
     flex-direction: column;
     justify-content: center;
@@ -5142,7 +5102,6 @@ html {
   }
   .cancel-button {
     @include typography(9);
-
     display: none;
     flex-direction: column;
     justify-content: center;
@@ -5338,7 +5297,7 @@ html {
 }
 
 .create-list-copy-textarea {
-  background: #ffffff;
+  background: #fff;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
   border-radius: 4px;
   width: 100%;
@@ -5486,7 +5445,7 @@ html {
 
 .seperator-dropdown {
   padding: 12px 24px;
-  background: #ffffff;
+  background: #fff;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.26);
   border-radius: 8px;
   width: 136px;
@@ -5586,7 +5545,6 @@ html {
 .settings-tabs-button,
 .collaborations-tabs-button {
   @include typography(4);
-
   color: #e1e1e1;
   margin-right: 25px;
   @media (min-width: 768px) {
@@ -5633,7 +5591,6 @@ html {
     white-space: nowrap;
     span {
       @include typography(9);
-
       padding: 5px;
     }
     .on {
@@ -5643,7 +5600,7 @@ html {
       color: #f97a7a;
     }
   }
-  input:checked+.on-off {
+  input:checked + .on-off {
     .on {
       color: #2dad6b;
     }
@@ -5655,7 +5612,6 @@ html {
 
 .manage-subscriptions-link {
   @include typography(9);
-
   color: #2dad6b;
   white-space: nowrap;
 }
@@ -5687,7 +5643,6 @@ html {
   }
   h3 {
     @include typography(4);
-
     color: #9baabf;
     margin-bottom: 30px;
   }
@@ -5705,8 +5660,7 @@ html {
     flex-wrap: wrap;
     div {
       @include typography(9);
-
-      background: #ffffff;
+      background: #fff;
       box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
       border-radius: 2px;
       color: #2a1e3e;
@@ -5741,7 +5695,7 @@ html {
     margin: 0 2.5em;
     flex-direction: column;
     justify-content: center;
-    color: #ffffff;
+    color: #fff;
     display: flex;
     .heading {
       font-weight: bold;
@@ -5787,7 +5741,7 @@ html {
       width: 300px;
       cursor: pointer;
       outline: none;
-      background: #ffffff;
+      background: #fff;
       border: 0;
       //display: flex;
       justify-content: center;
@@ -5852,11 +5806,10 @@ html {
 
     div {
       @include typography(9);
-
       background: #2a1e3e;
       box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
       border-radius: 2px;
-      color: #ffffff;
+      color: #fff;
       text-align: center;
       padding: 17px 21px 18px 22px;
       margin: 0 12px 12px 0;
@@ -5926,19 +5879,16 @@ html {
   margin-left: -5px;
   div {
     @include typography(8);
-
     color: #9baabf;
     margin-bottom: 20px;
   }
   a {
     @include typography(7);
-
     display: block;
     color: #2a1e3e;
     margin-bottom: 10px;
     span {
       @include typography(6);
-
       color: #2dad6b;
     }
   }
@@ -5949,7 +5899,6 @@ html {
   }
   .logout {
     @include typography(7);
-
     color: #9baabf;
   }
 }
@@ -5987,7 +5936,7 @@ html {
   min-height: 80px;
   padding: 20px;
   margin-bottom: 80px;
-  background: #ffffff;
+  background: #fff;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
   border-radius: 8px;
   border: 1px solid #f8f8fb;
@@ -6011,14 +5960,13 @@ html {
 
 .create-list-copy-button {
   @include typography(9);
-
   position: absolute;
   top: 15px;
   right: 6px;
 }
 
 .list-context-menu {
-  background: #ffffff;
+  background: #fff;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
   border-radius: 4px;
   width: 226px;
@@ -6061,16 +6009,16 @@ html {
     margin-left: 2.5em;
     flex-direction: column;
     justify-content: center;
-    color: #ffffff;
+    color: #fff;
     .heading {
       @include typography(3);
       margin-bottom: 10px;
-      color: #ffffff;
+      color: #fff;
     }
     .subheading {
       @include typography(4);
       margin-bottom: 8px;
-      color: #ffffff;
+      color: #fff;
     }
   }
   .action {
@@ -6085,14 +6033,13 @@ html {
     text-align: center;
     button {
       @include typography(9);
-
-      color: #9013FE;
+      color: #9013fe;
       cursor: pointer;
       outline: none;
       margin-left: 2em;
       margin-right: 2.5em;
       display: flex;
-      background: #ffffff;
+      background: #fff;
       border: 0;
       justify-content: center;
       align-items: center;
@@ -6110,7 +6057,7 @@ html {
 .feedback {
   @include typography(9);
   cursor: pointer;
-  color: #ffffff;
+  color: #fff;
   font-size: 18px;
   z-index: 999;
   display: none;
@@ -6164,7 +6111,7 @@ html {
   border-radius: 50%;
   behavior: url(PIE.htc);
   /* remove if you don't care about IE8 */
-  background: #2EAC6D;
+  background: #2eac6d;
   border: 0px solid #666;
   color: rgb(255, 255, 255);
   text-align: center;
@@ -6179,6 +6126,7 @@ html {
     font: 15px 'Lato';
   }
 }
+
 .button-container {
   display: flex;
   align-items: center;
@@ -6211,41 +6159,39 @@ html {
     background-color: #2c60ef;
     .re-button {
       background-color: white;
-      color: #2C60EF;
+      color: #2c60ef;
     }
     .info a {
-        color: white !important;
-      }
+      color: white !important;
+    }
 
   }
-   &__white {
+  &__white {
+    background-color: white;
+    color: #ea612d;
+    @include media-query(tablet) {
+      margin-right: 10px;
+    }
+    .re-button {
+      width: 180px;
+      @include media-query(tablet) {
+        width: 260px;
+      }
       background-color: white;
       color: #ea612d;
-      @include media-query(tablet) {
-        margin-right: 10px;
+    }
+    .info {
+      color: #ea612d !important;
+      a {
+        color: #ea612d !important;
       }
-     .re-button {
-       width: 180px;
-       @include media-query(tablet) {
-         width: 260px;
-       }
-       background-color: white;
-       color: #ea612d;
-
-     }
-     .info {
-       color: #ea612d !important;
-       a {
-         color: #ea612d !important;
-       }
-     }
-   }
+    }
+  }
   .info {
     @include typography(7);
-
     padding-left: 20px;
     text-align: left;
-    color:white;
+    color: white;
     margin-top: -10px;
     flex: 1;
     @include media-query(tablet) {
@@ -6253,7 +6199,8 @@ html {
     }
   }
 }
-.list-actions{
+
+.list-actions {
   display: flex;
   justify-content: space-between;
   // margin: 10px;
@@ -6277,6 +6224,7 @@ html {
     }
   }
 }
+
 .bottom {
   @include media-query(tablet) {
     margin-bottom: 100px;
@@ -6292,7 +6240,6 @@ html {
   overflow-y: visible;
   .header {
     @include typography(8);
-
     text-align: left;
     color: $text-color-gray;
     flex-direction: column;
@@ -6319,22 +6266,21 @@ html {
       height: 52px;
       margin-top: auto;
       border-radius: 2px;
-      background-color: #F97a7a;
-      color: #ffffff;
+      background-color: #f97a7a;
+      color: #fff;
     }
   }
   .content {
     padding-top: 16px;
     @include typography(7);
-
     text-align: left;
     color: $text-color-black;
 
-    img{
+    img {
       width: 24px;
       height: 24px;
       border-radius: 50%;
-      margin-right:5px;
+      margin-right: 5px;
     }
   }
 }
@@ -6348,49 +6294,51 @@ html {
   margin-left: 10px;
   width: 25px;
   height: 25px;
-  box-shadow: 0 1px 2px 0 rgba(0,0,0,0.18);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
   border-radius: 50%;
   font-size: 10px;
   color: white;
 }
+
 .simpletext {
   h2 {
     @include typography(5);
   }
-  p{
+  p {
     @include typography(7);
     color: #2a1e3e;
     line-height: 20px;
   }
 
-  b{
+  b {
     @include typography(6);
   }
 }
+
 .addAListingRow {
   tr {
-    padding-top:100px !important;
+    padding-top: 100px !important;
   }
-  div{
+  div {
     margin-top: 0px;
   }
   td {
-    overflow-y:hidden;
+    overflow-y: hidden;
     textarea {
       font-family: Lato;
-    font-size: 15px !important;;
-    font-weight: 400;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: 1.33 !important;
-    min-height:39px !important;
-    letter-spacing: -.4px !important;
+      font-size: 15px !important;;
+      font-weight: 400;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.33 !important;
+      min-height: 39px !important;
+      letter-spacing: -.4px !important;
       width: 100% !important;
-      margin-top:37px;
+      margin-top: 37px;
       @media (min-width: 768px) {
-        min-height:39px !important;
+        min-height: 39px !important;
         min-width: 100px !important;
-        margin-top:37px;
+        margin-top: 37px;
       }
 
     }
@@ -6398,11 +6346,13 @@ html {
 }
 
 .streams-result-count {
-  margin-left:5px
+  margin-left: 5px
 }
+
 .users-result-count {
-  margin-left:5px
+  margin-left: 5px
 }
+
 .thanks-to {
   margin: 80px auto 40px;
   justify-content: center;
@@ -6422,6 +6372,7 @@ html {
     border-radius: 6px;
   }
 }
+
 .ais-search-box {
   display: none;
 }
@@ -6443,6 +6394,7 @@ html {
 .table-list-container {
   position: relative;
 }
+
 .table-scroll.absolute-containers {
   -webkit-overflow-scrolling: touch;
   overflow-x: hidden;

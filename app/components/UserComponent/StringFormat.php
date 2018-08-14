@@ -22,19 +22,20 @@ class StringFormat extends Component
      * @var PrettyDateTime
      */
     private $date = null;
-
+    
     /**
      * @return $this
      */
     public function init()
     {
-        if (!$this->date) {
+        if (!$this->date)
+        {
             $this->date = new PrettyDateTime();
         }
-
+        
         return $this;
     }
-
+    
     /**
      * @return StringFormat
      */
@@ -42,7 +43,7 @@ class StringFormat extends Component
     {
         return (new self())->init();
     }
-
+    
     /**
      * @param $date
      *
@@ -53,7 +54,7 @@ class StringFormat extends Component
     {
         return $this->date->day(new \DateTime($date));
     }
-
+    
     /**
      * @param string $date
      *
@@ -64,7 +65,7 @@ class StringFormat extends Component
     {
         return $this->date->parse(new \DateTime($date));
     }
-
+    
     /**
      * @param int $timestamp
      *
@@ -74,5 +75,24 @@ class StringFormat extends Component
     public function prettyDateTimestamp(int $timestamp)
     {
         return $this->date->parse(new \DateTime(date('Y-m-d H:i:s', $timestamp)));
+    }
+    
+    /**
+     * @param     $string
+     * @param int $characters
+     *
+     * @return string
+     */
+    public function truncate($string, $characters = 0)
+    {
+        if ($characters > 0)
+        {
+            if (strlen($string) > $characters)
+            {
+                return substr($string, 0, $characters) . '..';
+            }
+        }
+        
+        return $string;
     }
 }

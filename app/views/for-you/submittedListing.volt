@@ -36,10 +36,23 @@
                 </td>
                 <td style="text-align:left;width:85%;">
                     <strong>{{ listing.columns[0].content }}</strong>
-                    <p>{{ listing.columns[1].content }}</p>
+                    {% set len = filterTableRowsContent(listing.columns[1].content)|striptags|length %}
+                    {% if len > 160 %}
+                        {% set length = 480 %}
+                    {% elseif len > 80 %}
+                        {% set length = 300 %}
+                    {% elseif len > 40 %}
+                        {% set length = 175 %}
+                    {% elseif len > 20 %}
+                        {% set length = 150 %}
+                    {% else %}
+                        {% set length = 0 %}
+                    {% endif %}
+
+                    <p style="min-width: {{ length }}px;">{{ filterTableRowsContent(listing.columns[1].content)|striptags }}</p>
                     <p>
-                    {% if  listing.columns[2].link is defined %}
-                        <a class="re-table-link" target="_blank" href="{{ listing.columns[2].link }}">{{ listing.columns[2].content }}</a>
+                    {% if listing.columns[2].link is defined AND (listing.columns[2].link OR listing.columns[2].content) %}
+                        <a class="re-table-link" target="_blank" href="{{ listing.columns[2].link }}">{{ listing.columns[2].content ? listing.columns[2].content : listing.columns[2].link }}</a>
                     {% endif %}
                         <a class="re-table-link" style="color:#acb9c8;border:#acb9c8;" target="_blank" href="/profile/{{ listing.userHandle }}"><strong>Author:</strong> {{ listing.userName }}</a>
                     </p>

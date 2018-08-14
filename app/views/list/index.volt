@@ -276,11 +276,25 @@
 
             <td style="text-align:left;width:85%;">
                 <strong>{{ row[0].content }}</strong>
-                <p>{{ row[1].content }}</p>
-                <p>
-                {% if row[2].link is defined %}
-                    <a class="re-table-link" target="_blank" href="{{ row[2].link }}">{{ row[2].content }}</a>
+
+                {% set len = filterTableRowsContent(row[1].content)|striptags|length %}
+                {% if len > 160 %}
+                    {% set length = 480 %}
+                {% elseif len > 80 %}
+                    {% set length = 300 %}
+                {% elseif len > 40 %}
+                    {% set length = 175 %}
+                {% elseif len > 20 %}
+                    {% set length = 150 %}
                 {% else %}
+                    {% set length = 0 %}
+                {% endif %}
+
+                <p style="min-width: {{ length }}px;">{{ filterTableRowsContent(row[1].content)|striptags }}</p>
+                <p>
+                {% if row[2].link is defined AND row[2].link %}
+                    <a class="re-table-link" target="_blank" href="{{ row[2].link }}">{{ row[2].content }}</a>
+                {% elseif row[2].content is defined AND row[2].content %}
                     <a class="re-table-link" target="_blank" href="{{ row[2].content }}">{{ row[2].content }}</a>
                 {% endif %}
                 </p>
