@@ -52,7 +52,7 @@
                     <p style="min-width: {{ length }}px;">{{ filterTableRowsContent(listing.columns[1].content)|striptags }}</p>
                     <p>
                         {% if listing.columns[2].link is defined AND (listing.columns[2].link OR listing.columns[2].content) %}
-                        <a class="re-table-link" target="_blank" href="{{ listing.columns[2].link }}">{{ listing.columns[2].content }}</a>
+                        <a class="re-table-link" target="_blank" href="{{ listing.columns[2].link }}">{{ truncate(listing.columns[2].content, 100) }}</a>
                         {% endif %}
                         <a class="re-table-link" style="color:#acb9c8;border:#acb9c8;" target="_blank" href="/profile/{{ listing.userHandle }}"><strong>Author:</strong> {{ listing.userName }}</a>
                     </p>

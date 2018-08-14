@@ -2488,11 +2488,10 @@ html {
           color: #6cc69d;
           border-radius: 2px;
           letter-spacing: -0.43px;
-          display: block;
-          max-width: 50%;
           text-overflow: ellipsis;
           overflow: hidden;
           white-space: nowrap;
+          max-width: 300px;
           @media (min-width: 768px) {
             font-size: 16px;
             letter-spacing: -0.43px;

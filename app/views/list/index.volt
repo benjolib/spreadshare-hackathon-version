@@ -293,9 +293,9 @@
                 <p style="min-width: {{ length }}px;">{{ filterTableRowsContent(row[1].content)|striptags }}</p>
                 <p>
                 {% if row[2].link is defined AND row[2].link %}
-                    <a class="re-table-link" target="_blank" href="{{ row[2].link }}">{{ row[2].content }}</a>
+                    <a class="re-table-link" target="_blank" href="{{ row[2].link }}">{{ truncate(row[2].content, 100) }}</a>
                 {% elseif row[2].content is defined AND row[2].content %}
-                    <a class="re-table-link" target="_blank" href="{{ row[2].content }}">{{ row[2].content }}</a>
+                    <a class="re-table-link" target="_blank" href="{{ row[2].content }}">{{ truncate(row[2].content, 100) }}</a>
                 {% endif %}
                 </p>
             </td>
