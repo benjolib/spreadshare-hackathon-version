@@ -26,6 +26,9 @@ final class Envelope implements \JsonSerializable
      */
     public $data = null;
 
+    /**
+     * @var bool
+     */
     public $success;
 
     /**
@@ -50,42 +53,15 @@ final class Envelope implements \JsonSerializable
     public function __construct(RecordInterface $records = null, $success = true)
     {
         $this->success = $success;
-        $status = ($success) ? 'SUCCESS' : 'ERROR';
-        if ($records !== null)
-        {
-            $count = $records->count();
+        $status = $success ? 'SUCCESS' : 'ERROR';
+        $this->_meta = new MetaObject(
+            $status,
+            $records === null ? 0 : $records->count(),
+            $success
+        );
 
-            $this->_meta = new MetaObject(
-                $status,
-                $count,
-                $success
-            );
-        }
-        else
-        {
-            $this->_meta = new MetaObject(
-                $status,
-                0,
-                $success
-            );
-        }
-
-        if ($records)
-        {
+        if ($records) {
             $this->data = $records->getData();
         }
-
-        /*
-        if ($this->_meta->count === 0)
-        {
-            // This is required to make the response JSON return an empty JS object.  Without
-            // this, the JSON return an empty array:  [] instead of {}
-            $this->data = new \stdClass();
-        }
-        else
-        {
-            $this->data = $records;
-        }
-        */
     }
 }

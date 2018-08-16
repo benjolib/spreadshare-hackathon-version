@@ -16,11 +16,17 @@ class Delete extends ActionHandler implements MethodInterface
 {
     use FeaturedModifier;
 
+    /**
+     * @return bool
+     */
     public function needsLogin()
     {
         return true;
     }
 
+    /**
+     * @return \DS\Controller\Api\Meta\Record
+     */
     public function process()
     {
         return $this->setFeatured(false);

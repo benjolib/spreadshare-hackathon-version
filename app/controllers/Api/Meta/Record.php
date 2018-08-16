@@ -58,8 +58,7 @@ final class Record implements \Countable, \JsonSerializable, RecordInterface
      */
     public function __construct($record = null)
     {
-        if ($record instanceof Base)
-        {
+        if ($record instanceof Base) {
             $record = $record->toArray();
         }
 

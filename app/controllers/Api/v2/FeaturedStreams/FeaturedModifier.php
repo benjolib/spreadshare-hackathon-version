@@ -16,9 +16,15 @@ use DS\Model\Tables;
 
 trait FeaturedModifier
 {
+    /**
+     * @param $featured
+     * @return Record
+     * @throws InvalidParameterException
+     */
     public function setFeatured($featured): Record
     {
         $tableId = $this->action;
+
         if (!$this->getServiceManager()->getAuth()->hasRole(UserRoles::Admin)) {
             throw new InvalidParameterException('Not allowed');
         }
@@ -41,5 +47,4 @@ trait FeaturedModifier
         }
         return new Record();
     }
-
 }

@@ -44,8 +44,11 @@ final class MetaObject implements \JsonSerializable
     }
 
     /**
-     * Response constructor.
+     * Response MetaObject constructor.
      *
+     * @param $status
+     * @param int $total
+     * @param bool $success
      */
     public function __construct($status, $total = 0, $success = true)
     {

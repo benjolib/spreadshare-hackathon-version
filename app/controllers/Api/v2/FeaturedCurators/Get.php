@@ -33,7 +33,10 @@ class Get extends ActionHandler implements MethodInterface
     {
         return false;
     }
-    
+
+    /**
+     * @return Records
+     */
     public function process()
     {
         /** @var User[] $curators */

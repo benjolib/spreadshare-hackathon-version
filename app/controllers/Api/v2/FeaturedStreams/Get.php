@@ -22,8 +22,6 @@ use DS\Model\Tables;
  */
 class Get extends ActionHandler implements MethodInterface
 {
-    private $searchMinimum = 2;
-    
     /**
      * @return bool
      */
@@ -31,7 +29,10 @@ class Get extends ActionHandler implements MethodInterface
     {
         return false;
     }
-    
+
+    /**
+     * @return Records
+     */
     public function process()
     {
         /** @var Tables[] $streams */
@@ -41,5 +42,4 @@ class Get extends ActionHandler implements MethodInterface
         }
         return new Records($result);
     }
-    
 }

@@ -24,7 +24,10 @@ use DS\Model\User;
  */
 class Get extends ActionHandler implements MethodInterface
 {
-    private $searchMinimum = 2;
+    /**
+     * @var int Need at least this chars num provided as needle for a search
+     */
+    private $searchMinimumChars = 2;
 
     /**
      * @return bool
@@ -33,14 +36,16 @@ class Get extends ActionHandler implements MethodInterface
     {
         return true;
     }
-    
+
+    /**
+     * @return Records
+     */
     public function process()
     {
         $query = $this->request->get('q', null, null);
 
-        if ($query === null || strlen($query) < $this->searchMinimum)
-        {
-            throw new \InvalidArgumentException(sprintf('Give at least %d characters.', $this->searchMinimum));
+        if ($query === null || strlen($query) < $this->searchMinimumChars) {
+            throw new \InvalidArgumentException(sprintf('Give at least %d characters.', $this->searchMinimumChars));
         }
 
         $result = new Records(User::searchCuratorsByName($query, 50));
