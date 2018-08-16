@@ -43,7 +43,7 @@ class TableUpdated extends AbstractEvent
             ];
             
             // Send Table Creation Event To ES Queue
-            Bernard::produce('touchTable', $datasource);
+//            Bernard::produce('touchTable', $datasource);
         }
         
         // Show notification for this change if this change was not initiated by the owner

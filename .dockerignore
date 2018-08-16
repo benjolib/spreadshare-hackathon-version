@@ -1,7 +1,11 @@
 **
-!docker
-!composer.json
 !app
+!bin
+!docker
+!public
+!react
+!sass
+!composer.json
 !phpunit.xml
 !dockerEntrypoint.sh
 

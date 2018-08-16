@@ -21,11 +21,3 @@ while(!\$connected) {
 EOF
 php /tmp/wait_for_mysql.php
 rm /tmp/wait_for_mysql.php
-
-sleep 5
-
-echo "Starting Table daemon.."
-/usr/bin/php /application/bin/cli.php NewQueue Table --name=touchTable >> /application/system/log/queue-table &
-
-echo "Starting Wallet daemon.."
-/usr/bin/php /application/bin/cli.php NewQueue Wallet --name=newWallet >> /application/system/log/queue-wallet &

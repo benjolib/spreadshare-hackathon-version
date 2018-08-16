@@ -50,6 +50,10 @@
 ## ---- Base Php ----
 FROM phalconphp/php-apache:ubuntu-16.04 AS base
 ENV COMPOSER_VERSION 1.5.2
+ENV PROVISION_CONTEXT "production"
+
+# set working directory
+WORKDIR project
 
 #RUN rm -rf /var/lib/apt/lists/*
 RUN apt-get update && apt-get install -y curl
@@ -70,23 +74,28 @@ RUN echo "" >> /etc/apache2/apache2.conf \
     && echo "# Include spreadshare configurations from host machine" >> /etc/apache2/apache2.conf \
     && echo "IncludeOptional spreadshare/*.conf" >> /etc/apache2/apache2.conf
 
+## create directories required by phalcon
+RUN mkdir -p /project/system/cache/volt && \
+    chown -R $APPLICATION_USER:$APPLICATION_GROUP /project/system/cache && \
+    mkdir -p /project/system/log && \
+    chown -R $APPLICATION_USER:$APPLICATION_GROUP /project/system/log && \
+    mkdir -p /project/system/uploads/userimages && \
+    chown -R $APPLICATION_USER:$APPLICATION_GROUP /project/system/uploads/userimages && \
+    chown -R $APPLICATION_USER:$APPLICATION_GROUP /project/public
 
 # ---- Dependencies ----
 FROM base AS dependencies
 # install packages
-COPY ./composer.json /project
-WORKDIR /project
-RUN composer install --classmap-authoritative --no-dev
+COPY ./composer.json .
+RUN composer install --classmap-authoritative --prefer-dist --no-dev
 # copy production packages for later use
 RUN cp -R vendor ../prod_vendor
 # install ALL packages, including 'dev dependencies' for testing purpose
-RUN composer install --classmap-authoritative
+RUN composer install --classmap-authoritative --prefer-dist
 
 ## ---- Test ----
 FROM dependencies AS test
 COPY . .
-RUN ls ./vendor/composer
-RUN ls .
 RUN ./vendor/phpunit/phpunit/phpunit  --configuration ./phpunit.xml ./app/tests
 
 
@@ -94,5 +103,6 @@ RUN ./vendor/phpunit/phpunit/phpunit  --configuration ./phpunit.xml ./app/tests
 FROM base AS release
 COPY . .
 COPY ./docker/apache2 /etc/apache2/spreadshare
+COPY docker/app/bin/*.sh /opt/docker/provision/entrypoint.d/
 COPY --from=dependencies /prod_vendor ./vendor
-ENTRYPOINT ["./dockerEntrypoint.sh"]
+

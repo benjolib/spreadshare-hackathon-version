@@ -3,8 +3,8 @@ version: '3.6'
 services:
 
   mysql1:
-    container_name: spreadshare-mysql-testing
-    build: docker-testing/mysql
+    container_name: spreadshare-mysql
+    build: docker/mysql
     restart: always
     hostname: mysql1
     expose:
@@ -12,14 +12,14 @@ services:
     ports:
       - "3308:3306"
     volumes:
-      - ./docker-testing/mysql/config/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
+      - ./docker/mysql/config/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
       - ./schemas/structure.sql:/docker-entrypoint-initdb.d/01_structure.sql
       - ./schemas/data.sql:/docker-entrypoint-initdb.d/02_data.sql
     env_file:
         - docker-testing/variables.env
 
   redis:
-    container_name: spreadshare-redis-testing
+    container_name: spreadshare-redis
     restart: always
     hostname: redis
     image: redis:4.0

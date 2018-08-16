@@ -52,7 +52,7 @@ class TableCreated extends AbstractEvent
             ];
 
             // Send Table Creation Event To ES Queue
-            Bernard::produce('touchTable', $datasource);
+//            Bernard::produce('touchTable', $datasource);
         }
 
         // Initialize table log with a table created entry
