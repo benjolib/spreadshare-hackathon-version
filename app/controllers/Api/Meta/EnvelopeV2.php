@@ -21,6 +21,9 @@ final class EnvelopeV2 implements \JsonSerializable
      */
     public $data = null;
 
+    /**
+     * @var bool
+     */
     public $success;
 
     /**
@@ -44,8 +47,7 @@ final class EnvelopeV2 implements \JsonSerializable
     {
         $this->success = $success;
 
-        if ($records)
-        {
+        if ($records) {
             $this->data = $records->getData();
         }
     }

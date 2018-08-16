@@ -30,7 +30,10 @@ class Get extends ActionHandler implements MethodInterface
     {
         return false;
     }
-    
+
+    /**
+     * @return Records
+     */
     public function process()
     {
         /** @var Tags[] $tags */
@@ -41,5 +44,4 @@ class Get extends ActionHandler implements MethodInterface
 
         return new Records($result);
     }
-    
 }

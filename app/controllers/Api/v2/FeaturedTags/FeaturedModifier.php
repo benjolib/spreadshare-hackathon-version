@@ -17,9 +17,15 @@ use DS\Model\Tags;
 
 trait FeaturedModifier
 {
+    /**
+     * @param $featured
+     * @return Record
+     * @throws InvalidParameterException
+     */
     public function setFeatured($featured): Record
     {
         $tagId = $this->action;
+
         if (!$this->getServiceManager()->getAuth()->hasRole(UserRoles::Admin)) {
             throw new InvalidParameterException('Not allowed');
         }
@@ -42,5 +48,4 @@ trait FeaturedModifier
         }
         return new Record();
     }
-
 }

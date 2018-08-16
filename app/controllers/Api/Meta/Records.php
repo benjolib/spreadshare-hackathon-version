@@ -89,20 +89,13 @@ final class Records implements \ArrayAccess, \Countable, \JsonSerializable, Reco
     /**
      * Records constructor.
      *
-     * @param mixed $records
+     * @param array $records
+     * @param null $totals
      */
     public function __construct(array $records, $totals = null)
     {
         $this->data = $records;
-
-        if ($totals === null)
-        {
-            $this->totals = count($records);
-        }
-        else
-        {
-            $this->totals = $totals;
-        }
+        $this->totals = $totals === null ? count($records) : $totals;
     }
 
     /**
@@ -193,5 +186,4 @@ final class Records implements \ArrayAccess, \Countable, \JsonSerializable, Reco
     {
         unset($this->data[$offset]);
     }
-
 }

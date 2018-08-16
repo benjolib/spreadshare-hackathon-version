@@ -62,18 +62,19 @@ abstract class ActionHandler extends PhalconMvcController
      */
     protected function getServiceManager(): ServiceManager
     {
-        if (!$this->serviceManager)
-        {
+        if (!$this->serviceManager) {
             $this->serviceManager = ServiceManager::instance($this->getDI());
         }
         
         return $this->serviceManager;
     }
-    
+
+    /**
+     * @return int
+     */
     protected function getUserId(): int
     {
-        if (!$this->userId)
-        {
+        if (!$this->userId) {
             $this->userId = $this->getServiceManager()->getAuth()->getUserId();
         }
         

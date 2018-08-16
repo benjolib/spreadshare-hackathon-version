@@ -16,9 +16,17 @@ use DS\Model\User;
 
 trait CuratorModifier
 {
+    /**
+     * Set/Clear curator role of a user
+     *
+     * @param bool $add
+     * @return Record
+     * @throws InvalidParameterException
+     */
     public function setCurator(bool $add): Record
     {
         $userId = $this->action;
+
         if (!$this->getServiceManager()->getAuth()->hasRole(UserRoles::Admin)) {
             throw new InvalidParameterException('Not allowed');
         }
@@ -45,5 +53,4 @@ trait CuratorModifier
         }
         return new Record();
     }
-
 }

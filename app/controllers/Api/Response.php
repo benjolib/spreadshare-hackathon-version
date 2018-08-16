@@ -75,7 +75,7 @@ abstract class Response extends DiInjection
     /**
      * Response constructor.
      *
-     * @param HttpResponse $response
+     * @param \Phalcon\Di $di
      */
     public function __construct(Di $di)
     {

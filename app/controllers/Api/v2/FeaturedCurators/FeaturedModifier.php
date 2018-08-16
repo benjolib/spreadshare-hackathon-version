@@ -16,9 +16,17 @@ use DS\Model\User;
 
 trait FeaturedModifier
 {
+    /**
+     * Set/Clear featured flag
+     *
+     * @param bool $add
+     * @return Record
+     * @throws InvalidParameterException
+     */
     public function setFeatured(bool $add): Record
     {
         $userId = $this->action;
+
         if (!$this->getServiceManager()->getAuth()->hasRole(UserRoles::Admin)) {
             throw new InvalidParameterException('Not allowed');
         }
@@ -45,5 +53,4 @@ trait FeaturedModifier
         }
         return new Record();
     }
-
 }

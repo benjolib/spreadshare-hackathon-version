@@ -16,7 +16,10 @@ class Post extends ActionHandler implements MethodInterface
     {
         return true;
     }
-    
+
+    /**
+     * @return \DS\Controller\Api\Meta\Record
+     */
     public function process()
     {
         return $this->setFeatured(true);
