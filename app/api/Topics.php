@@ -19,8 +19,7 @@ use DS\Traits\Api\GetAllTrait;
  *
  * @method static findFirstById(int $id)
  */
-class Topics
-    extends BaseApi
+class Topics extends BaseApi
 {
     use GetAllTrait;
     

@@ -19,8 +19,7 @@ use DS\Model\UserTopics as UserTopicsModel;
  *
  * @method static findFirstById(int $id)
  */
-class UserTopics
-    extends BaseApi
+class UserTopics extends BaseApi
 {
     
     /**
@@ -32,8 +31,7 @@ class UserTopics
     public function saveUserTopics(int $userId, array $topicIds)
     {
         $userTopics = new UserTopicsModel();
-        if (count($topicIds))
-        {
+        if (count($topicIds)) {
             $userTopics->setTopicsByUserId($userId, $topicIds);
         }
         
