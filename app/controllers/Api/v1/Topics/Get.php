@@ -74,5 +74,4 @@ class Get extends ActionHandler implements MethodInterface
     {
         return new Records(Topics::getAll());
     }
-    
 }

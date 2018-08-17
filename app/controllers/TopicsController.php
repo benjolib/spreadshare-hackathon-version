@@ -18,20 +18,16 @@ use Phalcon\Logger;
  * @version   $Version$
  * @package   DS\Controller
  */
-class TopicsController
-    extends BaseController
+class TopicsController extends BaseController
 {
     /**
      * Spreadshare
      */
     public function indexAction($params = [])
     {
-        try
-        {
+        try {
             $this->view->setMainView('pages/topics');
-        }
-        catch (Exception $e)
-        {
+        } catch (Exception $e) {
             Application::instance()->log($e->getMessage(), Logger::CRITICAL);
         }
     }

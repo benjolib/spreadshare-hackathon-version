@@ -62,6 +62,9 @@ abstract class BaseController extends PhalconMvcController
         }
     }
 
+    /**
+     * @return string base URL - without script name
+     */
     public function getBaseUrl()
     {
         // output: /myproject/index.php

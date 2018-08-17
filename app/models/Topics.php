@@ -17,8 +17,7 @@ use DS\Model\Events\TopicsEvents;
  *
  * @method static findFirstById(int $id)
  */
-class Topics
-    extends TopicsEvents
+class Topics extends TopicsEvents
 {
     /**
      * @param array $param

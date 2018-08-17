@@ -17,8 +17,7 @@ use DS\Model\Events\UserTopicsEvents;
  *
  * @method static findFirstById(int $id)
  */
-class UserTopics
-    extends UserTopicsEvents
+class UserTopics extends UserTopicsEvents
 {
     
     /**
@@ -32,12 +31,10 @@ class UserTopics
     public function setTopicsByUserId(int $userId, array $topicIds): UserTopics
     {
         // Remove all topics for user
-        $this->getWriteConnection()
-             ->delete($this->getSource(), "userId = '{$userId}'");
+        $this->getWriteConnection()->delete($this->getSource(), "userId = '{$userId}'");
         
-        // .. and recrete them:
-        foreach ($topicIds as $id)
-        {
+        // ... and recreate them
+        foreach ($topicIds as $id) {
             (new self())->setUserId($userId)->setTopicId($id)->create();
         }
         

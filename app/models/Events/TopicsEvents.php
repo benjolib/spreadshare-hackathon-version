@@ -17,8 +17,7 @@ use DS\Model\Abstracts\AbstractTopics;
  * @version   $Version$
  * @package   DS\Model
  */
-abstract class TopicsEvents
-    extends AbstractTopics
+abstract class TopicsEvents extends AbstractTopics
 {
     
     /**
