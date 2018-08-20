@@ -303,4 +303,126 @@ class ApiController extends PhalconMvcController
 
         return $response;
     }
+
+    /**
+     * @return Json|Text
+     */
+    public function route3Action()
+    {
+        $di = $this->getDi();
+
+        // Disable view processing since the api has it's own responses
+        $this->view->disable();
+
+        // Prepare some request variables
+        $version  = $this->dispatcher->getParam("version");
+        $entity   = $this->camelCase($this->dispatcher->getParam("entity"));
+        $entityId = $this->dispatcher->getParam("entityId");
+        $auth     = ServiceManager::instance($this->getDI())->getAuth();
+
+        // Construct class name of the action handler
+        $className = __NAMESPACE__ . "\\Api\\v{$version}\\{$entity}\\" . $this->camelCaseHTTPMethod();
+
+        // Switch between response types, default is json
+        $responseType = $this->request->get('type', 'string', 'json');
+        $response = $responseType === 'string' ? new Text($di) : new Json($di);
+
+        try {
+            // Send CORS header to allow access from the requested domain
+            // @todo change this to the only allowed domain(s) in production
+            $response
+                ->getResponse()
+                ->setHeader('Access-Control-Allow-Origin', $this->request->getServer('HTTP_ORIGIN') ?: $this->request->getServer('HTTP_HOST'))
+                ->setHeader('Access-Control-Allow-Credentials', 'true');
+
+            // Check if api controller exists
+            if (!class_exists($className) || !is_a($className, $this->actionHandlerClass, true)) {
+                throw new InvalidParameterException('Invalid entity: ' . $entity);
+            }
+
+            // @var $controller \DS\Controller\Api\ActionHandler
+            $controller = new $className();
+            $controller->setDi($di);
+
+            // Check whether the controller needs a login
+            if ($controller->needsLogin() && !$auth->loggedIn()) {
+                throw new SecurityException('Need login');
+            }
+
+            // Set id and action for current action
+            $controller->setId($entityId);
+
+            // E-Tag handling
+            // Calculate ETag on server-side and compare it with provided by client
+            $serverETag = $controller->getEtag();
+
+            if ($serverETag) {
+                $response->getResponse()
+                    ->setEtag($serverETag)
+                    ->setHeader('Pragma', 'cache');
+
+                $clientETag = $this->request->getHeader('if-none-match');
+                if ($clientETag && $clientETag === $serverETag) {
+                    // Client presented the same ETag - not need to deliver content
+                    $response->getResponse()->setHeader('Cache-Control', 'must-revalidate');
+                    $response->getResponse()->setNotModified();
+                    $response->getResponse()->send();
+                    die;
+                }
+
+                // Client ETag is absent or not valid - specify caching
+                $response->getResponse()->setCache(60 * 24);
+            }
+
+            // Call process method to process the request or initialize the controller
+            $actionResult = $controller->process();
+
+            // Then additionally call action method, if there is one
+            //if ($action && method_exists($controller, $action)) {
+            //    $actionResult = $controller->$action();
+            //}
+
+            if ($actionResult instanceof RecordInterface) {
+                // Attach action result to response
+                $response->set($actionResult);
+            } elseif ($actionResult instanceof Error) {
+                // Handle possible errors
+                $response->setError($actionResult);
+            } else {
+                $response->set(null, false);
+            }
+
+        } catch (\Error $e) {
+            $response->setError(new Error($e->getMessage() . ' ('.str_replace(ROOT_PATH, '', $e->getFile()).':'.$e->getLine().')', 'There was an internal error. Our team is informed. Please try again in a few minutes. Sorry for this!', ErrorCodes::InvalidParameter));
+            $this->logException($e, $entity, $entityId, $responseType);
+        } catch (InvalidParameterException $e) {
+            $response->setError(new Error($e->getMessage(), $e->getMessage(), ErrorCodes::InvalidParameter));
+            $this->logException($e, $entity, $entityId, $responseType);
+        } catch (SecurityException $e) {
+            $response->setError(
+                new Error('Session Error', 'It seems like your session timed out. Please relogin.', ErrorCodes::SessionExpired)
+            );
+        } catch (UserValidationException $e) {
+            $error = new Error('Validation Error', $e->getMessage(), ErrorCodes::UserValidation);
+            $error
+                ->setMore($e->getFixMessage())
+                ->setError($e->getMessage())
+                ->setDevMessage($e->getField() . ' has value ' . $e->getValue())
+                ->setErrorCode($e->getCode());
+
+            $response->setError($error);
+        } catch (\Exception $e) {
+            $response->setError(new Error('Api Error', $e->getMessage(), ErrorCodes::GeneralException, $e->getTraceAsString()));
+            $this->logException($e, $entity, $entityId, $responseType);
+        }
+
+        if (is_null($response->getResponse()->getContent()) && !$response->getError()) {
+            // In case no response content returned treat it as an error
+            $response->setError(new Error('Api Error.', 'There was an internal error contacting the Api.', 'No response set by the api method.'));
+        }
+
+        $response->send();
+
+        return $response;
+    }
 }

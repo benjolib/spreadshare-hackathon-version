@@ -49,9 +49,9 @@ class Json extends Response
         $this->envelope = $request->get('envelope', null, true) ? true : false;
         if ($this->envelope) {
             /** @var Router $router */
-            $router =$this->getDI()->get('router');
-            return strpos($router->getRewriteUri(), 'v2') !== false ?
-                new EnvelopeV2($records, !$error) : new Envelope($records, !$error);
+            $router = $this->getDI()->get('router');
+            return strpos($router->getRewriteUri(), 'v1') !== false ?
+                new Envelope($records, !$error) : new EnvelopeV2($records, !$error);
         }
 
         return $records;
@@ -68,10 +68,12 @@ class Json extends Response
 
         /** @var Router $router */
         $router =$this->getDI()->get('router');
-        if (strpos($router->getRewriteUri(), 'v2') !== false) {
-            $this->response->setJsonContent(ErrorV2::fromErrorV1($error));
-        } else {
+        if (strpos($router->getRewriteUri(), 'v1') !== false) {
+            // old-style
             $this->response->setJsonContent($error);
+        } else {
+            // new-style
+            $this->response->setJsonContent(new ErrorV2($error));
         }
 
         return $this;
