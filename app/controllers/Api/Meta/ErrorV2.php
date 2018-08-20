@@ -8,8 +8,7 @@
 
 namespace DS\Controller\Api\Meta;
 
-
-class ErrorV2
+class ErrorV2 implements \JsonSerializable
 {
     /**
      * @var
@@ -20,19 +19,13 @@ class ErrorV2
      * ErrorV2 constructor.
      * @param $message
      */
-    private function __construct($message)
+    public function __construct($message)
     {
-        $this->message = $message;
-    }
-
-    /**
-     * @param Error $error
-     * @return ErrorV2
-     */
-    public static function fromErrorV1(Error $error)
-    {
-        $ev2 = new self($error->getUserMessage());
-        return $ev2;
+        if ($message instanceof Error) {
+            $this->message = $message->getUserMessage();
+        } else {
+            $this->message = $message;
+        }
     }
 
     /**
