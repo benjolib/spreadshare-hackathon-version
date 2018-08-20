@@ -393,7 +393,7 @@ CREATE TABLE `tags` (
   CONSTRAINT `tableTagsUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=17212 DEFAULT CHARSET=utf8;
 
--- Create syntax for TABLE 'topics'
+-- Create syntax for TABLE 'bundles'
 CREATE TABLE `bundles` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(200) DEFAULT NULL,
