@@ -23,8 +23,7 @@ use Phalcon\Di;
  *
  * @method static findFirstById(int $id)
  */
-abstract class Base
-    extends BaseEvents
+abstract class Base extends BaseEvents
 {
     /**
      * @var ServiceManager
@@ -47,31 +46,31 @@ abstract class Base
     }
     
     /**
-     * @param string $column
-     * @param string $id
+     * @param string $field
+     * @param string $value
      *
      * @return bool
      */
-    public function deleteByFieldValue(string $column = 'id', string $id): bool
+    public function deleteByFieldValue(string $field = 'id', string $value): bool
     {
-        return $this->getWriteConnection()->delete($this->getSource(), sprintf("%s = ?", $column), [$id]);
+        return $this->getWriteConnection()->delete($this->getSource(), sprintf("%s = ?", $field), [$value]);
     }
     
     /**
      * Return model instance by id
      *
-     * @param int $id
+     * @param int $value
+     * @param string $field
      *
      * @return $this
      */
-    public static function get($id, $column = 'id')
+    public static function get($value, string $field = 'id')
     {
-        if (property_exists(static::class, $column))
-        {
+        if (property_exists(static::class, $field)) {
             return static::findFirst(
                 [
-                    "conditions" => sprintf("%s = ?0", $column),
-                    "bind" => [$id],
+                    "conditions" => sprintf("%s = ?0", $field),
+                    "bind" => [$value],
                 ]
             ) ?: new static();
         }
@@ -89,8 +88,7 @@ abstract class Base
      */
     public static function findByFieldValue($field, $value)
     {
-        if (property_exists(static::class, $field))
-        {
+        if (property_exists(static::class, $field)) {
             return parent::findFirst(
                 [
                     "conditions" => sprintf("%s = ?0", $field),
@@ -113,8 +111,7 @@ abstract class Base
      */
     public static function findAllByFieldValue($field, $value)
     {
-        if (property_exists(static::class, $field))
-        {
+        if (property_exists(static::class, $field)) {
             return parent::find(
                 [
                     "conditions" => sprintf("%s = ?0", $field),
@@ -152,8 +149,7 @@ abstract class Base
     public static function getInstance($id = null)
     {
         $instance = null;
-        if ($id)
-        {
+        if ($id) {
             $instance = self::findFirstById($id);
         }
         
@@ -220,8 +216,7 @@ abstract class Base
         $time = $this->$field;
         $time = time() - $time; // to get the time since that moment
         
-        if ($time < 60)
-        {
+        if ($time < 60) {
             return 'Just now';
         }
         
@@ -235,10 +230,8 @@ abstract class Base
             1 => 'second',
         ];
         
-        foreach ($tokens as $unit => $text)
-        {
-            if ($time < $unit)
-            {
+        foreach ($tokens as $unit => $text) {
+            if ($time < $unit) {
                 continue;
             }
             $numberOfUnits = floor($time / $unit);
@@ -314,6 +307,5 @@ abstract class Base
      */
     public function initialize()
     {
-    
     }
 }
