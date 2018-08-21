@@ -24,6 +24,8 @@ use DS\Exceptions\InvalidParameterException;
  */
 class Delete extends ActionHandler implements MethodInterface
 {
+    use BundleModifier;
+
     /**
      * @return bool
      */
@@ -34,6 +36,7 @@ class Delete extends ActionHandler implements MethodInterface
 
     /**
      * @return Records
+     * @throws InvalidParameterException
      */
     public function process()
     {
@@ -44,6 +47,9 @@ class Delete extends ActionHandler implements MethodInterface
         ]);
         if ($bundle) {
             $bundle->delete();
+            if ($bundle->getImage()) {
+                @unlink($this->getImageDiskPathByURI($bundle->getImage()));
+            }
             return new Record();
         } else {
             throw new InvalidParameterException('The bundle that you want to delete does not exist.');
