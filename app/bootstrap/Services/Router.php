@@ -21,15 +21,17 @@ return function (\DS\Interfaces\GeneralApplication $application, Phalcon\Di\Fact
     $router->removeExtraSlashes(true);
     
     // custom Routes
+
+    // API v1-v2
     $router->add(
-        "/api/v{version:[0-9]}/{method:[a-zA-Z0-9\-]+}",
+        "/api/v{version:[12]}/{method:[a-zA-Z0-9\-]+}",
         [
             'controller' => 'Api',
             'action' => 'route',
         ]
     );
     $router->add(
-        "/api/v{version:[0-9]}/{method:[a-zA-Z0-9\-]+}/:action",
+        "/api/v{version:[12]}/{method:[a-zA-Z0-9\-]+}/:action",
         [
             'controller' => 'Api',
             'action' => 'route',
@@ -37,7 +39,7 @@ return function (\DS\Interfaces\GeneralApplication $application, Phalcon\Di\Fact
         ]
     );
     $router->add(
-        "/api/v{version:[0-9]}/{method:[a-zA-Z0-9\-]+}/:action/([a-zA-Z0-9\-]+)",
+        "/api/v{version:[12]}/{method:[a-zA-Z0-9\-]+}/:action/([a-zA-Z0-9\-]+)",
         [
             'controller' => 'Api',
             'action' => 'route',
@@ -45,7 +47,25 @@ return function (\DS\Interfaces\GeneralApplication $application, Phalcon\Di\Fact
             'id' => 4,
         ]
     );
-    
+
+    // API v3
+    $router->add(
+        "/api/v{version:[3]}/{entity:[a-zA-Z0-9\-]+}",
+        [
+            'controller' => 'Api',
+            'action' => 'route3',
+        ],
+        ['GET', 'POST', 'PUT']
+    );
+    $router->add(
+        "/api/v{version:[3]}/{entity:[a-zA-Z0-9\-]+}/{entityId:[0-9]+}",
+        [
+            'controller' => 'Api',
+            'action' => 'route3',
+        ],
+        ['GET', 'POST', 'PUT', 'DELETE']
+    );
+
     /**
      * Attach manual routes
      */

@@ -186,19 +186,16 @@ abstract class AbstractTables extends \DS\Model\Base
      */
     public function setTitle($title)
     {
-        if (empty($title))
-        {
+        if (empty($title)) {
             throw new InvalidStreamTitleException('Please give a title for your Stream');
         }
 
-        if (strlen($title) < 4)
-        {
+        if (strlen($title) < 4) {
             throw new InvalidStreamTitleException('Please provide at least four characters');
         }
 
         $tableCheck = self::findByFieldValue('title', $title);
-        if ($tableCheck && $tableCheck->getId() != $this->getId())
-        {
+        if ($tableCheck && $tableCheck->getId() != $this->getId()) {
             throw new InvalidStreamTitleException('A Stream with the exact same title already exists. Please choose another title');
         }
 
@@ -439,11 +436,11 @@ abstract class AbstractTables extends \DS\Model\Base
         $this->hasMany('id', 'DS\Model\TableTokens', 'tableId', ['alias' => 'TableTokens']);
         $this->hasMany('id', 'DS\Model\TableVotes', 'tableId', ['alias' => 'TableVotes']);
         $this->hasMany('id', 'DS\Model\RequestAdd', 'table_id', ['alias' => 'RequestAdd']);
+        $this->hasMany('id', 'DS\Model\TableContributions', 'tableId', ['alias' => 'Contributors']);
         $this->belongsTo('ownerUserId', 'DS\Model\User', 'id', ['alias' => 'User']);
         $this->belongsTo('topic1Id', 'DS\Model\Topics', 'id', ['alias' => 'Topics']);
         $this->belongsTo('topic2Id', 'DS\Model\Topics', 'id', ['alias' => 'Topics']);
         $this->belongsTo('typeId', 'DS\Model\Types', 'id', ['alias' => 'Types']);
-        $this->hasMany('id', 'DS\Model\TableContributions', 'tableId', ['alias' => 'Contributors']);
     }
 
     /**

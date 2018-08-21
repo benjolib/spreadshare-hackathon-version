@@ -19,8 +19,7 @@ use Phalcon\Mvc\Model;
  *
  * @method static findFirstById(int $id)
  */
-abstract class BaseEvents
-    extends Model
+abstract class BaseEvents extends Model
 {
     /**
      * @return bool
@@ -28,18 +27,15 @@ abstract class BaseEvents
     public function beforeValidationOnCreate()
     {
         $time = time();
-        if (property_exists($this, 'updatedAt'))
-        {
+        if (property_exists($this, 'updatedAt')) {
             $this->updatedAt = $time;
         }
         
-        if (property_exists($this, 'updatedById'))
-        {
+        if (property_exists($this, 'updatedById')) {
             $this->updatedById = auth()->getUserId();
         }
         
-        if (property_exists($this, 'createdAt'))
-        {
+        if (property_exists($this, 'createdAt')) {
             $this->createdAt = $time;
         }
         
@@ -51,13 +47,11 @@ abstract class BaseEvents
      */
     public function beforeValidationOnUpdate()
     {
-        if (property_exists($this, 'updatedAt'))
-        {
+        if (property_exists($this, 'updatedAt')) {
             $this->updatedAt = time();
         }
         
-        if (property_exists($this, 'updatedById'))
-        {
+        if (property_exists($this, 'updatedById')) {
             $this->updatedById = auth()->getUserId();
         }
         

@@ -393,6 +393,26 @@ CREATE TABLE `tags` (
   CONSTRAINT `tableTagsUserId` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=17212 DEFAULT CHARSET=utf8;
 
+-- Create syntax for TABLE 'bundles'
+CREATE TABLE `bundles` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(200) DEFAULT NULL,
+  `image` varchar(250) DEFAULT NULL COMMENT 'image url',
+  `createdAt` int(10) unsigned DEFAULT NULL COMMENT 'timestamp',
+  `updatedAt` int(10) unsigned DEFAULT NULL COMMENT 'timestamp',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Create syntax for TABLE 'bundleTags'
+CREATE TABLE `bundleTags` (
+  `bundleId` int(11) unsigned NOT NULL,
+  `tagId` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`bundleId`,`tagId`),
+  KEY `bundleTagsTagId` (`tagId`),
+  CONSTRAINT `bundleTagsBundleId` FOREIGN KEY (`bundleId`) REFERENCES `bundles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `bundleTagsTagId` FOREIGN KEY (`tagId`) REFERENCES `tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 -- Create syntax for TABLE 'topics'
 CREATE TABLE `topics` (
   `id` tinyint(1) unsigned NOT NULL AUTO_INCREMENT,
