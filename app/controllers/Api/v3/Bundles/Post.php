@@ -36,6 +36,7 @@ class Post extends ActionHandler implements MethodInterface
 
     /**
      * @return \DS\Controller\Api\Meta\Record
+     * @throws InvalidParameterException
      */
     public function process()
     {
@@ -53,6 +54,6 @@ class Post extends ActionHandler implements MethodInterface
         }
 
         $bundle = $this->updateBundle($bundle, $bundleParams);
-        return new Record(array_merge($bundle->toArray(['id','title']), ['image' => $bundle->getImage()]));
+        return new Record($bundle->toArray(['id','title', 'image', 'tags']));
     }
 }

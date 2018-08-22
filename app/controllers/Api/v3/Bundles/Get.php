@@ -34,18 +34,15 @@ class Get extends ActionHandler implements MethodInterface
 
     /**
      * @return Records
+     * @throws InvalidParameterException
      */
     public function process()
     {
         if ($this->id) {
             // fetch specific model
-            $bundle = Bundles::findFirst([
-                "conditions" => "id = ?0",
-                "columns" => "id, title, image",
-                "bind" => [$this->id],
-            ]);
+            $bundle = Bundles::findFirst($this->id);
             if ($bundle) {
-                return new Record($bundle);
+                return new Record($bundle->toArray(['id', 'title', 'image', 'tags']));
             } else {
                 throw new InvalidParameterException('The bundle that you want to get does not exist.');
             }
@@ -55,7 +52,7 @@ class Get extends ActionHandler implements MethodInterface
             $bundles = Bundles::find(['order' => 'id ASC']);
             $result = array();
             foreach ($bundles as $bundle) {
-                $result[] = array_merge($bundle->toArray(['id','title']), ['image' => $bundle->getImage()]);
+                $result[] = $bundle->toArray(['id','title', 'image', 'tags']);
             }
             return new Records($result);
         }

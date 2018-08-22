@@ -19,4 +19,25 @@ use DS\Model\Events\BundlesEvents;
  */
 class Bundles extends BundlesEvents
 {
+    /**
+     * @param null $columns
+     * @return array
+     */
+    public function toArray($columns = null)
+    {
+        $append = [];
+        if (is_array($columns) && in_array('tags', $columns)) {
+            // tags are requested
+            $tags = [];
+            foreach ($this->bundleTags as $bundleTag) {
+                $tags[] = [
+                    'id'    => $bundleTag->tags->id,
+                    'title' => $bundleTag->tags->title,
+                ];
+            }
+            unset($columns['tags']);
+            $append = ['tags' => $tags];
+        }
+        return array_merge(parent::toArray($columns), $append);
+    }
 }
