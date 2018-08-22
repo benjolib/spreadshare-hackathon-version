@@ -183,6 +183,7 @@ abstract class AbstractBundles extends \DS\Model\Base
         $this->setSchema('spreadshare');
         $this->setSource('bundles');
         $this->hasMany('id', 'DS\Model\BundleTags', 'bundleId', ['alias' => 'BundleTags']);
+        $this->hasManyToMany('id', 'DS\Model\BundleTags', 'bundleId', 'tagId', 'DS\Model\Tags', 'id');
     }
 
     /**
