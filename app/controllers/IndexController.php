@@ -29,10 +29,7 @@ class IndexController extends BaseController
     /**
      * Home
      */
-    public function indexAction(
-//        $selection = 'recently-added'
-    $tag = null
-    )
+    public function indexAction($tag = null)
     {
         try {
             if ($this->serviceManager->getAuth()->loggedIn() && $this->serviceManager->getAuth()->getUser()->getStatus() == UserStatus::OnboardingIncomplete) {
@@ -55,6 +52,9 @@ class IndexController extends BaseController
 
             $this->view->setVar('exploreActive', true);
 
+            $loadMore = $this->request->isAjax() && $this->request->has('page');
+            $page = (int) $this->request->get('page', null, 0);
+            $limit = 23;
 
             $tableFilter = new TableFilter();
             if (!empty($tag)) {
@@ -72,11 +72,6 @@ class IndexController extends BaseController
             $orderBy = Tables::class . ".createdAt DESC";
             $this->view->setVar('selectionName', 'Recently Added');
 
-//            $this->view->setVar('selection', $selection);
-
-            $page = (int) $this->request->get('page', null, 0);
-            $limit = 23;
-
             // Filter tables by tableFilter
             $tables = (new Tables())
                 ->findTablesAsArray(
@@ -91,11 +86,10 @@ class IndexController extends BaseController
             // we fetch 1 more than limit so we can check this
             if (count($tables) > $limit) {
                 $tables = array_slice($tables, 0, $limit);
-                $this->view->setVar('moreToLoad', true);
+                $this->view->setVar('moreItemsAvailable', true);
             } else {
-                $this->view->setVar('moreToLoad', false);
+                $this->view->setVar('moreItemsAvailable', false);
             }
-
             $this->view->setVar('tables', $tables);
 
             $featuredCurators = User::findByRole(UserRoles::FeaturedCurator);
@@ -103,8 +97,10 @@ class IndexController extends BaseController
 
             $featuredTags = Tags::findAllByFieldValue('featured', 1);
             $this->view->setVar('featuredTags', $featuredTags->toArray(['id','title']));
+
             // Paging instead of returning the whole page
-            if ($this->request->isAjax() && $this->request->has('page')) {
+            if ($loadMore) {
+                // Load More page load
                 if (count($tables) === 0) {
                     // Return nothing if tables are empty for today.
                     $this->view->disable();
@@ -114,14 +110,13 @@ class IndexController extends BaseController
                   ]));
                 }
                 $this->view->setMainView('homepage/loadmore');
+            } else if (empty($tag)) {
+                // ordinary page load
+                $this->view->setMainView('homepage/index');
             } else {
-                 if (!empty($tag)) {
-                     $this->view->setVar('tag', $tag);
-                    $this->view->setMainView('homepage/index');
-                 }else {
-                    $this->view->setMainView('homepage/index');
-                 }
-                
+                // tagged page load
+                $this->view->setVar('tag', $tag);
+                $this->view->setMainView('homepage/index');
             }
         } catch (Exception $e) {
             Application::instance()->log($e->getMessage(), Logger::CRITICAL);
