@@ -141,6 +141,7 @@ public/js/webtools-ie.js
 public/js/webtools.js
 public/userimages/*
 public/tableimages/*
+public/bundleimages/*
 
 # dist
 system/uploads/userimages
