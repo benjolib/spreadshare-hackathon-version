@@ -49,7 +49,7 @@ class Get extends ActionHandler implements MethodInterface
         } else {
             // fetch all models
             /** @var Bundles[] $bundles */
-            $bundles = Bundles::find(['order' => 'id ASC']);
+            $bundles = Bundles::find(['order' => 'id DESC']);
             $result = array();
             foreach ($bundles as $bundle) {
                 $result[] = $bundle->toArray(['id','title', 'image', 'tags']);
