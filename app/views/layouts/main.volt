@@ -29,6 +29,8 @@
   <link href="/css/main.878d83e3.css" rel="stylesheet">
   <link href="/semantic/semantic.min.css" rel="stylesheet">
   <link rel="icon" type="image/png" href="/assets/images/9-0/logo.png"> {% block header %}{% endblock %}
+  <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
+
   <meta property="og:title" content="{% block title %}{% endblock %}" /> {# TODO: It's not taking block title the second time #}
   <meta property="og:type" content="website" />
   <meta property="og:description" content="{{ config.description }}" />
