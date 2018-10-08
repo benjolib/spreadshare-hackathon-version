@@ -42,22 +42,15 @@ abstract class UserEvents extends AbstractUser
      */
     private function pushToAlgolia()
     {
-        try
-        {
+        try {
             $index = $this->serviceManager->getAlgolia()->initIndex(self::ALGOLIA_INDEX . '-' . ENV);
-            $index->addObjects(
-                [
-                    [
+            $index->addObjects([[
                         'objectID' => $this->getId(),
-                        'name' => $this->getName(),
-                        'tagline' => $this->getTagline(),
-                        'handle' => $this->getHandle(),
-                    ],
-                ]
-            );
-        }
-        catch (AlgoliaException $e)
-        {
+                        'name'     => $this->getName(),
+                        'tagline'  => $this->getTagline(),
+                        'handle'   => $this->getHandle(),
+            ]]);
+        } catch (AlgoliaException $e) {
             $this->serviceManager->getRavenClient()->captureException($e);
         }
     }
@@ -67,13 +60,10 @@ abstract class UserEvents extends AbstractUser
      */
     private function removeFromAlgolia()
     {
-        try
-        {
+        try {
             $index = $this->serviceManager->getAlgolia()->initIndex(self::ALGOLIA_INDEX . '-' . ENV);
             $index->deleteObject($this->getId());
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             $this->serviceManager->getRavenClient()->captureException($e);
         }
     }
@@ -84,11 +74,8 @@ abstract class UserEvents extends AbstractUser
     public function beforeCreate()
     {
         $this->emailConfirmationToken = preg_replace('/[^a-zA-Z0-9]/', '', base64_encode(openssl_random_pseudo_bytes(24)));
-        
         $this->setConfirmed(0);
-        
-        if (!$this->getStatus())
-        {
+        if (!$this->getStatus()) {
             $this->setStatus(UserStatus::Unconfirmed);
         }
     }
@@ -98,21 +85,21 @@ abstract class UserEvents extends AbstractUser
      */
     public function afterCreate()
     {
-        
-        (new Wallet())->setUserId($this->getId())
-                      ->setTokens(0)
-                      ->setContractAddress('')
-                      ->setData('')
-                      ->create();
+        (new Wallet())
+            ->setUserId($this->getId())
+            ->setTokens(0)
+            ->setContractAddress('')
+            ->setData('')
+            ->create();
         
         // Create users wallet using queue
-        if ($this instanceof User)
-        {
+        if ($this instanceof User) {
             UserCreated::after($this);
         }
         
-        (new UserStats())->setUserId($this->getId())
-                         ->create();
+        (new UserStats())
+            ->setUserId($this->getId())
+            ->create();
     }
     
     /**
@@ -122,35 +109,31 @@ abstract class UserEvents extends AbstractUser
     {
         $this->pushToAlgolia();
     }
-    
+
     /**
      * @return bool
+     * @throws UserValidationException
      */
     public function beforeValidationOnCreate()
     {
         parent::beforeValidationOnCreate();
         
         // Check if user with hande or email address already exists
-        if (($user = self::findFirstByHandleOrEmail($this->getHandle(), $this->getEmail())))
-        {
-            if ($user->getHandle() == $this->getHandle())
-            {
+        if (($user = self::findFirstByHandleOrEmail($this->getHandle(), $this->getEmail()))) {
+            if ($user->getHandle() == $this->getHandle()) {
                 throw new UserValidationException(
                     'A user with this username already exists.',
                     'handle',
                     $this->getHandle()
                 );
             }
-            else
-            {
-                if ($user->getEmail() == $this->getEmail())
-                {
-                    throw new UserValidationException(
-                        'A user with this email address already exists.',
-                        'email',
-                        $this->getHandle()
-                    );
-                }
+
+            if ($user->getEmail() == $this->getEmail()) {
+                throw new UserValidationException(
+                    'A user with this email address already exists.',
+                    'email',
+                    $this->getHandle()
+                );
             }
             
             throw new UserValidationException(
@@ -158,7 +141,6 @@ abstract class UserEvents extends AbstractUser
                 'email',
                 $this->getHandle()
             );
-            
         }
         
         return $this->beforeValidationOnUpdate();
@@ -171,18 +153,16 @@ abstract class UserEvents extends AbstractUser
     {
         parent::beforeValidationOnUpdate();
         
-        if (($user = self::findFirstByHandleOrEmail($this->getHandle(), $this->getEmail())))
-        {
-            if ($user->getId() != $this->getId() && $user->getHandle() == $this->getHandle())
-            {
+        if (($user = self::findFirstByHandleOrEmail($this->getHandle(), $this->getEmail()))) {
+            if ($user->getId() != $this->getId() && $user->getHandle() == $this->getHandle()) {
                 throw new UserValidationException(
                     'A user with this username already exists.',
                     'handle',
                     $this->getHandle()
                 );
             }
-            if ($user->getId() != $this->getId() && $user->getEmail() == $this->getEmail())
-            {
+
+            if ($user->getId() != $this->getId() && $user->getEmail() == $this->getEmail()) {
                 throw new UserValidationException(
                     'A user with this email already exists.',
                     'email',
@@ -191,8 +171,7 @@ abstract class UserEvents extends AbstractUser
             }
         }
         
-        if (strlen($this->getEmail()) < $this->emailMinimumLength)
-        {
+        if (strlen($this->getEmail()) < $this->emailMinimumLength) {
             throw new UserValidationException(
                 sprintf('E-Mail address has to be at least %d characters long.', $this->emailMinimumLength),
                 'email',
@@ -201,8 +180,7 @@ abstract class UserEvents extends AbstractUser
             );
         }
         
-        if (!strlen($this->getName()))
-        {
+        if (!strlen($this->getName())) {
             throw new UserValidationException(
                 sprintf('Please provide a valid name.'),
                 'name',
@@ -212,11 +190,7 @@ abstract class UserEvents extends AbstractUser
         }
         
         $urlPattern = "/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i";
-        if ($this->getWebsite() && !preg_match(
-                $urlPattern,
-                $this->getWebsite()
-            ))
-        {
+        if ($this->getWebsite() && !preg_match($urlPattern, $this->getWebsite())) {
             throw new UserValidationException(
                 'Please provide a valid website in the following format: [http://]www.example.com',
                 'website',
@@ -226,14 +200,12 @@ abstract class UserEvents extends AbstractUser
         }
         
         // Check if username is given
-        if (!$this->getHandle())
-        {
+        if (!$this->getHandle()) {
             return false;
         }
         
         // Check if email is given
-        if (!$this->getEmail())
-        {
+        if (!$this->getEmail()) {
             return false;
         }
         
@@ -250,15 +222,16 @@ abstract class UserEvents extends AbstractUser
      */
     public static function findFirstByHandleOrEmail($handle, $email)
     {
-        return parent::findFirst(
-            [
+        return parent::findFirst([
                 "conditions" => "handle = ?0 OR email = ?1",
                 "limit" => 1,
                 "bind" => [$handle, $email],
-            ]
-        );
+        ]);
     }
-    
+
+    /**
+     *
+     */
     public function afterDelete()
     {
         $this->removeFromAlgolia();

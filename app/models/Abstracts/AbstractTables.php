@@ -68,13 +68,6 @@ abstract class AbstractTables extends \DS\Model\Base
     /**
      *
      * @var string
-     * @Column(type="string", length=255, nullable=false)
-     */
-    protected $description;
-
-    /**
-     *
-     * @var string
      * @Column(type="string", length=140, nullable=true)
      */
     protected $tagline;
@@ -85,6 +78,13 @@ abstract class AbstractTables extends \DS\Model\Base
      * @Column(type="string", length=255, nullable=true)
      */
     protected $image;
+
+    /**
+     *
+     * @var string
+     * @Column(type="string", length=255, nullable=false)
+     */
+    protected $description;
 
     /**
      *
@@ -433,6 +433,7 @@ abstract class AbstractTables extends \DS\Model\Base
         $this->hasMany('id', 'DS\Model\TableStats', 'tableId', ['alias' => 'TableStats']);
         $this->hasMany('id', 'DS\Model\TableSubscription', 'tableId', ['alias' => 'TableSubscription']);
         $this->hasMany('id', 'DS\Model\TableTags', 'tableId', ['alias' => 'TableTags']);
+        $this->hasManyToMany('id', 'DS\Model\TableTags', 'tableId', 'tagId', 'DS\Model\Tags', 'id', ['alias' => 'Tags']);
         $this->hasMany('id', 'DS\Model\TableTokens', 'tableId', ['alias' => 'TableTokens']);
         $this->hasMany('id', 'DS\Model\TableVotes', 'tableId', ['alias' => 'TableVotes']);
         $this->hasMany('id', 'DS\Model\RequestAdd', 'table_id', ['alias' => 'RequestAdd']);
@@ -490,6 +491,7 @@ abstract class AbstractTables extends \DS\Model\Base
     public function setFeatured(int $featured)
     {
         $this->featured = $featured;
+
         return $this;
     }
 
@@ -499,5 +501,48 @@ abstract class AbstractTables extends \DS\Model\Base
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Get titles of all Tags associated with this Table
+     *
+     * @return array of string
+     */
+    public function getTagsTitles()
+    {
+        // tags = Array(
+        //    array(id => 17072, title => Tech),
+        //    array(id => 17108, title => Testflight)
+        // )
+        // $tags = $this->getTags();
+
+        // tags = Array(DS\models\Tags)
+        $tags = $this->Tags;
+        $tagsTitles = [];
+        foreach ($tags as $tag) {
+            $tagsTitles[] = $tag->getTitle();
+        }
+
+        return $tagsTitles;
+    }
+
+    /**
+     * Get titles of all Bundles that contains all Tags associated with this Table
+     *
+     * @return array of string
+     */
+    public function getBundlesTitles()
+    {
+        // tags = Array(DS\models\Tags)
+        $tags = $this->Tags;
+        $bundlesTitles = [];
+        foreach ($tags as $tag) {
+            $bundles = $tag->Bundles;
+            foreach ($bundles as $bundle) {
+                $bundlesTitles[] = $bundle->getTitle();
+            }
+        }
+
+        return array_unique($bundlesTitles);
     }
 }
