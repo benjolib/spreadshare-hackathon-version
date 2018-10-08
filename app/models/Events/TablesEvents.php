@@ -32,26 +32,21 @@ abstract class TablesEvents extends AbstractTables
     const ALGOLIA_INDEX = 'spreadshare-stream';
     
     /**
-     * Push current instance to algola
+     * Push current instance to Algolia
      */
     private function pushToAlgolia()
     {
-        try
-        {
+        try {
             $index = $this->serviceManager->getAlgolia()->initIndex(self::ALGOLIA_INDEX . '-' . ENV);
-            $index->addObjects(
-                [
-                    [
-                        'objectID' => $this->getId(),
-                        'title' => $this->getTitle(),
-                        'tagline' => $this->getTagline(),
+            $index->addObjects([[
+                        'objectID'    => $this->getId(),
+                        'title'       => $this->getTitle(),
+                        'tagline'     => $this->getTagline(),
                         'description' => $this->getDescription(),
-                    ],
-                ]
-            );
-        }
-        catch (AlgoliaException $e)
-        {
+                        'tags'        => implode(' ', $this->getTagsTitles()),      // search by tag titles
+                        'bundles'     => implode(' ', $this->getBundlesTitles()),   // search by bundle titles
+            ]]);
+        } catch (AlgoliaException $e) {
             $this->serviceManager->getRavenClient()->captureException($e);
         }
     }
@@ -61,13 +56,10 @@ abstract class TablesEvents extends AbstractTables
      */
     private function removeFromAlgolia()
     {
-        try
-        {
+        try {
             $index = $this->serviceManager->getAlgolia()->initIndex(self::ALGOLIA_INDEX . '-' . ENV);
             $index->deleteObject($this->getId());
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             $this->serviceManager->getRavenClient()->captureException($e);
         }
     }
@@ -87,24 +79,19 @@ abstract class TablesEvents extends AbstractTables
     {
         parent::beforeValidationOnUpdate();
         
-        if (!empty($this->getTitle()))
-        {
-            
-            if (strlen($this->getTitle()) < 4)
-            {
+        if (!empty($this->getTitle())) {
+            if (strlen($this->getTitle()) < 4) {
                 throw new \InvalidArgumentException('Please provide at least four characters for the table name.');
             }
             
             // Check if table with this name already exists
             $tableCheck = Tables::findByFieldValue('title', $this->getTitle());
-            if ($tableCheck && $tableCheck->getId() != $this->getId())
-            {
+            if ($tableCheck && $tableCheck->getId() != $this->getId()) {
                 throw new \InvalidArgumentException('A table with the exact same title already exists. Please choose another title');
             }
         }
         
-        if (!$this->getTypeId())
-        {
+        if (!$this->getTypeId()) {
             $this->setTypeId(null);
         }
 
@@ -118,23 +105,19 @@ abstract class TablesEvents extends AbstractTables
 //            $this->setTopic2Id(null);
 //        }
         
-        if ($this->getTypeId() && Types::findFirstById($this->getTypeId()) === false)
-        {
+        if ($this->getTypeId() && Types::findFirstById($this->getTypeId()) === false) {
             throw new \InvalidArgumentException("Your selected type is invalid. Please select another one.");
         }
         
-        if (!$this->getFlags())
-        {
+        if (!$this->getFlags()) {
             $this->setFlags(TableFlags::Unpublished);
         }
         
-        if (!$this->getSlug() && strpos($this->getTitle(), "temptitle") === false)
-        {
+        if (!$this->getSlug() && strpos($this->getTitle(), "temptitle") === false) {
             $slug      = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $this->getTitle())));
             $slugCheck = Tables::findByFieldValue('slug', $slug);
             $i         = 2;
-            while ($slugCheck && $slugCheck->getId() != $this->getId())
-            {
+            while ($slugCheck && $slugCheck->getId() != $this->getId()) {
                 $slug      = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $this->getTitle()))) . '_' . $i;
                 $slugCheck = Tables::findByFieldValue('slug', $slug);
                 $i++;
@@ -154,8 +137,7 @@ abstract class TablesEvents extends AbstractTables
         $tableStats = new TableStats();
         $tableStats->setTableId($this->getId())->create();
         
-        if ($this instanceof Tables)
-        {
+        if ($this instanceof Tables) {
             TableCreated::after($this->getOwnerUserId(), $this);
         }
         
@@ -167,24 +149,24 @@ abstract class TablesEvents extends AbstractTables
      */
     public function afterSave()
     {
-        if ($this instanceof Tables)
-        {
+        if ($this instanceof Tables) {
             TableUpdated::after($this->getOwnerUserId(), $this);
             
-            if ($this->getFlags() === TableFlags::Published)
-            {
+            if ($this->getFlags() === TableFlags::Published) {
                 $this->pushToAlgolia();
             }
             
-            if ($this->getFlags() === TableFlags::Unpublished)
-            {
+            if ($this->getFlags() === TableFlags::Unpublished) {
                 $this->removeFromAlgolia();
             }
         }
         
         return true;
     }
-    
+
+    /**
+     *
+     */
     public function afterDelete()
     {
         $this->removeFromAlgolia();
