@@ -489,17 +489,19 @@
                 </div>
             </div>
 
+{% if bundles|length > 0 %}
             <div class="about-list__item">
                 <div class="about-list__item__name">BUNDLES</div>
                 <div class="about-list__item__content">
                     <div class="tags" id="tags">
-                        {% for i, tag in tags %}
-                            <a style="color:#2a1e3e" href="/tag/{{tag['id']}}">{{tag['title']}}</a>
-                            {{ i + 1 < tags|length ? ', ' : '' }}
+                        {% for i, bundle in bundles %}
+                            <a style="color:#2a1e3e" href="#">{{bundle}}</a>
+                            {{ i + 1 < bundles|length ? ', ' : '' }}
                         {% endfor %}
                     </div>
                 </div>
             </div>
+{% endif %}
 
             <div class="about-list__item">
                 <div class="about-list__item__name">STATS</div>
