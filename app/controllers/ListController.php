@@ -164,6 +164,7 @@ class ListController extends BaseController
             // Tags
 
             $tags = $tableModel->getTags();
+            $bundles = $tableModel->getBundlesTitles();
 
             // access checks
 
@@ -234,6 +235,7 @@ class ListController extends BaseController
             $this->view->setVar('orderby', $orderby);
             $this->view->setVar('userId', $authId);
             $this->view->setVar('tags', $tags);
+            $this->view->setVar('bundles', $bundles);
             $this->view->setVar('tablemodel', $tableModel);
 
             /* foreach ($tableModel->contributors as $c) {
