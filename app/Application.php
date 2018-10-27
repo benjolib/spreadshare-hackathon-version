@@ -24,11 +24,8 @@ use Phalcon\Mvc\Application as PhalconApplication;
  * @version   $Version$
  * @package   DS\Controller
  */
-final class Application
-    extends PhalconApplication
-    implements GeneralApplication
+final class Application extends PhalconApplication implements GeneralApplication
 {
-
     /**
      * @var Application
      */
@@ -126,8 +123,7 @@ final class Application
      */
     public static function initialize(DiInterface $di)
     {
-        if (!self::$instance)
-        {
+        if (!self::$instance) {
             self::$instance = new Application($di);
         }
 
@@ -142,10 +138,14 @@ final class Application
         return self::$instance;
     }
 
+    /**
+     * @param DiInterface $di
+     * @param Logger\AdapterInterface $logger
+     * @return Application
+     */
     public static function initializeForTest(DiInterface $di, Logger\AdapterInterface $logger)
     {
-        if (!self::$instance)
-        {
+        if (!self::$instance) {
             self::$instance = new Application($di);
             self::$instance->logger = $logger;
         }
@@ -184,8 +184,7 @@ final class Application
      */
     public static function instance()
     {
-        if (!self::$instance)
-        {
+        if (!self::$instance) {
             throw new Exception('Application not initialized, yet.');
         }
 
@@ -213,8 +212,8 @@ final class Application
          * Initialize all required services
          *
          * @since Phalcon 3.0
-         * @note  needed to change from ServiceManager::initialize() to a non static context because phalcon 3.0
-         *        changed the way service closures are bound to an object
+         * @note  needed to change from ServiceManager::initialize() to a non static context
+         *        because phalcon 3.0 changed the way service closures are bound to an object
          * @see   https://github.com/phalcon/cphalcon/issues/11029#issuecomment-200612702
          */
         $servMan = ServiceManager::instance($this->getDI())->initialize($this);
@@ -222,10 +221,8 @@ final class Application
         // Set logger instance
         $this->logger = $servMan->getLogger();
 
-        if ($this->getMode() === 'development')
-        {
-            if ($this->getDI()->has('whoops'))
-            {
+        if ($this->getMode() === 'development') {
+            if ($this->getDI()->has('whoops')) {
                 /**
                  * @var $whoops \Whoops\Run
                  */
@@ -241,9 +238,7 @@ final class Application
                         }
                     );
             }
-        }
-        else
-        {
+        } else {
             $servMan->getRavenClient();
         }
 

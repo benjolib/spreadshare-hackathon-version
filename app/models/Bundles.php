@@ -40,4 +40,16 @@ class Bundles extends BundlesEvents
         }
         return array_merge(parent::toArray($columns), $append);
     }
+
+    /**
+     * @return array
+     */
+    public function getTagsIds()
+    {
+        $ids = [];
+        foreach ($this->bundleTags as $bundleTag) {
+            $ids[] = $bundleTag->tagId;
+        }
+        return $ids;
+    }
 }

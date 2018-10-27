@@ -47,7 +47,7 @@ class ApiController extends PhalconMvcController
     public function initialize()
     {
         if (!$this->request) {
-            // ensure request is in place
+            // Ensure request is in place
             $this->request = $this->getDI()->get('request');
         }
     }
@@ -106,10 +106,10 @@ class ApiController extends PhalconMvcController
             // We have '-' signs inside the string. Need to Camel Case it. Ex.: 'one-two-three'
             // 1. Replace each '-' with a space. Thus we'll have string of separate words. Ex.: 'one two three'
             // 2. Uppercase each word with ucwords(). Ex.: 'One Two Three'
-            // 3. Cut out spaces - replce spaces with  ''. Ex.: 'OneTwoThree'
+            // 3. Cut out spaces - replace spaces with  ''. Ex.: 'OneTwoThree'
             return str_replace(' ', '', ucwords(str_replace('-', ' ', str)));
         } else {
-            // No '-' inside the str - just make first char uppercased
+            // No '-' inside the str - just make first char upper-cased
             return ucfirst($str);
         }
     }
@@ -179,10 +179,21 @@ class ApiController extends PhalconMvcController
         $this->view->disable();
 
         // Prepare some request variables
+        // Which version: 1, 2, 3
         $version = $this->dispatcher->getParam("version");
+
+        // '/api/v{version:[12]}/{method:[a-zA-Z0-9\-]+}/:action/([a-zA-Z0-9\-]+)',
+        // FeaturedCurators
         $method  = $this->camelCase($this->dispatcher->getParam("method"));
+
+        // '/api/v{version:[12]}/{method:[a-zA-Z0-9\-]+}/:action/([a-zA-Z0-9\-]+)',
+        // 'subaction' => 3,
         $action  = $this->dispatcher->getParam("subaction");
+
+        // 'id' => 4,
         $id      = $this->dispatcher->getParam("id");
+
+        // \DS\Component\Auth
         $auth    = ServiceManager::instance($this->getDI())->getAuth();
 
         // Construct class name of the action handler
@@ -222,13 +233,14 @@ class ApiController extends PhalconMvcController
             $serverETag = $controller->getEtag();
 
             if ($serverETag) {
-                $response->getResponse()
+                $response
+                    ->getResponse()
                     ->setEtag($serverETag)
                     ->setHeader('Pragma', 'cache');
 
                 $clientETag = $this->request->getHeader('if-none-match');
                 if ($clientETag && $clientETag === $serverETag) {
-                    // Client presented the same ETag - not need to deliver content
+                    // Client presented the same ETag as we have on server side - not need to deliver content
                     $response->getResponse()->setHeader('Cache-Control', 'must-revalidate');
                     $response->getResponse()->setNotModified();
                     $response->getResponse()->send();
@@ -258,7 +270,13 @@ class ApiController extends PhalconMvcController
             }
 
         } catch (\Error $e) {
-            $response->setError(new Error($e->getMessage() . ' ('.str_replace(ROOT_PATH, '', $e->getFile()).':'.$e->getLine().')', 'There was an internal error. Our team is informed. Please try again in a few minutes. Sorry for this!', ErrorCodes::InvalidParameter));
+            $response->setError(
+                new Error(
+                    $e->getMessage()  . ' ('.str_replace(ROOT_PATH, '', $e->getFile()).':'.$e->getLine().')',
+                    'There was an internal error. Our team is informed. Please try again in a few minutes. Sorry for this!',
+                    ErrorCodes::InvalidParameter
+                )
+            );
             $this->logException($e, $method, $action, $responseType);
         } catch (InvalidParameterException $e) {
             $response->setError(new Error($e->getMessage(), $e->getMessage(), ErrorCodes::InvalidParameter));
@@ -393,7 +411,13 @@ class ApiController extends PhalconMvcController
             }
 
         } catch (\Error $e) {
-            $response->setError(new Error($e->getMessage() . ' ('.str_replace(ROOT_PATH, '', $e->getFile()).':'.$e->getLine().')', 'There was an internal error. Our team is informed. Please try again in a few minutes. Sorry for this!', ErrorCodes::InvalidParameter));
+            $response->setError(
+                new Error(
+                    $e->getMessage() . ' ('.str_replace(ROOT_PATH, '', $e->getFile()).':'.$e->getLine().')',
+                    $e->getMessage() . 'There was an internal error. Our team is informed. Please try again in a few minutes. Sorry for this!',
+                    ErrorCodes::InvalidParameter
+                )
+            );
             $this->logException($e, $entity, $entityId, $responseType);
         } catch (InvalidParameterException $e) {
             $response->setError(new Error($e->getMessage(), $e->getMessage(), ErrorCodes::InvalidParameter));

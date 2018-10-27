@@ -18,8 +18,7 @@ use DS\Model\Events\TagsEvents;
  *
  * @method static findFirstById(int $id)
  */
-class Tags
-    extends TagsEvents
+class Tags extends TagsEvents
 {
     /**
      * @param array $ids
@@ -29,8 +28,7 @@ class Tags
      */
     public function getByIds(array $ids = [], $limit = Paging::endlessScrollPortions)
     {
-        if (count($ids))
-        {
+        if (count($ids)) {
             return self::query()
                        ->columns(
                            [

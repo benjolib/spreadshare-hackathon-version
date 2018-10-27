@@ -1,7 +1,5 @@
 <?php
-/**
- * Define all non-dynamic routes here.
- */
+
 return [
     [
         'url' => '/login/twitter',
@@ -172,14 +170,6 @@ return [
         ],
         'methods' => ['GET', 'POST'],
     ],
-    [
-        'url' => '/stream/{id:[0-9]+}/delete',
-        'paths' => [
-            'controller' => 'Table',
-            'action' => 'delete',
-        ],
-        'methods' => ['GET', 'POST'],
-    ],
 
     // NEW ROUTES
 
@@ -201,6 +191,19 @@ return [
         ],
         'methods' => ['GET', 'POST'],
     ],
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // The good question is why part of Stream is controlled by ListController and part - by TableController
+
+    [
+        // streams created by you
+        'url' => '/streams',
+        'paths' => [
+            'controller' => 'Lists',
+            'action' => 'index',
+        ],
+        'methods' => ['GET', 'POST'],
+    ],
     [
         'url' => '/stream/{slug}',
         'paths' => [
@@ -210,13 +213,55 @@ return [
         'methods' => ['GET', 'POST'],
     ],
     [
-        'url' => '/stream/{id}/edit',
+        'url' => '/stream/{id:[0-9]+}/edit',
         'paths' => [
             'controller' => 'List',
             'action' => 'edit',
         ],
         'methods' => ['GET', 'POST'],
     ],
+    [
+        'url' => '/stream/{id:[0-9]+}/delete',
+        'paths' => [
+            'controller' => 'Table',
+            'action' => 'delete',
+        ],
+        'methods' => ['GET', 'POST'],
+    ],
+    [
+        'url' => '/stream/subscribe/{tableId:[0-9]+}',
+        'paths' => [
+            'controller' => 'List_Subscription',
+            'action' => 'subscribe',
+        ],
+        'methods' => ['GET', 'POST'],
+    ],
+    [
+        'url' => '/stream/comment/{tableId:[0-9]+}',
+        'paths' => [
+            'controller' => 'List_Subscription',
+            'action' => 'subscribe',
+        ],
+        'methods' => ['GET', 'POST'],
+    ],
+    [
+        'url' => '/stream/flag/{tableId:[0-9]+}/{reason}',
+        'paths' => [
+            'controller' => 'List_Flag',
+            'action' => 'flag',
+        ],
+        'methods' => ['GET', 'POST'],
+    ],
+    [
+        'url' => '/create\-list',
+        'paths' => [
+            'controller' => 'CreateList',
+            'action' => 'index',
+        ],
+        'methods' => ['GET', 'POST'],
+    ],
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     [
         'url' => '/submissions',
         'paths' => [
@@ -229,14 +274,6 @@ return [
         'url' => '/collaborations',
         'paths' => [
             'controller' => 'Collaboration',
-            'action' => 'index',
-        ],
-        'methods' => ['GET', 'POST'],
-    ],
-    [
-        'url' => '/streams',
-        'paths' => [
-            'controller' => 'Lists',
             'action' => 'index',
         ],
         'methods' => ['GET', 'POST'],
@@ -314,14 +351,6 @@ return [
         'methods' => ['GET', 'POST'],
     ],
     [
-        'url' => '/create\-list',
-        'paths' => [
-            'controller' => 'CreateList',
-            'action' => 'index',
-        ],
-        'methods' => ['GET', 'POST'],
-    ],
-    [
         'url' => '/history',
         'paths' => [
             'controller' => 'History',
@@ -346,7 +375,52 @@ return [
         'methods' => ['GET', 'POST'],
     ],
 
-    // api
+    // API v1-v2
+    [
+        'url' => '/api/v{version:[12]}/{method:[a-zA-Z0-9\-]+}',
+        'paths' => [
+            'controller' => 'Api',
+            'action' => 'route',
+        ],
+        'methods' => ['GET', 'POST', 'DELETE'],
+    ],
+    [
+        'url' => '/api/v{version:[12]}/{method:[a-zA-Z0-9\-]+}/:action',
+        'paths' => [
+            'controller' => 'Api',
+            'action' => 'route',
+            'subaction' => 3,
+        ],
+        'methods' =>['GET', 'POST', 'DELETE'],
+    ],
+    [
+        'url' => '/api/v{version:[12]}/{method:[a-zA-Z0-9\-]+}/:action/([a-zA-Z0-9\-]+)',
+        'paths' => [
+            'controller' => 'Api',
+            'action' => 'route',
+            'subaction' => 3,
+            'id' => 4,
+        ],
+        'methods' => ['GET', 'POST', 'DELETE'],
+    ],
+
+    // API v3
+    [
+        'url' => '/api/v{version:[3]}/{entity:[a-zA-Z0-9\-]+}',
+        'paths' => [
+            'controller' => 'Api',
+            'action' => 'route3',
+        ],
+        'methods' => ['GET', 'POST', 'PUT'],
+    ],
+    [
+        'url' => '/api/v{version:[3]}/{entity:[a-zA-Z0-9\-]+}/{entityId:[0-9]+}',
+        'paths' => [
+            'controller' => 'Api',
+            'action' => 'route3',
+        ],
+        'methods' => ['GET', 'POST', 'PUT', 'DELETE'],
+    ],
 
     [
         'url' => '/row/{id:[0-9]+}/add',
@@ -413,34 +487,17 @@ return [
         'methods' => ['GET', 'POST'],
     ],
     [
-        'url' => '/stream/subscribe/{tableId:[0-9]+}',
-        'paths' => [
-            'controller' => 'List_Subscription',
-            'action' => 'subscribe',
-        ],
-        'methods' => ['GET', 'POST'],
-    ],
-    [
-        'url' => '/stream/comment/{tableId:[0-9]+}',
-        'paths' => [
-            'controller' => 'List_Subscription',
-            'action' => 'subscribe',
-        ],
-        'methods' => ['GET', 'POST'],
-    ],
-    [
-        'url' => '/stream/flag/{tableId:[0-9]+}/{reason}',
-        'paths' => [
-            'controller' => 'List_Flag',
-            'action' => 'flag',
-        ],
-        'methods' => ['GET', 'POST'],
-    ],
-    [
-        'url' => '/tag/{tagId:[a-zA-Z0-9\-]+}',
+        'url' => '/tag/{tag:[a-zA-Z0-9\-]+}',
         'paths' => [
             'controller' => 'Index',
-            'action' => 'index',
+            'action' => 'tag',
         ]
-    ]
+    ],
+    [
+        'url' => '/bundle/{bundle:[a-zA-Z0-9\-]+}',
+        'paths' => [
+            'controller' => 'Index',
+            'action' => 'bundle',
+        ]
+    ],
 ];

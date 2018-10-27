@@ -49,6 +49,19 @@ abstract class AbstractBundles extends \DS\Model\Base
     protected $updatedAt;
 
     /**
+     * @var boolean
+     * @Column(type="boolean")
+     */
+    protected $featured;
+
+    /**
+     *
+     * @var string
+     * @Column(type="string", length=100, nullable=false)
+     */
+    protected $slug;
+
+    /**
      * Method to set the value of field id
      *
      * @param integer $id
@@ -216,5 +229,41 @@ abstract class AbstractBundles extends \DS\Model\Base
     public static function findFirst($parameters = null)
     {
         return parent::findFirst($parameters);
+    }
+
+    /**
+     * @param bool $featured
+     * @return AbstractBundles
+     */
+    public function setFeatured(int $featured): AbstractBundles
+    {
+        $this->featured = $featured;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isFeatured(): bool
+    {
+        return $this->featured;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string $slug
+     * @return AbstractBundles
+     */
+    public function setSlug(string $slug): AbstractBundles
+    {
+        $this->slug = $slug;
+        return $this;
     }
 }

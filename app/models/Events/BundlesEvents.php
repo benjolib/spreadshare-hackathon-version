@@ -2,6 +2,7 @@
 
 namespace DS\Model\Events;
 
+use DS\Model\Bundles;
 use DS\Model\Abstracts\AbstractBundles;
 
 /**
@@ -34,6 +35,7 @@ abstract class BundlesEvents extends AbstractBundles
     {
         parent::beforeValidationOnUpdate();
 
+        // Ensure reasonable title
         if (strlen($this->getTitle()) < 4) {
             throw new \InvalidArgumentException('Please provide at least four characters for the title.');
         }
@@ -42,6 +44,21 @@ abstract class BundlesEvents extends AbstractBundles
         $bundle = self::findByFieldValue('title', $this->getTitle());
         if ($bundle && $bundle->getId() != $this->getId()) {
             throw new \InvalidArgumentException('A bundle with the exact same title already exists. Please choose another title');
+        }
+
+        // Ensure unique slug
+        if (        !$this->getSlug()
+            &&  strpos($this->getTitle(), "temptitle") === false
+        ) {
+            $slug      = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $this->getTitle())));
+            $slugCheck = Bundles::findByFieldValue('slug', $slug);
+            $i         = 2;
+            while ($slugCheck && ($slugCheck->getId() != $this->getId())) {
+                $slug      = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $this->getTitle()))) . '_' . $i;
+                $slugCheck = Bundles::findByFieldValue('slug', $slug);
+                $i++;
+            }
+            $this->setSlug($slug);
         }
 
         return true;
