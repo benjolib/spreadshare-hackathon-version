@@ -6,6 +6,7 @@
 {% block content %}
     <div class="re-page">
 
+        {# page title and slogan #}
         <div class="u-flex u-sm-flexCol u-md-flexRow u-flexJustifyBetween u-md-flexAlignItemsEnd lists-page-space">
             <div>
                 <h1 class="re-heading">Admin</h1>
@@ -15,6 +16,7 @@
 
         <div id="app">
 
+            {# Tabs menu #}
             <div class="ui five item menu">
                 <a data-tab="tstreams"  :class="{ active: tab == 0 ? true : false }" v-on:click="getFeatured('Streams');"   class="item">Streams</a>
                 <a data-tab="tcurators" :class="{ active: tab == 1 ? true : false }" v-on:click="getFeatured('Curators');"  class="item">Curators</a>
@@ -23,7 +25,9 @@
                 <a data-tab="tbundles"  :class="{ active: tab == 4 ? true : false }" v-on:click="getFeatured('Bundles');"   class="item">Bundles</a>
             </div>
 
-
+            {##}
+            {# Tab Streams #}
+            {##}
             <div class="ui bottom tab" data-tab="tstreams" :class="{ active: tab == 0 ? true : false }">
                 <table id="admintable" class="ui striped table display" style="display: table">
                     <thead>
@@ -56,7 +60,9 @@
                 </table>
             </div>
 
-
+            {##}
+            {# Tab Curators #}
+            {##}
             <div class="ui bottom tab" data-tab="tcurators" :class="{ active: tab == 1 ? true : false }">
                 <table id="admintable" class="ui striped table display" style="display: table">
                     <thead>
@@ -89,7 +95,9 @@
                 </table>
             </div>
 
-
+            {##}
+            {# Tab Users #}
+            {##}
             <div class="ui bottom tab" data-tab="tusers" :class="{ active: tab == 2 ? true : false }">
                 <table id="admintable" class="ui striped table display" style="display: table">
                     <thead>
@@ -122,7 +130,9 @@
                 </table>
             </div>
 
-
+            {##}
+            {# Tab Tags #}
+            {##}
             <div class="ui bottom tab" data-tab="ttags" :class="{ active: tab == 3 ? true : false }">
                 <table id="admintable" class="ui striped table display" style="display: table">
                     <thead>
@@ -155,17 +165,23 @@
                 </table>
             </div>
 
-
+            {##}
+            {# tab Bundles #}
+            {##}
             <div class="ui bottom tab" data-tab="tbundles" :class="{ active: tab == 4 ? true : false }">
                 <table id="admintable" class="ui striped table display" style="display: table">
                     <thead>
                     <tr>
                         <th>BUNDLES</th>
-                        <th class="right aligned collapsing">Action</th>
+                        <th class="right aligned collapsing">FEATURED</th>
+                        <th class="right aligned collapsing">ACTION</th>
                     </tr>
                     </thead>
 
                     <tbody>
+                    {##}
+                    {# Create Bundle Row #}
+                    {##}
                     <tr>
                         <td class="collapsing">
                             <div>
@@ -190,10 +206,19 @@
                                 </div>
                             </div>
                         </td>
+
+                        <td>
+                            {# spare space for FEATURED row#}
+                        </td>
+
                         <td class="right aligned collapsing">
                             <button v-on:click="createNewBundle" class="positive ui button">Create</button>
                         </td>
                     </tr>
+
+                    {##}
+                    {# Display bundles rows #}
+                    {##}
                     <tr v-for="item of data.Bundles">
                         <td class="collapsing">
                             <div class="content">
@@ -209,6 +234,14 @@
                                     </div>
                                 </div>
 
+                            </div>
+                        </td>
+
+                        <td class="right aligned  collapsing">
+                            <div class="ui checkbox">
+                                <input :id='item.id' v-on:click="setFeatured('Bundles', $event)" v-if="item.featured == '1'" type="checkbox" checked name="example">
+                                <input :id='item.id' v-on:click="setFeatured('Bundles', $event)" v-if="item.featured == '0'" type="checkbox" name="example">
+                                <label></label>
                             </div>
                         </td>
 
@@ -289,6 +322,7 @@
                 },
 
                 methods: {
+
                     createNewBundle: function (event) {
                         var newBundleTags = [];
                         for (i = 0; i < this.newBundleTags.length; i++) {
@@ -349,20 +383,42 @@
                     setFeatured: function (type, event) {
                         console.log(event.target.checked);
                         console.log(event.target.id);
-                        var path = `api/v2/Featured${type}/${event.target.id}`;
+                        var path = '';
+                        var method = '';
+                        var data = {};
                         if (type == 'Users') {
+                            // Special case
                             path = `api/v2/Curators/${event.target.id}`;
-                        }
-                        axios({
-                            method: event.target.checked ? 'post' : 'delete',
-                            url: path,
-                            data: {
+                            method = event.target.checked ? 'post' : 'delete';
+                            data = {
                                 type,
                                 id: event.target.id,
                                 checked: event.target.checked
-                            }
+                            };
+                        } else if (type == 'Bundles') {
+                            // Special case
+                            path = `api/v3/Bundles/${event.target.id}`;
+                            method = 'put';
+                            data = {
+                                featured: event.target.checked
+                            };
+                        } else {
+                            // Normal case
+                            path = `api/v2/Featured${type}/${event.target.id}`;
+                            method = event.target.checked ? 'post' : 'delete';
+                            data = {
+                                type,
+                                id: event.target.id,
+                                checked: event.target.checked
+                            };
+                        }
+                        axios({
+                            method: method,
+                            url: path,
+                            data: data,
                         });
                     },
+
                     getFeatured: function (type) {
                         var path = `api/v2/Featured${type}`;
                         switch (type) {

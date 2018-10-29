@@ -18,8 +18,7 @@ use DS\Model\Tags;
  * @version   $Version$
  * @package   DS\Model
  */
-abstract class TagsEvents
-    extends AbstractTags
+abstract class TagsEvents extends AbstractTags
 {
     
     /**
@@ -39,13 +38,13 @@ abstract class TagsEvents
     {
         parent::beforeValidationOnUpdate();
 
-        if (!$this->getSlug() && strpos($this->getTitle(), "temptitle") === false)
-        {
+        if (        !$this->getSlug()
+                &&  strpos($this->getTitle(), "temptitle") === false
+        ) {
             $slug      = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $this->getTitle())));
             $slugCheck = Tags::findByFieldValue('slug', $slug);
             $i         = 2;
-            while ($slugCheck && $slugCheck->getId() != $this->getId())
-            {
+            while ($slugCheck && ($slugCheck->getId() != $this->getId())) {
                 $slug      = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $this->getTitle()))) . '_' . $i;
                 $slugCheck = Tags::findByFieldValue('slug', $slug);
                 $i++;

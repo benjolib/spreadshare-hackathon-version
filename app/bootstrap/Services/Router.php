@@ -19,83 +19,17 @@ return function (\DS\Interfaces\GeneralApplication $application, Phalcon\Di\Fact
     $router->setDefaultController('Index');
     $router->setDefaultAction('index');
     $router->removeExtraSlashes(true);
-    
-    // custom Routes
 
-    // API v1-v2
-    $router->add(
-        "/api/v{version:[12]}/{method:[a-zA-Z0-9\-]+}",
-        [
-            'controller' => 'Api',
-            'action' => 'route',
-        ]
-    );
-    $router->add(
-        "/api/v{version:[12]}/{method:[a-zA-Z0-9\-]+}/:action",
-        [
-            'controller' => 'Api',
-            'action' => 'route',
-            'subaction' => 3,
-        ]
-    );
-    $router->add(
-        "/api/v{version:[12]}/{method:[a-zA-Z0-9\-]+}/:action/([a-zA-Z0-9\-]+)",
-        [
-            'controller' => 'Api',
-            'action' => 'route',
-            'subaction' => 3,
-            'id' => 4,
-        ]
-    );
-
-    // API v3
-    $router->add(
-        "/api/v{version:[3]}/{entity:[a-zA-Z0-9\-]+}",
-        [
-            'controller' => 'Api',
-            'action' => 'route3',
-        ],
-        ['GET', 'POST', 'PUT']
-    );
-    $router->add(
-        "/api/v{version:[3]}/{entity:[a-zA-Z0-9\-]+}/{entityId:[0-9]+}",
-        [
-            'controller' => 'Api',
-            'action' => 'route3',
-        ],
-        ['GET', 'POST', 'PUT', 'DELETE']
-    );
-
-    /**
-     * Attach manual routes
-     */
+    // Attach manual routes
     $manualRoutes = include_once ROOT_PATH . '/app/bootstrap/Routes.php';
-    foreach ($manualRoutes as $route)
-    {
+    foreach ($manualRoutes as $route) {
         $router->add(
             $route['url'],
             $route['paths'],
             isset($route['methods']) ? $route['methods'] : ['GET', 'POST']
         );
-        
     }
-    
-    /*
-    $router->add(
-        '/:controller/([a-zA-Z\-]+)/:params', [
-            'controller' => 1,
-            'action' => 2,
-            'params' => 3
-        ]
-    )->convert(
-        'action',
-        function ($action)
-        {
-            return Phalcon\Text::camelize($action);
-        }
-    );
-*/
-    
+
     // Register a 404
     // This unfortunately did not work, so i am using the dispatcher workaround below
     /*$router->notFound(

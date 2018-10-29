@@ -37,13 +37,6 @@ abstract class AbstractTags extends \DS\Model\Base
 
     /**
      *
-     * @var string
-     * @Column(type="string", length=100, nullable=false)
-     */
-    protected $slug;
-
-    /**
-     *
      * @var integer
      * @Column(type="integer", length=10, nullable=true)
      */
@@ -54,6 +47,13 @@ abstract class AbstractTags extends \DS\Model\Base
      * @Column(type="boolean")
      */
     protected $featured;
+
+    /**
+     *
+     * @var string
+     * @Column(type="string", length=100, nullable=false)
+     */
+    protected $slug;
 
     /**
      * Method to set the value of field id

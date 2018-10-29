@@ -3,6 +3,7 @@
 namespace DS\Controller;
 
 use DS\Application;
+use DS\Model\Bundles;
 use DS\Model\DataSource\TableFlags;
 use DS\Model\DataSource\UserRoles;
 use DS\Model\DataSource\UserStatus;
@@ -27,9 +28,42 @@ use Phalcon\Logger;
 class IndexController extends BaseController
 {
     /**
-     * Home
+     * Homepage
      */
-    public function indexAction($tag = null)
+    public function indexAction()
+    {
+        return $this->showStreams();
+    }
+
+    /**
+     * /tag/id-or-slug-of-the-tag
+     *
+     * @param null $tag
+     */
+    public function tagAction($tag = null)
+    {
+        // tag may be ID or slug
+        return $this->showStreams($tag);
+    }
+
+    /**
+     * /bundle/id-or-slug-of-the-bundle
+     *
+     * @param null $bundle
+     */
+    public function bundleAction($bundle = null)
+    {
+        // bundle may be ID or slug
+        return $this->showStreams(null, $bundle);
+    }
+
+    /**
+     * Show Streams page accordig to hte filter provided (tag, bundle, etc)
+     *
+     * @param null $tag ID or slug
+     * @param null $bundle ID or slug
+     */
+    protected function showStreams($tag = null, $bundle = null)
     {
         try {
             if ($this->serviceManager->getAuth()->loggedIn() && $this->serviceManager->getAuth()->getUser()->getStatus() == UserStatus::OnboardingIncomplete) {
@@ -52,21 +86,52 @@ class IndexController extends BaseController
 
             $this->view->setVar('exploreActive', true);
 
-            $loadMore = $this->request->isAjax() && $this->request->has('page');
-            $page = (int) $this->request->get('page', null, 0);
-            $limit = 23;
+            $currentPageExplicitlyRequested = $this->request->isAjax() && $this->request->has('page');
+            $currentPage = (int) $this->request->get('page', null, 0);
+            $limit = 25;
 
+            // Specufy filter on what stremas are we looking for
             $tableFilter = new TableFilter();
+
             if (!empty($tag)) {
+                // Deal with specified tag
                 $t = Tags::findByFieldValue('slug', $tag);
                 if (empty($t)) {
-                    /** @var Tags $t */
+                    // No such tags - try to fund by ID
                     $t = Tags::findFirstById($tag);
-                    $t->save();
+                    if (empty($t)) {
+                        // No such tag - visit mainpage
+                        $this->response->redirect("/", true);
+                    }
+                    // Redirect by slug - looks better for UI
                     $this->response->redirect("/tag/" . $t->getSlug(), true);
                 }
+
+                // Specify what exact tags to filter Streams by
                 $tableFilter->setTags([$t->getId()]);
             }
+
+            if (!empty($bundle)) {
+                // Deal with specified bundle
+                $b = Bundles::findByFieldValue('slug', $bundle);
+                if (empty($b)) {
+                    // No such bundle - try to find by ID
+                    $b = Bundles::findFirstById($bundle);
+                    if (empty($b)) {
+                        // No such bundle - visit mainpage
+                        $this->response->redirect("/", true);
+                    }
+                    // Redirect by slug - looks better for UI
+                    $this->response->redirect("/bundle/" . $b->getSlug(), true);
+                }
+
+                // Specify what exact tags to filter Streams by
+                $tableFilter->setTags($b->getTagsIds());
+            }
+
+            /*
+             * This section is almost identical to the same in ExploreController
+             */
 
             // recently-added
             $orderBy = Tables::class . ".createdAt DESC";
@@ -78,12 +143,12 @@ class IndexController extends BaseController
                     $this->serviceManager->getAuth()->getUserId(),
                     $tableFilter,
                     TableFlags::Published,
-                    $page,
+                    $currentPage,
                     $orderBy,
                     $limit
                 );
 
-            // we fetch 1 more than limit so we can check this
+            // findTablesAsArray() fetches 1 more than limit requested, so we can check whether 'more' items available
             if (count($tables) > $limit) {
                 $tables = array_slice($tables, 0, $limit);
                 $this->view->setVar('moreItemsAvailable', true);
@@ -98,24 +163,31 @@ class IndexController extends BaseController
             $featuredTags = Tags::findAllByFieldValue('featured', 1);
             $this->view->setVar('featuredTags', $featuredTags->toArray(['id','title']));
 
-            // Paging instead of returning the whole page
-            if ($loadMore) {
-                // Load More page load
+            $featuredBundles = Bundles::findAllByFieldValue('featured', 1);
+            $this->view->setVar('featuredBundles', $featuredBundles->toArray(['id','title']));
+
+            if ($currentPageExplicitlyRequested) {
+                // Next page explicit request
+                // Paging is done with 'load more' button - so return next page content instead of the whole page
                 if (count($tables) === 0) {
                     // Return nothing if tables are empty for today.
                     $this->view->disable();
                     header('Content-Type: application/json');
                     die(json_encode([
-                      'code' => 'no-results'
-                  ]));
+                        'code' => 'no-results'
+                    ]));
                 }
                 $this->view->setMainView('homepage/loadmore');
-            } else if (empty($tag)) {
-                // ordinary page load
+            } else if ($tag) {
+                // Tagged streams load
+                $this->view->setVar('tag', $tag);
+                $this->view->setMainView('homepage/index');
+            } else if ($bundle) {
+                // Bundles streams load
+                $this->view->setVar('bundle', $bundle);
                 $this->view->setMainView('homepage/index');
             } else {
-                // tagged page load
-                $this->view->setVar('tag', $tag);
+                // non-filtered streams load
                 $this->view->setMainView('homepage/index');
             }
         } catch (Exception $e) {

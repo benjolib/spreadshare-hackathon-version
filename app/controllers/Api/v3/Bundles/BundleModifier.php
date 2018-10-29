@@ -35,32 +35,60 @@ trait BundleModifier
         if (!$this->getServiceManager()->getAuth()->hasRole(UserRoles::Admin)) {
             throw new InvalidParameterException('Not allowed');
         }
-        // set title
-        $bundle->setTitle(isset($params['title']) ? $params['title'] : null);
-        $image = isset($params['image']) ? base64_decode($params['image']) : null;
-        $imageURI = null;
 
-        // save and set image
-        $ext = Image::getExtension($image);
-        if ($ext) {
-            // image type is recognized, all is fine
-            $imageName = uniqid("", true).$ext;
-            $imagePath = $this->getImageDiskPathByName($imageName);
-            if (file_put_contents($imagePath, $image)) {
-                // write ok
-                $imageURI = $this->getImageURI($imageName);
+        if (!is_array($params)) {
+            // Nothing to do here
+            return $bundle;
+        }
+
+        $modified = false;
+
+        if (array_key_exists('title', $params)) {
+            // We have title provided
+            $bundle->setTitle(isset($params['title']) ? $params['title'] : null);
+            $modified = true;
+        }
+
+        if (array_key_exists('image', $params)) {
+            // We have image bin data specified
+            $image = isset($params['image']) ? base64_decode($params['image']) : null;
+            $imageURI = null;
+
+            // Save and set image
+            $ext = Image::getExtension($image);
+            if ($ext) {
+                // image type is recognized, all is fine
+                $imageName = uniqid("", true).$ext;
+                $imagePath = $this->getImageDiskPathByName($imageName);
+                if (file_put_contents($imagePath, $image)) {
+                    // write ok
+                    $imageURI = $this->getImageURI($imageName);
+                }
+            }
+            $bundle->setImage($imageURI);
+            $modified = true;
+        }
+
+        if (array_key_exists('featured', $params)) {
+            // We have featured specified
+            $bundle->setFeatured(isset($params['featured']) ? (int)$params['featured'] : 0);
+            $modified = true;
+        }
+
+        // Save Bundle
+        if ($modified) {
+            if (!$bundle->save()) {
+                die($bundle->getMessages());
             }
         }
-        $bundle->setImage($imageURI);
 
-        // save Bundle and all assigned tags
-        if ($bundle->save()) {
+        // Looks like bundle saved successfully
+
+        // Process assigned tags
+        if (array_key_exists('tags', $params)) {
             $bundleTags = new BundleTags();
             $bundleTags->setBundleId($bundle->getId());
             $bundleTags->assignTags(isset($params['tags']) ? $params['tags'] : null);
-        } else {
-            var_dump($bundle->getMessages());
-            die();
         }
 
         return $bundle;

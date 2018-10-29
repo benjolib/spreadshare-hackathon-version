@@ -54,6 +54,6 @@ class Put extends ActionHandler implements MethodInterface
         }
 
         $bundle = $this->updateBundle($bundle, $bundleParams);
-        return new Record($bundle->toArray(['id','title', 'image', 'tags']));
+        return new Record($bundle->toArray(['id', 'title', 'image', 'featured', 'tags']));
     }
 }

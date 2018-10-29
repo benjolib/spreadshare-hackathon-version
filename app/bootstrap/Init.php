@@ -19,8 +19,7 @@ try
     define('APP_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR);
     define('ROOT_PATH', dirname(APP_PATH) . DIRECTORY_SEPARATOR);
 
-    if (!class_exists('Phalcon\Config'))
-    {
+    if (!class_exists('Phalcon\Config')) {
         throw new ErrorException('Phalcon is not installed!');
     }
 
@@ -50,16 +49,13 @@ try
     $di[Services::CONFIG] = $config;
     
     // Register Whoops if available (only available in dev mode)
-    if ($config['mode'] === 'development' && class_exists('Whoops\Provider\Phalcon\WhoopsServiceProvider'))
-    {
+    if (($config['mode'] === 'development') && class_exists('Whoops\Provider\Phalcon\WhoopsServiceProvider')) {
         new Whoops\Provider\Phalcon\WhoopsServiceProvider($di);
     }
     
     include_once 'Functions.php';
     
     return $di;
-}
-catch (Exception $e)
-{
+} catch (Exception $e) {
     die('Error: ' . $e->getMessage());
 }

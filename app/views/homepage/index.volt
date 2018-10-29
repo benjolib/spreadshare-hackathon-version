@@ -5,12 +5,16 @@
 {% endblock %}
 
 {% block content %}
+
 <div class="re-page re-page--medium">
+
+    {# Page main titile and slogan #}
     <div class="homepage-space">
         <h1 class="re-heading">Explore</h1>
         <h2 class="re-subheading re-subheading--button-below">We curate the best Streams for you every day</h2>
     </div>
 
+{# Block with Tag name #}
 {% if tag is defined %}
     <div class="home-heading u-flex">
         <div class="selected-topics__items">
@@ -21,20 +25,65 @@
     </div>
 {% endif %}
 
+{# Block with Bundle name #}
+{% if bundle is defined %}
+    <div class="home-heading u-flex">
+        <div class="selected-topics__items">
+            <a href="javascript:history.back()">
+                <div>{{ bundle }} x</div>
+            </a>
+        </div>
+    </div>
+{% endif %}
+
+</div>
+
+    {##########################################################}
+    {##########################################################}
+    {##########################################################}
+
+{% if featuredBundles %}
+<div class="trending-topics">
+    <div class="trending-topics__inner">
+        <h3>Trending Bundles</h3>
+        <div class="trending-topics__items">
+            {% for featuredBundle in featuredBundles %}
+                <a href="/bundle/{{ featuredBundle['id'] }}"><div>{{ featuredBundle['title'] }}</div></a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<div class="re-page re-page--medium">
     <div class="u-flex u-flexWrap big-gutter home-top-margin-bottom" >
 
+{# Page is separated into several sections #}
+
+{# Rendered stream index acroll all sections #}
 {% set rendered_index = -1 %}
 
+{# Number of streams rendered in current section #}
 {% set cur_section_rendered_num = 0 %}
 
+        {##########################################################}
+        {##########################################################}
+        {##########################################################}
+
+{# Loop over all streams and render current section only #}
 {% for index, table in tables %}
 
+    {# Skip already rendered streams #}
     {% if index <= rendered_index %}
         {% continue %}
     {% endif %}
+
+    {# Skip abcent streams (How's that can be?) #}
     {% if tables[index] is not defined %}
         {% continue %}
     {% endif %}
+
+    {# Featured streams only #}
     {% if tables[index][ 'featured'] is not "1" %}
         {% continue %}
     {% endif %}
@@ -74,20 +123,26 @@
     </div>
 </div>
 
+    {##########################################################}
+    {##########################################################}
+    {##########################################################}
 
+{% if featuredTags %}
 <div class="trending-topics">
     <div class="trending-topics__inner">
         <h3>Trending Tags</h3>
-{% if featuredTags %}
         <div class="trending-topics__items">
     {% for featuredTag in featuredTags %}
             <a href="/tag/{{ featuredTag['id'] }}"><div>{{ featuredTag['title'] }}</div></a>
     {% endfor %}
         </div>
-{% endif %}
     </div>
 </div>
+{% endif %}
 
+    {##########################################################}
+    {##########################################################}
+    {##########################################################}
 
 <div class="re-page re-page--medium">
     <div class="u-flex u-flexWrap homepage-gutter">
@@ -160,6 +215,9 @@
     </div>
 </div>
 
+    {##########################################################}
+    {##########################################################}
+    {##########################################################}
 
 <div class="wrapdigital">
     <div class="digital-expert">
@@ -178,6 +236,9 @@
     </div>
 </div>
 
+    {##########################################################}
+    {##########################################################}
+    {##########################################################}
 
 <div class="re-page re-page--medium">
     <div class="u-flex u-flexWrap homepage-gutter">
@@ -218,6 +279,9 @@
     </div>
 </div>
 
+    {##########################################################}
+    {##########################################################}
+    {##########################################################}
 
 <div class="featured-curators">
     <div class="featured-curators__inner">
@@ -240,6 +304,9 @@
     </div>
 </div>
 
+    {##########################################################}
+    {##########################################################}
+    {##########################################################}
 
 <div class="re-page re-page--medium">
     <div id="load-more-container" class="u-flex u-flexWrap homepage-gutter">
@@ -280,13 +347,22 @@
     </div>
 </div>
 
+    {##########################################################}
+    {##########################################################}
+    {##########################################################}
+
 <div class="u-flex u-flexJustifyCenter">
     <a href="#" class="re-button re-button--load-more" {{ moreItemsAvailable ? '' : 'style="display:none;"' }}>Load More</a>
 </div>
 
+    {##########################################################}
+    {##########################################################}
+    {##########################################################}
+
 {% endblock %}
 
 {% block scripts %}
+
 <script type="text/javascript">
     $(document).ready(function () {
         var pageNumber = 1;
@@ -307,4 +383,5 @@
         });
     });
 </script>
+
 {% endblock %}

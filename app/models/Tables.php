@@ -208,45 +208,111 @@ class Tables extends TablesEvents
         $limit = Paging::endlessScrollPortions
     ): Tables
     {
+        $Locations         = Locations::class;
+        $TableLocations    = TableLocations::class;
+        $TableRows         = TableRows::class;
+        $Tables            = Tables::class;
+        $TableStaffPicks   = TableStaffPicks::class;
+        $TableStats        = TableStats::class;
+        $TableSubscription = TableSubscription::class;
+        $TableTags         = TableTags::class;
+        $TableVotes        = TableVotes::class;
+        $Tags              = Tags::class;
+        $Topics            = Topics::class;
+        $Types             = Types::class;
+        $User              = User::class;
+
         $this->query = self::query()
             ->columns([
-                Tables::class . '.id',
-                Tables::class . '.flags',
-                Tables::class . '.title',
-                Tables::class . '.slug',
-                Tables::class . '.tagline',
-                Tables::class . '.image',
-                Tables::class . '.description',
-                Tables::class . '.ownerUserId',
-                Tables::class . '.featured',
-                User::class . '.image as creatorImage',
-                User::class . '.handle as creatorHandle',
-                User::class . '.name as creator',
-                User::class . '.tagline as creatorBio',
-                Tables::class . '.createdAt',
-                Tables::class . '.topic1Id',
-                '(SELECT ' . Topics::class . '.title FROM ' . Topics::class . ' WHERE ' . Topics::class . '.id = ' . Tables::class . '.topic1Id) AS topic1',
-                Tables::class . '.topic2Id',
-                '(SELECT ' . Topics::class . '.title FROM ' . Topics::class . ' WHERE ' . Topics::class . '.id = ' . Tables::class . '.topic2Id) AS topic2',
-                TableStats::class . '.votesCount',
-                TableStats::class . '.viewsCount',
-                TableStats::class . '.commentsCount',
-                TableStats::class . '.collaboratorCount',
-                TableStats::class . '.contributionCount',
-                TableStats::class . '.tokensCount',
-                TableStats::class . '.subscriberCount',
-                Tables::class . '.typeId',
-                Types::class . '.title as typeTitle',
-                '(SELECT ' . TableStaffPicks::class . '.createdAt FROM ' . TableStaffPicks::class . ' WHERE ' . TableStaffPicks::class . '.tableId = ' . Tables::class . '.id) as staffPick',
-                '(SELECT ' . TableSubscription::class . '.createdAt FROM ' . TableSubscription::class . ' WHERE ' . TableSubscription::class . '.tableId = ' . Tables::class . '.id AND ' . TableSubscription::class . '.userId = ' . $userId . ') as userHasSubscribed',
-                '(SELECT ' . TableVotes::class . '.createdAt FROM ' . TableVotes::class . ' WHERE ' . TableVotes::class . '.tableId = ' . Tables::class . '.id AND ' . TableVotes::class . '.userId = ' . $userId . ') as userHasVoted',
-                '(SELECT CUSTOM_GROUP_CONCAT(' . Tags::class . '.title, ' . Tags::class . ".title, 'ASC', ', ') FROM " . TableTags::class . ' INNER JOIN ' . Tags::class . ' ON ' . Tags::class . '.id = ' . TableTags::class . '.tagId WHERE ' . TableTags::class . '.tableId = ' . Tables::class . '.id) as tags',
-                '(SELECT CUSTOM_GROUP_CONCAT(' . Locations::class . '.locationName, ' . Locations::class . ".locationName, 'ASC', ', ') FROM " . TableLocations::class . ' INNER JOIN ' . Locations::class . ' ON ' . Locations::class . '.id = ' . TableLocations::class . '.locationId WHERE ' . TableLocations::class . '.tableId = ' . Tables::class . '.id) as locations',
-                '(SELECT COUNT(' . TableRows::class . '.id) FROM ' . TableRows::class . ' WHERE ' . TableRows::class . '.tableId = ' . Tables::class . '.id) as listingCount'
+                "$Tables.id",
+                "$Tables.flags",
+                "$Tables.title",
+                "$Tables.slug",
+                "$Tables.tagline",
+                "$Tables.image",
+                "$Tables.description",
+                "$Tables.ownerUserId",
+                "$Tables.featured",
+                "$Tables.createdAt",
+                "$Tables.topic1Id",
+                "$Tables.typeId",
+                "$Tables.topic2Id",
+
+                "$User.image   AS creatorImage",
+                "$User.handle  AS creatorHandle",
+                "$User.name    AS creator",
+                "$User.tagline AS creatorBio",
+
+                "(SELECT $Topics.title FROM $Topics WHERE $Topics.id = $Tables.topic1Id) AS topic1",
+                "(SELECT $Topics.title FROM $Topics WHERE $Topics.id = $Tables.topic2Id) AS topic2",
+
+                "$TableStats.votesCount",
+                "$TableStats.viewsCount",
+                "$TableStats.commentsCount",
+                "$TableStats.collaboratorCount",
+                "$TableStats.contributionCount",
+                "$TableStats.tokensCount",
+                "$TableStats.subscriberCount",
+
+                "$Types.title AS typeTitle",
+
+                "(SELECT 
+                    $TableStaffPicks.createdAt 
+                  FROM
+                    $TableStaffPicks 
+                  WHERE
+                    $TableStaffPicks.tableId = $Tables.id
+                ) AS staffPick",
+
+                "(SELECT
+                    $TableSubscription.createdAt
+                  FROM
+                    $TableSubscription
+                  WHERE
+                        $TableSubscription.tableId = $Tables.id
+                    AND $TableSubscription.userId = $userId
+                ) AS userHasSubscribed",
+
+                "(SELECT 
+                    $TableVotes.createdAt 
+                  FROM 
+                    $TableVotes 
+                  WHERE 
+                        $TableVotes.tableId = $Tables.id 
+                    AND $TableVotes.userId = $userId
+                ) AS userHasVoted",
+
+                "(SELECT 
+                    CUSTOM_GROUP_CONCAT($Tags.title, $Tags.title, 'ASC', ', ') 
+                  FROM 
+                    $TableTags 
+                  INNER JOIN 
+                    $Tags ON $Tags.id = $TableTags.tagId 
+                  WHERE 
+                    $TableTags.tableId = $Tables.id
+                ) AS tags",
+
+                "(SELECT 
+                    CUSTOM_GROUP_CONCAT($Locations.locationName, $Locations.locationName, 'ASC', ', ') 
+                  FROM 
+                    $TableLocations 
+                  INNER JOIN 
+                    $Locations ON $Locations.id = $TableLocations.locationId 
+                  WHERE 
+                    $TableLocations.tableId = $Tables.id
+                ) AS locations",
+
+                "(SELECT 
+                    COUNT($TableRows.id) 
+                  FROM 
+                    $TableRows 
+                  WHERE 
+                    $TableRows.tableId = $Tables.id
+                ) AS listingCount"
             ])
-            ->innerJoin(TableStats::class, TableStats::class . '.tableId = ' . Tables::class . '.id')
-            ->innerJoin(User::class, Tables::class . '.ownerUserId = ' . User::class . '.id')
-            ->leftJoin(Types::class, Tables::class . '.typeId = ' . Types::class . '.id');
+            ->innerJoin($TableStats, "$TableStats.tableId = $Tables.id")
+            ->innerJoin($User, "$Tables.ownerUserId = $User.id")
+            ->leftJoin($Types, "$Tables.typeId = $Types.id");
 
         if ($limit !== Paging::noPaging) {
             $this->query->limit((int) $limit + 1, $limit * $page);
@@ -267,11 +333,11 @@ class Tables extends TablesEvents
         }
 
         if ($tableFilter->getTopic()) {
-            $this->query->andWhere(Tables::class . '.topic1Id = :topic: OR ' . Tables::class . '.topic2Id = :topic:', ['topic' => $tableFilter->getTopic()]);
+            $this->query->andWhere("$Tables.topic1Id = :topic: OR $Tables.topic2Id = :topic:", ['topic' => $tableFilter->getTopic()]);
         }
 
         if ($tableFilter->getType()) {
-            $this->query->andWhere(Tables::class . '.typeId = :type:', ['type' => $tableFilter->getType()]);
+            $this->query->andWhere("$Tables.typeId = :type:", ['type' => $tableFilter->getType()]);
         }
 
         if ($tableFilter->getStaffPicks()) {
@@ -280,22 +346,22 @@ class Tables extends TablesEvents
 
         if ($tableFilter->getLocations() && count($tableFilter->getLocations())) {
             $this->query
-                ->innerJoin(TableLocations::class, TableLocations::class . '.tableId = ' . Tables::class . '.id')
-                ->inWhere(TableLocations::class . '.locationId', $tableFilter->getLocations())
-                ->groupBy(Tables::class . '.id');
+                ->innerJoin("$TableLocations", "$TableLocations.tableId = $Tables.id")
+                ->inWhere("$TableLocations.locationId", $tableFilter->getLocations())
+                ->groupBy("$Tables.id");
         }
 
         if ($tableFilter->getTags() && count($tableFilter->getTags())) {
             $this->query
-                ->innerJoin(TableTags::class, TableTags::class . '.tableId = ' . Tables::class . '.id')
-                ->inWhere(TableTags::class . '.tagId', $tableFilter->getTags())
-                ->groupBy(Tables::class . '.id');
+                ->innerJoin($TableTags, "$TableTags.tableId = $Tables.id")
+                ->inWhere("$TableTags.tagId", $tableFilter->getTags())
+                ->groupBy("$Tables.id");
         }
 
         if ($tableFilter->getDateRange()) {
             $this->query
                 ->andWhere(
-                Tables::class . '.createdAt > :dateFrom: AND ' . Tables::class . '.createdAt < :dateTo:',
+                "$Tables.createdAt > :dateFrom: AND $Tables.createdAt < :dateTo:",
                 [
                     'dateFrom' => $tableFilter->getDateRange()->getFrom(),
                     'dateTo' => $tableFilter->getDateRange()->getTo(),
@@ -313,21 +379,21 @@ class Tables extends TablesEvents
     {
         $query = $this->readQuery("
             SELECT
-              user.id,
-              user.handle,
-              user.name,
-              user.email,
-              user.website,
-              user.tagline,
-              user.image
+                user.id,
+                user.handle,
+                user.name,
+                user.email,
+                user.website,
+                user.tagline,
+                user.image
             FROM
-              tables
+                tables
             INNER JOIN
-              tableSubscription ON tableSubscription.tableId = tables.id
+                tableSubscription ON tableSubscription.tableId = tables.id
             INNER JOIN
-              user ON tableSubscription.userId = user.id
+                user ON tableSubscription.userId = user.id
             WHERE
-              tables.id = $this->id
+                tables.id = $this->id
             ");
 
         $query->setFetchMode(Db::FETCH_ASSOC);
@@ -341,16 +407,16 @@ class Tables extends TablesEvents
     {
         $query = $this->readQuery("
             SELECT
-              tags.id,
-              tags.title
+                tags.id,
+                tags.title
             FROM
-              tables
+                tables
             INNER JOIN
-              tableTags ON tableTags.tableId = tables.id
+                tableTags ON tableTags.tableId = tables.id
             INNER JOIN
-              tags ON tableTags.tagId = tags.id
+                tags ON tableTags.tagId = tags.id
             WHERE
-              tables.id = $this->id
+                tables.id = $this->id
             ");
 
         $query->setFetchMode(Db::FETCH_ASSOC);

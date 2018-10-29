@@ -3,8 +3,7 @@
  * This file is used to define some service functions that will be enabled from within the views and everywhere else
  */
 
-if (!function_exists('di'))
-{
+if (!function_exists('di')) {
     /**
      * @param null $service
      *
@@ -14,8 +13,7 @@ if (!function_exists('di'))
     {
         $default = \Phalcon\Di::getDefault();
         
-        if ($service !== null)
-        {
+        if ($service !== null) {
             return $default->get($service);
         }
         
@@ -23,8 +21,7 @@ if (!function_exists('di'))
     }
 }
 
-if (!function_exists('auth'))
-{
+if (!function_exists('auth')) {
     /**
      * @return \DS\Component\Auth
      */
@@ -35,8 +32,7 @@ if (!function_exists('auth'))
 }
 
 
-if (!function_exists('request'))
-{
+if (!function_exists('request')) {
     /**
      * @return \Phalcon\Http\Request
      */
@@ -46,8 +42,7 @@ if (!function_exists('request'))
     }
 }
 
-if (!function_exists('serviceManager'))
-{
+if (!function_exists('serviceManager')) {
     /**
      * @return \DS\Component\ServiceManager
      */
