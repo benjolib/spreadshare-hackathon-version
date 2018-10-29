@@ -17,8 +17,7 @@ return function (\DS\Interfaces\GeneralApplication $application, Phalcon\Di\Fact
         function () use ($application) {
             $config = $application->getConfig();
             
-            if (!isset($config['memcache']))
-            {
+            if (!isset($config['memcache'])) {
                 throw new \Phalcon\Exception('Error. Memcache service is used but there is no configuration.');
             }
             
@@ -37,8 +36,7 @@ return function (\DS\Interfaces\GeneralApplication $application, Phalcon\Di\Fact
         function () use ($application) {
             $config = $application->getConfig();
             
-            if (!isset($config['redis']))
-            {
+            if (!isset($config['redis'])) {
                 throw new \Phalcon\Exception('Error. Redis service is used but there is no configuration.');
             }
             
@@ -69,15 +67,13 @@ return function (\DS\Interfaces\GeneralApplication $application, Phalcon\Di\Fact
     /**
      * Register model meta data caching
      */
-    if ($application->getConfig()->mode !== 'development')
-    {
+    if ($application->getConfig()->mode !== 'development') {
         $di->set(
             \DS\Constants\Services::MODELSMETADATA,
             function () use ($application, $di) {
                 $config = $application->getConfig();
                 
-                if ($config['redis'])
-                {
+                if ($config['redis']) {
                     $cache = new \Phalcon\Mvc\Model\MetaData\Redis(
                         [
                             "lifetime" => 86400 * 30,
@@ -86,9 +82,7 @@ return function (\DS\Interfaces\GeneralApplication $application, Phalcon\Di\Fact
                             'port' => $config['redis']['port'],
                         ]
                     );
-                }
-                else
-                {
+                } else {
                     $cache = new \Phalcon\Mvc\Model\MetaData\Memcache(
                         [
                             "lifetime" => 86400 * 30,
@@ -100,7 +94,7 @@ return function (\DS\Interfaces\GeneralApplication $application, Phalcon\Di\Fact
                 }
                 
                 // After model change do a reset once:
-                //$cache->reset();
+                $cache->reset();
                 
                 return $cache;
             }
