@@ -93,9 +93,6 @@ return function (\DS\Interfaces\GeneralApplication $application, Phalcon\Di\Fact
                     );
                 }
                 
-                // After model change do a reset once:
-                $cache->reset();
-                
                 return $cache;
             }
         );

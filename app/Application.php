@@ -135,6 +135,10 @@ final class Application extends PhalconApplication implements GeneralApplication
             // Do session management
             ->sessionManagement();
 
+        // After model change do a reset once:
+        $cache = $di->get(Services::MODELSMETADATA);
+        $cache->reset();
+
         return self::$instance;
     }
 
