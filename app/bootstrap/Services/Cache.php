@@ -72,7 +72,7 @@ return function (\DS\Interfaces\GeneralApplication $application, Phalcon\Di\Fact
             \DS\Constants\Services::MODELSMETADATA,
             function () use ($application, $di) {
                 $config = $application->getConfig();
-                
+
                 if ($config['redis']) {
                     $cache = new \Phalcon\Mvc\Model\MetaData\Redis(
                         [
@@ -92,9 +92,13 @@ return function (\DS\Interfaces\GeneralApplication $application, Phalcon\Di\Fact
                         ]
                     );
                 }
-                
+
+                // After model change do a reset once:
+                //$cache->reset();
+
                 return $cache;
             }
         );
     }
+
 };
