@@ -43,7 +43,7 @@
     {##########################################################}
 
 {% if featuredBundles %}
-<div class="trending-topics">
+<div class="trending-topics" style="background-color:#132466">
     <div class="trending-topics__inner">
         <h3>Trending Bundles</h3>
         <div class="trending-topics__items">
